@@ -1,0 +1,54 @@
+{
+  "version": "jrg 0.2.0",
+  "tokenizer": "o200k_base, encode_ordinary, complete stdout including footer",
+  "cases": [
+    {
+      "case": "shared_paths",
+      "method": "path grouping, all lines retained",
+      "budget": 20000,
+      "plain_tokens": 5120,
+      "ai_tokens": 2275,
+      "reduction_percent": 55.57,
+      "matched": 160,
+      "shown": 160,
+      "omitted": 0,
+      "clipped": 0
+    },
+    {
+      "case": "duplicate_lines",
+      "method": "exact duplicate grouping, all locations retained",
+      "budget": 20000,
+      "plain_tokens": 7600,
+      "ai_tokens": 57,
+      "reduction_percent": 99.25,
+      "matched": 200,
+      "shown": 200,
+      "omitted": 0,
+      "clipped": 0
+    },
+    {
+      "case": "long_japanese_lines",
+      "method": "match-centered excerpts; source tails omitted",
+      "budget": 20000,
+      "plain_tokens": 10008,
+      "ai_tokens": 1079,
+      "reduction_percent": 89.22,
+      "matched": 12,
+      "shown": 12,
+      "omitted": 0,
+      "clipped": 12
+    },
+    {
+      "case": "budgeted_results",
+      "method": "512-token budget; some matching lines omitted",
+      "budget": 512,
+      "plain_tokens": 12300,
+      "ai_tokens": 510,
+      "reduction_percent": 95.85,
+      "matched": 300,
+      "shown": 21,
+      "omitted": 279,
+      "clipped": 1
+    }
+  ]
+}

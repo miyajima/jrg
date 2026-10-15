@@ -1,0 +1,26 @@
+{
+  "method": "warm cache, median subprocess wall-clock ms, output discarded, -c",
+  "files_per_corpus": 400,
+  "lines_per_file_before_matches": 400,
+  "repeats": 9,
+  "threads": 4,
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "versions": {
+    "jrg": "jrg 0.1.0",
+    "rg": "ripgrep 15.2.0 (rev e89fff89ac)"
+  },
+  "bytes": {
+    "ascii": 11202800,
+    "japanese": 15063200
+  },
+  "latency_ms": {
+    "jrg_ascii": 10.12,
+    "jrg_japanese": 34.73,
+    "rg_ascii": 5.98,
+    "rg_japanese": 6.26
+  },
+  "japanese_recall_lines": {
+    "jrg": 1600,
+    "rg": 400
+  }
+}

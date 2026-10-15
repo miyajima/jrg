@@ -1,0 +1,9 @@
+/target/
+/dist/
+__pycache__/
+*.pyc
+/DEPLOYMENT.md
+*.log
+.env
+.env.*
+!.env.example
