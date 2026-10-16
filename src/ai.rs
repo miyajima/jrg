@@ -12,6 +12,7 @@ type DisplayKey = (String, u64, bool);
 pub struct AiOutput {
     groups: BTreeMap<GroupKey, Record>,
     matched: u64,
+    context: u64,
     snippet_chars: usize,
 }
 
@@ -145,6 +146,7 @@ impl AiOutput {
         Self {
             groups: BTreeMap::new(),
             matched: 0,
+            context: 0,
             snippet_chars,
         }
     }
@@ -152,6 +154,8 @@ impl AiOutput {
     pub fn push(&mut self, line: Line) {
         if line.selected {
             self.matched = self.matched.saturating_add(1);
+        } else {
+            self.context = self.context.saturating_add(1);
         }
         let snippet = Snippet::new(
             &line.text,
@@ -193,6 +197,14 @@ impl AiOutput {
     }
 
     pub fn finish(self, tokenizer: &CoreBPE, max_tokens: usize) -> String {
+        self.finish_impl(tokenizer, max_tokens, false).0
+    }
+
+    pub fn finish_smart(self, tokenizer: &CoreBPE, max_tokens: usize) -> (String, bool) {
+        self.finish_impl(tokenizer, max_tokens, true)
+    }
+
+    fn finish_impl(self, tokenizer: &CoreBPE, max_tokens: usize, detailed: bool) -> (String, bool) {
         let mut files: BTreeMap<String, Vec<Record>> = BTreeMap::new();
         for record in self.groups.into_values() {
             files.entry(record.path.clone()).or_default().push(record);
@@ -225,7 +237,8 @@ impl AiOutput {
                     let mut limit = self.snippet_chars;
                     loop {
                         chosen.insert(key.clone(), record.clone());
-                        let output = render(&chosen, self.matched);
+                        let output =
+                            render(&chosen, self.matched, detailed.then_some(self.context));
                         // Retokenize the whole payload: BPE merges at boundaries
                         // mean that sums of per-line token counts are not exact.
                         if tokenizer.encode_ordinary(&output).len() <= max_tokens {
@@ -246,11 +259,27 @@ impl AiOutput {
                 }
             }
         }
-        render(&chosen, self.matched)
+        let shown: u64 = chosen
+            .values()
+            .filter(|r| r.selected)
+            .map(|r| r.numbers.count())
+            .sum();
+        let context: u64 = chosen
+            .values()
+            .filter(|r| !r.selected)
+            .map(|r| r.numbers.count())
+            .sum();
+        let complete = shown == self.matched
+            && context == self.context
+            && chosen.values().all(|r| !r.snippet.clipped());
+        (
+            render(&chosen, self.matched, detailed.then_some(self.context)),
+            complete,
+        )
     }
 }
 
-fn render(records: &BTreeMap<DisplayKey, Record>, matched: u64) -> String {
+fn render(records: &BTreeMap<DisplayKey, Record>, matched: u64, context: Option<u64>) -> String {
     let mut out = String::new();
     let mut path = None;
     let mut shown = 0_u64;
@@ -286,6 +315,22 @@ fn render(records: &BTreeMap<DisplayKey, Record>, matched: u64) -> String {
         "# matched={matched} shown={shown} omitted={} clipped={clipped}\n",
         matched.saturating_sub(shown)
     ));
+    if let Some(expected) = context {
+        let shown: u64 = records
+            .values()
+            .filter(|r| !r.selected)
+            .map(|r| r.numbers.count())
+            .sum();
+        let clipped: u64 = records
+            .values()
+            .filter(|r| !r.selected && r.snippet.clipped())
+            .map(|r| r.numbers.count())
+            .sum();
+        out.push_str(&format!(
+            "# context_omitted={} context_clipped={clipped}\n",
+            expected.saturating_sub(shown)
+        ));
+    }
     out
 }
 

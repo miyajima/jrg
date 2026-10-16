@@ -20,7 +20,7 @@ class InstallTests(unittest.TestCase):
                                              input="ｶﾞｯｺｳ\n".encode()).decode()
             self.assertIn("matched=1 shown=1 omitted=0", result)
             self.assertFalse(list(dest.glob(".*-install.*")))
-            self.assertEqual(subprocess.check_output([str(dest / "jrg"), "--version"]), b"jrg 0.2.0\n")
+            self.assertEqual(subprocess.check_output([str(dest / "jrg"), "--version"]), b"jrg 0.8.0\n")
 
     def test_invalid_binary_does_not_replace_existing_install(self):
         with tempfile.TemporaryDirectory(prefix="jrg-install-") as tmp:
