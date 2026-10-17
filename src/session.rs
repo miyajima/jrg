@@ -148,6 +148,11 @@ impl Session {
         }
         changed
     }
+    pub fn matches_source(&self, path: &str, signature: &str) -> bool {
+        self.entries
+            .get(path)
+            .is_some_and(|entry| entry.signature == signature)
+    }
     pub fn seen(&self, path: &str, n: usize) -> bool {
         self.entries
             .get(path)

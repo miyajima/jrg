@@ -51,7 +51,7 @@ impl Matcher {
         Ok(Self { regex, options })
     }
 
-    fn matches(&self, line: &str) -> bool {
+    pub(crate) fn matches(&self, line: &str) -> bool {
         self.regex
             .is_match(&normalize::normalize(line, self.options))
     }

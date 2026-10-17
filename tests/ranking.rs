@@ -284,3 +284,130 @@ fn ranking_keeps_explicit_function_scopes_and_reports_nested_query_misuse() {
     assert_eq!(out.status.code(), Some(2));
     assert!(text(&out).contains("--rank-query belongs on the outer command"));
 }
+
+#[test]
+fn discovery_limit_cli_preserves_exact_reads_and_omissions_can_be_read_without_repeat() {
+    let d = TempDir::new().unwrap();
+    for n in 0..8 {
+        fs::write(
+            d.path().join(format!("a{n}.txt")),
+            format!("hit ordinary {n}\n"),
+        )
+        .unwrap();
+    }
+    fs::write(d.path().join("z.txt"), "hit cancellation\n").unwrap();
+    fs::write(d.path().join("needed.txt"), "known body\n".repeat(80)).unwrap();
+    let out = run(
+        d.path(),
+        &[
+            "--smart",
+            "--session",
+            "state.json",
+            "--rank-query",
+            "cancellation",
+            "--discovery-limit",
+            "1",
+            "--batch",
+            "-",
+        ],
+        r#"{"operations":[{"search":["hit","."]},{"read":{"path":"needed.txt","start":1,"end":80}}]}"#,
+    );
+    assert!(out.status.success(), "{}", text(&out));
+    let s = text(&out);
+    assert_eq!(
+        s.lines().filter(|l| l.starts_with("1:hit ")).count(),
+        1,
+        "{s}"
+    );
+    assert!(
+        s.contains("1:hit cancellation") && s.contains("80:known body") && s.contains("pending=0"),
+        "{s}"
+    );
+    let resume = run(
+        d.path(),
+        &["--smart", "--session", "state.json", "--resume"],
+        "",
+    );
+    assert!(!text(&resume).contains("ordinary"), "{}", text(&resume));
+    let read = run(
+        d.path(),
+        &["--smart", "--session", "state.json", "--batch", "-"],
+        r#"{"operations":[{"read":{"path":"a7.txt","start":1,"end":1}}]}"#,
+    );
+    assert!(text(&read).contains("1:hit ordinary 7"), "{}", text(&read));
+}
+
+#[test]
+fn discovery_has_stable_ties_and_budget_counters_survive_small_budget() {
+    let d = TempDir::new().unwrap();
+    for n in 0..14 {
+        fs::write(d.path().join(format!("a{n:02}.txt")), "hit same\n").unwrap();
+    }
+    let out = run(
+        d.path(),
+        &[
+            "--smart",
+            "--rank-query",
+            "unseen",
+            "--discovery-limit",
+            "1",
+            "--max-tokens",
+            "256",
+            "hit",
+            ".",
+        ],
+        "",
+    );
+    assert!(out.status.success());
+    let s = text(&out);
+    assert!(
+        s.contains("@ ./a00.txt:1-1") && !s.contains("@ ./a01.txt:"),
+        "{s}"
+    );
+    assert!(
+        s.contains("discovery_selected=1 discovery_omitted=13") && s.contains("pending=0"),
+        "{s}"
+    );
+    for budget in ["64", "128"] {
+        let out = run(
+            d.path(),
+            &[
+                "--smart",
+                "--rank-query",
+                "same",
+                "--discovery-limit",
+                "1",
+                "--max-tokens",
+                budget,
+                "hit",
+                ".",
+            ],
+            "",
+        );
+        let s = text(&out);
+        assert!(out.status.success());
+        assert!(
+            tiktoken_rs::o200k_base().unwrap().encode_ordinary(&s).len() <= budget.parse().unwrap(),
+            "{s}"
+        );
+        assert!(s.contains("discovery_omitted=13"), "{s}");
+    }
+}
+
+#[test]
+fn discovery_limit_requires_rank_query_and_rejects_out_of_range() {
+    let d = TempDir::new().unwrap();
+    for args in [
+        vec!["--smart", "--discovery-limit", "2", "hit"],
+        vec![
+            "--smart",
+            "--rank-query",
+            "hit",
+            "--discovery-limit",
+            "257",
+            "hit",
+        ],
+    ] {
+        assert_eq!(run(d.path(), &args, "hit\n").status.code(), Some(2));
+    }
+}

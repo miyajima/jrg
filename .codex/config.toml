@@ -1,0 +1,9 @@
+# Project-scoped jrg; a fresh seen/pending state is created per connection.
+[mcp_servers.jrg]
+command = "/bin/sh"
+args = ["/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh", "/Users/miyajimakazuhiro/projects/jrg"]
+startup_timeout_sec = 10
+tool_timeout_sec = 60
+
+[mcp_servers.jrg.tools.retrieve]
+output_token_limit = 30000

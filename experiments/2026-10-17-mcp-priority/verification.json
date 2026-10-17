@@ -1,0 +1,286 @@
+{
+  "summary": {
+    "installed_sha256": "2d34247bfe4eae581af765ac5be93e5bde61e9326037696e6eebcbd6de7e7003",
+    "version": "0.15.2",
+    "model_turns": 0,
+    "embedding_calls": 0,
+    "instructions_length": 1441,
+    "four_configs_protocol_verified": [
+      "Codex",
+      "Claude",
+      "Cursor",
+      "OpenCode"
+    ],
+    "equivalent_to_0151": true,
+    "rules": {
+      "Codex": "AGENTS.md",
+      "Claude": "CLAUDE.md imports AGENTS.md",
+      "Cursor": ".cursor/rules/jrg.mdc alwaysApply=true",
+      "OpenCode": "AGENTS.md"
+    },
+    "rg": {
+      "unchanged": true,
+      "json_matches": 1,
+      "absence_exit": 1
+    },
+    "model_selection_rate": "unmeasured"
+  },
+  "clients": {
+    "Codex": {
+      "command": [
+        "/bin/sh",
+        "/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh",
+        "/Users/miyajimakazuhiro/projects/jrg"
+      ],
+      "initialize": {
+        "id": 1,
+        "jsonrpc": "2.0",
+        "result": {
+          "capabilities": {
+            "tools": {}
+          },
+          "instructions": "Prefer jrg retrieve for code investigation, source search, and bounded line reads within the configured root. Use native rg for exhaustive matches or file enumeration, absence checks, exact counts, machine-readable output and pipelines, or unsupported flags/encodings. If jrg is unavailable or a path is outside the configured root, use permitted native tools. Keep rg installed and usable; never replace its executable or alias it to jrg. Explicit user requests and host permissions take precedence.\n\nFor source investigations, use review with specific identifiers and narrow known paths. Batch independent known searches and reads; do not assume heuristic bundles contain every dependency or test. Use locate for discovery and explain for a named definition or guard. Follow concrete omitted-range hints with scoped reads rather than repeating broad searches.\n\nFor multiple requested items, supply requirements with stable IDs and literal original-source patterns. Preserve every linked condition clause in the answer. matched is literal evidence, not semantic coverage. Check unresolved, conditions_incomplete, omitted, syntax=unavailable, pending, and capture_omitted; ranked or budgeted results cannot prove absence. The same connection shares seen/pending state. Conditions can be resurfaced by reissuing a scoped operation; use repeat only when previously delivered source is needed again. Reconnects start a fresh retrieval session.\n",
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "jrg",
+            "version": "0.15.2"
+          }
+        }
+      },
+      "retrieve_equivalent_to_0151": true,
+      "replies": [
+        {
+          "id": 3,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n@ experiments/2026-10-17-mcp-priority/guard.rs:1-1,5-6\n1:fn receive(status: &str, candidates: &[u8], version: u32) {\n5:    { return; }\n6:}\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=0 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 4,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=6 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 5,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "path escapes configured MCP root",
+                "type": "text"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    "Claude": {
+      "command": [
+        "/bin/sh",
+        "/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh",
+        "/Users/miyajimakazuhiro/projects/jrg"
+      ],
+      "initialize": {
+        "id": 1,
+        "jsonrpc": "2.0",
+        "result": {
+          "capabilities": {
+            "tools": {}
+          },
+          "instructions": "Prefer jrg retrieve for code investigation, source search, and bounded line reads within the configured root. Use native rg for exhaustive matches or file enumeration, absence checks, exact counts, machine-readable output and pipelines, or unsupported flags/encodings. If jrg is unavailable or a path is outside the configured root, use permitted native tools. Keep rg installed and usable; never replace its executable or alias it to jrg. Explicit user requests and host permissions take precedence.\n\nFor source investigations, use review with specific identifiers and narrow known paths. Batch independent known searches and reads; do not assume heuristic bundles contain every dependency or test. Use locate for discovery and explain for a named definition or guard. Follow concrete omitted-range hints with scoped reads rather than repeating broad searches.\n\nFor multiple requested items, supply requirements with stable IDs and literal original-source patterns. Preserve every linked condition clause in the answer. matched is literal evidence, not semantic coverage. Check unresolved, conditions_incomplete, omitted, syntax=unavailable, pending, and capture_omitted; ranked or budgeted results cannot prove absence. The same connection shares seen/pending state. Conditions can be resurfaced by reissuing a scoped operation; use repeat only when previously delivered source is needed again. Reconnects start a fresh retrieval session.\n",
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "jrg",
+            "version": "0.15.2"
+          }
+        }
+      },
+      "retrieve_equivalent_to_0151": true,
+      "replies": [
+        {
+          "id": 3,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n@ experiments/2026-10-17-mcp-priority/guard.rs:1-1,5-6\n1:fn receive(status: &str, candidates: &[u8], version: u32) {\n5:    { return; }\n6:}\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=0 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 4,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=6 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 5,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "path escapes configured MCP root",
+                "type": "text"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    "Cursor": {
+      "command": [
+        "/bin/sh",
+        "/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh",
+        "/Users/miyajimakazuhiro/projects/jrg"
+      ],
+      "initialize": {
+        "id": 1,
+        "jsonrpc": "2.0",
+        "result": {
+          "capabilities": {
+            "tools": {}
+          },
+          "instructions": "Prefer jrg retrieve for code investigation, source search, and bounded line reads within the configured root. Use native rg for exhaustive matches or file enumeration, absence checks, exact counts, machine-readable output and pipelines, or unsupported flags/encodings. If jrg is unavailable or a path is outside the configured root, use permitted native tools. Keep rg installed and usable; never replace its executable or alias it to jrg. Explicit user requests and host permissions take precedence.\n\nFor source investigations, use review with specific identifiers and narrow known paths. Batch independent known searches and reads; do not assume heuristic bundles contain every dependency or test. Use locate for discovery and explain for a named definition or guard. Follow concrete omitted-range hints with scoped reads rather than repeating broad searches.\n\nFor multiple requested items, supply requirements with stable IDs and literal original-source patterns. Preserve every linked condition clause in the answer. matched is literal evidence, not semantic coverage. Check unresolved, conditions_incomplete, omitted, syntax=unavailable, pending, and capture_omitted; ranked or budgeted results cannot prove absence. The same connection shares seen/pending state. Conditions can be resurfaced by reissuing a scoped operation; use repeat only when previously delivered source is needed again. Reconnects start a fresh retrieval session.\n",
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "jrg",
+            "version": "0.15.2"
+          }
+        }
+      },
+      "retrieve_equivalent_to_0151": true,
+      "replies": [
+        {
+          "id": 3,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n@ experiments/2026-10-17-mcp-priority/guard.rs:1-1,5-6\n1:fn receive(status: &str, candidates: &[u8], version: u32) {\n5:    { return; }\n6:}\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=0 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 4,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=6 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 5,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "path escapes configured MCP root",
+                "type": "text"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    },
+    "OpenCode": {
+      "command": [
+        "/bin/sh",
+        "/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh",
+        "/Users/miyajimakazuhiro/projects/jrg"
+      ],
+      "initialize": {
+        "id": 1,
+        "jsonrpc": "2.0",
+        "result": {
+          "capabilities": {
+            "tools": {}
+          },
+          "instructions": "Prefer jrg retrieve for code investigation, source search, and bounded line reads within the configured root. Use native rg for exhaustive matches or file enumeration, absence checks, exact counts, machine-readable output and pipelines, or unsupported flags/encodings. If jrg is unavailable or a path is outside the configured root, use permitted native tools. Keep rg installed and usable; never replace its executable or alias it to jrg. Explicit user requests and host permissions take precedence.\n\nFor source investigations, use review with specific identifiers and narrow known paths. Batch independent known searches and reads; do not assume heuristic bundles contain every dependency or test. Use locate for discovery and explain for a named definition or guard. Follow concrete omitted-range hints with scoped reads rather than repeating broad searches.\n\nFor multiple requested items, supply requirements with stable IDs and literal original-source patterns. Preserve every linked condition clause in the answer. matched is literal evidence, not semantic coverage. Check unresolved, conditions_incomplete, omitted, syntax=unavailable, pending, and capture_omitted; ranked or budgeted results cannot prove absence. The same connection shares seen/pending state. Conditions can be resurfaced by reissuing a scoped operation; use repeat only when previously delivered source is needed again. Reconnects start a fresh retrieval session.\n",
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "jrg",
+            "version": "0.15.2"
+          }
+        }
+      },
+      "retrieve_equivalent_to_0151": true,
+      "replies": [
+        {
+          "id": 3,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n@ experiments/2026-10-17-mcp-priority/guard.rs:1-1,5-6\n1:fn receive(status: &str, candidates: &[u8], version: u32) {\n5:    { return; }\n6:}\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=0 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 4,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "# requirement_map literal links; not semantic coverage. Check every item and condition in the answer. Conditions may repeat seen source.\n# item R4 状態と件数と版 state=matched matches=1 conditions=1 conditions_incomplete=0 omitted=0 syntax=ast\n# condition R4 experiments/2026-10-17-mcp-priority/guard.rs:2-4\n@ experiments/2026-10-17-mcp-priority/guard.rs:2-4\n2:    if status != \"completed\"\n3:        || !candidates.is_empty()\n4:        || version == 0\n# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=6 pending=0 partial=0 changed=0 untracked=0\n",
+                "type": "text"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "id": 5,
+          "jsonrpc": "2.0",
+          "result": {
+            "content": [
+              {
+                "text": "path escapes configured MCP root",
+                "type": "text"
+              }
+            ],
+            "isError": true
+          }
+        }
+      ]
+    }
+  }
+}

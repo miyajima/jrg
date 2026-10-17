@@ -4,6 +4,7 @@ from pathlib import Path
 import os
 import subprocess
 import tempfile
+import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ class InstallTests(unittest.TestCase):
                                              input="ｶﾞｯｺｳ\n".encode()).decode()
             self.assertIn("matched=1 shown=1 omitted=0", result)
             self.assertFalse(list(dest.glob(".*-install.*")))
-            self.assertEqual(subprocess.check_output([str(dest / "jrg"), "--version"]), b"jrg 0.8.0\n")
+            self.assertEqual(subprocess.check_output([str(dest / "jrg"), "--version"]), ("jrg " + tomllib.loads((ROOT / "Cargo.toml").read_text())["package"]["version"] + "\n").encode())
 
     def test_invalid_binary_does_not_replace_existing_install(self):
         with tempfile.TemporaryDirectory(prefix="jrg-install-") as tmp:

@@ -1,14 +1,18 @@
 mod ai;
 mod batch;
 mod blocks;
+mod budget;
 mod cli;
+mod embedding;
 mod mcp;
 mod normalize;
 mod output;
 mod rank;
+mod requirements;
 mod search;
 mod session;
 mod smart;
+mod syntax;
 
 use clap::CommandFactory;
 use cli::{Args, Color, Engine};
@@ -31,7 +35,11 @@ fn main() -> ExitCode {
     let stdout = io::stdout();
     let result = if args.mcp {
         mcp::serve(&args)
-    } else if args.batch.is_some() || args.session.is_some() || args.rank_query.is_some() {
+    } else if args.batch.is_some()
+        || args.session.is_some()
+        || args.rank_query.is_some()
+        || args.intent == cli::Intent::Review
+    {
         batch::run(&args)
     } else {
         run(

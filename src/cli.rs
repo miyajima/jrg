@@ -28,6 +28,7 @@ pub enum Engine {
 pub enum Intent {
     Locate,
     Explain,
+    Review,
 }
 
 #[derive(Clone, Copy, PartialEq, ValueEnum)]
@@ -65,6 +66,9 @@ pub struct Args {
     /// 文字列検索の候補をこのクエリとのBM25関連度で並べる（意味検索ではない）
     #[arg(long, requires = "smart", conflicts_with = "mcp")]
     pub rank_query: Option<String>,
+    /// 広いlocate検索のBM25上位候補数（既定12、0で無制限）。read/explainは対象外
+    #[arg(long, requires = "rank_query", value_parser = clap::value_parser!(u16).range(0..=256))]
+    pub discovery_limit: Option<u16>,
     /// 選択したエンジンと文脈量を stderr に表示
     #[arg(long)]
     pub explain_plan: bool,
@@ -88,7 +92,7 @@ pub struct Args {
     /// 検索パス。省略時は標準入力がパイプなら標準入力、それ以外はカレントディレクトリ
     pub paths: Vec<PathBuf>,
     /// 検索パターンを追加（OR 検索）。-e 使用時は位置引数をパスとして扱う
-    #[arg(short = 'e', long = "regexp", value_name = "PATTERN", action = clap::ArgAction::Append)]
+    #[arg(short = 'e', long = "regexp", value_name = "PATTERN", allow_hyphen_values = true, action = clap::ArgAction::Append)]
     pub patterns: Vec<String>,
     /// 原文を正規表現で検索（表記の正規化は行わない）
     #[arg(long, conflicts_with = "fixed_strings")]
@@ -186,15 +190,27 @@ impl Args {
         let explicit_context = ["context", "before_context", "after_context"]
             .iter()
             .any(|name| matches.value_source(name) == Some(ValueSource::CommandLine));
-        if args.intent == Intent::Explain && !explicit_context {
+        if matches!(args.intent, Intent::Explain | Intent::Review) && !explicit_context {
             args.context = 3;
             args.block_context = args.smart;
+        }
+        if args.intent == Intent::Review
+            && args.globs.is_empty()
+            && !((args.pattern.is_some() || !args.patterns.is_empty())
+                && args.inputs(true).1.iter().any(|p| p.is_file()))
+        {
+            args.globs = [
+                "*.rs", "*.py", "*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs", "*.cjs", "*.md",
+                "*.mdx", "*.txt", "*.rst",
+            ]
+            .map(str::to_owned)
+            .to_vec();
         }
         if args.smart && matches.value_source("snippet_chars") != Some(ValueSource::CommandLine) {
             args.snippet_chars = 320;
         }
         if args.smart && matches.value_source("max_tokens") != Some(ValueSource::CommandLine) {
-            if args.batch.is_some() || args.resume {
+            if args.batch.is_some() || args.resume || args.intent == Intent::Review {
                 args.max_tokens = 24000;
             } else if args.block_context {
                 args.max_tokens = 16000;
@@ -217,5 +233,26 @@ impl Args {
             paths.push(if stdin_is_terminal { "." } else { "-" }.into());
         }
         (patterns, paths)
+    }
+}
+
+#[cfg(test)]
+mod review_startup_tests {
+    use super::*;
+    use clap::CommandFactory;
+    #[test]
+    fn review_without_a_search_pattern_can_start_mcp_or_resume() {
+        for tail in [
+            vec!["--mcp", "--root", "."],
+            vec!["--resume", "--session", "session.json"],
+        ] {
+            let argv = ["jrg", "--smart", "--intent", "review"]
+                .into_iter()
+                .chain(tail);
+            let m = Args::command().try_get_matches_from(argv).unwrap();
+            let args = Args::prepared(&m);
+            assert!(args.mcp || args.resume);
+            assert!(args.pattern.is_none() && args.patterns.is_empty());
+        }
     }
 }

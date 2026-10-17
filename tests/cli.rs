@@ -366,3 +366,24 @@ fn broken_pipe_does_not_deadlock_workers() {
         std::thread::sleep(std::time::Duration::from_millis(10));
     }
 }
+
+#[test]
+fn repeated_patterns_accept_option_like_literal_values() {
+    let d = TempDir::new().unwrap();
+    fs::write(
+        d.path().join("x.txt"),
+        "--stream\n--glob=private\nordinary\n",
+    )
+    .unwrap();
+    let out = run(
+        d.path(),
+        &["-e", "--stream", "-e", "--glob=private", "--", "x.txt"],
+        b"",
+    );
+    assert_eq!(code(&out), 0, "{}", String::from_utf8_lossy(&out.stderr));
+    assert!(
+        text(&out).contains("--stream")
+            && text(&out).contains("--glob=private")
+            && !text(&out).contains("ordinary")
+    );
+}

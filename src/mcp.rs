@@ -110,8 +110,36 @@ impl Server {
             .collect()
     }
     fn plan(&self, input: &Value) -> Result<(Args, Value), String> {
-        Self::keys(input, &["operations", "max_tokens", "repeat", "resume"])?;
+        Self::keys(
+            input,
+            &[
+                "operations",
+                "max_tokens",
+                "repeat",
+                "resume",
+                "rank_query",
+                "discovery_limit",
+                "requirements",
+            ],
+        )?;
         let mut args = self.args.clone();
+        if let Some(query) = input.get("rank_query") {
+            let query = query.as_str().ok_or("rank_query must be a string")?;
+            if crate::rank::tokens(query).is_empty() {
+                return Err("rank_query needs at least one searchable term".into());
+            }
+            args.rank_query = Some(query.to_owned());
+        }
+        if let Some(n) = input.get("discovery_limit") {
+            if args.rank_query.is_none() {
+                return Err("discovery_limit needs rank_query".into());
+            }
+            args.discovery_limit = Some(
+                n.as_u64()
+                    .filter(|n| *n <= 256)
+                    .ok_or("discovery_limit must be 0..256")? as u16,
+            );
+        }
         if let Some(n) = input.get("max_tokens") {
             args.max_tokens = n
                 .as_u64()
@@ -125,6 +153,14 @@ impl Server {
         }
         if args.repeat && args.resume {
             return Err("repeat and resume conflict".into());
+        }
+        crate::requirements::Requirements::parse(
+            input.get("requirements"),
+            args.max_tokens as usize,
+        )
+        .map_err(|e| e.to_string())?;
+        if args.resume && input.get("requirements").is_some() {
+            return Err("requirements needs explicit operations; repeat the scoped operation to resurface conditions".into());
         }
         if (args.repeat || args.resume) && args.session.is_none() {
             return Err("repeat/resume needs server --session".into());
@@ -196,9 +232,14 @@ impl Server {
                 if let Some(intent) = search.get("intent") {
                     let intent = intent
                         .as_str()
-                        .filter(|v| ["locate", "explain"].contains(v))
-                        .ok_or("intent must be locate or explain")?;
+                        .filter(|v| ["locate", "explain", "review"].contains(v))
+                        .ok_or("intent must be locate, explain or review")?;
                     argv.extend(["--intent".into(), intent.into()]);
+                }
+                if search["intent"] == "review" && search.get("context").is_some() {
+                    return Err(
+                        "review selects source scopes; context belongs to locate/explain".into(),
+                    );
                 }
                 if let Some(n) = search.get("context") {
                     argv.extend([
@@ -215,7 +256,7 @@ impl Server {
                     }
                 }
                 for pattern in patterns {
-                    argv.extend(["-e".into(), pattern]);
+                    argv.push(format!("--regexp={pattern}"));
                 }
                 argv.push("--".into());
                 for path in paths {
@@ -224,14 +265,21 @@ impl Server {
                 plan.push(json!({"search":argv}));
             }
         }
-        Ok((args, json!({"operations":plan})))
+        let mut batch = json!({"operations":plan});
+        if let Some(requirements) = input.get("requirements") {
+            batch["requirements"] = requirements.clone();
+        }
+        Ok((args, batch))
     }
     fn schema(&self) -> Value {
         let search = json!({"type":"object","additionalProperties":false,"required":["patterns"],"properties":{
             "patterns":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}},"paths":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}},
-            "intent":{"type":"string","enum":["locate","explain"]},"regex":{"type":"boolean"},"case_insensitive":{"type":"boolean"},"full_scope":{"type":"boolean"},"context":{"type":"integer","minimum":0,"maximum":128},"globs":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}}}});
+            "intent":{"type":"string","enum":["locate","explain","review"]},"regex":{"type":"boolean"},"case_insensitive":{"type":"boolean"},"full_scope":{"type":"boolean"},"context":{"type":"integer","minimum":0,"maximum":128},"globs":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}}}});
         let read = json!({"type":"object","additionalProperties":false,"required":["path","start","end"],"properties":{"path":{"type":"string"},"start":{"type":"integer","minimum":1},"end":{"type":"integer","minimum":1}}});
-        json!({"tools":[{"name":"retrieve","description":"Batch independent source searches and line reads. Fixed root; no shell. patterns are literal by default; regex=true searches original text, default normalizes Japanese. locate for discovery; explain for named definitions/guards/tests. Explain keeps matched definitions, short caller contexts; full_scope=true or read for needed caller bodies. Shared session suppresses already delivered rows (seen); empty operations with resume retrieves pending rows; repeat only when necessary. Default 24000 tokens, max26000. scope_limited is not pending. Batch implementation and related tests when paths are known. Errors/omissions are explicit in footer.","inputSchema":{"type":"object","additionalProperties":false,"required":["operations"],"properties":{"operations":{"type":"array","maxItems":64,"items":{"oneOf":[{"type":"object","required":["search"],"additionalProperties":false,"properties":{"search":search}},{"type":"object","required":["read"],"additionalProperties":false,"properties":{"read":read}}]}},"max_tokens":{"type":"integer","minimum":64,"maximum":26000},"repeat":{"type":"boolean"},"resume":{"type":"boolean"}}},"annotations":{"readOnlyHint":true,"destructiveHint":false,"openWorldHint":false}}]})
+        let requirement = json!({"type":"object","additionalProperties":false,"required":["id","description","patterns"],"properties":{
+            "id":{"type":"string","pattern":"^[A-Za-z0-9_-]{1,32}$"},"description":{"type":"string","minLength":1,"maxLength":160},
+            "patterns":{"type":"array","minItems":1,"maxItems":16,"items":{"type":"string","minLength":1,"maxLength":128}}}});
+        json!({"tools":[{"name":"retrieve","description":"Prefer jrg retrieve for source investigation and bounded reads within the configured root. Keep native rg for exhaustive enumeration, absence checks, exact counts, machine output, pipelines and unsupported options; fall back when jrg is unavailable. Batch independent source searches and line reads. For multi-item requests, supply outer requirements with stable IDs, descriptions and case-sensitive original-source literal patterns. Returns item/evidence links plus whole if/while predicates before ordinary source; answer every item and preserve all linked clauses. matched means literal evidence, not verified semantic coverage. Check unresolved, conditions_incomplete, omitted and syntax=unavailable; do not infer absence or a passed contract. Requirements only annotate selected source, never expand retrieval or invoke models. Reissue scoped operations to resurface conditions even when seen. Fixed root; no shell. patterns are literal by default; regex=true searches original text, default normalizes Japanese. review for source investigations: BM25 ranks query-focused previews and production definition names, focuses the leading module family for broad searches, then bundles functions/guards/helpers/tests. Explicit paths override family focus; other families have hints. No guessed broad reads needed. Scope paths when known; root paths are valid. Independent review searches may share one call; scope slots are shared across the batch (source8 plus up to2 small sibling JSON definitions/tests6/helpers8/constants16), so combine overlapping subjects in one search. Generic stage/verify names do not expand root tests; test-only searches stay scoped. JSON/schema investigations also include small sibling serialization definitions and tests asserting their field keys. Document review returns matching headings/sections or local contexts directly, no locate retry needed. Literal patterns starting with - are values. Heuristic links and omitted file/scope hints are explicit; not semantic test/dependency closure. No context with review. Use returned evidence/paths/line numbers; follow concrete gaps with narrow explain/read, never guess a file path. Small known modules may be read with their tests directly. locate for discovery; explain for named definitions/guards/tests. Explain keeps matched definitions, short caller contexts; full_scope=true or read for needed caller bodies. Shared session suppresses already delivered rows (seen); empty operations with resume retrieves pending rows; repeat only when necessary. Default24000 tokens, max26000, with96000-byte transport ceiling before seen tracking. scope_limited is not pending. Batch implementation and related tests when paths are known. Optional outer rank_query enables BM25. Broad locate searches over directories or multiple files return top12 novel passages per operation (discovery_limit overrides; 0 disables). Single-file locate, explain functions and explicit read ranges remain uncapped and are packed first. Batch independent known functions/guards/tests with their related reads. Unselected range hints are discovery omissions, not pending; retrieve only needed hints narrowly. Seen rows are excluded before selecting top candidates. English identifiers work for code. review optionally supplements lexical candidates with pinned local EmbeddingGemma 2 over a configured Unix socket; model/service failures explicitly fall back to lexical. ast-grep parses Rust/TS/JS/Python scopes, with labeled lexical fallback for invalid or unsupported syntax. Lexical locate/explain stay exact. Candidate ranking cannot prove absence. Errors/omissions are explicit in footer.","inputSchema":{"type":"object","additionalProperties":false,"required":["operations"],"properties":{"operations":{"type":"array","maxItems":64,"items":{"oneOf":[{"type":"object","required":["search"],"additionalProperties":false,"properties":{"search":search}},{"type":"object","required":["read"],"additionalProperties":false,"properties":{"read":read}}]}},"requirements":{"type":"array","minItems":1,"maxItems":16,"items":requirement,"description":"Requested item checklist with original-source case-sensitive literal patterns (not regex or normalized). Explicit operations only; statuses must fit budget or request fails before execution."},"rank_query":{"type":"string","description":"Optional BM25 relevance query for this entire batch, not the retrieval pattern. Needs a searchable term."},"discovery_limit":{"type":"integer","minimum":0,"maximum":256,"description":"Per broad locate operation BM25 top passages, default12; 0 disables cutoff. Never limits read or explain."},"max_tokens":{"type":"integer","minimum":64,"maximum":26000},"repeat":{"type":"boolean"},"resume":{"type":"boolean"}}},"annotations":{"readOnlyHint":true,"destructiveHint":false,"openWorldHint":false}}]})
     }
     fn response(&mut self, request: &Value, output: &mut dyn Write) -> io::Result<()> {
         let id = request.get("id").cloned().unwrap_or(Value::Null);
@@ -254,7 +302,7 @@ impl Server {
                     "2025-11-25"
                 };
             Ok(
-                json!({"protocolVersion":version,"capabilities":{"tools":{}},"serverInfo":{"name":"jrg","version":env!("CARGO_PKG_VERSION")}}),
+                json!({"protocolVersion":version,"capabilities":{"tools":{}},"instructions":include_str!("mcp_instructions.txt"),"serverInfo":{"name":"jrg","version":env!("CARGO_PKG_VERSION")}}),
             )
         } else if method == "ping" {
             Ok(json!({}))

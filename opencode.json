@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "jrg": {
+      "type": "local",
+      "command": [
+        "/bin/sh",
+        "/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh",
+        "/Users/miyajimakazuhiro/projects/jrg"
+      ],
+      "enabled": true
+    }
+  }
+}

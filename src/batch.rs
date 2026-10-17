@@ -47,12 +47,26 @@ pub fn execute(
     value: Option<Value>,
     writer: &mut dyn Write,
 ) -> Result<u8, Box<dyn Error>> {
+    let requirements = crate::requirements::Requirements::parse(
+        value.as_ref().and_then(|v| v.get("requirements")),
+        args.max_tokens as usize,
+    )?;
     if args
         .rank_query
         .as_ref()
         .is_some_and(|q| crate::rank::tokens(q).is_empty())
     {
         return Err(invalid("--rank-query needs at least one searchable term").into());
+    }
+    if args.intent == crate::cli::Intent::Review
+        && (!args.smart
+            || !args.block_context
+            || !matches!(args.encoding, crate::cli::Encoding::Utf8)
+            || args.max_tokens < 128)
+    {
+        return Err(
+            invalid("review needs smart UTF-8 scopes, no explicit context, budget >=128").into(),
+        );
     }
     let mut session = args
         .session
@@ -61,8 +75,11 @@ pub fn execute(
         .transpose()?;
     let mut prepared = Vec::new();
     if let Some(value) = value {
-        if value.as_object().is_none_or(|o| o.len() != 1) {
-            return Err(invalid("expected only operations array").into());
+        if value.as_object().is_none_or(|o| {
+            !o.contains_key("operations")
+                || o.keys().any(|k| k != "operations" && k != "requirements")
+        }) {
+            return Err(invalid("expected operations and optional requirements").into());
         }
         let operations = value["operations"]
             .as_array()
@@ -106,6 +123,7 @@ pub fn execute(
                 }
                 if inner.mcp
                     || inner.rank_query.is_some()
+                    || inner.discovery_limit.is_some()
                     || inner.root.is_some()
                     || inner.session.is_some()
                     || inner.resume
@@ -121,6 +139,16 @@ pub fn execute(
                     || inner.column
                 {
                     prepared.push(Operation::Error("batch search needs numbered content search, no nested batches or machine modes; --rank-query belongs on the outer command".into()));
+                    continue;
+                }
+                if inner.intent == crate::cli::Intent::Review
+                    && (!inner.block_context
+                        || !matches!(inner.encoding, crate::cli::Encoding::Utf8)
+                        || args.max_tokens < 128)
+                {
+                    prepared.push(Operation::Error(
+                        "review needs UTF-8 scopes, no explicit context, budget >=128".into(),
+                    ));
                     continue;
                 }
                 let (patterns, paths) = inner.inputs(true);
@@ -162,9 +190,22 @@ pub fn execute(
             }
         }
     } else if !args.resume {
-        prepared.push(Operation::Search(Box::new(args.clone())));
+        let mut inner = args.clone();
+        if args.intent == crate::cli::Intent::Review {
+            let (patterns, paths) = args.inputs(true);
+            if paths.iter().any(|p| p == Path::new("-")) {
+                return Err(invalid("review cannot read stdin").into());
+            }
+            inner.pattern = None;
+            inner.patterns = patterns;
+            inner.paths = paths;
+        }
+        prepared.push(Operation::Search(Box::new(inner)));
     }
     let mut evidence = Evidence::default();
+    evidence.requirements = requirements;
+    evidence.rank_query = args.rank_query.clone();
+    evidence.discovery_limit = args.discovery_limit.unwrap_or(12) as usize;
     if args.resume {
         evidence.resume(session.as_mut().unwrap())?;
     }
@@ -177,7 +218,15 @@ pub fn execute(
                 evidence.read(&path, start, end).map_err(Into::into)
             }
             Operation::Search(inner) => {
-                let mut capture = Capture::default();
+                let mut capture = if inner.intent == crate::cli::Intent::Review {
+                    Capture::preview_for(
+                        args.rank_query
+                            .as_deref()
+                            .unwrap_or(&inner.patterns.join(" ")),
+                    )
+                } else {
+                    Capture::default()
+                };
                 match crate::run(&inner, &mut io::sink(), false, Some(&mut capture)) {
                     Ok(code) => {
                         if code == 1 {
@@ -195,7 +244,13 @@ pub fn execute(
                                 i + 1
                             ));
                         }
-                        evidence.search(&inner, capture).map_err(Into::into)
+                        if inner.intent == crate::cli::Intent::Review {
+                            evidence
+                                .review(&inner, capture, session.as_ref(), args.repeat)
+                                .map_err(Into::into)
+                        } else {
+                            evidence.search(&inner, capture).map_err(Into::into)
+                        }
                     }
                     Err(err) => Err(err),
                 }
@@ -212,10 +267,10 @@ pub fn execute(
         .messages
         .iter()
         .any(|m| m.contains("error:") || m.contains("search error"));
-    let tokenizer = tiktoken_rs::o200k_base()?;
-    evidence.rank_query = args.rank_query.clone();
+    let tokenizer = tiktoken_rs::o200k_base_singleton();
+    let evidence_semantic_found = evidence.semantic_found();
     let payload = evidence.render_tracked(
-        &tokenizer,
+        tokenizer,
         args.max_tokens as usize,
         session.as_mut(),
         args.repeat,
@@ -228,5 +283,11 @@ pub fn execute(
     if let Some(session) = session {
         session.save()?;
     }
-    Ok(if failed { 2 } else { search_code })
+    Ok(if failed {
+        2
+    } else if evidence_semantic_found {
+        0
+    } else {
+        search_code
+    })
 }

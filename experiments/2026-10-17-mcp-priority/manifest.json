@@ -1,0 +1,18 @@
+{
+  "Cargo.toml": "72aef3f3c1835a347018104f0a4bf12c3abacc3843e880a55cd93370dd30dfd4",
+  "Cargo.lock": "187275ac9b1c18be5b2a11541ecf9d7c6aa56727dbe00f9f0dc3d169a60bf928",
+  "src/mcp.rs": "23486a17318f6ad71d10bd3f4e7ea30a69ce5079928625904cf57af89b497222",
+  "src/mcp_instructions.txt": "74959481e1e26638a71687b4c20397270ca97c4ad93a8e000db9e32b427eb66a",
+  "tests/mcp.rs": "7be50e409373b3d359ecde4c0e7fc36a5cd612e4019545713f07d35facd58db3",
+  "scripts/jrg-mcp.sh": "8584d42664d3a10c986dd5235ed0d922e691fd5a2e738baa6bbd33d4afd93285",
+  "AGENTS.md": "9889bff85cceb962e15c333beaf8d427e515cde1b102b3af1796a9c8440878f2",
+  "CLAUDE.md": "b2872e43c658a41ef03322fa6d81e5717e4f46549613f67abcf3f8c5e0ea5171",
+  ".cursor/rules/jrg.mdc": "8289df78df6aa759cca6de8f26613697eda21f2cd737c96f7292f6b94239c16a",
+  ".mcp.json": "58a2e168bdf3159dcbadf44d2cfae83d2469c550000174050bbdff156f6925ba",
+  ".cursor/mcp.json": "0079480f765091a27b37047ec4f44d083d3643f671e2b841d0e0f082f48d957e",
+  ".codex/config.toml": "b2854597c808bda4024ac4b963d9cd8a7337e04d8cfba93e7dfc53c7c5a024da",
+  "opencode.json": "d3274816e7c4fec5df70eab07c33d4d8ea23c111e5f74bc449b6f4c4ac063581",
+  "docs/CODEX_RETRIEVAL.md": "76282ecdca5a7d9c68595bf2db1e89b3a61d88fdd9bfed73e8afe6c9f81e15ff",
+  "installed_binary_sha256": "2d34247bfe4eae581af765ac5be93e5bde61e9326037696e6eebcbd6de7e7003",
+  "old_binary_sha256": "3be2751524f261de3c9f0500897c53f6fea4b7f68cde96505c093d6460f52fa0"
+}

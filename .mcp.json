@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "jrg": {
+      "command": "/bin/sh",
+      "args": [
+        "/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh",
+        "/Users/miyajimakazuhiro/projects/jrg"
+      ],
+      "type": "stdio"
+    }
+  }
+}

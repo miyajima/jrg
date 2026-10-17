@@ -1,6 +1,6 @@
 [package]
 name = "jrg"
-version = "0.8.0"
+version = "0.15.2"
 edition = "2024"
 rust-version = "1.88"
 description = "A Japanese-friendly recursive text search CLI"
@@ -8,6 +8,7 @@ license = "MIT"
 repository = "https://github.com/miyajima/jrg"
 
 [dependencies]
+ast-grep-language = { version = "=0.45.1", default-features = false, features = ["tree-sitter-rust", "tree-sitter-python", "tree-sitter-typescript", "tree-sitter-javascript"] }
 clap = { version = "4.5", features = ["derive"] }
 encoding_rs = "0.8"
 ignore = "0.4"
