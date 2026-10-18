@@ -6,8 +6,68 @@ use unicode_segmentation::UnicodeSegmentation;
 
 const MAX_GROUPS: usize = 4096;
 const MAX_REFERENCE_RANGES: usize = 256;
+const MAX_TRACKED_ROWS: usize = 8192;
+const MAX_TRACKED_TEXT_BYTES: usize = 4 * 1024 * 1024;
 type GroupKey = (bool, String, String, u64);
 type DisplayKey = (String, u64, bool);
+
+#[derive(Default)]
+pub struct TrackedRows {
+    pub rows: BTreeMap<String, Vec<(usize, String)>>,
+    pub omitted: usize,
+    row_count: usize,
+    original_text_bytes: usize,
+}
+
+impl TrackedRows {
+    pub(crate) fn add_row(&mut self, path: &str, number: u64, text: &str) {
+        self.add_range(path, number, number, text);
+    }
+
+    fn add_range(&mut self, path: &str, start: u64, end: u64, text: &str) {
+        if start > end {
+            return;
+        }
+        let total = end.saturating_sub(start).saturating_add(1);
+        let available_rows = MAX_TRACKED_ROWS.saturating_sub(self.row_count);
+        let available_bytes = MAX_TRACKED_TEXT_BYTES.saturating_sub(self.original_text_bytes);
+        let rows_by_bytes = if text.is_empty() {
+            available_rows
+        } else {
+            available_bytes / text.len()
+        };
+        let allowed = available_rows
+            .min(rows_by_bytes)
+            .min(usize::try_from(total).unwrap_or(usize::MAX));
+        let mut recorded = 0_u64;
+        while recorded < allowed as u64 {
+            let Some(number) = start.checked_add(recorded) else {
+                break;
+            };
+            let Ok(index) = usize::try_from(number.saturating_sub(1)) else {
+                break;
+            };
+            self.rows
+                .entry(path.to_owned())
+                .or_default()
+                .push((index, text.to_owned()));
+            self.row_count += 1;
+            self.original_text_bytes += text.len();
+            recorded += 1;
+        }
+        self.omitted = self
+            .omitted
+            .saturating_add(usize::try_from(total.saturating_sub(recorded)).unwrap_or(usize::MAX));
+    }
+}
+
+impl std::ops::Deref for TrackedRows {
+    type Target = BTreeMap<String, Vec<(usize, String)>>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.rows
+    }
+}
 
 pub struct AiOutput {
     groups: BTreeMap<GroupKey, Record>,
@@ -197,14 +257,29 @@ impl AiOutput {
     }
 
     pub fn finish(self, tokenizer: &CoreBPE, max_tokens: usize) -> String {
-        self.finish_impl(tokenizer, max_tokens, false).0
+        self.finish_impl(tokenizer, max_tokens, false, false).0
     }
 
     pub fn finish_smart(self, tokenizer: &CoreBPE, max_tokens: usize) -> (String, bool) {
-        self.finish_impl(tokenizer, max_tokens, true)
+        let (text, complete, _) = self.finish_impl(tokenizer, max_tokens, true, false);
+        (text, complete)
     }
 
-    fn finish_impl(self, tokenizer: &CoreBPE, max_tokens: usize, detailed: bool) -> (String, bool) {
+    pub fn finish_smart_tracked(
+        self,
+        tokenizer: &CoreBPE,
+        max_tokens: usize,
+    ) -> (String, bool, TrackedRows) {
+        self.finish_impl(tokenizer, max_tokens, true, true)
+    }
+
+    fn finish_impl(
+        self,
+        tokenizer: &CoreBPE,
+        max_tokens: usize,
+        detailed: bool,
+        track_rows: bool,
+    ) -> (String, bool, TrackedRows) {
         let mut files: BTreeMap<String, Vec<Record>> = BTreeMap::new();
         for record in self.groups.into_values() {
             files.entry(record.path.clone()).or_default().push(record);
@@ -272,9 +347,18 @@ impl AiOutput {
         let complete = shown == self.matched
             && context == self.context
             && chosen.values().all(|r| !r.snippet.clipped());
+        let mut rows = TrackedRows::default();
+        if track_rows {
+            for record in chosen.values().filter(|r| !r.snippet.clipped()) {
+                for (&start, &end) in &record.numbers.0 {
+                    rows.add_range(&record.path, start, end, &record.snippet.body);
+                }
+            }
+        }
         (
             render(&chosen, self.matched, detailed.then_some(self.context)),
             complete,
+            rows,
         )
     }
 }
@@ -354,6 +438,136 @@ mod tests {
     fn tokenizer() -> &'static CoreBPE {
         static TOKENIZER: OnceLock<CoreBPE> = OnceLock::new();
         TOKENIZER.get_or_init(|| tiktoken_rs::o200k_base().unwrap())
+    }
+
+    fn line(path: &str, number: u64, text: &str, selected: bool) -> Line {
+        Line {
+            path: Arc::new(path.to_owned()),
+            number,
+            text: text.to_owned(),
+            ranges: std::iter::once(0..text.len()).collect(),
+            selected,
+        }
+    }
+
+    #[test]
+    fn smart_tracked_output_matches_legacy_and_keeps_complete_repeated_locations() {
+        let mut legacy = AiOutput::new(160);
+        let mut tracked = AiOutput::new(160);
+        for number in [2, 4] {
+            legacy.push(line("source.rs", number, "repeat", true));
+            tracked.push(line("source.rs", number, "repeat", true));
+        }
+
+        let expected = legacy.finish_smart(tokenizer(), 4000);
+        let (actual, complete, rows) = tracked.finish_smart_tracked(tokenizer(), 4000);
+
+        assert_eq!(actual, expected.0);
+        assert_eq!(complete, expected.1);
+        assert!(complete);
+        assert!(actual.contains("2,4:1:repeat"), "{actual}");
+        assert_eq!(
+            rows.rows.get("source.rs").unwrap(),
+            &vec![(1, "repeat".to_owned()), (3, "repeat".to_owned())]
+        );
+        assert_eq!(rows.omitted, 0);
+    }
+
+    #[test]
+    fn smart_tracked_output_excludes_cropped_and_budget_dropped_rows() {
+        let source = format!("{}needle{}", "left".repeat(80), "right".repeat(80));
+        let start = source.find("needle").unwrap();
+        let mut clipped = AiOutput::new(16);
+        let mut clipped_line = line("cropped.rs", 1, &source, true);
+        clipped_line.ranges = std::iter::once(start..start + "needle".len()).collect();
+        clipped.push(clipped_line);
+        let (rendered, _, rows) = clipped.finish_smart_tracked(tokenizer(), 4000);
+        assert!(rendered.contains('…'), "{rendered}");
+        assert!(!rows.rows.contains_key("cropped.rs"));
+
+        let mut output = AiOutput::new(160);
+        for number in 1..=40 {
+            output.push(line(
+                "budget.rs",
+                number,
+                &format!("hit_{number:03} alpha_{number:03} beta_{number:03} gamma_{number:03}"),
+                true,
+            ));
+        }
+        let (rendered, _, rows) = output.finish_smart_tracked(tokenizer(), 64);
+        let rows = rows.rows.get("budget.rs").unwrap();
+        assert!(!rows.is_empty() && rows.len() < 40, "{rendered}");
+        for (number, original) in rows {
+            assert!(
+                rendered.contains(&format!("{}:1:{original}", number + 1)),
+                "{rendered}"
+            );
+        }
+    }
+
+    #[test]
+    fn tracked_rows_cap_huge_repeated_ranges_without_expanding_the_range() {
+        let last = 1_000_000_000_u64;
+        let body = "hit".to_owned();
+        let record = Record {
+            path: "range.rs".to_owned(),
+            numbers: Locations(BTreeMap::from([(1, last)])),
+            selected: true,
+            snippet: Snippet {
+                body: body.clone(),
+                column: 1,
+                focus: 0,
+                left: false,
+                right: false,
+            },
+        };
+        let output = AiOutput {
+            groups: BTreeMap::from([((false, "range.rs".to_owned(), body, 0), record)]),
+            matched: last,
+            context: 0,
+            snippet_chars: 160,
+        };
+
+        let (rendered, complete, tracked) = output.finish_smart_tracked(tokenizer(), 4000);
+
+        assert!(complete);
+        assert!(rendered.contains("1-1000000000:1:hit"), "{rendered}");
+        assert_eq!(tracked.rows.get("range.rs").unwrap().len(), 8192);
+        assert_eq!(tracked.omitted, usize::try_from(last).unwrap() - 8192);
+    }
+
+    #[test]
+    fn tracked_rows_enforce_the_original_text_byte_cap() {
+        let body = "x".repeat(1024);
+        let record = Record {
+            path: "bytes.rs".to_owned(),
+            numbers: Locations(BTreeMap::from([(1, 5000)])),
+            selected: true,
+            snippet: Snippet {
+                body: body.clone(),
+                column: 1,
+                focus: 0,
+                left: false,
+                right: false,
+            },
+        };
+        let output = AiOutput {
+            groups: BTreeMap::from([((false, "bytes.rs".to_owned(), body, 0), record)]),
+            matched: 5000,
+            context: 0,
+            snippet_chars: 2048,
+        };
+
+        let (_, complete, tracked) = output.finish_smart_tracked(tokenizer(), 4000);
+
+        assert!(complete);
+        let rows = tracked.rows.get("bytes.rs").unwrap();
+        assert_eq!(rows.len(), 4096);
+        assert_eq!(
+            rows.iter().map(|(_, text)| text.len()).sum::<usize>(),
+            4 * 1024 * 1024
+        );
+        assert_eq!(tracked.omitted, 904);
     }
 
     #[test]

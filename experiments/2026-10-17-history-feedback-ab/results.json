@@ -1,0 +1,1790 @@
+{
+  "schema_version": 1,
+  "arms": {
+    "A": {
+      "runs": 10,
+      "completed": 10,
+      "fully_correct_runs": 9,
+      "score_sum_of_60": 59.5,
+      "full_criteria_of_60": 59,
+      "median_seconds": 130.6955,
+      "total_seconds": 1290.809,
+      "source_calls": 85,
+      "retrieval_ms": 3902.569,
+      "history_applied": 0,
+      "queries_with_feedback": 0,
+      "mean_gold_line_coverage": 0.9862417504419101,
+      "mean_topical_scope_precision": 0.15791901137263853,
+      "mean_topical_line_precision": 0.17462939639851813
+    },
+    "B": {
+      "runs": 10,
+      "completed": 10,
+      "fully_correct_runs": 10,
+      "score_sum_of_60": 60,
+      "full_criteria_of_60": 60,
+      "median_seconds": 116.3305,
+      "total_seconds": 1203.711,
+      "source_calls": 68,
+      "retrieval_ms": 3574.0299999999997,
+      "history_applied": 36,
+      "queries_with_feedback": 4,
+      "mean_gold_line_coverage": 0.9962894812820736,
+      "mean_topical_scope_precision": 0.18549934863866469,
+      "mean_topical_line_precision": 0.19231194846294944
+    }
+  },
+  "pairs": [
+    {
+      "task": "routing",
+      "repetition": 1,
+      "A_seconds": 145.489,
+      "B_seconds": 117.54,
+      "B_over_A_time": 0.8078961296043,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "routing",
+      "repetition": 2,
+      "A_seconds": 160.64,
+      "B_seconds": 129.361,
+      "B_over_A_time": 0.805285109561753,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "parcels",
+      "repetition": 1,
+      "A_seconds": 111.076,
+      "B_seconds": 115.121,
+      "B_over_A_time": 1.036416507616407,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "parcels",
+      "repetition": 2,
+      "A_seconds": 157.862,
+      "B_seconds": 119.051,
+      "B_over_A_time": 0.7541460262761146,
+      "A_score": 5.5,
+      "B_score": 6,
+      "score_delta": 0.5,
+      "both_completed": true,
+      "both_fully_correct": false
+    },
+    {
+      "task": "audio",
+      "repetition": 1,
+      "A_seconds": 177.802,
+      "B_seconds": 217.857,
+      "B_over_A_time": 1.2252786807797438,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "audio",
+      "repetition": 2,
+      "A_seconds": 172.662,
+      "B_seconds": 133.028,
+      "B_over_A_time": 0.7704532554933916,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "portable",
+      "repetition": 1,
+      "A_seconds": 85.666,
+      "B_seconds": 81.26,
+      "B_over_A_time": 0.9485676931337989,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "portable",
+      "repetition": 2,
+      "A_seconds": 72.204,
+      "B_seconds": 69.643,
+      "B_over_A_time": 0.964531050911307,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "japanese",
+      "repetition": 1,
+      "A_seconds": 115.902,
+      "B_seconds": 109.225,
+      "B_over_A_time": 0.9423909854877396,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    },
+    {
+      "task": "japanese",
+      "repetition": 2,
+      "A_seconds": 91.506,
+      "B_seconds": 111.625,
+      "B_over_A_time": 1.2198653640198458,
+      "A_score": 6,
+      "B_score": 6,
+      "score_delta": 0,
+      "both_completed": true,
+      "both_fully_correct": true
+    }
+  ],
+  "runs": [
+    {
+      "id": "routing-A-1",
+      "task": "routing",
+      "arm": "A",
+      "repetition": 1,
+      "elapsed_seconds": 145.489,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 440611,
+        "cached_input_tokens": 351360,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8187,
+        "reasoning_output_tokens": 3102
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 6,
+      "retrieval_ms": 349.472,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Lists the combined rg eligibility gates, native normalization for ASCII/fullwidth, and original output; code/test citations support the bounded claim.",
+          "Distinguishes auto NotFound fallback from post-launch errors/no retry, and identifies missing-rg test limitation.",
+          "Correct complete/plain versus compact selection, tie/budget/clipping rules, and separate block path.",
+          "Correct Explain context=3 and explicit -A/-B/-C including0 precedence; full does not remove budget. Review rejection is additional detail in routing-3; other answers describe prepared defaults without claiming the explicit Review query succeeds.",
+          "Current8000/16000/24000 defaults and matched/shown/omitted/clipped plus context omissions supported.",
+          "Correct smart/machine output conflicts, internal rg JSON versus public JSON, and bounded/sorted/skip-test limitations."
+        ],
+        "graded_at": "2026-10-17T08:21:40.853928+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 3977,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.11440784510937893,
+        "gold_topical_scope_precision": 0.13178294573643412,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 4
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 454,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 0.11136890951276102,
+        "gold_topical_line_precision": 0.10572687224669604,
+        "gold_topical_scope_precision": 0.08,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "routing-B-1",
+      "task": "routing",
+      "arm": "B",
+      "repetition": 1,
+      "elapsed_seconds": 117.54,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 408436,
+        "cached_input_tokens": 335488,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6136,
+        "reasoning_output_tokens": 1547
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 7,
+      "retrieval_ms": 364.06,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Lists the combined rg eligibility gates, native normalization for ASCII/fullwidth, and original output; code/test citations support the bounded claim.",
+          "Distinguishes auto NotFound fallback from post-launch errors/no retry, and identifies missing-rg test limitation.",
+          "Correct complete/plain versus compact selection, tie/budget/clipping rules, and separate block path.",
+          "Correct Explain context=3 and explicit -A/-B/-C including0 precedence; full does not remove budget. Review rejection is additional detail in routing-3; other answers describe prepared defaults without claiming the explicit Review query succeeds.",
+          "Current8000/16000/24000 defaults and matched/shown/omitted/clipped plus context omissions supported.",
+          "Correct smart/machine output conflicts, internal rg JSON versus public JSON, and bounded/sorted/skip-test limitations."
+        ],
+        "graded_at": "2026-10-17T08:21:40.854112+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 2903,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 0.9860788863109049,
+        "gold_topical_line_precision": 0.15466758525663107,
+        "gold_topical_scope_precision": 0.036458333333333336,
+        "fully_covered_criteria": 5,
+        "history_applied": 5,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 5
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 454,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 0.11136890951276102,
+        "gold_topical_line_precision": 0.10572687224669604,
+        "gold_topical_scope_precision": 0.08,
+        "fully_covered_criteria": 0,
+        "history_applied": 5,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 16
+      }
+    },
+    {
+      "id": "routing-A-2",
+      "task": "routing",
+      "arm": "A",
+      "repetition": 2,
+      "elapsed_seconds": 160.64,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 655478,
+        "cached_input_tokens": 566528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8023,
+        "reasoning_output_tokens": 2705
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 10,
+      "retrieval_ms": 409.452,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Lists the combined rg eligibility gates, native normalization for ASCII/fullwidth, and original output; code/test citations support the bounded claim.",
+          "Distinguishes auto NotFound fallback from post-launch errors/no retry, and identifies missing-rg test limitation.",
+          "Correct complete/plain versus compact selection, tie/budget/clipping rules, and separate block path.",
+          "Correct Explain context=3 and explicit -A/-B/-C including0 precedence; full does not remove budget. Review rejection is additional detail in routing-3; other answers describe prepared defaults without claiming the explicit Review query succeeds.",
+          "Current8000/16000/24000 defaults and matched/shown/omitted/clipped plus context omissions supported.",
+          "Correct smart/machine output conflicts, internal rg JSON versus public JSON, and bounded/sorted/skip-test limitations."
+        ],
+        "graded_at": "2026-10-17T08:21:40.854114+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 4466,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.10188087774294671,
+        "gold_topical_scope_precision": 0.02564102564102564,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 8
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 454,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 0.11136890951276102,
+        "gold_topical_line_precision": 0.10572687224669604,
+        "gold_topical_scope_precision": 0.08,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "routing-B-2",
+      "task": "routing",
+      "arm": "B",
+      "repetition": 2,
+      "elapsed_seconds": 129.361,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 480011,
+        "cached_input_tokens": 401152,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6919,
+        "reasoning_output_tokens": 1732
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 8,
+      "retrieval_ms": 406.413,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Lists the combined rg eligibility gates, native normalization for ASCII/fullwidth, and original output; code/test citations support the bounded claim.",
+          "Distinguishes auto NotFound fallback from post-launch errors/no retry, and identifies missing-rg test limitation.",
+          "Correct complete/plain versus compact selection, tie/budget/clipping rules, and separate block path.",
+          "Correct Explain context=3 and explicit -A/-B/-C including0 precedence; full does not remove budget. Review rejection is additional detail in routing-3; other answers describe prepared defaults without claiming the explicit Review query succeeds.",
+          "Current8000/16000/24000 defaults and matched/shown/omitted/clipped plus context omissions supported.",
+          "Correct smart/machine output conflicts, internal rg JSON versus public JSON, and bounded/sorted/skip-test limitations."
+        ],
+        "graded_at": "2026-10-17T08:21:40.854115+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 3536,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.12867647058823528,
+        "gold_topical_scope_precision": 0.07468879668049792,
+        "fully_covered_criteria": 6,
+        "history_applied": 5,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 6
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 454,
+        "gold_required_lines": 431,
+        "gold_line_coverage": 0.11136890951276102,
+        "gold_topical_line_precision": 0.10572687224669604,
+        "gold_topical_scope_precision": 0.08,
+        "fully_covered_criteria": 0,
+        "history_applied": 5,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 16
+      }
+    },
+    {
+      "id": "parcels-A-1",
+      "task": "parcels",
+      "arm": "A",
+      "repetition": 1,
+      "elapsed_seconds": 111.076,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 555539,
+        "cached_input_tokens": 481792,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5674,
+        "reasoning_output_tokens": 1180
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 10,
+      "retrieval_ms": 438.568,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct writable+draft editing versus writable+draft/collecting/ready search; UI/test limits are explicit.",
+          "Correct three allowed case states for lookup and receive, plus ownership/validation/lease constraints; no state-only safety claim.",
+          "Correct old job retirement/cancellation/current job+address checks and bounded test coverage.",
+          "Preserves result status/noncompleted-empty, version length, page100/total100000, next-offset bounds, page-query geometry equality, merge version/total/500/duplicate constraints.",
+          "Correct validated noncompleted next-page preservation, status search_failed and cleared next_offset; distinguishes validation rejection and later failure notification.",
+          "Correct draft-only confirmation, latest completed lookup/version/address/ownership/selection checks, retained500 cap and separate registration jobs."
+        ],
+        "graded_at": "2026-10-17T08:29:37.636984+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 2424,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.17656765676567657,
+        "gold_topical_scope_precision": 0.07124681933842239,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 10
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 21,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 0.008771929824561403,
+        "gold_topical_line_precision": 0.14285714285714285,
+        "gold_topical_scope_precision": 0.14285714285714285,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 0,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "parcels-B-1",
+      "task": "parcels",
+      "arm": "B",
+      "repetition": 1,
+      "elapsed_seconds": 115.121,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 575544,
+        "cached_input_tokens": 509824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6158,
+        "reasoning_output_tokens": 1016
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 10,
+      "retrieval_ms": 425.508,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct writable+draft editing versus writable+draft/collecting/ready search; UI/test limits are explicit.",
+          "Correct three allowed case states for lookup and receive, plus ownership/validation/lease constraints; no state-only safety claim.",
+          "Correct old job retirement/cancellation/current job+address checks and bounded test coverage.",
+          "Preserves result status/noncompleted-empty, version length, page100/total100000, next-offset bounds, page-query geometry equality, merge version/total/500/duplicate constraints.",
+          "Correct validated noncompleted next-page preservation, status search_failed and cleared next_offset; distinguishes validation rejection and later failure notification.",
+          "Correct draft-only confirmation, latest completed lookup/version/address/ownership/selection checks, retained500 cap and separate registration jobs."
+        ],
+        "graded_at": "2026-10-17T08:29:37.636780+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 2348,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.18228279386712096,
+        "gold_topical_scope_precision": 0.10616438356164383,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 9
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 21,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 0.008771929824561403,
+        "gold_topical_line_precision": 0.14285714285714285,
+        "gold_topical_scope_precision": 0.14285714285714285,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 1,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 94
+      }
+    },
+    {
+      "id": "parcels-A-2",
+      "task": "parcels",
+      "arm": "A",
+      "repetition": 2,
+      "elapsed_seconds": 157.862,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 875921,
+        "cached_input_tokens": 790528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7557,
+        "reasoning_output_tokens": 2077
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 14,
+      "retrieval_ms": 494.36,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          0.5,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct writable+draft editing versus writable+draft/collecting/ready search; UI/test limits are explicit.",
+          "Correct three allowed case states for lookup and receive, plus ownership/validation/lease constraints; no state-only safety claim.",
+          "Correct old job retirement/cancellation/current job+address checks and bounded test coverage.",
+          "Counts/offset/version/geometry/merge bounds are correct, but the result acceptance compound guard omits the allowed result-status check and the noncompleted-result-must-have-empty-candidates clause (src/parcels.rs398-412). Main conclusion remains correct; partial for missing important predicate clauses.",
+          "Correct validated noncompleted next-page preservation, status search_failed and cleared next_offset; distinguishes validation rejection and later failure notification.",
+          "Correct draft-only confirmation, latest completed lookup/version/address/ownership/selection checks, retained500 cap and separate registration jobs."
+        ],
+        "graded_at": "2026-10-17T08:29:37.636983+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 5.5,
+      "full_criteria": 5,
+      "retrieval": {
+        "tracked_unique_source_lines": 2938,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.1456773315180395,
+        "gold_topical_scope_precision": 0.137546468401487,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 12
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 21,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 0.008771929824561403,
+        "gold_topical_line_precision": 0.14285714285714285,
+        "gold_topical_scope_precision": 0.14285714285714285,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "parcels-B-2",
+      "task": "parcels",
+      "arm": "B",
+      "repetition": 2,
+      "elapsed_seconds": 119.051,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 323319,
+        "cached_input_tokens": 252928,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5601,
+        "reasoning_output_tokens": 1803
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 5,
+      "retrieval_ms": 306.073,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct writable+draft editing versus writable+draft/collecting/ready search; UI/test limits are explicit. Answer discloses interrupted retrieval; no unexecuted UI test success is claimed.",
+          "Correct three allowed case states for lookup and receive, plus ownership/validation/lease constraints; no state-only safety claim.",
+          "Correct old job retirement/cancellation/current job+address checks and bounded test coverage.",
+          "Preserves result status/noncompleted-empty, version length, page100/total100000, next-offset bounds, page-query geometry equality, merge version/total/500/duplicate constraints.",
+          "Correct validated noncompleted next-page preservation, status search_failed and cleared next_offset; distinguishes validation rejection and later failure notification.",
+          "Correct draft-only confirmation, latest completed lookup/version/address/ownership/selection checks, retained500 cap and separate registration jobs."
+        ],
+        "graded_at": "2026-10-17T08:29:37.636980+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 1821,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.23503569467325644,
+        "gold_topical_scope_precision": 0.12280701754385964,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 5
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 21,
+        "gold_required_lines": 342,
+        "gold_line_coverage": 0.008771929824561403,
+        "gold_topical_line_precision": 0.14285714285714285,
+        "gold_topical_scope_precision": 0.14285714285714285,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 0,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 94
+      }
+    },
+    {
+      "id": "audio-A-1",
+      "task": "audio",
+      "arm": "A",
+      "repetition": 1,
+      "elapsed_seconds": 177.802,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 771295,
+        "cached_input_tokens": 678016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9929,
+        "reasoning_output_tokens": 3526
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 11,
+      "retrieval_ms": 600.388,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct Live1=30s/Gemini=120s, strict cumulative whole-response cap including consumed PCM, and PCM length/rate validation; finite fixture evidence distinguished.",
+          "Correct shared128/live1-64 bounded cancellation records, entry checks/pre-PCM tombstones, actual shared-set lookup, and eviction limits.",
+          "Correct generation/global-cancel-epoch/effect/outputFailed queue gates; only generation changes permit identified other effects; stream state and post-drain checks included.",
+          "Correct session/epoch/effect isolation guards and explicit static caveat for unfiltered current output effect in cancellation tombstones; not presented as an executed reproduction.",
+          "Correct provider completion versus queued finish/drain and state/generation/ID recheck before successful playback_finished; reason/error terminal events and backend contracts are distinguished.",
+          "Correct injected/mock tests versus actual devices and 120s bridge versus90s/100s native limits; no actual test/provider/device success claimed."
+        ],
+        "graded_at": "2026-10-17T08:41:09.603336+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 3163,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.9270216962524654,
+        "gold_topical_line_precision": 0.17673095162820107,
+        "gold_topical_scope_precision": 0.2676923076923077,
+        "fully_covered_criteria": 5,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 8
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 779,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.3076923076923077,
+        "gold_topical_line_precision": 0.2913992297817715,
+        "gold_topical_scope_precision": 0.3235294117647059,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 3,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "audio-B-1",
+      "task": "audio",
+      "arm": "B",
+      "repetition": 1,
+      "elapsed_seconds": 217.857,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 721193,
+        "cached_input_tokens": 628096,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 10871,
+        "reasoning_output_tokens": 3947
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 10,
+      "retrieval_ms": 582.571,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct Live1=30s/Gemini=120s, strict cumulative whole-response cap including consumed PCM, and PCM length/rate validation; finite fixture evidence distinguished.",
+          "Correct shared128/live1-64 bounded cancellation records, entry checks/pre-PCM tombstones, actual shared-set lookup, and eviction limits.",
+          "Correct generation/global-cancel-epoch/effect/outputFailed queue gates; only generation changes permit identified other effects; stream state and post-drain checks included.",
+          "Correct session/epoch/effect isolation guards and explicit static caveat for unfiltered current output effect in cancellation tombstones; not presented as an executed reproduction.",
+          "Correct provider completion versus queued finish/drain and state/generation/ID recheck before successful playback_finished; reason/error terminal events and backend contracts are distinguished.",
+          "Correct injected/mock tests versus actual devices and 120s bridge versus90s/100s native limits; no actual test/provider/device success claimed."
+        ],
+        "graded_at": "2026-10-17T08:41:09.603333+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 2764,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.9901380670611439,
+        "gold_topical_line_precision": 0.2141823444283647,
+        "gold_topical_scope_precision": 0.2923076923076923,
+        "fully_covered_criteria": 5,
+        "history_applied": 13,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 9
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 779,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.3076923076923077,
+        "gold_topical_line_precision": 0.2913992297817715,
+        "gold_topical_scope_precision": 0.3235294117647059,
+        "fully_covered_criteria": 0,
+        "history_applied": 13,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 1,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 103
+      }
+    },
+    {
+      "id": "audio-A-2",
+      "task": "audio",
+      "arm": "A",
+      "repetition": 2,
+      "elapsed_seconds": 172.662,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 881017,
+        "cached_input_tokens": 761216,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9353,
+        "reasoning_output_tokens": 3227
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 13,
+      "retrieval_ms": 554.849,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct Live1=30s/Gemini=120s, strict cumulative whole-response cap including consumed PCM, and PCM length/rate validation; finite fixture evidence distinguished.",
+          "Correct shared128/live1-64 bounded cancellation records, entry checks/pre-PCM tombstones, actual shared-set lookup, and eviction limits.",
+          "Correct generation/global-cancel-epoch/effect/outputFailed queue gates; only generation changes permit identified other effects; stream state and post-drain checks included.",
+          "Correct session/epoch/effect isolation guards and explicit static caveat for unfiltered current output effect in cancellation tombstones; not presented as an executed reproduction.",
+          "Correct provider completion versus queued finish/drain and state/generation/ID recheck before successful playback_finished; reason/error terminal events and backend contracts are distinguished.",
+          "Correct injected/mock tests versus actual devices and 120s bridge versus90s/100s native limits; no actual test/provider/device success claimed."
+        ],
+        "graded_at": "2026-10-17T08:41:09.603335+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 2703,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.9388560157790927,
+        "gold_topical_line_precision": 0.20902700702922677,
+        "gold_topical_scope_precision": 0.21308016877637131,
+        "fully_covered_criteria": 5,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 11
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 779,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.3076923076923077,
+        "gold_topical_line_precision": 0.2913992297817715,
+        "gold_topical_scope_precision": 0.3235294117647059,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "audio-B-2",
+      "task": "audio",
+      "arm": "B",
+      "repetition": 2,
+      "elapsed_seconds": 133.028,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 602813,
+        "cached_input_tokens": 540544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6860,
+        "reasoning_output_tokens": 1480
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 10,
+      "retrieval_ms": 531.54,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct Live1=30s/Gemini=120s, strict cumulative whole-response cap including consumed PCM, and PCM length/rate validation; finite fixture evidence distinguished.",
+          "Correct shared128/live1-64 bounded cancellation records, entry checks/pre-PCM tombstones, actual shared-set lookup, and eviction limits.",
+          "Correct generation/global-cancel-epoch/effect/outputFailed queue gates; only generation changes permit identified other effects; stream state and post-drain checks included.",
+          "Correct session/epoch/effect isolation guards and explicit static caveat for unfiltered current output effect in cancellation tombstones; not presented as an executed reproduction.",
+          "Correct provider completion versus queued finish/drain and state/generation/ID recheck before successful playback_finished; reason/error terminal events and backend contracts are distinguished.",
+          "Correct injected/mock tests versus actual devices and 120s bridge versus90s/100s native limits; no actual test/provider/device success claimed."
+        ],
+        "graded_at": "2026-10-17T08:41:09.603152+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 2522,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.9901380670611439,
+        "gold_topical_line_precision": 0.23433782712133228,
+        "gold_topical_scope_precision": 0.26614481409001955,
+        "fully_covered_criteria": 5,
+        "history_applied": 13,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 9
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 779,
+        "gold_required_lines": 507,
+        "gold_line_coverage": 0.3076923076923077,
+        "gold_topical_line_precision": 0.2913992297817715,
+        "gold_topical_scope_precision": 0.3235294117647059,
+        "fully_covered_criteria": 0,
+        "history_applied": 13,
+        "requests_with_history_applied": 1,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 1,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 103
+      }
+    },
+    {
+      "id": "portable-A-1",
+      "task": "portable",
+      "arm": "A",
+      "repetition": 1,
+      "elapsed_seconds": 85.666,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 259829,
+        "cached_input_tokens": 216960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4450,
+        "reasoning_output_tokens": 1147
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 6,
+      "retrieval_ms": 278.164,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct version equality/files-list/included versus actual file-set validation; schema/signature limits explicit.",
+          "Correct absolute/parent/empty/duplicate/self-manifest and symlink checks, with resolve/ancestor and test limits.",
+          "Correct file/hash mismatch and extra file/symlink refusal; empty directories/authenticity limits are bounded.",
+          "Correct existing/dangling-symlink target refusal and exclusive new mkdir; no atomic publication or host-target guarantees claimed.",
+          "Correct copy+manifest+target verification within BaseException cleanup; distinguishes code behavior from missing injected failure tests and cleanup failure risks.",
+          "Correct staged versus activation/runtime effect, unchanged host settings and separate validation/rollback; no unexecuted tests claimed."
+        ],
+        "graded_at": "2026-10-17T08:46:07.245895+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 841,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.11771700356718193,
+        "gold_topical_scope_precision": 0.10256410256410256,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 2
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 252,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 0.29347826086956524,
+        "gold_topical_line_precision": 0.10714285714285714,
+        "gold_topical_scope_precision": 0.10344827586206896,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 4,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "portable-B-1",
+      "task": "portable",
+      "arm": "B",
+      "repetition": 1,
+      "elapsed_seconds": 81.26,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 168631,
+        "cached_input_tokens": 128640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4111,
+        "reasoning_output_tokens": 1145
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 4,
+      "retrieval_ms": 228.167,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct version equality/files-list/included versus actual file-set validation; schema/signature limits explicit.",
+          "Correct absolute/parent/empty/duplicate/self-manifest and symlink checks, with resolve/ancestor and test limits.",
+          "Correct file/hash mismatch and extra file/symlink refusal; empty directories/authenticity limits are bounded.",
+          "Correct existing/dangling-symlink target refusal and exclusive new mkdir; no atomic publication or host-target guarantees claimed.",
+          "Correct copy+manifest+target verification within BaseException cleanup; distinguishes code behavior from missing injected failure tests and cleanup failure risks.",
+          "Correct staged versus activation/runtime effect, unchanged host settings and separate validation/rollback; no unexecuted tests claimed."
+        ],
+        "graded_at": "2026-10-17T08:46:07.245893+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 589,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.16808149405772496,
+        "gold_topical_scope_precision": 0.273972602739726,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 252,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 0.29347826086956524,
+        "gold_topical_line_precision": 0.10714285714285714,
+        "gold_topical_scope_precision": 0.273972602739726,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 3,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 71
+      }
+    },
+    {
+      "id": "portable-A-2",
+      "task": "portable",
+      "arm": "A",
+      "repetition": 2,
+      "elapsed_seconds": 72.204,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 130347,
+        "cached_input_tokens": 92800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3575,
+        "reasoning_output_tokens": 771
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 3,
+      "retrieval_ms": 209.493,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct version equality/files-list/included versus actual file-set validation; schema/signature limits explicit.",
+          "Correct absolute/parent/empty/duplicate/self-manifest and symlink checks, with resolve/ancestor and test limits.",
+          "Correct file/hash mismatch and extra file/symlink refusal; empty directories/authenticity limits are bounded.",
+          "Correct existing/dangling-symlink target refusal and exclusive new mkdir; no atomic publication or host-target guarantees claimed.",
+          "Correct copy+manifest+target verification within BaseException cleanup; distinguishes code behavior from missing injected failure tests and cleanup failure risks.",
+          "Correct staged versus activation/runtime effect, unchanged host settings and separate validation/rollback; no unexecuted tests claimed."
+        ],
+        "graded_at": "2026-10-17T08:46:07.245891+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 524,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.18893129770992367,
+        "gold_topical_scope_precision": 0.26732673267326734,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 252,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 0.29347826086956524,
+        "gold_topical_line_precision": 0.10714285714285714,
+        "gold_topical_scope_precision": 0.26732673267326734,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "portable-B-2",
+      "task": "portable",
+      "arm": "B",
+      "repetition": 2,
+      "elapsed_seconds": 69.643,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 130596,
+        "cached_input_tokens": 108544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3277,
+        "reasoning_output_tokens": 598
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 3,
+      "retrieval_ms": 190.494,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct version equality/files-list/included versus actual file-set validation; schema/signature limits explicit.",
+          "Correct absolute/parent/empty/duplicate/self-manifest and symlink checks, with resolve/ancestor and test limits.",
+          "Correct file/hash mismatch and extra file/symlink refusal; empty directories/authenticity limits are bounded.",
+          "Correct existing/dangling-symlink target refusal and exclusive new mkdir; no atomic publication or host-target guarantees claimed.",
+          "Correct copy+manifest+target verification within BaseException cleanup; distinguishes code behavior from missing injected failure tests and cleanup failure risks.",
+          "Correct staged versus activation/runtime effect, unchanged host settings and separate validation/rollback; no unexecuted tests claimed."
+        ],
+        "graded_at": "2026-10-17T08:46:07.245677+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 553,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.17902350813743217,
+        "gold_topical_scope_precision": 0.27,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 252,
+        "gold_required_lines": 92,
+        "gold_line_coverage": 0.29347826086956524,
+        "gold_topical_line_precision": 0.10714285714285714,
+        "gold_topical_scope_precision": 0.27,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 71
+      }
+    },
+    {
+      "id": "japanese-A-1",
+      "task": "japanese",
+      "arm": "A",
+      "repetition": 1,
+      "elapsed_seconds": 115.902,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 342276,
+        "cached_input_tokens": 283008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5649,
+        "reasoning_output_tokens": 1137
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 7,
+      "retrieval_ms": 324.495,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct NFKC then kana on patterns and text, disabling options and unsupported semantic/morphology cases with finite tests.",
+          "Correct original grapheme mapping/compatibility expansion and overlapping result merge; no universal Unicode proof claimed.",
+          "Correct normalized all-pattern Unicode smart-case, explicit ignore-case and CLI conflict with test boundary.",
+          "Correct decoded pre-normalized line-local UTF8 byte range vs scalar-value column; input encoding/file offsets/display widths distinguished.",
+          "Correct strict UTF8/SJIS/EUCJP decoding, explicit encoding/BOM/CRLF/final-line handling and early-exit/incomplete test limits.",
+          "Correct one initial-buffer NUL heuristic/-a behavior, static fixture limits and separate external rg path; no live/test success claimed."
+        ],
+        "graded_at": "2026-10-17T08:53:15.642055+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 1594,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.2120451693851945,
+        "gold_topical_scope_precision": 0.2413793103448276,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 5
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 52,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 0.04844290657439446,
+        "gold_topical_line_precision": 0.4423076923076923,
+        "gold_topical_scope_precision": 0.3,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 2,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "japanese-B-1",
+      "task": "japanese",
+      "arm": "B",
+      "repetition": 1,
+      "elapsed_seconds": 109.225,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 270506,
+        "cached_input_tokens": 238080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5154,
+        "reasoning_output_tokens": 1230
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 6,
+      "retrieval_ms": 263.997,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct NFKC then kana on patterns and text, disabling options and unsupported semantic/morphology cases with finite tests.",
+          "Correct original grapheme mapping/compatibility expansion and overlapping result merge; no universal Unicode proof claimed.",
+          "Correct normalized all-pattern Unicode smart-case, explicit ignore-case and CLI conflict with test boundary.",
+          "Correct decoded pre-normalized line-local UTF8 byte range vs scalar-value column; input encoding/file offsets/display widths distinguished.",
+          "Correct strict UTF8/SJIS/EUCJP decoding, explicit encoding/BOM/CRLF/final-line handling and early-exit/incomplete test limits.",
+          "Correct one initial-buffer NUL heuristic/-a behavior, static fixture limits and separate external rg path; no live/test success claimed."
+        ],
+        "graded_at": "2026-10-17T08:53:15.642056+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 1456,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 0.9965397923875432,
+        "gold_topical_line_precision": 0.23145604395604397,
+        "gold_topical_scope_precision": 0.12562814070351758,
+        "fully_covered_criteria": 5,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 5
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 52,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 0.04844290657439446,
+        "gold_topical_line_precision": 0.4423076923076923,
+        "gold_topical_scope_precision": 0.3,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 1,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 30
+      }
+    },
+    {
+      "id": "japanese-A-2",
+      "task": "japanese",
+      "arm": "A",
+      "repetition": 2,
+      "elapsed_seconds": 91.506,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 218583,
+        "cached_input_tokens": 172160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4845,
+        "reasoning_output_tokens": 1096
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 5,
+      "retrieval_ms": 243.328,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct NFKC then kana on patterns and text, disabling options and unsupported semantic/morphology cases with finite tests.",
+          "Correct original grapheme mapping/compatibility expansion and overlapping result merge; no universal Unicode proof claimed.",
+          "Correct normalized all-pattern Unicode smart-case, explicit ignore-case and CLI conflict with test boundary.",
+          "Correct decoded pre-normalized line-local UTF8 byte range vs scalar-value column; input encoding/file offsets/display widths distinguished.",
+          "Correct strict UTF8/SJIS/EUCJP decoding, explicit encoding/BOM/CRLF/final-line handling and early-exit/incomplete test limits.",
+          "Correct one initial-buffer NUL heuristic/-a behavior, static fixture limits and separate external rg path; no live/test success claimed."
+        ],
+        "graded_at": "2026-10-17T08:53:15.641862+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 1088,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 0.9965397923875432,
+        "gold_topical_line_precision": 0.30330882352941174,
+        "gold_topical_scope_precision": 0.12093023255813953,
+        "fully_covered_criteria": 5,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 4
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 52,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 0.04844290657439446,
+        "gold_topical_line_precision": 0.4423076923076923,
+        "gold_topical_scope_precision": 0.3,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 1,
+      "first_query_matches_training": true,
+      "feedback_sources": {}
+    },
+    {
+      "id": "japanese-B-2",
+      "task": "japanese",
+      "arm": "B",
+      "repetition": 2,
+      "elapsed_seconds": 111.625,
+      "process_exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "usage": {
+        "input_tokens": 232692,
+        "cached_input_tokens": 179328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5067,
+        "reasoning_output_tokens": 1330
+      },
+      "model_requested": "gpt-6.1-sol",
+      "effort_requested": "high",
+      "provider_revision_observed": null,
+      "source_changed": [],
+      "source_calls": 5,
+      "retrieval_ms": 275.207,
+      "rejected_calls": 0,
+      "command_calls": 0,
+      "tool_types": [
+        "agent_message",
+        "mcp_tool_call"
+      ],
+      "errors": [],
+      "answer_saved": true,
+      "grade": {
+        "scores": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "notes": [
+          "Correct NFKC then kana on patterns and text, disabling options and unsupported semantic/morphology cases with finite tests.",
+          "Correct original grapheme mapping/compatibility expansion and overlapping result merge; no universal Unicode proof claimed.",
+          "Correct normalized all-pattern Unicode smart-case, explicit ignore-case and CLI conflict with test boundary.",
+          "Correct decoded pre-normalized line-local UTF8 byte range vs scalar-value column; input encoding/file offsets/display widths distinguished.",
+          "Correct strict UTF8/SJIS/EUCJP decoding, explicit encoding/BOM/CRLF/final-line handling and early-exit/incomplete test limits.",
+          "Correct one initial-buffer NUL heuristic/-a behavior, static fixture limits and separate external rg path; no live/test success claimed."
+        ],
+        "graded_at": "2026-10-17T08:53:15.642058+00:00",
+        "reviewer": "parent; arm mapping unopened"
+      },
+      "score": 6,
+      "full_criteria": 6,
+      "retrieval": {
+        "tracked_unique_source_lines": 1730,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 1.0,
+        "gold_topical_line_precision": 0.19537572254335261,
+        "gold_topical_scope_precision": 0.2868217054263566,
+        "fully_covered_criteria": 6,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 4
+      },
+      "first_retrieval": {
+        "tracked_unique_source_lines": 52,
+        "gold_required_lines": 289,
+        "gold_line_coverage": 0.04844290657439446,
+        "gold_topical_line_precision": 0.4423076923076923,
+        "gold_topical_scope_precision": 0.3,
+        "fully_covered_criteria": 0,
+        "history_applied": 0,
+        "requests_with_history_applied": 0,
+        "tracking_omitted": 0,
+        "recorded_requests": 1
+      },
+      "source_calls_without_emitted_record": 1,
+      "first_query_matches_training": true,
+      "feedback_sources": {
+        "agent": 30
+      }
+    }
+  ],
+  "median_paired_B_over_A_time": 0.9454793393107692,
+  "fully_correct_pairs": 9,
+  "gold_sha256_matches": true,
+  "limits": [
+    "descriptive 5-task/10-pair repeated-task study; no significance claim",
+    "gold literal evidence coverage is distinct from semantic answer correctness",
+    "provider immutable revision and per-response usage are unavailable in ephemeral CLI",
+    "EmbeddingGemma2 disabled equally; no unseen-query or longitudinal generalization measured"
+  ]
+}

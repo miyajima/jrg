@@ -1,0 +1,188 @@
+{
+  "arms": {
+    "A": {
+      "runs": 10,
+      "completed": 10,
+      "fully_correct_runs": 9,
+      "score_sum_of_60": 59.5,
+      "full_criteria_of_60": 59,
+      "median_seconds": 130.6955,
+      "total_seconds": 1290.809,
+      "source_calls": 85,
+      "retrieval_ms": 3902.569,
+      "history_applied": 0,
+      "queries_with_feedback": 0,
+      "mean_gold_line_coverage": 0.9862417504419101,
+      "mean_topical_scope_precision": 0.15791901137263853,
+      "mean_topical_line_precision": 0.17462939639851813
+    },
+    "B": {
+      "runs": 10,
+      "completed": 10,
+      "fully_correct_runs": 10,
+      "score_sum_of_60": 60,
+      "full_criteria_of_60": 60,
+      "median_seconds": 116.3305,
+      "total_seconds": 1203.711,
+      "source_calls": 68,
+      "retrieval_ms": 3574.0299999999997,
+      "history_applied": 36,
+      "queries_with_feedback": 4,
+      "mean_gold_line_coverage": 0.9962894812820736,
+      "mean_topical_scope_precision": 0.18549934863866469,
+      "mean_topical_line_precision": 0.19231194846294944
+    }
+  },
+  "per_task": [
+    {
+      "task": "routing",
+      "arms": {
+        "A": {
+          "mean_seconds": 153.0645,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 16,
+          "read_operations": 42,
+          "repeat_attempts": 2,
+          "transport_failures": 0
+        },
+        "B": {
+          "mean_seconds": 123.4505,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 15,
+          "read_operations": 36,
+          "repeat_attempts": 2,
+          "transport_failures": 0
+        }
+      }
+    },
+    {
+      "task": "parcels",
+      "arms": {
+        "A": {
+          "mean_seconds": 134.469,
+          "score_of_12": 11.5,
+          "full_criteria_of_12": 11,
+          "native_tool_attempts": 24,
+          "read_operations": 41,
+          "repeat_attempts": 4,
+          "transport_failures": 0
+        },
+        "B": {
+          "mean_seconds": 117.086,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 17,
+          "read_operations": 27,
+          "repeat_attempts": 2,
+          "transport_failures": 2
+        }
+      }
+    },
+    {
+      "task": "audio",
+      "arms": {
+        "A": {
+          "mean_seconds": 175.232,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 24,
+          "read_operations": 70,
+          "repeat_attempts": 12,
+          "transport_failures": 0
+        },
+        "B": {
+          "mean_seconds": 175.4425,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 20,
+          "read_operations": 59,
+          "repeat_attempts": 6,
+          "transport_failures": 0
+        }
+      }
+    },
+    {
+      "task": "portable",
+      "arms": {
+        "A": {
+          "mean_seconds": 78.935,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 9,
+          "read_operations": 9,
+          "repeat_attempts": 1,
+          "transport_failures": 0
+        },
+        "B": {
+          "mean_seconds": 75.45150000000001,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 7,
+          "read_operations": 10,
+          "repeat_attempts": 3,
+          "transport_failures": 0
+        }
+      }
+    },
+    {
+      "task": "japanese",
+      "arms": {
+        "A": {
+          "mean_seconds": 103.70400000000001,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 12,
+          "read_operations": 33,
+          "repeat_attempts": 1,
+          "transport_failures": 0
+        },
+        "B": {
+          "mean_seconds": 110.425,
+          "score_of_12": 12,
+          "full_criteria_of_12": 12,
+          "native_tool_attempts": 11,
+          "read_operations": 27,
+          "repeat_attempts": 1,
+          "transport_failures": 0
+        }
+      }
+    }
+  ],
+  "median_paired_B_over_A_time_all": 0.9454793393107692,
+  "quality_and_transport_qualified": {
+    "pairs": 9,
+    "median_B_over_A_time": 0.9485676931337989,
+    "excluded_from_sensitivity_only": [
+      {
+        "task": "parcels",
+        "repetition": 2,
+        "reasons": [
+          "not all six criteria fully correct in both",
+          "transport failure"
+        ]
+      }
+    ]
+  },
+  "counterfactual": {
+    "recorded_responses": 153,
+    "source_text_changes": 0,
+    "known_selection_changes": 0,
+    "selection_comparable_responses": 113,
+    "original_response_reproduction_failures": 0,
+    "B_history_applied_observed_sum": 72
+  },
+  "training_seconds": 619.431,
+  "training_source_calls": 40,
+  "feedback_events": 314,
+  "native_tool_attempts": {
+    "A": 85,
+    "B": 70
+  },
+  "notes": [
+    "primary includes every registered trial; sensitivity subset never replaces primary",
+    "counterfactual replays completed proxy response traces; transport attempts without a response are audited separately",
+    "time differences alone do not establish a ranking effect when counterfactual source responses are unchanged"
+  ]
+}

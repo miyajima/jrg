@@ -2,9 +2,11 @@
 use crate::cli::Args;
 use serde_json::{Value, json};
 use std::{
+    cell::RefCell,
     error::Error,
     io::{self, BufRead, Read, Write},
     path::{Path, PathBuf},
+    rc::Rc,
 };
 
 pub fn serve(args: &Args) -> Result<u8, Box<dyn Error>> {
@@ -22,6 +24,7 @@ struct Reply<'a> {
     id: Value,
     body: Vec<u8>,
     sent: bool,
+    metadata: Rc<RefCell<Option<Value>>>,
 }
 impl Write for Reply<'_> {
     fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
@@ -31,9 +34,13 @@ impl Write for Reply<'_> {
     fn flush(&mut self) -> io::Result<()> {
         if !self.sent {
             let text = std::str::from_utf8(&self.body).map_err(io::Error::other)?;
+            let mut result = json!({"content":[{"type":"text","text":text}],"isError":false});
+            if let Some(metadata) = self.metadata.borrow().as_ref() {
+                result["structuredContent"] = metadata.clone();
+            }
             serde_json::to_writer(
                 &mut self.output,
-                &json!({"jsonrpc":"2.0","id":self.id,"result":{"content":[{"type":"text","text":text}],"isError":false}}),
+                &json!({"jsonrpc":"2.0","id":self.id,"result":result}),
             )?;
             self.output.write_all(b"\n")?;
             self.output.flush()?;
@@ -49,6 +56,9 @@ impl Server {
             return Err(io::Error::other("MCP root must be a directory"));
         }
         let mut args = args.clone();
+        if args.context_id.is_none() {
+            args.context_id = Some(crate::history::new_id());
+        }
         if let Some(path) = &args.session {
             args.session = Some(std::path::absolute(path)?);
         }
@@ -120,9 +130,33 @@ impl Server {
                 "rank_query",
                 "discovery_limit",
                 "requirements",
+                "history_mode",
+                "context_id",
             ],
         )?;
         let mut args = self.args.clone();
+        if let Some(mode) = input.get("history_mode") {
+            let requested = match mode.as_str() {
+                Some("auto") => crate::history::Mode::Auto,
+                Some("record") => crate::history::Mode::Record,
+                Some("off") => crate::history::Mode::Off,
+                _ => return Err("history_mode must be auto, record or off".into()),
+            };
+            args.history_mode = match args.history_mode {
+                crate::history::Mode::Off => crate::history::Mode::Off,
+                crate::history::Mode::Record if requested == crate::history::Mode::Auto => {
+                    crate::history::Mode::Record
+                }
+                _ => requested,
+            };
+        }
+        if let Some(context) = input.get("context_id") {
+            let context = context
+                .as_str()
+                .filter(|s| !s.is_empty() && s.len() <= 128 && !s.chars().any(char::is_control))
+                .ok_or("context_id must be 1..128 non-control bytes")?;
+            args.context_id = Some(context.to_owned());
+        }
         if let Some(query) = input.get("rank_query") {
             let query = query.as_str().ok_or("rank_query must be a string")?;
             if crate::rank::tokens(query).is_empty() {
@@ -271,6 +305,130 @@ impl Server {
         }
         Ok((args, batch))
     }
+    fn history_call(&self, tool: &str, input: &Value) -> Result<Value, String> {
+        if crate::history::effective_mode(self.args.history_mode) == crate::history::Mode::Off {
+            return Err("history is disabled for this server".into());
+        }
+        let repo = crate::history::Repo::discover(&self.root).map_err(|e| e.to_string())?;
+        let mut store = crate::history::Store::open(&repo).map_err(|e| e.to_string())?;
+        let allowed = |record: &Value| -> bool {
+            let Some(paths) = record["conditions"]["requested_paths"]
+                .as_array()
+                .filter(|ps| !ps.is_empty())
+            else {
+                return false;
+            };
+            let path_allowed = |path: &str| {
+                let path = Path::new(path);
+                if path.is_absolute()
+                    || path
+                        .components()
+                        .any(|c| matches!(c, std::path::Component::ParentDir))
+                {
+                    return false;
+                }
+                let joined = repo.root.join(path);
+                joined
+                    .canonicalize()
+                    .unwrap_or(joined)
+                    .starts_with(&self.root)
+            };
+            if !paths.iter().all(|p| p.as_str().is_some_and(path_allowed)) {
+                return false;
+            }
+            let Some(results) = record["results"].as_array() else {
+                return false;
+            };
+            results.iter().all(|r| {
+                let Some(path) = r["path"].as_str() else {
+                    return false;
+                };
+                let path = Path::new(path);
+                if path.is_absolute()
+                    || path
+                        .components()
+                        .any(|c| matches!(c, std::path::Component::ParentDir))
+                {
+                    return false;
+                }
+                let joined = repo.root.join(path);
+                joined
+                    .canonicalize()
+                    .unwrap_or(joined)
+                    .starts_with(&self.root)
+            })
+        };
+        let value = if tool == "feedback" {
+            Self::keys(
+                input,
+                &["request_id", "result_id", "label", "event_id", "context_id"],
+            )?;
+            input["event_id"]
+                .as_str()
+                .ok_or("event_id required for retry-safe feedback")?;
+            let id = input["request_id"].as_str().ok_or("request_id required")?;
+            let record = store.show(id).map_err(|e| e.to_string())?;
+            if !allowed(&record["request"]) {
+                return Err("request is outside configured root".into());
+            }
+            let mut input = input.clone();
+            input["source"] = "agent".into();
+            store.feedback(&input).map_err(|e| e.to_string())?
+        } else {
+            Self::keys(input, &["action", "request_id", "limit"])?;
+            match input["action"].as_str() {
+                Some("show") => {
+                    let id = input["request_id"].as_str().ok_or("request_id required")?;
+                    let value = store.show(id).map_err(|e| e.to_string())?;
+                    if !allowed(&value["request"]) {
+                        return Err("request is outside configured root".into());
+                    }
+                    value
+                }
+                Some("list" | "status") => {
+                    let limit = match input.get("limit") {
+                        None => 20,
+                        Some(v) => {
+                            v.as_u64()
+                                .filter(|n| *n > 0 && *n <= 100)
+                                .ok_or("limit must be 1..100")? as usize
+                        }
+                    };
+                    let list = store.list(100).map_err(|e| e.to_string())?;
+                    let mut visible = Vec::new();
+                    for item in list["requests"]
+                        .as_array()
+                        .ok_or("invalid stored history")?
+                    {
+                        let Some(id) = item["request_id"].as_str() else {
+                            continue;
+                        };
+                        if store
+                            .show(id)
+                            .ok()
+                            .is_some_and(|record| allowed(&record["request"]))
+                        {
+                            visible.push(item.clone());
+                        }
+                    }
+                    let count = visible.len();
+                    visible.truncate(limit);
+                    json!({"schema_version":1,"requests":visible,"visible_recent_requests":count,"scan_limit":100})
+                }
+                _ => return Err("action must be list, show or status".into()),
+            }
+        };
+        let encoded = value.to_string();
+        if encoded.len() > 48_000
+            || tiktoken_rs::o200k_base_singleton()
+                .encode_ordinary(&encoded)
+                .len()
+                > 12_000
+        {
+            return Err("history response exceeds budget; use CLI history export".into());
+        }
+        Ok(value)
+    }
     fn schema(&self) -> Value {
         let search = json!({"type":"object","additionalProperties":false,"required":["patterns"],"properties":{
             "patterns":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}},"paths":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}},
@@ -279,7 +437,15 @@ impl Server {
         let requirement = json!({"type":"object","additionalProperties":false,"required":["id","description","patterns"],"properties":{
             "id":{"type":"string","pattern":"^[A-Za-z0-9_-]{1,32}$"},"description":{"type":"string","minLength":1,"maxLength":160},
             "patterns":{"type":"array","minItems":1,"maxItems":16,"items":{"type":"string","minLength":1,"maxLength":128}}}});
-        json!({"tools":[{"name":"retrieve","description":"Prefer jrg retrieve for source investigation and bounded reads within the configured root. Keep native rg for exhaustive enumeration, absence checks, exact counts, machine output, pipelines and unsupported options; fall back when jrg is unavailable. Batch independent source searches and line reads. For multi-item requests, supply outer requirements with stable IDs, descriptions and case-sensitive original-source literal patterns. Returns item/evidence links plus whole if/while predicates before ordinary source; answer every item and preserve all linked clauses. matched means literal evidence, not verified semantic coverage. Check unresolved, conditions_incomplete, omitted and syntax=unavailable; do not infer absence or a passed contract. Requirements only annotate selected source, never expand retrieval or invoke models. Reissue scoped operations to resurface conditions even when seen. Fixed root; no shell. patterns are literal by default; regex=true searches original text, default normalizes Japanese. review for source investigations: BM25 ranks query-focused previews and production definition names, focuses the leading module family for broad searches, then bundles functions/guards/helpers/tests. Explicit paths override family focus; other families have hints. No guessed broad reads needed. Scope paths when known; root paths are valid. Independent review searches may share one call; scope slots are shared across the batch (source8 plus up to2 small sibling JSON definitions/tests6/helpers8/constants16), so combine overlapping subjects in one search. Generic stage/verify names do not expand root tests; test-only searches stay scoped. JSON/schema investigations also include small sibling serialization definitions and tests asserting their field keys. Document review returns matching headings/sections or local contexts directly, no locate retry needed. Literal patterns starting with - are values. Heuristic links and omitted file/scope hints are explicit; not semantic test/dependency closure. No context with review. Use returned evidence/paths/line numbers; follow concrete gaps with narrow explain/read, never guess a file path. Small known modules may be read with their tests directly. locate for discovery; explain for named definitions/guards/tests. Explain keeps matched definitions, short caller contexts; full_scope=true or read for needed caller bodies. Shared session suppresses already delivered rows (seen); empty operations with resume retrieves pending rows; repeat only when necessary. Default24000 tokens, max26000, with96000-byte transport ceiling before seen tracking. scope_limited is not pending. Batch implementation and related tests when paths are known. Optional outer rank_query enables BM25. Broad locate searches over directories or multiple files return top12 novel passages per operation (discovery_limit overrides; 0 disables). Single-file locate, explain functions and explicit read ranges remain uncapped and are packed first. Batch independent known functions/guards/tests with their related reads. Unselected range hints are discovery omissions, not pending; retrieve only needed hints narrowly. Seen rows are excluded before selecting top candidates. English identifiers work for code. review optionally supplements lexical candidates with pinned local EmbeddingGemma 2 over a configured Unix socket; model/service failures explicitly fall back to lexical. ast-grep parses Rust/TS/JS/Python scopes, with labeled lexical fallback for invalid or unsupported syntax. Lexical locate/explain stay exact. Candidate ranking cannot prove absence. Errors/omissions are explicit in footer.","inputSchema":{"type":"object","additionalProperties":false,"required":["operations"],"properties":{"operations":{"type":"array","maxItems":64,"items":{"oneOf":[{"type":"object","required":["search"],"additionalProperties":false,"properties":{"search":search}},{"type":"object","required":["read"],"additionalProperties":false,"properties":{"read":read}}]}},"requirements":{"type":"array","minItems":1,"maxItems":16,"items":requirement,"description":"Requested item checklist with original-source case-sensitive literal patterns (not regex or normalized). Explicit operations only; statuses must fit budget or request fails before execution."},"rank_query":{"type":"string","description":"Optional BM25 relevance query for this entire batch, not the retrieval pattern. Needs a searchable term."},"discovery_limit":{"type":"integer","minimum":0,"maximum":256,"description":"Per broad locate operation BM25 top passages, default12; 0 disables cutoff. Never limits read or explain."},"max_tokens":{"type":"integer","minimum":64,"maximum":26000},"repeat":{"type":"boolean"},"resume":{"type":"boolean"}}},"annotations":{"readOnlyHint":true,"destructiveHint":false,"openWorldHint":false}}]})
+        let mut schema = json!({"tools":[{"name":"retrieve","description":"Prefer jrg retrieve for source investigation and bounded reads within the configured root. Keep native rg for exhaustive enumeration, absence checks, exact counts, machine output, pipelines and unsupported options; fall back when jrg is unavailable. Batch independent source searches and line reads. For multi-item requests, supply outer requirements with stable IDs, descriptions and case-sensitive original-source literal patterns. Returns item/evidence links plus whole if/while predicates before ordinary source; answer every item and preserve all linked clauses. matched means literal evidence, not verified semantic coverage. Check unresolved, conditions_incomplete, omitted and syntax=unavailable; do not infer absence or a passed contract. Requirements only annotate selected source, never expand retrieval or invoke models. Reissue scoped operations to resurface conditions even when seen. Fixed root; no shell. patterns are literal by default; regex=true searches original text, default normalizes Japanese. review for source investigations: BM25 ranks query-focused previews and production definition names, focuses the leading module family for broad searches, then bundles functions/guards/helpers/tests. Explicit paths override family focus; other families have hints. No guessed broad reads needed. Scope paths when known; root paths are valid. Independent review searches may share one call; scope slots are shared across the batch (source8 plus up to2 small sibling JSON definitions/tests6/helpers8/constants16), so combine overlapping subjects in one search. Generic stage/verify names do not expand root tests; test-only searches stay scoped. JSON/schema investigations also include small sibling serialization definitions and tests asserting their field keys. Document review returns matching headings/sections or local contexts directly, no locate retry needed. Literal patterns starting with - are values. Heuristic links and omitted file/scope hints are explicit; not semantic test/dependency closure. No context with review. Use returned evidence/paths/line numbers; follow concrete gaps with narrow explain/read, never guess a file path. Small known modules may be read with their tests directly. locate for discovery; explain for named definitions/guards/tests. Explain keeps matched definitions, short caller contexts; full_scope=true or read for needed caller bodies. Shared session suppresses already delivered rows (seen); empty operations with resume retrieves pending rows; repeat only when necessary. Default24000 tokens, max26000, with96000-byte transport ceiling before seen tracking. scope_limited is not pending. Batch implementation and related tests when paths are known. Optional outer rank_query enables BM25. Broad locate searches over directories or multiple files return top12 novel passages per operation (discovery_limit overrides; 0 disables). Single-file locate, explain functions and explicit read ranges remain uncapped and are packed first. Batch independent known functions/guards/tests with their related reads. Unselected range hints are discovery omissions, not pending; retrieve only needed hints narrowly. Seen rows are excluded before selecting top candidates. English identifiers work for code. review optionally supplements lexical candidates with pinned local EmbeddingGemma 2 over a configured Unix socket; model/service failures explicitly fall back to lexical. ast-grep parses Rust/TS/JS/Python scopes, with labeled lexical fallback for invalid or unsupported syntax. Lexical locate/explain stay exact. Candidate ranking cannot prove absence. Errors/omissions are explicit in footer.","inputSchema":{"type":"object","additionalProperties":false,"required":["operations"],"properties":{"operations":{"type":"array","maxItems":64,"items":{"oneOf":[{"type":"object","required":["search"],"additionalProperties":false,"properties":{"search":search}},{"type":"object","required":["read"],"additionalProperties":false,"properties":{"read":read}}]}},"requirements":{"type":"array","minItems":1,"maxItems":16,"items":requirement,"description":"Requested item checklist with original-source case-sensitive literal patterns (not regex or normalized). Explicit operations only; statuses must fit budget or request fails before execution."},"rank_query":{"type":"string","description":"Optional BM25 relevance query for this entire batch, not the retrieval pattern. Needs a searchable term."},"discovery_limit":{"type":"integer","minimum":0,"maximum":256,"description":"Per broad locate operation BM25 top passages, default12; 0 disables cutoff. Never limits read or explain."},"max_tokens":{"type":"integer","minimum":64,"maximum":26000},"repeat":{"type":"boolean"},"resume":{"type":"boolean"}}},"annotations":{"readOnlyHint":true,"destructiveHint":false,"openWorldHint":false}}]});
+        schema["tools"][0]["inputSchema"]["properties"]["history_mode"] =
+            json!({"type":"string","enum":["auto","record","off"]});
+        schema["tools"][0]["inputSchema"]["properties"]["context_id"] =
+            json!({"type":"string","minLength":1,"maxLength":128});
+        let tools = schema["tools"].as_array_mut().unwrap();
+        tools.push(json!({"name":"feedback","description":"Report helpful/not_helpful/unknown for an emitted jrg result. This records an agent report, never a human confirmation. Retry with the same event_id for idempotence.","inputSchema":{"type":"object","additionalProperties":false,"required":["request_id","result_id","label","event_id"],"properties":{"request_id":{"type":"string"},"result_id":{"type":"string"},"label":{"type":"string","enum":["helpful","not_helpful","unknown"]},"event_id":{"type":"string"},"context_id":{"type":"string"}}},"annotations":{"readOnlyHint":false,"destructiveHint":false,"idempotentHint":true,"openWorldHint":false}}));
+        tools.push(json!({"name":"history","description":"Inspect local search history within the configured root. No source bodies are stored. show requires request_id.","inputSchema":{"type":"object","additionalProperties":false,"required":["action"],"properties":{"action":{"type":"string","enum":["list","show","status"]},"request_id":{"type":"string"},"limit":{"type":"integer","minimum":1,"maximum":100}}},"annotations":{"readOnlyHint":true,"destructiveHint":false,"openWorldHint":false}}));
+        schema
     }
     fn response(&mut self, request: &Value, output: &mut dyn Write) -> io::Result<()> {
         let id = request.get("id").cloned().unwrap_or(Value::Null);
@@ -310,6 +476,21 @@ impl Server {
             Err((-32000, "initialize first"))
         } else if method == "tools/list" {
             Ok(self.schema())
+        } else if method == "tools/call"
+            && matches!(
+                request["params"]["name"].as_str(),
+                Some("history" | "feedback")
+            )
+        {
+            let params = &request["params"];
+            let response =
+                self.history_call(params["name"].as_str().unwrap(), &params["arguments"]);
+            Ok(match response {
+                Ok(value) => {
+                    json!({"content":[{"type":"text","text":value.to_string()}],"structuredContent":value,"isError":false})
+                }
+                Err(error) => json!({"content":[{"type":"text","text":error}],"isError":true}),
+            })
         } else if method == "tools/call" {
             let params = &request["params"];
             let plan = if params["name"] != "retrieve" {
@@ -322,16 +503,23 @@ impl Server {
                     Ok(json!({"content":[{"type":"text","text":message}],"isError":true}))
                 }
                 Ok((args, value)) => {
+                    let metadata = Rc::new(RefCell::new(None));
+                    let callback_metadata = metadata.clone();
+                    let mut callback = move |value| {
+                        *callback_metadata.borrow_mut() = Some(value);
+                    };
                     let mut reply = Reply {
                         output,
                         id: id.clone(),
                         body: Vec::new(),
                         sent: false,
+                        metadata,
                     };
                     let result = crate::batch::execute(
                         &args,
                         if args.resume { None } else { Some(value) },
                         &mut reply,
+                        Some(&mut callback),
                     );
                     if reply.sent {
                         if let Err(e) = result {

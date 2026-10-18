@@ -1,0 +1,26 @@
+[
+  {
+    "history_mode": "auto",
+    "exit_code": 101,
+    "stderr": "\nthread 'main' (1010769) panicked at src/cli.rs:234:48:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+    "response_to_retrieve": null
+  },
+  {
+    "history_mode": "off",
+    "exit_code": 0,
+    "stderr": "",
+    "response_to_retrieve": {
+      "id": 2,
+      "jsonrpc": "2.0",
+      "result": {
+        "content": [
+          {
+            "text": "# scope=heuristic deferred=0 errors=0 capture_omitted=0 seen=0 pending=0 partial=0 changed=0 untracked=0\n",
+            "type": "text"
+          }
+        ],
+        "isError": false
+      }
+    }
+  }
+]

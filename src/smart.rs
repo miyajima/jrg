@@ -1,5 +1,5 @@
 use crate::{
-    ai::AiOutput,
+    ai::{AiOutput, TrackedRows},
     cli::{Args, Color, Encoding},
     output::Output,
     search::{Event, Line, Search},
@@ -200,6 +200,8 @@ impl RgProcess {
 pub struct SmartOutput {
     ai: AiOutput,
     plain: Option<Vec<u8>>,
+    plain_rows: TrackedRows,
+    tracking_enabled: bool,
     omit_path: bool,
     byte_limit: usize,
 }
@@ -209,6 +211,8 @@ impl SmartOutput {
         Self {
             ai: AiOutput::new(args.snippet_chars as usize),
             plain: Some(Vec::new()),
+            plain_rows: TrackedRows::default(),
+            tracking_enabled: true,
             omit_path: paths.len() == 1 && paths[0].is_file(),
             byte_limit: (args.max_tokens as usize)
                 .saturating_mul(128)
@@ -256,16 +260,49 @@ impl SmartOutput {
                 }
                 .event(Event::Line(clean))?;
             }
+            if self.tracking_enabled {
+                self.plain_rows.add_row(&line.path, line.number, &line.text);
+            }
             if buffer.len() > self.byte_limit {
                 self.plain = None;
+                self.plain_rows = TrackedRows::default();
             }
         }
         self.ai.push(line);
         Ok(())
     }
 
+    pub fn disable_tracking(&mut self) {
+        self.tracking_enabled = false;
+        self.plain_rows = TrackedRows::default();
+    }
+
     pub fn finish(self, tokenizer: &tiktoken_rs::CoreBPE, budget: usize) -> String {
-        let (compact, complete) = self.ai.finish_smart(tokenizer, budget);
+        self.finish_impl(tokenizer, budget, false).0
+    }
+
+    pub fn finish_tracked(
+        self,
+        tokenizer: &tiktoken_rs::CoreBPE,
+        budget: usize,
+    ) -> (String, TrackedRows) {
+        self.finish_impl(tokenizer, budget, true)
+    }
+
+    fn finish_impl(
+        self,
+        tokenizer: &tiktoken_rs::CoreBPE,
+        budget: usize,
+        track_rows: bool,
+    ) -> (String, TrackedRows) {
+        let track_rows = track_rows && self.tracking_enabled;
+        let (compact, complete, compact_rows) = if track_rows {
+            self.ai.finish_smart_tracked(tokenizer, budget)
+        } else {
+            let (text, complete) = self.ai.finish_smart(tokenizer, budget);
+            (text, complete, TrackedRows::default())
+        };
+        let plain_rows = self.plain_rows;
         if let Some(bytes) = self.plain {
             let plain = String::from_utf8(bytes).unwrap();
             let plain_tokens = tokenizer.encode_ordinary(&plain).len();
@@ -273,9 +310,153 @@ impl SmartOutput {
             if plain_tokens <= budget
                 && (!complete || plain_tokens <= tokenizer.encode_ordinary(&compact).len())
             {
-                return plain;
+                return (
+                    plain,
+                    if track_rows {
+                        plain_rows
+                    } else {
+                        TrackedRows::default()
+                    },
+                );
             }
         }
-        compact
+        (compact, compact_rows)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use clap::CommandFactory;
+    use std::sync::{Arc, OnceLock};
+    use tiktoken_rs::CoreBPE;
+
+    fn tokenizer() -> &'static CoreBPE {
+        static TOKENIZER: OnceLock<CoreBPE> = OnceLock::new();
+        TOKENIZER.get_or_init(|| tiktoken_rs::o200k_base().unwrap())
+    }
+
+    fn args() -> Args {
+        let matches = Args::command()
+            .try_get_matches_from(["jrg", "--smart", "--max-tokens", "512", "needle"])
+            .unwrap();
+        Args::prepared(&matches)
+    }
+
+    fn line(number: u64, text: &str) -> Line {
+        Line {
+            path: Arc::new("source.rs".into()),
+            number,
+            text: text.to_owned(),
+            ranges: std::iter::once(0..text.len()).collect(),
+            selected: true,
+        }
+    }
+
+    #[test]
+    fn tracked_plain_output_matches_legacy_and_returns_original_lines() {
+        let args = args();
+        let mut legacy = SmartOutput::new(&args, &[]);
+        let mut tracked = SmartOutput::new(&args, &[]);
+        for number in [2, 4] {
+            legacy.push(&args, line(number, "same")).unwrap();
+            tracked.push(&args, line(number, "same")).unwrap();
+        }
+
+        let expected = legacy.finish(tokenizer(), 512);
+        let (actual, rows) = tracked.finish_tracked(tokenizer(), 512);
+
+        assert_eq!(actual, expected);
+        assert!(actual.contains("same"), "{actual}");
+        assert_eq!(
+            rows.rows.get("source.rs").unwrap(),
+            &vec![(1, "same".to_owned()), (3, "same".to_owned())]
+        );
+        assert_eq!(rows.omitted, 0);
+    }
+
+    #[test]
+    fn tracked_output_after_plain_buffer_drop_only_returns_rendered_rows() {
+        let args = args();
+        let mut legacy = SmartOutput::new(&args, &[]);
+        let mut tracked = SmartOutput::new(&args, &[]);
+        legacy.byte_limit = 1;
+        tracked.byte_limit = 1;
+        for number in 1..=40 {
+            let text =
+                format!("needle_{number:03} alpha_{number:03} beta_{number:03} gamma_{number:03}");
+            legacy.push(&args, line(number, &text)).unwrap();
+            tracked.push(&args, line(number, &text)).unwrap();
+        }
+
+        let expected = legacy.finish(tokenizer(), 64);
+        let (actual, rows) = tracked.finish_tracked(tokenizer(), 64);
+
+        assert_eq!(actual, expected);
+        let rows = rows.rows.get("source.rs").unwrap();
+        assert!(!rows.is_empty() && rows.len() < 40, "{actual}");
+        for (number, original) in rows {
+            assert!(
+                actual.contains(&format!("{}:1:{original}", number + 1)),
+                "{actual}"
+            );
+        }
+    }
+
+    #[test]
+    fn plain_sidecar_caps_rows_and_reports_every_omitted_row() {
+        let args = args();
+        let mut output = SmartOutput::new(&args, &[]);
+        output.byte_limit = 8 * 1024 * 1024;
+        for number in 1..=9000 {
+            output.push(&args, line(number * 2, "row")).unwrap();
+        }
+
+        let (rendered, tracked) = output.finish_tracked(tokenizer(), 100_000);
+
+        assert_eq!(rendered.matches("row").count(), 9000);
+        assert_eq!(tracked.rows.get("source.rs").unwrap().len(), 8192);
+        assert_eq!(tracked.omitted, 808);
+    }
+
+    #[test]
+    fn plain_fallback_discards_sidecar_counts_before_compact_tracking() {
+        let args = args();
+        let mut output = SmartOutput::new(&args, &[]);
+        output.byte_limit = 8 * 1024 * 1024;
+        for number in 1..=8195 {
+            output.push(&args, line(number, "same")).unwrap();
+        }
+        assert_eq!(output.plain_rows.omitted, 3);
+
+        output.byte_limit = 0;
+        output.push(&args, line(8196, "same")).unwrap();
+        assert!(output.plain.is_none());
+        assert!(output.plain_rows.rows.is_empty());
+        assert_eq!(output.plain_rows.omitted, 0);
+
+        let (_, tracked) = output.finish_tracked(tokenizer(), 64);
+
+        assert_eq!(tracked.rows.get("source.rs").unwrap().len(), 8192);
+        assert_eq!(tracked.omitted, 4);
+    }
+
+    #[test]
+    fn disabling_tracking_preserves_text_without_collecting_rows() {
+        let args = args();
+        let mut expected = SmartOutput::new(&args, &[]);
+        let mut disabled = SmartOutput::new(&args, &[]);
+        disabled.disable_tracking();
+        for number in [2, 4] {
+            expected.push(&args, line(number, "same")).unwrap();
+            disabled.push(&args, line(number, "same")).unwrap();
+        }
+
+        let expected = expected.finish(tokenizer(), 512);
+        let (actual, tracked) = disabled.finish_tracked(tokenizer(), 512);
+
+        assert_eq!(actual, expected);
+        assert!(tracked.rows.is_empty());
+        assert_eq!(tracked.omitted, 0);
     }
 }

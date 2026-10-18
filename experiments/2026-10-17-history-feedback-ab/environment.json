@@ -1,0 +1,9 @@
+{
+  "os": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "architecture": "arm64",
+  "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "codex_version": "codex-cli 0.163.0-alpha.10.2",
+  "codex_executable_sha256": "1afb28c01d7d49e892bd75f11076b10f1451e34e0ee308a95e5ab7f69f9c84fe",
+  "embedding_socket": null,
+  "state_isolation": "per-run JRG_STATE_DIR; no writes to installed user jrg history"
+}

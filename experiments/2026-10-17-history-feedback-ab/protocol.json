@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-10-17T07:51:01.903820+00:00",
+  "lab": "/private/tmp/jrg-feedback-ab-2q6g2zj8",
+  "binary": "/private/tmp/jrg-feedback-ab-2q6g2zj8/tools/jrg",
+  "binary_sha256": "de04e5d3b48692b50431722090d9ce0adf8fe3219bc8934e50fa3ed18d4345a6",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "model_basis": "current user config label, pinned equally; provider immutable revision not exposed",
+  "tasks": [
+    {
+      "id": "routing",
+      "project": "jrg",
+      "prompt": "smartモードの採用前レビューをしてください。1)自動rg経路に進める検索と内蔵に残る条件、ASCII検索と全角原文の扱い、2)rg不在と実行時失敗の扱い、3)短い完全出力と切れた圧縮出力の選び方、4)説明目的の文脈と明示指定の優先順位、5)予算と文脈欠落の表示、6)JSON等の機械出力との関係とテスト上の保証範囲。各番号を1 findingとして、コードとテストの出典を挙げ、保証されていない点を区別してください。",
+      "root": "/private/tmp/jrg-feedback-ab-2q6g2zj8/corpus/routing",
+      "origin": "current working-copy source, frozen by per-file SHA-256"
+    },
+    {
+      "id": "parcels",
+      "project": "sfk-shinsa",
+      "prompt": "土地候補の再検索を、申込受付後にも安全に使えるかをソースレビューしてください。1)UIの編集可能条件と検索可能条件の違い、2)ドメインの検索依頼と結果受入が許す案件状態、3)古いジョブや住所変更の結果を防ぐ仕組み、4)結果件数・次ページ・版の検証、5)追加ページの失敗時に既存候補がどうなるか、6)関連土地の確定・変更と検索の違い。各番号を1 findingとして実装と該当テストを引用し、状態が許されることだけで全検証を通ると解釈しないでください。",
+      "root": "/private/tmp/jrg-feedback-ab-2q6g2zj8/corpus/parcels",
+      "origin": "preserved real source snapshot from 2026-10-15-session-replay/corpus"
+    },
+    {
+      "id": "audio",
+      "project": "consentside",
+      "prompt": "Gemini/Live1の応答音声が取消後に復活したり、再生前に完了扱いになるリスクをソースから調査してください。1)provider別の上限と累積量の判定、2)遅れて届く音声の取消済み判定と保持数、3)キュー済み書込の世代・全体取消・effect取消の検証、4)別effectを巻き込まないための扱い、5)provider完了とデバイスdrain・playback_finishedの関係、6)テスト・fixtureのカバー範囲と実デバイスでは未検証の点。各番号を1 findingとして実装とテストの出典を示してください。",
+      "root": "/private/tmp/jrg-feedback-ab-2q6g2zj8/corpus/audio",
+      "origin": "preserved real source snapshot from 2026-10-15-session-replay/corpus"
+    },
+    {
+      "id": "portable",
+      "project": "astra-harness",
+      "prompt": "配布物をMacへステージする手順の安全性をレビューしてください。1)manifestの版とファイル集合の検証、2)パストラバーサルと重複・symlinkの扱い、3)ハッシュ不一致と余分なファイルへの対応、4)既存のtargetと新しい版ディレクトリ確保の扱い、5)コピー中・再検証中の例外と後始末、6)この処理だけでは実施・保証しないホスト設定変更や実行効果。各番号を1 findingとして、実装とテストまたは文書の出典を示し、ステージ完了と有効化を区別してください。",
+      "root": "/private/tmp/jrg-feedback-ab-2q6g2zj8/corpus/portable",
+      "origin": "preserved real source snapshot from 2026-10-15-session-replay/corpus"
+    },
+    {
+      "id": "japanese",
+      "project": "jrg",
+      "prompt": "日本語検索を既存の検索・解析ツールへ組み込む前の互換性レビューをしてください。1)正規化の順序・カナ統一と扱わない表記ゆれ、2)結合濁点・互換文字の元の位置への対応、3)正規化後のsmart-caseと大小文字条件、4)JSONのバイト位置・列番号・デコード元の関係、5)UTF-8/Shift_JIS/EUC-JP・BOM/CRLF・不正入力、6)バイナリ判定と静的テストから分かる範囲。各番号を1 findingとして、コードとテストの出典を示し、同義語検索や形態素解析を実装済みとは扱わないでください。",
+      "root": "/private/tmp/jrg-feedback-ab-2q6g2zj8/corpus/japanese",
+      "origin": "current working-copy source, frozen by per-file SHA-256"
+    }
+  ],
+  "training_runs": 5,
+  "evaluation_repetitions": 2,
+  "maximum_model_runs": 25,
+  "maximum_seconds_per_run": 300,
+  "arms": {
+    "A": "auto mode with empty feedback DB",
+    "B": "auto mode with independently collected, frozen training feedback"
+  },
+  "feedback_source": "agent only; parent verifies actual citation use/semantic correctness in training; no forged human feedback",
+  "feedback_policy": "helpful only for actually delivered result receipts cited by correct training findings; unknown/irrelevant are not automatically negative",
+  "split": "training/evaluation fresh model contexts, same repeated task by design; does not measure new-query generalization",
+  "replay": "recorded training retrieval queries are replayed separately in A/B for direct retrieval comparison; live evaluators start with the same first training query, then investigate freely",
+  "quality": "parent semantic review of all six subjects and supporting line citations, blind evaluation answer labels; no keyword-only pass and no grader model",
+  "retrieval_metrics": "first bundle and frozen query replay source-scope precision/required-evidence coverage using preregistered source map; report literal coverage separately from answer correctness",
+  "time_metric": "fresh CLI process start through completed final answer; sequential counterbalanced contemporaneous pairs; source-search latency separate; train/label cost excluded from marginal time and reported separately",
+  "order": "rep1 AB for task indices even else BA; rep2 reversed, same task root and prompt per pair",
+  "blinding": "both arms hide history footer/structured metadata/admin tools in common MCP adapter; original responses and receipt IDs retained locally",
+  "isolation": "private per-run JRG_STATE_DIR and fresh seen session; B cloned from sealed seed using SQLite backup; evaluator cannot submit feedback; no source edits or history from other tasks",
+  "invalidation": "retain all failures; no silent retries or task selection based on outcome; any source/binary drift, forbidden tool/delegation or model mismatch disqualifies causal interpretation",
+  "embedding": "disabled equally: no verified offline model/runtime or live socket found; JRG_EMBEDDING_SOCKET explicitly unset; conclusions limited to AST+lexical history",
+  "common_sha256": "73d54d8c0d8e876728fa21f4101b945dc317249405fb79ab085eee32c251e187",
+  "proxy_sha256": "2c2a2646682e7378a1b3c92f58881bb9275b1d0e3a5ea65efd7d160b2b44b93d",
+  "runner_sha256": "73373bd915fdc38f8e4340b24ab0f7f3754f8c3c3e2b212f43ea42aa847a5b09",
+  "source_archive": {
+    "path": "source_snapshot.tar.gz",
+    "sha256": "84f833094df13e9cc2848bf3e8f0f710571b9cfaa3ac16561466767a313805d9"
+  },
+  "gold_sha256": "661a5358af3c90c18547a3fcb5c8174abee7b18992a4aa026ae89d9629fc2ec3",
+  "sealed_before_models_at": "2026-10-17T07:59:25.001448+00:00"
+}

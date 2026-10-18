@@ -4,6 +4,8 @@ mod blocks;
 mod budget;
 mod cli;
 mod embedding;
+mod history;
+mod history_runtime;
 mod mcp;
 mod normalize;
 mod output;
@@ -30,6 +32,16 @@ use std::{
 };
 
 fn main() -> ExitCode {
+    let argv: Vec<String> = std::env::args().collect();
+    if argv.get(1).is_some_and(|arg| arg == "--history") {
+        return match history::command(&argv[2..]) {
+            Ok(code) => ExitCode::from(code),
+            Err(error) => {
+                eprintln!("jrg history: {error}");
+                ExitCode::from(2)
+            }
+        };
+    }
     let matches = Args::command().get_matches();
     let args = Args::prepared(&matches);
     let stdout = io::stdout();
@@ -65,6 +77,11 @@ fn run(
     mut capture: Option<&mut blocks::Capture>,
 ) -> Result<u8, Box<dyn std::error::Error>> {
     let (patterns, paths) = args.inputs(io::stdin().is_terminal());
+    let mut history = if capture.is_none() {
+        history_runtime::Runtime::begin(args, None)
+    } else {
+        None
+    };
     let matcher = Matcher::new(&patterns, args)?;
     let eligible = smart::rg_eligible(args, &paths);
     if args.engine == Engine::Rg && !eligible {
@@ -118,6 +135,11 @@ fn run(
         .then(|| ai::AiOutput::new(args.snippet_chars as usize));
     let mut smart_output = (args.smart && !args.block_context && capture.is_none())
         .then(|| smart::SmartOutput::new(args, &paths));
+    if history.is_none()
+        && let Some(output) = smart_output.as_mut()
+    {
+        output.disable_tracking();
+    }
     let mut scoped = blocks::Capture::default();
     let mut overrides = OverrideBuilder::new(std::env::current_dir()?);
     for glob in &args.globs {
@@ -243,14 +265,24 @@ fn run(
     }
     if args.block_context && capture.is_none() && found {
         let mut evidence = blocks::Evidence::default();
+        evidence.history = history.take();
         if failed {
             evidence
                 .messages
                 .push("search error; results may be partial".into());
         }
         evidence.search(args, scoped)?;
-        let payload = evidence.render(tokenizer.as_ref().unwrap(), args.max_tokens as usize);
-        if let Err(err) = output.writer.write_all(payload.as_bytes()) {
+        let mut rendered = evidence.render(tokenizer.as_ref().unwrap(), args.max_tokens as usize);
+        history = rendered.history.take();
+        if let Some(trace) = history.as_mut() {
+            trace.prepare(rendered.text.len(), if failed { 2 } else { 0 });
+            trace.decorate(
+                &mut rendered.text,
+                tokenizer.as_ref().unwrap(),
+                args.max_tokens as usize,
+            );
+        }
+        if let Err(err) = output.writer.write_all(rendered.text.as_bytes()) {
             if err.kind() == io::ErrorKind::BrokenPipe {
                 return Ok(0);
             }
@@ -258,7 +290,33 @@ fn run(
         }
     }
     if let Some(smart_output) = smart_output {
-        let payload = smart_output.finish(tokenizer.as_ref().unwrap(), args.max_tokens as usize);
+        let (mut payload, rows) = if history.is_some() {
+            smart_output.finish_tracked(tokenizer.as_ref().unwrap(), args.max_tokens as usize)
+        } else {
+            (
+                smart_output.finish(tokenizer.as_ref().unwrap(), args.max_tokens as usize),
+                Default::default(),
+            )
+        };
+        if let Some(trace) = history.as_mut() {
+            trace.tracking_omitted = trace.tracking_omitted.saturating_add(rows.omitted);
+            trace.capture(rows.rows, None);
+            trace.prepare(
+                payload.len(),
+                if failed {
+                    2
+                } else if found {
+                    0
+                } else {
+                    1
+                },
+            );
+            trace.decorate(
+                &mut payload,
+                tokenizer.as_ref().unwrap(),
+                args.max_tokens as usize,
+            );
+        }
         if let Err(err) = output.writer.write_all(payload.as_bytes()) {
             if err.kind() == io::ErrorKind::BrokenPipe {
                 return Ok(0);
@@ -266,11 +324,20 @@ fn run(
             return Err(err.into());
         }
     }
+    if args.block_context
+        && !found
+        && let Some(trace) = history.as_mut()
+    {
+        trace.prepare(0, if failed { 2 } else { 1 });
+    }
     if let Err(err) = output.writer.flush() {
         if err.kind() == io::ErrorKind::BrokenPipe {
             return Ok(0);
         }
         return Err(err.into());
+    }
+    if let Some(trace) = history.as_mut() {
+        trace.emitted();
     }
     // grep/rg convention: quiet succeeds as soon as any match is found.
     Ok(if args.quiet && found {

@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "sealed_file_integrity": {
+    "protocol.json": true,
+    "gold.json": true,
+    "GRADING.md": true,
+    "common.txt": true,
+    "proxy.py": true,
+    "run.py": true,
+    "replay.py": true,
+    "seed.py": true,
+    "analyze.py": true,
+    "blind.py": true,
+    "training_grades.json": true,
+    "training_feedback.json": true,
+    "blinded/sealed_mapping.json": true
+  },
+  "seed_integrity": {
+    "routing": true,
+    "parcels": true,
+    "audio": true,
+    "portable": true,
+    "japanese": true
+  },
+  "source_issues": [],
+  "binary_unchanged": true,
+  "runs": [
+    {
+      "id": "routing-A-1",
+      "native_tool_attempts": 6,
+      "completed_proxy_responses": 6,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 6,
+      "read_operations": 17,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 123.724167,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "routing-B-1",
+      "native_tool_attempts": 7,
+      "completed_proxy_responses": 7,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 11,
+      "read_operations": 17,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 142.393125,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "routing-A-2",
+      "native_tool_attempts": 10,
+      "completed_proxy_responses": 10,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 7,
+      "read_operations": 25,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 132.759833,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "routing-B-2",
+      "native_tool_attempts": 8,
+      "completed_proxy_responses": 8,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 11,
+      "read_operations": 19,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 129.751792,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "parcels-A-1",
+      "native_tool_attempts": 10,
+      "completed_proxy_responses": 10,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 13,
+      "read_operations": 25,
+      "resume_attempts": 0,
+      "repeat_attempts": 2,
+      "first_query_ms": 80.762959,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "parcels-B-1",
+      "native_tool_attempts": 10,
+      "completed_proxy_responses": 10,
+      "native_failed_calls": [
+        {
+          "tool": "retrieve",
+          "error": null
+        }
+      ],
+      "transport_failures": 0,
+      "search_operations": 21,
+      "read_operations": 20,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 90.826333,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "parcels-A-2",
+      "native_tool_attempts": 14,
+      "completed_proxy_responses": 14,
+      "native_failed_calls": [
+        {
+          "tool": "retrieve",
+          "error": null
+        },
+        {
+          "tool": "retrieve",
+          "error": null
+        }
+      ],
+      "transport_failures": 0,
+      "search_operations": 22,
+      "read_operations": 16,
+      "resume_attempts": 0,
+      "repeat_attempts": 2,
+      "first_query_ms": 82.577292,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "parcels-B-2",
+      "native_tool_attempts": 7,
+      "completed_proxy_responses": 5,
+      "native_failed_calls": [
+        {
+          "tool": "retrieve",
+          "error": {
+            "message": "tool call error: tool call failed for `jrg/retrieve`\n\nCaused by:\n    Transport closed"
+          }
+        },
+        {
+          "tool": "retrieve",
+          "error": {
+            "message": "tool call error: tool call failed for `jrg/retrieve`\n\nCaused by:\n    Transport closed"
+          }
+        }
+      ],
+      "transport_failures": 2,
+      "search_operations": 8,
+      "read_operations": 7,
+      "resume_attempts": 1,
+      "repeat_attempts": 1,
+      "first_query_ms": 75.184708,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "audio-A-1",
+      "native_tool_attempts": 11,
+      "completed_proxy_responses": 11,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 15,
+      "read_operations": 32,
+      "resume_attempts": 0,
+      "repeat_attempts": 4,
+      "first_query_ms": 188.307667,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "audio-B-1",
+      "native_tool_attempts": 10,
+      "completed_proxy_responses": 10,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 13,
+      "read_operations": 30,
+      "resume_attempts": 0,
+      "repeat_attempts": 3,
+      "first_query_ms": 189.742958,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "audio-A-2",
+      "native_tool_attempts": 13,
+      "completed_proxy_responses": 13,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 17,
+      "read_operations": 38,
+      "resume_attempts": 0,
+      "repeat_attempts": 8,
+      "first_query_ms": 185.593959,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "audio-B-2",
+      "native_tool_attempts": 10,
+      "completed_proxy_responses": 10,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 12,
+      "read_operations": 29,
+      "resume_attempts": 0,
+      "repeat_attempts": 3,
+      "first_query_ms": 193.200667,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "portable-A-1",
+      "native_tool_attempts": 6,
+      "completed_proxy_responses": 6,
+      "native_failed_calls": [
+        {
+          "tool": "retrieve",
+          "error": null
+        },
+        {
+          "tool": "retrieve",
+          "error": null
+        }
+      ],
+      "transport_failures": 0,
+      "search_operations": 6,
+      "read_operations": 5,
+      "resume_attempts": 0,
+      "repeat_attempts": 0,
+      "first_query_ms": 128.423625,
+      "recorded_queries_matching_rated_history": 0,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "portable-B-1",
+      "native_tool_attempts": 4,
+      "completed_proxy_responses": 4,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 3,
+      "read_operations": 7,
+      "resume_attempts": 0,
+      "repeat_attempts": 2,
+      "first_query_ms": 136.586375,
+      "recorded_queries_matching_rated_history": 0,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "portable-A-2",
+      "native_tool_attempts": 3,
+      "completed_proxy_responses": 3,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 3,
+      "read_operations": 4,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 127.549375,
+      "recorded_queries_matching_rated_history": 0,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "portable-B-2",
+      "native_tool_attempts": 3,
+      "completed_proxy_responses": 3,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 3,
+      "read_operations": 3,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 126.083333,
+      "recorded_queries_matching_rated_history": 0,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "japanese-A-1",
+      "native_tool_attempts": 7,
+      "completed_proxy_responses": 7,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 13,
+      "read_operations": 19,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 97.294208,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "japanese-B-1",
+      "native_tool_attempts": 6,
+      "completed_proxy_responses": 6,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 7,
+      "read_operations": 12,
+      "resume_attempts": 0,
+      "repeat_attempts": 0,
+      "first_query_ms": 103.331542,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "japanese-A-2",
+      "native_tool_attempts": 5,
+      "completed_proxy_responses": 5,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 7,
+      "read_operations": 14,
+      "resume_attempts": 0,
+      "repeat_attempts": 0,
+      "first_query_ms": 103.643334,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    },
+    {
+      "id": "japanese-B-2",
+      "native_tool_attempts": 5,
+      "completed_proxy_responses": 5,
+      "native_failed_calls": [],
+      "transport_failures": 0,
+      "search_operations": 4,
+      "read_operations": 15,
+      "resume_attempts": 0,
+      "repeat_attempts": 1,
+      "first_query_ms": 101.186125,
+      "recorded_queries_matching_rated_history": 1,
+      "feedback_unchanged": true,
+      "non_retrieve_mcp_calls": [],
+      "forbidden_item_types": []
+    }
+  ],
+  "all_feedback_unchanged": true,
+  "all_tools_permitted": true,
+  "transport_failed_runs": [
+    "parcels-B-2"
+  ],
+  "limits": [
+    "native failed transport attempts are absent from proxy response traces and their no-model replay",
+    "query match diagnostic counts recorded requests only; unrecorded requests cannot contribute stored feedback"
+  ]
+}

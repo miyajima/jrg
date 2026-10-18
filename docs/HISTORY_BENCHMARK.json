@@ -1,0 +1,88 @@
+{
+  "binary_version": "jrg 0.15.2",
+  "binary_sha256": "de04e5d3b48692b50431722090d9ce0adf8fe3219bc8934e50fa3ed18d4345a6",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "fixture": {
+    "files": 40,
+    "functions": 600,
+    "embedding": "unconfigured"
+  },
+  "repeats": 25,
+  "cold_process_off_ms": 518.909,
+  "first_history_process_ms": 99.813,
+  "warm": {
+    "off": {
+      "median_ms": 140.002,
+      "p95_ms": 163.966
+    },
+    "record": {
+      "median_ms": 145.947,
+      "p95_ms": 167.233
+    },
+    "auto": {
+      "median_ms": 152.373,
+      "p95_ms": 174.876
+    }
+  },
+  "auto_p95_overhead_ms": 10.91,
+  "target_max_ms": 16.397,
+  "target_met": true,
+  "first_worktree_process_ms": 157.905,
+  "worktree_feedback_applied": 2,
+  "after_external_edit_process_ms": 171.336,
+  "edited_feedback_applied": 2,
+  "near_10000_requests": {
+    "off": {
+      "median_ms": 117.613,
+      "p95_ms": 206.827
+    },
+    "auto": {
+      "median_ms": 128.406,
+      "p95_ms": 236.564
+    }
+  },
+  "persistent_mcp_warm": {
+    "off": {
+      "median_ms": 38.622,
+      "p95_ms": 50.261
+    },
+    "record": {
+      "median_ms": 43.889,
+      "p95_ms": 53.924
+    },
+    "auto": {
+      "median_ms": 49.428,
+      "p95_ms": 68.379
+    }
+  },
+  "persistent_mcp_near_10000_requests": {
+    "off": {
+      "median_ms": 28.57,
+      "p95_ms": 33.877
+    },
+    "record": {
+      "median_ms": 30.21,
+      "p95_ms": 35.257
+    },
+    "auto": {
+      "median_ms": 36.752,
+      "p95_ms": 42.075
+    }
+  },
+  "notes": "Includes process startup and fresh source search. Synthetic speed only; no quality or token-savings conclusion.",
+  "cli_near_10000_overhead": {
+    "p95_ms": 29.737,
+    "target_max_ms": 20.683,
+    "target_met": false
+  },
+  "mcp_warm_overhead": {
+    "p95_ms": 18.118,
+    "target_max_ms": 10,
+    "target_met": false
+  },
+  "mcp_near_10000_overhead": {
+    "p95_ms": 8.198,
+    "target_max_ms": 10,
+    "target_met": true
+  }
+}

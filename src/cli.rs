@@ -45,6 +45,12 @@ pub enum ExplainScope {
     after_help = "例: jrg がっこう ./docs\n    jrg --ai --max-tokens 1000 認証 ./src\n    jrg -i ＡＰＩ -g '*.md' .\n    jrg --regex 'TODO|FIXME' src\n    jrg --encoding shift-jis 東京 legacy\n\n既定は固定文字列検索 + NFKC + カナ統一。--regex は原文に対する正規表現検索。"
 )]
 pub struct Args {
+    /// Local search history: auto records and reuses verified ratings; record only logs.
+    #[arg(long, value_enum, default_value = "auto")]
+    pub history_mode: crate::history::Mode,
+    /// Optional task identity for history feedback (never shared seen state).
+    #[arg(long)]
+    pub context_id: Option<String>,
     /// Read-only local stdio MCP server (requires --root)
     #[arg(long, requires = "root", conflicts_with_all = ["batch", "resume", "pattern", "patterns", "paths"])]
     pub mcp: bool,

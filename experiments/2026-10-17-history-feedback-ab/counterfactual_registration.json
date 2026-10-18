@@ -1,0 +1,8 @@
+{
+  "registered_at": "2026-10-17T08:20:31.247721+00:00",
+  "timing": "supplementary diagnostic registered after training replay and before first task blind grading; live cohort remains unchanged",
+  "scope": "all 20 registered live query sequences, no selection by correctness/time",
+  "purpose": "hold each observed query trajectory fixed and compare source responses under empty vs frozen rated history; detect source changes in different seen states",
+  "extra_model_runs": 0,
+  "script_sha256": "a0060b7eed19a757f117fa47c6d82cea96a0a8bb1b50fbe0c10ff970fc2eded6"
+}

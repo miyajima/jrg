@@ -440,6 +440,7 @@ type SourceRanges = BTreeMap<String, Vec<(Range<usize>, u8)>>;
 
 #[derive(Default)]
 pub struct Evidence {
+    pub history: Option<crate::history_runtime::Runtime>,
     pub requirements: crate::requirements::Requirements,
     pub rank_query: Option<String>,
     pub discovery_limit: usize,
@@ -474,6 +475,9 @@ pub struct Evidence {
 impl Evidence {
     fn key(&mut self, path: &str) -> io::Result<String> {
         let canonical = fs::canonicalize(path)?;
+        if let Some(history) = self.history.as_mut() {
+            history.note_file(&canonical);
+        }
         Ok(self
             .aliases
             .entry(canonical)
@@ -1084,6 +1088,12 @@ impl Evidence {
             }
             groups.sort_by(|((pa, _), sa), ((pb, _), sb)| sb.total_cmp(sa).then(pa.cmp(pb)));
         }
+        if broad && let Some(history) = self.history.as_mut() {
+            for ((path, _), score) in &mut groups {
+                *score = history.adjust(path, None, *score, "review_file");
+            }
+            groups.sort_by(|((pa, _), sa), ((pb, _), sb)| sb.total_cmp(sa).then(pa.cmp(pb)));
+        }
         let best = groups.first().map_or(0.0, |(_, score)| *score);
         let family = groups
             .first()
@@ -1293,7 +1303,17 @@ impl Evidence {
             .iter()
             .map(|c| crate::rank::tokens(&self.files[&c.path][c.span.clone()].join("\n")))
             .collect();
-        let scores = crate::rank::bm25_scores(&docs, &crate::rank::tokens(query));
+        let mut scores = crate::rank::bm25_scores(&docs, &crate::rank::tokens(query));
+        if let Some(history) = self.history.as_mut() {
+            for (candidate, score) in candidates.iter().zip(&mut scores) {
+                *score = history.adjust(
+                    &candidate.path,
+                    Some(candidate.span.clone()),
+                    *score,
+                    "review_scope",
+                );
+            }
+        }
         let mut uncovered: BTreeSet<_> = crate::rank::tokens(query)
             .into_iter()
             .filter(|s| s.len() >= 3)
@@ -1434,9 +1454,14 @@ impl Evidence {
                 }
             }
             Ok(None) => {}
-            Err(err) => self.messages.push(format!(
-                "embedding fallback: {err}; lexical candidates retained"
-            )),
+            Err(err) => {
+                if let Some(history) = self.history.as_mut() {
+                    history.disable_reuse("embedding_unavailable");
+                }
+                self.messages.push(format!(
+                    "embedding fallback: {err}; lexical candidates retained"
+                ));
+            }
         }
         let (code, docs): (Vec<_>, Vec<_>) = std::mem::take(&mut capture.lines)
             .into_iter()
@@ -1911,7 +1936,12 @@ impl Evidence {
                     crate::rank::tokens(&self.files[path][range.clone()].join("\n"))
                 })
                 .collect();
-            let scores = crate::rank::bm25_scores(&documents, &query);
+            let mut scores = crate::rank::bm25_scores(&documents, &query);
+            if let Some(history) = self.history.as_mut() {
+                for ((path, range), score) in candidates.iter().zip(&mut scores) {
+                    *score = history.adjust(path, Some(range.clone()), *score, "locate");
+                }
+            }
             let mut ranked: Vec<_> = candidates.into_iter().zip(scores).collect();
             ranked.sort_by(|((pa, ra), sa), ((pb, rb), sb)| {
                 sb.total_cmp(sa)
@@ -2047,7 +2077,7 @@ impl Evidence {
         budget: usize,
         mut session: Option<&mut crate::session::Session>,
         repeat: bool,
-    ) -> String {
+    ) -> crate::history_runtime::Rendered {
         let counter = crate::budget::Counter::new(tokenizer);
         let mut tracked = BTreeMap::new();
         let mut changed = 0;
@@ -2298,9 +2328,22 @@ impl Evidence {
             }
         }
         output.push_str(&suffix);
-        output
+        if let Some(history) = self.history.as_mut() {
+            history.capture(
+                crate::history_runtime::Runtime::rows_from(&self.files, &shown),
+                Some(&self.files),
+            );
+        }
+        crate::history_runtime::Rendered {
+            text: output,
+            history: self.history,
+        }
     }
-    pub fn render(self, tokenizer: &tiktoken_rs::CoreBPE, budget: usize) -> String {
+    pub fn render(
+        mut self,
+        tokenizer: &tiktoken_rs::CoreBPE,
+        budget: usize,
+    ) -> crate::history_runtime::Rendered {
         let escape = |s: &str| {
             s.chars()
                 .flat_map(|c| {
@@ -2410,7 +2453,7 @@ impl Evidence {
             }
         }
         let combined = format!("{notes}{output}{suffix}");
-        if tokenizer.encode_ordinary(&combined).len() <= budget {
+        let text = if tokenizer.encode_ordinary(&combined).len() <= budget {
             combined
         } else if tokenizer
             .encode_ordinary(&format!("{output}{suffix}"))
@@ -2419,7 +2462,18 @@ impl Evidence {
         {
             format!("{output}{suffix}")
         } else {
+            seen.clear();
             format!("# deferred evidence exceeds budget ({budget})\n")
+        };
+        if let Some(history) = self.history.as_mut() {
+            history.capture(
+                crate::history_runtime::Runtime::rows_from(&self.files, &seen),
+                Some(&self.files),
+            );
+        }
+        crate::history_runtime::Rendered {
+            text,
+            history: self.history,
         }
     }
 }

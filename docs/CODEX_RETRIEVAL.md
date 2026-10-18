@@ -1,5 +1,11 @@
 # Codexからjrgを使う取得手順
 
+## ローカルの検索履歴と評価
+
+smart/MCP検索は既定で検索条件と実際の返却範囲を記録する。`retrieve`の`structuredContent.history`にIDがあれば、実際の利用で役立った根拠が得られた後に`feedback`へ`request_id`、`result_id`、`label`、再試行で同じ`event_id`を渡せる。検索時と評価時に同じタスクの`context_id`を使う。単に一致した、出力された、検索が成功しただけでhelpfulを付けない。MCPの評価は常にagentであり、人の確認とは区別する。
+
+同条件の候補順位だけに反映し、現在の原文を毎回照合する。`history_mode=record`は比較用の記録のみ、`off`は記録・反映とも無効。要求項目IDと検索結果IDは別。取得済み範囲を扱う`session`も履歴とは独立している。[CLI・保存先・worktree・編集後の対応条件](HISTORY.md)を参照。
+
 ## 0.15.2: MCPとクライアントの優先方針
 
 MCPのinitialize応答の`instructions`とretrieveの説明の先頭で、設定root内のコード調査・内容検索・範囲を限定した原文取得にjrgを優先する方針を伝える。先頭512文字以内にrgの例外と利用不可時の通常ツールへの切替も含める。全一致・全ファイルの列挙、不存在確認、正確な件数、機械出力・パイプ処理、未対応のオプション・エンコードは通常のrgを使う。rgの実体・aliasや既存の権限を変更しない。

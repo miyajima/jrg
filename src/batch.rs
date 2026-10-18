@@ -39,14 +39,16 @@ pub fn run(args: &Args) -> Result<u8, Box<dyn Error>> {
     } else {
         None
     };
-    execute(args, value, &mut io::stdout().lock())
+    execute(args, value, &mut io::stdout().lock(), None)
 }
 
 pub fn execute(
     args: &Args,
     value: Option<Value>,
     writer: &mut dyn Write,
+    mut metadata: Option<&mut dyn FnMut(Value)>,
 ) -> Result<u8, Box<dyn Error>> {
+    let history_input = value.clone();
     let requirements = crate::requirements::Requirements::parse(
         value.as_ref().and_then(|v| v.get("requirements")),
         args.max_tokens as usize,
@@ -128,6 +130,9 @@ pub fn execute(
                     || inner.session.is_some()
                     || inner.resume
                     || inner.repeat
+                    || matches.value_source("history_mode")
+                        == Some(clap::parser::ValueSource::CommandLine)
+                    || inner.context_id.is_some()
                     || inner.batch.is_some()
                     || inner.json
                     || inner.count
@@ -203,6 +208,7 @@ pub fn execute(
         prepared.push(Operation::Search(Box::new(inner)));
     }
     let mut evidence = Evidence::default();
+    evidence.history = crate::history_runtime::Runtime::begin(args, history_input.as_ref());
     evidence.requirements = requirements;
     evidence.rank_query = args.rank_query.clone();
     evidence.discovery_limit = args.discovery_limit.unwrap_or(12) as usize;
@@ -212,6 +218,9 @@ pub fn execute(
     let mut search_code = 0;
     let mut failed = false;
     for (i, op) in prepared.into_iter().enumerate() {
+        if let Some(history) = evidence.history.as_mut() {
+            history.operation(Some(i + 1));
+        }
         let result: Result<(), Box<dyn Error>> = match op {
             Operation::Error(message) => Err(invalid(&message).into()),
             Operation::Read(path, start, end) => {
@@ -268,26 +277,42 @@ pub fn execute(
         .iter()
         .any(|m| m.contains("error:") || m.contains("search error"));
     let tokenizer = tiktoken_rs::o200k_base_singleton();
+    if let Some(history) = evidence.history.as_mut() {
+        history.operation(None);
+    }
     let evidence_semantic_found = evidence.semantic_found();
-    let payload = evidence.render_tracked(
+    let mut rendered = evidence.render_tracked(
         tokenizer,
         args.max_tokens as usize,
         session.as_mut(),
         args.repeat,
     );
-    match writer.write_all(payload.as_bytes()) {
-        Err(err) if err.kind() == io::ErrorKind::BrokenPipe => return Ok(0),
-        other => other?,
-    }
-    writer.flush()?;
-    if let Some(session) = session {
-        session.save()?;
-    }
-    Ok(if failed {
+    let code = if failed {
         2
     } else if evidence_semantic_found {
         0
     } else {
         search_code
-    })
+    };
+    if let Some(history) = rendered.history.as_mut() {
+        history.prepare(rendered.text.len(), code);
+        if let Some(value) =
+            history.decorate(&mut rendered.text, tokenizer, args.max_tokens as usize)
+            && let Some(callback) = metadata.as_mut()
+        {
+            callback(value);
+        }
+    }
+    match writer.write_all(rendered.text.as_bytes()) {
+        Err(err) if err.kind() == io::ErrorKind::BrokenPipe => return Ok(0),
+        other => other?,
+    }
+    writer.flush()?;
+    if let Some(history) = rendered.history.as_mut() {
+        history.emitted();
+    }
+    if let Some(session) = session {
+        session.save()?;
+    }
+    Ok(code)
 }
