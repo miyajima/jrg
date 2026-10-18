@@ -663,3 +663,249 @@ fn mcp_history_rejects_a_request_that_also_searched_outside_its_root() {
         .collect();
     assert_eq!(responses[1]["result"]["isError"], true, "{}", responses[1]);
 }
+
+#[test]
+fn history_regression_resume_keeps_mcp_alive_with_empty_and_pending_sessions() {
+    use std::io::Write;
+    use std::process::Stdio;
+    let (root, state) = fixture();
+    let source: String = (1..=100)
+        .map(|n| format!("// pending_row_{n:03}\n"))
+        .collect();
+    std::fs::write(root.path().join("pending.txt"), source).unwrap();
+    let messages = [
+        serde_json::json!({"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}),
+        serde_json::json!({"jsonrpc":"2.0","method":"notifications/initialized"}),
+        serde_json::json!({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"retrieve","arguments":{"operations":[],"resume":true,"history_mode":"auto"}}}),
+        serde_json::json!({"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"retrieve","arguments":{"operations":[{"read":{"path":"pending.txt","start":1,"end":100}}],"max_tokens":128}}}),
+        serde_json::json!({"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"retrieve","arguments":{"operations":[],"resume":true,"max_tokens":8000,"history_mode":"auto"}}}),
+        serde_json::json!({"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"retrieve","arguments":{"operations":[{"read":{"path":"x.rs","start":1,"end":3}}]}}}),
+    ];
+    let mut child = Command::new(env!("CARGO_BIN_EXE_jrg"))
+        .current_dir(root.path())
+        .env_remove("JRG_HISTORY")
+        .env_remove("JRG_EMBEDDING_SOCKET")
+        .env("JRG_STATE_DIR", state.path())
+        .args(["--smart", "--mcp", "--root"])
+        .arg(root.path())
+        .args([
+            "--session",
+            state.path().join("seen.json").to_str().unwrap(),
+        ])
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    let mut input = child.stdin.take().unwrap();
+    for message in messages {
+        writeln!(input, "{message}").unwrap();
+    }
+    drop(input);
+    let out = child.wait_with_output().unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let responses: Vec<Value> = String::from_utf8(out.stdout)
+        .unwrap()
+        .lines()
+        .map(|line| serde_json::from_str(line).unwrap())
+        .collect();
+    assert_eq!(responses.len(), 5);
+    for response in &responses[1..] {
+        assert_eq!(response["result"]["isError"], false, "{response}");
+    }
+    assert!(
+        responses[3]["result"]["content"][0]["text"]
+            .as_str()
+            .unwrap()
+            .contains("100:// pending_row_100"),
+        "{}",
+        responses[3]
+    );
+    assert!(
+        responses[4]["result"]["content"][0]["text"]
+            .as_str()
+            .unwrap()
+            .contains("PRIVATE_BODY_123")
+    );
+    let list = json(invoke(root.path(), state.path(), &["--history", "list"]));
+    assert_eq!(list["requests"].as_array().unwrap().len(), 4);
+    let mut resumes = 0;
+    for request in list["requests"].as_array().unwrap() {
+        let record = json(invoke(
+            root.path(),
+            state.path(),
+            &["--history", "show", request["request_id"].as_str().unwrap()],
+        ));
+        if record["request"]["conditions"]["resume"] == true {
+            resumes += 1;
+            assert_eq!(record["request"]["status"], "emitted");
+            assert_eq!(record["request"]["history_applied"], 0);
+            for result in record["request"]["results"].as_array().unwrap() {
+                assert_eq!(result["file_operation_ids"], serde_json::json!([]));
+            }
+        }
+    }
+    assert_eq!(resumes, 2);
+}
+
+#[test]
+fn history_regression_large_search_saves_bounded_feedback_targets_without_changing_source() {
+    let (root, state) = fixture();
+    let source: String = (1..=400)
+        .map(|n| format!("needle unique_{n:04} 日本語\n"))
+        .collect();
+    std::fs::write(root.path().join("bulk.txt"), source).unwrap();
+    let out = invoke(
+        root.path(),
+        state.path(),
+        &[
+            "--smart",
+            "--engine",
+            "native",
+            "--max-tokens",
+            "20000",
+            "needle",
+            "bulk.txt",
+        ],
+    );
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    assert!(
+        !String::from_utf8_lossy(&out.stderr).contains("history unavailable"),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let off = invoke(
+        root.path(),
+        state.path(),
+        &[
+            "--smart",
+            "--engine",
+            "native",
+            "--max-tokens",
+            "20000",
+            "--history-mode",
+            "off",
+            "needle",
+            "bulk.txt",
+        ],
+    );
+    assert!(off.status.success());
+    let rendered = String::from_utf8(out.stdout).unwrap();
+    assert_eq!(
+        rendered.split("# history request=").next().unwrap(),
+        String::from_utf8(off.stdout).unwrap()
+    );
+    let record = last_request(root.path(), state.path());
+    assert_eq!(record["status"], "emitted");
+    assert!(serde_json::to_vec(&record).unwrap().len() <= 64 * 1024);
+    let kept = record["results"].as_array().unwrap();
+    assert!(!kept.is_empty() && kept.len() < 400, "{record}");
+    assert_eq!(record["metadata_omitted"]["results"], 400 - kept.len());
+    for result in kept {
+        assert_eq!(result["path"], "bulk.txt");
+        assert!(result["end"].as_u64().unwrap() <= 400);
+    }
+    let accepted = json(invoke(
+        root.path(),
+        state.path(),
+        &[
+            "--history",
+            "feedback",
+            record["request_id"].as_str().unwrap(),
+            kept[0]["result_id"].as_str().unwrap(),
+            "helpful",
+        ],
+    ));
+    assert_eq!(accepted["accepted"], true);
+    let export = invoke(root.path(), state.path(), &["--history", "export"]);
+    assert!(!String::from_utf8_lossy(&export.stdout).contains("needle unique_0001"));
+}
+
+#[test]
+fn history_regression_mcp_only_exposes_persisted_ids_after_metadata_reduction() {
+    use std::io::{BufRead, BufReader, Write};
+    use std::process::Stdio;
+    let (root, state) = fixture();
+    let source: String = (1..=400)
+        .map(|n| format!("needle unique_{n:04}\n"))
+        .collect();
+    std::fs::write(root.path().join("bulk.txt"), source).unwrap();
+    let mut child = Command::new(env!("CARGO_BIN_EXE_jrg"))
+        .current_dir(root.path())
+        .env_remove("JRG_HISTORY")
+        .env_remove("JRG_EMBEDDING_SOCKET")
+        .env("JRG_STATE_DIR", state.path())
+        .args(["--smart", "--mcp", "--root"])
+        .arg(root.path())
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    let mut input = child.stdin.take().unwrap();
+    let mut output = BufReader::new(child.stdout.take().unwrap());
+    let mut exchange = |message: Value| -> Value {
+        writeln!(input, "{message}").unwrap();
+        input.flush().unwrap();
+        let mut line = String::new();
+        output.read_line(&mut line).unwrap();
+        let response = serde_json::from_str(&line).unwrap();
+        if message["method"] == "initialize" {
+            writeln!(
+                input,
+                "{}",
+                serde_json::json!({"jsonrpc":"2.0","method":"notifications/initialized"})
+            )
+            .unwrap();
+            input.flush().unwrap();
+        }
+        response
+    };
+    exchange(serde_json::json!({"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}));
+    let reply = exchange(
+        serde_json::json!({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"retrieve","arguments":{
+        "operations":[{"read":{"path":"bulk.txt","start":1,"end":400}}],"max_tokens":20000}}}),
+    );
+    assert_eq!(reply["result"]["isError"], false, "{reply}");
+    let meta = &reply["result"]["structuredContent"]["history"];
+    let targets = meta["results"].as_array().expect("bounded history IDs");
+    assert!(!targets.is_empty() && targets.len() < 400);
+    assert_eq!(meta["metadata_omitted"]["results"], 400 - targets.len());
+    let accepted = exchange(
+        serde_json::json!({"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"feedback","arguments":{
+        "request_id":meta["request_id"], "result_id":targets[0]["result_id"], "event_id":"bounded-mcp", "label":"helpful"}}}),
+    );
+    assert_eq!(
+        accepted["result"]["structuredContent"]["accepted"], true,
+        "{accepted}"
+    );
+    drop(input);
+    let out = child.wait_with_output().unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let record = json(invoke(
+        root.path(),
+        state.path(),
+        &["--history", "show", meta["request_id"].as_str().unwrap()],
+    ));
+    let saved_ids: Vec<_> = record["request"]["results"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| &r["result_id"])
+        .collect();
+    let advertised_ids: Vec<_> = targets.iter().map(|r| &r["result_id"]).collect();
+    assert_eq!(advertised_ids, saved_ids);
+    assert!(serde_json::to_vec(&record["request"]).unwrap().len() <= 64 * 1024);
+}

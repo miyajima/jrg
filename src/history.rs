@@ -76,6 +76,51 @@ mod tests {
         store.emitted(request_id).unwrap();
     }
 
+    #[test]
+    fn oversized_conditions_keep_query_identity_and_safe_scope() {
+        let fixture = Fixture::new("bounded-conditions");
+        let mut store = fixture.store();
+        let mut request = record("large-conditions", "exact-original-query", "ctx");
+        request["conditions"] =
+            json!({"cwd":"", "requested_paths":["."], "patterns":["語".repeat(30_000)]});
+        store.prepare(&request).unwrap();
+        store.emitted("large-conditions").unwrap();
+        let saved = store.show("large-conditions").unwrap()["request"].clone();
+        assert!(serde_json::to_vec(&saved).unwrap().len() <= super::MAX_REQUEST_BYTES);
+        assert_eq!(saved["query_key"], "exact-original-query");
+        assert_eq!(saved["conditions"]["requested_paths"], json!(["."]));
+        assert_eq!(
+            saved["conditions"]["digest"],
+            digest(&request["conditions"].to_string())
+        );
+        assert_eq!(saved["metadata_omitted"]["conditions"], true);
+        assert_eq!(saved["results"], request["results"]);
+
+        let mut request = record("large-paths", "other-query", "ctx");
+        request["conditions"] = json!({"cwd":"", "requested_paths":["path/".repeat(15_000)]});
+        store.prepare(&request).unwrap();
+        let saved = store.show("large-paths").unwrap()["request"].clone();
+        assert!(serde_json::to_vec(&saved).unwrap().len() <= super::MAX_REQUEST_BYTES);
+        assert_eq!(saved["conditions"]["requested_paths"], json!([]));
+        assert_eq!(saved["metadata_omitted"]["requested_paths"], true);
+    }
+
+    #[test]
+    fn oversized_decisions_are_omitted_before_feedback_targets() {
+        let fixture = Fixture::new("bounded-decisions");
+        let mut store = fixture.store();
+        let mut request = record("large-decisions", "query-1", "ctx");
+        request["decisions"] = json!([{"stage":"review_scope", "path":"路".repeat(30_000)}]);
+        store.prepare(&request).unwrap();
+        store.emitted("large-decisions").unwrap();
+        let saved = store.show("large-decisions").unwrap()["request"].clone();
+        assert_eq!(saved["results"], request["results"]);
+        assert_eq!(saved["decisions"], json!([]));
+        assert_eq!(saved["metadata_omitted"]["decisions"], 1);
+        assert_eq!(saved["metadata_omitted"]["results"], 0);
+        assert!(store.feedback(&json!({"request_id":"large-decisions", "result_id":"result-1", "label":"helpful", "source":"human"})).unwrap()["accepted"] == true);
+    }
+
     fn feedback(
         store: &mut Store,
         request_id: &str,
@@ -182,6 +227,27 @@ mod tests {
                 }))
                 .is_err()
         );
+    }
+
+    #[test]
+    fn oversized_result_is_not_advertised_or_accepted_for_feedback() {
+        let fixture = Fixture::new("bounded-result");
+        let mut store = fixture.store();
+        let mut request = record("large-result", "query-1", "ctx");
+        let mut oversized = request["results"][0].clone();
+        oversized["result_id"] = "omitted-result".into();
+        oversized["ranges"] = json!(vec![[10, 11]; 20_000]);
+        request["results"]
+            .as_array_mut()
+            .unwrap()
+            .insert(0, oversized);
+        let saved = store.prepare(&request).unwrap();
+        assert_eq!(saved["metadata_omitted"]["results"], 1);
+        assert_eq!(saved["results"].as_array().unwrap().len(), 1);
+        assert_eq!(saved["results"][0]["result_id"], "result-1");
+        store.emitted("large-result").unwrap();
+        assert!(store.feedback(&json!({"request_id":"large-result", "result_id":"omitted-result", "label":"helpful", "source":"human"})).is_err());
+        assert!(store.feedback(&json!({"request_id":"large-result", "result_id":"result-1", "label":"helpful", "source":"human"})).unwrap()["accepted"] == true);
     }
 
     #[test]
@@ -766,7 +832,7 @@ impl Store {
         })
     }
 
-    pub fn prepare(&mut self, record: &Value) -> io::Result<()> {
+    pub fn prepare(&mut self, record: &Value) -> io::Result<Value> {
         let input = record
             .as_object()
             .ok_or_else(|| invalid_data("request must be a JSON object"))?;
@@ -807,10 +873,7 @@ impl Store {
         object.insert("status".to_owned(), Value::String("prepared".to_owned()));
         object.insert("created_at".to_owned(), Value::Number(created_at.into()));
 
-        let payload = serde_json::to_string(&stored).map_err(json_error)?;
-        if payload.len() > MAX_REQUEST_BYTES {
-            return Err(invalid_data("request metadata exceeds the 64 KiB limit"));
-        }
+        let payload = Self::bounded_payload(&mut stored)?;
 
         let tx = self.conn.transaction().map_err(db_error)?;
         tx.execute(
@@ -822,7 +885,54 @@ impl Store {
         prune(&tx, now_ms()?)?;
         tx.commit().map_err(db_error)?;
         maintain_database(&self.conn)?;
-        Ok(())
+        Ok(stored)
+    }
+
+    fn bounded_payload(stored: &mut Value) -> io::Result<String> {
+        let payload = serde_json::to_string(stored).map_err(json_error)?;
+        if payload.len() <= MAX_REQUEST_BYTES {
+            return Ok(payload);
+        }
+        // Keep exact query identity and complete result receipts. Never truncate
+        // an identifier, a path or an individual source range into a new value.
+        let results = std::mem::take(stored["results"].as_array_mut().unwrap());
+        let decisions = stored
+            .get_mut("decisions")
+            .and_then(Value::as_array_mut)
+            .map_or(0, |items| std::mem::take(items).len());
+        stored["metadata_omitted"] = json!({"results":results.len(), "decisions":decisions,
+            "conditions":false, "requested_paths":false});
+        if serde_json::to_vec(stored).map_err(json_error)?.len() > MAX_REQUEST_BYTES {
+            let conditions = stored["conditions"].take();
+            stored["conditions"] = json!({"cwd":conditions["cwd"],
+                "requested_paths":conditions["requested_paths"],
+                "digest":digest(&conditions.to_string()), "details_omitted":true});
+            stored["metadata_omitted"]["conditions"] = true.into();
+            if serde_json::to_vec(stored).map_err(json_error)?.len() > MAX_REQUEST_BYTES {
+                // An incomplete path list must not grant a narrower MCP server
+                // access to a request that originally searched outside its root.
+                stored["conditions"]["requested_paths"] = json!([]);
+                stored["metadata_omitted"]["requested_paths"] = true.into();
+            }
+        }
+        let mut size = serde_json::to_vec(stored).map_err(json_error)?.len();
+        let mut kept = Vec::new();
+        let total = results.len();
+        for result in results {
+            let cost = serde_json::to_vec(&result).map_err(json_error)?.len()
+                + usize::from(!kept.is_empty());
+            if size.saturating_add(cost) <= MAX_REQUEST_BYTES {
+                size += cost;
+                kept.push(result);
+            }
+        }
+        stored["metadata_omitted"]["results"] = (total - kept.len()).into();
+        stored["results"] = kept.into();
+        let payload = serde_json::to_string(stored).map_err(json_error)?;
+        if payload.len() > MAX_REQUEST_BYTES {
+            return Err(invalid_data("request metadata exceeds the 64 KiB limit"));
+        }
+        Ok(payload)
     }
 
     pub fn emitted(&mut self, request_id: &str) -> io::Result<()> {

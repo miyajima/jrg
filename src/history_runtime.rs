@@ -37,6 +37,7 @@ pub struct Runtime {
     file_operations: BTreeMap<PathBuf, BTreeSet<usize>>,
     current_operation: Option<usize>,
     prepared: bool,
+    metadata_omitted: Option<Value>,
 }
 struct Snapshot {
     path: String,
@@ -75,6 +76,8 @@ impl Runtime {
                         }
                     })
                     .collect()
+            } else if args.resume {
+                vec![Self::relative_path(&cwd, &repo.root, &cwd)]
             } else {
                 args.inputs(true)
                     .1
@@ -102,7 +105,7 @@ impl Runtime {
                 }
                 true
             });
-            let conditions = json!({
+            let mut conditions = json!({
                 "policy":"history-score-v1", "syntax":"ast-grep-0.45.1-anchor-v1",
                 "cwd":cwd.strip_prefix(&repo.root).unwrap_or(&cwd).to_string_lossy(),
                 "embedding": if std::env::var_os("JRG_EMBEDDING_SOCKET").is_some() {
@@ -121,6 +124,9 @@ impl Runtime {
                 "globs":args.globs,"max_count":args.max_count,"max_tokens":args.max_tokens,
                 "discovery_limit":args.discovery_limit,"block_context":args.block_context,
             });
+            if args.resume {
+                conditions["resume"] = true.into();
+            }
             let query_key = history::digest(&conditions.to_string());
             let ratings = if mode == Mode::Auto && !args.resume && reuse_allowed {
                 store.ratings(&query_key)?
@@ -141,8 +147,9 @@ impl Runtime {
                 applied: 0,
                 sources: BTreeMap::new(),
                 file_operations: BTreeMap::new(),
-                current_operation: Some(1),
+                current_operation: if args.resume { None } else { Some(1) },
                 prepared: false,
+                metadata_omitted: None,
                 decisions: Vec::new(),
                 tracking_omitted: 0,
             })
@@ -388,7 +395,13 @@ impl Runtime {
                 .ok()
                 .and_then(|p| self.file_operations.get(&p))
                 .map(|s| s.iter().copied().collect::<Vec<_>>())
-                .unwrap_or_else(|| vec![1]);
+                .unwrap_or_else(|| {
+                    if self.conditions["resume"] == true {
+                        Vec::new()
+                    } else {
+                        vec![1]
+                    }
+                });
             let requirements = self.conditions["operations"]["requirements"]
                 .as_array()
                 .cloned()
@@ -478,7 +491,12 @@ impl Runtime {
             "output_bytes":bytes,"exit_code":code,"history_applied":self.applied,"decisions":self.decisions,
             "tracking_omitted":self.tracking_omitted});
         match self.store.prepare(&record) {
-            Ok(()) => {
+            Ok(stored) => {
+                self.results = stored["results"].as_array().cloned().unwrap_or_default();
+                self.metadata_omitted = stored.get("metadata_omitted").cloned();
+                if let Some(omitted) = &self.metadata_omitted {
+                    eprintln!("jrg history metadata reduced: {omitted}");
+                }
                 self.prepared = true;
                 true
             }
@@ -501,13 +519,16 @@ impl Runtime {
             .repo
             .root
             .join(self.conditions["cwd"].as_str().unwrap_or(""));
-        let meta = json!({"history":{"request_id":self.request_id,"mode":format!("{:?}",self.mode).to_lowercase(),
+        let mut meta = json!({"history":{"request_id":self.request_id,"mode":format!("{:?}",self.mode).to_lowercase(),
             "results":self.results.iter().map(|r| {
                 let path=self.repo.root.join(r["path"].as_str().unwrap_or(""));
                 let path=path.strip_prefix(&cwd).unwrap_or(&path).to_string_lossy();
                 json!({"result_id":r["result_id"],"path":path,"repo_path":r["path"],"ranges":r["ranges"]})
             }).collect::<Vec<_>>(),
             "applied":self.applied}});
+        if let Some(omitted) = &self.metadata_omitted {
+            meta["history"]["metadata_omitted"] = omitted.clone();
+        }
         let footer = format!(
             "# history request={} results={} applied={}\n",
             self.request_id,

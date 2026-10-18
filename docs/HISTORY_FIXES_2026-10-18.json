@@ -1,0 +1,47 @@
+{
+  "verified_on": "2026-10-18",
+  "base_commit": "28ac0cf50b38975136c2db9e29db52ed5ea6b157",
+  "source_sha256": {
+    "src/history.rs": "1ad7066d790fd8f2979f05547dc57eb8b3570b4a40b2a46efdcfc077b64c6038",
+    "src/history_runtime.rs": "6d10ee7c1d3a822675c955b02d03706ecfe86224597f3863032e38ba0b522d3e",
+    "tests/history.rs": "b3690bc50aa30f44d3bd6fca8834f9cbabf7da96223fac9f024731123d0215ec"
+  },
+  "regression_tests": {
+    "initial_integration_failures": [
+      "resume panic at src/cli.rs:234:48",
+      "request metadata exceeds the 64 KiB limit"
+    ],
+    "initial_unit_failures": [
+      "oversized UTF-8 conditions",
+      "oversized decisions"
+    ],
+    "final_history_integration_passed": 18,
+    "new_regression_tests": 6
+  },
+  "checks": {
+    "cargo_test_offline_locked": {
+      "passed": 186,
+      "suites": 11,
+      "exit_code": 0
+    },
+    "cargo_clippy_offline_locked_all_targets_deny_warnings": {
+      "exit_code": 0
+    },
+    "rustfmt_owned_files": {
+      "exit_code": 0
+    },
+    "git_diff_check_owned_files": {
+      "exit_code": 0
+    }
+  },
+  "scope": {
+    "embedding_implementation_modified": false,
+    "installed_binary_updated": false,
+    "real_task_AB_repeated": false
+  },
+  "limits": [
+    "History payload remains limited to 65536 UTF-8 bytes including backend fields.",
+    "Only persisted complete result receipts are advertised for feedback.",
+    "Oversized conditions retain query_key and a digest; omitted path lists deny MCP history/feedback access."
+  ]
+}
