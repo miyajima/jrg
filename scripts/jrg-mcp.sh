@@ -2,7 +2,12 @@
 # One fresh retrieval session per MCP connection, using the installed binary.
 set -eu
 umask 077
-root=${1:?usage: sh jrg-mcp.sh /absolute/project}
+if [ "$#" -eq 0 ]; then
+    root=$(pwd -P)
+else
+    root=$1
+    [ -n "$root" ] || { printf '%s\n' 'usage: sh jrg-mcp.sh [root]' >&2; exit 2; }
+fi
 script_dir=$(CDPATH= cd "$(dirname "$0")" && pwd -P)
 binary=${HOME:?HOME is not set}/.local/bin/jrg
 session_dir=$(mktemp -d "${TMPDIR:-/tmp}/jrg-mcp.XXXXXX")
