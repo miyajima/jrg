@@ -656,16 +656,116 @@ fn review_finds_rust_inline_and_python_tests_and_keeps_branch_siblings() {
 }
 
 #[test]
-fn review_rejects_context_override_and_marks_heuristic_test_gaps() {
+fn review_ignores_context_hint_and_marks_heuristic_test_gaps() {
     let d = TempDir::new().unwrap();
     fs::write(d.path().join("x.rs"), "fn cancel_audio() { finish(); }\n").unwrap();
     let mut req = init();
     req.push(call(2,json!({"operations":[{"search":{"patterns":["cancel_audio"],"paths":["x.rs"],"intent":"review","context":0}}]})));
-    req.push(call(3,json!({"operations":[{"search":{"patterns":["cancel_audio"],"paths":["x.rs"],"intent":"review"}}]})));
+    req.push(call(3,json!({"repeat":true,"operations":[{"search":{"patterns":["cancel_audio"],"paths":["x.rs"],"intent":"review","context":3}}]})));
+    req.push(call(4,json!({"repeat":true,"operations":[{"search":{"patterns":["cancel_audio"],"paths":["x.rs"],"intent":"review"}}]})));
     let out = exchange(d.path(), req);
-    assert_eq!(out[1]["result"]["isError"], true);
-    let s = out[2]["result"]["content"][0]["text"].as_str().unwrap();
-    assert!(s.contains("tests=0") && s.contains("not proof"), "{s}");
+    let mut sources = Vec::new();
+    for response in &out[1..] {
+        assert_eq!(response["result"]["isError"], false, "{response}");
+        let s = response["result"]["content"][0]["text"].as_str().unwrap();
+        assert!(s.contains("tests=0") && s.contains("not proof"), "{s}");
+        sources.push(
+            s.lines()
+                .filter(|line| {
+                    line.starts_with('@') || line.chars().next().is_some_and(|c| c.is_ascii_digit())
+                })
+                .collect::<Vec<_>>(),
+        );
+    }
+    assert!(
+        sources[0]
+            .iter()
+            .any(|line| line.contains("fn cancel_audio"))
+    );
+    assert_eq!(sources[0], sources[1]);
+    assert_eq!(sources[1], sources[2]);
+}
+
+#[test]
+fn mcp_guidance_examples_execute_and_errors_support_recovery() {
+    let d = TempDir::new().unwrap();
+    let mut req = init();
+    req.push(json!({"jsonrpc":"2.0","id":2,"method":"tools/list"}));
+    let out = exchange(d.path(), req);
+    let examples = out[1]["result"]["tools"][0]["inputSchema"]["examples"]
+        .as_array()
+        .expect("retrieve must publish executable usage examples");
+    assert!(examples.len() >= 3);
+    for example in examples {
+        let fixture = TempDir::new().unwrap();
+        fs::create_dir(fixture.path().join("src")).unwrap();
+        fs::write(
+            fixture.path().join("src/lib.rs"),
+            "fn identifier() { marker(); }\n",
+        )
+        .unwrap();
+        let mut req = init();
+        req.push(call(2, example.clone()));
+        let result = exchange(fixture.path(), req);
+        assert_eq!(result[1]["result"]["isError"], false, "{result:?}");
+        assert!(
+            result[1]["result"]["content"][0]["text"]
+                .as_str()
+                .unwrap()
+                .contains("identifier")
+        );
+    }
+
+    fs::create_dir(d.path().join("src")).unwrap();
+    fs::write(d.path().join("src/lib.rs"), "fn identifier() {}\n").unwrap();
+    let mut req = init();
+    req.push(call(2, json!({"query":"identifier"})));
+    req.push(call(
+        3,
+        json!({"operations":[{"read":{"path":"src/missing.rs","start":1,"end":1}}]}),
+    ));
+    req.push(call(
+        4,
+        json!({"operations":[{"search":{"patterns":["identifier"],"paths":[]}}]}),
+    ));
+    req.push(call(5, json!({"operations":[{"search":{"patterns":[]}}]})));
+    req.push(call(6, json!({"operations":[{"search":{"patterns":["identifier"],"paths":["src"],"intent":"review","context":129}}]})));
+    req.push(call(7, json!({"operations":[{"search":{"patterns":["identifier"],"paths":["src"],"intent":"review","context":2}}]})));
+    let result = exchange(d.path(), req);
+    for response in &result[1..6] {
+        assert_eq!(response["result"]["isError"], true, "{response}");
+    }
+    let messages: Vec<_> = result[1..6]
+        .iter()
+        .map(|r| r["result"]["content"][0]["text"].as_str().unwrap())
+        .collect();
+    assert!(
+        messages[0].contains("query") && messages[0].contains("operations"),
+        "{}",
+        messages[0]
+    );
+    assert!(
+        messages[1].contains("src/missing.rs")
+            && messages[1].contains(&d.path().to_string_lossy().to_string())
+            && messages[1].contains("read.path")
+            && messages[1].contains("returned path"),
+        "{}",
+        messages[1]
+    );
+    assert!(
+        messages[2].contains("search.paths") && messages[2].to_lowercase().contains("omit"),
+        "{}",
+        messages[2]
+    );
+    assert!(messages[3].contains("search.patterns"), "{}", messages[3]);
+    assert!(messages[4].contains("0..128"), "{}", messages[4]);
+    assert_eq!(result[6]["result"]["isError"], false, "{:?}", result[6]);
+    assert!(
+        result[6]["result"]["content"][0]["text"]
+            .as_str()
+            .unwrap()
+            .contains("fn identifier")
+    );
 }
 
 #[test]

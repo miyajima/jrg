@@ -1,6 +1,6 @@
 [package]
 name = "jrg"
-version = "0.15.2"
+version = "0.15.3"
 edition = "2024"
 rust-version = "1.88"
 description = "A Japanese-friendly recursive text search CLI"

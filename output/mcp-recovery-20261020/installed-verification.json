@@ -1,0 +1,20 @@
+{
+  "version": "0.15.3",
+  "launcher": "/Users/miyajimakazuhiro/projects/jrg/scripts/jrg-mcp.sh",
+  "installed_binary_sha256": "1bc9053a3e498059c1b37ef0a5b18bd91526dcc0d6d0b88ab868ce774f134357",
+  "checks": {
+    "initialize_and_tools_list_guidance": true,
+    "published_example_1": true,
+    "published_example_2": true,
+    "published_example_3": true,
+    "review_context_0_3_and_omitted_same_source": true,
+    "actionable_errors_and_root_symlink_boundary": true,
+    "valid_search_after_errors_same_connection": true,
+    "initialization_error_explains_handshake_and_recovers": true,
+    "metrics_wrapper_and_restore_hash_preserved": true
+  },
+  "limitations": [
+    "Existing MCP processes retain their previous binary until reconnection.",
+    "Guidance delivery and execution verified; future AI adherence is not guaranteed."
+  ]
+}

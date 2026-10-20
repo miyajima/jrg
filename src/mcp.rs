@@ -77,12 +77,19 @@ impl Server {
     }
     fn keys(value: &Value, allowed: &[&str]) -> Result<(), String> {
         let object = value.as_object().ok_or("expected an object")?;
-        if object.keys().any(|key| !allowed.contains(&key.as_str())) {
-            return Err("unknown argument".into());
+        let unknown: Vec<_> = object
+            .keys()
+            .filter(|key| !allowed.contains(&key.as_str()))
+            .collect();
+        if !unknown.is_empty() {
+            return Err(format!(
+                "unknown argument(s): {unknown:?}. Allowed arguments: {}. Read tools/list for the request shape; retrieve uses operations containing search or read, not a top-level query.",
+                allowed.join(", ")
+            ));
         }
         Ok(())
     }
-    fn path(&self, value: &Value) -> Result<String, String> {
+    fn path(&self, value: &Value, field: &str) -> Result<String, String> {
         let path = value.as_str().ok_or("path must be a string")?;
         if path == "-" {
             return Err("stdin is not a source path".into());
@@ -91,9 +98,19 @@ impl Server {
             .root
             .join(path)
             .canonicalize()
-            .map_err(|e| format!("invalid path: {e}"))?;
+            .map_err(|e| {
+                let hint = if field == "read.path" {
+                    "Locate an existing file using search.paths with a known parent directory and optional search.globs, then use its returned path in read.path."
+                } else {
+                    "Use an existing parent directory in search.paths and filename patterns in search.globs."
+                };
+                format!("invalid {field} {path:?} relative to configured MCP root {:?}: {e}. {hint} Do not retry the same missing path; use permitted native tools if the required path is outside this root.", self.root)
+            })?;
         if !canonical.starts_with(&self.root) {
-            return Err("path escapes configured MCP root".into());
+            return Err(format!(
+                "path escapes configured MCP root {:?}: {path:?}. Use permitted native tools for paths outside this root.",
+                self.root
+            ));
         }
         if !canonical.is_file() && !canonical.is_dir() {
             return Err("path must be a regular file or directory".into());
@@ -105,17 +122,24 @@ impl Server {
             path.to_owned()
         })
     }
-    fn string_array(value: &Value) -> Result<Vec<String>, String> {
+    fn string_array(value: &Value, field: &str) -> Result<Vec<String>, String> {
         let values = value
             .as_array()
             .filter(|a| !a.is_empty() && a.len() <= 64)
-            .ok_or("expected 1..64 strings")?;
+            .ok_or_else(|| {
+                let hint = match field {
+                    "search.paths" => "Omit paths to use the configured root, or supply an existing file or directory; use globs for filename patterns.",
+                    "search.globs" => "Omit globs when no filename filter is needed.",
+                    _ => "Supply at least one literal search string in patterns.",
+                };
+                format!("{field} must contain 1..64 strings. {hint}")
+            })?;
         values
             .iter()
             .map(|v| {
                 v.as_str()
                     .map(str::to_owned)
-                    .ok_or_else(|| "expected string".into())
+                    .ok_or_else(|| format!("{field} entries must be strings"))
             })
             .collect()
     }
@@ -202,7 +226,7 @@ impl Server {
         let operations = input
             .get("operations")
             .and_then(Value::as_array)
-            .ok_or("operations array required")?;
+            .ok_or(r#"operations array required; use {"operations":[{"search":{"patterns":["identifier"],"paths":["."],"intent":"locate"}}]}. query is not a top-level argument."#)?;
         if operations.len() > 64
             || (operations.is_empty() && !args.resume)
             || (args.resume && !operations.is_empty())
@@ -217,7 +241,7 @@ impl Server {
             }
             if let Some(read) = op.get("read") {
                 Self::keys(read, &["path", "start", "end"])?;
-                let path = self.path(&read["path"])?;
+                let path = self.path(&read["path"], "read.path")?;
                 let start = read["start"]
                     .as_u64()
                     .filter(|n| *n > 0)
@@ -242,9 +266,9 @@ impl Server {
                         "globs",
                     ],
                 )?;
-                let patterns = Self::string_array(&search["patterns"])?;
+                let patterns = Self::string_array(&search["patterns"], "search.patterns")?;
                 let paths = if let Some(paths) = search.get("paths") {
-                    Self::string_array(paths)?
+                    Self::string_array(paths, "search.paths")?
                 } else {
                     vec![".".into()]
                 };
@@ -270,22 +294,18 @@ impl Server {
                         .ok_or("intent must be locate, explain or review")?;
                     argv.extend(["--intent".into(), intent.into()]);
                 }
-                if search["intent"] == "review" && search.get("context").is_some() {
-                    return Err(
-                        "review selects source scopes; context belongs to locate/explain".into(),
-                    );
-                }
                 if let Some(n) = search.get("context") {
-                    argv.extend([
-                        "--context".into(),
-                        n.as_u64()
-                            .filter(|n| *n <= 128)
-                            .ok_or("context must be 0..128")?
-                            .to_string(),
-                    ]);
+                    let n = n
+                        .as_u64()
+                        .filter(|n| *n <= 128)
+                        .ok_or("context must be 0..128")?;
+                    // Review chooses complete scopes; a line-context hint cannot change them.
+                    if search["intent"] != "review" {
+                        argv.extend(["--context".into(), n.to_string()]);
+                    }
                 }
                 if let Some(globs) = search.get("globs") {
-                    for glob in Self::string_array(globs)? {
+                    for glob in Self::string_array(globs, "search.globs")? {
                         argv.extend(["--glob".into(), glob]);
                     }
                 }
@@ -294,7 +314,7 @@ impl Server {
                 }
                 argv.push("--".into());
                 for path in paths {
-                    argv.push(self.path(&json!(path))?);
+                    argv.push(self.path(&json!(path), "search.paths")?);
                 }
                 plan.push(json!({"search":argv}));
             }
@@ -431,13 +451,18 @@ impl Server {
     }
     fn schema(&self) -> Value {
         let search = json!({"type":"object","additionalProperties":false,"required":["patterns"],"properties":{
-            "patterns":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}},"paths":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}},
-            "intent":{"type":"string","enum":["locate","explain","review"]},"regex":{"type":"boolean"},"case_insensitive":{"type":"boolean"},"full_scope":{"type":"boolean"},"context":{"type":"integer","minimum":0,"maximum":128},"globs":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}}}});
+            "patterns":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"},"description":"Required literal source strings; use regex=true for regular expressions. Not a top-level query."},"paths":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"},"description":"Existing files/directories relative to the configured MCP root. Omit for the root; never send an empty array or guessed filename. Filename filters belong in globs."},
+            "intent":{"type":"string","enum":["locate","explain","review"]},"regex":{"type":"boolean"},"case_insensitive":{"type":"boolean"},"full_scope":{"type":"boolean"},"context":{"type":"integer","minimum":0,"maximum":128,"description":"Extra lines for locate/explain. Omit for review: valid values are accepted but ignored because review selects source scopes."},"globs":{"type":"array","minItems":1,"maxItems":64,"items":{"type":"string"}}}});
         let read = json!({"type":"object","additionalProperties":false,"required":["path","start","end"],"properties":{"path":{"type":"string"},"start":{"type":"integer","minimum":1},"end":{"type":"integer","minimum":1}}});
         let requirement = json!({"type":"object","additionalProperties":false,"required":["id","description","patterns"],"properties":{
             "id":{"type":"string","pattern":"^[A-Za-z0-9_-]{1,32}$"},"description":{"type":"string","minLength":1,"maxLength":160},
             "patterns":{"type":"array","minItems":1,"maxItems":16,"items":{"type":"string","minLength":1,"maxLength":128}}}});
-        let mut schema = json!({"tools":[{"name":"retrieve","description":"Prefer jrg retrieve for source investigation and bounded reads within the configured root. Keep native rg for exhaustive enumeration, absence checks, exact counts, machine output, pipelines and unsupported options; fall back when jrg is unavailable. Batch independent source searches and line reads. For multi-item requests, supply outer requirements with stable IDs, descriptions and case-sensitive original-source literal patterns. Returns item/evidence links plus whole if/while predicates before ordinary source; answer every item and preserve all linked clauses. matched means literal evidence, not verified semantic coverage. Check unresolved, conditions_incomplete, omitted and syntax=unavailable; do not infer absence or a passed contract. Requirements only annotate selected source, never expand retrieval or invoke models. Reissue scoped operations to resurface conditions even when seen. Fixed root; no shell. patterns are literal by default; regex=true searches original text, default normalizes Japanese. review for source investigations: BM25 ranks query-focused previews and production definition names, focuses the leading module family for broad searches, then bundles functions/guards/helpers/tests. Explicit paths override family focus; other families have hints. No guessed broad reads needed. Scope paths when known; root paths are valid. Independent review searches may share one call; scope slots are shared across the batch (source8 plus up to2 small sibling JSON definitions/tests6/helpers8/constants16), so combine overlapping subjects in one search. Generic stage/verify names do not expand root tests; test-only searches stay scoped. JSON/schema investigations also include small sibling serialization definitions and tests asserting their field keys. Document review returns matching headings/sections or local contexts directly, no locate retry needed. Literal patterns starting with - are values. Heuristic links and omitted file/scope hints are explicit; not semantic test/dependency closure. No context with review. Use returned evidence/paths/line numbers; follow concrete gaps with narrow explain/read, never guess a file path. Small known modules may be read with their tests directly. locate for discovery; explain for named definitions/guards/tests. Explain keeps matched definitions, short caller contexts; full_scope=true or read for needed caller bodies. Shared session suppresses already delivered rows (seen); empty operations with resume retrieves pending rows; repeat only when necessary. Default24000 tokens, max26000, with96000-byte transport ceiling before seen tracking. scope_limited is not pending. Batch implementation and related tests when paths are known. Optional outer rank_query enables BM25. Broad locate searches over directories or multiple files return top12 novel passages per operation (discovery_limit overrides; 0 disables). Single-file locate, explain functions and explicit read ranges remain uncapped and are packed first. Batch independent known functions/guards/tests with their related reads. Unselected range hints are discovery omissions, not pending; retrieve only needed hints narrowly. Seen rows are excluded before selecting top candidates. English identifiers work for code. review optionally supplements lexical candidates with pinned local EmbeddingGemma 2 over a configured Unix socket; model/service failures explicitly fall back to lexical. ast-grep parses Rust/TS/JS/Python scopes, with labeled lexical fallback for invalid or unsupported syntax. Lexical locate/explain stay exact. Candidate ranking cannot prove absence. Errors/omissions are explicit in footer.","inputSchema":{"type":"object","additionalProperties":false,"required":["operations"],"properties":{"operations":{"type":"array","maxItems":64,"items":{"oneOf":[{"type":"object","required":["search"],"additionalProperties":false,"properties":{"search":search}},{"type":"object","required":["read"],"additionalProperties":false,"properties":{"read":read}}]}},"requirements":{"type":"array","minItems":1,"maxItems":16,"items":requirement,"description":"Requested item checklist with original-source case-sensitive literal patterns (not regex or normalized). Explicit operations only; statuses must fit budget or request fails before execution."},"rank_query":{"type":"string","description":"Optional BM25 relevance query for this entire batch, not the retrieval pattern. Needs a searchable term."},"discovery_limit":{"type":"integer","minimum":0,"maximum":256,"description":"Per broad locate operation BM25 top passages, default12; 0 disables cutoff. Never limits read or explain."},"max_tokens":{"type":"integer","minimum":64,"maximum":26000},"repeat":{"type":"boolean"},"resume":{"type":"boolean"}}},"annotations":{"readOnlyHint":true,"destructiveHint":false,"openWorldHint":false}}]});
+        let mut schema = json!({"tools":[{"name":"retrieve","description":"Prefer jrg retrieve for source investigation and bounded reads within the configured root. Keep native rg for exhaustive enumeration, absence checks, exact counts, machine output, pipelines and unsupported options; fall back when jrg is unavailable. Call with operations:[{search:{patterns:[\"identifier\"],paths:[\".\"],intent:\"locate\"}}], never a top-level query. Paths must already exist; omit paths for the configured root, use globs for filename filters. review accepts but ignores context. Batch independent source searches and line reads. For multi-item requests, supply outer requirements with stable IDs, descriptions and case-sensitive original-source literal patterns. Returns item/evidence links plus whole if/while predicates before ordinary source; answer every item and preserve all linked clauses. matched means literal evidence, not verified semantic coverage. Check unresolved, conditions_incomplete, omitted and syntax=unavailable; do not infer absence or a passed contract. Requirements only annotate selected source, never expand retrieval or invoke models. Reissue scoped operations to resurface conditions even when seen. Fixed root; no shell. patterns are literal by default; regex=true searches original text, default normalizes Japanese. review for source investigations: BM25 ranks query-focused previews and production definition names, focuses the leading module family for broad searches, then bundles functions/guards/helpers/tests. Explicit paths override family focus; other families have hints. No guessed broad reads needed. Scope paths when known; root paths are valid. Independent review searches may share one call; scope slots are shared across the batch (source8 plus up to2 small sibling JSON definitions/tests6/helpers8/constants16), so combine overlapping subjects in one search. Generic stage/verify names do not expand root tests; test-only searches stay scoped. JSON/schema investigations also include small sibling serialization definitions and tests asserting their field keys. Document review returns matching headings/sections or local contexts directly, no locate retry needed. Literal patterns starting with - are values. Heuristic links and omitted file/scope hints are explicit; not semantic test/dependency closure. For review, omit context; a supplied valid context is ignored because review selects scopes. Use returned evidence/paths/line numbers; follow concrete gaps with narrow explain/read, never guess a file path. Small known modules may be read with their tests directly. locate for discovery; explain for named definitions/guards/tests. Explain keeps matched definitions, short caller contexts; full_scope=true or read for needed caller bodies. Shared session suppresses already delivered rows (seen); empty operations with resume retrieves pending rows; repeat only when necessary. Default24000 tokens, max26000, with96000-byte transport ceiling before seen tracking. scope_limited is not pending. Batch implementation and related tests when paths are known. Optional outer rank_query enables BM25. Broad locate searches over directories or multiple files return top12 novel passages per operation (discovery_limit overrides; 0 disables). Single-file locate, explain functions and explicit read ranges remain uncapped and are packed first. Batch independent known functions/guards/tests with their related reads. Unselected range hints are discovery omissions, not pending; retrieve only needed hints narrowly. Seen rows are excluded before selecting top candidates. English identifiers work for code. review optionally supplements lexical candidates with pinned local EmbeddingGemma 2 over a configured Unix socket; model/service failures explicitly fall back to lexical. ast-grep parses Rust/TS/JS/Python scopes, with labeled lexical fallback for invalid or unsupported syntax. Lexical locate/explain stay exact. Candidate ranking cannot prove absence. Errors/omissions are explicit in footer.","inputSchema":{"type":"object","additionalProperties":false,"required":["operations"],"properties":{"operations":{"type":"array","maxItems":64,"items":{"oneOf":[{"type":"object","required":["search"],"additionalProperties":false,"properties":{"search":search}},{"type":"object","required":["read"],"additionalProperties":false,"properties":{"read":read}}]}},"requirements":{"type":"array","minItems":1,"maxItems":16,"items":requirement,"description":"Requested item checklist with original-source case-sensitive literal patterns (not regex or normalized). Explicit operations only; statuses must fit budget or request fails before execution."},"rank_query":{"type":"string","description":"Optional BM25 relevance query for this entire batch, not the retrieval pattern. Needs a searchable term."},"discovery_limit":{"type":"integer","minimum":0,"maximum":256,"description":"Per broad locate operation BM25 top passages, default12; 0 disables cutoff. Never limits read or explain."},"max_tokens":{"type":"integer","minimum":64,"maximum":26000},"repeat":{"type":"boolean"},"resume":{"type":"boolean"}}},"annotations":{"readOnlyHint":true,"destructiveHint":false,"openWorldHint":false}}]});
+        schema["tools"][0]["inputSchema"]["examples"] = json!([
+            {"operations":[{"search":{"intent":"locate","patterns":["identifier"],"paths":["."]}}]},
+            {"operations":[{"search":{"intent":"review","patterns":["identifier"],"paths":["src"]}}]},
+            {"operations":[{"read":{"path":"src/lib.rs","start":1,"end":1}}]}
+        ]);
         schema["tools"][0]["inputSchema"]["properties"]["history_mode"] =
             json!({"type":"string","enum":["auto","record","off"]});
         schema["tools"][0]["inputSchema"]["properties"]["context_id"] =
@@ -468,12 +493,15 @@ impl Server {
                     "2025-11-25"
                 };
             Ok(
-                json!({"protocolVersion":version,"capabilities":{"tools":{}},"instructions":include_str!("mcp_instructions.txt"),"serverInfo":{"name":"jrg","version":env!("CARGO_PKG_VERSION")}}),
+                json!({"protocolVersion":version,"capabilities":{"tools":{}},"instructions":format!("{}\nConfigured MCP root: {:?}. Relative paths resolve from this root, not another project or the client working directory.\n", include_str!("mcp_instructions.txt"), self.root),"serverInfo":{"name":"jrg","version":env!("CARGO_PKG_VERSION")}}),
             )
         } else if method == "ping" {
             Ok(json!({}))
         } else if !self.ready {
-            Err((-32000, "initialize first"))
+            Err((
+                -32000,
+                "initialize first: send initialize, then notifications/initialized before tools/list or tools/call",
+            ))
         } else if method == "tools/list" {
             Ok(self.schema())
         } else if method == "tools/call"
