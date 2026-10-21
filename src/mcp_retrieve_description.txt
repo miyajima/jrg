@@ -1,0 +1,15 @@
+Prefer jrg retrieve for source investigation and bounded reads within the configured root. Use native rg for exhaustive enumeration, absence checks, exact counts, machine output/pipelines, unsupported options/encodings, unavailable jrg or outside-root files. Respect permissions; never replace rg.
+
+Use operations with search.patterns or read, never top-level query. Paths must exist relative to root; omit paths for root, use globs for filename filters. Patterns are literal (including leading -); regex=true searches original text, otherwise Japanese is normalized. rank_query only ranks. Fixed root; no shell. Correct invalid arguments using error hints.
+
+Identify required behaviors, full guards and tests first. Use scoped review for known identifiers, explain for definitions/guards, locate for discovery; read only missing spans from returned paths/line hints. Avoid guessed large chunks around known functions. Small complete modules may be read with tests. Batch needed independent scopes/tests; combine overlapping subjects in one review. Do not prefetch speculative surroundings.
+
+Scope before lowering budgets. Keep large retrievals separate from full alternate-file versions/listings in outer tool output; use scoped diffs for versions. Check inner omissions AND outer truncation. Recover required evidence; fewer tokens alone is not success.
+
+For multiple items supply requirements with stable IDs and case-sensitive literal source patterns. Whole if/while predicates precede source: preserve ALL linked clauses. matched is literal evidence, not semantic verification. Requirements annotate selected source, never expand retrieval/invoke models. Check unresolved, conditions_incomplete, omitted, syntax=unavailable, pending and capture_omitted; capped/ranked results cannot prove absence or a passed contract.
+
+review bundles BM25-ranked functions/guards/helpers/tests; shared batch slots and family focus can omit dependencies/tests. Explicit paths override family focus; follow concrete hints only. Document review returns sections/local contexts directly. Omit context for review (valid values ignored). explain gives definitions plus short callers; full_scope/read only if a caller body is needed. Structural/optional semantic failures have explicit lexical fallback.
+
+Broad directory/multi-file locate returns top12 novel passages per operation (discovery_limit overrides; 0 disables); single-file locate, explain and read have no discovery cutoff. Limits: default24000/max26000 tokens,96000 bytes; outer caps are separate.
+
+Reuse emitted evidence. Normal rereads suppress seen rows; if source was lost to truncation/compaction or is needed again, repeat:true only on that scope. Scoped operations can resurface conditions. Empty operations+resume fetches pending rows; unselected/scope_limited needs an explicit scope. Never repeat broad searches or reconnect merely to reset seen state.

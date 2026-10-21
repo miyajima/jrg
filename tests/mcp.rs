@@ -17,11 +17,13 @@ fn exchange(root: &std::path::Path, requests: Vec<Value>) -> Vec<Value> {
         .spawn()
         .unwrap();
     let mut input = c.stdin.take().unwrap();
-    for request in requests {
-        writeln!(input, "{request}").unwrap();
-    }
-    drop(input);
+    let writer = std::thread::spawn(move || {
+        for request in requests {
+            writeln!(input, "{request}").unwrap();
+        }
+    });
     let out = c.wait_with_output().unwrap();
+    writer.join().unwrap();
     assert!(
         out.status.success(),
         "{}",
@@ -1117,5 +1119,368 @@ fn json_review_collects_sibling_output_definition_and_schema_assertion_tests() {
             && s.contains("fn decoded_coordinates")
             && s.contains("assert_eq!(value"),
         "{s}"
+    );
+}
+
+#[test]
+fn scoped_contract_retrieval_reduces_tokens_and_recovers_only_required_evidence() {
+    let implementation = r#"pub const MAX_PAYLOAD_BYTES: usize = 8;
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct Request<'a> {
+    pub authorized: bool,
+    pub payload: &'a str,
+}
+
+pub struct DispatchState {
+    pub available_slots: usize,
+    pub fail_dispatch: bool,
+    pub cleanup_calls: usize,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub enum DispatchError {
+    Rejected,
+    EmptyAfterNormalization,
+    DispatchFailed,
+}
+
+struct Cleanup<'a> {
+    calls: &'a mut usize,
+}
+
+impl Drop for Cleanup<'_> {
+    fn drop(&mut self) {
+        *self.calls += 1;
+    }
+}
+
+fn normalize_payload(payload: &str) -> Result<String, DispatchError> {
+    let normalized = payload.trim().to_ascii_lowercase();
+    if normalized.is_empty() {
+        return Err(DispatchError::EmptyAfterNormalization);
+    }
+    Ok(normalized)
+}
+
+fn dispatch_normalized(payload: String, fail: bool) -> Result<String, DispatchError> {
+    if fail {
+        return Err(DispatchError::DispatchFailed);
+    }
+    Ok(payload)
+}
+
+pub fn authorize_and_dispatch(
+    request: &Request<'_>,
+    state: &mut DispatchState,
+) -> Result<String, DispatchError> {
+    if !request.authorized
+        || state.available_slots == 0
+        || request.payload.is_empty()
+        || request.payload.len() > MAX_PAYLOAD_BYTES
+    {
+        return Err(DispatchError::Rejected);
+    }
+
+    let normalized = normalize_payload(request.payload)?;
+    let fail = state.fail_dispatch;
+    let _cleanup = Cleanup {
+        calls: &mut state.cleanup_calls,
+    };
+    dispatch_normalized(normalized, fail)
+}
+
+"#;
+    let unrelated_functions = r#"pub fn render_legacy_route(code: u32, label: &str) -> String {
+    format!("{code}:{label}")
+}
+
+pub fn summarize_metrics(values: &[u64]) -> u64 {
+    values.iter().copied().sum()
+}
+
+pub fn retry_dashboard_key(region: &str, service: &str) -> String {
+    format!("{region}/{service}/retry")
+}
+"#;
+    let tests = r#"use crate::{authorize_and_dispatch, DispatchError, DispatchState, Request};
+
+#[test]
+fn rejects_each_guard_boundary() {
+    for (authorized, available_slots, payload) in [
+        (false, 1, "JOB"),
+        (true, 0, "JOB"),
+        (true, 1, ""),
+        (true, 1, "123456789"),
+    ] {
+        let request = Request { authorized, payload };
+        let mut state = DispatchState {
+            available_slots,
+            fail_dispatch: false,
+            cleanup_calls: 0,
+        };
+        assert_eq!(
+            authorize_and_dispatch(&request, &mut state),
+            Err(DispatchError::Rejected)
+        );
+        assert_eq!(state.cleanup_calls, 0);
+    }
+}
+
+#[test]
+fn accepts_exact_payload_limit_and_normalizes_before_dispatch() {
+    let request = Request {
+        authorized: true,
+        payload: "  JOB-1 ",
+    };
+    let mut state = DispatchState {
+        available_slots: 1,
+        fail_dispatch: false,
+        cleanup_calls: 0,
+    };
+    assert_eq!(
+        authorize_and_dispatch(&request, &mut state),
+        Ok("job-1".to_owned())
+    );
+    assert_eq!(state.cleanup_calls, 1);
+}
+
+#[test]
+fn cleanup_runs_on_dispatch_error() {
+    let request = Request {
+        authorized: true,
+        payload: "JOB-1",
+    };
+    let mut state = DispatchState {
+        available_slots: 1,
+        fail_dispatch: true,
+        cleanup_calls: 0,
+    };
+    assert_eq!(
+        authorize_and_dispatch(&request, &mut state),
+        Err(DispatchError::DispatchFailed)
+    );
+    assert_eq!(state.cleanup_calls, 1);
+}
+"#;
+    let unrelated_docs = format!(
+        "# Routine dashboard notes\n\n{}",
+        (0..24)
+            .map(|n| format!(
+                "Region {n:02}: monitor retry queues, cache refresh, scheduled exports, and weekly delivery totals.\n\n"
+            ))
+            .collect::<String>()
+    );
+    let broad = TempDir::new().unwrap();
+    let targeted = TempDir::new().unwrap();
+    for root in [broad.path(), targeted.path()] {
+        fs::create_dir_all(root.join("src")).unwrap();
+        fs::create_dir_all(root.join("tests")).unwrap();
+        fs::create_dir_all(root.join("docs")).unwrap();
+        fs::write(root.join("src/dispatch.rs"), implementation).unwrap();
+        fs::write(root.join("src/legacy.rs"), unrelated_functions).unwrap();
+        fs::write(root.join("tests/dispatch.rs"), tests).unwrap();
+        fs::write(root.join("docs/dashboard.md"), &unrelated_docs).unwrap();
+    }
+
+    let requirements = json!([
+        {"id":"GUARD","description":"All authorization, capacity, and payload guard clauses","patterns":["if !request.authorized"]},
+        {"id":"FLOW","description":"Normalization, dispatch, and cleanup dependency","patterns":["normalize_payload", "dispatch_normalized", "impl Drop for Cleanup"]},
+        {"id":"BOUNDARIES","description":"Focused tests for rejected boundaries and cleanup","patterns":["rejects_each_guard_boundary", "accepts_exact_payload_limit_and_normalizes_before_dispatch", "cleanup_runs_on_dispatch_error"]}
+    ]);
+    let mut broad_requests = init();
+    broad_requests.push(call(
+        2,
+        json!({
+            "context_id":"contract-broad",
+            "operations":[
+                {"read":{"path":"src/dispatch.rs","start":1,"end":implementation.lines().count()}},
+                {"read":{"path":"src/legacy.rs","start":1,"end":unrelated_functions.lines().count()}},
+                {"read":{"path":"tests/dispatch.rs","start":1,"end":tests.lines().count()}},
+                {"read":{"path":"docs/dashboard.md","start":1,"end":unrelated_docs.lines().count()}}
+            ],
+            "requirements":requirements.clone()
+        }),
+    ));
+    let broad_out = exchange(broad.path(), broad_requests);
+    let broad_text = broad_out[1]["result"]["content"][0]["text"]
+        .as_str()
+        .unwrap();
+
+    let guard_start = implementation
+        .lines()
+        .position(|line| line.contains("if !request.authorized"))
+        .unwrap();
+    let guard_end = implementation
+        .lines()
+        .position(|line| line.contains("let normalized = normalize_payload"))
+        .unwrap();
+    let guard_read_end = guard_end;
+    let focused_operations = json!([
+        {"search":{"intent":"review","paths":["src/dispatch.rs"],"patterns":["pub const MAX_PAYLOAD_BYTES: usize = 8;"]}},
+        {"search":{"intent":"explain","paths":["src/dispatch.rs"],"patterns":["authorize_and_dispatch","normalize_payload","dispatch_normalized","Cleanup"]}},
+        {"search":{"intent":"review","paths":["tests/dispatch.rs"],"patterns":["rejects_each_guard_boundary","accepts_exact_payload_limit_and_normalizes_before_dispatch","cleanup_runs_on_dispatch_error"]}}
+    ]);
+    let focused_request = json!({
+        "context_id":"contract-focused",
+        "operations":focused_operations.clone(),
+        "requirements":requirements
+    });
+    let mut focused_requests = init();
+    focused_requests.push(call(2, focused_request.clone()));
+    focused_requests.push(call(
+        3,
+        json!({"context_id":"contract-focused","operations":focused_operations}),
+    ));
+    focused_requests.push(call(
+        4,
+        json!({
+            "context_id":"contract-focused",
+            "repeat":true,
+            "operations":[{"read":{"path":"src/dispatch.rs","start":guard_start + 1,"end":guard_read_end}}],
+            "requirements":[{"id":"GUARD","description":"Full authorization, capacity, and payload guard","patterns":["if !request.authorized"]}]
+        }),
+    ));
+    let focused_out = exchange(targeted.path(), focused_requests);
+    let focused_text = focused_out[1]["result"]["content"][0]["text"]
+        .as_str()
+        .unwrap();
+    let suppressed_text = focused_out[2]["result"]["content"][0]["text"]
+        .as_str()
+        .unwrap();
+    let recovered_guard = focused_out[3]["result"]["content"][0]["text"]
+        .as_str()
+        .unwrap();
+    let compound_predicate = concat!(
+        "51:    if !request.authorized\n",
+        "52:        || state.available_slots == 0\n",
+        "53:        || request.payload.is_empty()\n",
+        "54:        || request.payload.len() > MAX_PAYLOAD_BYTES"
+    );
+    let normalization_empty_guard = concat!(
+        "33:    let normalized = payload.trim().to_ascii_lowercase();\n",
+        "34:    if normalized.is_empty() {\n",
+        "35:        return Err(DispatchError::EmptyAfterNormalization);\n",
+        "36:    }\n",
+        "37:    Ok(normalized)\n",
+        "38:}"
+    );
+    let dispatch_failure_body = concat!(
+        "41:    if fail {\n",
+        "42:        return Err(DispatchError::DispatchFailed);\n",
+        "43:    }\n",
+        "44:    Ok(payload)\n",
+        "45:}"
+    );
+
+    let required_evidence = [
+        "# item GUARD All authorization, capacity, and payload guard clauses state=matched",
+        "# item FLOW Normalization, dispatch, and cleanup dependency state=matched",
+        "# item BOUNDARIES Focused tests for rejected boundaries and cleanup state=matched",
+        "pub const MAX_PAYLOAD_BYTES: usize = 8;",
+        "return Err(DispatchError::Rejected);",
+        "let normalized = normalize_payload(request.payload)?;",
+        "payload.trim().to_ascii_lowercase()",
+        "DispatchError::EmptyAfterNormalization",
+        "Ok(normalized)",
+        "fn dispatch_normalized(payload: String, fail: bool) -> Result<String, DispatchError>",
+        "dispatch_normalized(normalized, fail)",
+        "impl Drop for Cleanup<'_>",
+        "fn drop(&mut self)",
+        "*self.calls += 1;",
+        "let _cleanup = Cleanup {",
+        "calls: &mut state.cleanup_calls",
+        "fn rejects_each_guard_boundary",
+        "(false, 1, \"JOB\")",
+        "(true, 0, \"JOB\")",
+        "(true, 1, \"\")",
+        "(true, 1, \"123456789\")",
+        "Err(DispatchError::Rejected)",
+        "state.cleanup_calls, 0",
+        "fn accepts_exact_payload_limit_and_normalizes_before_dispatch",
+        "payload: \"  JOB-1 \"",
+        "Ok(\"job-1\".to_owned())",
+        "state.cleanup_calls, 1",
+        "fn cleanup_runs_on_dispatch_error",
+        "fail_dispatch: true",
+        "Err(DispatchError::DispatchFailed)",
+    ];
+    for required in required_evidence {
+        assert!(
+            focused_text.contains(required),
+            "missing focused evidence {required:?}: {focused_text}"
+        );
+        assert!(
+            broad_text.contains(required),
+            "missing broad evidence {required:?}: {broad_text}"
+        );
+    }
+    assert!(focused_text.contains(compound_predicate), "{focused_text}");
+    assert!(
+        focused_text.contains(normalization_empty_guard),
+        "{focused_text}"
+    );
+    assert!(
+        focused_text.contains(dispatch_failure_body),
+        "{focused_text}"
+    );
+    assert!(broad_text.contains(compound_predicate), "{broad_text}");
+    assert!(
+        broad_text.contains(normalization_empty_guard),
+        "{broad_text}"
+    );
+    assert!(broad_text.contains(dispatch_failure_body), "{broad_text}");
+    assert!(
+        focused_text.contains("conditions_incomplete=0"),
+        "{focused_text}"
+    );
+    assert!(!focused_text.contains("state=unresolved"), "{focused_text}");
+    assert!(focused_text.contains("pending=0"), "{focused_text}");
+    assert!(!focused_text.contains("Region 00:"), "{focused_text}");
+    assert!(
+        !focused_text.contains("render_legacy_route"),
+        "{focused_text}"
+    );
+    assert!(
+        !focused_text.contains("retry_dashboard_key"),
+        "{focused_text}"
+    );
+
+    let seen_count = suppressed_text
+        .split_whitespace()
+        .find_map(|field| field.strip_prefix("seen=")?.parse::<usize>().ok())
+        .expect("normal repeat:false response should report seen rows");
+    assert!(seen_count > 0, "{suppressed_text}");
+    assert!(
+        !suppressed_text.contains("if !request.authorized"),
+        "{suppressed_text}"
+    );
+    assert!(
+        !suppressed_text.contains("let normalized = normalize_payload"),
+        "{suppressed_text}"
+    );
+    assert!(
+        recovered_guard.contains("@ src/dispatch.rs:51-54"),
+        "{recovered_guard}"
+    );
+    assert!(
+        recovered_guard.contains(compound_predicate),
+        "{recovered_guard}"
+    );
+    assert!(
+        !recovered_guard.contains("render_legacy_route"),
+        "{recovered_guard}"
+    );
+
+    let tokenizer = tiktoken_rs::o200k_base().unwrap();
+    let broad_tokens = tokenizer.encode_ordinary(broad_text).len();
+    let focused_tokens = [focused_text, suppressed_text, recovered_guard]
+        .iter()
+        .map(|text| tokenizer.encode_ordinary(text).len())
+        .sum::<usize>();
+    eprintln!("broad read: {broad_tokens} tokens; scoped review + seen suppression + narrow recovery: {focused_tokens} tokens");
+    assert!(
+        focused_tokens < broad_tokens,
+        "focused={focused_tokens}, broad={broad_tokens}"
     );
 }

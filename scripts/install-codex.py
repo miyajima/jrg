@@ -22,12 +22,17 @@ POLICY = "\n".join((
     BEGIN,
     "For ordinary code investigation, content search, and bounded source reads, "
     "prefer the available jrg MCP `retrieve` tool scoped to this chat's launch "
-    "working directory. No manual project selection is required.",
+    "working directory.",
     "Use native `rg` for exhaustive match or file enumeration, absence checks, "
     "exact counts, machine output or pipelines, unsupported options or encodings, "
     "unavailable jrg, and paths outside its configured root. Explicit user "
     "instructions and host permissions take precedence. Never replace the `rg` "
     "executable or alias it to jrg.",
+    "Use scoped review/explain for known functions; batch needed implementation/tests and "
+    "read only missing spans. Preserve whole guards/tests. Scope before budget. Keep large "
+    "outputs separate, use scoped version diffs and check inner/outer truncation. Recover "
+    "lost seen text with repeat:true only on that scope; resume only pending rows, never "
+    "reconnect to reset state.",
     END,
 ))
 JRG = ("mcp_servers", "jrg")
