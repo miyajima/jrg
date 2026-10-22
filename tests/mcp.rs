@@ -1478,7 +1478,9 @@ fn cleanup_runs_on_dispatch_error() {
         .iter()
         .map(|text| tokenizer.encode_ordinary(text).len())
         .sum::<usize>();
-    eprintln!("broad read: {broad_tokens} tokens; scoped review + seen suppression + narrow recovery: {focused_tokens} tokens");
+    eprintln!(
+        "broad read: {broad_tokens} tokens; scoped review + seen suppression + narrow recovery: {focused_tokens} tokens"
+    );
     assert!(
         focused_tokens < broad_tokens,
         "focused={focused_tokens}, broad={broad_tokens}"
