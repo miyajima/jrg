@@ -8,6 +8,7 @@ use tempfile::TempDir;
 fn run(root: &std::path::Path, args: &[&str], input: &str) -> Output {
     let mut child = Command::new(env!("CARGO_BIN_EXE_jrg"))
         .current_dir(root)
+        .env("JRG_HISTORY", "off")
         .args(args)
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())

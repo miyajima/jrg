@@ -192,6 +192,9 @@ impl Runtime {
                                 .chain(argv),
                         ) {
                             let args = Args::prepared(&matches);
+                            if args.mcp || args.batch.is_some() || args.resume {
+                                continue;
+                            }
                             let (patterns, paths) = args.inputs(true);
                             *value = json!({"patterns":patterns,"paths":paths.iter().map(|p|Self::relative_path(p,root,cwd)).collect::<Vec<_>>(),
                             "intent":args.intent.to_possible_value().unwrap().get_name(),"regex":args.regex,

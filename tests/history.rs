@@ -366,18 +366,32 @@ fn requirement_rows_record_literal_item_and_file_operation_links() {
 #[test]
 fn batch_history_controls_belong_on_the_outer_request() {
     let (root, state) = fixture();
-    std::fs::write(
-        root.path().join("plan.json"),
-        r#"{"operations":[{"search":["--history-mode","off","alpha","x.rs"]}]}"#,
-    )
-    .unwrap();
-    let out = invoke(
-        root.path(),
-        state.path(),
-        &["--smart", "--batch", "plan.json"],
-    );
-    assert_eq!(out.status.code(), Some(2));
-    assert!(String::from_utf8_lossy(&out.stdout).contains("outer"));
+    for search in [
+        serde_json::json!(["--history-mode", "off", "alpha", "x.rs"]),
+        serde_json::json!(["--batch", "-"]),
+        serde_json::json!(["--mcp", "--root", "."]),
+        serde_json::json!(["--resume", "--session", "unused.json"]),
+    ] {
+        let plan = serde_json::json!({"operations":[
+            {"search":search},
+            {"read":{"path":"x.rs","start":1,"end":3}}
+        ]});
+        std::fs::write(root.path().join("plan.json"), plan.to_string()).unwrap();
+        let out = invoke(
+            root.path(),
+            state.path(),
+            &["--smart", "--batch", "plan.json"],
+        );
+        assert_eq!(
+            out.status.code(),
+            Some(2),
+            "{search}: {}",
+            String::from_utf8_lossy(&out.stderr)
+        );
+        let text = String::from_utf8_lossy(&out.stdout);
+        assert!(text.contains("outer"), "{text}");
+        assert!(text.contains("PRIVATE_BODY_123"), "{text}");
+    }
 }
 
 #[test]
