@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "id": "result-3",
+      "url": "https://nodejs.org/download/release/latest-jod/docs/api/modules.html",
+      "title": "Modules: CommonJS modules | Node.js v22.23.4 Documentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n### Loading ECMAScript modules using `require()`#\n\nHistory\nVersion  | Changes\n--- | ---\nv22.13.0  | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module.\nv23.0.0, v22.12.0  | This feature is no longer behind the `--experimental-require-module` CLI flag.\nv22.12.0  | Support `'module.exports'` interop export in `require(esm)`.\nv22.0.0  | Added in: v22.0.0\n\nStability: 1.2 - Release candidate\n\nThe `.mjs` extension is reserved for ECMAScript Modules. See Determining module system section for more info regarding which files are parsed as ECMAScript modules.\n\n`require()` only supports loading ECMAScript modules that meet the following requirements:\n\n  * The module is fully synchronous (contains no top-level `await`); and\n  * One of these conditions are met:\n    1. The file has a `.mjs` extension.\n    2. The file has a `.js` extension, and the closest `package.json` contains `\"type\": \"module\"`\n    3.     \n    `export function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); }\n    \n    export default class Point {\n      constructor(x, y) { this.x = x; this.y = y; }\n      static distance = distance;\n    }\n    \n    export { Point as 'module.exports' }` [Button: copy]\n    \n    `const Point = require('./point.mjs');\n    console.log(Point); // [class Point]\n    \n    const { distance } = require('./point.mjs');\n    console.log(distance); // [Function: distance]` [Button: copy]\n\nIf the module being `require()`'d contains top-level `await`, or the module graph it `import`s contains top-level `await`, `ERR_REQUIRE_ASYNC_MODULE` will be thrown. In this case, users should load the asynchronous module using `import()`.\n\nIf `--experimental-print-required-tla` is enabled, instead of throwing `ERR_REQUIRE_ASYNC_MODULE` before evaluation, Node.js will evaluate the module, try to locate the top-level awaits, and print their location to help users fix them.\n\nSupport for loading ES modules using `require()` is currently experimental and can be disabled using `--no-experimental-require-module`. To print where this feature is used, use `--trace-require-module`.\n\nThis feature can be detected by checking if `process.features.require_module` is `true`.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "7c6deb165806e1622b3c9393a519ecccabcc7ad231af48ae26c8bef1c5edcd53"
+    },
+    {
+      "id": "result-17",
+      "url": "https://www.reddit.com/r/node/comments/1n5vigs",
+      "title": "TIL that you can require() ESM by default in Node 20+",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "TIL that you can require() ESM by default in Node 20+"
+        }
+      ],
+      "source_hash": "5acba213119bf94b20d9f46a2c024518e7ab116854631c4cc574f9462ded33a5"
+    },
+    {
+      "id": "result-15",
+      "url": "https://static.sched.com/hosted_files/pu2025/17/PowerUP%202025%20-Node.js%20What%E2%80%99s%20new%20and%20what%E2%80%99s%20next.pdf",
+      "title": "PowerUP 2025 -Node.js What’s new and what’s next",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "32e8eead89a8b6caeb3e10db8e7a53524a8167f410c11a5bdb651276165dcda5"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1003,
+  "max_tokens": 1024
+}

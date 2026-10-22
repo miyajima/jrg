@@ -1,0 +1,884 @@
+{
+  "started_at": "2026-10-22T08:15:04.165038+00:00",
+  "finished_at": "2026-10-22T08:16:49.209660+00:00",
+  "frozen_inputs_sha256": "6285b4d13b00364ce6ad992661ed2cce5647fb80facb23a7288e2813b40be4c3",
+  "measurement": "Exact o200k_base tokens in compact page JSON and complete compact selector result JSON; no answer grading or billing measurement.",
+  "rows": [
+    {
+      "id": "sqlite",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 7871,
+      "output_tokens": 493,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/sqlite-512-japanese.json",
+      "sha256": "89a0b85b092660e7460daaffeca15eb472e7062cb850617dae74b68258c55eac"
+    },
+    {
+      "id": "sqlite",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "transaction"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 7871,
+      "output_tokens": 500,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/sqlite-512-automatic_english.json",
+      "sha256": "45849b6389614dc35e15135a656379af8c152ab53f8c4936bf05ebb2b39eea57"
+    },
+    {
+      "id": "sqlite",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 7871,
+      "output_tokens": 1022,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/sqlite-1024-japanese.json",
+      "sha256": "d0796cdda35c9ee18e1aabb18c13d531fa282e92a7103a47e6a9205501063c2a"
+    },
+    {
+      "id": "sqlite",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "per_connection",
+        "transaction"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "input_tokens": 7871,
+      "output_tokens": 1015,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/sqlite-1024-automatic_english.json",
+      "sha256": "816887b8f5b715d8df95e30567d70e458f06d7125ba9fcc2e6a048376a3e4d48"
+    },
+    {
+      "id": "sqlite",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [
+        "transaction"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 7871,
+      "output_tokens": 2047,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/sqlite-2048-japanese.json",
+      "sha256": "505c2f0b8882d61b22234abd78a383dc817bb6e6ea783d17059931ad9e7702e4"
+    },
+    {
+      "id": "sqlite",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "per_connection",
+        "transaction"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "input_tokens": 7871,
+      "output_tokens": 2039,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/sqlite-2048-automatic_english.json",
+      "sha256": "c1ab013c2571f6394fa0ee1c3a03f12541c0e35ce75d52d51dad2e1329002506"
+    },
+    {
+      "id": "postgres",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 1,
+      "complete": false,
+      "input_tokens": 5515,
+      "output_tokens": 501,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/postgres-512-japanese.json",
+      "sha256": "d2292dbfb495311bf15ee1183ae69713a31aae5900311cf3fc1ebee4d068f94d"
+    },
+    {
+      "id": "postgres",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "null_semantics"
+      ],
+      "hits": 1,
+      "total": 1,
+      "complete": true,
+      "input_tokens": 5515,
+      "output_tokens": 509,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/postgres-512-automatic_english.json",
+      "sha256": "d5f148fa4e6ef844f61ea38186a33cdd38ccf1c9606cf4302c6c208391fa0864"
+    },
+    {
+      "id": "postgres",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 1,
+      "complete": false,
+      "input_tokens": 5515,
+      "output_tokens": 1021,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/postgres-1024-japanese.json",
+      "sha256": "802443dae6bf97c4cb36f8d785b4446c661f25c5f9846b97d36e49f39053230d"
+    },
+    {
+      "id": "postgres",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "null_semantics"
+      ],
+      "hits": 1,
+      "total": 1,
+      "complete": true,
+      "input_tokens": 5515,
+      "output_tokens": 1003,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/postgres-1024-automatic_english.json",
+      "sha256": "8fa874734d50f0c5d5b7d77e18e5b8134ff4770d7a5f2df6df7e9db841121456"
+    },
+    {
+      "id": "postgres",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 1,
+      "complete": false,
+      "input_tokens": 5515,
+      "output_tokens": 2036,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/postgres-2048-japanese.json",
+      "sha256": "8458b6085454c3a818d7328b9cff6d0a4ab3d966cf9817cbcec2cab8d77356cf"
+    },
+    {
+      "id": "postgres",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "null_semantics"
+      ],
+      "hits": 1,
+      "total": 1,
+      "complete": true,
+      "input_tokens": 5515,
+      "output_tokens": 2045,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/postgres-2048-automatic_english.json",
+      "sha256": "a0a1e9ca0b4ca9e740cb677820e98426f05f377c2796e7b7b4ef12787044cb4e"
+    },
+    {
+      "id": "docker",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 1,
+      "complete": false,
+      "input_tokens": 4003,
+      "output_tokens": 511,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/docker-512-japanese.json",
+      "sha256": "1cd6f65ad60e96f8a227c2c557ce72b512d6df882b2f7ab2fe1fc2fa8b57bc43"
+    },
+    {
+      "id": "docker",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "recursive_readonly"
+      ],
+      "hits": 1,
+      "total": 1,
+      "complete": true,
+      "input_tokens": 4003,
+      "output_tokens": 496,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/docker-512-automatic_english.json",
+      "sha256": "fac7a5198bcb4685b853797789f6f6d6ab9ab938f40c27a1eca43d1ae93b4980"
+    },
+    {
+      "id": "docker",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 1,
+      "complete": false,
+      "input_tokens": 4003,
+      "output_tokens": 1003,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/docker-1024-japanese.json",
+      "sha256": "f6d4d9b7c4654c1d51a9d59ab6c7e2ab608773c47d40aa0aaed4ceebe18af1fe"
+    },
+    {
+      "id": "docker",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "recursive_readonly"
+      ],
+      "hits": 1,
+      "total": 1,
+      "complete": true,
+      "input_tokens": 4003,
+      "output_tokens": 1011,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/docker-1024-automatic_english.json",
+      "sha256": "bb56e68de35160376b97a5feb41d69574fe95d80581c50504615c89d66d7faca"
+    },
+    {
+      "id": "docker",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [
+        "recursive_readonly"
+      ],
+      "hits": 1,
+      "total": 1,
+      "complete": true,
+      "input_tokens": 4003,
+      "output_tokens": 2035,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/docker-2048-japanese.json",
+      "sha256": "5013585640e59f95352c7d79ed3307d6015f29969c1f1e6ad594cb0ca90e52ad"
+    },
+    {
+      "id": "docker",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "recursive_readonly"
+      ],
+      "hits": 1,
+      "total": 1,
+      "complete": true,
+      "input_tokens": 4003,
+      "output_tokens": 2048,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/docker-2048-automatic_english.json",
+      "sha256": "1fd5269b00537f24fc46d4b5e61cefcbc0801d975dc1512d78de44a4abd884f0"
+    },
+    {
+      "id": "kubernetes",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [
+        "subpath"
+      ],
+      "hits": 1,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 7004,
+      "output_tokens": 502,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/kubernetes-512-japanese.json",
+      "sha256": "a4bacd07e100d39d32b652eef66ba2542a19f456d7d1d37d23272904dad3074f"
+    },
+    {
+      "id": "kubernetes",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "eventual",
+        "subpath"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 7004,
+      "output_tokens": 512,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/kubernetes-512-automatic_english.json",
+      "sha256": "51ccad7362cc190ed10f5bffd0a52fff144c9dc8fdcf2c75585112eafedef1ab"
+    },
+    {
+      "id": "kubernetes",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [
+        "subpath"
+      ],
+      "hits": 1,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 7004,
+      "output_tokens": 1002,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/kubernetes-1024-japanese.json",
+      "sha256": "ec952dab1baed3f23cf7a1b1323081d2c04037d3f3a49a6e30bfc94d37c4d268"
+    },
+    {
+      "id": "kubernetes",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "eventual",
+        "delay",
+        "subpath"
+      ],
+      "hits": 3,
+      "total": 3,
+      "complete": true,
+      "input_tokens": 7004,
+      "output_tokens": 1010,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/kubernetes-1024-automatic_english.json",
+      "sha256": "267f1728b0fe50b50ec1febb0844ff0e9f54e07b43dd3b97ad1ebd069fd1c1e1"
+    },
+    {
+      "id": "kubernetes",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [
+        "subpath"
+      ],
+      "hits": 1,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 7004,
+      "output_tokens": 2013,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/kubernetes-2048-japanese.json",
+      "sha256": "0b6e489f1ad3583d726ffdd4fdee99df523a635bea868f6c130eaec1c9ac7833"
+    },
+    {
+      "id": "kubernetes",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "eventual",
+        "delay",
+        "subpath"
+      ],
+      "hits": 3,
+      "total": 3,
+      "complete": true,
+      "input_tokens": 7004,
+      "output_tokens": 2042,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/kubernetes-2048-automatic_english.json",
+      "sha256": "ad7b8844bb258de1a3f9914cc6b24a64447344d65ae1cb4f5b2ab5569c57c061"
+    },
+    {
+      "id": "fetch",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [
+        "samesite"
+      ],
+      "hits": 1,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 5660,
+      "output_tokens": 512,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/fetch-512-japanese.json",
+      "sha256": "eadf2ef2e5643203424f808833cf5745259be8854fb3564ba3bbbd1a078904c3"
+    },
+    {
+      "id": "fetch",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "samesite"
+      ],
+      "hits": 1,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 5660,
+      "output_tokens": 512,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/fetch-512-automatic_english.json",
+      "sha256": "f1b16891f112d3b48c2bf1fa8ec38915ad1b0ccbe2dd4353b68e07bd9134dd56"
+    },
+    {
+      "id": "fetch",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [
+        "samesite",
+        "server"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 5660,
+      "output_tokens": 1019,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/fetch-1024-japanese.json",
+      "sha256": "48da6f13654642cb296a725fb377bdcca897c66ad62535ee3ee5710d35a7268b"
+    },
+    {
+      "id": "fetch",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "samesite",
+        "server"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 5660,
+      "output_tokens": 1017,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/fetch-1024-automatic_english.json",
+      "sha256": "97a269904e8f171c27ba61e36536467fc558e1f0d83aa8963f71a536230ccbbd"
+    },
+    {
+      "id": "fetch",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [
+        "samesite",
+        "server"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 5660,
+      "output_tokens": 2047,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/fetch-2048-japanese.json",
+      "sha256": "e95d02be4015751209f29b49d2058b9a65ac8ec7e10b5ec04d49e500f8e3f505"
+    },
+    {
+      "id": "fetch",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "samesite",
+        "server"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 5660,
+      "output_tokens": 2046,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/fetch-2048-automatic_english.json",
+      "sha256": "b77f420b80c8d7187354f9392fb55f76db0788f8668b129f6fc7a3908356ff94"
+    },
+    {
+      "id": "redis",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [
+        "updates"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 36159,
+      "output_tokens": 494,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/redis-512-japanese.json",
+      "sha256": "726f4f0eabda32277d8a9e408548d2c8738488ccbaeb0b8c1c3182c313fd7774"
+    },
+    {
+      "id": "redis",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "updates"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 36159,
+      "output_tokens": 497,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/redis-512-automatic_english.json",
+      "sha256": "93eba305f0ab3dd48c8b26c631a77753afdff5475b578c55e9324da9f415d826"
+    },
+    {
+      "id": "redis",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [
+        "updates"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 36159,
+      "output_tokens": 1018,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/redis-1024-japanese.json",
+      "sha256": "7fd3f4dc51d83fafe6f4bed7932c249c85dccd5216027a4c5b3382e46b6cf735"
+    },
+    {
+      "id": "redis",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "updates"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 36159,
+      "output_tokens": 1019,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/redis-1024-automatic_english.json",
+      "sha256": "d30e26df2101ef89ef00576533294b45e9a5e0fe72501a395937d1b0d05842f5"
+    },
+    {
+      "id": "redis",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [
+        "updates"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 36159,
+      "output_tokens": 2031,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/redis-2048-japanese.json",
+      "sha256": "d8cd62964f87c407b52272c6d49c196090438df943764c44aae0f0512b740e4e"
+    },
+    {
+      "id": "redis",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "updates"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 36159,
+      "output_tokens": 2044,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/redis-2048-automatic_english.json",
+      "sha256": "8452c745cb7ce07596323eea994a330ea9f9756d3f8369162cf6d3a41c9a1bbd"
+    },
+    {
+      "id": "go",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [
+        "wait"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 5414,
+      "output_tokens": 483,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/go-512-japanese.json",
+      "sha256": "379f5830fe9d17113992c43e1d08196b5b6bd45cf4ce0d118811e80b93282feb"
+    },
+    {
+      "id": "go",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "wait"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "input_tokens": 5414,
+      "output_tokens": 512,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/go-512-automatic_english.json",
+      "sha256": "681520c270a516b2b7eae13572d2507af069a299e56e09ae1eed54d518da3967"
+    },
+    {
+      "id": "go",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [
+        "wait",
+        "leak"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "input_tokens": 5414,
+      "output_tokens": 995,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/go-1024-japanese.json",
+      "sha256": "70b459af88972485770f2ece96b91686d9b422a6b58bbad80cd0cc34c7fabe59"
+    },
+    {
+      "id": "go",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "wait",
+        "leak"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "input_tokens": 5414,
+      "output_tokens": 1014,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/go-1024-automatic_english.json",
+      "sha256": "cbdd50e5b2e704de23b05a89c99deaf2b3fc9aea5f53ecc6216a79c8a80ddd02"
+    },
+    {
+      "id": "go",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [
+        "wait",
+        "leak"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "input_tokens": 5414,
+      "output_tokens": 2038,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/go-2048-japanese.json",
+      "sha256": "a29820d5c7ed6e23f76bfff27944dc7ca9d4ff41e94b28baeb7fc619efad959d"
+    },
+    {
+      "id": "go",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "wait",
+        "leak"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "input_tokens": 5414,
+      "output_tokens": 2031,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/go-2048-automatic_english.json",
+      "sha256": "fbf45b277b39e0276fda0d5e5caa2151cc14d5b676c8193b7f6979027080965a"
+    },
+    {
+      "id": "s3",
+      "budget": 512,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 6387,
+      "output_tokens": 511,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/s3-512-japanese.json",
+      "sha256": "d030c19593ba2202858445dbe0183e43e2d8484de8f3e2ac3fc48ed10935ae9d"
+    },
+    {
+      "id": "s3",
+      "budget": 512,
+      "arm": "automatic_english",
+      "retained_units": [
+        "directory_order",
+        "token"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 6387,
+      "output_tokens": 486,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/s3-512-automatic_english.json",
+      "sha256": "b6e13c633279b1e7b86b9d59445b9f0abd2d2ec5c89f8dc3a40fd6bca48acdac"
+    },
+    {
+      "id": "s3",
+      "budget": 1024,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 6387,
+      "output_tokens": 1023,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/s3-1024-japanese.json",
+      "sha256": "6b4e4a64d802ace28d50e0293ca42ed4f0e3f18b8211536433b9b9f8aee94d49"
+    },
+    {
+      "id": "s3",
+      "budget": 1024,
+      "arm": "automatic_english",
+      "retained_units": [
+        "directory_order",
+        "token"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 6387,
+      "output_tokens": 1024,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/s3-1024-automatic_english.json",
+      "sha256": "dd843b074cc61e4ce2f5d4f181a3694a5c7ddcf602e8518b900e861fc9dc78f7"
+    },
+    {
+      "id": "s3",
+      "budget": 2048,
+      "arm": "japanese",
+      "retained_units": [],
+      "hits": 0,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 6387,
+      "output_tokens": 2026,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/s3-2048-japanese.json",
+      "sha256": "d4a6f36797055eee2861d36f19ff07ca3e5a46e9f7363821f2ad7f0683cac447"
+    },
+    {
+      "id": "s3",
+      "budget": 2048,
+      "arm": "automatic_english",
+      "retained_units": [
+        "directory_order",
+        "token"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "input_tokens": 6387,
+      "output_tokens": 2021,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/s3-2048-automatic_english.json",
+      "sha256": "95db9fcf36b28773594f8ce3bedba77e78f3163488cd8da8a4861e544ded8799"
+    }
+  ],
+  "aggregates": [
+    {
+      "budget": 512,
+      "arm": "japanese",
+      "cases": 8,
+      "hits": 4,
+      "total": 17,
+      "complete_cases": 0,
+      "input_tokens": 78013,
+      "output_tokens": 4007
+    },
+    {
+      "budget": 512,
+      "arm": "automatic_english",
+      "cases": 8,
+      "hits": 10,
+      "total": 17,
+      "complete_cases": 2,
+      "input_tokens": 78013,
+      "output_tokens": 4024
+    },
+    {
+      "budget": 1024,
+      "arm": "japanese",
+      "cases": 8,
+      "hits": 6,
+      "total": 17,
+      "complete_cases": 1,
+      "input_tokens": 78013,
+      "output_tokens": 8103
+    },
+    {
+      "budget": 1024,
+      "arm": "automatic_english",
+      "cases": 8,
+      "hits": 14,
+      "total": 17,
+      "complete_cases": 5,
+      "input_tokens": 78013,
+      "output_tokens": 8113
+    },
+    {
+      "budget": 2048,
+      "arm": "japanese",
+      "cases": 8,
+      "hits": 8,
+      "total": 17,
+      "complete_cases": 2,
+      "input_tokens": 78013,
+      "output_tokens": 16273
+    },
+    {
+      "budget": 2048,
+      "arm": "automatic_english",
+      "cases": 8,
+      "hits": 14,
+      "total": 17,
+      "complete_cases": 5,
+      "input_tokens": 78013,
+      "output_tokens": 16316
+    }
+  ]
+}

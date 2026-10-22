@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "id": "python",
+      "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "title": "C API Extension Support for Free Threading — Python 3.15.0 documentation",
+      "blocks": [
+        {
+          "id": "line-29",
+          "kind": "heading",
+          "text": "# Python experimental support for free threading¶\n",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "id": "line-55",
+          "kind": "heading",
+          "text": "## The global interpreter lock in free-threaded Python¶\n",
+          "parent_id": "line-29",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "id": "line-59",
+          "kind": "paragraph",
+          "text": "The GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading. A warning will be printed in this case.\n",
+          "parent_id": "line-55",
+          "start_line": 59,
+          "end_line": 59
+        },
+        {
+          "id": "line-75",
+          "kind": "heading",
+          "text": "## Known limitations¶\n",
+          "parent_id": "line-29",
+          "start_line": 75,
+          "end_line": 75
+        },
+        {
+          "id": "line-107",
+          "kind": "heading",
+          "text": "### Single-threaded performance¶\n",
+          "parent_id": "line-75",
+          "start_line": 107,
+          "end_line": 107
+        },
+        {
+          "id": "line-109",
+          "kind": "paragraph",
+          "text": "The free-threaded build has additional overhead when executing Python code compared to the default GIL-enabled build. In 3.13, this overhead is about 40% on the pyperformance suite. Programs that spend most of their time in C extensions or I/O will see less of an impact. The largest impact is because the specializing adaptive interpreter (PEP 659) is disabled in the free-threaded build. We expect to re-enable it in a thread-safe way in the 3.14 release. This overhead is expected to be reduced in upcoming Python release. We are aiming for an overhead of 10% or less on the pyperformance suite compared to the default GIL-enabled build.\n",
+          "parent_id": "line-107",
+          "start_line": 109,
+          "end_line": 109
+        }
+      ],
+      "source_hash": "f50c5a3333e8d160d108fbc2fd0bff9f74bc4e483bef7c587c9e6f56f983c92e"
+    }
+  ],
+  "omitted_count": 81,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 510,
+  "max_tokens": 512
+}

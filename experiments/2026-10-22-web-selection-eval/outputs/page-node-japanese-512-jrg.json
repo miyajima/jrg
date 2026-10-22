@@ -1,0 +1,80 @@
+{
+  "documents": [
+    {
+      "id": "node",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+      "title": "Modules: CommonJS modules | Node.js v22.15.0 Documentation",
+      "blocks": [
+        {
+          "id": "line-137",
+          "kind": "heading",
+          "text": "## Modules: CommonJS modules#\n",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "id": "line-678",
+          "kind": "heading",
+          "text": "### The module scope#\n",
+          "parent_id": "line-137",
+          "start_line": 678,
+          "end_line": 678
+        },
+        {
+          "id": "line-744",
+          "kind": "heading",
+          "text": "#### require(id)#\n",
+          "parent_id": "line-678",
+          "start_line": 744,
+          "end_line": 744
+        },
+        {
+          "id": "line-766",
+          "kind": "heading",
+          "text": "##### require.cache#\n",
+          "parent_id": "line-744",
+          "start_line": 766,
+          "end_line": 766
+        },
+        {
+          "id": "line-776",
+          "kind": "code",
+          "text": "```\nconst assert = require('node:assert');\nconst realFs = require('node:fs');\n\nconst fakeFs = {};\nrequire.cache.fs = { exports: fakeFs };\n\nassert.strictEqual(require('fs'), fakeFs);\nassert.strictEqual(require('node:fs'), realFs); copy\n```\n",
+          "parent_id": "line-766",
+          "start_line": 776,
+          "end_line": 785
+        },
+        {
+          "id": "line-787",
+          "kind": "heading",
+          "text": "##### require.extensions#\n",
+          "parent_id": "line-744",
+          "start_line": 787,
+          "end_line": 787
+        },
+        {
+          "id": "line-795",
+          "kind": "paragraph",
+          "text": "Instruct require on how to handle certain file extensions.\n",
+          "parent_id": "line-787",
+          "start_line": 795,
+          "end_line": 795
+        },
+        {
+          "id": "line-799",
+          "kind": "code",
+          "text": "```\nrequire.extensions['.sjs'] = require.extensions['.js']; copy\n```\n",
+          "parent_id": "line-787",
+          "start_line": 799,
+          "end_line": 801
+        }
+      ],
+      "source_hash": "a51c8cb292f9a70a570b414575078a82c3a9449680b610e5f989f718b76181f3"
+    }
+  ],
+  "omitted_count": 355,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 493,
+  "max_tokens": 512
+}

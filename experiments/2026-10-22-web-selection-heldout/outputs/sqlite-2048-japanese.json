@@ -1,0 +1,383 @@
+{
+  "documents": [
+    {
+      "id": "sqlite",
+      "url": "https://www.sqlite.org/foreignkeys.html",
+      "title": "SQLite Foreign Key Support",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "paragraph",
+          "text": "Small. Fast. Reliable.\nChoose any three.\n",
+          "start_line": 1,
+          "end_line": 2
+        },
+        {
+          "id": "line-4",
+          "kind": "list",
+          "text": "- Home\n",
+          "start_line": 4,
+          "end_line": 4
+        },
+        {
+          "id": "line-6",
+          "kind": "list",
+          "text": "- Menu\n",
+          "start_line": 6,
+          "end_line": 6
+        },
+        {
+          "id": "line-8",
+          "kind": "list",
+          "text": "- About\n",
+          "start_line": 8,
+          "end_line": 8
+        },
+        {
+          "id": "line-10",
+          "kind": "list",
+          "text": "- Documentation\n",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "id": "line-12",
+          "kind": "list",
+          "text": "- Download\n",
+          "start_line": 12,
+          "end_line": 12
+        },
+        {
+          "id": "line-14",
+          "kind": "list",
+          "text": "- License\n",
+          "start_line": 14,
+          "end_line": 14
+        },
+        {
+          "id": "line-16",
+          "kind": "list",
+          "text": "- Support\n",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "id": "line-18",
+          "kind": "list",
+          "text": "- Purchase\n",
+          "start_line": 18,
+          "end_line": 18
+        },
+        {
+          "id": "line-20",
+          "kind": "list",
+          "text": "- Search\n",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "id": "line-22",
+          "kind": "list",
+          "text": "- About\n",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "id": "line-24",
+          "kind": "list",
+          "text": "- Documentation\n",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "id": "line-26",
+          "kind": "list",
+          "text": "- Download\n",
+          "start_line": 26,
+          "end_line": 26
+        },
+        {
+          "id": "line-28",
+          "kind": "list",
+          "text": "- Support\n",
+          "start_line": 28,
+          "end_line": 28
+        },
+        {
+          "id": "line-30",
+          "kind": "list",
+          "text": "- Purchase\n",
+          "start_line": 30,
+          "end_line": 30
+        },
+        {
+          "id": "line-32",
+          "kind": "paragraph",
+          "text": "Search Documentation\nSearch Changelog\n",
+          "start_line": 32,
+          "end_line": 33
+        },
+        {
+          "id": "line-35",
+          "kind": "paragraph",
+          "text": "SQLite Foreign Key Support\n",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "id": "line-37",
+          "kind": "paragraph",
+          "text": "Table Of Contents\n",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "line-39",
+          "kind": "list",
+          "text": "1. Introduction to Foreign Key Constraints\n",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-41",
+          "kind": "paragraph",
+          "text": "2.\nEnabling Foreign Key Support\n",
+          "start_line": 41,
+          "end_line": 42
+        },
+        {
+          "id": "line-44",
+          "kind": "list",
+          "text": "3. Required and Suggested Database Indexes\n",
+          "start_line": 44,
+          "end_line": 44
+        },
+        {
+          "id": "line-46",
+          "kind": "list",
+          "text": "4. Advanced Foreign Key Constraint Features\n",
+          "start_line": 46,
+          "end_line": 46
+        },
+        {
+          "id": "line-48",
+          "kind": "paragraph",
+          "text": "4.1. Composite Foreign Key Constraints\n",
+          "start_line": 48,
+          "end_line": 48
+        },
+        {
+          "id": "line-50",
+          "kind": "paragraph",
+          "text": "4.2. Deferred Foreign Key Constraints\n",
+          "start_line": 50,
+          "end_line": 50
+        },
+        {
+          "id": "line-52",
+          "kind": "paragraph",
+          "text": "4.3.\nON DELETE and ON UPDATE Actions\n",
+          "start_line": 52,
+          "end_line": 53
+        },
+        {
+          "id": "line-55",
+          "kind": "list",
+          "text": "5. CREATE, ALTER and DROP TABLE commands\n",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "id": "line-57",
+          "kind": "list",
+          "text": "6. Limits and Unsupported Features\n",
+          "start_line": 57,
+          "end_line": 57
+        },
+        {
+          "id": "line-59",
+          "kind": "heading",
+          "text": "## Overview\n",
+          "start_line": 59,
+          "end_line": 59
+        },
+        {
+          "id": "line-61",
+          "kind": "paragraph",
+          "text": "This document describes the support for SQL foreign key constraints introduced in SQLite version 3.6.19 (2009-10-14).\n",
+          "parent_id": "line-59",
+          "start_line": 61,
+          "end_line": 61
+        },
+        {
+          "id": "line-65",
+          "kind": "paragraph",
+          "text": "This document does not contain a full description of the syntax used to create foreign key constraints in SQLite. This may be found as part of the documentation for the CREATE TABLE statement.\n",
+          "parent_id": "line-59",
+          "start_line": 65,
+          "end_line": 65
+        },
+        {
+          "id": "line-67",
+          "kind": "heading",
+          "text": "# 1. Introduction to Foreign Key Constraints\n",
+          "start_line": 67,
+          "end_line": 67
+        },
+        {
+          "id": "line-109",
+          "kind": "paragraph",
+          "text": "The following SQLite command-line session illustrates the effect of the foreign key constraint added to the track table:\n",
+          "parent_id": "line-67",
+          "start_line": 109,
+          "end_line": 109
+        },
+        {
+          "id": "line-178",
+          "kind": "paragraph",
+          "text": "SQLite uses the following terminology:\n",
+          "parent_id": "line-67",
+          "start_line": 178,
+          "end_line": 178
+        },
+        {
+          "id": "line-196",
+          "kind": "heading",
+          "text": "# 2. Enabling Foreign Key Support\n",
+          "start_line": 196,
+          "end_line": 196
+        },
+        {
+          "id": "line-202",
+          "kind": "code",
+          "text": "```\nsqlite> PRAGMA foreign_keys = ON;\n\n```\n",
+          "parent_id": "line-196",
+          "start_line": 202,
+          "end_line": 205
+        },
+        {
+          "id": "line-221",
+          "kind": "paragraph",
+          "text": "Tip: If the command \"PRAGMA foreign_keys\" returns no data instead of a single row containing \"0\" or \"1\", then the version of SQLite you are using does not support foreign keys (either because it is older than 3.6.19 or because it was compiled with SQLITE_OMIT_FOREIGN_KEY or SQLITE_OMIT_TRIGGER defined).\n",
+          "parent_id": "line-196",
+          "start_line": 221,
+          "end_line": 221
+        },
+        {
+          "id": "line-223",
+          "kind": "paragraph",
+          "text": "It is not possible to enable or disable foreign key constraints in the middle of a multi-statement transaction (when SQLite is not in autocommit mode). Attempting to do so does not return an error; it simply has no effect.\n",
+          "parent_id": "line-196",
+          "start_line": 223,
+          "end_line": 223
+        },
+        {
+          "id": "line-225",
+          "kind": "heading",
+          "text": "# 3. Required and Suggested Database Indexes\n",
+          "start_line": 225,
+          "end_line": 225
+        },
+        {
+          "id": "line-249",
+          "kind": "list",
+          "text": "- The parent table does not exist, or\n",
+          "parent_id": "line-225",
+          "start_line": 249,
+          "end_line": 249
+        },
+        {
+          "id": "line-257",
+          "kind": "paragraph",
+          "text": "The last bullet above is illustrated by the following:\n",
+          "parent_id": "line-225",
+          "start_line": 257,
+          "end_line": 257
+        },
+        {
+          "id": "line-272",
+          "kind": "code",
+          "text": "```\nSELECT rowid FROM track WHERE trackartist = ?\n\n```\n",
+          "parent_id": "line-225",
+          "start_line": 272,
+          "end_line": 275
+        },
+        {
+          "id": "line-304",
+          "kind": "heading",
+          "text": "# 4. Advanced Foreign Key Constraint Features\n",
+          "start_line": 304,
+          "end_line": 304
+        },
+        {
+          "id": "line-332",
+          "kind": "heading",
+          "text": "## 4.2. Deferred Foreign Key Constraints\n",
+          "parent_id": "line-304",
+          "start_line": 332,
+          "end_line": 332
+        },
+        {
+          "id": "line-334",
+          "kind": "paragraph",
+          "text": "Each foreign key constraint in SQLite is classified as either immediate or deferred. Foreign key constraints are immediate by default. All the foreign key examples presented so far have been of immediate foreign key constraints.\n",
+          "parent_id": "line-332",
+          "start_line": 334,
+          "end_line": 334
+        },
+        {
+          "id": "line-399",
+          "kind": "heading",
+          "text": "## 4.3. ON DELETE and ON UPDATE Actions\n",
+          "parent_id": "line-304",
+          "start_line": 399,
+          "end_line": 399
+        },
+        {
+          "id": "line-513",
+          "kind": "paragraph",
+          "text": "Those familiar with SQLite triggers will have noticed that the \"ON DELETE SET DEFAULT\" action demonstrated in the example above is similar in effect to the following AFTER DELETE trigger:\n",
+          "parent_id": "line-399",
+          "start_line": 513,
+          "end_line": 513
+        },
+        {
+          "id": "line-571",
+          "kind": "heading",
+          "text": "# 5. CREATE, ALTER and DROP TABLE commands\n",
+          "start_line": 571,
+          "end_line": 571
+        },
+        {
+          "id": "line-573",
+          "kind": "paragraph",
+          "text": "This section describes the way the CREATE TABLE, ALTER TABLE, and DROP TABLE commands interact with SQLite's foreign keys.\n",
+          "parent_id": "line-571",
+          "start_line": 573,
+          "end_line": 573
+        },
+        {
+          "id": "line-589",
+          "kind": "heading",
+          "text": "# 6. Limits and Unsupported Features\n",
+          "start_line": 589,
+          "end_line": 589
+        },
+        {
+          "id": "line-595",
+          "kind": "list",
+          "text": "- No support for switching constraints between deferred and immediate mode. Many systems allow the user to toggle individual foreign key constraints between deferred and immediate mode at runtime (for example using the Oracle \"SET CONSTRAINT\" command). SQLite does not support this. In SQLite, a foreign key constraint is permanently marked as deferred or immediate when it is created.\n",
+          "parent_id": "line-589",
+          "start_line": 595,
+          "end_line": 595
+        }
+      ],
+      "source_hash": "3e7ff88e20c0910a4143cea65a1a37eea34c4b69202f15f8d7c577a0be4dd4cd"
+    }
+  ],
+  "omitted_count": 89,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2047,
+  "max_tokens": 2048
+}

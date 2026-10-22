@@ -1,0 +1,234 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "June 26, 2025 · The Rust Release Team\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "start_line": 3,
+          "text": "The Rust team is happy to announce a new version of Rust, 1.88.0. Rust is a programming language empowering everyone to build reliable and efficient software.\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "start_line": 5,
+          "text": "If you have a previous version of Rust installed via rustup, you can get 1.88.0 with:\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-7",
+          "kind": "code",
+          "start_line": 7,
+          "text": "```\n$ rustup update stable\n```\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "paragraph",
+          "start_line": 11,
+          "text": "If you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.88.0.\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "paragraph",
+          "start_line": 13,
+          "text": "If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (rustup default beta) or the nightly channel (rustup default nightly). Please report any bugs you might come across!\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "heading",
+          "start_line": 15,
+          "text": "## What's in 1.88.0 stable\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 17,
+          "text": "### Let chains\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 19,
+          "text": "This feature allows &&-chaining let statements inside if and while conditions, even intermingling with boolean expressions, so there is less distinction between if/if let and while/while let. The patterns inside the let sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 21,
+          "text": "For example, this snippet combines multiple conditions which would have required nesting if let and if blocks before:\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-23",
+          "kind": "code",
+          "parent_id": "line-17",
+          "start_line": 23,
+          "text": "```\nif let Channel::Stable(v) = release_info()\n&& let Semver { major, minor, .. } = v\n&& major == 1\n&& minor == 88\n{\nprintln!(\"`let_chains` was stabilized in this version\");\n}\n```\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 33,
+          "text": "Let chains are only available in the Rust 2024 edition, as this feature depends on the if let temporary scope change for more consistent drop order.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 35,
+          "text": "Earlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 37,
+          "text": "### Naked functions\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 39,
+          "text": "Rust now supports writing naked functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function. This is a more ergonomic alternative to defining functions in a global_asm! block. A naked function is marked with the #[unsafe(naked)] attribute, and its body consists of a single naked_asm! call.\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 41,
+          "text": "For example:\n"
+        },
+        {
+          "end_line": 52,
+          "id": "line-43",
+          "kind": "code",
+          "parent_id": "line-37",
+          "start_line": 43,
+          "text": "```\n#[unsafe(naked)]\npub unsafe extern \"sysv64\" fn wrapping_add(a: u64, b: u64) -> u64 {\n// Equivalent to `a.wrapping_add(b)`.\ncore::arch::naked_asm!(\n\"lea rax, [rdi + rsi]\",\n\"ret\"\n);\n}\n```\n"
+        },
+        {
+          "end_line": 54,
+          "id": "line-54",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 54,
+          "text": "The handwritten assembly block defines the entire function body: unlike non-naked functions, the compiler does not add any special handling for arguments or return values. Naked functions are used in low-level settings like Rust's compiler-builtins, operating systems, and embedded applications.\n"
+        },
+        {
+          "end_line": 56,
+          "id": "line-56",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 56,
+          "text": "Look for a more detailed post on this soon!\n"
+        },
+        {
+          "end_line": 58,
+          "id": "line-58",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 58,
+          "text": "### Boolean configuration\n"
+        },
+        {
+          "end_line": 60,
+          "id": "line-60",
+          "kind": "paragraph",
+          "parent_id": "line-58",
+          "start_line": 60,
+          "text": "The cfg predicate language now supports boolean literals, true and false, acting as a configuration that is always enabled or disabled, respectively. This works in Rust conditional compilation with cfg and cfg_attr attributes and the built-in cfg! macro, and also in Cargo [target] tables in both configuration and manifests.\n"
+        },
+        {
+          "end_line": 62,
+          "id": "line-62",
+          "kind": "paragraph",
+          "parent_id": "line-58",
+          "start_line": 62,
+          "text": "Previously, empty predicate lists could be used for unconditional configuration, like cfg(all()) for enabled and cfg(any()) for disabled, but this meaning is rather implicit and easy to get backwards. cfg(true) and cfg(false) offer a more direct way to say what you mean.\n"
+        },
+        {
+          "end_line": 64,
+          "id": "line-64",
+          "kind": "paragraph",
+          "parent_id": "line-58",
+          "start_line": 64,
+          "text": "See RFC 3695 for more background!\n"
+        },
+        {
+          "end_line": 66,
+          "id": "line-66",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 66,
+          "text": "### Cargo automatic cache cleaning\n"
+        },
+        {
+          "end_line": 68,
+          "id": "line-68",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 68,
+          "text": "Starting in 1.88.0, Cargo will automatically run garbage collection on the cache in its home directory!\n"
+        },
+        {
+          "end_line": 70,
+          "id": "line-70",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 70,
+          "text": "When building, Cargo downloads and caches crates needed as dependencies. Historically, these downloaded files would never be cleaned up, leading to an unbounded amount of disk usage in Cargo's home directory. In this version, Cargo introduces a garbage collection mechanism to automatically clean up old files (e.g. .crate files). Cargo will remove files downloaded from the network if not accessed in 3 months, and files obtained from the local system if not accessed in 1 month. Note that this automatic garbage collection will not take place if running offline (using --offline or --frozen).\n"
+        },
+        {
+          "end_line": 72,
+          "id": "line-72",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 72,
+          "text": "Cargo 1.78 and newer track the access information needed for this garbage collection. This was introduced well before the actual cleanup that's starting now, in order to reduce cache churn for those that still use prior versions. If you regularly use versions of Cargo even older than 1.78, in addition to running current versions of Cargo, and you expect to have some crates accessed exclusively by the older versions of Cargo and don't want to re-download those crates every ~3 months, you may wish to set cache.auto-clean-frequency = \"never\" in the Cargo configuration, as described in the docs.\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-74",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 74,
+          "text": "For more information, see the original unstable announcement of this feature. Some parts of that design remain unstable, like the gc subcommand tracked in cargo#13060, so there's still more to look forward to!\n"
+        }
+      ],
+      "id": "rust",
+      "source_hash": "d098b0afe7ebcb13f12c1165dc8f5e181310e3a07fbc0a5a27b95c866ca61ebd",
+      "title": "Announcing Rust 1.88.0 | Rust Blog",
+      "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/"
+    }
+  ],
+  "omitted_count": 34,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2004,
+  "max_tokens": 2048
+}

@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n# C API Extension Support for Free Threading\n\nStarting with the 3.13 release, CPython has support for running with the :term:`global interpreter lock` (GIL) disabled in a configuration called :term:`free threading`. This document describes how to adapt C API extensions to support free threading.\n\n## Identifying the Free-Threaded Build in C\n\nThe CPython C API exposes the `Py_GIL_DISABLED` macro: in the free-threaded build it's defined to `1`, and in the regular build it's not defined. You can use it to enable code that only runs under the free-threaded build:\n    \n    #ifdef Py_GIL_DISABLED\n    /* code that only runs in the free-threaded build */\n    #endif\n\nNote\n\nOn Windows, this macro is not defined automatically, but must be specified to the compiler when building. The :func:`sysconfig.get_config_var` function can be used to determine whether the current running interpreter had the macro defined.\n\n## Module Initialization\n\nExtension modules need to explicitly indicate that they support running with the GIL disabled; otherwise importing the extension will raise a warning and enable the GIL at runtime.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-2",
+      "source_hash": "53f8faac32de98dc960087e16ad135fc0115dc49b4c8ba1f4612fe0ab6fbd40e",
+      "title": "cpython/Doc/howto/free-threading-extensions.rst at main · python/cpython · GitHub",
+      "url": "https://github.com/python/cpython/blob/main/Doc/howto/free-threading-extensions.rst"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-13",
+      "source_hash": "81d9895cc0bdb606bb7c19b180253c307df01293bd5b30925d82e808bd82ac06",
+      "title": "Python experimental support for free",
+      "url": "https://fossies.org/linux/misc/python-3.13.8-docs-pdf-a4.tar.bz2/docs-pdf/howto-free-threading-python.pdf"
+    }
+  ],
+  "omitted_count": 17,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 506,
+  "max_tokens": 512
+}

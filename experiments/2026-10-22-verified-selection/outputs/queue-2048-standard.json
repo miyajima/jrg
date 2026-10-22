@@ -1,0 +1,240 @@
+{
+  "documents": [
+    {
+      "id": "queue",
+      "url": "https://docs.python.org/3/library/queue.html",
+      "title": "queue — A synchronized queue class — Python 3.15.1 documentation",
+      "blocks": [
+        {
+          "id": "line-31",
+          "kind": "heading",
+          "text": "# queue — A synchronized queue class¶\n",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-45",
+          "kind": "paragraph",
+          "text": "class queue.Queue(maxsize=0)¶\n",
+          "parent_id": "line-31",
+          "start_line": 45,
+          "end_line": 45
+        },
+        {
+          "id": "line-47",
+          "kind": "paragraph",
+          "text": "Constructor for a FIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n",
+          "parent_id": "line-31",
+          "start_line": 47,
+          "end_line": 47
+        },
+        {
+          "id": "line-49",
+          "kind": "paragraph",
+          "text": "class queue.LifoQueue(maxsize=0)¶\n",
+          "parent_id": "line-31",
+          "start_line": 49,
+          "end_line": 49
+        },
+        {
+          "id": "line-51",
+          "kind": "paragraph",
+          "text": "Constructor for a LIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n",
+          "parent_id": "line-31",
+          "start_line": 51,
+          "end_line": 51
+        },
+        {
+          "id": "line-53",
+          "kind": "paragraph",
+          "text": "class queue.PriorityQueue(maxsize=0)¶\n",
+          "parent_id": "line-31",
+          "start_line": 53,
+          "end_line": 53
+        },
+        {
+          "id": "line-55",
+          "kind": "paragraph",
+          "text": "Constructor for a priority queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n",
+          "parent_id": "line-31",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "id": "line-82",
+          "kind": "paragraph",
+          "text": "Exception raised when non-blocking get() (or get_nowait()) is called on a Queue object which is empty.\n",
+          "parent_id": "line-31",
+          "start_line": 82,
+          "end_line": 82
+        },
+        {
+          "id": "line-86",
+          "kind": "paragraph",
+          "text": "Exception raised when non-blocking put() (or put_nowait()) is called on a Queue object which is full.\n",
+          "parent_id": "line-31",
+          "start_line": 86,
+          "end_line": 86
+        },
+        {
+          "id": "line-90",
+          "kind": "paragraph",
+          "text": "Exception raised when put() or get() is called on a Queue object which has been shut down.\n",
+          "parent_id": "line-31",
+          "start_line": 90,
+          "end_line": 90
+        },
+        {
+          "id": "line-94",
+          "kind": "heading",
+          "text": "## Queue Objects¶\n",
+          "parent_id": "line-31",
+          "start_line": 94,
+          "end_line": 94
+        },
+        {
+          "id": "line-100",
+          "kind": "paragraph",
+          "text": "Return the approximate size of the queue. Note, qsize() > 0 doesn’t guarantee that a subsequent get() will not block, nor will qsize() < maxsize guarantee that put() will not block.\n",
+          "parent_id": "line-94",
+          "start_line": 100,
+          "end_line": 100
+        },
+        {
+          "id": "line-110",
+          "kind": "paragraph",
+          "text": "Queue.put(item, block=True, timeout=None)¶\n",
+          "parent_id": "line-94",
+          "start_line": 110,
+          "end_line": 110
+        },
+        {
+          "id": "line-112",
+          "kind": "paragraph",
+          "text": "Put item into the queue. If optional args block is true and timeout is None (the default), block if necessary until a free slot is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Full exception if no free slot was available within that time. Otherwise (block is false), put an item on the queue if a free slot is immediately available, else raise the Full exception (timeout is ignored in that case).\n",
+          "parent_id": "line-94",
+          "start_line": 112,
+          "end_line": 112
+        },
+        {
+          "id": "line-122",
+          "kind": "paragraph",
+          "text": "Remove and return an item from the queue. If optional args block is true and timeout is None (the default), block if necessary until an item is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time. Otherwise (block is false), return an item if one is immediately available, else raise the Empty exception (timeout is ignored in that case).\n",
+          "parent_id": "line-94",
+          "start_line": 122,
+          "end_line": 122
+        },
+        {
+          "id": "line-124",
+          "kind": "paragraph",
+          "text": "Prior to 3.0 on POSIX systems, and for all versions on Windows, if block is true and timeout is None, this operation goes into an uninterruptible wait on an underlying lock. This means that no exceptions can occur, and in particular a SIGINT will not trigger a KeyboardInterrupt.\n",
+          "parent_id": "line-94",
+          "start_line": 124,
+          "end_line": 124
+        },
+        {
+          "id": "line-146",
+          "kind": "paragraph",
+          "text": "The count of unfinished tasks goes up whenever an item is added to the queue. The count goes down whenever a consumer thread calls task_done() to indicate that the item was retrieved and all work on it is complete. When the count of unfinished tasks drops to zero, join() unblocks.\n",
+          "parent_id": "line-94",
+          "start_line": 146,
+          "end_line": 146
+        },
+        {
+          "id": "line-178",
+          "kind": "heading",
+          "text": "### Terminating queues¶\n",
+          "parent_id": "line-94",
+          "start_line": 178,
+          "end_line": 178
+        },
+        {
+          "id": "line-186",
+          "kind": "paragraph",
+          "text": "The queue can no longer grow. Future calls to put() raise ShutDown. Currently blocked callers of put() will be unblocked and will raise ShutDown in the formerly blocked thread.\n",
+          "parent_id": "line-178",
+          "start_line": 186,
+          "end_line": 186
+        },
+        {
+          "id": "line-194",
+          "kind": "paragraph",
+          "text": "If immediate is true, the queue is terminated immediately. The queue is drained to be completely empty and the count of unfinished tasks is reduced by the number of tasks drained. If unfinished tasks is zero, callers of join() are unblocked. Also, blocked callers of get() are unblocked and will raise ShutDown because the queue is empty.\n",
+          "parent_id": "line-178",
+          "start_line": 194,
+          "end_line": 194
+        },
+        {
+          "id": "line-196",
+          "kind": "paragraph",
+          "text": "Use caution when using join() with immediate set to true. This unblocks the join even when no work has been done on the tasks, violating the usual invariant for joining a queue.\n",
+          "parent_id": "line-178",
+          "start_line": 196,
+          "end_line": 196
+        },
+        {
+          "id": "line-200",
+          "kind": "heading",
+          "text": "## SimpleQueue Objects¶\n",
+          "parent_id": "line-31",
+          "start_line": 200,
+          "end_line": 200
+        },
+        {
+          "id": "line-214",
+          "kind": "paragraph",
+          "text": "Put item into the queue. The method never blocks and always succeeds (except for potential low-level errors such as failure to allocate memory). The optional args block and timeout are ignored and only provided for compatibility with Queue.put().\n",
+          "parent_id": "line-200",
+          "start_line": 214,
+          "end_line": 214
+        },
+        {
+          "id": "line-216",
+          "kind": "paragraph",
+          "text": "CPython implementation detail: This method has a C implementation which is reentrant. That is, a put() or get() call can be interrupted by another put() call in the same thread without deadlocking or corrupting internal state inside the queue. This makes it appropriate for use in destructors such as __del__ methods or weakref callbacks.\n",
+          "parent_id": "line-200",
+          "start_line": 216,
+          "end_line": 216
+        },
+        {
+          "id": "line-224",
+          "kind": "paragraph",
+          "text": "Remove and return an item from the queue. If optional args block is true and timeout is None (the default), block if necessary until an item is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time. Otherwise (block is false), return an item if one is immediately available, else raise the Empty exception (timeout is ignored in that case).\n",
+          "parent_id": "line-200",
+          "start_line": 224,
+          "end_line": 224
+        },
+        {
+          "id": "line-236",
+          "kind": "paragraph",
+          "text": "collections.deque is an alternative implementation of unbounded queues with fast atomic append() and popleft() operations that do not require locking and also support indexing.\n",
+          "parent_id": "line-200",
+          "start_line": 236,
+          "end_line": 236
+        },
+        {
+          "id": "line-260",
+          "kind": "heading",
+          "text": "### Navigation\n",
+          "parent_id": "line-200",
+          "start_line": 260,
+          "end_line": 260
+        },
+        {
+          "id": "line-298",
+          "kind": "paragraph",
+          "text": "The Python Software Foundation is a non-profit corporation.\nPlease donate.\n",
+          "parent_id": "line-260",
+          "start_line": 298,
+          "end_line": 299
+        }
+      ],
+      "source_hash": "8a05033cec7622e7dc2c304a8b52b94a77b5b534d731d009902f76551058ad2a"
+    }
+  ],
+  "omitted_count": 108,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2039,
+  "max_tokens": 2048
+}

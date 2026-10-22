@@ -1,0 +1,71 @@
+{
+  "documents": [
+    {
+      "id": "rust",
+      "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+      "title": "Announcing Rust 1.88.0 | Rust Blog",
+      "blocks": [
+        {
+          "id": "line-7",
+          "kind": "code",
+          "text": "```\n$ rustup update stable\n```\n",
+          "start_line": 7,
+          "end_line": 9
+        },
+        {
+          "id": "line-15",
+          "kind": "heading",
+          "text": "## What's in 1.88.0 stable\n",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "id": "line-17",
+          "kind": "heading",
+          "text": "### Let chains\n",
+          "parent_id": "line-15",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "id": "line-21",
+          "kind": "paragraph",
+          "text": "For example, this snippet combines multiple conditions which would have required nesting if let and if blocks before:\n",
+          "parent_id": "line-17",
+          "start_line": 21,
+          "end_line": 21
+        },
+        {
+          "id": "line-23",
+          "kind": "code",
+          "text": "```\nif let Channel::Stable(v) = release_info()\n&& let Semver { major, minor, .. } = v\n&& major == 1\n&& minor == 88\n{\nprintln!(\"`let_chains` was stabilized in this version\");\n}\n```\n",
+          "parent_id": "line-17",
+          "start_line": 23,
+          "end_line": 31
+        },
+        {
+          "id": "line-33",
+          "kind": "paragraph",
+          "text": "Let chains are only available in the Rust 2024 edition, as this feature depends on the if let temporary scope change for more consistent drop order.\n",
+          "parent_id": "line-17",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "id": "line-35",
+          "kind": "paragraph",
+          "text": "Earlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!\n",
+          "parent_id": "line-17",
+          "start_line": 35,
+          "end_line": 35
+        }
+      ],
+      "source_hash": "d098b0afe7ebcb13f12c1165dc8f5e181310e3a07fbc0a5a27b95c866ca61ebd"
+    }
+  ],
+  "omitted_count": 55,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 506,
+  "max_tokens": 512
+}

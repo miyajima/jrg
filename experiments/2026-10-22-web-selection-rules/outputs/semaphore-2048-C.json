@@ -1,0 +1,320 @@
+{
+  "documents": [
+    {
+      "id": "semaphore",
+      "url": "https://docs.python.org/3/library/asyncio-sync.html",
+      "title": "Synchronization Primitives — Python 3.15.1 documentation",
+      "blocks": [
+        {
+          "id": "line-33",
+          "kind": "heading",
+          "text": "# Synchronization Primitives¶\n",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "id": "line-53",
+          "kind": "list",
+          "text": "- BoundedSemaphore\n",
+          "parent_id": "line-33",
+          "start_line": 53,
+          "end_line": 53
+        },
+        {
+          "id": "line-57",
+          "kind": "heading",
+          "text": "## Lock¶\n",
+          "parent_id": "line-33",
+          "start_line": 57,
+          "end_line": 57
+        },
+        {
+          "id": "line-63",
+          "kind": "paragraph",
+          "text": "An asyncio lock can be used to guarantee exclusive access to a shared resource.\n",
+          "parent_id": "line-57",
+          "start_line": 63,
+          "end_line": 63
+        },
+        {
+          "id": "line-114",
+          "kind": "heading",
+          "text": "## Event¶\n",
+          "parent_id": "line-33",
+          "start_line": 114,
+          "end_line": 114
+        },
+        {
+          "id": "line-120",
+          "kind": "paragraph",
+          "text": "An asyncio event can be used to notify multiple asyncio tasks that some event has happened.\n",
+          "parent_id": "line-114",
+          "start_line": 120,
+          "end_line": 120
+        },
+        {
+          "id": "line-174",
+          "kind": "heading",
+          "text": "## Condition¶\n",
+          "parent_id": "line-33",
+          "start_line": 174,
+          "end_line": 174
+        },
+        {
+          "id": "line-180",
+          "kind": "paragraph",
+          "text": "An asyncio condition primitive can be used by a task to wait for some event to happen and then get exclusive access to a shared resource.\n",
+          "parent_id": "line-174",
+          "start_line": 180,
+          "end_line": 180
+        },
+        {
+          "id": "line-182",
+          "kind": "paragraph",
+          "text": "In essence, a Condition object combines the functionality of an Event and a Lock. It is possible to have multiple Condition objects share one Lock, which allows coordinating exclusive access to a shared resource between different tasks interested in particular states of that shared resource.\n",
+          "parent_id": "line-174",
+          "start_line": 182,
+          "end_line": 182
+        },
+        {
+          "id": "line-241",
+          "kind": "paragraph",
+          "text": "When invoked on an unlocked lock, a RuntimeError is raised.\n",
+          "parent_id": "line-174",
+          "start_line": 241,
+          "end_line": 241
+        },
+        {
+          "id": "line-249",
+          "kind": "paragraph",
+          "text": "This method releases the underlying lock, and then blocks until it is awakened by a notify() or notify_all() call. Once awakened, the Condition re-acquires its lock and this method returns True.\n",
+          "parent_id": "line-174",
+          "start_line": 249,
+          "end_line": 249
+        },
+        {
+          "id": "line-257",
+          "kind": "paragraph",
+          "text": "The predicate must be a callable which result will be interpreted as a boolean value. The method will repeatedly wait() until the predicate evaluates to true. The final value is the return value.\n",
+          "parent_id": "line-174",
+          "start_line": 257,
+          "end_line": 257
+        },
+        {
+          "id": "line-259",
+          "kind": "heading",
+          "text": "## Semaphore¶\n",
+          "parent_id": "line-33",
+          "start_line": 259,
+          "end_line": 259
+        },
+        {
+          "id": "line-261",
+          "kind": "paragraph",
+          "text": "class asyncio.Semaphore(value=1)¶\n",
+          "parent_id": "line-259",
+          "start_line": 261,
+          "end_line": 261
+        },
+        {
+          "id": "line-265",
+          "kind": "paragraph",
+          "text": "A semaphore manages an internal counter which is decremented by each acquire() call and incremented by each release() call. The counter can never go below zero; when acquire() finds that it is zero, it blocks, waiting until some task calls release().\n",
+          "parent_id": "line-259",
+          "start_line": 265,
+          "end_line": 265
+        },
+        {
+          "id": "line-267",
+          "kind": "paragraph",
+          "text": "The optional value argument gives the initial value for the internal counter (1 by default). If the given value is less than 0 a ValueError is raised.\n",
+          "parent_id": "line-259",
+          "start_line": 267,
+          "end_line": 267
+        },
+        {
+          "id": "line-271",
+          "kind": "paragraph",
+          "text": "The preferred way to use a Semaphore is an async with statement:\n",
+          "parent_id": "line-259",
+          "start_line": 271,
+          "end_line": 271
+        },
+        {
+          "id": "line-300",
+          "kind": "paragraph",
+          "text": "If the internal counter is greater than zero, decrement it by one and return True immediately. If it is zero, wait until a release() is called and return True.\n",
+          "parent_id": "line-259",
+          "start_line": 300,
+          "end_line": 300
+        },
+        {
+          "id": "line-304",
+          "kind": "paragraph",
+          "text": "Returns True if semaphore can not be acquired immediately.\n",
+          "parent_id": "line-259",
+          "start_line": 304,
+          "end_line": 304
+        },
+        {
+          "id": "line-308",
+          "kind": "paragraph",
+          "text": "Release a semaphore, incrementing the internal counter by one. Can wake up a task waiting to acquire the semaphore.\n",
+          "parent_id": "line-259",
+          "start_line": 308,
+          "end_line": 308
+        },
+        {
+          "id": "line-310",
+          "kind": "paragraph",
+          "text": "Unlike BoundedSemaphore, Semaphore allows making more release() calls than acquire() calls.\n",
+          "parent_id": "line-259",
+          "start_line": 310,
+          "end_line": 310
+        },
+        {
+          "id": "line-312",
+          "kind": "heading",
+          "text": "## BoundedSemaphore¶\n",
+          "parent_id": "line-33",
+          "start_line": 312,
+          "end_line": 312
+        },
+        {
+          "id": "line-314",
+          "kind": "paragraph",
+          "text": "class asyncio.BoundedSemaphore(value=1)¶\n",
+          "parent_id": "line-312",
+          "start_line": 314,
+          "end_line": 314
+        },
+        {
+          "id": "line-316",
+          "kind": "paragraph",
+          "text": "A bounded semaphore object. Not thread-safe.\n",
+          "parent_id": "line-312",
+          "start_line": 316,
+          "end_line": 316
+        },
+        {
+          "id": "line-318",
+          "kind": "paragraph",
+          "text": "Bounded Semaphore is a version of Semaphore that raises a ValueError in release() if it increases the internal counter above the initial value.\n",
+          "parent_id": "line-312",
+          "start_line": 318,
+          "end_line": 318
+        },
+        {
+          "id": "line-320",
+          "kind": "paragraph",
+          "text": "Changed in version 3.10: Removed the loop parameter.\n",
+          "parent_id": "line-312",
+          "start_line": 320,
+          "end_line": 320
+        },
+        {
+          "id": "line-322",
+          "kind": "heading",
+          "text": "## Barrier¶\n",
+          "parent_id": "line-33",
+          "start_line": 322,
+          "end_line": 322
+        },
+        {
+          "id": "line-328",
+          "kind": "paragraph",
+          "text": "A barrier is a simple synchronization primitive that allows to block until parties number of tasks are waiting on it. Tasks can wait on the wait() method and would be blocked until the specified number of tasks end up waiting on wait(). At that point all of the waiting tasks would unblock simultaneously.\n",
+          "parent_id": "line-322",
+          "start_line": 328,
+          "end_line": 328
+        },
+        {
+          "id": "line-330",
+          "kind": "paragraph",
+          "text": "async with can be used as an alternative to awaiting on wait().\n",
+          "parent_id": "line-322",
+          "start_line": 330,
+          "end_line": 330
+        },
+        {
+          "id": "line-332",
+          "kind": "paragraph",
+          "text": "The barrier can be reused any number of times.\n",
+          "parent_id": "line-322",
+          "start_line": 332,
+          "end_line": 332
+        },
+        {
+          "id": "line-376",
+          "kind": "paragraph",
+          "text": "When a waiting or blocked task in the barrier is cancelled, this task exits the barrier which stays in the same state. If the state of the barrier is “filling”, the number of waiting task decreases by 1.\n",
+          "parent_id": "line-322",
+          "start_line": 376,
+          "end_line": 376
+        },
+        {
+          "id": "line-378",
+          "kind": "paragraph",
+          "text": "The return value is an integer in the range of 0 to parties-1, different for each task. This can be used to select a task to do some special housekeeping, e.g.:\n",
+          "parent_id": "line-322",
+          "start_line": 378,
+          "end_line": 378
+        },
+        {
+          "id": "line-389",
+          "kind": "paragraph",
+          "text": "This method may raise a BrokenBarrierError exception if the barrier is broken or reset while a task is waiting. It could raise a CancelledError if a task is cancelled.\n",
+          "parent_id": "line-322",
+          "start_line": 389,
+          "end_line": 389
+        },
+        {
+          "id": "line-403",
+          "kind": "paragraph",
+          "text": "The number of tasks required to pass the barrier.\n",
+          "parent_id": "line-322",
+          "start_line": 403,
+          "end_line": 403
+        },
+        {
+          "id": "line-407",
+          "kind": "paragraph",
+          "text": "The number of tasks currently waiting in the barrier while filling.\n",
+          "parent_id": "line-322",
+          "start_line": 407,
+          "end_line": 407
+        },
+        {
+          "id": "line-415",
+          "kind": "paragraph",
+          "text": "This exception, a subclass of RuntimeError, is raised when the Barrier object is reset or broken.\n",
+          "parent_id": "line-322",
+          "start_line": 415,
+          "end_line": 415
+        },
+        {
+          "id": "line-419",
+          "kind": "heading",
+          "text": "### Table of Contents\n",
+          "parent_id": "line-322",
+          "start_line": 419,
+          "end_line": 419
+        },
+        {
+          "id": "line-421",
+          "kind": "list",
+          "text": "- Synchronization Primitives Lock Event Condition Semaphore BoundedSemaphore Barrier\n",
+          "parent_id": "line-419",
+          "start_line": 421,
+          "end_line": 421
+        }
+      ],
+      "source_hash": "7452a9e6b9e529bf60fe7298e328d4daac707c9c58af77ba82f7b7817bf4cdd4"
+    }
+  ],
+  "omitted_count": 152,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2032,
+  "max_tokens": 2048
+}

@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n# The Rust Edition Guide\n\n# `let` chains in `if` and `while`\n\n## Summary\n\n  * Allow chaining of `let` expressions in the condition operand of `if` and `while`.\n\n## Details\n\nStarting with the 2024 Edition, it is now allowed to have chaining of `let` expressions inside `if` and `while` condition operands, where chaining refers to `&&` chains. The `let` expressions still have to appear at the top level, so `if (let Some(hi) = foo || let Some(hi) = bar)` is not allowed.\n\nBefore 2024, the `let` had to appear directly after the `if` or `while`, forming a `if let` or `while let` special variant. Now, `if` and `while` allow chains of one or more `let` expressions, possibly mixed with expressions that are `bool` typed.\n    \n    `#![allow(unused)]\n    fn main() {\n    fn sum_first_two(nums: &[u8]) -> Option<u8> {\n        let mut iter = nums.iter();\n        if let Some(first) = iter.next()\n            && let Some(second) = iter.next()\n        {\n            first.checked_add(*second)\n        } else {\n            None\n        }\n    }\n    }`\n\nThe feature is edition gated due to requiring if let rescoping, which is a Edition 2024 change.\n\n## Migration\n\nThe switch to Edition 2024 doesn’t neccessitate any migrations due to this feature, as it creates a true extension of the set of allowed Rust programs.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-3",
+      "source_hash": "8eac08a4049fa396022300662814944c3d177e2270c82580d088d9d9afd7a270",
+      "title": "let chains in if and while - The Rust Edition Guide",
+      "url": "https://doc.rust-lang.org/stable/edition-guide/rust-2024/let-chains.html"
+    }
+  ],
+  "omitted_count": 17,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 495,
+  "max_tokens": 512
+}

@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-16",
+      "url": "https://ccbskillssem.github.io/assets/github_actions_valeh.pdf",
+      "title": "CCB Skills Seminar - GitHub Actions - Spring 2022",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "CCB Skills Seminar - GitHub Actions - Spring 2022"
+        }
+      ],
+      "source_hash": "fceeeb9634fb8adfc79a0ff8337de00dcace07f73c9f21600e34ba9f3bc02048"
+    },
+    {
+      "id": "result-3",
+      "url": "https://github.blog/changelog/2026-05-07-github-actions-concurrency-groups-now-allow-larger-queues/",
+      "title": "GitHub Actions concurrency groups now allow larger queues - GitHub Changelog",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\nBack to changelog\n\nImprovement\n\nMay 7, 2026 • 1 minute read\n\n# GitHub Actions concurrency groups now allow larger queues\n\nImage\n\nYou can now allow multiple jobs or workflow runs to wait in the same GitHub Actions concurrency group instead of being limited to a single pending run.\n\nPreviously, a concurrency group could have one run in progress and one pending run. If another run entered the group, the pending run was canceled and replaced. Now, you can configure concurrency groups to queue multiple pending runs and process them sequentially, with support for up to 100 queued jobs or workflow runs per concurrency group.\n\nThis makes it easier to manage deployments and other workflows that need to run in order against a shared environment or resource. Increased queuing can be enabled by adding `queue: max` to the concurrency block in YAML when `cancel-in-progress` is `false` or not set.\n\nFor more information, see the GitHub Actions documentation on controlling the concurrency of workflows and jobs.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "c7dd8aed9eed869ae9fae6240be2190c00f368769f0cd99637bf112147604195"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 459,
+  "max_tokens": 512
+}

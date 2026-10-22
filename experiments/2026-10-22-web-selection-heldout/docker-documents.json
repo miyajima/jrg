@@ -1,0 +1,939 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "heading",
+          "start_line": 1,
+          "text": "# Bind mounts\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "text": "Ask Gordon\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 5,
+          "text": "Copy Markdown\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 7,
+          "text": "View Markdown\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 9,
+          "text": "Table of contents\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 11,
+          "text": "When you use a bind mount, a file or directory on the host machine is mounted from the host into a container. By contrast, when you use a volume, a new directory is created within Docker's storage directory on the host machine. Docker creates and maintains this storage location, but containers access it directly using standard filesystem operations.\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 13,
+          "text": "## When to use bind mounts\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "paragraph",
+          "parent_id": "line-13",
+          "start_line": 15,
+          "text": "Bind mounts are appropriate for the following types of use case:\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 17,
+          "text": "- Sharing source code or build artifacts between a development environment on the Docker host and a container.\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 19,
+          "text": "- When you want to create or generate files in a container and persist the files onto the host's filesystem.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 21,
+          "text": "- Sharing configuration files from the host machine to containers. This is how Docker provides DNS resolution to containers by default, by mounting /etc/resolv.conf from the host machine into each container.\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "paragraph",
+          "parent_id": "line-13",
+          "start_line": 23,
+          "text": "Bind mounts are also available for builds: you can bind mount source code from the host into the build container to test, lint, or compile a project.\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 25,
+          "text": "## Bind-mounting over existing data\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "paragraph",
+          "parent_id": "line-25",
+          "start_line": 27,
+          "text": "If you bind mount file or directory into a directory in the container in which files or directories exist, the pre-existing files are obscured by the mount. This is similar to if you were to save files into /mnt on a Linux host, and then mounted a USB drive into /mnt. The contents of /mnt would be obscured by the contents of the USB drive until the USB drive was unmounted.\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "paragraph",
+          "parent_id": "line-25",
+          "start_line": 29,
+          "text": "With containers, there's no straightforward way of removing a mount to reveal the obscured files again. Your best option is to recreate the container without the mount.\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 31,
+          "text": "## Considerations and constraints\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "list",
+          "parent_id": "line-31",
+          "start_line": 33,
+          "text": "- Bind mounts have write access to files on the host by default.One side effect of using bind mounts is that you can change the host filesystem via processes running in a container, including creating, modifying, or deleting important system files or directories. This capability can have security implications. For example, it may affect non-Docker processes on the host system.You can use the readonly or ro option to prevent the container from writing to the mount.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "list",
+          "parent_id": "line-31",
+          "start_line": 35,
+          "text": "- Bind mounts are created to the Docker daemon host, not the client.If you're using a remote Docker daemon, you can't create a bind mount to access files on the client machine in a container.For Docker Desktop, the daemon runs inside a Linux VM, not directly on the native host. Docker Desktop has built-in mechanisms that transparently handle bind mounts, allowing you to share native host filesystem paths with containers running in the virtual machine.\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "list",
+          "parent_id": "line-31",
+          "start_line": 37,
+          "text": "- Containers with bind mounts are strongly tied to the host.Bind mounts rely on the host machine's filesystem having a specific directory structure available. This reliance means that containers with bind mounts may fail if run on a different host without the same directory structure.\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 39,
+          "text": "## Syntax\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "paragraph",
+          "parent_id": "line-39",
+          "start_line": 41,
+          "text": "To create a bind mount, you can use either the --mount or --volume flag.\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-43",
+          "kind": "code",
+          "parent_id": "line-39",
+          "start_line": 43,
+          "text": "```\n$ docker run --mount type=bind,src=<host-path>,dst=<container-path>\n$ docker run --volume <host-path>:<container-path>\n\n```\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "paragraph",
+          "parent_id": "line-39",
+          "start_line": 49,
+          "text": "In general, --mount is preferred. The main difference is that the --mount flag is more explicit and supports all the available options.\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "paragraph",
+          "parent_id": "line-39",
+          "start_line": 51,
+          "text": "If you use --volume to bind-mount a file or directory that does not yet exist on the Docker host, Docker automatically creates the directory on the host for you. It's always created as a directory. If the Docker daemon doesn't have permission to create the source directory, create it before starting the container.\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "paragraph",
+          "parent_id": "line-39",
+          "start_line": 53,
+          "text": "By default, --mount does not automatically create a directory if the specified mount path does not exist on the host. Instead, it produces an error:\n"
+        },
+        {
+          "end_line": 59,
+          "id": "line-55",
+          "kind": "code",
+          "parent_id": "line-39",
+          "start_line": 55,
+          "text": "```\n$ docker run --mount type=bind,src=/dev/noexist,dst=/mnt/foo alpine\ndocker: Error response from daemon: invalid mount config for type \"bind\": bind source path does not exist: /dev/noexist.\n\n```\n"
+        },
+        {
+          "end_line": 61,
+          "id": "line-61",
+          "kind": "paragraph",
+          "parent_id": "line-39",
+          "start_line": 61,
+          "text": "You can use the bind-create-src option to automatically create the source directory on the host if it doesn't exist:\n"
+        },
+        {
+          "end_line": 66,
+          "id": "line-63",
+          "kind": "code",
+          "parent_id": "line-39",
+          "start_line": 63,
+          "text": "```\n$ docker run --mount type=bind,src=/home/user/mydir,dst=/mnt/foo,bind-create-src alpine\n\n```\n"
+        },
+        {
+          "end_line": 68,
+          "id": "line-68",
+          "kind": "heading",
+          "parent_id": "line-39",
+          "start_line": 68,
+          "text": "### Options for --mount\n"
+        },
+        {
+          "end_line": 70,
+          "id": "line-70",
+          "kind": "paragraph",
+          "parent_id": "line-68",
+          "start_line": 70,
+          "text": "The --mount flag consists of multiple key-value pairs, separated by commas and each consisting of a <key>=<value> tuple. The order of the keys isn't significant.\n"
+        },
+        {
+          "end_line": 75,
+          "id": "line-72",
+          "kind": "code",
+          "parent_id": "line-68",
+          "start_line": 72,
+          "text": "```\n$ docker run --mount type=bind,src=<host-path>,dst=<container-path>[,<key>=<value>...]\n\n```\n"
+        },
+        {
+          "end_line": 77,
+          "id": "line-77",
+          "kind": "paragraph",
+          "parent_id": "line-68",
+          "start_line": 77,
+          "text": "Valid options for --mount type=bind include:\n"
+        },
+        {
+          "end_line": 84,
+          "id": "line-79",
+          "kind": "table",
+          "parent_id": "line-68",
+          "start_line": 79,
+          "text": "| Option | Description |\n| source, src | The location of the file or directory on the host. This can be an absolute or relative path. |\n| destination, dst, target | The path where the file or directory is mounted in the container. Must be an absolute path. |\n| readonly, ro | If present, causes the bind mount to be mounted into the container as read-only. |\n| bind-propagation | If present, changes the bind propagation. |\n| bind-create-src | Automatically creates the source directory on the host if it doesn't exist. By default, --mount produces an error if the source path doesn't exist on the daemon. |\n"
+        },
+        {
+          "end_line": 86,
+          "id": "line-86",
+          "kind": "paragraph",
+          "parent_id": "line-68",
+          "start_line": 86,
+          "text": "Example\n"
+        },
+        {
+          "end_line": 91,
+          "id": "line-88",
+          "kind": "code",
+          "parent_id": "line-68",
+          "start_line": 88,
+          "text": "```\n$ docker run --mount type=bind,src=.,dst=/project,ro,bind-propagation=rshared\n\n```\n"
+        },
+        {
+          "end_line": 93,
+          "id": "line-93",
+          "kind": "heading",
+          "parent_id": "line-39",
+          "start_line": 93,
+          "text": "### Options for --volume\n"
+        },
+        {
+          "end_line": 95,
+          "id": "line-95",
+          "kind": "paragraph",
+          "parent_id": "line-93",
+          "start_line": 95,
+          "text": "The --volume or -v flag consists of three fields, separated by colon characters (:). The fields must be in the correct order.\n"
+        },
+        {
+          "end_line": 100,
+          "id": "line-97",
+          "kind": "code",
+          "parent_id": "line-93",
+          "start_line": 97,
+          "text": "```\n$ docker run -v <host-path>:<container-path>[:opts]\n\n```\n"
+        },
+        {
+          "end_line": 102,
+          "id": "line-102",
+          "kind": "paragraph",
+          "parent_id": "line-93",
+          "start_line": 102,
+          "text": "The first field is the path on the host to bind mount into the container. The second field is the path where the file or directory is mounted in the container.\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-104",
+          "kind": "paragraph",
+          "parent_id": "line-93",
+          "start_line": 104,
+          "text": "The third field is optional, and is a comma-separated list of options. Valid options for --volume with a bind mount include:\n"
+        },
+        {
+          "end_line": 114,
+          "id": "line-106",
+          "kind": "table",
+          "parent_id": "line-93",
+          "start_line": 106,
+          "text": "| Option | Description |\n| readonly, ro | If present, causes the bind mount to be mounted into the container as read-only. |\n| z, Z | Configures SELinux labeling. See Configure the SELinux label |\n| rprivate (default) | Sets bind propagation to rprivate for this mount. See Configure bind propagation. |\n| private | Sets bind propagation to private for this mount. See Configure bind propagation. |\n| rshared | Sets bind propagation to rshared for this mount. See Configure bind propagation. |\n| shared | Sets bind propagation to shared for this mount. See Configure bind propagation. |\n| rslave | Sets bind propagation to rslave for this mount. See Configure bind propagation. |\n| slave | Sets bind propagation to slave for this mount. See Configure bind propagation. |\n"
+        },
+        {
+          "end_line": 116,
+          "id": "line-116",
+          "kind": "paragraph",
+          "parent_id": "line-93",
+          "start_line": 116,
+          "text": "Example\n"
+        },
+        {
+          "end_line": 121,
+          "id": "line-118",
+          "kind": "code",
+          "parent_id": "line-93",
+          "start_line": 118,
+          "text": "```\n$ docker run -v .:/project:ro,rshared\n\n```\n"
+        },
+        {
+          "end_line": 123,
+          "id": "line-123",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 123,
+          "text": "## Start a container with a bind mount\n"
+        },
+        {
+          "end_line": 125,
+          "id": "line-125",
+          "kind": "paragraph",
+          "parent_id": "line-123",
+          "start_line": 125,
+          "text": "Consider a case where you have a directory source and that when you build the source code, the artifacts are saved into another directory, source/target/. You want the artifacts to be available to the container at /app/, and you want the container to get access to a new build each time you build the source on your development host. Use the following command to bind-mount the target/ directory into your container at /app/. Run the command from within the source directory. The $(pwd) sub-command expands to the current working directory on Linux or macOS hosts. If you're on Windows, see also Path conversions on Windows.\n"
+        },
+        {
+          "end_line": 127,
+          "id": "line-127",
+          "kind": "paragraph",
+          "parent_id": "line-123",
+          "start_line": 127,
+          "text": "The following --mount and -v examples produce the same result. You can't run them both unless you remove the devtest container after running the first one.\n"
+        },
+        {
+          "end_line": 129,
+          "id": "line-129",
+          "kind": "paragraph",
+          "parent_id": "line-123",
+          "start_line": 129,
+          "text": "--mount\n"
+        },
+        {
+          "end_line": 131,
+          "id": "line-131",
+          "kind": "paragraph",
+          "parent_id": "line-123",
+          "start_line": 131,
+          "text": "-v\n"
+        },
+        {
+          "end_line": 140,
+          "id": "line-133",
+          "kind": "code",
+          "parent_id": "line-123",
+          "start_line": 133,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n--mount type=bind,source=\"$(pwd)\"/target,target=/app \\\nnginx:latest\n\n```\n"
+        },
+        {
+          "end_line": 149,
+          "id": "line-142",
+          "kind": "code",
+          "parent_id": "line-123",
+          "start_line": 142,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n-v \"$(pwd)\"/target:/app \\\nnginx:latest\n\n```\n"
+        },
+        {
+          "end_line": 151,
+          "id": "line-151",
+          "kind": "paragraph",
+          "parent_id": "line-123",
+          "start_line": 151,
+          "text": "Use docker inspect devtest to verify that the bind mount was created correctly. Look for the Mounts section:\n"
+        },
+        {
+          "end_line": 164,
+          "id": "line-153",
+          "kind": "code",
+          "parent_id": "line-123",
+          "start_line": 153,
+          "text": "```\n\"Mounts\": [\n{\n\"Type\": \"bind\",\n\"Source\": \"/tmp/source/target\",\n\"Destination\": \"/app\",\n\"Mode\": \"\",\n\"RW\": true,\n\"Propagation\": \"rprivate\"\n}\n],\n```\n"
+        },
+        {
+          "end_line": 166,
+          "id": "line-166",
+          "kind": "paragraph",
+          "parent_id": "line-123",
+          "start_line": 166,
+          "text": "This shows that the mount is a bind mount, it shows the correct source and destination, it shows that the mount is read-write, and that the propagation is set to rprivate.\n"
+        },
+        {
+          "end_line": 168,
+          "id": "line-168",
+          "kind": "paragraph",
+          "parent_id": "line-123",
+          "start_line": 168,
+          "text": "Stop and remove the container:\n"
+        },
+        {
+          "end_line": 173,
+          "id": "line-170",
+          "kind": "code",
+          "parent_id": "line-123",
+          "start_line": 170,
+          "text": "```\n$ docker container rm -fv devtest\n\n```\n"
+        },
+        {
+          "end_line": 175,
+          "id": "line-175",
+          "kind": "heading",
+          "parent_id": "line-123",
+          "start_line": 175,
+          "text": "### Mount into a non-empty directory on the container\n"
+        },
+        {
+          "end_line": 177,
+          "id": "line-177",
+          "kind": "paragraph",
+          "parent_id": "line-175",
+          "start_line": 177,
+          "text": "If you bind-mount a directory into a non-empty directory on the container, the directory's existing contents are obscured by the bind mount. This can be beneficial, such as when you want to test a new version of your application without building a new image. However, it can also be surprising and this behavior differs from that of volumes.\n"
+        },
+        {
+          "end_line": 179,
+          "id": "line-179",
+          "kind": "paragraph",
+          "parent_id": "line-175",
+          "start_line": 179,
+          "text": "This example is contrived to be extreme, but replaces the contents of the container's /usr/ directory with the /tmp/ directory on the host machine. In most cases, this would result in a non-functioning container.\n"
+        },
+        {
+          "end_line": 181,
+          "id": "line-181",
+          "kind": "paragraph",
+          "parent_id": "line-175",
+          "start_line": 181,
+          "text": "The --mount and -v examples have the same end result.\n"
+        },
+        {
+          "end_line": 183,
+          "id": "line-183",
+          "kind": "paragraph",
+          "parent_id": "line-175",
+          "start_line": 183,
+          "text": "--mount\n"
+        },
+        {
+          "end_line": 185,
+          "id": "line-185",
+          "kind": "paragraph",
+          "parent_id": "line-175",
+          "start_line": 185,
+          "text": "-v\n"
+        },
+        {
+          "end_line": 197,
+          "id": "line-187",
+          "kind": "code",
+          "parent_id": "line-175",
+          "start_line": 187,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name broken-container \\\n--mount type=bind,source=/tmp,target=/usr \\\nnginx:latest\n\ndocker: Error response from daemon: oci runtime error: container_linux.go:262:\nstarting container process caused \"exec: \\\"nginx\\\": executable file not found in $PATH\".\n\n```\n"
+        },
+        {
+          "end_line": 209,
+          "id": "line-199",
+          "kind": "code",
+          "parent_id": "line-175",
+          "start_line": 199,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name broken-container \\\n-v /tmp:/usr \\\nnginx:latest\n\ndocker: Error response from daemon: oci runtime error: container_linux.go:262:\nstarting container process caused \"exec: \\\"nginx\\\": executable file not found in $PATH\".\n\n```\n"
+        },
+        {
+          "end_line": 211,
+          "id": "line-211",
+          "kind": "paragraph",
+          "parent_id": "line-175",
+          "start_line": 211,
+          "text": "The container is created but does not start. Remove it:\n"
+        },
+        {
+          "end_line": 216,
+          "id": "line-213",
+          "kind": "code",
+          "parent_id": "line-175",
+          "start_line": 213,
+          "text": "```\n$ docker container rm broken-container\n\n```\n"
+        },
+        {
+          "end_line": 218,
+          "id": "line-218",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 218,
+          "text": "## Use a read-only bind mount\n"
+        },
+        {
+          "end_line": 220,
+          "id": "line-220",
+          "kind": "paragraph",
+          "parent_id": "line-218",
+          "start_line": 220,
+          "text": "For some development applications, the container needs to write into the bind mount, so changes are propagated back to the Docker host. At other times, the container only needs read access.\n"
+        },
+        {
+          "end_line": 222,
+          "id": "line-222",
+          "kind": "paragraph",
+          "parent_id": "line-218",
+          "start_line": 222,
+          "text": "This example modifies the previous one, but mounts the directory as a read-only bind mount, by adding ro to the (empty by default) list of options, after the mount point within the container. Where multiple options are present, separate them by commas.\n"
+        },
+        {
+          "end_line": 224,
+          "id": "line-224",
+          "kind": "paragraph",
+          "parent_id": "line-218",
+          "start_line": 224,
+          "text": "The --mount and -v examples have the same result.\n"
+        },
+        {
+          "end_line": 226,
+          "id": "line-226",
+          "kind": "paragraph",
+          "parent_id": "line-218",
+          "start_line": 226,
+          "text": "--mount\n"
+        },
+        {
+          "end_line": 228,
+          "id": "line-228",
+          "kind": "paragraph",
+          "parent_id": "line-218",
+          "start_line": 228,
+          "text": "-v\n"
+        },
+        {
+          "end_line": 237,
+          "id": "line-230",
+          "kind": "code",
+          "parent_id": "line-218",
+          "start_line": 230,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n--mount type=bind,source=\"$(pwd)\"/target,target=/app,readonly \\\nnginx:latest\n\n```\n"
+        },
+        {
+          "end_line": 246,
+          "id": "line-239",
+          "kind": "code",
+          "parent_id": "line-218",
+          "start_line": 239,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n-v \"$(pwd)\"/target:/app:ro \\\nnginx:latest\n\n```\n"
+        },
+        {
+          "end_line": 248,
+          "id": "line-248",
+          "kind": "paragraph",
+          "parent_id": "line-218",
+          "start_line": 248,
+          "text": "Use docker inspect devtest to verify that the bind mount was created correctly. Look for the Mounts section:\n"
+        },
+        {
+          "end_line": 261,
+          "id": "line-250",
+          "kind": "code",
+          "parent_id": "line-218",
+          "start_line": 250,
+          "text": "```\n\"Mounts\": [\n{\n\"Type\": \"bind\",\n\"Source\": \"/tmp/source/target\",\n\"Destination\": \"/app\",\n\"Mode\": \"ro\",\n\"RW\": false,\n\"Propagation\": \"rprivate\"\n}\n],\n```\n"
+        },
+        {
+          "end_line": 263,
+          "id": "line-263",
+          "kind": "paragraph",
+          "parent_id": "line-218",
+          "start_line": 263,
+          "text": "Stop and remove the container:\n"
+        },
+        {
+          "end_line": 268,
+          "id": "line-265",
+          "kind": "code",
+          "parent_id": "line-218",
+          "start_line": 265,
+          "text": "```\n$ docker container rm -fv devtest\n\n```\n"
+        },
+        {
+          "end_line": 270,
+          "id": "line-270",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 270,
+          "text": "## Recursive mounts\n"
+        },
+        {
+          "end_line": 272,
+          "id": "line-272",
+          "kind": "paragraph",
+          "parent_id": "line-270",
+          "start_line": 272,
+          "text": "When you bind mount a path that itself contains mounts, those submounts are also included in the bind mount by default. This behavior is configurable, using the bind-recursive option for --mount. This option is only supported with the --mount flag, not with -v or --volume.\n"
+        },
+        {
+          "end_line": 274,
+          "id": "line-274",
+          "kind": "paragraph",
+          "parent_id": "line-270",
+          "start_line": 274,
+          "text": "If the bind mount is read-only, the Docker Engine makes a best-effort attempt at making the submounts read-only as well. This is referred to as recursive read-only mounts. Recursive read-only mounts require Linux kernel version 5.12 or later. If you're running an older kernel version, submounts are automatically mounted as read-write by default. Attempting to set submounts to be read-only on a kernel version earlier than 5.12, using the bind-recursive=readonly option, results in an error.\n"
+        },
+        {
+          "end_line": 276,
+          "id": "line-276",
+          "kind": "paragraph",
+          "parent_id": "line-270",
+          "start_line": 276,
+          "text": "Supported values for the bind-recursive option are:\n"
+        },
+        {
+          "end_line": 282,
+          "id": "line-278",
+          "kind": "table",
+          "parent_id": "line-270",
+          "start_line": 278,
+          "text": "| Value | Description |\n| enabled (default) | Read-only mounts are made recursively read-only if kernel is v5.12 or later. Otherwise, submounts are read-write. |\n| disabled | Submounts are ignored (not included in the bind mount). |\n| writable | Submounts are read-write. |\n| readonly | Submounts are read-only. Requires kernel v5.12 or later. |\n"
+        },
+        {
+          "end_line": 284,
+          "id": "line-284",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 284,
+          "text": "## Configure bind propagation\n"
+        },
+        {
+          "end_line": 286,
+          "id": "line-286",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 286,
+          "text": "Bind propagation defaults to rprivate for both bind mounts and volumes. It is only configurable for bind mounts, and only on Linux host machines. Bind propagation is an advanced topic and many users never need to configure it.\n"
+        },
+        {
+          "end_line": 288,
+          "id": "line-288",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 288,
+          "text": "Bind propagation refers to whether or not mounts created within a given bind-mount can be propagated to replicas of that mount. Consider a mount point /mnt, which is also mounted on /tmp. The propagation settings control whether a mount on /tmp/a would also be available on /mnt/a. Each propagation setting has a recursive counterpoint. In the case of recursion, consider that /tmp/a is also mounted as /foo. The propagation settings control whether /mnt/a and/or /tmp/a would exist.\n"
+        },
+        {
+          "end_line": 290,
+          "id": "line-290",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 290,
+          "text": "Note\n"
+        },
+        {
+          "end_line": 292,
+          "id": "line-292",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 292,
+          "text": "Mount propagation doesn't work with Docker Desktop.\n"
+        },
+        {
+          "end_line": 300,
+          "id": "line-294",
+          "kind": "table",
+          "parent_id": "line-284",
+          "start_line": 294,
+          "text": "| Propagation setting | Description |\n| shared | Sub-mounts of the original mount are exposed to replica mounts, and sub-mounts of replica mounts are also propagated to the original mount. |\n| slave | similar to a shared mount, but only in one direction. If the original mount exposes a sub-mount, the replica mount can see it. However, if the replica mount exposes a sub-mount, the original mount cannot see it. |\n| private | The mount is private. Sub-mounts within it are not exposed to replica mounts, and sub-mounts of replica mounts are not exposed to the original mount. |\n| rshared | The same as shared, but the propagation also extends to and from mount points nested within any of the original or replica mount points. |\n| rslave | The same as slave, but the propagation also extends to and from mount points nested within any of the original or replica mount points. |\n| rprivate | The default. The same as private, meaning that no mount points anywhere within the original or replica mount points propagate in either direction. |\n"
+        },
+        {
+          "end_line": 302,
+          "id": "line-302",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 302,
+          "text": "Before you can set bind propagation on a mount point, the host filesystem needs to already support bind propagation.\n"
+        },
+        {
+          "end_line": 304,
+          "id": "line-304",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 304,
+          "text": "For more information about bind propagation, see the Linux kernel documentation for shared subtree.\n"
+        },
+        {
+          "end_line": 306,
+          "id": "line-306",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 306,
+          "text": "The following example mounts the target/ directory into the container twice, and the second mount sets both the ro option and the rslave bind propagation option.\n"
+        },
+        {
+          "end_line": 308,
+          "id": "line-308",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 308,
+          "text": "The --mount and -v examples have the same result.\n"
+        },
+        {
+          "end_line": 310,
+          "id": "line-310",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 310,
+          "text": "--mount\n"
+        },
+        {
+          "end_line": 312,
+          "id": "line-312",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 312,
+          "text": "-v\n"
+        },
+        {
+          "end_line": 322,
+          "id": "line-314",
+          "kind": "code",
+          "parent_id": "line-284",
+          "start_line": 314,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n--mount type=bind,source=\"$(pwd)\"/target,target=/app \\\n--mount type=bind,source=\"$(pwd)\"/target,target=/app2,readonly,bind-propagation=rslave \\\nnginx:latest\n\n```\n"
+        },
+        {
+          "end_line": 332,
+          "id": "line-324",
+          "kind": "code",
+          "parent_id": "line-284",
+          "start_line": 324,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n-v \"$(pwd)\"/target:/app \\\n-v \"$(pwd)\"/target:/app2:ro,rslave \\\nnginx:latest\n\n```\n"
+        },
+        {
+          "end_line": 334,
+          "id": "line-334",
+          "kind": "paragraph",
+          "parent_id": "line-284",
+          "start_line": 334,
+          "text": "Now if you create /app/foo/, /app2/foo/ also exists.\n"
+        },
+        {
+          "end_line": 336,
+          "id": "line-336",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 336,
+          "text": "## Configure the SELinux label\n"
+        },
+        {
+          "end_line": 338,
+          "id": "line-338",
+          "kind": "paragraph",
+          "parent_id": "line-336",
+          "start_line": 338,
+          "text": "If you use SELinux, you can add the z or Z options to modify the SELinux label of the host file or directory being mounted into the container. This affects the file or directory on the host machine itself and can have consequences outside of the scope of Docker.\n"
+        },
+        {
+          "end_line": 340,
+          "id": "line-340",
+          "kind": "list",
+          "parent_id": "line-336",
+          "start_line": 340,
+          "text": "- The z option indicates that the bind mount content is shared among multiple containers.\n"
+        },
+        {
+          "end_line": 342,
+          "id": "line-342",
+          "kind": "list",
+          "parent_id": "line-336",
+          "start_line": 342,
+          "text": "- The Z option indicates that the bind mount content is private and unshared.\n"
+        },
+        {
+          "end_line": 344,
+          "id": "line-344",
+          "kind": "paragraph",
+          "parent_id": "line-336",
+          "start_line": 344,
+          "text": "Use extreme caution with these options. Bind-mounting a system directory such as /home or /usr with the Z option renders your host machine inoperable and you may need to relabel the host machine files by hand.\n"
+        },
+        {
+          "end_line": 346,
+          "id": "line-346",
+          "kind": "paragraph",
+          "parent_id": "line-336",
+          "start_line": 346,
+          "text": "Important\n"
+        },
+        {
+          "end_line": 348,
+          "id": "line-348",
+          "kind": "paragraph",
+          "parent_id": "line-336",
+          "start_line": 348,
+          "text": "When using bind mounts with services, SELinux labels (:Z and :z), as well as :ro are ignored. See moby/moby #32579 for details.\n"
+        },
+        {
+          "end_line": 350,
+          "id": "line-350",
+          "kind": "paragraph",
+          "parent_id": "line-336",
+          "start_line": 350,
+          "text": "This example sets the z option to specify that multiple containers can share the bind mount's contents:\n"
+        },
+        {
+          "end_line": 352,
+          "id": "line-352",
+          "kind": "paragraph",
+          "parent_id": "line-336",
+          "start_line": 352,
+          "text": "It is not possible to modify the SELinux label using the --mount flag.\n"
+        },
+        {
+          "end_line": 361,
+          "id": "line-354",
+          "kind": "code",
+          "parent_id": "line-336",
+          "start_line": 354,
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n-v \"$(pwd)\"/target:/app:z \\\nnginx:latest\n\n```\n"
+        },
+        {
+          "end_line": 363,
+          "id": "line-363",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 363,
+          "text": "## Use a bind mount with Docker Compose\n"
+        },
+        {
+          "end_line": 365,
+          "id": "line-365",
+          "kind": "paragraph",
+          "parent_id": "line-363",
+          "start_line": 365,
+          "text": "A single Docker Compose service with a bind mount looks like this:\n"
+        },
+        {
+          "end_line": 377,
+          "id": "line-367",
+          "kind": "code",
+          "parent_id": "line-363",
+          "start_line": 367,
+          "text": "```\nservices:\nfrontend:\nimage: node:lts\nvolumes:\n- type: bind\nsource: ./static\ntarget: /opt/app/static\nvolumes:\nmyapp:\n```\n"
+        },
+        {
+          "end_line": 379,
+          "id": "line-379",
+          "kind": "paragraph",
+          "parent_id": "line-363",
+          "start_line": 379,
+          "text": "For more information about using volumes of the bind type with Compose, see Compose reference on the volumes top-level element. and Compose reference on the volume attribute.\n"
+        },
+        {
+          "end_line": 381,
+          "id": "line-381",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 381,
+          "text": "## Next steps\n"
+        },
+        {
+          "end_line": 383,
+          "id": "line-383",
+          "kind": "list",
+          "parent_id": "line-381",
+          "start_line": 383,
+          "text": "- Learn about volumes.\n"
+        },
+        {
+          "end_line": 385,
+          "id": "line-385",
+          "kind": "list",
+          "parent_id": "line-381",
+          "start_line": 385,
+          "text": "- Learn about tmpfs mounts.\n"
+        },
+        {
+          "end_line": 387,
+          "id": "line-387",
+          "kind": "list",
+          "parent_id": "line-381",
+          "start_line": 387,
+          "text": "- Learn about image mounts.\n"
+        },
+        {
+          "end_line": 389,
+          "id": "line-389",
+          "kind": "list",
+          "parent_id": "line-381",
+          "start_line": 389,
+          "text": "- Learn about storage drivers.\n"
+        }
+      ],
+      "id": "docker",
+      "source_hash": "7bd2f1aa709e2bae31826f48062fda846a5ef638d9db973fc799eb9eeaeeb47f",
+      "title": "Bind mounts | Docker Docs",
+      "url": "https://docs.docker.com/engine/storage/bind-mounts/"
+    }
+  ]
+}

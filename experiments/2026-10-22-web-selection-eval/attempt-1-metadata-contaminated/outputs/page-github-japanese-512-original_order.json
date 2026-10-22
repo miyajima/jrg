@@ -1,0 +1,79 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "In this article\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "heading",
+          "start_line": 3,
+          "text": "# Control the concurrency of workflows and jobs\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "parent_id": "line-3",
+          "start_line": 5,
+          "text": "Manage which workflows and jobs can run simultaneously.\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "paragraph",
+          "parent_id": "line-3",
+          "start_line": 7,
+          "text": "Copy markdown\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "heading",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "text": "## Using concurrency in different scenarios\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 13,
+          "text": "You can use jobs.<job_id>.concurrency to ensure that only a single job or workflow using the same concurrency group will run at a time. A concurrency group can be any string or expression. Allowed expression contexts: github, inputs, vars, needs, strategy, and matrix. For more information about expressions, see Evaluate expressions in workflows and actions.\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 15,
+          "text": "You can also specify concurrency at the workflow level. For more information, see concurrency.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 21,
+          "text": "To allow more than one pending job or workflow run to wait in the same concurrency group, use the optional queue property. The queue property accepts the following values:\n"
+        }
+      ],
+      "id": "github",
+      "source_hash": "82f4d5aaaad6ec61cd71618a0d200e3d3ad1a8902753de3253bea7bc35bb2642",
+      "title": "Control the concurrency of workflows and jobs - GitHub Docs",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency"
+    }
+  ],
+  "omitted_count": 47,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 502,
+  "max_tokens": 512
+}

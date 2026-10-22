@@ -1,0 +1,160 @@
+{
+  "documents": [
+    {
+      "id": "node",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+      "title": "Modules: CommonJS modules | Node.js v26.12.0 Documentation",
+      "blocks": [
+        {
+          "id": "line-137",
+          "kind": "heading",
+          "text": "## Modules: CommonJS modules#\n",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "id": "line-247",
+          "kind": "heading",
+          "text": "### Loading ECMAScript modules using require()#\n",
+          "parent_id": "line-137",
+          "start_line": 247,
+          "end_line": 247
+        },
+        {
+          "id": "line-251",
+          "kind": "table",
+          "text": "| Version | Changes |\n| v22.13.0 | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module. |\n| v23.0.0, v22.12.0 | This feature is no longer behind the --experimental-require-module CLI flag. |\n| v22.12.0 | Support 'module.exports' interop export in require(esm). |\n| v22.0.0 | Added in: v22.0.0 |\n",
+          "parent_id": "line-247",
+          "start_line": 251,
+          "end_line": 255
+        },
+        {
+          "id": "line-678",
+          "kind": "heading",
+          "text": "### The module scope#\n",
+          "parent_id": "line-137",
+          "start_line": 678,
+          "end_line": 678
+        },
+        {
+          "id": "line-744",
+          "kind": "heading",
+          "text": "#### require(id)#\n",
+          "parent_id": "line-678",
+          "start_line": 744,
+          "end_line": 744
+        },
+        {
+          "id": "line-766",
+          "kind": "heading",
+          "text": "##### require.cache#\n",
+          "parent_id": "line-744",
+          "start_line": 766,
+          "end_line": 766
+        },
+        {
+          "id": "line-776",
+          "kind": "code",
+          "text": "```\nconst assert = require('node:assert');\nconst realFs = require('node:fs');\n\nconst fakeFs = {};\nrequire.cache.fs = { exports: fakeFs };\n\nassert.strictEqual(require('fs'), fakeFs);\nassert.strictEqual(require('node:fs'), realFs); copy\n```\n",
+          "parent_id": "line-766",
+          "start_line": 776,
+          "end_line": 785
+        },
+        {
+          "id": "line-787",
+          "kind": "heading",
+          "text": "##### require.extensions#\n",
+          "parent_id": "line-744",
+          "start_line": 787,
+          "end_line": 787
+        },
+        {
+          "id": "line-795",
+          "kind": "paragraph",
+          "text": "Instruct require on how to handle certain file extensions.\n",
+          "parent_id": "line-787",
+          "start_line": 795,
+          "end_line": 795
+        },
+        {
+          "id": "line-799",
+          "kind": "code",
+          "text": "```\nrequire.extensions['.sjs'] = require.extensions['.js']; copy\n```\n",
+          "parent_id": "line-787",
+          "start_line": 799,
+          "end_line": 801
+        },
+        {
+          "id": "line-807",
+          "kind": "heading",
+          "text": "##### require.main#\n",
+          "parent_id": "line-744",
+          "start_line": 807,
+          "end_line": 807
+        },
+        {
+          "id": "line-817",
+          "kind": "code",
+          "text": "```\nconsole.log(require.main); copy\n```\n",
+          "parent_id": "line-807",
+          "start_line": 817,
+          "end_line": 819
+        },
+        {
+          "id": "line-840",
+          "kind": "heading",
+          "text": "##### require.resolve(request[, options])#\n",
+          "parent_id": "line-744",
+          "start_line": 840,
+          "end_line": 840
+        },
+        {
+          "id": "line-858",
+          "kind": "heading",
+          "text": "###### require.resolve.paths(request)#\n",
+          "parent_id": "line-840",
+          "start_line": 858,
+          "end_line": 858
+        },
+        {
+          "id": "line-864",
+          "kind": "list",
+          "text": "- Returns: <string[]> | <null>\n",
+          "parent_id": "line-858",
+          "start_line": 864,
+          "end_line": 864
+        },
+        {
+          "id": "line-868",
+          "kind": "heading",
+          "text": "### The module object#\n",
+          "parent_id": "line-137",
+          "start_line": 868,
+          "end_line": 868
+        },
+        {
+          "id": "line-988",
+          "kind": "heading",
+          "text": "#### module.isPreloading#\n",
+          "parent_id": "line-868",
+          "start_line": 988,
+          "end_line": 988
+        },
+        {
+          "id": "line-990",
+          "kind": "paragraph",
+          "text": "Added in: v15.4.0, v14.17.0\n",
+          "parent_id": "line-988",
+          "start_line": 990,
+          "end_line": 990
+        }
+      ],
+      "source_hash": "7fb29625c4d8281a74217e9569dac2d979ac8469a0cb9ae0c691d15e77c4aa46"
+    }
+  ],
+  "omitted_count": 345,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1003,
+  "max_tokens": 1024
+}

@@ -1,0 +1,152 @@
+{
+  "documents": [
+    {
+      "id": "semaphore",
+      "url": "https://docs.python.org/3/library/asyncio-sync.html",
+      "title": "Synchronization Primitives — Python 3.15.1 documentation",
+      "blocks": [
+        {
+          "id": "line-33",
+          "kind": "heading",
+          "text": "# Synchronization Primitives¶\n",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "id": "line-174",
+          "kind": "heading",
+          "text": "## Condition¶\n",
+          "parent_id": "line-33",
+          "start_line": 174,
+          "end_line": 174
+        },
+        {
+          "id": "line-257",
+          "kind": "paragraph",
+          "text": "The predicate must be a callable which result will be interpreted as a boolean value. The method will repeatedly wait() until the predicate evaluates to true. The final value is the return value.\n",
+          "parent_id": "line-174",
+          "start_line": 257,
+          "end_line": 257
+        },
+        {
+          "id": "line-259",
+          "kind": "heading",
+          "text": "## Semaphore¶\n",
+          "parent_id": "line-33",
+          "start_line": 259,
+          "end_line": 259
+        },
+        {
+          "id": "line-265",
+          "kind": "paragraph",
+          "text": "A semaphore manages an internal counter which is decremented by each acquire() call and incremented by each release() call. The counter can never go below zero; when acquire() finds that it is zero, it blocks, waiting until some task calls release().\n",
+          "parent_id": "line-259",
+          "start_line": 265,
+          "end_line": 265
+        },
+        {
+          "id": "line-267",
+          "kind": "paragraph",
+          "text": "The optional value argument gives the initial value for the internal counter (1 by default). If the given value is less than 0 a ValueError is raised.\n",
+          "parent_id": "line-259",
+          "start_line": 267,
+          "end_line": 267
+        },
+        {
+          "id": "line-300",
+          "kind": "paragraph",
+          "text": "If the internal counter is greater than zero, decrement it by one and return True immediately. If it is zero, wait until a release() is called and return True.\n",
+          "parent_id": "line-259",
+          "start_line": 300,
+          "end_line": 300
+        },
+        {
+          "id": "line-304",
+          "kind": "paragraph",
+          "text": "Returns True if semaphore can not be acquired immediately.\n",
+          "parent_id": "line-259",
+          "start_line": 304,
+          "end_line": 304
+        },
+        {
+          "id": "line-308",
+          "kind": "paragraph",
+          "text": "Release a semaphore, incrementing the internal counter by one. Can wake up a task waiting to acquire the semaphore.\n",
+          "parent_id": "line-259",
+          "start_line": 308,
+          "end_line": 308
+        },
+        {
+          "id": "line-310",
+          "kind": "paragraph",
+          "text": "Unlike BoundedSemaphore, Semaphore allows making more release() calls than acquire() calls.\n",
+          "parent_id": "line-259",
+          "start_line": 310,
+          "end_line": 310
+        },
+        {
+          "id": "line-312",
+          "kind": "heading",
+          "text": "## BoundedSemaphore¶\n",
+          "parent_id": "line-33",
+          "start_line": 312,
+          "end_line": 312
+        },
+        {
+          "id": "line-314",
+          "kind": "paragraph",
+          "text": "class asyncio.BoundedSemaphore(value=1)¶\n",
+          "parent_id": "line-312",
+          "start_line": 314,
+          "end_line": 314
+        },
+        {
+          "id": "line-316",
+          "kind": "paragraph",
+          "text": "A bounded semaphore object. Not thread-safe.\n",
+          "parent_id": "line-312",
+          "start_line": 316,
+          "end_line": 316
+        },
+        {
+          "id": "line-318",
+          "kind": "paragraph",
+          "text": "Bounded Semaphore is a version of Semaphore that raises a ValueError in release() if it increases the internal counter above the initial value.\n",
+          "parent_id": "line-312",
+          "start_line": 318,
+          "end_line": 318
+        },
+        {
+          "id": "line-322",
+          "kind": "heading",
+          "text": "## Barrier¶\n",
+          "parent_id": "line-33",
+          "start_line": 322,
+          "end_line": 322
+        },
+        {
+          "id": "line-328",
+          "kind": "paragraph",
+          "text": "A barrier is a simple synchronization primitive that allows to block until parties number of tasks are waiting on it. Tasks can wait on the wait() method and would be blocked until the specified number of tasks end up waiting on wait(). At that point all of the waiting tasks would unblock simultaneously.\n",
+          "parent_id": "line-322",
+          "start_line": 328,
+          "end_line": 328
+        },
+        {
+          "id": "line-378",
+          "kind": "paragraph",
+          "text": "The return value is an integer in the range of 0 to parties-1, different for each task. This can be used to select a task to do some special housekeeping, e.g.:\n",
+          "parent_id": "line-322",
+          "start_line": 378,
+          "end_line": 378
+        }
+      ],
+      "source_hash": "7452a9e6b9e529bf60fe7298e328d4daac707c9c58af77ba82f7b7817bf4cdd4"
+    }
+  ],
+  "omitted_count": 173,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1009,
+  "max_tokens": 1024
+}

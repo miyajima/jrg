@@ -1,0 +1,130 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "June 26, 2025 · The Rust Release Team\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "start_line": 3,
+          "text": "The Rust team is happy to announce a new version of Rust, 1.88.0. Rust is a programming language empowering everyone to build reliable and efficient software.\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "start_line": 5,
+          "text": "If you have a previous version of Rust installed via rustup, you can get 1.88.0 with:\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-7",
+          "kind": "code",
+          "start_line": 7,
+          "text": "```\n$ rustup update stable\n```\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "paragraph",
+          "start_line": 11,
+          "text": "If you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.88.0.\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "paragraph",
+          "start_line": 13,
+          "text": "If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (rustup default beta) or the nightly channel (rustup default nightly). Please report any bugs you might come across!\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "heading",
+          "start_line": 15,
+          "text": "## What's in 1.88.0 stable\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 17,
+          "text": "### Let chains\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 19,
+          "text": "This feature allows &&-chaining let statements inside if and while conditions, even intermingling with boolean expressions, so there is less distinction between if/if let and while/while let. The patterns inside the let sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 21,
+          "text": "For example, this snippet combines multiple conditions which would have required nesting if let and if blocks before:\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-23",
+          "kind": "code",
+          "parent_id": "line-17",
+          "start_line": 23,
+          "text": "```\nif let Channel::Stable(v) = release_info()\n&& let Semver { major, minor, .. } = v\n&& major == 1\n&& minor == 88\n{\nprintln!(\"`let_chains` was stabilized in this version\");\n}\n```\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 33,
+          "text": "Let chains are only available in the Rust 2024 edition, as this feature depends on the if let temporary scope change for more consistent drop order.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 35,
+          "text": "Earlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 37,
+          "text": "### Naked functions\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 39,
+          "text": "Rust now supports writing naked functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function. This is a more ergonomic alternative to defining functions in a global_asm! block. A naked function is marked with the #[unsafe(naked)] attribute, and its body consists of a single naked_asm! call.\n"
+        }
+      ],
+      "id": "rust",
+      "source_hash": "d098b0afe7ebcb13f12c1165dc8f5e181310e3a07fbc0a5a27b95c866ca61ebd",
+      "title": "Announcing Rust 1.88.0 | Rust Blog",
+      "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/"
+    }
+  ],
+  "omitted_count": 47,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1021,
+  "max_tokens": 1024
+}

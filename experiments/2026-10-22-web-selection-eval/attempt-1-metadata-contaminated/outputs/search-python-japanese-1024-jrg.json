@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "id": "result-5",
+      "url": "https://docs.python.org/de/3.13/howto/free-threading-python.html",
+      "title": "Python experimental support for free threading — Python 3.13.16 Dokumentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n# Python experimental support for free threading¶\n\nStarting with the 3.13 release, CPython has experimental support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. Free-threaded execution allows for full utilization of the available processing power by running threads in parallel on available CPU cores. While not all software will benefit from this automatically, programs designed with threading in mind will run faster on multi-core hardware.\n\nThe free-threaded mode is experimental and work is ongoing to improve it: expect some bugs and a substantial single-threaded performance hit.\n\nThis document describes the implications of free threading for Python code. See C API Extension Support for Free Threading for information on how to write C extensions that support the free-threaded build.\n\n## Installation¶\n\nStarting with Python 3.13, the official macOS and Windows installers optionally support installing free-threaded Python binaries. \n## The global interpreter lock in free-threaded Python¶\n\nFree-threaded builds of CPython support optionally running with the GIL enabled at runtime using the environment variable `PYTHON_GIL` or the command-line option `-X gil`.\n\nThe GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading. A warning will be printed in this case.\n\nIn addition to individual package documentation, the following websites track the status of popular packages support for free threading:\n\n  * https://py-free-threading.github.io/tracking/\n\n  * https://hugovk.github.io/free-threaded-wheels/\n\n## Thread safety¶\n\nThe free-threaded build of CPython aims to provide similar thread-safety behavior at the Python level to the default GIL-enabled build. Built-in types like `dict`, `list`, and `set` use internal locks to protect against concurrent modifications in ways that behave similarly to the GIL. --------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "2dd02321487e9dad9e1084810793635002729d0f66e4b9800b2e2ddc94a0ced1"
+    },
+    {
+      "id": "result-12",
+      "url": "https://irl.github.io/cpython/howto/free-threading-extensions.html",
+      "title": "C API Extension Support for Free Threading — Python 3.14.0a2 documentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n# C API Extension Support for Free Threading¶\n\nStarting with the 3.13 release, CPython has experimental support for running with the global interpreter lock (GIL) disabled in a configuration called free threading. This document describes how to adapt C API extensions to support free threading.\n\n## Identifying the Free-Threaded Build in C¶\n\nThe CPython C API exposes the `Py_GIL_DISABLED` macro: in the free-threaded build it’s defined to `1`, and in the regular build it’s not defined. You can use it to enable code that only runs under the free-threaded build:\n    \n    #ifdef Py_GIL_DISABLED\n    /* code that only runs in the free-threaded build */\n    #endif\n    \n\n## Module Initialization¶\n\nExtension modules need to explicitly indicate that they support running with the GIL disabled; otherwise importing the extension will raise a warning and enable the GIL at runtime.\n\nThere are two ways to indicate that an extension module supports running with the GIL disabled depending on whether the extension uses multi-phase or single-phase initialization.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "ef275eacc6b3ac0644229f0a633d5c3db5e2b6bc413107bc72dd911b7fe61ba1"
+    },
+    {
+      "id": "result-17",
+      "url": "https://www.reddit.com/r/Python/comments/1v3ayph/anyone_running_freethreaded_python_314_in/",
+      "title": "Anyone running free-threaded Python 3.14 in production yet? Curious what actually breaks",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "bed18ef194dd8f63ced086f371dfd2844cc4e7d70fab62bad7be7e3fd7f5fec5"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1009,
+  "max_tokens": 1024
+}

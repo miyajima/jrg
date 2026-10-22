@@ -1,0 +1,30 @@
+[
+  {
+    "transport": "MCP",
+    "case": "search-python-japanese",
+    "matches_direct_cli": true,
+    "raw_payload_tokens": 8461,
+    "result_envelope_tokens": 978
+  },
+  {
+    "transport": "MCP",
+    "case": "page-node-japanese",
+    "matches_direct_cli": true,
+    "raw_payload_tokens": 10021,
+    "result_envelope_tokens": 1040
+  },
+  {
+    "transport": "RTK",
+    "case": "search-python-japanese",
+    "matches_direct_cli": true,
+    "raw_payload_tokens": 8461,
+    "result_envelope_tokens": 1024
+  },
+  {
+    "transport": "RTK",
+    "case": "page-node-japanese",
+    "matches_direct_cli": true,
+    "raw_payload_tokens": 10021,
+    "result_envelope_tokens": 1086
+  }
+]

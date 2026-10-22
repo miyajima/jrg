@@ -1,0 +1,240 @@
+{
+  "documents": [
+    {
+      "id": "s3",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+      "title": "ListObjectsV2 - Amazon S3",
+      "blocks": [
+        {
+          "id": "line-9",
+          "kind": "heading",
+          "text": "# ListObjectsV2\n",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "id": "line-13",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-9",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-19",
+          "kind": "list",
+          "text": "- Directory buckets - For directory buckets, you must make requests for this API operation to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format https://amzn-s3-demo-bucket.s3express-zone-id.region-code.amazonaws.com/key-name . Path-style requests are not supported. For more information about endpoints in Availability Zones, see Regional and Zonal endpoints for directory buckets in Availability Zones in the Amazon S3 User Guide. For more information about endpoints in Local Zones, see Concepts for directory buckets in Local Zones in the Amazon S3 User Guide.\n",
+          "parent_id": "line-13",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "id": "line-25",
+          "kind": "list",
+          "text": "- Directory bucket permissions - To grant access to this API operation on a directory bucket, we recommend that you use the CreateSession API operation for session-based authorization. Specifically, you grant the s3express:CreateSession permission to the directory bucket in a bucket policy or an IAM identity-based policy. Then, you make the CreateSession API call on the bucket to obtain a session token. With the session token in your request header, you can make API requests to this operation. After the session token expires, you make another CreateSession API call to generate a new session token for use. AWS CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see CreateSession.\n",
+          "parent_id": "line-13",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "id": "line-31",
+          "kind": "list",
+          "text": "- Directory bucket - For directory buckets, ListObjectsV2 does not return objects in lexicographical order.\n",
+          "parent_id": "line-13",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-64",
+          "kind": "heading",
+          "text": "## URI Request Parameters\n",
+          "parent_id": "line-9",
+          "start_line": 64,
+          "end_line": 64
+        },
+        {
+          "id": "line-72",
+          "kind": "paragraph",
+          "text": "Access points - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.\n",
+          "parent_id": "line-64",
+          "start_line": 72,
+          "end_line": 72
+        },
+        {
+          "id": "line-74",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-64",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "id": "line-84",
+          "kind": "paragraph",
+          "text": "ContinuationToken indicates to Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this ContinuationToken for pagination of the list results.\n",
+          "parent_id": "line-74",
+          "start_line": 84,
+          "end_line": 84
+        },
+        {
+          "id": "line-92",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-64",
+          "start_line": 92,
+          "end_line": 92
+        },
+        {
+          "id": "line-100",
+          "kind": "paragraph",
+          "text": "Encoding type used by Amazon S3 to encode the object keys in the response. Responses are encoded only in UTF-8. An object key can contain any Unicode character. However, the XML 1.0 parser can't parse certain characters, such as characters with an ASCII value from 0 to 10. For characters that aren't supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response. For more information about characters to avoid in object key names, see Object key naming guidelines.\n",
+          "parent_id": "line-92",
+          "start_line": 100,
+          "end_line": 100
+        },
+        {
+          "id": "line-102",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-64",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "id": "line-104",
+          "kind": "paragraph",
+          "text": "When using the URL encoding type, non-ASCII characters that are used in an object's key name will be percent-encoded according to UTF-8 code values. For example, the object test_file(3).png will appear as test_file%283%29.png.\n",
+          "parent_id": "line-102",
+          "start_line": 104,
+          "end_line": 104
+        },
+        {
+          "id": "line-110",
+          "kind": "paragraph",
+          "text": "The owner field is not present in ListObjectsV2 by default. If you want to return the owner field with each key in the result, then set the FetchOwner field to true.\n",
+          "parent_id": "line-102",
+          "start_line": 110,
+          "end_line": 110
+        },
+        {
+          "id": "line-207",
+          "kind": "heading",
+          "text": "## Response Elements\n",
+          "parent_id": "line-9",
+          "start_line": 207,
+          "end_line": 207
+        },
+        {
+          "id": "line-243",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-207",
+          "start_line": 243,
+          "end_line": 243
+        },
+        {
+          "id": "line-265",
+          "kind": "paragraph",
+          "text": "Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response. Each rolled-up result counts as only one return against the MaxKeys value.\n",
+          "parent_id": "line-243",
+          "start_line": 265,
+          "end_line": 265
+        },
+        {
+          "id": "line-267",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-207",
+          "start_line": 267,
+          "end_line": 267
+        },
+        {
+          "id": "line-275",
+          "kind": "paragraph",
+          "text": "Encoding type used by Amazon S3 to encode object key names in the XML response.\n",
+          "parent_id": "line-267",
+          "start_line": 275,
+          "end_line": 275
+        },
+        {
+          "id": "line-287",
+          "kind": "paragraph",
+          "text": "Set to false if all of the results were returned. Set to true if more keys are available to return. If the number of results exceeds that specified by MaxKeys, all of the results might not be returned.\n",
+          "parent_id": "line-267",
+          "start_line": 287,
+          "end_line": 287
+        },
+        {
+          "id": "line-311",
+          "kind": "paragraph",
+          "text": "NextContinuationToken is sent when isTruncated is true, which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key\n",
+          "parent_id": "line-267",
+          "start_line": 311,
+          "end_line": 311
+        },
+        {
+          "id": "line-343",
+          "kind": "heading",
+          "text": "## Examples\n",
+          "parent_id": "line-9",
+          "start_line": 343,
+          "end_line": 343
+        },
+        {
+          "id": "line-387",
+          "kind": "heading",
+          "text": "### Sample Request for general purpose buckets: Listing keys using the max-keys, prefix, and start-after parameters\n",
+          "parent_id": "line-343",
+          "start_line": 387,
+          "end_line": 387
+        },
+        {
+          "id": "line-389",
+          "kind": "paragraph",
+          "text": "In addition to the list-type parameter that indicates version 2 of the API operation, the request also specifies additional parameters to retrieve up to three keys in the quotes bucket that start with E and occur lexicographically after ExampleGuide.pdf.\n",
+          "parent_id": "line-387",
+          "start_line": 389,
+          "end_line": 389
+        },
+        {
+          "id": "line-527",
+          "kind": "heading",
+          "text": "### Sample Request for general purpose buckets: Using a continuation token\n",
+          "parent_id": "line-343",
+          "start_line": 527,
+          "end_line": 527
+        },
+        {
+          "id": "line-529",
+          "kind": "paragraph",
+          "text": "In this example, the initial request returns more than 1,000 keys. In response to this request, Amazon S3 returns the IsTruncated element with the value set to true and with a NextContinuationToken element.\n",
+          "parent_id": "line-527",
+          "start_line": 529,
+          "end_line": 529
+        },
+        {
+          "id": "line-574",
+          "kind": "heading",
+          "text": "### Sample request for general purpose buckets\n",
+          "parent_id": "line-343",
+          "start_line": 574,
+          "end_line": 574
+        },
+        {
+          "id": "line-576",
+          "kind": "paragraph",
+          "text": "In the following subsequent request, we include a continuation-token query parameter in the request with the value of the NextContinuationToken element from the preceding response.\n",
+          "parent_id": "line-574",
+          "start_line": 576,
+          "end_line": 576
+        }
+      ],
+      "source_hash": "26b291deb241ace35bb3ba15037a1bc8752cd76721da1b74205eee11d53cfb1c"
+    }
+  ],
+  "omitted_count": 186,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2021,
+  "max_tokens": 2048
+}

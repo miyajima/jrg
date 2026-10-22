@@ -1,0 +1,255 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "In this article\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "heading",
+          "start_line": 3,
+          "text": "# Control the concurrency of workflows and jobs\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "parent_id": "line-3",
+          "start_line": 5,
+          "text": "Manage which workflows and jobs can run simultaneously.\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "paragraph",
+          "parent_id": "line-3",
+          "start_line": 7,
+          "text": "Copy markdown\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "heading",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "text": "## Using concurrency in different scenarios\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 13,
+          "text": "You can use jobs.<job_id>.concurrency to ensure that only a single job or workflow using the same concurrency group will run at a time. A concurrency group can be any string or expression. Allowed expression contexts: github, inputs, vars, needs, strategy, and matrix. For more information about expressions, see Evaluate expressions in workflows and actions.\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 15,
+          "text": "You can also specify concurrency at the workflow level. For more information, see concurrency.\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 17,
+          "text": "This means that there can be at most one running job or workflow in a concurrency group at any time. When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. By default, any existing pending job or workflow in the same concurrency group will be canceled and the new queued job or workflow will take its place.\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 19,
+          "text": "To also cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true. To conditionally cancel currently running jobs or workflows in the same concurrency group, you can specify cancel-in-progress as an expression with any of the allowed expression contexts.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 21,
+          "text": "To allow more than one pending job or workflow run to wait in the same concurrency group, use the optional queue property. The queue property accepts the following values:\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "parent_id": "line-11",
+          "start_line": 23,
+          "text": "- single (default): At most one job or workflow run can be pending in the concurrency group. When a new job or workflow run is queued, any existing pending job or workflow run in the same group is canceled and replaced.\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "list",
+          "parent_id": "line-11",
+          "start_line": 25,
+          "text": "- max: Up to 100 jobs or workflow runs can be pending in the concurrency group. When the queue is full, any additional jobs or workflow runs are canceled.\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 27,
+          "text": "The combination of queue: max and cancel-in-progress: true is not allowed and will result in a workflow validation error.\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "paragraph",
+          "parent_id": "line-11",
+          "start_line": 29,
+          "text": "Note\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "list",
+          "parent_id": "line-11",
+          "start_line": 31,
+          "text": "- The concurrency group name is case insensitive. For example, prod and Prod will be treated as the same concurrency group.\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "list",
+          "parent_id": "line-11",
+          "start_line": 33,
+          "text": "- Jobs or workflow runs in the same concurrency group are processed in first-in-first-out (FIFO) order according to the time each one started waiting on the concurrency group, not the time each workflow was dispatched. Since the actual start time of a job or run may vary, ordering is not guaranteed.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "heading",
+          "parent_id": "line-11",
+          "start_line": 35,
+          "text": "### Example: Using concurrency and the default behavior\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "paragraph",
+          "parent_id": "line-35",
+          "start_line": 37,
+          "text": "The default behavior of GitHub Actions is to allow multiple jobs or workflow runs to run concurrently. The concurrency keyword allows you to control the concurrency of workflow runs.\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-35",
+          "start_line": 39,
+          "text": "For example, you can use the concurrency keyword immediately after where trigger conditions are defined to limit the concurrency of entire workflow runs for a specific branch:\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-41",
+          "kind": "code",
+          "parent_id": "line-35",
+          "start_line": 41,
+          "text": "```\non:\npush:\nbranches:\n- main\n\nconcurrency:\ngroup: ${{ github.workflow }}-${{ github.ref }}\ncancel-in-progress: true\n\n```\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "paragraph",
+          "parent_id": "line-35",
+          "start_line": 53,
+          "text": "You can also limit the concurrency of jobs within a workflow by using the concurrency keyword at the job level:\n"
+        },
+        {
+          "end_line": 68,
+          "id": "line-55",
+          "kind": "code",
+          "parent_id": "line-35",
+          "start_line": 55,
+          "text": "```\non:\npush:\nbranches:\n- main\n\njobs:\njob-1:\nruns-on: ubuntu-latest\nconcurrency:\ngroup: example-group\ncancel-in-progress: true\n\n```\n"
+        },
+        {
+          "end_line": 70,
+          "id": "line-70",
+          "kind": "heading",
+          "parent_id": "line-11",
+          "start_line": 70,
+          "text": "### Example: Concurrency groups\n"
+        },
+        {
+          "end_line": 72,
+          "id": "line-72",
+          "kind": "paragraph",
+          "parent_id": "line-70",
+          "start_line": 72,
+          "text": "Concurrency groups provide a way to manage and limit the execution of workflow runs or jobs that share the same concurrency key.\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-74",
+          "kind": "paragraph",
+          "parent_id": "line-70",
+          "start_line": 74,
+          "text": "The concurrency key is used to group workflows or jobs together into a concurrency group. When you define a concurrency key, GitHub Actions ensures that only one workflow or job with that key runs at any given time. If a new workflow run or job starts with the same concurrency key, GitHub Actions will cancel any workflow or job already running with that key. The concurrency key can be a hard-coded string, or it can be a dynamic expression that includes context variables.\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "paragraph",
+          "parent_id": "line-70",
+          "start_line": 76,
+          "text": "It is possible to define concurrency conditions in your workflow so that the workflow or job is part of a concurrency group.\n"
+        },
+        {
+          "end_line": 78,
+          "id": "line-78",
+          "kind": "paragraph",
+          "parent_id": "line-70",
+          "start_line": 78,
+          "text": "This means that when a workflow run or job starts, GitHub will cancel any workflow runs or jobs that are already in progress in the same concurrency group. This is useful in scenarios where you want to prevent parallel runs for a certain set of a workflows or jobs, such as the ones used for deployments to a staging environment, in order to prevent actions that could cause conflicts or consume more resources than necessary.\n"
+        },
+        {
+          "end_line": 80,
+          "id": "line-80",
+          "kind": "paragraph",
+          "parent_id": "line-70",
+          "start_line": 80,
+          "text": "In this example, job-1 is part of a concurrency group named staging_environment. This means that if a new run of job-1 is triggered, any runs of the same job in the staging_environment concurrency group that are already in progress will be cancelled.\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-82",
+          "kind": "code",
+          "parent_id": "line-70",
+          "start_line": 82,
+          "text": "```\njobs:\njob-1:\nruns-on: ubuntu-latest\nconcurrency:\ngroup: staging_environment\ncancel-in-progress: true\n\n```\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-94",
+          "kind": "code",
+          "parent_id": "line-70",
+          "start_line": 94,
+          "text": "```\non:\npush:\nbranches:\n- main\n\nconcurrency:\ngroup: ci-${{ github.ref }}\ncancel-in-progress: true\n\n```\n"
+        }
+      ],
+      "id": "github",
+      "source_hash": "82f4d5aaaad6ec61cd71618a0d200e3d3ad1a8902753de3253bea7bc35bb2642",
+      "title": "Control the concurrency of workflows and jobs - GitHub Docs",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency"
+    }
+  ],
+  "omitted_count": 25,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2047,
+  "max_tokens": 2048
+}

@@ -1,0 +1,22 @@
+{
+  "root": {
+    "passed": 222,
+    "failed": 0,
+    "environment": "JRG_HISTORY=off; history tests remove/override their own environment; localTCP fixtures run outside sandbox."
+  },
+  "mcp": {
+    "passed": 16,
+    "failed": 0
+  },
+  "rtk": {
+    "passed": 19,
+    "failed": 0,
+    "cargo_home": "/private/tmp/jrg-rtk-cargo-home",
+    "offline": true,
+    "local_loopback": true
+  },
+  "fmt": "pass",
+  "clippy_all_targets_deny_warnings": "pass",
+  "tsugi_reuse": "Database unavailable Error14; implemented normally.",
+  "prior_environment_failures": "SandboxTCP denied; native stdout comparisons included per-request historyUUID. No history/retrieval production or unrelated test code was changed."
+}

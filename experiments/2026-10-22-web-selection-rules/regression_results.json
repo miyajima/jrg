@@ -1,0 +1,2084 @@
+{
+  "kind": "Known regression cases; excluded from held-out aggregate",
+  "rows": [
+    {
+      "id": "sqlite",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "per_connection",
+        "transaction"
+      ],
+      "after": [
+        "per_connection",
+        "transaction"
+      ],
+      "total": 2,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "sqlite",
+              "url": "https://www.sqlite.org/foreignkeys.html",
+              "title": "SQLite Foreign Key Support",
+              "blocks": [
+                {
+                  "id": "line-67",
+                  "kind": "heading",
+                  "text": "# 1. Introduction to Foreign Key Constraints\n",
+                  "start_line": 67,
+                  "end_line": 67
+                },
+                {
+                  "id": "line-188",
+                  "kind": "paragraph",
+                  "text": "The foreign key constraint is satisfied if for each row in the child table either one or more of the child key columns are NULL, or there exists a row in the parent table for which each parent key column contains a value equal to the value in its associated child key column.\n",
+                  "parent_id": "line-67",
+                  "start_line": 188,
+                  "end_line": 188
+                },
+                {
+                  "id": "line-196",
+                  "kind": "heading",
+                  "text": "# 2. Enabling Foreign Key Support\n",
+                  "start_line": 196,
+                  "end_line": 196
+                },
+                {
+                  "id": "line-200",
+                  "kind": "paragraph",
+                  "text": "Assuming the library is compiled with foreign key constraints enabled, it must still be enabled by the application at runtime, using the PRAGMA foreign_keys command. For example:\n",
+                  "parent_id": "line-196",
+                  "start_line": 200,
+                  "end_line": 200
+                },
+                {
+                  "id": "line-207",
+                  "kind": "paragraph",
+                  "text": "Foreign key constraints are disabled by default (for backwards compatibility), so must be enabled separately for each database connection. (Note, however, that future releases of SQLite might change so that foreign key constraints enabled by default. Careful developers will not make any assumptions about whether or not foreign keys are enabled by default but will instead enable or disable them as necessary.) The application can also use a PRAGMA foreign_keys statement to determine if foreign keys are currently enabled. The following command-line session demonstrates this:\n",
+                  "parent_id": "line-196",
+                  "start_line": 207,
+                  "end_line": 207
+                },
+                {
+                  "id": "line-223",
+                  "kind": "paragraph",
+                  "text": "It is not possible to enable or disable foreign key constraints in the middle of a multi-statement transaction (when SQLite is not in autocommit mode). Attempting to do so does not return an error; it simply has no effect.\n",
+                  "parent_id": "line-196",
+                  "start_line": 223,
+                  "end_line": 223
+                },
+                {
+                  "id": "line-225",
+                  "kind": "heading",
+                  "text": "# 3. Required and Suggested Database Indexes\n",
+                  "start_line": 225,
+                  "end_line": 225
+                },
+                {
+                  "id": "line-247",
+                  "kind": "paragraph",
+                  "text": "If the database schema contains foreign key errors that require looking at more than one table definition to identify, then those errors are not detected when the tables are created. Instead, such errors prevent the application from preparing SQL statements that modify the content of the child or parent tables in ways that use the foreign keys. Errors reported when content is changed are \"DML errors\" and errors reported when the schema is changed are \"DDL errors\". So, in other words, misconfigured foreign key constraints that require looking at both the child and parent are DML errors. The English language error message for foreign key DML errors is usually \"foreign key mismatch\" but can also be \"no such table\" if the parent table does not exist. Foreign key DML errors are reported if:\n",
+                  "parent_id": "line-225",
+                  "start_line": 247,
+                  "end_line": 247
+                },
+                {
+                  "id": "line-304",
+                  "kind": "heading",
+                  "text": "# 4. Advanced Foreign Key Constraint Features\n",
+                  "start_line": 304,
+                  "end_line": 304
+                },
+                {
+                  "id": "line-332",
+                  "kind": "heading",
+                  "text": "## 4.2. Deferred Foreign Key Constraints\n",
+                  "parent_id": "line-304",
+                  "start_line": 332,
+                  "end_line": 332
+                },
+                {
+                  "id": "line-338",
+                  "kind": "paragraph",
+                  "text": "If the current statement is not inside an explicit transaction (a BEGIN/COMMIT/ROLLBACK block), then an implicit transaction is committed as soon as the statement has finished executing. In this case deferred constraints behave the same as immediate constraints.\n",
+                  "parent_id": "line-332",
+                  "start_line": 338,
+                  "end_line": 338
+                },
+                {
+                  "id": "line-395",
+                  "kind": "paragraph",
+                  "text": "A nested savepoint transaction may be RELEASEd while the database is in a state that does not satisfy a deferred foreign key constraint. A transaction savepoint (a non-nested savepoint that was opened while there was not currently an open transaction), on the other hand, is subject to the same restrictions as a COMMIT - attempting to RELEASE it while the database is in such a state will fail.\n",
+                  "parent_id": "line-332",
+                  "start_line": 395,
+                  "end_line": 395
+                }
+              ],
+              "source_hash": "3e7ff88e20c0910a4143cea65a1a37eea34c4b69202f15f8d7c577a0be4dd4cd"
+            }
+          ],
+          "omitted_count": 127,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1015,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "sqlite",
+              "url": "https://www.sqlite.org/foreignkeys.html",
+              "title": "SQLite Foreign Key Support",
+              "blocks": [
+                {
+                  "id": "line-67",
+                  "kind": "heading",
+                  "text": "# 1. Introduction to Foreign Key Constraints\n",
+                  "start_line": 67,
+                  "end_line": 67
+                },
+                {
+                  "id": "line-188",
+                  "kind": "paragraph",
+                  "text": "The foreign key constraint is satisfied if for each row in the child table either one or more of the child key columns are NULL, or there exists a row in the parent table for which each parent key column contains a value equal to the value in its associated child key column.\n",
+                  "parent_id": "line-67",
+                  "start_line": 188,
+                  "end_line": 188
+                },
+                {
+                  "id": "line-196",
+                  "kind": "heading",
+                  "text": "# 2. Enabling Foreign Key Support\n",
+                  "start_line": 196,
+                  "end_line": 196
+                },
+                {
+                  "id": "line-200",
+                  "kind": "paragraph",
+                  "text": "Assuming the library is compiled with foreign key constraints enabled, it must still be enabled by the application at runtime, using the PRAGMA foreign_keys command. For example:\n",
+                  "parent_id": "line-196",
+                  "start_line": 200,
+                  "end_line": 200
+                },
+                {
+                  "id": "line-207",
+                  "kind": "paragraph",
+                  "text": "Foreign key constraints are disabled by default (for backwards compatibility), so must be enabled separately for each database connection. (Note, however, that future releases of SQLite might change so that foreign key constraints enabled by default. Careful developers will not make any assumptions about whether or not foreign keys are enabled by default but will instead enable or disable them as necessary.) The application can also use a PRAGMA foreign_keys statement to determine if foreign keys are currently enabled. The following command-line session demonstrates this:\n",
+                  "parent_id": "line-196",
+                  "start_line": 207,
+                  "end_line": 207
+                },
+                {
+                  "id": "line-223",
+                  "kind": "paragraph",
+                  "text": "It is not possible to enable or disable foreign key constraints in the middle of a multi-statement transaction (when SQLite is not in autocommit mode). Attempting to do so does not return an error; it simply has no effect.\n",
+                  "parent_id": "line-196",
+                  "start_line": 223,
+                  "end_line": 223
+                },
+                {
+                  "id": "line-225",
+                  "kind": "heading",
+                  "text": "# 3. Required and Suggested Database Indexes\n",
+                  "start_line": 225,
+                  "end_line": 225
+                },
+                {
+                  "id": "line-247",
+                  "kind": "paragraph",
+                  "text": "If the database schema contains foreign key errors that require looking at more than one table definition to identify, then those errors are not detected when the tables are created. Instead, such errors prevent the application from preparing SQL statements that modify the content of the child or parent tables in ways that use the foreign keys. Errors reported when content is changed are \"DML errors\" and errors reported when the schema is changed are \"DDL errors\". So, in other words, misconfigured foreign key constraints that require looking at both the child and parent are DML errors. The English language error message for foreign key DML errors is usually \"foreign key mismatch\" but can also be \"no such table\" if the parent table does not exist. Foreign key DML errors are reported if:\n",
+                  "parent_id": "line-225",
+                  "start_line": 247,
+                  "end_line": 247
+                },
+                {
+                  "id": "line-304",
+                  "kind": "heading",
+                  "text": "# 4. Advanced Foreign Key Constraint Features\n",
+                  "start_line": 304,
+                  "end_line": 304
+                },
+                {
+                  "id": "line-332",
+                  "kind": "heading",
+                  "text": "## 4.2. Deferred Foreign Key Constraints\n",
+                  "parent_id": "line-304",
+                  "start_line": 332,
+                  "end_line": 332
+                },
+                {
+                  "id": "line-338",
+                  "kind": "paragraph",
+                  "text": "If the current statement is not inside an explicit transaction (a BEGIN/COMMIT/ROLLBACK block), then an implicit transaction is committed as soon as the statement has finished executing. In this case deferred constraints behave the same as immediate constraints.\n",
+                  "parent_id": "line-332",
+                  "start_line": 338,
+                  "end_line": 338
+                },
+                {
+                  "id": "line-395",
+                  "kind": "paragraph",
+                  "text": "A nested savepoint transaction may be RELEASEd while the database is in a state that does not satisfy a deferred foreign key constraint. A transaction savepoint (a non-nested savepoint that was opened while there was not currently an open transaction), on the other hand, is subject to the same restrictions as a COMMIT - attempting to RELEASE it while the database is in such a state will fail.\n",
+                  "parent_id": "line-332",
+                  "start_line": 395,
+                  "end_line": 395
+                }
+              ],
+              "source_hash": "3e7ff88e20c0910a4143cea65a1a37eea34c4b69202f15f8d7c577a0be4dd4cd"
+            }
+          ],
+          "omitted_count": 127,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1015,
+          "max_tokens": 1024
+        }
+      }
+    },
+    {
+      "id": "postgres",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "null_semantics"
+      ],
+      "after": [
+        "null_semantics"
+      ],
+      "total": 1,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "postgres",
+              "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+              "title": "PostgreSQL: Documentation: 18: 5.5. Constraints",
+              "blocks": [
+                {
+                  "id": "line-91",
+                  "kind": "heading",
+                  "text": "## 5.5. Constraints #\n",
+                  "start_line": 91,
+                  "end_line": 91
+                },
+                {
+                  "id": "line-105",
+                  "kind": "paragraph",
+                  "text": "Data types are a way to limit the kind of data that can be stored in a table. For many applications, however, the constraint they provide is too coarse. For example, a column containing a product price should probably only accept positive values. But there is no standard data type that accepts only positive numbers. Another issue is that you might want to constrain column data with respect to other columns or rows. For example, in a table containing product information, there should be only one row for each product number.\n",
+                  "parent_id": "line-91",
+                  "start_line": 105,
+                  "end_line": 105
+                },
+                {
+                  "id": "line-295",
+                  "kind": "heading",
+                  "text": "### 5.5.3. Unique Constraints #\n",
+                  "parent_id": "line-91",
+                  "start_line": 295,
+                  "end_line": 295
+                },
+                {
+                  "id": "line-297",
+                  "kind": "paragraph",
+                  "text": "Unique constraints ensure that the data contained in a column, or a group of columns, is unique among all the rows in the table. The syntax is:\n",
+                  "parent_id": "line-295",
+                  "start_line": 297,
+                  "end_line": 297
+                },
+                {
+                  "id": "line-351",
+                  "kind": "paragraph",
+                  "text": "Adding a unique constraint will automatically create a unique B-tree index on the column or group of columns listed in the constraint. A uniqueness restriction covering only some rows cannot be written as a unique constraint, but it is possible to enforce such a restriction by creating a unique partial index.\n",
+                  "parent_id": "line-295",
+                  "start_line": 351,
+                  "end_line": 351
+                },
+                {
+                  "id": "line-353",
+                  "kind": "paragraph",
+                  "text": "In general, a unique constraint is violated if there is more than one row in the table where the values of all of the columns included in the constraint are equal. By default, two null values are not considered equal in this comparison. That means even in the presence of a unique constraint it is possible to store duplicate rows that contain a null value in at least one of the constrained columns. This behavior can be changed by adding the clause NULLS NOT DISTINCT, like\n",
+                  "parent_id": "line-295",
+                  "start_line": 353,
+                  "end_line": 353
+                },
+                {
+                  "id": "line-380",
+                  "kind": "heading",
+                  "text": "### 5.5.4. Primary Keys #\n",
+                  "parent_id": "line-91",
+                  "start_line": 380,
+                  "end_line": 380
+                },
+                {
+                  "id": "line-382",
+                  "kind": "paragraph",
+                  "text": "A primary key constraint indicates that a column, or group of columns, can be used as a unique identifier for rows in the table. This requires that the values be both unique and not null. So, the following two table definitions accept the same data:\n",
+                  "parent_id": "line-380",
+                  "start_line": 382,
+                  "end_line": 382
+                },
+                {
+                  "id": "line-423",
+                  "kind": "heading",
+                  "text": "### 5.5.5. Foreign Keys #\n",
+                  "parent_id": "line-91",
+                  "start_line": 423,
+                  "end_line": 423
+                },
+                {
+                  "id": "line-567",
+                  "kind": "paragraph",
+                  "text": "There are two other options: SET NULL and SET DEFAULT. These cause the referencing column(s) in the referencing row(s) to be set to nulls or their default values, respectively, when the referenced row is deleted. Note that these do not excuse you from observing any constraints. For example, if an action specifies SET DEFAULT but the default value would not satisfy the foreign key constraint, the operation will fail.\n",
+                  "parent_id": "line-423",
+                  "start_line": 567,
+                  "end_line": 567
+                },
+                {
+                  "id": "line-599",
+                  "kind": "paragraph",
+                  "text": "Normally, a referencing row need not satisfy the foreign key constraint if any of its referencing columns are null. If MATCH FULL is added to the foreign key declaration, a referencing row escapes satisfying the constraint only if all its referencing columns are null (so a mix of null and non-null values is guaranteed to fail a MATCH FULL constraint). If you don't want referencing rows to be able to avoid satisfying the foreign key constraint, declare the referencing column(s) as NOT NULL.\n",
+                  "parent_id": "line-423",
+                  "start_line": 599,
+                  "end_line": 599
+                }
+              ],
+              "source_hash": "e6a80937be9f32bc0d7bde609f2ea0a2108a6c6790af364747813908f5d27e27"
+            }
+          ],
+          "omitted_count": 148,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1003,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "postgres",
+              "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+              "title": "PostgreSQL: Documentation: 18: 5.5. Constraints",
+              "blocks": [
+                {
+                  "id": "line-91",
+                  "kind": "heading",
+                  "text": "## 5.5. Constraints #\n",
+                  "start_line": 91,
+                  "end_line": 91
+                },
+                {
+                  "id": "line-105",
+                  "kind": "paragraph",
+                  "text": "Data types are a way to limit the kind of data that can be stored in a table. For many applications, however, the constraint they provide is too coarse. For example, a column containing a product price should probably only accept positive values. But there is no standard data type that accepts only positive numbers. Another issue is that you might want to constrain column data with respect to other columns or rows. For example, in a table containing product information, there should be only one row for each product number.\n",
+                  "parent_id": "line-91",
+                  "start_line": 105,
+                  "end_line": 105
+                },
+                {
+                  "id": "line-295",
+                  "kind": "heading",
+                  "text": "### 5.5.3. Unique Constraints #\n",
+                  "parent_id": "line-91",
+                  "start_line": 295,
+                  "end_line": 295
+                },
+                {
+                  "id": "line-297",
+                  "kind": "paragraph",
+                  "text": "Unique constraints ensure that the data contained in a column, or a group of columns, is unique among all the rows in the table. The syntax is:\n",
+                  "parent_id": "line-295",
+                  "start_line": 297,
+                  "end_line": 297
+                },
+                {
+                  "id": "line-351",
+                  "kind": "paragraph",
+                  "text": "Adding a unique constraint will automatically create a unique B-tree index on the column or group of columns listed in the constraint. A uniqueness restriction covering only some rows cannot be written as a unique constraint, but it is possible to enforce such a restriction by creating a unique partial index.\n",
+                  "parent_id": "line-295",
+                  "start_line": 351,
+                  "end_line": 351
+                },
+                {
+                  "id": "line-353",
+                  "kind": "paragraph",
+                  "text": "In general, a unique constraint is violated if there is more than one row in the table where the values of all of the columns included in the constraint are equal. By default, two null values are not considered equal in this comparison. That means even in the presence of a unique constraint it is possible to store duplicate rows that contain a null value in at least one of the constrained columns. This behavior can be changed by adding the clause NULLS NOT DISTINCT, like\n",
+                  "parent_id": "line-295",
+                  "start_line": 353,
+                  "end_line": 353
+                },
+                {
+                  "id": "line-380",
+                  "kind": "heading",
+                  "text": "### 5.5.4. Primary Keys #\n",
+                  "parent_id": "line-91",
+                  "start_line": 380,
+                  "end_line": 380
+                },
+                {
+                  "id": "line-382",
+                  "kind": "paragraph",
+                  "text": "A primary key constraint indicates that a column, or group of columns, can be used as a unique identifier for rows in the table. This requires that the values be both unique and not null. So, the following two table definitions accept the same data:\n",
+                  "parent_id": "line-380",
+                  "start_line": 382,
+                  "end_line": 382
+                },
+                {
+                  "id": "line-423",
+                  "kind": "heading",
+                  "text": "### 5.5.5. Foreign Keys #\n",
+                  "parent_id": "line-91",
+                  "start_line": 423,
+                  "end_line": 423
+                },
+                {
+                  "id": "line-567",
+                  "kind": "paragraph",
+                  "text": "There are two other options: SET NULL and SET DEFAULT. These cause the referencing column(s) in the referencing row(s) to be set to nulls or their default values, respectively, when the referenced row is deleted. Note that these do not excuse you from observing any constraints. For example, if an action specifies SET DEFAULT but the default value would not satisfy the foreign key constraint, the operation will fail.\n",
+                  "parent_id": "line-423",
+                  "start_line": 567,
+                  "end_line": 567
+                },
+                {
+                  "id": "line-599",
+                  "kind": "paragraph",
+                  "text": "Normally, a referencing row need not satisfy the foreign key constraint if any of its referencing columns are null. If MATCH FULL is added to the foreign key declaration, a referencing row escapes satisfying the constraint only if all its referencing columns are null (so a mix of null and non-null values is guaranteed to fail a MATCH FULL constraint). If you don't want referencing rows to be able to avoid satisfying the foreign key constraint, declare the referencing column(s) as NOT NULL.\n",
+                  "parent_id": "line-423",
+                  "start_line": 599,
+                  "end_line": 599
+                }
+              ],
+              "source_hash": "e6a80937be9f32bc0d7bde609f2ea0a2108a6c6790af364747813908f5d27e27"
+            }
+          ],
+          "omitted_count": 148,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1003,
+          "max_tokens": 1024
+        }
+      }
+    },
+    {
+      "id": "docker",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "recursive_readonly"
+      ],
+      "after": [
+        "recursive_readonly"
+      ],
+      "total": 1,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "docker",
+              "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+              "title": "Bind mounts | Docker Docs",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# Bind mounts\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-39",
+                  "kind": "heading",
+                  "text": "## Syntax\n",
+                  "parent_id": "line-1",
+                  "start_line": 39,
+                  "end_line": 39
+                },
+                {
+                  "id": "line-53",
+                  "kind": "paragraph",
+                  "text": "By default, --mount does not automatically create a directory if the specified mount path does not exist on the host. Instead, it produces an error:\n",
+                  "parent_id": "line-39",
+                  "start_line": 53,
+                  "end_line": 53
+                },
+                {
+                  "id": "line-123",
+                  "kind": "heading",
+                  "text": "## Start a container with a bind mount\n",
+                  "parent_id": "line-1",
+                  "start_line": 123,
+                  "end_line": 123
+                },
+                {
+                  "id": "line-175",
+                  "kind": "heading",
+                  "text": "### Mount into a non-empty directory on the container\n",
+                  "parent_id": "line-123",
+                  "start_line": 175,
+                  "end_line": 175
+                },
+                {
+                  "id": "line-177",
+                  "kind": "paragraph",
+                  "text": "If you bind-mount a directory into a non-empty directory on the container, the directory's existing contents are obscured by the bind mount. This can be beneficial, such as when you want to test a new version of your application without building a new image. However, it can also be surprising and this behavior differs from that of volumes.\n",
+                  "parent_id": "line-175",
+                  "start_line": 177,
+                  "end_line": 177
+                },
+                {
+                  "id": "line-218",
+                  "kind": "heading",
+                  "text": "## Use a read-only bind mount\n",
+                  "parent_id": "line-1",
+                  "start_line": 218,
+                  "end_line": 218
+                },
+                {
+                  "id": "line-220",
+                  "kind": "paragraph",
+                  "text": "For some development applications, the container needs to write into the bind mount, so changes are propagated back to the Docker host. At other times, the container only needs read access.\n",
+                  "parent_id": "line-218",
+                  "start_line": 220,
+                  "end_line": 220
+                },
+                {
+                  "id": "line-222",
+                  "kind": "paragraph",
+                  "text": "This example modifies the previous one, but mounts the directory as a read-only bind mount, by adding ro to the (empty by default) list of options, after the mount point within the container. Where multiple options are present, separate them by commas.\n",
+                  "parent_id": "line-218",
+                  "start_line": 222,
+                  "end_line": 222
+                },
+                {
+                  "id": "line-226",
+                  "kind": "paragraph",
+                  "text": "--mount\n",
+                  "parent_id": "line-218",
+                  "start_line": 226,
+                  "end_line": 226
+                },
+                {
+                  "id": "line-270",
+                  "kind": "heading",
+                  "text": "## Recursive mounts\n",
+                  "parent_id": "line-1",
+                  "start_line": 270,
+                  "end_line": 270
+                },
+                {
+                  "id": "line-272",
+                  "kind": "paragraph",
+                  "text": "When you bind mount a path that itself contains mounts, those submounts are also included in the bind mount by default. This behavior is configurable, using the bind-recursive option for --mount. This option is only supported with the --mount flag, not with -v or --volume.\n",
+                  "parent_id": "line-270",
+                  "start_line": 272,
+                  "end_line": 272
+                },
+                {
+                  "id": "line-274",
+                  "kind": "paragraph",
+                  "text": "If the bind mount is read-only, the Docker Engine makes a best-effort attempt at making the submounts read-only as well. This is referred to as recursive read-only mounts. Recursive read-only mounts require Linux kernel version 5.12 or later. If you're running an older kernel version, submounts are automatically mounted as read-write by default. Attempting to set submounts to be read-only on a kernel version earlier than 5.12, using the bind-recursive=readonly option, results in an error.\n",
+                  "parent_id": "line-270",
+                  "start_line": 274,
+                  "end_line": 274
+                },
+                {
+                  "id": "line-278",
+                  "kind": "table",
+                  "text": "| Value | Description |\n| enabled (default) | Read-only mounts are made recursively read-only if kernel is v5.12 or later. Otherwise, submounts are read-write. |\n| disabled | Submounts are ignored (not included in the bind mount). |\n| writable | Submounts are read-write. |\n| readonly | Submounts are read-only. Requires kernel v5.12 or later. |\n",
+                  "parent_id": "line-270",
+                  "start_line": 278,
+                  "end_line": 282
+                }
+              ],
+              "source_hash": "7bd2f1aa709e2bae31826f48062fda846a5ef638d9db973fc799eb9eeaeeb47f"
+            }
+          ],
+          "omitted_count": 102,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1011,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "docker",
+              "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+              "title": "Bind mounts | Docker Docs",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# Bind mounts\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-39",
+                  "kind": "heading",
+                  "text": "## Syntax\n",
+                  "parent_id": "line-1",
+                  "start_line": 39,
+                  "end_line": 39
+                },
+                {
+                  "id": "line-53",
+                  "kind": "paragraph",
+                  "text": "By default, --mount does not automatically create a directory if the specified mount path does not exist on the host. Instead, it produces an error:\n",
+                  "parent_id": "line-39",
+                  "start_line": 53,
+                  "end_line": 53
+                },
+                {
+                  "id": "line-123",
+                  "kind": "heading",
+                  "text": "## Start a container with a bind mount\n",
+                  "parent_id": "line-1",
+                  "start_line": 123,
+                  "end_line": 123
+                },
+                {
+                  "id": "line-175",
+                  "kind": "heading",
+                  "text": "### Mount into a non-empty directory on the container\n",
+                  "parent_id": "line-123",
+                  "start_line": 175,
+                  "end_line": 175
+                },
+                {
+                  "id": "line-177",
+                  "kind": "paragraph",
+                  "text": "If you bind-mount a directory into a non-empty directory on the container, the directory's existing contents are obscured by the bind mount. This can be beneficial, such as when you want to test a new version of your application without building a new image. However, it can also be surprising and this behavior differs from that of volumes.\n",
+                  "parent_id": "line-175",
+                  "start_line": 177,
+                  "end_line": 177
+                },
+                {
+                  "id": "line-218",
+                  "kind": "heading",
+                  "text": "## Use a read-only bind mount\n",
+                  "parent_id": "line-1",
+                  "start_line": 218,
+                  "end_line": 218
+                },
+                {
+                  "id": "line-220",
+                  "kind": "paragraph",
+                  "text": "For some development applications, the container needs to write into the bind mount, so changes are propagated back to the Docker host. At other times, the container only needs read access.\n",
+                  "parent_id": "line-218",
+                  "start_line": 220,
+                  "end_line": 220
+                },
+                {
+                  "id": "line-222",
+                  "kind": "paragraph",
+                  "text": "This example modifies the previous one, but mounts the directory as a read-only bind mount, by adding ro to the (empty by default) list of options, after the mount point within the container. Where multiple options are present, separate them by commas.\n",
+                  "parent_id": "line-218",
+                  "start_line": 222,
+                  "end_line": 222
+                },
+                {
+                  "id": "line-226",
+                  "kind": "paragraph",
+                  "text": "--mount\n",
+                  "parent_id": "line-218",
+                  "start_line": 226,
+                  "end_line": 226
+                },
+                {
+                  "id": "line-270",
+                  "kind": "heading",
+                  "text": "## Recursive mounts\n",
+                  "parent_id": "line-1",
+                  "start_line": 270,
+                  "end_line": 270
+                },
+                {
+                  "id": "line-272",
+                  "kind": "paragraph",
+                  "text": "When you bind mount a path that itself contains mounts, those submounts are also included in the bind mount by default. This behavior is configurable, using the bind-recursive option for --mount. This option is only supported with the --mount flag, not with -v or --volume.\n",
+                  "parent_id": "line-270",
+                  "start_line": 272,
+                  "end_line": 272
+                },
+                {
+                  "id": "line-274",
+                  "kind": "paragraph",
+                  "text": "If the bind mount is read-only, the Docker Engine makes a best-effort attempt at making the submounts read-only as well. This is referred to as recursive read-only mounts. Recursive read-only mounts require Linux kernel version 5.12 or later. If you're running an older kernel version, submounts are automatically mounted as read-write by default. Attempting to set submounts to be read-only on a kernel version earlier than 5.12, using the bind-recursive=readonly option, results in an error.\n",
+                  "parent_id": "line-270",
+                  "start_line": 274,
+                  "end_line": 274
+                },
+                {
+                  "id": "line-278",
+                  "kind": "table",
+                  "text": "| Value | Description |\n| enabled (default) | Read-only mounts are made recursively read-only if kernel is v5.12 or later. Otherwise, submounts are read-write. |\n| disabled | Submounts are ignored (not included in the bind mount). |\n| writable | Submounts are read-write. |\n| readonly | Submounts are read-only. Requires kernel v5.12 or later. |\n",
+                  "parent_id": "line-270",
+                  "start_line": 278,
+                  "end_line": 282
+                }
+              ],
+              "source_hash": "7bd2f1aa709e2bae31826f48062fda846a5ef638d9db973fc799eb9eeaeeb47f"
+            }
+          ],
+          "omitted_count": 102,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1011,
+          "max_tokens": 1024
+        }
+      }
+    },
+    {
+      "id": "kubernetes",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "eventual",
+        "delay",
+        "subpath"
+      ],
+      "after": [
+        "eventual",
+        "delay",
+        "subpath"
+      ],
+      "total": 3,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "kubernetes",
+              "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+              "title": "Secrets | Kubernetes",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# Secrets\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-106",
+                  "kind": "heading",
+                  "text": "## Types of Secret\n",
+                  "parent_id": "line-1",
+                  "start_line": 106,
+                  "end_line": 106
+                },
+                {
+                  "id": "line-108",
+                  "kind": "paragraph",
+                  "text": "When creating a Secret, you can specify its type using the type field of the Secret resource, or certain equivalent kubectl command line flags (if available). The Secret type is used to facilitate programmatic handling of the Secret data.\n",
+                  "parent_id": "line-106",
+                  "start_line": 108,
+                  "end_line": 108
+                },
+                {
+                  "id": "line-148",
+                  "kind": "heading",
+                  "text": "### ServiceAccount token Secrets\n",
+                  "parent_id": "line-106",
+                  "start_line": 148,
+                  "end_line": 148
+                },
+                {
+                  "id": "line-156",
+                  "kind": "list",
+                  "text": "- Request a mounted token in a projected volume in your Pod manifest. Kubernetes creates the token and mounts it in the Pod. The token is automatically invalidated when the Pod that it's mounted in is deleted. For details, see Launch a Pod using service account token projection.\n",
+                  "parent_id": "line-148",
+                  "start_line": 156,
+                  "end_line": 156
+                },
+                {
+                  "id": "line-321",
+                  "kind": "heading",
+                  "text": "### TLS Secrets\n",
+                  "parent_id": "line-106",
+                  "start_line": 321,
+                  "end_line": 321
+                },
+                {
+                  "id": "line-323",
+                  "kind": "paragraph",
+                  "text": "The kubernetes.io/tls Secret type is for storing a certificate and its associated key that are typically used for TLS.\n",
+                  "parent_id": "line-321",
+                  "start_line": 323,
+                  "end_line": 323
+                },
+                {
+                  "id": "line-429",
+                  "kind": "heading",
+                  "text": "## Working with Secrets\n",
+                  "parent_id": "line-1",
+                  "start_line": 429,
+                  "end_line": 429
+                },
+                {
+                  "id": "line-453",
+                  "kind": "heading",
+                  "text": "### Editing a Secret\n",
+                  "parent_id": "line-429",
+                  "start_line": 453,
+                  "end_line": 453
+                },
+                {
+                  "id": "line-463",
+                  "kind": "paragraph",
+                  "text": "Depending on how you created the Secret, as well as how the Secret is used in your Pods, updates to existing Secret objects are propagated automatically to Pods that use the data. For more information, refer to Using Secrets as files from a Pod section.\n",
+                  "parent_id": "line-453",
+                  "start_line": 463,
+                  "end_line": 463
+                },
+                {
+                  "id": "line-503",
+                  "kind": "heading",
+                  "text": "### Using Secrets as files from a Pod\n",
+                  "parent_id": "line-429",
+                  "start_line": 503,
+                  "end_line": 503
+                },
+                {
+                  "id": "line-509",
+                  "kind": "paragraph",
+                  "text": "When a volume contains data from a Secret, and that Secret is updated, Kubernetes tracks this and updates the data in the volume, using an eventually-consistent approach.\n",
+                  "parent_id": "line-503",
+                  "start_line": 509,
+                  "end_line": 509
+                },
+                {
+                  "id": "line-511",
+                  "kind": "heading",
+                  "text": "#### Note:\n",
+                  "parent_id": "line-503",
+                  "start_line": 511,
+                  "end_line": 511
+                },
+                {
+                  "id": "line-513",
+                  "kind": "paragraph",
+                  "text": "A container using a Secret as a\nsubPath volume mount does not receive\nautomated Secret updates.\n",
+                  "parent_id": "line-511",
+                  "start_line": 513,
+                  "end_line": 515
+                },
+                {
+                  "id": "line-517",
+                  "kind": "paragraph",
+                  "text": "The kubelet keeps a cache of the current keys and values for the Secrets that are used in volumes for pods on that node. You can configure the way that the kubelet detects changes from the cached values. The configMapAndSecretChangeDetectionStrategy field in the kubelet configuration controls which strategy the kubelet uses. The default strategy is Watch.\n",
+                  "parent_id": "line-511",
+                  "start_line": 517,
+                  "end_line": 517
+                },
+                {
+                  "id": "line-521",
+                  "kind": "paragraph",
+                  "text": "As a result, the total delay from the moment when the Secret is updated to the moment when new keys are projected to the Pod can be as long as the kubelet sync period + cache propagation delay, where the cache propagation delay depends on the chosen cache type (following the same order listed in the previous paragraph, these are: watch propagation delay, the configured cache TTL, or zero for direct polling).\n",
+                  "parent_id": "line-511",
+                  "start_line": 521,
+                  "end_line": 521
+                }
+              ],
+              "source_hash": "f9b756063d7923a42f9ad4eaa8b3d6e68a900e65a3434ef6881b66b60e24820c"
+            }
+          ],
+          "omitted_count": 204,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1010,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "kubernetes",
+              "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+              "title": "Secrets | Kubernetes",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# Secrets\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-106",
+                  "kind": "heading",
+                  "text": "## Types of Secret\n",
+                  "parent_id": "line-1",
+                  "start_line": 106,
+                  "end_line": 106
+                },
+                {
+                  "id": "line-108",
+                  "kind": "paragraph",
+                  "text": "When creating a Secret, you can specify its type using the type field of the Secret resource, or certain equivalent kubectl command line flags (if available). The Secret type is used to facilitate programmatic handling of the Secret data.\n",
+                  "parent_id": "line-106",
+                  "start_line": 108,
+                  "end_line": 108
+                },
+                {
+                  "id": "line-148",
+                  "kind": "heading",
+                  "text": "### ServiceAccount token Secrets\n",
+                  "parent_id": "line-106",
+                  "start_line": 148,
+                  "end_line": 148
+                },
+                {
+                  "id": "line-156",
+                  "kind": "list",
+                  "text": "- Request a mounted token in a projected volume in your Pod manifest. Kubernetes creates the token and mounts it in the Pod. The token is automatically invalidated when the Pod that it's mounted in is deleted. For details, see Launch a Pod using service account token projection.\n",
+                  "parent_id": "line-148",
+                  "start_line": 156,
+                  "end_line": 156
+                },
+                {
+                  "id": "line-321",
+                  "kind": "heading",
+                  "text": "### TLS Secrets\n",
+                  "parent_id": "line-106",
+                  "start_line": 321,
+                  "end_line": 321
+                },
+                {
+                  "id": "line-323",
+                  "kind": "paragraph",
+                  "text": "The kubernetes.io/tls Secret type is for storing a certificate and its associated key that are typically used for TLS.\n",
+                  "parent_id": "line-321",
+                  "start_line": 323,
+                  "end_line": 323
+                },
+                {
+                  "id": "line-429",
+                  "kind": "heading",
+                  "text": "## Working with Secrets\n",
+                  "parent_id": "line-1",
+                  "start_line": 429,
+                  "end_line": 429
+                },
+                {
+                  "id": "line-453",
+                  "kind": "heading",
+                  "text": "### Editing a Secret\n",
+                  "parent_id": "line-429",
+                  "start_line": 453,
+                  "end_line": 453
+                },
+                {
+                  "id": "line-463",
+                  "kind": "paragraph",
+                  "text": "Depending on how you created the Secret, as well as how the Secret is used in your Pods, updates to existing Secret objects are propagated automatically to Pods that use the data. For more information, refer to Using Secrets as files from a Pod section.\n",
+                  "parent_id": "line-453",
+                  "start_line": 463,
+                  "end_line": 463
+                },
+                {
+                  "id": "line-503",
+                  "kind": "heading",
+                  "text": "### Using Secrets as files from a Pod\n",
+                  "parent_id": "line-429",
+                  "start_line": 503,
+                  "end_line": 503
+                },
+                {
+                  "id": "line-509",
+                  "kind": "paragraph",
+                  "text": "When a volume contains data from a Secret, and that Secret is updated, Kubernetes tracks this and updates the data in the volume, using an eventually-consistent approach.\n",
+                  "parent_id": "line-503",
+                  "start_line": 509,
+                  "end_line": 509
+                },
+                {
+                  "id": "line-511",
+                  "kind": "heading",
+                  "text": "#### Note:\n",
+                  "parent_id": "line-503",
+                  "start_line": 511,
+                  "end_line": 511
+                },
+                {
+                  "id": "line-513",
+                  "kind": "paragraph",
+                  "text": "A container using a Secret as a\nsubPath volume mount does not receive\nautomated Secret updates.\n",
+                  "parent_id": "line-511",
+                  "start_line": 513,
+                  "end_line": 515
+                },
+                {
+                  "id": "line-517",
+                  "kind": "paragraph",
+                  "text": "The kubelet keeps a cache of the current keys and values for the Secrets that are used in volumes for pods on that node. You can configure the way that the kubelet detects changes from the cached values. The configMapAndSecretChangeDetectionStrategy field in the kubelet configuration controls which strategy the kubelet uses. The default strategy is Watch.\n",
+                  "parent_id": "line-511",
+                  "start_line": 517,
+                  "end_line": 517
+                },
+                {
+                  "id": "line-521",
+                  "kind": "paragraph",
+                  "text": "As a result, the total delay from the moment when the Secret is updated to the moment when new keys are projected to the Pod can be as long as the kubelet sync period + cache propagation delay, where the cache propagation delay depends on the chosen cache type (following the same order listed in the previous paragraph, these are: watch propagation delay, the configured cache TTL, or zero for direct polling).\n",
+                  "parent_id": "line-511",
+                  "start_line": 521,
+                  "end_line": 521
+                }
+              ],
+              "source_hash": "f9b756063d7923a42f9ad4eaa8b3d6e68a900e65a3434ef6881b66b60e24820c"
+            }
+          ],
+          "omitted_count": 204,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1010,
+          "max_tokens": 1024
+        }
+      }
+    },
+    {
+      "id": "fetch",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "samesite",
+        "server"
+      ],
+      "after": [
+        "samesite",
+        "server"
+      ],
+      "total": 3,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "fetch",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+              "title": "Using the Fetch API - Web APIs | MDN",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# Using the Fetch API\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-41",
+                  "kind": "heading",
+                  "text": "## Making a request\n",
+                  "parent_id": "line-1",
+                  "start_line": 41,
+                  "end_line": 41
+                },
+                {
+                  "id": "line-218",
+                  "kind": "heading",
+                  "text": "### Making cross-origin requests\n",
+                  "parent_id": "line-41",
+                  "start_line": 218,
+                  "end_line": 218
+                },
+                {
+                  "id": "line-222",
+                  "kind": "list",
+                  "text": "- For fetch requests the default value of mode is cors, meaning that if the request is cross-origin then it will use the Cross-Origin Resource Sharing (CORS) mechanism. This means that: if the request is a simple request, then the request will always be sent, but the server must respond with the correct Access-Control-Allow-Origin header or the browser will not share the response with the caller. if the request is not a simple request, then the browser will send a preflighted request to check that the server understands CORS and allows the request, and the real request will not be sent unless the server responds to the preflighted request with the appropriate CORS headers.\n",
+                  "parent_id": "line-218",
+                  "start_line": 222,
+                  "end_line": 222
+                },
+                {
+                  "id": "line-224",
+                  "kind": "list",
+                  "text": "- Setting mode to same-origin disallows cross-origin requests completely.\n",
+                  "parent_id": "line-218",
+                  "start_line": 224,
+                  "end_line": 224
+                },
+                {
+                  "id": "line-230",
+                  "kind": "heading",
+                  "text": "### Including credentials\n",
+                  "parent_id": "line-41",
+                  "start_line": 230,
+                  "end_line": 230
+                },
+                {
+                  "id": "line-234",
+                  "kind": "list",
+                  "text": "- HTTP cookies\n",
+                  "parent_id": "line-230",
+                  "start_line": 234,
+                  "end_line": 234
+                },
+                {
+                  "id": "line-240",
+                  "kind": "paragraph",
+                  "text": "By default, credentials are only included in same-origin requests. To customize this behavior, as well as to control whether the browser respects any Set-Cookie response headers, set the credentials option, which can take one of the following three values:\n",
+                  "parent_id": "line-230",
+                  "start_line": 240,
+                  "end_line": 240
+                },
+                {
+                  "id": "line-244",
+                  "kind": "list",
+                  "text": "- same-origin (the default): only send and include credentials for same-origin requests.\n",
+                  "parent_id": "line-230",
+                  "start_line": 244,
+                  "end_line": 244
+                },
+                {
+                  "id": "line-248",
+                  "kind": "paragraph",
+                  "text": "Note that if a cookie's SameSite attribute is set to Strict or Lax, then the cookie will not be sent cross-site, even if credentials is set to include.\n",
+                  "parent_id": "line-230",
+                  "start_line": 248,
+                  "end_line": 248
+                },
+                {
+                  "id": "line-250",
+                  "kind": "paragraph",
+                  "text": "Including credentials in cross-origin requests can make a site vulnerable to CSRF attacks, so even if credentials is set to include, the server must also agree to their inclusion by including the Access-Control-Allow-Credentials header in its response. Additionally, in this situation the server must explicitly specify the client's origin in the Access-Control-Allow-Origin response header (that is, * is not allowed).\n",
+                  "parent_id": "line-230",
+                  "start_line": 250,
+                  "end_line": 250
+                },
+                {
+                  "id": "line-254",
+                  "kind": "list",
+                  "text": "- If the request is a simple request, then the request will be sent with credentials, but the server must set the Access-Control-Allow-Credentials and Access-Control-Allow-Origin response headers, or the browser will return a network error to the caller. If the server does set the correct headers, then the response, including credentials, will be delivered to the caller.\n",
+                  "parent_id": "line-230",
+                  "start_line": 254,
+                  "end_line": 254
+                },
+                {
+                  "id": "line-256",
+                  "kind": "list",
+                  "text": "- If the request is not a simple request, then the browser will send a preflighted request without credentials, and the server must set the Access-Control-Allow-Credentials and Access-Control-Allow-Origin response headers, or the browser will return a network error to the caller. If the server does set the correct headers, then the browser will follow up with the real request, including credentials, and will deliver the real response, including credentials, to the caller.\n",
+                  "parent_id": "line-230",
+                  "start_line": 256,
+                  "end_line": 256
+                }
+              ],
+              "source_hash": "2858e831d9d4e4329d75aa2af75528ab82d3825b6cc167ac75d16a079cdc41dc"
+            }
+          ],
+          "omitted_count": 164,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1017,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "fetch",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+              "title": "Using the Fetch API - Web APIs | MDN",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# Using the Fetch API\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-41",
+                  "kind": "heading",
+                  "text": "## Making a request\n",
+                  "parent_id": "line-1",
+                  "start_line": 41,
+                  "end_line": 41
+                },
+                {
+                  "id": "line-218",
+                  "kind": "heading",
+                  "text": "### Making cross-origin requests\n",
+                  "parent_id": "line-41",
+                  "start_line": 218,
+                  "end_line": 218
+                },
+                {
+                  "id": "line-222",
+                  "kind": "list",
+                  "text": "- For fetch requests the default value of mode is cors, meaning that if the request is cross-origin then it will use the Cross-Origin Resource Sharing (CORS) mechanism. This means that: if the request is a simple request, then the request will always be sent, but the server must respond with the correct Access-Control-Allow-Origin header or the browser will not share the response with the caller. if the request is not a simple request, then the browser will send a preflighted request to check that the server understands CORS and allows the request, and the real request will not be sent unless the server responds to the preflighted request with the appropriate CORS headers.\n",
+                  "parent_id": "line-218",
+                  "start_line": 222,
+                  "end_line": 222
+                },
+                {
+                  "id": "line-224",
+                  "kind": "list",
+                  "text": "- Setting mode to same-origin disallows cross-origin requests completely.\n",
+                  "parent_id": "line-218",
+                  "start_line": 224,
+                  "end_line": 224
+                },
+                {
+                  "id": "line-230",
+                  "kind": "heading",
+                  "text": "### Including credentials\n",
+                  "parent_id": "line-41",
+                  "start_line": 230,
+                  "end_line": 230
+                },
+                {
+                  "id": "line-234",
+                  "kind": "list",
+                  "text": "- HTTP cookies\n",
+                  "parent_id": "line-230",
+                  "start_line": 234,
+                  "end_line": 234
+                },
+                {
+                  "id": "line-240",
+                  "kind": "paragraph",
+                  "text": "By default, credentials are only included in same-origin requests. To customize this behavior, as well as to control whether the browser respects any Set-Cookie response headers, set the credentials option, which can take one of the following three values:\n",
+                  "parent_id": "line-230",
+                  "start_line": 240,
+                  "end_line": 240
+                },
+                {
+                  "id": "line-244",
+                  "kind": "list",
+                  "text": "- same-origin (the default): only send and include credentials for same-origin requests.\n",
+                  "parent_id": "line-230",
+                  "start_line": 244,
+                  "end_line": 244
+                },
+                {
+                  "id": "line-248",
+                  "kind": "paragraph",
+                  "text": "Note that if a cookie's SameSite attribute is set to Strict or Lax, then the cookie will not be sent cross-site, even if credentials is set to include.\n",
+                  "parent_id": "line-230",
+                  "start_line": 248,
+                  "end_line": 248
+                },
+                {
+                  "id": "line-250",
+                  "kind": "paragraph",
+                  "text": "Including credentials in cross-origin requests can make a site vulnerable to CSRF attacks, so even if credentials is set to include, the server must also agree to their inclusion by including the Access-Control-Allow-Credentials header in its response. Additionally, in this situation the server must explicitly specify the client's origin in the Access-Control-Allow-Origin response header (that is, * is not allowed).\n",
+                  "parent_id": "line-230",
+                  "start_line": 250,
+                  "end_line": 250
+                },
+                {
+                  "id": "line-254",
+                  "kind": "list",
+                  "text": "- If the request is a simple request, then the request will be sent with credentials, but the server must set the Access-Control-Allow-Credentials and Access-Control-Allow-Origin response headers, or the browser will return a network error to the caller. If the server does set the correct headers, then the response, including credentials, will be delivered to the caller.\n",
+                  "parent_id": "line-230",
+                  "start_line": 254,
+                  "end_line": 254
+                },
+                {
+                  "id": "line-256",
+                  "kind": "list",
+                  "text": "- If the request is not a simple request, then the browser will send a preflighted request without credentials, and the server must set the Access-Control-Allow-Credentials and Access-Control-Allow-Origin response headers, or the browser will return a network error to the caller. If the server does set the correct headers, then the browser will follow up with the real request, including credentials, and will deliver the real response, including credentials, to the caller.\n",
+                  "parent_id": "line-230",
+                  "start_line": 256,
+                  "end_line": 256
+                }
+              ],
+              "source_hash": "2858e831d9d4e4329d75aa2af75528ab82d3825b6cc167ac75d16a079cdc41dc"
+            }
+          ],
+          "omitted_count": 164,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1017,
+          "max_tokens": 1024
+        }
+      }
+    },
+    {
+      "id": "redis",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "updates"
+      ],
+      "after": [
+        "updates",
+        "nonpositive"
+      ],
+      "total": 2,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "redis",
+              "url": "https://redis.io/docs/latest/commands/expire/",
+              "title": "EXPIRE | Docs",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# EXPIRE\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-250",
+                  "kind": "paragraph",
+                  "text": "The timeout will only be cleared by commands that delete or overwrite the contents of the key, including DEL, SET, GETSET and all the *STORE commands. This means that all the operations that conceptually alter the value stored at the key without replacing it with a new one will leave the timeout untouched. For instance, incrementing the value of a key with INCR, pushing a new value into a list with LPUSH, or altering the field value of a hash with HSET are all operations that will leave the timeout untouched.\n",
+                  "parent_id": "line-1",
+                  "start_line": 250,
+                  "end_line": 250
+                },
+                {
+                  "id": "line-290",
+                  "kind": "heading",
+                  "text": "## Examples\n",
+                  "parent_id": "line-1",
+                  "start_line": 290,
+                  "end_line": 290
+                },
+                {
+                  "id": "line-1464",
+                  "kind": "list",
+                  "text": "- TTL ( @keyspace , @read , @fast ) Returns the expiration time in seconds of a key. ▶ Method ttl( key: K // the key. ) → RedisFuture<Long> // Long integer-reply TTL in seconds, or a negative value in order to signal an error.\n",
+                  "parent_id": "line-290",
+                  "start_line": 1464,
+                  "end_line": 1464
+                },
+                {
+                  "id": "line-2258",
+                  "kind": "list",
+                  "text": "- SET ( @write , @string , @slow ) Sets the string value of a key, ignoring its type. The key is created if it doesn't exist. ▶ Methods Set( ctx: context.Context, key: string, value: interface{}, expiration: time.Duration ) → *StatusCmd SetArgs( ctx: context.Context, key: string, value: interface{}, a: SetArgs // Mode can be `NX`, `XX`, `IFEQ`, `IFNE`, `IFDEQ`, `IFDNE` or empty. MatchValue is used with IFEQ/IFNE; MatchDigest (a uint64 xxh3 hash) is used with IFDEQ/IFDNE. ) → *StatusCmd SetIFEQ( ctx: context.Context, key: string, value: interface{}, matchValue: interface{}, expiration: time.Duration // Zero expiration means the key has no expiration time. ) → *StatusCmd // Returns \"OK\" on success. Returns nil if the operation was aborted due to condition not matching. SetIFNE( ctx: context.Context, key: string, value: interface{}, matchValue: interface{}, expiration: time.Duration // Zero expiration means the key has no expiration time. ) → *StatusCmd // Returns \"OK\" on success. Returns nil if the operation was aborted due to condition not matching. SetIFDEQ( ctx: context.Context, key: string, value: interface{}, matchDigest: uint64, // A uint64 xxh3 hash value. expiration: time.Duration // Zero expiration means the key has no expiration time. ) → *StatusCmd // Returns \"OK\" on success. Returns nil if the operation was aborted due to condition not matching. SetIFDNE( ctx: context.Context, key: string, value: interface{}, matchDigest: uint64, // A uint64 xxh3 hash value. expiration: time.Duration // Zero expiration means the key has no expiration time. ) → *StatusCmd // Returns \"OK\" on success. Returns nil if the operation was aborted due to condition not matching.\n",
+                  "parent_id": "line-290",
+                  "start_line": 2258,
+                  "end_line": 2258
+                },
+                {
+                  "id": "line-3936",
+                  "kind": "heading",
+                  "text": "## Details\n",
+                  "parent_id": "line-1",
+                  "start_line": 3936,
+                  "end_line": 3936
+                },
+                {
+                  "id": "line-3938",
+                  "kind": "heading",
+                  "text": "### Refreshing expires\n",
+                  "parent_id": "line-3936",
+                  "start_line": 3938,
+                  "end_line": 3938
+                },
+                {
+                  "id": "line-3940",
+                  "kind": "paragraph",
+                  "text": "It is possible to call EXPIRE using as argument a key that already has an existing expire set. In this case the time to live of a key is updated to the new value. There are many useful applications for this, an example is documented in the Navigation session pattern section below.\n",
+                  "parent_id": "line-3938",
+                  "start_line": 3940,
+                  "end_line": 3940
+                }
+              ],
+              "source_hash": "5c3d05d8d796fbf45dc6ec043af48f54c7b265aed55c52ea67b123ebbd854f59"
+            }
+          ],
+          "omitted_count": 218,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1019,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "redis",
+              "url": "https://redis.io/docs/latest/commands/expire/",
+              "title": "EXPIRE | Docs",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "# EXPIRE\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-250",
+                  "kind": "paragraph",
+                  "text": "The timeout will only be cleared by commands that delete or overwrite the contents of the key, including DEL, SET, GETSET and all the *STORE commands. This means that all the operations that conceptually alter the value stored at the key without replacing it with a new one will leave the timeout untouched. For instance, incrementing the value of a key with INCR, pushing a new value into a list with LPUSH, or altering the field value of a hash with HSET are all operations that will leave the timeout untouched.\n",
+                  "parent_id": "line-1",
+                  "start_line": 250,
+                  "end_line": 250
+                },
+                {
+                  "id": "line-258",
+                  "kind": "paragraph",
+                  "text": "Note that calling EXPIRE/PEXPIRE with a non-positive timeout or EXPIREAT/PEXPIREAT with a time in the past will result in the key being deleted rather than expired (accordingly, the emitted key event will be del, not expired).\n",
+                  "parent_id": "line-1",
+                  "start_line": 258,
+                  "end_line": 258
+                },
+                {
+                  "id": "line-270",
+                  "kind": "heading",
+                  "text": "## Optional arguments\n",
+                  "parent_id": "line-1",
+                  "start_line": 270,
+                  "end_line": 270
+                },
+                {
+                  "id": "line-284",
+                  "kind": "paragraph",
+                  "text": "Set the expiry only when the new expiry is greater than the current one. A non-volatile key is treated as an infinite TTL for the purpose of GT.\n",
+                  "parent_id": "line-270",
+                  "start_line": 284,
+                  "end_line": 284
+                },
+                {
+                  "id": "line-288",
+                  "kind": "paragraph",
+                  "text": "Set the expiry only when the new expiry is less than the current one. A non-volatile key is treated as an infinite TTL for the purpose of LT.\n",
+                  "parent_id": "line-270",
+                  "start_line": 288,
+                  "end_line": 288
+                },
+                {
+                  "id": "line-290",
+                  "kind": "heading",
+                  "text": "## Examples\n",
+                  "parent_id": "line-1",
+                  "start_line": 290,
+                  "end_line": 290
+                },
+                {
+                  "id": "line-320",
+                  "kind": "paragraph",
+                  "text": "Try it\n",
+                  "parent_id": "line-290",
+                  "start_line": 320,
+                  "end_line": 320
+                },
+                {
+                  "id": "line-1173",
+                  "kind": "list",
+                  "text": "- TTL ( @keyspace , @read , @fast ) Returns the expiration time in seconds of a key. ▶ Methods ttl( key: byte[] ) → long // TTL in seconds, or a negative value in order to signal an error ttl( key: String ) → long // TTL in seconds, or a negative value in order to signal an error\n",
+                  "parent_id": "line-290",
+                  "start_line": 1173,
+                  "end_line": 1173
+                },
+                {
+                  "id": "line-3936",
+                  "kind": "heading",
+                  "text": "## Details\n",
+                  "parent_id": "line-1",
+                  "start_line": 3936,
+                  "end_line": 3936
+                },
+                {
+                  "id": "line-3938",
+                  "kind": "heading",
+                  "text": "### Refreshing expires\n",
+                  "parent_id": "line-3936",
+                  "start_line": 3938,
+                  "end_line": 3938
+                },
+                {
+                  "id": "line-3940",
+                  "kind": "paragraph",
+                  "text": "It is possible to call EXPIRE using as argument a key that already has an existing expire set. In this case the time to live of a key is updated to the new value. There are many useful applications for this, an example is documented in the Navigation session pattern section below.\n",
+                  "parent_id": "line-3938",
+                  "start_line": 3940,
+                  "end_line": 3940
+                },
+                {
+                  "id": "line-3966",
+                  "kind": "heading",
+                  "text": "### Appendix: Redis expires\n",
+                  "parent_id": "line-3936",
+                  "start_line": 3966,
+                  "end_line": 3966
+                },
+                {
+                  "id": "line-3968",
+                  "kind": "heading",
+                  "text": "#### Keys with an expire\n",
+                  "parent_id": "line-3966",
+                  "start_line": 3968,
+                  "end_line": 3968
+                },
+                {
+                  "id": "line-3972",
+                  "kind": "paragraph",
+                  "text": "The EXPIRE family of commands is able to associate an expire to a given key, at the cost of some additional memory used by the key. When a key has an expire set, Redis will make sure to remove the key when the specified amount of time elapsed.\n",
+                  "parent_id": "line-3968",
+                  "start_line": 3972,
+                  "end_line": 3972
+                }
+              ],
+              "source_hash": "5c3d05d8d796fbf45dc6ec043af48f54c7b265aed55c52ea67b123ebbd854f59"
+            }
+          ],
+          "omitted_count": 211,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1016,
+          "max_tokens": 1024
+        }
+      }
+    },
+    {
+      "id": "go",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "wait",
+        "leak"
+      ],
+      "after": [
+        "wait",
+        "leak"
+      ],
+      "total": 2,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "go",
+              "url": "https://pkg.go.dev/context",
+              "title": "context package - context - Go Packages",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "## Documentation ¶\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-3",
+                  "kind": "heading",
+                  "text": "### Overview ¶\n",
+                  "parent_id": "line-1",
+                  "start_line": 3,
+                  "end_line": 3
+                },
+                {
+                  "id": "line-11",
+                  "kind": "paragraph",
+                  "text": "The WithCancel, WithDeadline, and WithTimeout functions take a Context (the parent) and return a derived Context (the child) and a CancelFunc. Calling the CancelFunc directly cancels the child and its children, removes the parent's reference to the child, and stops any associated timers. Failing to call the CancelFunc leaks the child and its children until the parent is canceled. The go vet tool checks that CancelFuncs are used on all control-flow paths.\n",
+                  "parent_id": "line-3",
+                  "start_line": 11,
+                  "end_line": 11
+                },
+                {
+                  "id": "line-13",
+                  "kind": "paragraph",
+                  "text": "The WithCancelCause function returns a CancelCauseFunc, which takes an error and records it as the cancellation cause. WithDeadlineCause and WithTimeoutCause take a cause to use when the deadline expires. Calling Cause on the canceled context or any of its children retrieves the cause. If no cause is specified, Cause(ctx) returns the same value as ctx.Err().\n",
+                  "parent_id": "line-3",
+                  "start_line": 13,
+                  "end_line": 13
+                },
+                {
+                  "id": "line-100",
+                  "kind": "heading",
+                  "text": "### Functions ¶\n",
+                  "parent_id": "line-1",
+                  "start_line": 100,
+                  "end_line": 100
+                },
+                {
+                  "id": "line-102",
+                  "kind": "heading",
+                  "text": "#### func AfterFunc ¶ added in go1.21.0\n",
+                  "parent_id": "line-100",
+                  "start_line": 102,
+                  "end_line": 102
+                },
+                {
+                  "id": "line-112",
+                  "kind": "paragraph",
+                  "text": "Calling the returned stop function stops the association of ctx with f. It returns true if the call stopped f from being run. If stop returns false, either the context is canceled and f has been started in its own goroutine; or f was already stopped. The stop function does not wait for f to complete before returning. If the caller needs to know whether f is completed, it must coordinate with f explicitly.\n",
+                  "parent_id": "line-102",
+                  "start_line": 112,
+                  "end_line": 112
+                },
+                {
+                  "id": "line-118",
+                  "kind": "paragraph",
+                  "text": "This example uses AfterFunc to define a function which waits on a sync.Cond, stopping the wait when a context is canceled.\n",
+                  "parent_id": "line-102",
+                  "start_line": 118,
+                  "end_line": 118
+                },
+                {
+                  "id": "line-269",
+                  "kind": "paragraph",
+                  "text": "This example uses AfterFunc to define a function which combines the cancellation signals of two Contexts.\n",
+                  "parent_id": "line-102",
+                  "start_line": 269,
+                  "end_line": 269
+                },
+                {
+                  "id": "line-519",
+                  "kind": "heading",
+                  "text": "### Types ¶\n",
+                  "parent_id": "line-1",
+                  "start_line": 519,
+                  "end_line": 519
+                },
+                {
+                  "id": "line-521",
+                  "kind": "heading",
+                  "text": "#### type CancelCauseFunc ¶ added in go1.20\n",
+                  "parent_id": "line-519",
+                  "start_line": 521,
+                  "end_line": 521
+                },
+                {
+                  "id": "line-527",
+                  "kind": "paragraph",
+                  "text": "A CancelCauseFunc behaves like a CancelFunc but additionally sets the cancellation cause. This cause can be retrieved by calling Cause on the canceled Context or on any of its derived Contexts.\n",
+                  "parent_id": "line-521",
+                  "start_line": 527,
+                  "end_line": 527
+                },
+                {
+                  "id": "line-529",
+                  "kind": "paragraph",
+                  "text": "If the context has already been canceled, CancelCauseFunc does not set the cause. For example, if childContext is derived from parentContext:\n",
+                  "parent_id": "line-521",
+                  "start_line": 529,
+                  "end_line": 529
+                },
+                {
+                  "id": "line-535",
+                  "kind": "heading",
+                  "text": "#### type CancelFunc ¶\n",
+                  "parent_id": "line-519",
+                  "start_line": 535,
+                  "end_line": 535
+                },
+                {
+                  "id": "line-541",
+                  "kind": "paragraph",
+                  "text": "A CancelFunc tells an operation to abandon its work. A CancelFunc does not wait for the work to stop. A CancelFunc may be called by multiple goroutines simultaneously. After the first call, subsequent calls to a CancelFunc do nothing.\n",
+                  "parent_id": "line-535",
+                  "start_line": 541,
+                  "end_line": 541
+                }
+              ],
+              "source_hash": "9cddbc320f7f29bb568d856dd81f3afd1a5a612a828c770858110fdfd9fbe5ad"
+            }
+          ],
+          "omitted_count": 130,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1014,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "go",
+              "url": "https://pkg.go.dev/context",
+              "title": "context package - context - Go Packages",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "heading",
+                  "text": "## Documentation ¶\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-3",
+                  "kind": "heading",
+                  "text": "### Overview ¶\n",
+                  "parent_id": "line-1",
+                  "start_line": 3,
+                  "end_line": 3
+                },
+                {
+                  "id": "line-11",
+                  "kind": "paragraph",
+                  "text": "The WithCancel, WithDeadline, and WithTimeout functions take a Context (the parent) and return a derived Context (the child) and a CancelFunc. Calling the CancelFunc directly cancels the child and its children, removes the parent's reference to the child, and stops any associated timers. Failing to call the CancelFunc leaks the child and its children until the parent is canceled. The go vet tool checks that CancelFuncs are used on all control-flow paths.\n",
+                  "parent_id": "line-3",
+                  "start_line": 11,
+                  "end_line": 11
+                },
+                {
+                  "id": "line-13",
+                  "kind": "paragraph",
+                  "text": "The WithCancelCause function returns a CancelCauseFunc, which takes an error and records it as the cancellation cause. WithDeadlineCause and WithTimeoutCause take a cause to use when the deadline expires. Calling Cause on the canceled context or any of its children retrieves the cause. If no cause is specified, Cause(ctx) returns the same value as ctx.Err().\n",
+                  "parent_id": "line-3",
+                  "start_line": 13,
+                  "end_line": 13
+                },
+                {
+                  "id": "line-100",
+                  "kind": "heading",
+                  "text": "### Functions ¶\n",
+                  "parent_id": "line-1",
+                  "start_line": 100,
+                  "end_line": 100
+                },
+                {
+                  "id": "line-102",
+                  "kind": "heading",
+                  "text": "#### func AfterFunc ¶ added in go1.21.0\n",
+                  "parent_id": "line-100",
+                  "start_line": 102,
+                  "end_line": 102
+                },
+                {
+                  "id": "line-112",
+                  "kind": "paragraph",
+                  "text": "Calling the returned stop function stops the association of ctx with f. It returns true if the call stopped f from being run. If stop returns false, either the context is canceled and f has been started in its own goroutine; or f was already stopped. The stop function does not wait for f to complete before returning. If the caller needs to know whether f is completed, it must coordinate with f explicitly.\n",
+                  "parent_id": "line-102",
+                  "start_line": 112,
+                  "end_line": 112
+                },
+                {
+                  "id": "line-118",
+                  "kind": "paragraph",
+                  "text": "This example uses AfterFunc to define a function which waits on a sync.Cond, stopping the wait when a context is canceled.\n",
+                  "parent_id": "line-102",
+                  "start_line": 118,
+                  "end_line": 118
+                },
+                {
+                  "id": "line-269",
+                  "kind": "paragraph",
+                  "text": "This example uses AfterFunc to define a function which combines the cancellation signals of two Contexts.\n",
+                  "parent_id": "line-102",
+                  "start_line": 269,
+                  "end_line": 269
+                },
+                {
+                  "id": "line-519",
+                  "kind": "heading",
+                  "text": "### Types ¶\n",
+                  "parent_id": "line-1",
+                  "start_line": 519,
+                  "end_line": 519
+                },
+                {
+                  "id": "line-521",
+                  "kind": "heading",
+                  "text": "#### type CancelCauseFunc ¶ added in go1.20\n",
+                  "parent_id": "line-519",
+                  "start_line": 521,
+                  "end_line": 521
+                },
+                {
+                  "id": "line-527",
+                  "kind": "paragraph",
+                  "text": "A CancelCauseFunc behaves like a CancelFunc but additionally sets the cancellation cause. This cause can be retrieved by calling Cause on the canceled Context or on any of its derived Contexts.\n",
+                  "parent_id": "line-521",
+                  "start_line": 527,
+                  "end_line": 527
+                },
+                {
+                  "id": "line-529",
+                  "kind": "paragraph",
+                  "text": "If the context has already been canceled, CancelCauseFunc does not set the cause. For example, if childContext is derived from parentContext:\n",
+                  "parent_id": "line-521",
+                  "start_line": 529,
+                  "end_line": 529
+                },
+                {
+                  "id": "line-535",
+                  "kind": "heading",
+                  "text": "#### type CancelFunc ¶\n",
+                  "parent_id": "line-519",
+                  "start_line": 535,
+                  "end_line": 535
+                },
+                {
+                  "id": "line-541",
+                  "kind": "paragraph",
+                  "text": "A CancelFunc tells an operation to abandon its work. A CancelFunc does not wait for the work to stop. A CancelFunc may be called by multiple goroutines simultaneously. After the first call, subsequent calls to a CancelFunc do nothing.\n",
+                  "parent_id": "line-535",
+                  "start_line": 541,
+                  "end_line": 541
+                }
+              ],
+              "source_hash": "9cddbc320f7f29bb568d856dd81f3afd1a5a612a828c770858110fdfd9fbe5ad"
+            }
+          ],
+          "omitted_count": 130,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1014,
+          "max_tokens": 1024
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "off_matches_saved_legacy": true,
+      "before": [
+        "directory_order",
+        "token"
+      ],
+      "after": [
+        "general_order",
+        "directory_order",
+        "token"
+      ],
+      "total": 3,
+      "outputs": {
+        "off": {
+          "documents": [
+            {
+              "id": "s3",
+              "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+              "title": "ListObjectsV2 - Amazon S3",
+              "blocks": [
+                {
+                  "id": "line-9",
+                  "kind": "heading",
+                  "text": "# ListObjectsV2\n",
+                  "start_line": 9,
+                  "end_line": 9
+                },
+                {
+                  "id": "line-13",
+                  "kind": "heading",
+                  "text": "###### Note\n",
+                  "parent_id": "line-9",
+                  "start_line": 13,
+                  "end_line": 13
+                },
+                {
+                  "id": "line-19",
+                  "kind": "list",
+                  "text": "- Directory buckets - For directory buckets, you must make requests for this API operation to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format https://amzn-s3-demo-bucket.s3express-zone-id.region-code.amazonaws.com/key-name . Path-style requests are not supported. For more information about endpoints in Availability Zones, see Regional and Zonal endpoints for directory buckets in Availability Zones in the Amazon S3 User Guide. For more information about endpoints in Local Zones, see Concepts for directory buckets in Local Zones in the Amazon S3 User Guide.\n",
+                  "parent_id": "line-13",
+                  "start_line": 19,
+                  "end_line": 19
+                },
+                {
+                  "id": "line-25",
+                  "kind": "list",
+                  "text": "- Directory bucket permissions - To grant access to this API operation on a directory bucket, we recommend that you use the CreateSession API operation for session-based authorization. Specifically, you grant the s3express:CreateSession permission to the directory bucket in a bucket policy or an IAM identity-based policy. Then, you make the CreateSession API call on the bucket to obtain a session token. With the session token in your request header, you can make API requests to this operation. After the session token expires, you make another CreateSession API call to generate a new session token for use. AWS CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see CreateSession.\n",
+                  "parent_id": "line-13",
+                  "start_line": 25,
+                  "end_line": 25
+                },
+                {
+                  "id": "line-27",
+                  "kind": "paragraph",
+                  "text": "Sorting order of returned objects\n",
+                  "parent_id": "line-13",
+                  "start_line": 27,
+                  "end_line": 27
+                },
+                {
+                  "id": "line-31",
+                  "kind": "list",
+                  "text": "- Directory bucket - For directory buckets, ListObjectsV2 does not return objects in lexicographical order.\n",
+                  "parent_id": "line-13",
+                  "start_line": 31,
+                  "end_line": 31
+                },
+                {
+                  "id": "line-64",
+                  "kind": "heading",
+                  "text": "## URI Request Parameters\n",
+                  "parent_id": "line-9",
+                  "start_line": 64,
+                  "end_line": 64
+                },
+                {
+                  "id": "line-74",
+                  "kind": "heading",
+                  "text": "###### Note\n",
+                  "parent_id": "line-64",
+                  "start_line": 74,
+                  "end_line": 74
+                },
+                {
+                  "id": "line-84",
+                  "kind": "paragraph",
+                  "text": "ContinuationToken indicates to Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this ContinuationToken for pagination of the list results.\n",
+                  "parent_id": "line-74",
+                  "start_line": 84,
+                  "end_line": 84
+                },
+                {
+                  "id": "line-92",
+                  "kind": "heading",
+                  "text": "###### Note\n",
+                  "parent_id": "line-64",
+                  "start_line": 92,
+                  "end_line": 92
+                },
+                {
+                  "id": "line-100",
+                  "kind": "paragraph",
+                  "text": "Encoding type used by Amazon S3 to encode the object keys in the response. Responses are encoded only in UTF-8. An object key can contain any Unicode character. However, the XML 1.0 parser can't parse certain characters, such as characters with an ASCII value from 0 to 10. For characters that aren't supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response. For more information about characters to avoid in object key names, see Object key naming guidelines.\n",
+                  "parent_id": "line-92",
+                  "start_line": 100,
+                  "end_line": 100
+                },
+                {
+                  "id": "line-102",
+                  "kind": "heading",
+                  "text": "###### Note\n",
+                  "parent_id": "line-64",
+                  "start_line": 102,
+                  "end_line": 102
+                },
+                {
+                  "id": "line-104",
+                  "kind": "paragraph",
+                  "text": "When using the URL encoding type, non-ASCII characters that are used in an object's key name will be percent-encoded according to UTF-8 code values. For example, the object test_file(3).png will appear as test_file%283%29.png.\n",
+                  "parent_id": "line-102",
+                  "start_line": 104,
+                  "end_line": 104
+                }
+              ],
+              "source_hash": "26b291deb241ace35bb3ba15037a1bc8752cd76721da1b74205eee11d53cfb1c"
+            }
+          ],
+          "omitted_count": 201,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1024,
+          "max_tokens": 1024
+        },
+        "builtin": {
+          "documents": [
+            {
+              "id": "s3",
+              "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+              "title": "ListObjectsV2 - Amazon S3",
+              "blocks": [
+                {
+                  "id": "line-1",
+                  "kind": "paragraph",
+                  "text": "View a markdown version of this page\n",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                {
+                  "id": "line-9",
+                  "kind": "heading",
+                  "text": "# ListObjectsV2\n",
+                  "start_line": 9,
+                  "end_line": 9
+                },
+                {
+                  "id": "line-13",
+                  "kind": "heading",
+                  "text": "###### Note\n",
+                  "parent_id": "line-9",
+                  "start_line": 13,
+                  "end_line": 13
+                },
+                {
+                  "id": "line-29",
+                  "kind": "list",
+                  "text": "- General purpose bucket - For general purpose buckets, ListObjectsV2 returns objects in lexicographical order based on their key names.\n",
+                  "parent_id": "line-13",
+                  "start_line": 29,
+                  "end_line": 29
+                },
+                {
+                  "id": "line-31",
+                  "kind": "list",
+                  "text": "- Directory bucket - For directory buckets, ListObjectsV2 does not return objects in lexicographical order.\n",
+                  "parent_id": "line-13",
+                  "start_line": 31,
+                  "end_line": 31
+                },
+                {
+                  "id": "line-64",
+                  "kind": "heading",
+                  "text": "## URI Request Parameters\n",
+                  "parent_id": "line-9",
+                  "start_line": 64,
+                  "end_line": 64
+                },
+                {
+                  "id": "line-72",
+                  "kind": "paragraph",
+                  "text": "Access points - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.\n",
+                  "parent_id": "line-64",
+                  "start_line": 72,
+                  "end_line": 72
+                },
+                {
+                  "id": "line-74",
+                  "kind": "heading",
+                  "text": "###### Note\n",
+                  "parent_id": "line-64",
+                  "start_line": 74,
+                  "end_line": 74
+                },
+                {
+                  "id": "line-84",
+                  "kind": "paragraph",
+                  "text": "ContinuationToken indicates to Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this ContinuationToken for pagination of the list results.\n",
+                  "parent_id": "line-74",
+                  "start_line": 84,
+                  "end_line": 84
+                },
+                {
+                  "id": "line-343",
+                  "kind": "heading",
+                  "text": "## Examples\n",
+                  "parent_id": "line-9",
+                  "start_line": 343,
+                  "end_line": 343
+                },
+                {
+                  "id": "line-387",
+                  "kind": "heading",
+                  "text": "### Sample Request for general purpose buckets: Listing keys using the max-keys, prefix, and start-after parameters\n",
+                  "parent_id": "line-343",
+                  "start_line": 387,
+                  "end_line": 387
+                },
+                {
+                  "id": "line-389",
+                  "kind": "paragraph",
+                  "text": "In addition to the list-type parameter that indicates version 2 of the API operation, the request also specifies additional parameters to retrieve up to three keys in the quotes bucket that start with E and occur lexicographically after ExampleGuide.pdf.\n",
+                  "parent_id": "line-387",
+                  "start_line": 389,
+                  "end_line": 389
+                },
+                {
+                  "id": "line-527",
+                  "kind": "heading",
+                  "text": "### Sample Request for general purpose buckets: Using a continuation token\n",
+                  "parent_id": "line-343",
+                  "start_line": 527,
+                  "end_line": 527
+                },
+                {
+                  "id": "line-529",
+                  "kind": "paragraph",
+                  "text": "In this example, the initial request returns more than 1,000 keys. In response to this request, Amazon S3 returns the IsTruncated element with the value set to true and with a NextContinuationToken element.\n",
+                  "parent_id": "line-527",
+                  "start_line": 529,
+                  "end_line": 529
+                },
+                {
+                  "id": "line-574",
+                  "kind": "heading",
+                  "text": "### Sample request for general purpose buckets\n",
+                  "parent_id": "line-343",
+                  "start_line": 574,
+                  "end_line": 574
+                },
+                {
+                  "id": "line-576",
+                  "kind": "paragraph",
+                  "text": "In the following subsequent request, we include a continuation-token query parameter in the request with the value of the NextContinuationToken element from the preceding response.\n",
+                  "parent_id": "line-574",
+                  "start_line": 576,
+                  "end_line": 576
+                }
+              ],
+              "source_hash": "26b291deb241ace35bb3ba15037a1bc8752cd76721da1b74205eee11d53cfb1c"
+            }
+          ],
+          "omitted_count": 198,
+          "duplicate_count": 0,
+          "status": "selected",
+          "tokens": 1024,
+          "max_tokens": 1024
+        }
+      }
+    }
+  ]
+}

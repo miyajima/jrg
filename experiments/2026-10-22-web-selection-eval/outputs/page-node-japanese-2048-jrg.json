@@ -1,0 +1,327 @@
+{
+  "documents": [
+    {
+      "id": "node",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+      "title": "Modules: CommonJS modules | Node.js v22.15.0 Documentation",
+      "blocks": [
+        {
+          "id": "line-135",
+          "kind": "list",
+          "text": "- Modules: CommonJS modules Enabling Accessing the main module Package manager tips Loading ECMAScript modules using require() All together Caching Module caching caveats Built-in modules Built-in modules with mandatory node: prefix Cycles File modules Folders as modules Loading from node_modules folders Loading from the global folders The module wrapper The module scope __dirname __filename exports module require(id) require.cache require.extensions require.main require.resolve(request[, options]) require.resolve.paths(request) The module object module.children module.exports exports shortcut module.filename module.id module.isPreloading module.loaded module.parent module.path module.paths module.require(id) The Module object Source map v3 support\n",
+          "start_line": 135,
+          "end_line": 135
+        },
+        {
+          "id": "line-137",
+          "kind": "heading",
+          "text": "## Modules: CommonJS modules#\n",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "id": "line-247",
+          "kind": "heading",
+          "text": "### Loading ECMAScript modules using require()#\n",
+          "parent_id": "line-137",
+          "start_line": 247,
+          "end_line": 247
+        },
+        {
+          "id": "line-283",
+          "kind": "paragraph",
+          "text": "A CommonJS module can load them with require():\n",
+          "parent_id": "line-247",
+          "start_line": 283,
+          "end_line": 283
+        },
+        {
+          "id": "line-316",
+          "kind": "code",
+          "text": "```\nconst Point = require('./point.mjs');\nconsole.log(Point); // [class Point]\n\n// Named exports are lost when 'module.exports' is used\nconst { distance } = require('./point.mjs');\nconsole.log(distance); // undefined copy\n```\n",
+          "parent_id": "line-247",
+          "start_line": 316,
+          "end_line": 323
+        },
+        {
+          "id": "line-338",
+          "kind": "code",
+          "text": "```\nconst Point = require('./point.mjs');\nconsole.log(Point); // [class Point]\n\nconst { distance } = require('./point.mjs');\nconsole.log(distance); // [Function: distance] copy\n```\n",
+          "parent_id": "line-247",
+          "start_line": 338,
+          "end_line": 344
+        },
+        {
+          "id": "line-350",
+          "kind": "paragraph",
+          "text": "Support for loading ES modules using require() is currently experimental and can be disabled using --no-experimental-require-module. To print where this feature is used, use --trace-require-module.\n",
+          "parent_id": "line-247",
+          "start_line": 350,
+          "end_line": 350
+        },
+        {
+          "id": "line-678",
+          "kind": "heading",
+          "text": "### The module scope#\n",
+          "parent_id": "line-137",
+          "start_line": 678,
+          "end_line": 678
+        },
+        {
+          "id": "line-744",
+          "kind": "heading",
+          "text": "#### require(id)#\n",
+          "parent_id": "line-678",
+          "start_line": 744,
+          "end_line": 744
+        },
+        {
+          "id": "line-766",
+          "kind": "heading",
+          "text": "##### require.cache#\n",
+          "parent_id": "line-744",
+          "start_line": 766,
+          "end_line": 766
+        },
+        {
+          "id": "line-768",
+          "kind": "paragraph",
+          "text": "Added in: v0.3.0\n",
+          "parent_id": "line-766",
+          "start_line": 768,
+          "end_line": 768
+        },
+        {
+          "id": "line-770",
+          "kind": "list",
+          "text": "- <Object>\n",
+          "parent_id": "line-766",
+          "start_line": 770,
+          "end_line": 770
+        },
+        {
+          "id": "line-776",
+          "kind": "code",
+          "text": "```\nconst assert = require('node:assert');\nconst realFs = require('node:fs');\n\nconst fakeFs = {};\nrequire.cache.fs = { exports: fakeFs };\n\nassert.strictEqual(require('fs'), fakeFs);\nassert.strictEqual(require('node:fs'), realFs); copy\n```\n",
+          "parent_id": "line-766",
+          "start_line": 776,
+          "end_line": 785
+        },
+        {
+          "id": "line-787",
+          "kind": "heading",
+          "text": "##### require.extensions#\n",
+          "parent_id": "line-744",
+          "start_line": 787,
+          "end_line": 787
+        },
+        {
+          "id": "line-791",
+          "kind": "paragraph",
+          "text": "Stability: 0 - Deprecated\n",
+          "parent_id": "line-787",
+          "start_line": 791,
+          "end_line": 791
+        },
+        {
+          "id": "line-793",
+          "kind": "list",
+          "text": "- <Object>\n",
+          "parent_id": "line-787",
+          "start_line": 793,
+          "end_line": 793
+        },
+        {
+          "id": "line-795",
+          "kind": "paragraph",
+          "text": "Instruct require on how to handle certain file extensions.\n",
+          "parent_id": "line-787",
+          "start_line": 795,
+          "end_line": 795
+        },
+        {
+          "id": "line-797",
+          "kind": "paragraph",
+          "text": "Process files with the extension .sjs as .js:\n",
+          "parent_id": "line-787",
+          "start_line": 797,
+          "end_line": 797
+        },
+        {
+          "id": "line-799",
+          "kind": "code",
+          "text": "```\nrequire.extensions['.sjs'] = require.extensions['.js']; copy\n```\n",
+          "parent_id": "line-787",
+          "start_line": 799,
+          "end_line": 801
+        },
+        {
+          "id": "line-805",
+          "kind": "paragraph",
+          "text": "Avoid using require.extensions. Use could cause subtle bugs and resolving the extensions gets slower with each registered extension.\n",
+          "parent_id": "line-787",
+          "start_line": 805,
+          "end_line": 805
+        },
+        {
+          "id": "line-807",
+          "kind": "heading",
+          "text": "##### require.main#\n",
+          "parent_id": "line-744",
+          "start_line": 807,
+          "end_line": 807
+        },
+        {
+          "id": "line-809",
+          "kind": "paragraph",
+          "text": "Added in: v0.1.17\n",
+          "parent_id": "line-807",
+          "start_line": 809,
+          "end_line": 809
+        },
+        {
+          "id": "line-811",
+          "kind": "list",
+          "text": "- <module> | <undefined>\n",
+          "parent_id": "line-807",
+          "start_line": 811,
+          "end_line": 811
+        },
+        {
+          "id": "line-815",
+          "kind": "paragraph",
+          "text": "In entry.js script:\n",
+          "parent_id": "line-807",
+          "start_line": 815,
+          "end_line": 815
+        },
+        {
+          "id": "line-817",
+          "kind": "code",
+          "text": "```\nconsole.log(require.main); copy\n```\n",
+          "parent_id": "line-807",
+          "start_line": 817,
+          "end_line": 819
+        },
+        {
+          "id": "line-821",
+          "kind": "code",
+          "text": "```\nnode entry.js copy\n```\n",
+          "parent_id": "line-807",
+          "start_line": 821,
+          "end_line": 823
+        },
+        {
+          "id": "line-840",
+          "kind": "heading",
+          "text": "##### require.resolve(request[, options])#\n",
+          "parent_id": "line-744",
+          "start_line": 840,
+          "end_line": 840
+        },
+        {
+          "id": "line-842",
+          "kind": "paragraph",
+          "text": "History\n",
+          "parent_id": "line-840",
+          "start_line": 842,
+          "end_line": 842
+        },
+        {
+          "id": "line-848",
+          "kind": "list",
+          "text": "- request <string> The module path to resolve.\n",
+          "parent_id": "line-840",
+          "start_line": 848,
+          "end_line": 848
+        },
+        {
+          "id": "line-852",
+          "kind": "list",
+          "text": "- Returns: <string>\n",
+          "parent_id": "line-840",
+          "start_line": 852,
+          "end_line": 852
+        },
+        {
+          "id": "line-854",
+          "kind": "paragraph",
+          "text": "Use the internal require() machinery to look up the location of a module, but rather than loading the module, just return the resolved filename.\n",
+          "parent_id": "line-840",
+          "start_line": 854,
+          "end_line": 854
+        },
+        {
+          "id": "line-858",
+          "kind": "heading",
+          "text": "###### require.resolve.paths(request)#\n",
+          "parent_id": "line-840",
+          "start_line": 858,
+          "end_line": 858
+        },
+        {
+          "id": "line-860",
+          "kind": "paragraph",
+          "text": "Added in: v8.9.0\n",
+          "parent_id": "line-858",
+          "start_line": 860,
+          "end_line": 860
+        },
+        {
+          "id": "line-862",
+          "kind": "list",
+          "text": "- request <string> The module path whose lookup paths are being retrieved.\n",
+          "parent_id": "line-858",
+          "start_line": 862,
+          "end_line": 862
+        },
+        {
+          "id": "line-864",
+          "kind": "list",
+          "text": "- Returns: <string[]> | <null>\n",
+          "parent_id": "line-858",
+          "start_line": 864,
+          "end_line": 864
+        },
+        {
+          "id": "line-866",
+          "kind": "paragraph",
+          "text": "Returns an array containing the paths searched during resolution of request or null if the request string references a core module, for example http or fs.\n",
+          "parent_id": "line-858",
+          "start_line": 866,
+          "end_line": 866
+        },
+        {
+          "id": "line-868",
+          "kind": "heading",
+          "text": "### The module object#\n",
+          "parent_id": "line-137",
+          "start_line": 868,
+          "end_line": 868
+        },
+        {
+          "id": "line-1029",
+          "kind": "heading",
+          "text": "#### module.require(id)#\n",
+          "parent_id": "line-868",
+          "start_line": 1029,
+          "end_line": 1029
+        },
+        {
+          "id": "line-1037",
+          "kind": "paragraph",
+          "text": "The module.require() method provides a way to load a module as if require() was called from the original module.\n",
+          "parent_id": "line-1029",
+          "start_line": 1037,
+          "end_line": 1037
+        }
+      ],
+      "source_hash": "a51c8cb292f9a70a570b414575078a82c3a9449680b610e5f989f718b76181f3"
+    }
+  ],
+  "omitted_count": 324,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2025,
+  "max_tokens": 2048
+}

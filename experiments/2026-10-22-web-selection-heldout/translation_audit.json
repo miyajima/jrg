@@ -1,0 +1,63 @@
+{
+  "reviewer": "parent",
+  "timing": "Before selection execution; no paraphrases modified.",
+  "checks": [
+    {
+      "id": "sqlite",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    },
+    {
+      "id": "postgres",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    },
+    {
+      "id": "docker",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    },
+    {
+      "id": "kubernetes",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    },
+    {
+      "id": "fetch",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    },
+    {
+      "id": "redis",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    },
+    {
+      "id": "go",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    },
+    {
+      "id": "s3",
+      "identifiers_preserved": true,
+      "question_clauses_preserved": true,
+      "answer_facts_added": false,
+      "assessment": "faithful"
+    }
+  ],
+  "notes": "English describes only the Japanese question. S3 regular buckets follows original 通常のバケット; no lexicographical ordering, header names, Linux version numbers, settings or answers were supplied to the generator."
+}

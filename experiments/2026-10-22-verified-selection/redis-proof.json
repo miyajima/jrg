@@ -1,0 +1,26 @@
+{
+  "id": "redis",
+  "request_sha256": "f3360fa115bd0b6bb4fcbbb3a606c595be5a3e1ef15429f70c29b0ab72d05847",
+  "rule_ids": [
+    "nonpositive"
+  ],
+  "engine_sha256": "70937b883d2fc75e3530e4d8eb2f3f7a534456f1cdc582f595f930c730c7fe20",
+  "catalog_sha256": "e4833795a164d67105b1ef60a5fd96b28d4a021a0d283dd87633ab4475feca7a",
+  "input_files": {
+    "experiments/2026-10-22-web-selection-heldout/questions.json": "67873d57fa332b98c024baaae29268f2858e55a8b6965c8954b95c44acb8db6d",
+    "experiments/2026-10-22-web-selection-heldout/generated_english.json": "12f2d02bab28c8260ee469f1a54fbb6916b4dcc962cc10d73a7563d3e0ceb4a8",
+    "experiments/2026-10-22-web-selection-heldout/gold.json": "17024ee4de582889b200ea9bb46462f62b08957f371463b99ad508ee04fac94c",
+    "experiments/2026-10-22-web-selection-heldout/redis-documents.json": "d1b4675a6c44b513a592ab6856e58f10a617a12766a334046e00e1e8acdd4609"
+  },
+  "baseline_units": [
+    "updates"
+  ],
+  "selected_units": [
+    "updates",
+    "nonpositive"
+  ],
+  "outputs": {
+    "outputs/redis-off.json": "d30e26df2101ef89ef00576533294b45e9a5e0fe72501a395937d1b0d05842f5",
+    "outputs/redis-subset.json": "460b400245c25d93866ff012316791ea24a6beadd25fbe2d457f5b6858653b3e"
+  }
+}

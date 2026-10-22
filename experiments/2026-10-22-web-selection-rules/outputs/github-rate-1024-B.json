@@ -1,0 +1,120 @@
+{
+  "documents": [
+    {
+      "id": "github-rate",
+      "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "title": "Rate limits for the REST API - GitHub Docs",
+      "blocks": [
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "# Rate limits for the REST API\n",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-11",
+          "kind": "heading",
+          "text": "## About primary rate limits\n",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-31",
+          "kind": "heading",
+          "text": "### Primary rate limit for Git LFS access\n",
+          "parent_id": "line-11",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-33",
+          "kind": "paragraph",
+          "text": "API requests are required when you upload or download Git LFS content. These count towards a separate rate limiting bucket with a limit of 300 requests per minute for unauthenticated requests and 3,000 requests per minute for authenticated requests.\n",
+          "parent_id": "line-31",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "id": "line-68",
+          "kind": "heading",
+          "text": "## About secondary rate limits\n",
+          "parent_id": "line-3",
+          "start_line": 68,
+          "end_line": 68
+        },
+        {
+          "id": "line-72",
+          "kind": "paragraph",
+          "text": "You may encounter a secondary rate limit if you:\n",
+          "parent_id": "line-68",
+          "start_line": 72,
+          "end_line": 72
+        },
+        {
+          "id": "line-78",
+          "kind": "list",
+          "text": "- Make too many requests per minute. No more than 90 seconds of CPU time per 60 seconds of real time is allowed. No more than 60 seconds of this CPU time may be for the GraphQL API. You can roughly estimate the CPU time by measuring the total response time for your API requests.\n",
+          "parent_id": "line-68",
+          "start_line": 78,
+          "end_line": 78
+        },
+        {
+          "id": "line-100",
+          "kind": "heading",
+          "text": "## Checking the status of your rate limit\n",
+          "parent_id": "line-3",
+          "start_line": 100,
+          "end_line": 100
+        },
+        {
+          "id": "line-111",
+          "kind": "paragraph",
+          "text": "You can call the GET /rate_limit endpoint for a periodic overview of all resource families for the authenticated user. Calling this endpoint does not count against your primary rate limit, but it can count against your secondary rate limit. See REST API endpoints for rate limits.\n",
+          "parent_id": "line-100",
+          "start_line": 111,
+          "end_line": 111
+        },
+        {
+          "id": "line-115",
+          "kind": "paragraph",
+          "text": "Because GitHub processes API requests in multiple regions, rate limit values can vary from one response to the next based on the location handling the request. For example, x-ratelimit-remaining may be higher on a later response than on an earlier one within the same rate limit window. The x-ratelimit-* headers are the authoritative source for your current rate limit status and may differ from values reported by the GET /rate_limit endpoint. If the two disagree, rely on the response headers.\n",
+          "parent_id": "line-100",
+          "start_line": 115,
+          "end_line": 115
+        },
+        {
+          "id": "line-121",
+          "kind": "heading",
+          "text": "## Exceeding the rate limit\n",
+          "parent_id": "line-3",
+          "start_line": 121,
+          "end_line": 121
+        },
+        {
+          "id": "line-123",
+          "kind": "paragraph",
+          "text": "If you exceed your primary rate limit, you will receive a 403 or 429 response, and the x-ratelimit-remaining header will be 0. You should not retry your request until after the time specified by the x-ratelimit-reset header.\n",
+          "parent_id": "line-121",
+          "start_line": 123,
+          "end_line": 123
+        },
+        {
+          "id": "line-125",
+          "kind": "paragraph",
+          "text": "If you exceed a secondary rate limit, you will receive a 403 or 429 response and an error message that indicates that you exceeded a secondary rate limit. If the retry-after response header is present, you should not retry your request until after that many seconds has elapsed. If the x-ratelimit-remaining header is 0, you should not retry your request until after the time, in UTC epoch seconds, specified by the x-ratelimit-reset header. Otherwise, wait for at least one minute before retrying. If your request continues to fail due to a secondary rate limit, wait for an exponentially increasing amount of time between retries, and throw an error after a specific number of retries.\n",
+          "parent_id": "line-121",
+          "start_line": 125,
+          "end_line": 125
+        }
+      ],
+      "source_hash": "e9556f31e117f6001daa6e46b8306f4a70cdd3b02eecfa4c8784411117726579"
+    }
+  ],
+  "omitted_count": 51,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1020,
+  "max_tokens": 1024
+}

@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: last week; v23.0.0, v22.12.0  | Support `'module.exports'` interop export in `require(esm)`. ... If the module being `require()`'d contains top-level `await`, or the module graph it `import`s contains top-level `await`, `ERR_REQUIRE_ASYNC_MODULE` will be thrown. ... If `--experimental-print-required-tla` is enabled and the error is uncaught, Node.js will try to locate the top-level `await`s in the `require()`'d module graph and print the locations in the stderr.\n### Loading ECMAScript modules using `require()`#\n\nAdded in: v22.0.0, v20.17.0 History\nVersion  | Changes\n--- | ---\nv25.4.0  | This feature is no longer experimental.\nv23.5.0, v22.13.0, v20.19.0  | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module.\nv23.0.0, v22.12.0, v20.19.0  | This feature is no longer behind the `--experimental-require-module` CLI flag.\nv23.0.0, v22.12.0  | Support `'module.exports'` interop export in `require(esm)`.\n\nThe `.mjs` extension is reserved for ECMAScript Modules. See Determining module system section for more info regarding which files are parsed as ECMAScript modules.\n\n`require()` only supports loading ECMAScript modules that meet the following requirements:\n\n  * The module is fully synchronous (contains no top-level `await`); and\n  * One of these conditions are met:\n    1. The file has a `.mjs` extension.\n    2. The file has a `.js` extension, and the closest `package.json` contains `\"type\": \"module\"`\n    \n    [Input]`export function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); }\n    \n    export default class Point {\n      constructor(x, y) { this.x = x; this.y = y; }\n      static distance = distance;\n    }\n    \n    export { Point as 'module.exports' };\n    ``const Point = require('./point.mjs');\n    console.log(Point); // [class Point]\n    \n    const { distance } = require('./point.mjs');\n    console.log(distance); // [Function: distance]\n    `\n    \n    javascript[Button: copy]\n\nIf the module being `require()`'d contains top-level `await`, or the module graph it `import`s contains top-level `await`, `ERR_REQUIRE_ASYNC_MODULE` will be thrown. In this case, users should load the asynchronous module using `import()`.\n\nIf `--experimental-print-required-tla` is enabled and the error is uncaught, Node.js will try to locate the top-level `await`s in the `require()`'d module graph and print the locations in the stderr.\n\nIf support for loading ES modules using `require()` results in unexpected breakage, it can be disabled using `--no-require-module`. To print where this feature is used, use `--trace-require-module`.\n\nThis feature can be detected by checking if `process.features.require_module` is `true`.\n\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-1",
+      "source_hash": "e1916e92df9c30927b8ebcc34a840ec4cc8af12a9bb52724c8ae411f7c8392bf",
+      "title": "Modules: CommonJS modules | Node.js v26.12.0 Documentation",
+      "url": "https://nodejs.org/api/modules.html"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: yesterday;   * Files with an extension that is not `.mjs`, `.cjs`, `.json`, `.node`, or `.js` (when the nearest parent `package.json` file contains a top-level field `\"type\"` with a value of `\"module\"`, those files will be recognized as CommonJS modules only if they are being included via `require()`, not when used as the command-line entry point of the program). ... v22.12.0  | Support `'module.exports'` interop export in `require(esm)`. ... If the module being `require()`'d contains top-level `await`, or the module graph it `import`s contains top-level `await`, `ERR_REQUIRE_ASYNC_MODULE` will be thrown.\n\n### Loading ECMAScript modules using `require()`#\n\nHistory\nVersion  | Changes\n--- | ---\nv22.13.0  | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module.\nv23.0.0, v22.12.0  | This feature is no longer behind the `--experimental-require-module` CLI flag.\nv22.12.0  | Support `'module.exports'` interop export in `require(esm)`.\nv22.0.0  | Added in: v22.0.0\n\nStability: 1.2 - Release candidate\n\nThe `.mjs` extension is reserved for ECMAScript Modules. See Determining module system section for more info regarding which files are parsed as ECMAScript modules.\n\n`require()` only supports loading ECMAScript modules that meet the following requirements:\n\n  * The module is fully synchronous (contains no top-level `await`); and\n  * One of these conditions are met:\n    1. The file has a `.mjs` extension.\n    2. The file has a `.js` extension, and the closest `package.json` contains `\"type\": \"module\"`\n    3.     \n    `export function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); }\n    \n    export default class Point {\n      constructor(x, y) { this.x = x; this.y = y; }\n      static distance = distance;\n    }\n    \n    export { Point as 'module.exports' }` [Button: copy]\n    \n    `const Point = require('./point.mjs');\n    console.log(Point); // [class Point]\n    \n    const { distance } = require('./point.mjs');\n    console.log(distance); // [Function: distance]` [Button: copy]\n\nIf the module being `require()`'d contains top-level `await`, or the module graph it `import`s contains top-level `await`, `ERR_REQUIRE_ASYNC_MODULE` will be thrown. In this case, users should load the asynchronous module using `import()`.\n\nIf `--experimental-print-required-tla` is enabled, instead of throwing `ERR_REQUIRE_ASYNC_MODULE` before evaluation, Node.js will evaluate the module, try to locate the top-level awaits, and print their location to help users fix them.\n\nSupport for loading ES modules using `require()` is currently experimental and can be disabled using `--no-experimental-require-module`. To print where this feature is used, use `--trace-require-module`.\n\nThis feature can be detected by checking if `process.features.require_module` is `true`.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-3",
+      "source_hash": "054d71fb06986fd5366bca0f51854e0953852ae99e8b0303af8fd5e1dee58581",
+      "title": "Modules: CommonJS modules | Node.js v22.23.4 Documentation",
+      "url": "https://nodejs.org/download/release/latest-jod/docs/api/modules.html"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: last month; Calling `require()` on an ESM file with top-level `await` (or whose graph contains TLA) throws `ERR_REQUIRE_ASYNC_MODULE`. ... As in Node, a graph with a resolution or import-attribute error executes nothing on Node 24.9+; the legacy loader on older versions still executes a CJS dependency while linking, before a later graph error surfaces.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-13",
+      "source_hash": "066bd6050f06ecd53d23071b64fdb869d7692a067921fc712772bb20026ff3a3",
+      "title": "Jest: docs/ECMAScriptModules.md | Fossies",
+      "url": "https://fossies.org/linux/jest/docs/ECMAScriptModules.md"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1948,
+  "max_tokens": 2048
+}

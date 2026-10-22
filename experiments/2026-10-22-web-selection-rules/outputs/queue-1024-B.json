@@ -1,0 +1,112 @@
+{
+  "documents": [
+    {
+      "id": "queue",
+      "url": "https://docs.python.org/3/library/queue.html",
+      "title": "queue — A synchronized queue class — Python 3.15.1 documentation",
+      "blocks": [
+        {
+          "id": "line-31",
+          "kind": "heading",
+          "text": "# queue — A synchronized queue class¶\n",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-47",
+          "kind": "paragraph",
+          "text": "Constructor for a FIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n",
+          "parent_id": "line-31",
+          "start_line": 47,
+          "end_line": 47
+        },
+        {
+          "id": "line-51",
+          "kind": "paragraph",
+          "text": "Constructor for a LIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n",
+          "parent_id": "line-31",
+          "start_line": 51,
+          "end_line": 51
+        },
+        {
+          "id": "line-55",
+          "kind": "paragraph",
+          "text": "Constructor for a priority queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n",
+          "parent_id": "line-31",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "id": "line-86",
+          "kind": "paragraph",
+          "text": "Exception raised when non-blocking put() (or put_nowait()) is called on a Queue object which is full.\n",
+          "parent_id": "line-31",
+          "start_line": 86,
+          "end_line": 86
+        },
+        {
+          "id": "line-94",
+          "kind": "heading",
+          "text": "## Queue Objects¶\n",
+          "parent_id": "line-31",
+          "start_line": 94,
+          "end_line": 94
+        },
+        {
+          "id": "line-112",
+          "kind": "paragraph",
+          "text": "Put item into the queue. If optional args block is true and timeout is None (the default), block if necessary until a free slot is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Full exception if no free slot was available within that time. Otherwise (block is false), put an item on the queue if a free slot is immediately available, else raise the Full exception (timeout is ignored in that case).\n",
+          "parent_id": "line-94",
+          "start_line": 112,
+          "end_line": 112
+        },
+        {
+          "id": "line-122",
+          "kind": "paragraph",
+          "text": "Remove and return an item from the queue. If optional args block is true and timeout is None (the default), block if necessary until an item is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time. Otherwise (block is false), return an item if one is immediately available, else raise the Empty exception (timeout is ignored in that case).\n",
+          "parent_id": "line-94",
+          "start_line": 122,
+          "end_line": 122
+        },
+        {
+          "id": "line-178",
+          "kind": "heading",
+          "text": "### Terminating queues¶\n",
+          "parent_id": "line-94",
+          "start_line": 178,
+          "end_line": 178
+        },
+        {
+          "id": "line-196",
+          "kind": "paragraph",
+          "text": "Use caution when using join() with immediate set to true. This unblocks the join even when no work has been done on the tasks, violating the usual invariant for joining a queue.\n",
+          "parent_id": "line-178",
+          "start_line": 196,
+          "end_line": 196
+        },
+        {
+          "id": "line-200",
+          "kind": "heading",
+          "text": "## SimpleQueue Objects¶\n",
+          "parent_id": "line-31",
+          "start_line": 200,
+          "end_line": 200
+        },
+        {
+          "id": "line-224",
+          "kind": "paragraph",
+          "text": "Remove and return an item from the queue. If optional args block is true and timeout is None (the default), block if necessary until an item is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time. Otherwise (block is false), return an item if one is immediately available, else raise the Empty exception (timeout is ignored in that case).\n",
+          "parent_id": "line-200",
+          "start_line": 224,
+          "end_line": 224
+        }
+      ],
+      "source_hash": "8a05033cec7622e7dc2c304a8b52b94a77b5b534d731d009902f76551058ad2a"
+    }
+  ],
+  "omitted_count": 124,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1022,
+  "max_tokens": 1024
+}

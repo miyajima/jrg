@@ -1,0 +1,128 @@
+{
+  "documents": [
+    {
+      "id": "redis",
+      "url": "https://redis.io/docs/latest/commands/expire/",
+      "title": "EXPIRE | Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# EXPIRE\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-186",
+          "kind": "code",
+          "text": "```\nKeyExpire(\nkey: RedisKey, // The key to set the expiration for.\nexpiry: TimeSpan?, // The timeout to set.\nflags: CommandFlags // The flags to use for this operation.\n) → bool // true if the timeout was set. false if key does not exist or the timeout could not be set.\n\nKeyExpire(\nkey: RedisKey, // The key to set the expiration for.\nexpiry: TimeSpan?, // The timeout to set.\nwhen: ExpireWhen, // In Redis 7+, we choose under which condition the expiration will be set using ExpireWhen.\nflags: CommandFlags // The flags to use for this operation.\n) → bool // true if the timeout was set. false if key does not exist or the timeout could not be set.\n```\n",
+          "parent_id": "line-1",
+          "start_line": 186,
+          "end_line": 199
+        },
+        {
+          "id": "line-201",
+          "kind": "code",
+          "text": "```\nKeyExpireAsync(\nkey: RedisKey, // The key to set the expiration for.\nexpiry: TimeSpan?, // The timeout to set.\nflags: CommandFlags // The flags to use for this operation.\n) → Task<bool> // true if the timeout was set. false if key does not exist or the timeout could not be set.\n\nKeyExpireAsync(\nkey: RedisKey, // The key to set the expiration for.\nexpiry: TimeSpan?, // The timeout to set.\nwhen: ExpireWhen, // In Redis 7+, we choose under which condition the expiration will be set using ExpireWhen.\nflags: CommandFlags // The flags to use for this operation.\n) → Task<bool> // true if the timeout was set. false if key does not exist or the timeout could not be set.\n```\n",
+          "parent_id": "line-1",
+          "start_line": 201,
+          "end_line": 214
+        },
+        {
+          "id": "line-248",
+          "kind": "paragraph",
+          "text": "Set a timeout on key. After the timeout has expired, the key will automatically be deleted. A key with an associated timeout is often said to be volatile in Redis terminology.\n",
+          "parent_id": "line-1",
+          "start_line": 248,
+          "end_line": 248
+        },
+        {
+          "id": "line-250",
+          "kind": "paragraph",
+          "text": "The timeout will only be cleared by commands that delete or overwrite the contents of the key, including DEL, SET, GETSET and all the *STORE commands. This means that all the operations that conceptually alter the value stored at the key without replacing it with a new one will leave the timeout untouched. For instance, incrementing the value of a key with INCR, pushing a new value into a list with LPUSH, or altering the field value of a hash with HSET are all operations that will leave the timeout untouched.\n",
+          "parent_id": "line-1",
+          "start_line": 250,
+          "end_line": 250
+        },
+        {
+          "id": "line-290",
+          "kind": "heading",
+          "text": "## Examples\n",
+          "parent_id": "line-1",
+          "start_line": 290,
+          "end_line": 290
+        },
+        {
+          "id": "line-786",
+          "kind": "list",
+          "text": "- SET ( @write , @string , @slow ) Sets the string value of a key, ignoring its type. The key is created if it doesn't exist. ▶ Method SET( key: RedisArgument, value: RedisArgument | number, options?: SetOptions ) → Any\n",
+          "parent_id": "line-290",
+          "start_line": 786,
+          "end_line": 786
+        },
+        {
+          "id": "line-794",
+          "kind": "code",
+          "text": "```\nconsole.log(await redis.set('mykey', 'Hello')); // >>> OK\n\nconsole.log(await redis.expire('mykey', 10)); // >>> 1\nconsole.log(await redis.ttl('mykey')); // >>> 10\n\n// Overwriting a key with SET clears its expiry.\nconsole.log(await redis.set('mykey', 'Hello World')); // >>> OK\nconsole.log(await redis.ttl('mykey')); // >>> -1\n\n// XX only sets the expiry when one already exists, so this is a no-op.\nconsole.log(await redis.expire('mykey', 10, 'XX')); // >>> 0\nconsole.log(await redis.ttl('mykey')); // >>> -1\n\n// NX only sets the expiry when there is none, so this one applies.\nconsole.log(await redis.expire('mykey', 10, 'NX')); // >>> 1\nconst expireTtl = await redis.ttl('mykey');\nconsole.log(expireTtl); // >>> 10\n\n```\n",
+          "parent_id": "line-290",
+          "start_line": 794,
+          "end_line": 813
+        },
+        {
+          "id": "line-942",
+          "kind": "list",
+          "text": "- SET ( @write , @string , @slow ) Sets the string value of a key, ignoring its type. The key is created if it doesn't exist. ▶ Methods set( key: RedisKey, value: string | Buffer | number, callback?: Callback<\"OK\"> ) → Any set( key: RedisKey, value: string | Buffer | number, get: \"GET\", callback?: Callback<string | null> ) → Any set( key: RedisKey, value: string | Buffer | number, nx: \"NX\", callback?: Callback<\"OK\" | null> ) → Any set( key: RedisKey, value: string | Buffer | number, nx: \"NX\", get: \"GET\", callback?: Callback<string | null> ) → Any set( key: RedisKey, value: string | Buffer | number, xx: \"XX\", callback?: Callback<\"OK\" | null> ) → Any\n",
+          "parent_id": "line-290",
+          "start_line": 942,
+          "end_line": 942
+        },
+        {
+          "id": "line-1460",
+          "kind": "list",
+          "text": "- SET ( @write , @string , @slow ) Sets the string value of a key, ignoring its type. The key is created if it doesn't exist. ▶ Methods set( key: K, // the key. value: V // the value. ) → RedisFuture<String> // String simple-string-reply OK if SET was executed correctly. set( key: K, // the key. value: V, // the value. setArgs: SetArgs // the setArgs. ) → RedisFuture<String> // String simple-string-reply OK if SET was executed correctly.\n",
+          "parent_id": "line-290",
+          "start_line": 1460,
+          "end_line": 1460
+        },
+        {
+          "id": "line-2779",
+          "kind": "list",
+          "text": "- SET ( @write , @string , @slow ) Sets the string value of a key, ignoring its type. The key is created if it doesn't exist. ▶ Methods StringSet( key: RedisKey, value: RedisValue, expiry: TimeSpan?, // The expiry to set. when: When // Which condition to set the value under (defaults to always). ) → bool // true if the keys were set, false otherwise. StringSet( key: RedisKey, value: RedisValue, expiry: TimeSpan?, // The expiry to set. when: When, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise. StringSet( key: RedisKey, value: RedisValue, expiry: TimeSpan?, // The expiry to set. keepTtl: bool, when: When, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise. StringSet( key: RedisKey, value: RedisValue, expiry: Expiration, // The expiry to set. when: ValueCondition, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise. StringSet( values: KeyValuePair<RedisKey, RedisValue>[], // The keys and values to set. when: When, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise.\n",
+          "parent_id": "line-290",
+          "start_line": 2779,
+          "end_line": 2779
+        },
+        {
+          "id": "line-3936",
+          "kind": "heading",
+          "text": "## Details\n",
+          "parent_id": "line-1",
+          "start_line": 3936,
+          "end_line": 3936
+        },
+        {
+          "id": "line-3948",
+          "kind": "heading",
+          "text": "### Pattern: navigation session\n",
+          "parent_id": "line-3936",
+          "start_line": 3948,
+          "end_line": 3948
+        },
+        {
+          "id": "line-3964",
+          "kind": "paragraph",
+          "text": "This pattern is easily modified to use counters using INCR instead of lists using RPUSH.\n",
+          "parent_id": "line-3948",
+          "start_line": 3964,
+          "end_line": 3964
+        }
+      ],
+      "source_hash": "5c3d05d8d796fbf45dc6ec043af48f54c7b265aed55c52ea67b123ebbd854f59"
+    }
+  ],
+  "omitted_count": 212,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2031,
+  "max_tokens": 2048
+}

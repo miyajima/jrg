@@ -1,0 +1,72 @@
+{
+  "documents": [
+    {
+      "id": "fetch",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+      "title": "Using the Fetch API - Web APIs | MDN",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Using the Fetch API\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-41",
+          "kind": "heading",
+          "text": "## Making a request\n",
+          "parent_id": "line-1",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-218",
+          "kind": "heading",
+          "text": "### Making cross-origin requests\n",
+          "parent_id": "line-41",
+          "start_line": 218,
+          "end_line": 218
+        },
+        {
+          "id": "line-222",
+          "kind": "list",
+          "text": "- For fetch requests the default value of mode is cors, meaning that if the request is cross-origin then it will use the Cross-Origin Resource Sharing (CORS) mechanism. This means that: if the request is a simple request, then the request will always be sent, but the server must respond with the correct Access-Control-Allow-Origin header or the browser will not share the response with the caller. if the request is not a simple request, then the browser will send a preflighted request to check that the server understands CORS and allows the request, and the real request will not be sent unless the server responds to the preflighted request with the appropriate CORS headers.\n",
+          "parent_id": "line-218",
+          "start_line": 222,
+          "end_line": 222
+        },
+        {
+          "id": "line-230",
+          "kind": "heading",
+          "text": "### Including credentials\n",
+          "parent_id": "line-41",
+          "start_line": 230,
+          "end_line": 230
+        },
+        {
+          "id": "line-234",
+          "kind": "list",
+          "text": "- HTTP cookies\n",
+          "parent_id": "line-230",
+          "start_line": 234,
+          "end_line": 234
+        },
+        {
+          "id": "line-248",
+          "kind": "paragraph",
+          "text": "Note that if a cookie's SameSite attribute is set to Strict or Lax, then the cookie will not be sent cross-site, even if credentials is set to include.\n",
+          "parent_id": "line-230",
+          "start_line": 248,
+          "end_line": 248
+        }
+      ],
+      "source_hash": "2858e831d9d4e4329d75aa2af75528ab82d3825b6cc167ac75d16a079cdc41dc"
+    }
+  ],
+  "omitted_count": 170,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 512,
+  "max_tokens": 512
+}

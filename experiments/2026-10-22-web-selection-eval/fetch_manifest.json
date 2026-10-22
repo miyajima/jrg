@@ -1,0 +1,60 @@
+[
+  {
+    "id": "rust",
+    "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+    "final_url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+    "charset": "utf-8",
+    "bytes": 23447,
+    "sha256": "72c796ea62a02721d6dbee36c82b9e88e3bce60665bb68fc991b6abe5bf50c2a",
+    "retrieved_at": "2026-10-22T03:31:33.860395+00:00"
+  },
+  {
+    "id": "python",
+    "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+    "final_url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+    "charset": "utf-8",
+    "bytes": 27973,
+    "sha256": "ae5357dba34775f4badc2d054741d36e8a484038e07cf4bcf03b09988e9a0b3f",
+    "retrieved_at": "2026-10-22T03:31:33.602874+00:00"
+  },
+  {
+    "id": "node",
+    "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+    "final_url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+    "charset": "utf-8",
+    "bytes": 98239,
+    "sha256": "f04ebd1d706d07d7d9b2c8a4bd5ad0f70d3832865cd5a0fe8c0713be9c3706a8",
+    "retrieved_at": "2026-10-22T03:31:33.893032+00:00"
+  },
+  {
+    "id": "github",
+    "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+    "final_url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+    "charset": "utf-8",
+    "bytes": 351290,
+    "sha256": "f364553653d7ed3ea39db4af025100eb9dfe19e74b33d629be7dd6265ebc1c63",
+    "retrieved_at": "2026-10-22T03:31:34.555714+00:00"
+  },
+  {
+    "id": "jr",
+    "url": "https://www.jreast.co.jp/kippu/06.html",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "jma",
+    "url": "https://www.jma.go.jp/jma/kishou/know/faq/faq4.html",
+    "final_url": "https://www.jma.go.jp/jma/kishou/know/faq/faq4.html",
+    "charset": "utf-8",
+    "bytes": 23224,
+    "sha256": "e303973f7b45650340d5599441296fd3abc3299986d38f6c69d18760371ecc74",
+    "retrieved_at": "2026-10-22T03:31:33.659270+00:00"
+  },
+  {
+    "id": "jma-definition",
+    "url": "https://www.jma.go.jp/jma/kishou/know/yougo_hp/yoho.html",
+    "charset": "utf-8",
+    "bytes": 21749,
+    "sha256": "dafdb95ed6f335d57093c2262f16b09afb1ea79fb0acd9fc6b95ed7f4cb740c9",
+    "retrieved_at": "2026-10-22T03:35:42.694927+00:00"
+  }
+]

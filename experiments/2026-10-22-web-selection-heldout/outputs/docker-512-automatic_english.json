@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "id": "docker",
+      "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+      "title": "Bind mounts | Docker Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Bind mounts\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-218",
+          "kind": "heading",
+          "text": "## Use a read-only bind mount\n",
+          "parent_id": "line-1",
+          "start_line": 218,
+          "end_line": 218
+        },
+        {
+          "id": "line-226",
+          "kind": "paragraph",
+          "text": "--mount\n",
+          "parent_id": "line-218",
+          "start_line": 226,
+          "end_line": 226
+        },
+        {
+          "id": "line-270",
+          "kind": "heading",
+          "text": "## Recursive mounts\n",
+          "parent_id": "line-1",
+          "start_line": 270,
+          "end_line": 270
+        },
+        {
+          "id": "line-274",
+          "kind": "paragraph",
+          "text": "If the bind mount is read-only, the Docker Engine makes a best-effort attempt at making the submounts read-only as well. This is referred to as recursive read-only mounts. Recursive read-only mounts require Linux kernel version 5.12 or later. If you're running an older kernel version, submounts are automatically mounted as read-write by default. Attempting to set submounts to be read-only on a kernel version earlier than 5.12, using the bind-recursive=readonly option, results in an error.\n",
+          "parent_id": "line-270",
+          "start_line": 274,
+          "end_line": 274
+        },
+        {
+          "id": "line-278",
+          "kind": "table",
+          "text": "| Value | Description |\n| enabled (default) | Read-only mounts are made recursively read-only if kernel is v5.12 or later. Otherwise, submounts are read-write. |\n| disabled | Submounts are ignored (not included in the bind mount). |\n| writable | Submounts are read-write. |\n| readonly | Submounts are read-only. Requires kernel v5.12 or later. |\n",
+          "parent_id": "line-270",
+          "start_line": 278,
+          "end_line": 282
+        }
+      ],
+      "source_hash": "7bd2f1aa709e2bae31826f48062fda846a5ef638d9db973fc799eb9eeaeeb47f"
+    }
+  ],
+  "omitted_count": 110,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 496,
+  "max_tokens": 512
+}

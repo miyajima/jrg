@@ -1,0 +1,72 @@
+{
+  "documents": [
+    {
+      "id": "blockingqueue",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+      "title": "BlockingQueue (Java SE 21 & JDK 21)",
+      "blocks": [
+        {
+          "id": "line-5",
+          "kind": "heading",
+          "text": "# Interface BlockingQueue<E>\n",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "id": "line-26",
+          "kind": "paragraph",
+          "text": "A Queue that additionally supports operations that wait for\nthe queue to become non-empty when retrieving an element, and wait\nfor space to become available in the queue when storing an element.\n",
+          "parent_id": "line-5",
+          "start_line": 26,
+          "end_line": 28
+        },
+        {
+          "id": "line-37",
+          "kind": "paragraph",
+          "text": "A BlockingQueue does not accept null elements. Implementations throw NullPointerException on attempts to add, put or offer a null. A null is used as a sentinel value to indicate failure of poll operations.\n",
+          "parent_id": "line-5",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "line-39",
+          "kind": "paragraph",
+          "text": "A BlockingQueue may be capacity bounded. At any given time it may have a remainingCapacity beyond which no additional elements can be put without blocking. A BlockingQueue without any intrinsic capacity constraints always reports a remaining capacity of Integer.MAX_VALUE.\n",
+          "parent_id": "line-5",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-41",
+          "kind": "paragraph",
+          "text": "BlockingQueue implementations are designed to be used primarily for producer-consumer queues, but additionally support the Collection interface. So, for example, it is possible to remove an arbitrary element from a queue using remove(x). However, such operations are in general not performed very efficiently, and are intended for only occasional use, such as when a queued message is cancelled.\n",
+          "parent_id": "line-5",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-45",
+          "kind": "paragraph",
+          "text": "A BlockingQueue does not intrinsically support any kind of \"close\" or \"shutdown\" operation to indicate that no more items will be added. The needs and usage of such features tend to be implementation-dependent. For example, a common tactic is for producers to insert special end-of-stream or poison objects, that are interpreted accordingly when taken by consumers.\n",
+          "parent_id": "line-5",
+          "start_line": 45,
+          "end_line": 45
+        },
+        {
+          "id": "line-96",
+          "kind": "list",
+          "text": "- Method Details add boolean add(E e) Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and throwing an IllegalStateException if no space is currently available. When using a capacity-restricted queue, it is generally preferable to use offer. Specified by: add in interface Collection<E> Specified by: add in interface Queue<E> Parameters: e - the element to add Returns: true (as specified by Collection.add(E)) Throws: IllegalStateException - if the element cannot be added at this time due to capacity restrictions ClassCastException - if the class of the specified element prevents it from being added to this queue NullPointerException - if the specified element is null IllegalArgumentException - if some property of the specified element prevents it from being added to this queue offer boolean offer(E e) Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and false if no space is currently available. When using a capacity-restricted queue, this method is generally preferable to add(E), which can fail to insert an element only by throwing an exception. Specified by: offer in interface Queue<E> Parameters: e - the element to add Returns: true if the element was added to this queue, else false Throws: ClassCastException - if the class of the specified element prevents it from being added to this queue NullPointerException - if the specified element is null IllegalArgumentException - if some property of the specified element prevents it from being added to this queue put void put(E e) throws InterruptedException Inserts the specified element into this queue, waiting if necessary for space to become available. Parameters: e - the element to add Throws: InterruptedException - if interrupted while waiting ClassCastException - if the class of the specified element prevents it from being added to this queue NullPointerException - if the specified element is null IllegalArgumentException - if some property of the specified element prevents it from being added to this queue offer boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException Inserts the specified element into this queue, waiting up to the specified wait time if necessary for space to become available. Parameters: e - the element to add timeout - how long to wait before giving up, in units of unit unit - a TimeUnit determining how to interpret the timeout parameter Returns: true if successful, or false if the specified waiting time elapses before space is available Throws: InterruptedException - if interrupted while waiting ClassCastException - if the class of the specified element prevents it from being added to this queue NullPointerException - if the specified element is null IllegalArgumentException - if some property of the specified element prevents it from being added to this queue take E take() throws InterruptedException Retrieves and removes the head of this queue, waiting if necessary until an element becomes available. Returns: the head of this queue Throws: InterruptedException - if interrupted while waiting poll E poll(long timeout, TimeUnit unit) throws InterruptedException Retrieves and removes the head of this queue, waiting up to the specified wait time if necessary for an element to become available. Parameters: timeout - how long to wait before giving up, in units of unit unit - a TimeUnit determining how to interpret the timeout parameter Returns: the head of this queue, or null if the specified waiting time elapses before an element is available Throws: InterruptedException - if interrupted while waiting remainingCapacity int remainingCapacity() Returns the number of additional elements that this queue can ideally (in the absence of memory or resource constraints) accept without blocking, or Integer.MAX_VALUE if there is no intrinsic limit. Note that you cannot always tell if an attempt to insert an element will succeed by inspecting remainingCapacity because it may be the case that another thread is about to insert or remove an element. Returns: the remaining capacity remove boolean remove(Object o) Removes a single instance of the specified element from this queue, if it is present. More formally, removes an element e such that o.equals(e), if this queue contains one or more such elements. Returns true if this queue contained the specified element (or equivalently, if this queue changed as a result of the call). Specified by: remove in interface Collection<E> Parameters: o - element to be removed from this queue, if present Returns: true if this queue changed as a result of the call Throws: ClassCastException - if the class of the specified element is incompatible with this queue (optional) NullPointerException - if the specified element is null (optional) contains boolean contains(Object o) Returns true if this queue contains the specified element. More formally, returns true if and only if this queue contains at least one element e such that o.equals(e). Specified by: contains in interface Collection<E> Parameters: o - object to be checked for containment in this queue Returns: true if this queue contains the specified element Throws: ClassCastException - if the class of the specified element is incompatible with this queue (optional) NullPointerException - if the specified element is null (optional) drainTo int drainTo(Collection<? super E> c) Removes all available elements from this queue and adds them to the given collection. This operation may be more efficient than repeatedly polling this queue. A failure encountered while attempting to add elements to collection c may result in elements being in neither, either or both collections when the associated exception is thrown. Attempts to drain a queue to itself result in IllegalArgumentException. Further, the behavior of this operation is undefined if the specified collection is modified while the operation is in progress. Parameters: c - the collection to transfer elements into Returns: the number of elements transferred Throws: UnsupportedOperationException - if addition of elements is not supported by the specified collection ClassCastException - if the class of an element of this queue prevents it from being added to the specified collection NullPointerException - if the specified collection is null IllegalArgumentException - if the specified collection is this queue, or some property of an element of this queue prevents it from being added to the specified collection drainTo int drainTo(Collection<? super E> c, int maxElements) Removes at most the given number of available elements from this queue and adds them to the given collection. A failure encountered while attempting to add elements to collection c may result in elements being in neither, either or both collections when the associated exception is thrown. Attempts to drain a queue to itself result in IllegalArgumentException. Further, the behavior of this operation is undefined if the specified collection is modified while the operation is in progress. Parameters: c - the collection to transfer elements into maxElements - the maximum number of elements to transfer Returns: the number of elements transferred Throws: UnsupportedOperationException - if addition of elements is not supported by the specified collection ClassCastException - if the class of an element of this queue prevents it from being added to the specified collection NullPointerException - if the specified collection is null IllegalArgumentException - if the specified collection is this queue, or some property of an element of this queue prevents it from being added to the specified collection\n",
+          "parent_id": "line-5",
+          "start_line": 96,
+          "end_line": 96
+        }
+      ],
+      "source_hash": "ebe554cc5f90da837ae70392f6b8288bc0f90172b8db0a0d591892c400320588"
+    }
+  ],
+  "omitted_count": 21,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2038,
+  "max_tokens": 2048
+}

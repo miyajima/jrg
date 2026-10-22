@@ -1,0 +1,240 @@
+{
+  "documents": [
+    {
+      "id": "docker",
+      "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+      "title": "Bind mounts | Docker Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Bind mounts\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-25",
+          "kind": "heading",
+          "text": "## Bind-mounting over existing data\n",
+          "parent_id": "line-1",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "id": "line-27",
+          "kind": "paragraph",
+          "text": "If you bind mount file or directory into a directory in the container in which files or directories exist, the pre-existing files are obscured by the mount. This is similar to if you were to save files into /mnt on a Linux host, and then mounted a USB drive into /mnt. The contents of /mnt would be obscured by the contents of the USB drive until the USB drive was unmounted.\n",
+          "parent_id": "line-25",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "id": "line-39",
+          "kind": "heading",
+          "text": "## Syntax\n",
+          "parent_id": "line-1",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-53",
+          "kind": "paragraph",
+          "text": "By default, --mount does not automatically create a directory if the specified mount path does not exist on the host. Instead, it produces an error:\n",
+          "parent_id": "line-39",
+          "start_line": 53,
+          "end_line": 53
+        },
+        {
+          "id": "line-93",
+          "kind": "heading",
+          "text": "### Options for --volume\n",
+          "parent_id": "line-39",
+          "start_line": 93,
+          "end_line": 93
+        },
+        {
+          "id": "line-106",
+          "kind": "table",
+          "text": "| Option | Description |\n| readonly, ro | If present, causes the bind mount to be mounted into the container as read-only. |\n| z, Z | Configures SELinux labeling. See Configure the SELinux label |\n| rprivate (default) | Sets bind propagation to rprivate for this mount. See Configure bind propagation. |\n| private | Sets bind propagation to private for this mount. See Configure bind propagation. |\n| rshared | Sets bind propagation to rshared for this mount. See Configure bind propagation. |\n| shared | Sets bind propagation to shared for this mount. See Configure bind propagation. |\n| rslave | Sets bind propagation to rslave for this mount. See Configure bind propagation. |\n| slave | Sets bind propagation to slave for this mount. See Configure bind propagation. |\n",
+          "parent_id": "line-93",
+          "start_line": 106,
+          "end_line": 114
+        },
+        {
+          "id": "line-123",
+          "kind": "heading",
+          "text": "## Start a container with a bind mount\n",
+          "parent_id": "line-1",
+          "start_line": 123,
+          "end_line": 123
+        },
+        {
+          "id": "line-129",
+          "kind": "paragraph",
+          "text": "--mount\n",
+          "parent_id": "line-123",
+          "start_line": 129,
+          "end_line": 129
+        },
+        {
+          "id": "line-166",
+          "kind": "paragraph",
+          "text": "This shows that the mount is a bind mount, it shows the correct source and destination, it shows that the mount is read-write, and that the propagation is set to rprivate.\n",
+          "parent_id": "line-123",
+          "start_line": 166,
+          "end_line": 166
+        },
+        {
+          "id": "line-175",
+          "kind": "heading",
+          "text": "### Mount into a non-empty directory on the container\n",
+          "parent_id": "line-123",
+          "start_line": 175,
+          "end_line": 175
+        },
+        {
+          "id": "line-177",
+          "kind": "paragraph",
+          "text": "If you bind-mount a directory into a non-empty directory on the container, the directory's existing contents are obscured by the bind mount. This can be beneficial, such as when you want to test a new version of your application without building a new image. However, it can also be surprising and this behavior differs from that of volumes.\n",
+          "parent_id": "line-175",
+          "start_line": 177,
+          "end_line": 177
+        },
+        {
+          "id": "line-211",
+          "kind": "paragraph",
+          "text": "The container is created but does not start. Remove it:\n",
+          "parent_id": "line-175",
+          "start_line": 211,
+          "end_line": 211
+        },
+        {
+          "id": "line-218",
+          "kind": "heading",
+          "text": "## Use a read-only bind mount\n",
+          "parent_id": "line-1",
+          "start_line": 218,
+          "end_line": 218
+        },
+        {
+          "id": "line-220",
+          "kind": "paragraph",
+          "text": "For some development applications, the container needs to write into the bind mount, so changes are propagated back to the Docker host. At other times, the container only needs read access.\n",
+          "parent_id": "line-218",
+          "start_line": 220,
+          "end_line": 220
+        },
+        {
+          "id": "line-222",
+          "kind": "paragraph",
+          "text": "This example modifies the previous one, but mounts the directory as a read-only bind mount, by adding ro to the (empty by default) list of options, after the mount point within the container. Where multiple options are present, separate them by commas.\n",
+          "parent_id": "line-218",
+          "start_line": 222,
+          "end_line": 222
+        },
+        {
+          "id": "line-224",
+          "kind": "paragraph",
+          "text": "The --mount and -v examples have the same result.\n",
+          "parent_id": "line-218",
+          "start_line": 224,
+          "end_line": 224
+        },
+        {
+          "id": "line-226",
+          "kind": "paragraph",
+          "text": "--mount\n",
+          "parent_id": "line-218",
+          "start_line": 226,
+          "end_line": 226
+        },
+        {
+          "id": "line-228",
+          "kind": "paragraph",
+          "text": "-v\n",
+          "parent_id": "line-218",
+          "start_line": 228,
+          "end_line": 228
+        },
+        {
+          "id": "line-263",
+          "kind": "paragraph",
+          "text": "Stop and remove the container:\n",
+          "parent_id": "line-218",
+          "start_line": 263,
+          "end_line": 263
+        },
+        {
+          "id": "line-265",
+          "kind": "code",
+          "text": "```\n$ docker container rm -fv devtest\n\n```\n",
+          "parent_id": "line-218",
+          "start_line": 265,
+          "end_line": 268
+        },
+        {
+          "id": "line-270",
+          "kind": "heading",
+          "text": "## Recursive mounts\n",
+          "parent_id": "line-1",
+          "start_line": 270,
+          "end_line": 270
+        },
+        {
+          "id": "line-272",
+          "kind": "paragraph",
+          "text": "When you bind mount a path that itself contains mounts, those submounts are also included in the bind mount by default. This behavior is configurable, using the bind-recursive option for --mount. This option is only supported with the --mount flag, not with -v or --volume.\n",
+          "parent_id": "line-270",
+          "start_line": 272,
+          "end_line": 272
+        },
+        {
+          "id": "line-274",
+          "kind": "paragraph",
+          "text": "If the bind mount is read-only, the Docker Engine makes a best-effort attempt at making the submounts read-only as well. This is referred to as recursive read-only mounts. Recursive read-only mounts require Linux kernel version 5.12 or later. If you're running an older kernel version, submounts are automatically mounted as read-write by default. Attempting to set submounts to be read-only on a kernel version earlier than 5.12, using the bind-recursive=readonly option, results in an error.\n",
+          "parent_id": "line-270",
+          "start_line": 274,
+          "end_line": 274
+        },
+        {
+          "id": "line-278",
+          "kind": "table",
+          "text": "| Value | Description |\n| enabled (default) | Read-only mounts are made recursively read-only if kernel is v5.12 or later. Otherwise, submounts are read-write. |\n| disabled | Submounts are ignored (not included in the bind mount). |\n| writable | Submounts are read-write. |\n| readonly | Submounts are read-only. Requires kernel v5.12 or later. |\n",
+          "parent_id": "line-270",
+          "start_line": 278,
+          "end_line": 282
+        },
+        {
+          "id": "line-284",
+          "kind": "heading",
+          "text": "## Configure bind propagation\n",
+          "parent_id": "line-1",
+          "start_line": 284,
+          "end_line": 284
+        },
+        {
+          "id": "line-294",
+          "kind": "table",
+          "text": "| Propagation setting | Description |\n| shared | Sub-mounts of the original mount are exposed to replica mounts, and sub-mounts of replica mounts are also propagated to the original mount. |\n| slave | similar to a shared mount, but only in one direction. If the original mount exposes a sub-mount, the replica mount can see it. However, if the replica mount exposes a sub-mount, the original mount cannot see it. |\n| private | The mount is private. Sub-mounts within it are not exposed to replica mounts, and sub-mounts of replica mounts are not exposed to the original mount. |\n| rshared | The same as shared, but the propagation also extends to and from mount points nested within any of the original or replica mount points. |\n| rslave | The same as slave, but the propagation also extends to and from mount points nested within any of the original or replica mount points. |\n| rprivate | The default. The same as private, meaning that no mount points anywhere within the original or replica mount points propagate in either direction. |\n",
+          "parent_id": "line-284",
+          "start_line": 294,
+          "end_line": 300
+        },
+        {
+          "id": "line-304",
+          "kind": "paragraph",
+          "text": "For more information about bind propagation, see the Linux kernel documentation for shared subtree.\n",
+          "parent_id": "line-284",
+          "start_line": 304,
+          "end_line": 304
+        }
+      ],
+      "source_hash": "7bd2f1aa709e2bae31826f48062fda846a5ef638d9db973fc799eb9eeaeeb47f"
+    }
+  ],
+  "omitted_count": 88,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2048,
+  "max_tokens": 2048
+}

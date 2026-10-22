@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rust",
+    "query": "site.rust-lang.org Rust 1.88.0 let chains edition 2024 stabilized"
+  },
+  {
+    "id": "python",
+    "query": "Python 3.13 free threading C extension GIL automatically enabled import extension"
+  },
+  {
+    "id": "node",
+    "query": "Node.js 22.15 require esm top level await synchronous modules ERR_REQUIRE_ASYNC_MODULE"
+  },
+  {
+    "id": "github",
+    "query": "GitHub Actions concurrency group pending cancel in progress default behavior"
+  },
+  {
+    "id": "jr",
+    "query": "site.jreast.co.jp きっぷ 幼児 乳児 2人 指定席 こども 運賃"
+  },
+  {
+    "id": "jma",
+    "query": "site.jma.go.jp 降水確率 0% 1mm 四捨五入 意味"
+  }
+]

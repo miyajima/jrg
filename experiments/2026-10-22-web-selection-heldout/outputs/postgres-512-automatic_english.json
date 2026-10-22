@@ -1,0 +1,56 @@
+{
+  "documents": [
+    {
+      "id": "postgres",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "title": "PostgreSQL: Documentation: 18: 5.5. Constraints",
+      "blocks": [
+        {
+          "id": "line-91",
+          "kind": "heading",
+          "text": "## 5.5. Constraints #\n",
+          "start_line": 91,
+          "end_line": 91
+        },
+        {
+          "id": "line-105",
+          "kind": "paragraph",
+          "text": "Data types are a way to limit the kind of data that can be stored in a table. For many applications, however, the constraint they provide is too coarse. For example, a column containing a product price should probably only accept positive values. But there is no standard data type that accepts only positive numbers. Another issue is that you might want to constrain column data with respect to other columns or rows. For example, in a table containing product information, there should be only one row for each product number.\n",
+          "parent_id": "line-91",
+          "start_line": 105,
+          "end_line": 105
+        },
+        {
+          "id": "line-295",
+          "kind": "heading",
+          "text": "### 5.5.3. Unique Constraints #\n",
+          "parent_id": "line-91",
+          "start_line": 295,
+          "end_line": 295
+        },
+        {
+          "id": "line-297",
+          "kind": "paragraph",
+          "text": "Unique constraints ensure that the data contained in a column, or a group of columns, is unique among all the rows in the table. The syntax is:\n",
+          "parent_id": "line-295",
+          "start_line": 297,
+          "end_line": 297
+        },
+        {
+          "id": "line-353",
+          "kind": "paragraph",
+          "text": "In general, a unique constraint is violated if there is more than one row in the table where the values of all of the columns included in the constraint are equal. By default, two null values are not considered equal in this comparison. That means even in the presence of a unique constraint it is possible to store duplicate rows that contain a null value in at least one of the constrained columns. This behavior can be changed by adding the clause NULLS NOT DISTINCT, like\n",
+          "parent_id": "line-295",
+          "start_line": 353,
+          "end_line": 353
+        }
+      ],
+      "source_hash": "e6a80937be9f32bc0d7bde609f2ea0a2108a6c6790af364747813908f5d27e27"
+    }
+  ],
+  "omitted_count": 154,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 509,
+  "max_tokens": 512
+}

@@ -1,0 +1,72 @@
+{
+  "documents": [
+    {
+      "id": "blockingqueue",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+      "title": "BlockingQueue (Java SE 21 & JDK 21)",
+      "blocks": [
+        {
+          "id": "line-5",
+          "kind": "heading",
+          "text": "# Interface BlockingQueue<E>\n",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "id": "line-26",
+          "kind": "paragraph",
+          "text": "A Queue that additionally supports operations that wait for\nthe queue to become non-empty when retrieving an element, and wait\nfor space to become available in the queue when storing an element.\n",
+          "parent_id": "line-5",
+          "start_line": 26,
+          "end_line": 28
+        },
+        {
+          "id": "line-37",
+          "kind": "paragraph",
+          "text": "A BlockingQueue does not accept null elements. Implementations throw NullPointerException on attempts to add, put or offer a null. A null is used as a sentinel value to indicate failure of poll operations.\n",
+          "parent_id": "line-5",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "line-39",
+          "kind": "paragraph",
+          "text": "A BlockingQueue may be capacity bounded. At any given time it may have a remainingCapacity beyond which no additional elements can be put without blocking. A BlockingQueue without any intrinsic capacity constraints always reports a remaining capacity of Integer.MAX_VALUE.\n",
+          "parent_id": "line-5",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-41",
+          "kind": "paragraph",
+          "text": "BlockingQueue implementations are designed to be used primarily for producer-consumer queues, but additionally support the Collection interface. So, for example, it is possible to remove an arbitrary element from a queue using remove(x). However, such operations are in general not performed very efficiently, and are intended for only occasional use, such as when a queued message is cancelled.\n",
+          "parent_id": "line-5",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-45",
+          "kind": "paragraph",
+          "text": "A BlockingQueue does not intrinsically support any kind of \"close\" or \"shutdown\" operation to indicate that no more items will be added. The needs and usage of such features tend to be implementation-dependent. For example, a common tactic is for producers to insert special end-of-stream or poison objects, that are interpreted accordingly when taken by consumers.\n",
+          "parent_id": "line-5",
+          "start_line": 45,
+          "end_line": 45
+        },
+        {
+          "id": "line-94",
+          "kind": "list",
+          "text": "- Method Summary All MethodsInstance MethodsAbstract Methods Modifier and Type Method Description boolean add(E e) Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and throwing an IllegalStateException if no space is currently available. boolean contains(Object o) Returns true if this queue contains the specified element. int drainTo(Collection<? super E> c) Removes all available elements from this queue and adds them to the given collection. int drainTo(Collection<? super E> c, int maxElements) Removes at most the given number of available elements from this queue and adds them to the given collection. boolean offer(E e) Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions, returning true upon success and false if no space is currently available. boolean offer(E e, long timeout, TimeUnit unit) Inserts the specified element into this queue, waiting up to the specified wait time if necessary for space to become available. E poll(long timeout, TimeUnit unit) Retrieves and removes the head of this queue, waiting up to the specified wait time if necessary for an element to become available. void put(E e) Inserts the specified element into this queue, waiting if necessary for space to become available. int remainingCapacity() Returns the number of additional elements that this queue can ideally (in the absence of memory or resource constraints) accept without blocking, or Integer.MAX_VALUE if there is no intrinsic limit. boolean remove(Object o) Removes a single instance of the specified element from this queue, if it is present. E take() Retrieves and removes the head of this queue, waiting if necessary until an element becomes available. Methods declared in interface java.util.Collection addAll, clear, containsAll, equals, hashCode, isEmpty, iterator, parallelStream, removeAll, removeIf, retainAll, size, spliterator, stream, toArray, toArray, toArray Methods declared in interface java.lang.Iterable forEach Methods declared in interface java.util.Queue element, peek, poll, remove\n",
+          "parent_id": "line-5",
+          "start_line": 94,
+          "end_line": 94
+        }
+      ],
+      "source_hash": "ebe554cc5f90da837ae70392f6b8288bc0f90172b8db0a0d591892c400320588"
+    }
+  ],
+  "omitted_count": 21,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1020,
+  "max_tokens": 1024
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "version": "2026-10-22.1",
+  "engine_sha256": "70937b883d2fc75e3530e4d8eb2f3f7a534456f1cdc582f595f930c730c7fe20",
+  "catalog_sha256": "e4833795a164d67105b1ef60a5fd96b28d4a021a0d283dd87633ab4475feca7a",
+  "approvals": [
+    {
+      "id": "redis-1024-captured-v1",
+      "request_sha256": "f3360fa115bd0b6bb4fcbbb3a606c595be5a3e1ef15429f70c29b0ab72d05847",
+      "rule_ids": [
+        "nonpositive"
+      ],
+      "evidence": {
+        "path": "experiments/2026-10-22-verified-selection/redis-proof.json",
+        "sha256": "aec3d200a97aee673a8970518ff0f1500300083d2fe5e1cef76d1fa2ab607748",
+        "baseline_units": [
+          "updates"
+        ],
+        "selected_units": [
+          "updates",
+          "nonpositive"
+        ]
+      }
+    },
+    {
+      "id": "s3-1024-captured-v1",
+      "request_sha256": "a2cd13fb6b35ab4e594635b4a04943fc7113166316403a296a58a223484059e6",
+      "rule_ids": [
+        "s3-general-purpose"
+      ],
+      "evidence": {
+        "path": "experiments/2026-10-22-verified-selection/s3-proof.json",
+        "sha256": "94c2947f1685f515a6042a76db4fef2a940c264742a09caf5902e1b8e78bac5f",
+        "baseline_units": [
+          "directory_order",
+          "token"
+        ],
+        "selected_units": [
+          "general_order",
+          "directory_order",
+          "token"
+        ]
+      }
+    }
+  ]
+}

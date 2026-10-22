@@ -1,0 +1,88 @@
+{
+  "rows": [
+    {
+      "transport": "MCP",
+      "case": "redis",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": true
+    },
+    {
+      "transport": "MCP",
+      "case": "s3",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": true
+    },
+    {
+      "transport": "MCP",
+      "case": "search-unapproved",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": false
+    },
+    {
+      "transport": "MCP",
+      "case": "search-improved",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": false
+    },
+    {
+      "transport": "RTK",
+      "case": "redis",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": true,
+      "replayed_identically": true,
+      "english_instruction_matches_mcp": true
+    },
+    {
+      "transport": "RTK",
+      "case": "s3",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": true,
+      "replayed_identically": true,
+      "english_instruction_matches_mcp": true
+    },
+    {
+      "transport": "RTK",
+      "case": "search-unapproved",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": false,
+      "replayed_identically": true,
+      "english_instruction_matches_mcp": true
+    },
+    {
+      "transport": "RTK",
+      "case": "search-improved",
+      "budget": 1024,
+      "matches_standard_cli": true,
+      "approved_rule_applies": false,
+      "replayed_identically": true,
+      "english_instruction_matches_mcp": true
+    },
+    {
+      "transport": "MCP",
+      "case": "queue",
+      "budget": 2048,
+      "matches_standard_cli": true,
+      "approved_rule_applies": false
+    },
+    {
+      "transport": "RTK",
+      "case": "queue",
+      "budget": 2048,
+      "matches_standard_cli": true,
+      "approved_rule_applies": false,
+      "replayed_identically": true,
+      "english_instruction_matches_mcp": true
+    }
+  ],
+  "selector_sha256": "582ab47ec0b15ef6dafcc455e7eb40162e9597197f1ecf5e56ae94cdae38c25f",
+  "rtk_sha256": "211bd9e853f93d93c5917699d2fa903dbe3ae3ca4f768d74da411da575a4a5a7",
+  "mcp_sha256": "1dbf192c6313ab34354cc272078beb9c6b3d8b1aef29ed3d9e9a7e0989cf9be9",
+  "external_model_calls": 0
+}

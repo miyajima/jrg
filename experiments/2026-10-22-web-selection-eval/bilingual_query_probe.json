@@ -1,0 +1,576 @@
+{
+  "method": "Manual English question from pre-existing frozen cases appended to original Japanese question. No engine change, no automatic translation test, same four known pages only.",
+  "selector_sha256": "5648bef9a59e9a2f18b540a48f89d02d479accecdb8a0dd3da9ce63ba6867045",
+  "rows": [
+    {
+      "topic": "rust",
+      "budget": 1024,
+      "query_ja": "Rust 1.88.0の条件式でパターン照合を連結する機能は、2021エディションでも使えますか？",
+      "query_en": "What edition is required for let chains in Rust 1.88.0?",
+      "japanese_hits": 0,
+      "english_hits": 1,
+      "bilingual_hits": 1,
+      "total": 1,
+      "tokens": 1015,
+      "selected": {
+        "documents": [
+          {
+            "id": "rust",
+            "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+            "title": "Announcing Rust 1.88.0 | Rust Blog",
+            "blocks": [
+              {
+                "id": "line-11",
+                "kind": "paragraph",
+                "text": "If you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.88.0.\n",
+                "start_line": 11,
+                "end_line": 11
+              },
+              {
+                "id": "line-15",
+                "kind": "heading",
+                "text": "## What's in 1.88.0 stable\n",
+                "start_line": 15,
+                "end_line": 15
+              },
+              {
+                "id": "line-17",
+                "kind": "heading",
+                "text": "### Let chains\n",
+                "parent_id": "line-15",
+                "start_line": 17,
+                "end_line": 17
+              },
+              {
+                "id": "line-19",
+                "kind": "paragraph",
+                "text": "This feature allows &&-chaining let statements inside if and while conditions, even intermingling with boolean expressions, so there is less distinction between if/if let and while/while let. The patterns inside the let sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.\n",
+                "parent_id": "line-17",
+                "start_line": 19,
+                "end_line": 19
+              },
+              {
+                "id": "line-21",
+                "kind": "paragraph",
+                "text": "For example, this snippet combines multiple conditions which would have required nesting if let and if blocks before:\n",
+                "parent_id": "line-17",
+                "start_line": 21,
+                "end_line": 21
+              },
+              {
+                "id": "line-23",
+                "kind": "code",
+                "text": "```\nif let Channel::Stable(v) = release_info()\n&& let Semver { major, minor, .. } = v\n&& major == 1\n&& minor == 88\n{\nprintln!(\"`let_chains` was stabilized in this version\");\n}\n```\n",
+                "parent_id": "line-17",
+                "start_line": 23,
+                "end_line": 31
+              },
+              {
+                "id": "line-33",
+                "kind": "paragraph",
+                "text": "Let chains are only available in the Rust 2024 edition, as this feature depends on the if let temporary scope change for more consistent drop order.\n",
+                "parent_id": "line-17",
+                "start_line": 33,
+                "end_line": 33
+              },
+              {
+                "id": "line-35",
+                "kind": "paragraph",
+                "text": "Earlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!\n",
+                "parent_id": "line-17",
+                "start_line": 35,
+                "end_line": 35
+              },
+              {
+                "id": "line-37",
+                "kind": "heading",
+                "text": "### Naked functions\n",
+                "parent_id": "line-15",
+                "start_line": 37,
+                "end_line": 37
+              },
+              {
+                "id": "line-41",
+                "kind": "paragraph",
+                "text": "For example:\n",
+                "parent_id": "line-37",
+                "start_line": 41,
+                "end_line": 41
+              },
+              {
+                "id": "line-56",
+                "kind": "paragraph",
+                "text": "Look for a more detailed post on this soon!\n",
+                "parent_id": "line-37",
+                "start_line": 56,
+                "end_line": 56
+              },
+              {
+                "id": "line-58",
+                "kind": "heading",
+                "text": "### Boolean configuration\n",
+                "parent_id": "line-15",
+                "start_line": 58,
+                "end_line": 58
+              },
+              {
+                "id": "line-62",
+                "kind": "paragraph",
+                "text": "Previously, empty predicate lists could be used for unconditional configuration, like cfg(all()) for enabled and cfg(any()) for disabled, but this meaning is rather implicit and easy to get backwards. cfg(true) and cfg(false) offer a more direct way to say what you mean.\n",
+                "parent_id": "line-58",
+                "start_line": 62,
+                "end_line": 62
+              },
+              {
+                "id": "line-64",
+                "kind": "paragraph",
+                "text": "See RFC 3695 for more background!\n",
+                "parent_id": "line-58",
+                "start_line": 64,
+                "end_line": 64
+              },
+              {
+                "id": "line-76",
+                "kind": "heading",
+                "text": "### Stabilized APIs\n",
+                "parent_id": "line-15",
+                "start_line": 76,
+                "end_line": 76
+              },
+              {
+                "id": "line-80",
+                "kind": "list",
+                "text": "- impl Default for *const T\n",
+                "parent_id": "line-76",
+                "start_line": 80,
+                "end_line": 80
+              },
+              {
+                "id": "line-82",
+                "kind": "list",
+                "text": "- impl Default for *mut T\n",
+                "parent_id": "line-76",
+                "start_line": 82,
+                "end_line": 82
+              }
+            ],
+            "source_hash": "d098b0afe7ebcb13f12c1165dc8f5e181310e3a07fbc0a5a27b95c866ca61ebd"
+          }
+        ],
+        "omitted_count": 45,
+        "duplicate_count": 0,
+        "status": "selected",
+        "tokens": 1015,
+        "max_tokens": 1024
+      }
+    },
+    {
+      "topic": "python",
+      "budget": 1024,
+      "query_ja": "Python 3.13のGILなしビルドで、拡張モジュールを読み込むとロックが復活する条件と、明示的に有効化する方法は？",
+      "query_en": "In Python 3.13 free-threaded builds, when can the GIL be re-enabled automatically, and how can it be enabled explicitly?",
+      "japanese_hits": 2,
+      "english_hits": 2,
+      "bilingual_hits": 2,
+      "total": 2,
+      "tokens": 1005,
+      "selected": {
+        "documents": [
+          {
+            "id": "python",
+            "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+            "title": "Python experimental support for free threading — Python 3.13.16 documentation",
+            "blocks": [
+              {
+                "id": "line-29",
+                "kind": "heading",
+                "text": "# Python experimental support for free threading¶\n",
+                "start_line": 29,
+                "end_line": 29
+              },
+              {
+                "id": "line-33",
+                "kind": "paragraph",
+                "text": "The free-threaded mode is experimental and work is ongoing to improve it: expect some bugs and a substantial single-threaded performance hit.\n",
+                "parent_id": "line-29",
+                "start_line": 33,
+                "end_line": 33
+              },
+              {
+                "id": "line-41",
+                "kind": "heading",
+                "text": "## Installation¶\n",
+                "parent_id": "line-29",
+                "start_line": 41,
+                "end_line": 41
+              },
+              {
+                "id": "line-47",
+                "kind": "paragraph",
+                "text": "When building CPython from source, the --disable-gil configure option should be used to build a free-threaded Python interpreter.\n",
+                "parent_id": "line-41",
+                "start_line": 47,
+                "end_line": 47
+              },
+              {
+                "id": "line-49",
+                "kind": "heading",
+                "text": "## Identifying free-threaded Python¶\n",
+                "parent_id": "line-29",
+                "start_line": 49,
+                "end_line": 49
+              },
+              {
+                "id": "line-51",
+                "kind": "paragraph",
+                "text": "To check if the current interpreter supports free-threading, python -VV and sys.version contain “experimental free-threading build”. The new sys._is_gil_enabled() function can be used to check whether the GIL is actually disabled in the running process.\n",
+                "parent_id": "line-49",
+                "start_line": 51,
+                "end_line": 51
+              },
+              {
+                "id": "line-55",
+                "kind": "heading",
+                "text": "## The global interpreter lock in free-threaded Python¶\n",
+                "parent_id": "line-29",
+                "start_line": 55,
+                "end_line": 55
+              },
+              {
+                "id": "line-57",
+                "kind": "paragraph",
+                "text": "Free-threaded builds of CPython support optionally running with the GIL enabled at runtime using the environment variable PYTHON_GIL or the command-line option -X gil.\n",
+                "parent_id": "line-55",
+                "start_line": 57,
+                "end_line": 57
+              },
+              {
+                "id": "line-59",
+                "kind": "paragraph",
+                "text": "The GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading. A warning will be printed in this case.\n",
+                "parent_id": "line-55",
+                "start_line": 59,
+                "end_line": 59
+              },
+              {
+                "id": "line-67",
+                "kind": "heading",
+                "text": "## Thread safety¶\n",
+                "parent_id": "line-29",
+                "start_line": 67,
+                "end_line": 67
+              },
+              {
+                "id": "line-69",
+                "kind": "paragraph",
+                "text": "The free-threaded build of CPython aims to provide similar thread-safety behavior at the Python level to the default GIL-enabled build. Built-in types like dict, list, and set use internal locks to protect against concurrent modifications in ways that behave similarly to the GIL. However, Python has not historically guaranteed specific behavior for concurrent modifications to these built-in types, so this should be treated as a description of the current implementation, not a guarantee of current or future behavior.\n",
+                "parent_id": "line-67",
+                "start_line": 69,
+                "end_line": 69
+              },
+              {
+                "id": "line-75",
+                "kind": "heading",
+                "text": "## Known limitations¶\n",
+                "parent_id": "line-29",
+                "start_line": 75,
+                "end_line": 75
+              },
+              {
+                "id": "line-107",
+                "kind": "heading",
+                "text": "### Single-threaded performance¶\n",
+                "parent_id": "line-75",
+                "start_line": 107,
+                "end_line": 107
+              },
+              {
+                "id": "line-109",
+                "kind": "paragraph",
+                "text": "The free-threaded build has additional overhead when executing Python code compared to the default GIL-enabled build. In 3.13, this overhead is about 40% on the pyperformance suite. Programs that spend most of their time in C extensions or I/O will see less of an impact. The largest impact is because the specializing adaptive interpreter (PEP 659) is disabled in the free-threaded build. We expect to re-enable it in a thread-safe way in the 3.14 release. This overhead is expected to be reduced in upcoming Python release. We are aiming for an overhead of 10% or less on the pyperformance suite compared to the default GIL-enabled build.\n",
+                "parent_id": "line-107",
+                "start_line": 109,
+                "end_line": 109
+              }
+            ],
+            "source_hash": "845999197b847271f9751a28f288d5aa7362f5c81689c5b5e440a129d4ddeed4"
+          }
+        ],
+        "omitted_count": 73,
+        "duplicate_count": 0,
+        "status": "selected",
+        "tokens": 1005,
+        "max_tokens": 1024
+      }
+    },
+    {
+      "topic": "node",
+      "budget": 1024,
+      "query_ja": "Node.js 22.15.0で、読み込み先の依存モジュールが非同期の初期化を行うとrequire()はどうなり、代わりに何を使う？",
+      "query_en": "In Node.js 22.15.0, can require() load an ES module with top-level await in its dependency graph? What error and alternative apply?",
+      "japanese_hits": 0,
+      "english_hits": 2,
+      "bilingual_hits": 2,
+      "total": 2,
+      "tokens": 1001,
+      "selected": {
+        "documents": [
+          {
+            "id": "node",
+            "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+            "title": "Modules: CommonJS modules | Node.js v22.15.0 Documentation",
+            "blocks": [
+              {
+                "id": "line-137",
+                "kind": "heading",
+                "text": "## Modules: CommonJS modules#\n",
+                "start_line": 137,
+                "end_line": 137
+              },
+              {
+                "id": "line-193",
+                "kind": "heading",
+                "text": "### Enabling#\n",
+                "parent_id": "line-137",
+                "start_line": 193,
+                "end_line": 193
+              },
+              {
+                "id": "line-203",
+                "kind": "list",
+                "text": "- Files with a .js extension or without an extension, when the nearest parent package.json file doesn't contain a top-level field \"type\" or there is no package.json in any parent folder; unless the file contains syntax that errors unless it is evaluated as an ES module. Package authors should include the \"type\" field, even in packages where all sources are CommonJS. Being explicit about the type of the package will make things easier for build tools and loaders to determine how the files in the package should be interpreted.\n",
+                "parent_id": "line-193",
+                "start_line": 203,
+                "end_line": 203
+              },
+              {
+                "id": "line-247",
+                "kind": "heading",
+                "text": "### Loading ECMAScript modules using require()#\n",
+                "parent_id": "line-137",
+                "start_line": 247,
+                "end_line": 247
+              },
+              {
+                "id": "line-263",
+                "kind": "list",
+                "text": "- The module is fully synchronous (contains no top-level await); and\n",
+                "parent_id": "line-247",
+                "start_line": 263,
+                "end_line": 263
+              },
+              {
+                "id": "line-267",
+                "kind": "paragraph",
+                "text": "If the ES Module being loaded meets the requirements, require() can load it and return the module namespace object. In this case it is similar to dynamic import() but is run synchronously and returns the name space object directly.\n",
+                "parent_id": "line-247",
+                "start_line": 267,
+                "end_line": 267
+              },
+              {
+                "id": "line-300",
+                "kind": "paragraph",
+                "text": "For interoperability with existing tools that convert ES Modules into CommonJS, which could then load real ES Modules through require(), the returned namespace would contain a __esModule: true property if it has a default export so that consuming code generated by tools can recognize the default exports in real ES Modules. If the namespace already defines __esModule, this would not be added. This property is experimental and can change in the future. It should only be used by tools converting ES modules into CommonJS modules, following existing ecosystem conventions. Code authored directly in CommonJS should avoid depending on it.\n",
+                "parent_id": "line-247",
+                "start_line": 300,
+                "end_line": 300
+              },
+              {
+                "id": "line-302",
+                "kind": "paragraph",
+                "text": "When an ES Module contains both named exports and a default export, the result returned by require() is the module namespace object, which places the default export in the .default property, similar to the results returned by import(). To customize what should be returned by require(esm) directly, the ES Module can export the desired value using the string name \"module.exports\".\n",
+                "parent_id": "line-247",
+                "start_line": 302,
+                "end_line": 302
+              },
+              {
+                "id": "line-346",
+                "kind": "paragraph",
+                "text": "If the module being require()'d contains top-level await, or the module graph it imports contains top-level await, ERR_REQUIRE_ASYNC_MODULE will be thrown. In this case, users should load the asynchronous module using import().\n",
+                "parent_id": "line-247",
+                "start_line": 346,
+                "end_line": 346
+              },
+              {
+                "id": "line-678",
+                "kind": "heading",
+                "text": "### The module scope#\n",
+                "parent_id": "line-137",
+                "start_line": 678,
+                "end_line": 678
+              },
+              {
+                "id": "line-744",
+                "kind": "heading",
+                "text": "#### require(id)#\n",
+                "parent_id": "line-678",
+                "start_line": 744,
+                "end_line": 744
+              },
+              {
+                "id": "line-766",
+                "kind": "heading",
+                "text": "##### require.cache#\n",
+                "parent_id": "line-744",
+                "start_line": 766,
+                "end_line": 766
+              },
+              {
+                "id": "line-772",
+                "kind": "paragraph",
+                "text": "Modules are cached in this object when they are required. By deleting a key value from this object, the next require will reload the module. This does not apply to native addons, for which reloading will result in an error.\n",
+                "parent_id": "line-766",
+                "start_line": 772,
+                "end_line": 772
+              }
+            ],
+            "source_hash": "a51c8cb292f9a70a570b414575078a82c3a9449680b610e5f989f718b76181f3"
+          }
+        ],
+        "omitted_count": 350,
+        "duplicate_count": 0,
+        "status": "selected",
+        "tokens": 1001,
+        "max_tokens": 1024
+      }
+    },
+    {
+      "topic": "github",
+      "budget": 1024,
+      "query_ja": "GitHub Actionsで同じグループの実行が重なると、待機中と実行中の処理は既定でどう扱われる？最大待機数を増やす設定の上限と、実行中の中断設定との併用可否は？",
+      "query_en": "GitHub Actions concurrency: by default how are pending and running jobs handled? How many can wait with queue: max, and can it be combined with cancel-in-progress: true?",
+      "japanese_hits": 0,
+      "english_hits": 4,
+      "bilingual_hits": 4,
+      "total": 4,
+      "tokens": 1012,
+      "selected": {
+        "documents": [
+          {
+            "id": "github",
+            "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+            "title": "Control the concurrency of workflows and jobs - GitHub Docs",
+            "blocks": [
+              {
+                "id": "line-1",
+                "kind": "paragraph",
+                "text": "In this article\n",
+                "start_line": 1,
+                "end_line": 1
+              },
+              {
+                "id": "line-3",
+                "kind": "heading",
+                "text": "# Control the concurrency of workflows and jobs\n",
+                "start_line": 3,
+                "end_line": 3
+              },
+              {
+                "id": "line-11",
+                "kind": "heading",
+                "text": "## Using concurrency in different scenarios\n",
+                "parent_id": "line-3",
+                "start_line": 11,
+                "end_line": 11
+              },
+              {
+                "id": "line-17",
+                "kind": "paragraph",
+                "text": "This means that there can be at most one running job or workflow in a concurrency group at any time. When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. By default, any existing pending job or workflow in the same concurrency group will be canceled and the new queued job or workflow will take its place.\n",
+                "parent_id": "line-11",
+                "start_line": 17,
+                "end_line": 17
+              },
+              {
+                "id": "line-19",
+                "kind": "paragraph",
+                "text": "To also cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true. To conditionally cancel currently running jobs or workflows in the same concurrency group, you can specify cancel-in-progress as an expression with any of the allowed expression contexts.\n",
+                "parent_id": "line-11",
+                "start_line": 19,
+                "end_line": 19
+              },
+              {
+                "id": "line-25",
+                "kind": "list",
+                "text": "- max: Up to 100 jobs or workflow runs can be pending in the concurrency group. When the queue is full, any additional jobs or workflow runs are canceled.\n",
+                "parent_id": "line-11",
+                "start_line": 25,
+                "end_line": 25
+              },
+              {
+                "id": "line-27",
+                "kind": "paragraph",
+                "text": "The combination of queue: max and cancel-in-progress: true is not allowed and will result in a workflow validation error.\n",
+                "parent_id": "line-11",
+                "start_line": 27,
+                "end_line": 27
+              },
+              {
+                "id": "line-70",
+                "kind": "heading",
+                "text": "### Example: Concurrency groups\n",
+                "parent_id": "line-11",
+                "start_line": 70,
+                "end_line": 70
+              },
+              {
+                "id": "line-74",
+                "kind": "paragraph",
+                "text": "The concurrency key is used to group workflows or jobs together into a concurrency group. When you define a concurrency key, GitHub Actions ensures that only one workflow or job with that key runs at any given time. If a new workflow run or job starts with the same concurrency key, GitHub Actions will cancel any workflow or job already running with that key. The concurrency key can be a hard-coded string, or it can be a dynamic expression that includes context variables.\n",
+                "parent_id": "line-70",
+                "start_line": 74,
+                "end_line": 74
+              },
+              {
+                "id": "line-106",
+                "kind": "heading",
+                "text": "### Example: Queueing multiple pending runs\n",
+                "parent_id": "line-11",
+                "start_line": 106,
+                "end_line": 106
+              },
+              {
+                "id": "line-108",
+                "kind": "paragraph",
+                "text": "By default, only one job or workflow run can be pending in a concurrency group at a time. To allow multiple runs to queue instead of being canceled, set queue: max. With queue: max, up to 100 jobs or workflow runs can wait in the concurrency group; once the queue is full, any additional runs are canceled.\n",
+                "parent_id": "line-106",
+                "start_line": 108,
+                "end_line": 108
+              },
+              {
+                "id": "line-124",
+                "kind": "paragraph",
+                "text": "Note that queue: max cannot be combined with cancel-in-progress: true, because the two options describe conflicting behaviors for handling in-progress runs.\n",
+                "parent_id": "line-106",
+                "start_line": 124,
+                "end_line": 124
+              },
+              {
+                "id": "line-178",
+                "kind": "heading",
+                "text": "## Monitoring your current jobs in your organization or enterprise\n",
+                "parent_id": "line-3",
+                "start_line": 178,
+                "end_line": 178
+              },
+              {
+                "id": "line-180",
+                "kind": "paragraph",
+                "text": "To identify any constraints with concurrency or queuing, you can check how many jobs are currently being processed on the GitHub-hosted runners in your organization or enterprise. For more information, see Viewing your current jobs.\n",
+                "parent_id": "line-178",
+                "start_line": 180,
+                "end_line": 180
+              }
+            ],
+            "source_hash": "82f4d5aaaad6ec61cd71618a0d200e3d3ad1a8902753de3253bea7bc35bb2642"
+          }
+        ],
+        "omitted_count": 41,
+        "duplicate_count": 0,
+        "status": "selected",
+        "tokens": 1012,
+        "max_tokens": 1024
+      }
+    }
+  ]
+}

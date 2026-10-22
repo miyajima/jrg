@@ -1,0 +1,96 @@
+{
+  "documents": [
+    {
+      "id": "kubernetes",
+      "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+      "title": "Secrets | Kubernetes",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Secrets\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-106",
+          "kind": "heading",
+          "text": "## Types of Secret\n",
+          "parent_id": "line-1",
+          "start_line": 106,
+          "end_line": 106
+        },
+        {
+          "id": "line-262",
+          "kind": "heading",
+          "text": "### Basic authentication Secret\n",
+          "parent_id": "line-106",
+          "start_line": 262,
+          "end_line": 262
+        },
+        {
+          "id": "line-274",
+          "kind": "paragraph",
+          "text": "secret/basicauth-secret.yaml\n",
+          "parent_id": "line-262",
+          "start_line": 274,
+          "end_line": 274
+        },
+        {
+          "id": "line-321",
+          "kind": "heading",
+          "text": "### TLS Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 321,
+          "end_line": 321
+        },
+        {
+          "id": "line-351",
+          "kind": "code",
+          "text": "```\nkubectl create secret tls my-tls-secret \\\n--cert=path/to/cert/file \\\n--key=path/to/key/file\n\n```\n",
+          "parent_id": "line-321",
+          "start_line": 351,
+          "end_line": 356
+        },
+        {
+          "id": "line-429",
+          "kind": "heading",
+          "text": "## Working with Secrets\n",
+          "parent_id": "line-1",
+          "start_line": 429,
+          "end_line": 429
+        },
+        {
+          "id": "line-503",
+          "kind": "heading",
+          "text": "### Using Secrets as files from a Pod\n",
+          "parent_id": "line-429",
+          "start_line": 503,
+          "end_line": 503
+        },
+        {
+          "id": "line-511",
+          "kind": "heading",
+          "text": "#### Note:\n",
+          "parent_id": "line-503",
+          "start_line": 511,
+          "end_line": 511
+        },
+        {
+          "id": "line-513",
+          "kind": "paragraph",
+          "text": "A container using a Secret as a\nsubPath volume mount does not receive\nautomated Secret updates.\n",
+          "parent_id": "line-511",
+          "start_line": 513,
+          "end_line": 515
+        }
+      ],
+      "source_hash": "f9b756063d7923a42f9ad4eaa8b3d6e68a900e65a3434ef6881b66b60e24820c"
+    }
+  ],
+  "omitted_count": 210,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 502,
+  "max_tokens": 512
+}

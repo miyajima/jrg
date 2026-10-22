@@ -1,0 +1,34 @@
+[
+  {
+    "id": "queue",
+    "query_en": "Does Python's Queue become unbounded when its maximum size is set to 0 or a negative number? What conditions apply to the timeout for put?"
+  },
+  {
+    "id": "semaphore",
+    "query_en": "Can the initial value of asyncio's Semaphore be zero or negative? What happens if release is called on a BoundedSemaphore beyond its initial value?"
+  },
+  {
+    "id": "timeout",
+    "query_en": "Can the time limit for GNU timeout be set to 0 or a fractional value? I would also like to know the exit codes when the time limit expires and when the command is not found."
+  },
+  {
+    "id": "ssh",
+    "query_en": "In the OpenSSH client, what happens when the interval for checking whether the server is alive over the encrypted connection is set to 0? How does this differ from TCP keepalive?"
+  },
+  {
+    "id": "github-rate",
+    "query_en": "When a request is rate limited by the GitHub REST API, when should it be retried? Does the waiting approach differ between primary and secondary rate limits?"
+  },
+  {
+    "id": "nginx",
+    "query_en": "When a request exceeds the rate limit in NGINX, how is it handled within and beyond the burst allowance? What changes when nodelay is specified?"
+  },
+  {
+    "id": "gcs-retry",
+    "query_en": "When requests are rate limited by Google Cloud Storage, how is the retry delay recommended to increase? Do random delays and operation idempotency also matter?"
+  },
+  {
+    "id": "blockingqueue",
+    "query_en": "What does remainingCapacity return for a Java BlockingQueue with no capacity limit? I would also like to compare the waiting behavior of put and offer when the queue is full."
+  }
+]

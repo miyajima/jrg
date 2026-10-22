@@ -1,0 +1,34 @@
+[
+  {
+    "id": "queue",
+    "question_ja": "PythonのQueueは、最大サイズを0や負数にすると無制限になりますか。putのタイムアウトにはどんな条件がありますか？"
+  },
+  {
+    "id": "semaphore",
+    "question_ja": "asyncioのSemaphoreの初期値にゼロや負数を指定できますか。BoundedSemaphoreで初期値を超えてreleaseした場合はどうなりますか？"
+  },
+  {
+    "id": "timeout",
+    "question_ja": "GNU timeoutで制限時間に0や小数を指定できますか。時間切れの場合とコマンドが見つからない場合の終了コードも知りたいです。"
+  },
+  {
+    "id": "ssh",
+    "question_ja": "OpenSSHクライアントで、暗号化された経路でサーバーの生存確認をする間隔に0を指定するとどうなりますか。TCPのkeepaliveとは何が違いますか？"
+  },
+  {
+    "id": "github-rate",
+    "question_ja": "GitHub REST APIでリクエスト数の制限を受けたとき、いつ再試行すべきですか。主要な制限と二次的な制限で待機方法は違いますか？"
+  },
+  {
+    "id": "nginx",
+    "question_ja": "NGINXでリクエストのレート制限を超えた場合、burstの範囲内と範囲外ではどう扱われますか。nodelayを指定すると何が変わりますか？"
+  },
+  {
+    "id": "gcs-retry",
+    "question_ja": "Google Cloud Storageでリクエスト数を制限された場合、再試行の待機時間はどのように増やすのが推奨されますか。ランダムな待機や操作の冪等性も関係しますか？"
+  },
+  {
+    "id": "blockingqueue",
+    "question_ja": "JavaのBlockingQueueで容量に上限がない場合、remainingCapacityは何を返しますか。満杯のときのputとofferの待機動作も比較したいです。"
+  }
+]

@@ -1,0 +1,1530 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "heading",
+          "start_line": 1,
+          "text": "### Navigation\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "text": "- index\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 5,
+          "text": "- modules |\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 7,
+          "text": "- next |\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 9,
+          "text": "- previous |\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 11,
+          "text": "- \n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 13,
+          "text": "- Python »\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 15,
+          "text": "- \n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 17,
+          "text": "- \n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 19,
+          "text": "- 3.15.1 Documentation »\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 21,
+          "text": "- The Python standard library »\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 23,
+          "text": "- Networking and Interprocess Communication »\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 25,
+          "text": "- asyncio — Asynchronous I/O »\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 27,
+          "text": "- Synchronization Primitives\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 29,
+          "text": "- |\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 31,
+          "text": "- Theme Auto Light Dark |\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "heading",
+          "start_line": 33,
+          "text": "# Synchronization Primitives¶\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "paragraph",
+          "parent_id": "line-33",
+          "start_line": 35,
+          "text": "Source code: Lib/asyncio/locks.py\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "paragraph",
+          "parent_id": "line-33",
+          "start_line": 37,
+          "text": "asyncio synchronization primitives are designed to be similar to those of the threading module with two important caveats:\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 39,
+          "text": "- asyncio primitives are not thread-safe, therefore they should not be used for OS thread synchronization (use threading for that);\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 41,
+          "text": "- methods of these synchronization primitives do not accept the timeout argument; use the asyncio.wait_for() function to perform operations with timeouts.\n"
+        },
+        {
+          "end_line": 43,
+          "id": "line-43",
+          "kind": "paragraph",
+          "parent_id": "line-33",
+          "start_line": 43,
+          "text": "asyncio has the following basic synchronization primitives:\n"
+        },
+        {
+          "end_line": 45,
+          "id": "line-45",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 45,
+          "text": "- Lock\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-47",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 47,
+          "text": "- Event\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 49,
+          "text": "- Condition\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 51,
+          "text": "- Semaphore\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 53,
+          "text": "- BoundedSemaphore\n"
+        },
+        {
+          "end_line": 55,
+          "id": "line-55",
+          "kind": "list",
+          "parent_id": "line-33",
+          "start_line": 55,
+          "text": "- Barrier\n"
+        },
+        {
+          "end_line": 57,
+          "id": "line-57",
+          "kind": "heading",
+          "parent_id": "line-33",
+          "start_line": 57,
+          "text": "## Lock¶\n"
+        },
+        {
+          "end_line": 59,
+          "id": "line-59",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 59,
+          "text": "class asyncio.Lock¶\n"
+        },
+        {
+          "end_line": 61,
+          "id": "line-61",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 61,
+          "text": "Implements a mutex lock for asyncio tasks. Not thread-safe.\n"
+        },
+        {
+          "end_line": 63,
+          "id": "line-63",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 63,
+          "text": "An asyncio lock can be used to guarantee exclusive access to a shared resource.\n"
+        },
+        {
+          "end_line": 65,
+          "id": "line-65",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 65,
+          "text": "The preferred way to use a Lock is an async with statement:\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-67",
+          "kind": "code",
+          "parent_id": "line-57",
+          "start_line": 67,
+          "text": "```\nlock = asyncio.Lock()\n\n# ... later\nasync with lock:\n# access shared state\n\n```\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 76,
+          "text": "which is equivalent to:\n"
+        },
+        {
+          "end_line": 88,
+          "id": "line-78",
+          "kind": "code",
+          "parent_id": "line-57",
+          "start_line": 78,
+          "text": "```\nlock = asyncio.Lock()\n\n# ... later\nawait lock.acquire()\ntry:\n# access shared state\nfinally:\nlock.release()\n\n```\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-90",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 90,
+          "text": "Changed in version 3.10: Removed the loop parameter.\n"
+        },
+        {
+          "end_line": 92,
+          "id": "line-92",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 92,
+          "text": "async acquire()¶\n"
+        },
+        {
+          "end_line": 94,
+          "id": "line-94",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 94,
+          "text": "Acquire the lock.\n"
+        },
+        {
+          "end_line": 96,
+          "id": "line-96",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 96,
+          "text": "This method waits until the lock is unlocked, sets it to locked and returns True.\n"
+        },
+        {
+          "end_line": 98,
+          "id": "line-98",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 98,
+          "text": "When more than one coroutine is blocked in acquire() waiting for the lock to be unlocked, only one coroutine eventually proceeds.\n"
+        },
+        {
+          "end_line": 100,
+          "id": "line-100",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 100,
+          "text": "Acquiring a lock is fair: the coroutine that proceeds will be the first coroutine that started waiting on the lock.\n"
+        },
+        {
+          "end_line": 102,
+          "id": "line-102",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 102,
+          "text": "release()¶\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-104",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 104,
+          "text": "Release the lock.\n"
+        },
+        {
+          "end_line": 106,
+          "id": "line-106",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 106,
+          "text": "When the lock is locked, reset it to unlocked and return.\n"
+        },
+        {
+          "end_line": 108,
+          "id": "line-108",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 108,
+          "text": "If the lock is unlocked, a RuntimeError is raised.\n"
+        },
+        {
+          "end_line": 110,
+          "id": "line-110",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 110,
+          "text": "locked()¶\n"
+        },
+        {
+          "end_line": 112,
+          "id": "line-112",
+          "kind": "paragraph",
+          "parent_id": "line-57",
+          "start_line": 112,
+          "text": "Return True if the lock is locked.\n"
+        },
+        {
+          "end_line": 114,
+          "id": "line-114",
+          "kind": "heading",
+          "parent_id": "line-33",
+          "start_line": 114,
+          "text": "## Event¶\n"
+        },
+        {
+          "end_line": 116,
+          "id": "line-116",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 116,
+          "text": "class asyncio.Event¶\n"
+        },
+        {
+          "end_line": 118,
+          "id": "line-118",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 118,
+          "text": "An event object. Not thread-safe.\n"
+        },
+        {
+          "end_line": 120,
+          "id": "line-120",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 120,
+          "text": "An asyncio event can be used to notify multiple asyncio tasks that some event has happened.\n"
+        },
+        {
+          "end_line": 122,
+          "id": "line-122",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 122,
+          "text": "An Event object manages an internal flag that can be set to true with the set() method and reset to false with the clear() method. The wait() method blocks until the flag is set to true. The flag is set to false initially.\n"
+        },
+        {
+          "end_line": 124,
+          "id": "line-124",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 124,
+          "text": "Changed in version 3.10: Removed the loop parameter.\n"
+        },
+        {
+          "end_line": 126,
+          "id": "line-126",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 126,
+          "text": "Example:\n"
+        },
+        {
+          "end_line": 150,
+          "id": "line-128",
+          "kind": "code",
+          "parent_id": "line-114",
+          "start_line": 128,
+          "text": "```\nasync def waiter(event):\nprint('waiting for it ...')\nawait event.wait()\nprint('... got it!')\n\nasync def main():\n# Create an Event object.\nevent = asyncio.Event()\n\n# Spawn a Task to wait until 'event' is set.\nwaiter_task = asyncio.create_task(waiter(event))\n\n# Sleep for 1 second and set the event.\nawait asyncio.sleep(1)\nevent.set()\n\n# Wait until the waiter task is finished.\nawait waiter_task\n\nasyncio.run(main())\n\n```\n"
+        },
+        {
+          "end_line": 152,
+          "id": "line-152",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 152,
+          "text": "async wait()¶\n"
+        },
+        {
+          "end_line": 154,
+          "id": "line-154",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 154,
+          "text": "Wait until the event is set.\n"
+        },
+        {
+          "end_line": 156,
+          "id": "line-156",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 156,
+          "text": "If the event is set, return True immediately. Otherwise block until another task calls set().\n"
+        },
+        {
+          "end_line": 158,
+          "id": "line-158",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 158,
+          "text": "set()¶\n"
+        },
+        {
+          "end_line": 160,
+          "id": "line-160",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 160,
+          "text": "Set the event.\n"
+        },
+        {
+          "end_line": 162,
+          "id": "line-162",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 162,
+          "text": "All tasks waiting for event to be set will be immediately awakened.\n"
+        },
+        {
+          "end_line": 164,
+          "id": "line-164",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 164,
+          "text": "clear()¶\n"
+        },
+        {
+          "end_line": 166,
+          "id": "line-166",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 166,
+          "text": "Clear (unset) the event.\n"
+        },
+        {
+          "end_line": 168,
+          "id": "line-168",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 168,
+          "text": "Subsequent tasks awaiting on wait() will now block until the set() method is called again.\n"
+        },
+        {
+          "end_line": 170,
+          "id": "line-170",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 170,
+          "text": "is_set()¶\n"
+        },
+        {
+          "end_line": 172,
+          "id": "line-172",
+          "kind": "paragraph",
+          "parent_id": "line-114",
+          "start_line": 172,
+          "text": "Return True if the event is set.\n"
+        },
+        {
+          "end_line": 174,
+          "id": "line-174",
+          "kind": "heading",
+          "parent_id": "line-33",
+          "start_line": 174,
+          "text": "## Condition¶\n"
+        },
+        {
+          "end_line": 176,
+          "id": "line-176",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 176,
+          "text": "class asyncio.Condition(lock=None)¶\n"
+        },
+        {
+          "end_line": 178,
+          "id": "line-178",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 178,
+          "text": "A Condition object. Not thread-safe.\n"
+        },
+        {
+          "end_line": 180,
+          "id": "line-180",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 180,
+          "text": "An asyncio condition primitive can be used by a task to wait for some event to happen and then get exclusive access to a shared resource.\n"
+        },
+        {
+          "end_line": 182,
+          "id": "line-182",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 182,
+          "text": "In essence, a Condition object combines the functionality of an Event and a Lock. It is possible to have multiple Condition objects share one Lock, which allows coordinating exclusive access to a shared resource between different tasks interested in particular states of that shared resource.\n"
+        },
+        {
+          "end_line": 184,
+          "id": "line-184",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 184,
+          "text": "The optional lock argument must be a Lock object or None. In the latter case a new Lock object is created automatically.\n"
+        },
+        {
+          "end_line": 186,
+          "id": "line-186",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 186,
+          "text": "Changed in version 3.10: Removed the loop parameter.\n"
+        },
+        {
+          "end_line": 188,
+          "id": "line-188",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 188,
+          "text": "The preferred way to use a Condition is an async with statement:\n"
+        },
+        {
+          "end_line": 197,
+          "id": "line-190",
+          "kind": "code",
+          "parent_id": "line-174",
+          "start_line": 190,
+          "text": "```\ncond = asyncio.Condition()\n\n# ... later\nasync with cond:\nawait cond.wait()\n\n```\n"
+        },
+        {
+          "end_line": 199,
+          "id": "line-199",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 199,
+          "text": "which is equivalent to:\n"
+        },
+        {
+          "end_line": 211,
+          "id": "line-201",
+          "kind": "code",
+          "parent_id": "line-174",
+          "start_line": 201,
+          "text": "```\ncond = asyncio.Condition()\n\n# ... later\nawait cond.acquire()\ntry:\nawait cond.wait()\nfinally:\ncond.release()\n\n```\n"
+        },
+        {
+          "end_line": 213,
+          "id": "line-213",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 213,
+          "text": "async acquire()¶\n"
+        },
+        {
+          "end_line": 215,
+          "id": "line-215",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 215,
+          "text": "Acquire the underlying lock.\n"
+        },
+        {
+          "end_line": 217,
+          "id": "line-217",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 217,
+          "text": "This method waits until the underlying lock is unlocked, sets it to locked and returns True.\n"
+        },
+        {
+          "end_line": 219,
+          "id": "line-219",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 219,
+          "text": "notify(n=1)¶\n"
+        },
+        {
+          "end_line": 221,
+          "id": "line-221",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 221,
+          "text": "Wake up n tasks (1 by default) waiting on this condition. If fewer than n tasks are waiting they are all awakened.\n"
+        },
+        {
+          "end_line": 223,
+          "id": "line-223",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 223,
+          "text": "The lock must be acquired before this method is called and released shortly after. If called with an unlocked lock a RuntimeError error is raised.\n"
+        },
+        {
+          "end_line": 225,
+          "id": "line-225",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 225,
+          "text": "locked()¶\n"
+        },
+        {
+          "end_line": 227,
+          "id": "line-227",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 227,
+          "text": "Return True if the underlying lock is acquired.\n"
+        },
+        {
+          "end_line": 229,
+          "id": "line-229",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 229,
+          "text": "notify_all()¶\n"
+        },
+        {
+          "end_line": 231,
+          "id": "line-231",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 231,
+          "text": "Wake up all tasks waiting on this condition.\n"
+        },
+        {
+          "end_line": 233,
+          "id": "line-233",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 233,
+          "text": "This method acts like notify(), but wakes up all waiting tasks.\n"
+        },
+        {
+          "end_line": 235,
+          "id": "line-235",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 235,
+          "text": "The lock must be acquired before this method is called and released shortly after. If called with an unlocked lock a RuntimeError error is raised.\n"
+        },
+        {
+          "end_line": 237,
+          "id": "line-237",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 237,
+          "text": "release()¶\n"
+        },
+        {
+          "end_line": 239,
+          "id": "line-239",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 239,
+          "text": "Release the underlying lock.\n"
+        },
+        {
+          "end_line": 241,
+          "id": "line-241",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 241,
+          "text": "When invoked on an unlocked lock, a RuntimeError is raised.\n"
+        },
+        {
+          "end_line": 243,
+          "id": "line-243",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 243,
+          "text": "async wait()¶\n"
+        },
+        {
+          "end_line": 245,
+          "id": "line-245",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 245,
+          "text": "Wait until notified.\n"
+        },
+        {
+          "end_line": 247,
+          "id": "line-247",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 247,
+          "text": "If the calling task has not acquired the lock when this method is called, a RuntimeError is raised.\n"
+        },
+        {
+          "end_line": 249,
+          "id": "line-249",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 249,
+          "text": "This method releases the underlying lock, and then blocks until it is awakened by a notify() or notify_all() call. Once awakened, the Condition re-acquires its lock and this method returns True.\n"
+        },
+        {
+          "end_line": 251,
+          "id": "line-251",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 251,
+          "text": "Note that a task may return from this call spuriously, which is why the caller should always re-check the state and be prepared to wait() again. For this reason, you may prefer to use wait_for() instead.\n"
+        },
+        {
+          "end_line": 253,
+          "id": "line-253",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 253,
+          "text": "async wait_for(predicate)¶\n"
+        },
+        {
+          "end_line": 255,
+          "id": "line-255",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 255,
+          "text": "Wait until a predicate becomes true.\n"
+        },
+        {
+          "end_line": 257,
+          "id": "line-257",
+          "kind": "paragraph",
+          "parent_id": "line-174",
+          "start_line": 257,
+          "text": "The predicate must be a callable which result will be interpreted as a boolean value. The method will repeatedly wait() until the predicate evaluates to true. The final value is the return value.\n"
+        },
+        {
+          "end_line": 259,
+          "id": "line-259",
+          "kind": "heading",
+          "parent_id": "line-33",
+          "start_line": 259,
+          "text": "## Semaphore¶\n"
+        },
+        {
+          "end_line": 261,
+          "id": "line-261",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 261,
+          "text": "class asyncio.Semaphore(value=1)¶\n"
+        },
+        {
+          "end_line": 263,
+          "id": "line-263",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 263,
+          "text": "A Semaphore object. Not thread-safe.\n"
+        },
+        {
+          "end_line": 265,
+          "id": "line-265",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 265,
+          "text": "A semaphore manages an internal counter which is decremented by each acquire() call and incremented by each release() call. The counter can never go below zero; when acquire() finds that it is zero, it blocks, waiting until some task calls release().\n"
+        },
+        {
+          "end_line": 267,
+          "id": "line-267",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 267,
+          "text": "The optional value argument gives the initial value for the internal counter (1 by default). If the given value is less than 0 a ValueError is raised.\n"
+        },
+        {
+          "end_line": 269,
+          "id": "line-269",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 269,
+          "text": "Changed in version 3.10: Removed the loop parameter.\n"
+        },
+        {
+          "end_line": 271,
+          "id": "line-271",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 271,
+          "text": "The preferred way to use a Semaphore is an async with statement:\n"
+        },
+        {
+          "end_line": 280,
+          "id": "line-273",
+          "kind": "code",
+          "parent_id": "line-259",
+          "start_line": 273,
+          "text": "```\nsem = asyncio.Semaphore(10)\n\n# ... later\nasync with sem:\n# work with shared resource\n\n```\n"
+        },
+        {
+          "end_line": 282,
+          "id": "line-282",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 282,
+          "text": "which is equivalent to:\n"
+        },
+        {
+          "end_line": 294,
+          "id": "line-284",
+          "kind": "code",
+          "parent_id": "line-259",
+          "start_line": 284,
+          "text": "```\nsem = asyncio.Semaphore(10)\n\n# ... later\nawait sem.acquire()\ntry:\n# work with shared resource\nfinally:\nsem.release()\n\n```\n"
+        },
+        {
+          "end_line": 296,
+          "id": "line-296",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 296,
+          "text": "async acquire()¶\n"
+        },
+        {
+          "end_line": 298,
+          "id": "line-298",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 298,
+          "text": "Acquire a semaphore.\n"
+        },
+        {
+          "end_line": 300,
+          "id": "line-300",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 300,
+          "text": "If the internal counter is greater than zero, decrement it by one and return True immediately. If it is zero, wait until a release() is called and return True.\n"
+        },
+        {
+          "end_line": 302,
+          "id": "line-302",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 302,
+          "text": "locked()¶\n"
+        },
+        {
+          "end_line": 304,
+          "id": "line-304",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 304,
+          "text": "Returns True if semaphore can not be acquired immediately.\n"
+        },
+        {
+          "end_line": 306,
+          "id": "line-306",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 306,
+          "text": "release()¶\n"
+        },
+        {
+          "end_line": 308,
+          "id": "line-308",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 308,
+          "text": "Release a semaphore, incrementing the internal counter by one. Can wake up a task waiting to acquire the semaphore.\n"
+        },
+        {
+          "end_line": 310,
+          "id": "line-310",
+          "kind": "paragraph",
+          "parent_id": "line-259",
+          "start_line": 310,
+          "text": "Unlike BoundedSemaphore, Semaphore allows making more release() calls than acquire() calls.\n"
+        },
+        {
+          "end_line": 312,
+          "id": "line-312",
+          "kind": "heading",
+          "parent_id": "line-33",
+          "start_line": 312,
+          "text": "## BoundedSemaphore¶\n"
+        },
+        {
+          "end_line": 314,
+          "id": "line-314",
+          "kind": "paragraph",
+          "parent_id": "line-312",
+          "start_line": 314,
+          "text": "class asyncio.BoundedSemaphore(value=1)¶\n"
+        },
+        {
+          "end_line": 316,
+          "id": "line-316",
+          "kind": "paragraph",
+          "parent_id": "line-312",
+          "start_line": 316,
+          "text": "A bounded semaphore object. Not thread-safe.\n"
+        },
+        {
+          "end_line": 318,
+          "id": "line-318",
+          "kind": "paragraph",
+          "parent_id": "line-312",
+          "start_line": 318,
+          "text": "Bounded Semaphore is a version of Semaphore that raises a ValueError in release() if it increases the internal counter above the initial value.\n"
+        },
+        {
+          "end_line": 320,
+          "id": "line-320",
+          "kind": "paragraph",
+          "parent_id": "line-312",
+          "start_line": 320,
+          "text": "Changed in version 3.10: Removed the loop parameter.\n"
+        },
+        {
+          "end_line": 322,
+          "id": "line-322",
+          "kind": "heading",
+          "parent_id": "line-33",
+          "start_line": 322,
+          "text": "## Barrier¶\n"
+        },
+        {
+          "end_line": 324,
+          "id": "line-324",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 324,
+          "text": "class asyncio.Barrier(parties)¶\n"
+        },
+        {
+          "end_line": 326,
+          "id": "line-326",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 326,
+          "text": "A barrier object. Not thread-safe.\n"
+        },
+        {
+          "end_line": 328,
+          "id": "line-328",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 328,
+          "text": "A barrier is a simple synchronization primitive that allows to block until parties number of tasks are waiting on it. Tasks can wait on the wait() method and would be blocked until the specified number of tasks end up waiting on wait(). At that point all of the waiting tasks would unblock simultaneously.\n"
+        },
+        {
+          "end_line": 330,
+          "id": "line-330",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 330,
+          "text": "async with can be used as an alternative to awaiting on wait().\n"
+        },
+        {
+          "end_line": 332,
+          "id": "line-332",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 332,
+          "text": "The barrier can be reused any number of times.\n"
+        },
+        {
+          "end_line": 334,
+          "id": "line-334",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 334,
+          "text": "Example:\n"
+        },
+        {
+          "end_line": 358,
+          "id": "line-336",
+          "kind": "code",
+          "parent_id": "line-322",
+          "start_line": 336,
+          "text": "```\nasync def example_barrier():\n# barrier with 3 parties\nb = asyncio.Barrier(3)\n\n# create 2 new waiting tasks\nasyncio.create_task(b.wait())\nasyncio.create_task(b.wait())\n\nawait asyncio.sleep(0)\nprint(b)\n\n# The third .wait() call passes the barrier\nawait b.wait()\nprint(b)\nprint(\"barrier passed\")\n\nawait asyncio.sleep(0)\nprint(b)\n\nasyncio.run(example_barrier())\n\n```\n"
+        },
+        {
+          "end_line": 360,
+          "id": "line-360",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 360,
+          "text": "Result of this example is:\n"
+        },
+        {
+          "end_line": 368,
+          "id": "line-362",
+          "kind": "code",
+          "parent_id": "line-322",
+          "start_line": 362,
+          "text": "```\n<asyncio.locks.Barrier object at 0x... [filling, waiters:2/3]>\n<asyncio.locks.Barrier object at 0x... [draining, waiters:0/3]>\nbarrier passed\n<asyncio.locks.Barrier object at 0x... [filling, waiters:0/3]>\n\n```\n"
+        },
+        {
+          "end_line": 370,
+          "id": "line-370",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 370,
+          "text": "Added in version 3.11.\n"
+        },
+        {
+          "end_line": 372,
+          "id": "line-372",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 372,
+          "text": "async wait()¶\n"
+        },
+        {
+          "end_line": 374,
+          "id": "line-374",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 374,
+          "text": "Pass the barrier. When all the tasks party to the barrier have called this function, they are all unblocked simultaneously.\n"
+        },
+        {
+          "end_line": 376,
+          "id": "line-376",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 376,
+          "text": "When a waiting or blocked task in the barrier is cancelled, this task exits the barrier which stays in the same state. If the state of the barrier is “filling”, the number of waiting task decreases by 1.\n"
+        },
+        {
+          "end_line": 378,
+          "id": "line-378",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 378,
+          "text": "The return value is an integer in the range of 0 to parties-1, different for each task. This can be used to select a task to do some special housekeeping, e.g.:\n"
+        },
+        {
+          "end_line": 387,
+          "id": "line-380",
+          "kind": "code",
+          "parent_id": "line-322",
+          "start_line": 380,
+          "text": "```\n...\nasync with barrier as position:\nif position == 0:\n# Only one task prints this\nprint('End of *draining phase*')\n\n```\n"
+        },
+        {
+          "end_line": 389,
+          "id": "line-389",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 389,
+          "text": "This method may raise a BrokenBarrierError exception if the barrier is broken or reset while a task is waiting. It could raise a CancelledError if a task is cancelled.\n"
+        },
+        {
+          "end_line": 391,
+          "id": "line-391",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 391,
+          "text": "async reset()¶\n"
+        },
+        {
+          "end_line": 393,
+          "id": "line-393",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 393,
+          "text": "Return the barrier to the default, empty state. Any tasks waiting on it will receive the BrokenBarrierError exception.\n"
+        },
+        {
+          "end_line": 395,
+          "id": "line-395",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 395,
+          "text": "If a barrier is broken it may be better to just leave it and create a new one.\n"
+        },
+        {
+          "end_line": 397,
+          "id": "line-397",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 397,
+          "text": "async abort()¶\n"
+        },
+        {
+          "end_line": 399,
+          "id": "line-399",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 399,
+          "text": "Put the barrier into a broken state. This causes any active or future calls to wait() to fail with the BrokenBarrierError. Use this for example if one of the tasks needs to abort, to avoid infinite waiting tasks.\n"
+        },
+        {
+          "end_line": 401,
+          "id": "line-401",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 401,
+          "text": "parties¶\n"
+        },
+        {
+          "end_line": 403,
+          "id": "line-403",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 403,
+          "text": "The number of tasks required to pass the barrier.\n"
+        },
+        {
+          "end_line": 405,
+          "id": "line-405",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 405,
+          "text": "n_waiting¶\n"
+        },
+        {
+          "end_line": 407,
+          "id": "line-407",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 407,
+          "text": "The number of tasks currently waiting in the barrier while filling.\n"
+        },
+        {
+          "end_line": 409,
+          "id": "line-409",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 409,
+          "text": "broken¶\n"
+        },
+        {
+          "end_line": 411,
+          "id": "line-411",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 411,
+          "text": "A boolean that is True if the barrier is in the broken state.\n"
+        },
+        {
+          "end_line": 413,
+          "id": "line-413",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 413,
+          "text": "exception asyncio.BrokenBarrierError¶\n"
+        },
+        {
+          "end_line": 415,
+          "id": "line-415",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 415,
+          "text": "This exception, a subclass of RuntimeError, is raised when the Barrier object is reset or broken.\n"
+        },
+        {
+          "end_line": 417,
+          "id": "line-417",
+          "kind": "paragraph",
+          "parent_id": "line-322",
+          "start_line": 417,
+          "text": "Changed in version 3.9: Acquiring a lock using await lock or yield from lock and/or with statement (with await lock, with (yield from lock)) was removed. Use async with lock instead.\n"
+        },
+        {
+          "end_line": 419,
+          "id": "line-419",
+          "kind": "heading",
+          "parent_id": "line-322",
+          "start_line": 419,
+          "text": "### Table of Contents\n"
+        },
+        {
+          "end_line": 421,
+          "id": "line-421",
+          "kind": "list",
+          "parent_id": "line-419",
+          "start_line": 421,
+          "text": "- Synchronization Primitives Lock Event Condition Semaphore BoundedSemaphore Barrier\n"
+        },
+        {
+          "end_line": 423,
+          "id": "line-423",
+          "kind": "heading",
+          "parent_id": "line-419",
+          "start_line": 423,
+          "text": "#### Previous topic\n"
+        },
+        {
+          "end_line": 425,
+          "id": "line-425",
+          "kind": "paragraph",
+          "parent_id": "line-423",
+          "start_line": 425,
+          "text": "Streams\n"
+        },
+        {
+          "end_line": 427,
+          "id": "line-427",
+          "kind": "heading",
+          "parent_id": "line-419",
+          "start_line": 427,
+          "text": "#### Next topic\n"
+        },
+        {
+          "end_line": 429,
+          "id": "line-429",
+          "kind": "paragraph",
+          "parent_id": "line-427",
+          "start_line": 429,
+          "text": "Subprocesses\n"
+        },
+        {
+          "end_line": 431,
+          "id": "line-431",
+          "kind": "heading",
+          "parent_id": "line-322",
+          "start_line": 431,
+          "text": "### This page\n"
+        },
+        {
+          "end_line": 433,
+          "id": "line-433",
+          "kind": "list",
+          "parent_id": "line-431",
+          "start_line": 433,
+          "text": "- Report a bug\n"
+        },
+        {
+          "end_line": 435,
+          "id": "line-435",
+          "kind": "list",
+          "parent_id": "line-431",
+          "start_line": 435,
+          "text": "- Improve this page\n"
+        },
+        {
+          "end_line": 437,
+          "id": "line-437",
+          "kind": "list",
+          "parent_id": "line-431",
+          "start_line": 437,
+          "text": "- Show source\n"
+        },
+        {
+          "end_line": 439,
+          "id": "line-439",
+          "kind": "paragraph",
+          "parent_id": "line-431",
+          "start_line": 439,
+          "text": "«\n"
+        },
+        {
+          "end_line": 441,
+          "id": "line-441",
+          "kind": "heading",
+          "parent_id": "line-322",
+          "start_line": 441,
+          "text": "### Navigation\n"
+        },
+        {
+          "end_line": 443,
+          "id": "line-443",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 443,
+          "text": "- index\n"
+        },
+        {
+          "end_line": 445,
+          "id": "line-445",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 445,
+          "text": "- modules |\n"
+        },
+        {
+          "end_line": 447,
+          "id": "line-447",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 447,
+          "text": "- next |\n"
+        },
+        {
+          "end_line": 449,
+          "id": "line-449",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 449,
+          "text": "- previous |\n"
+        },
+        {
+          "end_line": 451,
+          "id": "line-451",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 451,
+          "text": "- \n"
+        },
+        {
+          "end_line": 453,
+          "id": "line-453",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 453,
+          "text": "- Python »\n"
+        },
+        {
+          "end_line": 455,
+          "id": "line-455",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 455,
+          "text": "- \n"
+        },
+        {
+          "end_line": 457,
+          "id": "line-457",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 457,
+          "text": "- \n"
+        },
+        {
+          "end_line": 459,
+          "id": "line-459",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 459,
+          "text": "- 3.15.1 Documentation »\n"
+        },
+        {
+          "end_line": 461,
+          "id": "line-461",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 461,
+          "text": "- The Python standard library »\n"
+        },
+        {
+          "end_line": 463,
+          "id": "line-463",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 463,
+          "text": "- Networking and Interprocess Communication »\n"
+        },
+        {
+          "end_line": 465,
+          "id": "line-465",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 465,
+          "text": "- asyncio — Asynchronous I/O »\n"
+        },
+        {
+          "end_line": 467,
+          "id": "line-467",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 467,
+          "text": "- Synchronization Primitives\n"
+        },
+        {
+          "end_line": 469,
+          "id": "line-469",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 469,
+          "text": "- |\n"
+        },
+        {
+          "end_line": 471,
+          "id": "line-471",
+          "kind": "list",
+          "parent_id": "line-441",
+          "start_line": 471,
+          "text": "- Theme Auto Light Dark |\n"
+        },
+        {
+          "end_line": 473,
+          "id": "line-473",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 473,
+          "text": "© Copyright 2001 Python Software Foundation.\n"
+        },
+        {
+          "end_line": 475,
+          "id": "line-475",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 475,
+          "text": "This page is licensed under the Python Software Foundation License Version 2.\n"
+        },
+        {
+          "end_line": 477,
+          "id": "line-477",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 477,
+          "text": "Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.\n"
+        },
+        {
+          "end_line": 479,
+          "id": "line-479",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 479,
+          "text": "See History and License for more information.\n"
+        },
+        {
+          "end_line": 482,
+          "id": "line-481",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 481,
+          "text": "The Python Software Foundation is a non-profit corporation.\nPlease donate.\n"
+        },
+        {
+          "end_line": 484,
+          "id": "line-484",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 484,
+          "text": "Last updated on Oct 22, 2026 (07:21 UTC).\n"
+        },
+        {
+          "end_line": 486,
+          "id": "line-486",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 486,
+          "text": "Found a bug?\n"
+        },
+        {
+          "end_line": 488,
+          "id": "line-488",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 488,
+          "text": "Created using Sphinx 8.2.3.\n"
+        }
+      ],
+      "id": "semaphore",
+      "source_hash": "7452a9e6b9e529bf60fe7298e328d4daac707c9c58af77ba82f7b7817bf4cdd4",
+      "title": "Synchronization Primitives — Python 3.15.1 documentation",
+      "url": "https://docs.python.org/3/library/asyncio-sync.html"
+    }
+  ]
+}

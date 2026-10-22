@@ -1,0 +1,34 @@
+[
+  {
+    "id": "sqlite",
+    "question_ja": "SQLiteで外部キー制約を有効にするとき、接続ごとの設定が必要ですか。トランザクションの途中で切り替えるとどうなりますか？"
+  },
+  {
+    "id": "postgres",
+    "question_ja": "PostgreSQLの一意制約でNULLを含む行は重複扱いになりますか。NULL同士も重複として扱う設定はありますか？"
+  },
+  {
+    "id": "docker",
+    "question_ja": "Dockerの読み取り専用バインドマウントでは、配下のサブマウントも読み取り専用になりますか。Linuxカーネルの版による違いはありますか？"
+  },
+  {
+    "id": "kubernetes",
+    "question_ja": "KubernetesのSecretをボリュームで使うと、値の変更はいつ反映されますか。subPathでマウントした場合も自動更新されますか？"
+  },
+  {
+    "id": "fetch",
+    "question_ja": "ブラウザーのfetchで別オリジンへCookieを送るには何を指定しますか。CookieのSameSite設定やサーバー側の許可にはどんな制限がありますか？"
+  },
+  {
+    "id": "redis",
+    "question_ja": "RedisのEXPIREで有効期限を付けたキーをSETやINCRで更新すると期限はどうなりますか。期限にゼロや負の値を指定した場合も知りたいです。"
+  },
+  {
+    "id": "go",
+    "question_ja": "GoのcontextでCancelFuncを呼ぶと、処理の終了まで待ちますか。キャンセル関数を呼ばずに残したときの問題も教えてください。"
+  },
+  {
+    "id": "s3",
+    "question_ja": "S3のListObjectsV2の返却順は、通常のバケットとディレクトリバケットで同じですか。続きの取得に使うトークンは実際のキー名ですか？"
+  }
+]

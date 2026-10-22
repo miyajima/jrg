@@ -1,0 +1,74 @@
+{
+  "documents": [
+    {
+      "id": "result-16",
+      "url": "https://ccbskillssem.github.io/assets/github_actions_valeh.pdf",
+      "title": "CCB Skills Seminar - GitHub Actions - Spring 2022",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "CCB Skills Seminar - GitHub Actions - Spring 2022"
+        }
+      ],
+      "source_hash": "fceeeb9634fb8adfc79a0ff8337de00dcace07f73c9f21600e34ba9f3bc02048"
+    },
+    {
+      "id": "result-3",
+      "url": "https://github.blog/changelog/2026-05-07-github-actions-concurrency-groups-now-allow-larger-queues/",
+      "title": "GitHub Actions concurrency groups now allow larger queues - GitHub Changelog",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\nBack to changelog\n\nImprovement\n\nMay 7, 2026 • 1 minute read\n\n# GitHub Actions concurrency groups now allow larger queues\n\nImage\n\nYou can now allow multiple jobs or workflow runs to wait in the same GitHub Actions concurrency group instead of being limited to a single pending run.\n\nPreviously, a concurrency group could have one run in progress and one pending run. If another run entered the group, the pending run was canceled and replaced. Now, you can configure concurrency groups to queue multiple pending runs and process them sequentially, with support for up to 100 queued jobs or workflow runs per concurrency group.\n\nThis makes it easier to manage deployments and other workflows that need to run in order against a shared environment or resource. Increased queuing can be enabled by adding `queue: max` to the concurrency block in YAML when `cancel-in-progress` is `false` or not set.\n\nFor more information, see the GitHub Actions documentation on controlling the concurrency of workflows and jobs.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "c7dd8aed9eed869ae9fae6240be2190c00f368769f0cd99637bf112147604195"
+    },
+    {
+      "id": "result-6",
+      "url": "https://github.github.com/gh-aw/reference/concurrency/",
+      "title": "Concurrency Control | GitHub Agentic Workflows",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\nSee Safe Outputs for details.\n\n## Queue Behavior (`queue`)\n\nSection titled “Queue Behavior (queue)”\n\nGitHub Actions concurrency groups accept an optional `queue` field that controls how multiple pending runs in the same group are handled. The gh-aw compiler preserves this field in both top-level and per-engine concurrency blocks:\n\nValue  | Behavior\n--- | ---\n`single` (Actions default)  | Only the latest pending run is kept; earlier pending runs are discarded.\n`max`  | All pending runs queue and run in arrival order.\n    \n    `\n    \n    concurrency:\n    \n      group: ${{ github.workflow }}-${{ github.ref }}\n    \n      queue: max\n    \n    `\n\nCompiler-generated concurrency groups (the top-level workflow group, and the agent, output, and conclusion jobs) emit `queue: max` by default so back-to-back triggers run sequentially rather than being dropped. The top-level group only emits `queue: max` when `cancel-in-progress` is not enabled, since GitHub Actions rejects the combination of `queue: max` and `cancel-in-progress: true`. --------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "d38d850f0d261c42f7cf900d0e37959b34ed1c3c1e4d22049901d3a9d3286228"
+    },
+    {
+      "id": "result-5",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax?utm_source=openai",
+      "title": "Workflow syntax for GitHub Actions - GitHub Docs",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "### Example: Using concurrency and the default behavior\n\nThe default behavior of GitHub Actions is to allow multiple jobs or workflow runs to run concurrently. The `concurrency` keyword allows you to control the concurrency of workflow runs.\n\nFor example, you can use the `concurrency` keyword immediately after where trigger conditions are defined to limit the concurrency of entire workflow runs for a specific branch:\n    \n    `on:\n      push:\n        branches:\n          - main\n    \n    concurrency:\n      group: ${{ github.workflow }}-${{ github.ref }}\n      cancel-in-progress: true\n    `\n\nYou can also limit the concurrency of jobs within a workflow by using the `concurrency` keyword at the job level:\n    \n    `on:\n      push:\n        branches:\n          - main\n    \n    jobs:\n      job-1:\n        runs-on: ubuntu-latest\n        concurrency:\n          group: example-group\n          cancel-in-progress: true\n    `\n\n### Example: Concurrency groups\n\nConcurrency groups provide a way to manage and limit the execution of workflow runs or jobs that share the same concurrency key.\n\nThe `concurrency` key is used to group workflows or jobs together into a concurrency group. When you define a `concurrency` key, GitHub Actions ensures that only one workflow or job with that key runs at any given time. If a new workflow run or job starts with the same `concurrency` key, GitHub Actions will cancel any workflow or job already running with that key. The `concurrency` key can be a hard-coded string, or it can be a dynamic expression that includes context variables.\n\nIt is possible to define concurrency conditions in your workflow so that the workflow or job is part of a concurrency group.\n\nThis means that when a workflow run or job starts, GitHub will cancel any workflow runs or jobs that are already in progress in the same concurrency group. This is useful in scenarios where you want to prevent parallel runs for a certain set of a workflows or jobs, such as the ones used for deployments to a staging environment, in order to prevent actions that could cause conflicts or consume more resources than necessary.\n\nBy default, only one job or workflow run can be `pending` in a concurrency group at a time. To allow multiple runs to queue instead of being canceled, set `queue: max`. With `queue: max`, up to 100 jobs or workflow runs can wait in the concurrency group; once the queue is full, any additional runs are canceled.\n\nFor example, the following workflow queues deployments to the `production` environment, processing them one at a time in order based on when each run started waiting on the concurrency group:\n    \n    `on:\n      push:\n        branches:\n          - main\n    \n    concurrency:\n      group: production-deploy\n      queue: max\n    `\n\nNote that `queue: max` cannot be combined with `cancel-in-progress: true`, because the two options describe conflicting behaviors for handling in-progress runs.\n\n### Example: Using concurrency to cancel any in-progress job or run\n\nTo use concurrency to cancel any in-progress job or run in GitHub Actions, you can use the `concurrency` key with the `cancel-in-progress` option set to `true`:\n    \n    `concurrency:\n      group: ${{ github.ref }}\n      cancel-in-progress: true\n    `\n\nNote that in this example, without defining a particular concurrency group, GitHub Actions will cancel any in-progress run of the job or workflow.\n\n### Example: Using a fallback value\n\nIf you build the group name with a property that is only defined for specific events, you can use a fallback value. For example, `github.head_ref` is only defined on `pull_request` events. If your workflow responds to other events in addition to `pull_request` events, you will need to provide a fallback to avoid a syntax error. The following concurrency group cancels in-progress jobs or runs on `pull_request` events only; if `github.head_ref` is undefined, the concurrency group will fallback to the run ID, which is guaranteed to be both unique and defined for the run.\n    \n    `concurrency:\n      group: ${{ github.head_ref || github.run_id }}\n      cancel-in-progress: true\n    `\n\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "032b3c911278e27997c96cf6b572c113278f4b483fc1a7c6b2fb7cecf03203f9"
+    },
+    {
+      "id": "result-13",
+      "url": "https://public.jdstone1.com/books_and_magazines/Computer_Books/DevOps/Learning_GitHub_Actions.pdf",
+      "title": "Learning GitHub Actions",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "ea1225203ef65e86a89d13261fe9223bff0e9c0c00ab8bb2d9145d51d9da4008"
+    }
+  ],
+  "omitted_count": 11,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1961,
+  "max_tokens": 2048
+}

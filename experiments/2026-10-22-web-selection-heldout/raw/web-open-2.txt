@@ -1,0 +1,294 @@
+Using the Fetch API - Web APIs | MDN (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+citeturn19view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch","lineno":null}); Total lines: 802
+L0:   * 【0†Skip to main content】
+L1:   * 【1†Skip to search】
+L2: 
+L3: HTML
+L4: 
+L5: 【2†HTML: Markup language】
+L6: 
+L7: HTML reference
+L8: 
+L9: 
+L10:   * 【3†Elements】
+L11:   * 【4†Global attributes】
+L12:   * 【5†Attributes】
+L13:   * 【6†See all…】
+L14: 
+L15: HTML guides
+L16: 
+L17: 
+L18:   * 【7†Responsive images】
+L19:   * 【8†HTML cheatsheet】
+L20:   * 【9†Date & time formats】
+L21:   * 【10†See all…】
+L22: 
+L23: Markup languages
+L24: 
+L25: 
+L26:   * 【11†SVG】
+L27:   * 【12†MathML】
+L28:   * 【13†XML】
+L29: 
+L30: CSS
+L31: 
+L32: 【14†CSS: Styling language】
+L33: 
+L34: CSS reference
+L35:   * 【15†Properties】
+L36:   * 【16†Selectors】
+L37:   * 【17†At-rules】
+L38:   * 【18†Values】
+L39:   * 【19†See all…】
+L40: 
+L41: CSS guides
+L42: 
+L43: 
+L44:   * 【20†Box model】
+L45:   * 【21†Animations】
+L46:   * 【22†Flexbox】
+L47:   * 【23†Colors】
+L48:   * 【24†See all…】
+L49: 
+L50: Layout cookbook
+L51: 
+L52: 
+L53:   * 【25†Column layouts】
+L54:   * 【26†Centering an element】
+L55:   * 【27†Card component】
+L56:   * 【28†See all…】
+L57: 
+L58: JavaScript JS
+L59: 
+L60: 【29†JavaScript: Scripting language】
+L61: 
+L62: JS reference
+L63:   * 【30†Standard built-in objects】
+L64:   * 【31†Expressions & operators】
+L65:   * 【32†Statements & declarations】
+L66:   * 【33†Functions】
+L67:   * 【34†See all…】
+L68: 
+L69: JS guides
+L70: 
+L71: 
+L72:   * 【35†Control flow & error handling】
+L73:   * 【36†Loops and iteration】
+L74:   * 【37†Working with objects】
+L75:   * 【38†Using classes】
+L76:   * 【39†See all…】
+L77: 
+L78: Web APIs
+L79: 
+L80: 【40†Web APIs: Programming interfaces】
+L81: 
+L82: Web API reference
+L83:   * 【41†File system API】
+L84:   * 【42†Fetch API】
+L85:   * 【43†Geolocation API】
+L86:   * 【44†HTML DOM API】
+L87:   * 【45†Push API】
+L88:   * 【46†Service worker API】
+L89:   * 【40†See all…】
+L90: 
+L91: Web API guides
+L92: 
+L93: 
+L94:   * 【47†Using the Web animation API】
+L95:   * 【48†Using the Fetch API】
+L96:   * 【49†Working with the History API】
+L97:   * 【50†Using the Web speech API】
+L98:   * 【51†Using web workers】
+L99: 
+L100: All
+L101: 
+L102: 【52†All web technology】
+L103: 
+L104: Technologies
+L105:   * 【53†Accessibility】
+L106:   * 【54†HTTP】
+L107:   * 【55†URI】
+L108:   * 【56†Web extensions】
+L109:   * 【57†WebAssembly】
+L110:   * 【58†WebDriver】
+L111:   * 【52†See all…】
+L112: 
+L113: Topics
+L114: 
+L115: 
+L116:   * 【59†Media】
+L117:   * 【60†Performance】
+L118:   * 【61†Privacy】
+L119:   * 【62†Security】
+L120:   * 【63†Progressive web apps】
+L121: 
+L122: Learn
+L123: 
+L124: 【64†Learn web development】
+L125: 
+L126: Frontend developer course
+L127: 
+L128: 
+L129:   * 【65†Getting started modules】
+L130:   * 【66†Core modules】
+L131:   * 【67†MDN Curriculum】
+L132:   * 【68†Check out the video course from Scrimba, our partner†scrimba.com】
+L133: 
+L134: Learn HTML
+--------------------------------------------------------------------------------
+EXPIRE | Docs (https://redis.io/docs/latest/commands/expire/)
+citeturn19view1 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://redis.io/docs/latest/commands/expire/","lineno":null}); Total lines: 2078
+L0: {"acl_categories":["@keyspace","@write","@fast"],"arguments":[{"display_text":"key","key_spec_index":0,"name":"key","type":"key"},{"display_text":"seconds","name":"seconds","type":"integer"},{"arguments":[{"display_text":"nx","name":"nx","token":"NX","type":"pure-token"},{"display_text":"xx","name":"xx","token":"XX","type":"pure-token"},{"display_text":"gt","name":"gt","token":"GT","type":"pure-token"},{"display_text":"lt","name":"lt","token":"LT","type":"pure-token"}],"name":"condition","optional":true,"since":"7.0.0","type":"oneof"}],"arity":-3,"categories":["docs","develop","stack","oss","rs","rc","oss","kubernetes","clients"],"command_flags":["write","fast"],"complexity":"O(1)","description":"Sets the expiration time of a key in seconds.","duplicateOf":"head:data-ai-metadata","group":"generic","key_specs":[{"RW":true,"begin_search":{"spec":{"index":1},"type":"index"},"find_keys":{"spec":{"keystep":1,"lastkey":0,"limit":0},"type":"range"},"update":true}],"location":"body","since":"1.0.0","syntax_fmt":"EXPIRE key seconds [NX | XX | GT | LT]","title":"EXPIRE","tableOfContents":{"sections":[]},"codeExamples":[{"codetabsId":"cmds_generic-stepexpire","commands":[{"acl_categories":["@write","@string","@slow"],"complexity":"O(1)","name":"SET"},{"acl_categories":["@keyspace","@write","@fast"],"complexity":"O(1)","name":"EXPIRE"},{"acl_categories":["@keyspace","@read","@fast"],"complexity":"O(1)","name":"TTL"}],"description":"Foundational: Set key expiration time using EXPIRE (supports conditional options NX/XX/GT/LT, returns 1 if set or 0 if not)","difficulty":"beginner","id":"expire","languages":[{"id":"redis-cli","panelId":"panel_redis-cli_cmds_generic-stepexpire"},{"clientId":"redis-py","clientName":"redis-py","id":"Python","langId":"python","panelId":"panel_Python_cmds_generic-stepexpire"},{"id":"Node-js","panelId":"panel_Nodejs_cmds_generic-stepexpire"},{"clientId":"ioredis","clientName":"ioredis","id":"ioredis","langId":"javascript","panelId":"panel_ioredis_cmds_generic-stepexpire"},{"clientId":"jedis","clientName":"Jedis","id":"Java-Sync","langId":"java","panelId":"panel_Java-Sync_cmds_generic-stepexpire"},{"clientId":"lettuce","clientName":"Lettuce","id":"Java-Async","langId":"java","panelId":"panel_Java-Async_cmds_generic-stepexpire"},{"clientId":"lettuce","clientName":"Lettuce","id":"Java-Reactive","langId":"java","panelId":"panel_Java-Reactive_cmds_generic-stepexpire"},{"clientId":"go-redis","clientName":"go-redis","id":"Go","langId":"go","panelId":"panel_Go_cmds_generic-stepexpire"},{"clientId":"hiredis","clientName":"hiredis","id":"C","langId":"c","panelId":"panel_C_cmds_generic-stepexpire"},{"id":"dotnet-Sync (SE-Redis)","panelId":"panel_Csharp-Sync (SERedis)_cmds_generic-stepexpire"},{"clientId":"predis","clientName":"Predis","id":"PHP","langId":"php","panelId":"panel_PHP_cmds_generic-stepexpire"},{"clientId":"redis-rs","clientName":"redis-rs","id":"Rust-Sync","langId":"rust","panelId":"panel_Rust-Sync_cmds_generic-stepexpire"},{"clientId":"redis-rs","clientName":"redis-rs","id":"Rust-Async","langId":"rust","panelId":"panel_Rust-Async_cmds_generic-stepexpire"}]}]}
+--------------------------------------------------------------------------------
+context package - context - Go Packages (https://pkg.go.dev/context)
+citeturn19view2 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://pkg.go.dev/context","lineno":null}); Total lines: 806
+L0: 【0†Image】 【1†Image】 【2†Image】
+L1: 
+L2: Help us shape the future of Go! 【3†Take the 2026 Go Developer Survey†blink.qualtrics.com】
+L3: 
+L4: 【4†Image】
+L5: 
+L6: 【5†Skip to Main Content】
+L7: 
+L8: [Input: Search packages or symbols] [Input] 【6†Image】
+L9: 
+L10: 【6†Image】
+L11: 
+L12:   * 【7†Why Go】
+L13:     * 【8†Case Studies†go.dev】
+L14: 
+L15: Common problems companies solve with Go
+L16: 
+L17:     * 【9†Use Cases†go.dev】
+L18: 
+L19: Stories about how and why companies use Go
+L20: 
+L21:     * 【10†Security†go.dev】
+L22: 
+L23: How Go can help keep you secure by default
+L24:   * 【11†Learn†go.dev】
+L25:   * 【7†Docs】
+L26:     * 【12†Effective Go†go.dev】
+L27: 
+L28: Tips for writing clear, performant, and idiomatic Go code
+L29: 
+L30:     * 【13†Go User Manual†go.dev】
+L31: 
+L32: A complete introduction to building software with Go
+L33: 
+L34:     * 【14†Standard library】
+L35: 
+L36: Reference documentation for Go's standard library
+L37: 
+L38:     * 【15†Release Notes†go.dev】
+L39: 
+L40: Learn what's new in each Go release
+L41: 
+L42:     * 【16†API】
+L43: 
+L44: Reference documentation for the pkg.go.dev API
+L45: 
+L46:   * 【17†Packages】
+L47:   * 【7†Community】
+L48:     * 【18†Recorded Talks†go.dev】
+L49: Videos from prior events
+L50: 
+L51:     * 【19†Meetups†www.meetup.com】
+L52: 
+L53: Meet other local Go developers
+L54: 
+L55:     * 【20†Conferences†github.com】
+L56: 
+L57: Learn and network with Go developers from around the world
+L58: 
+L59:     * 【21†Go blog†go.dev】
+L60: 
+L61: The Go project's official blog.
+L62: 
+L63:     * 【22†Go project†go.dev】
+L64: 
+L65: Get help and stay informed from Go
+L66: 
+L67:     * Get connected
+L68: 
+L69: [Button: ]
+L70: 
+L71:   * 【7†Why Go】
+L72: 
+L73: 【7†Why Go】
+L74: 
+L75:     * 【8†Case Studies†go.dev】
+L76:     * 【9†Use Cases†go.dev】
+L77:     * 【10†Security†go.dev】
+L78: 
+L79:   * 【11†Learn†go.dev】
+L80:   * 【7†Docs】
+L81: 
+L82: 【7†Docs】
+L83:     * 【12†Effective Go†go.dev】
+L84:     * 【13†Go User Manual†go.dev】
+L85:     * 【14†Standard library】
+L86:     * 【15†Release Notes†go.dev】
+L87:     * 【16†API】
+L88: 
+L89:   * 【17†Packages】
+L90:   * 【7†Community】
+L91: 
+L92: 【7†Community】
+L93: 
+L94:     * 【18†Recorded Talks†go.dev】
+L95:     * 【19†Meetups†www.meetup.com】
+L96:     * 【20†Conferences†github.com】
+L97:     * 【21†Go blog†go.dev】
+L98:     * 【22†Go project†go.dev】
+L99:     * Get connected
+L100: 
+L101:   1. 【17†Discover Packages】
+L102:   2. 【14†Standard library】
+L103:   3. 【23†context】 【24†Image】
+L104: # context
+L105: 
+L106: package standard library 【24†Image】
+L107: 
+L108: 【25†Version: go1.27.3】
+L109: 
+L110: Opens a new window with list of versions in this module.
+L111: 
+L112: Latest Latest 【26†Image: Warning】
+L113: 
+L114: This package is not in the latest version of its module.
+L115: 
+L116: 【27†Go to latest】 Published: Oct 20, 2026 License: 【28†BSD-3-Clause】
+L117: 
+L118: Opens a new window with license information.
+L119: 
+L120: 【29†Imports: 5】
+L121: 
+L122: Opens a new window with list of imports.
+L123: 
+L124: 【30†Imported by: 2,032,418】
+L125: 
+L126: Opens a new window with list of known importers.
+L127: 
+--------------------------------------------------------------------------------
+ListObjectsV2 - Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
+citeturn19view3 [wordlim: 200] Crawled: yesterday; Content type: text/html; Source: open({"ref_id":"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html","lineno":null}); Total lines: 611
+L0: 【0†View a markdown version of this page】
+L1: 
+L2: ListObjectsV2 - Amazon S3
+L3: 
+L4: 【1†Request Syntax】【2†URI Request Parameters】【3†Request Body】【4†Response Syntax】【5†Response Elements】【6†Errors】【7†Examples】【8†See Also】
+L5: # ListObjectsV2
+L6: Returns some or all (up to 1,000) of the objects in a bucket with each request. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. A `200 OK` response can contain valid or invalid XML. Make sure to design your application to parse the contents of the response and handle it appropriately. For more information about listing objects, see 【9†Listing object keys programmatically】 in the Amazon S3 User Guide.
+L7: To get a list of your buckets, see 【10†ListBuckets】.
+L8: ###### Note
+L9: 
+L10:   * General purpose bucket - For general purpose buckets, `ListObjectsV2` doesn't return prefixes that are related only to in-progress multipart uploads.
+L11: 
+L12:   * Directory buckets - For directory buckets, `ListObjectsV2` response includes the prefixes that are related only to in-progress multipart uploads.
+L13:   * Directory buckets - For directory buckets, you must make requests for this API operation to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format `https://amzn-s3-demo-bucket.s3express-zone-id.region-code.amazonaws.com/key-name `. Path-style requests are not supported. For more information about endpoints in Availability Zones, see 【11†Regional and Zonal endpoints for directory buckets in Availability Zones】 in the Amazon S3 User Guide.
+L14: For more information about endpoints in Local Zones, see 【12†Concepts for directory buckets in Local Zones】 in the Amazon S3 User Guide.
+L15: Permissions
+L16: 
+L17: 
+L18:   * General purpose bucket permissions - To use this operation, you must have READ access to the bucket. You must have permission to perform the `s3:ListBucket` action. The bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see 【13†Permissions Related to Bucket Subresource Operations】 and 【14†Managing Access Permissions to Your Amazon S3 Resources】 in the Amazon S3 User Guide.

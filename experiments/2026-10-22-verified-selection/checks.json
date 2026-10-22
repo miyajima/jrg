@@ -1,0 +1,73 @@
+{
+  "root_tests": {
+    "command": "JRG_HISTORY=off cargo test",
+    "passed": 227,
+    "failed": 0,
+    "native_loopback_permission": true
+  },
+  "mcp_tests": {
+    "command": "python3 tests/selection_mcp.py",
+    "passed": 17,
+    "failed": 0
+  },
+  "rtk_tests": {
+    "command": "CARGO_HOME=/private/tmp/jrg-rtk-cargo-home CARGO_INCREMENTAL=0 CARGO_NET_OFFLINE=true cargo test --locked --manifest-path integrations/rtk-proxy/Cargo.toml",
+    "passed": 26,
+    "failed": 0,
+    "native_loopback_permission": true,
+    "evidence": "RTK implementation agent final result"
+  },
+  "format_and_clippy": {
+    "root": "passed",
+    "rtk": "passed"
+  },
+  "actual_transport_cases": 10,
+  "independent_review": {
+    "material_findings_remaining": 0,
+    "approval_and_all_20_saved_outputs_checked": true,
+    "standard_outputs_equal_prior_off_D": true
+  },
+  "ledger_audit": {
+    "compiled_registry_matches_file": true,
+    "approvals": 2,
+    "proof_hashes_sources_outputs_and_gold_checked": true,
+    "policy": {
+      "catalog_sha256": "e4833795a164d67105b1ef60a5fd96b28d4a021a0d283dd87633ab4475feca7a",
+      "default_mode": "verified",
+      "engine_sha256": "70937b883d2fc75e3530e4d8eb2f3f7a534456f1cdc582f595f930c730c7fe20",
+      "registry_sha256": "76b9bb4760e446c2f28c9a1f3d634f8d1b405770840afd99440d6c114fce8594"
+    }
+  },
+  "files": {
+    "src/selection.rs": "326006edc4c675a045021a19aa7fccb09315e2843732bf5611b8c7236aa7b503",
+    "src/query_expansion.rs": "55ece3c22322ef2ec277b78c8a4460230b97abda5bdf44d389b7e7bffb2d3ccb",
+    "src/verified_query_rules.rs": "f0ddfe9dcebd5c58c24d0367620b031df8ca60f365337a2ed7bdf5b93a0b3034",
+    "src/bin/jrg-select.rs": "4df8ac7a73ab3cfe39030d56e6d75156f9d424579c138c86937154147c6d2ea6",
+    "src/lib.rs": "8570b386b269d3bb41324e758c81d7800084b306515e047cc41a08f3b1f75dce",
+    "data/query-expansions.v1.json": "e4833795a164d67105b1ef60a5fd96b28d4a021a0d283dd87633ab4475feca7a",
+    "data/verified-query-rules.v1.json": "76b9bb4760e446c2f28c9a1f3d634f8d1b405770840afd99440d6c114fce8594",
+    "data/QUERY_EXPANSIONS.md": "e459b0ac0d352cbca14afe17f9d7946b718c442d65805f70a9fb2ec9fb51fbfc",
+    "docs/WEB_SELECTION.md": "d8d6c7e2f9913a889fbf10febc1c1384dd8ae3856361822ca339f8acee85ec91",
+    "integrations/mcp/jrg_select_proxy.py": "1dbf192c6313ab34354cc272078beb9c6b3d8b1aef29ed3d9e9a7e0989cf9be9",
+    "integrations/rtk-proxy/src/lib.rs": "3058aba061a9de6eb73ee4afd9ec2969ac067d5f01824863c3fe96ec7e82c0d0",
+    "integrations/rtk-proxy/tests/proxy.rs": "29fb8dcfd96171b796023c9820c67d358e93559885c968b18c82001d0ea79e5e",
+    "integrations/rtk-proxy/README.md": "aad868192af67d55555cdc3432f8d7e48c2ad5110a742882e4edb56ddc7572ff",
+    "tests/verified_rules.rs": "d852fdb329bd5ab2fce48c4748d28a54098f15cf6b5596f79391289aca624cc0",
+    "tests/selection_cli.rs": "c9465be49df7bdf754763b0a19d64f3922cb6f5cb35b4e3ebd9eff0044cacc3c",
+    "tests/selection_mcp.py": "0c77ee93384c1920fbee8ea8450e24216da6779f9745074cffb51c24a263db6a",
+    "experiments/2026-10-22-verified-selection/replay_mcp.py": "105eb4f2fe2e3452b4c6ae39470883e99078639da579bcb394169597476a1018",
+    "experiments/2026-10-22-verified-selection/transport_check.py": "93291e5f839abc998f82ee5dea505b779d8ebdb1192b12e8f60c482c8c1da52b",
+    "experiments/2026-10-22-verified-selection/verify.py": "6055a0cd9947f1415516d6f51c4f012535bb4d78af5c21be7b84cd6b73587bb3",
+    "experiments/2026-10-22-verified-selection/redis-proof.json": "aec3d200a97aee673a8970518ff0f1500300083d2fe5e1cef76d1fa2ab607748",
+    "experiments/2026-10-22-verified-selection/s3-proof.json": "94c2947f1685f515a6042a76db4fef2a940c264742a09caf5902e1b8e78bac5f"
+  },
+  "logs": {
+    "ledger-audit.log": "d5aff2f97f415bbebe915b02bbcce4de6ebd86a0c4b360df7cb7540d09713b81",
+    "red.log": "fc485f740106dcc21a8739ab356d08b7ee066ad36046da9f2c0e1beaceb578db",
+    "transports.log": "a4b14a2b7d0141e92e199cd9c536f29aa39fc207495911c901380c9232f5cf01",
+    "mcp-test.log": "9cc7baccc2726e780405061eebed324e34d84724d48c1be8d9fae7df44de62f2",
+    "root-clippy.log": "d297e2ddb50cfab82e7de4aaf76617a67ad8de113b72d90cd1fc6d45229eaf95",
+    "root-test.log": "65c2baf2e523b4338d34ecb12ae5c9594681f75cbbb68b99c5f92ca7f27148f2",
+    "evaluation.log": "15bbd560dda71010c14ef61e12f188c10c8344cd71d0be8bc66b7adbbb4bd00d"
+  }
+}

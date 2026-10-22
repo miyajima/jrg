@@ -1,0 +1,84 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "list",
+          "start_line": 1,
+          "text": "- ホーム\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "list",
+          "start_line": 3,
+          "text": "- 知識・解説\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "list",
+          "start_line": 5,
+          "text": "- 天気予報等で用いる用語\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "list",
+          "start_line": 7,
+          "text": "- 予報の名称\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "heading",
+          "start_line": 9,
+          "text": "# 予報の名称\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 11,
+          "text": "### 予報の名称に関する用語\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-74",
+          "kind": "list",
+          "parent_id": "line-11",
+          "start_line": 74,
+          "text": "- 前へ\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "list",
+          "parent_id": "line-11",
+          "start_line": 76,
+          "text": "- 次へ\n"
+        },
+        {
+          "end_line": 78,
+          "id": "line-78",
+          "kind": "list",
+          "parent_id": "line-11",
+          "start_line": 78,
+          "text": "- 目次に戻る\n"
+        }
+      ],
+      "id": "jma",
+      "source_hash": "8bbca1993e8098b50c29ad247af4d91693295c45f8b01814485a920423389b23",
+      "title": "予報の名称 | 気象庁",
+      "url": "https://www.jma.go.jp/jma/kishou/know/yougo_hp/yoho.html"
+    }
+  ],
+  "omitted_count": 1,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 416,
+  "max_tokens": 1024
+}

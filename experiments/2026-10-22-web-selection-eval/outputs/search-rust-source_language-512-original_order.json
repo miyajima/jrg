@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 8.2 years ago; Crawled: 2 months ago; # Note: This feature was stabilized in 1.88.0 but on edition 2024 only. ... This is a tracking issue for the eRFC \"if- and while-let-chains, take 2\" (rust-lang/rfcs#2497). ...   * [Input] Second stabilization PR: Stabilize let chains in the 2024 edition #132833\n\nIssue body actions\n\n# Note: This feature was stabilized in 1.88.0 but on edition 2024 only. If you are using 1.88.0+ and get an error that the feature is still unstable, please upgrade the edition.\n\nThis is a tracking issue for the eRFC \"if- and while-let-chains, take 2\" (rust-lang/rfcs#2497).\nFor the tracking issue for the immediate edition changes, see #53668.\n\nSteps:\n\n  * [Input] Implement the RFC (cc @rust-lang/compiler -- can anyone write up mentoring instructions?)\n  * [Input] Adjust documentation (see instructions on forge)\n  * [Input] Formatting for new syntax has been added to the Style Guide (nightly-style-procedure)\n  * [Input] resolve expr fragment specifier issue (#86730)\n  * [Input] Initial stabilization PR: Stabilize `let_chains` in Rust 1.64 #94927, reverted in Revert let_chains stabilization #100538\n  * [Input] Second stabilization PR: Stabilize let chains in the 2024 edition #132833\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-6",
+      "source_hash": "e21e72c2e6f9196ef83946e13e2871a254471827532724c82995cbd037c9360c",
+      "title": "Tracking issue for eRFC 2497, \"if- and while-let-chains, take 2\" · Issue #53667 · rust-lang/rust · GitHub",
+      "url": "https://github.com/rust-lang/rust/issues/53667?timeline_page=1"
+    }
+  ],
+  "omitted_count": 17,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 501,
+  "max_tokens": 512
+}

@@ -1,0 +1,27 @@
+{
+  "status": "pass",
+  "reviewer": "native independent /root/selection_review",
+  "reviewed_files": 24,
+  "original_fixed_files": 81,
+  "saved_outputs": 64,
+  "exact_token_counts": 128,
+  "old_results_preserved": 48,
+  "aggregate_A_B_D_C": {
+    "1024": [
+      11,
+      11,
+      13,
+      13
+    ],
+    "2048": [
+      13,
+      13,
+      17,
+      16
+    ]
+  },
+  "finding": "No material issue; Queue signature line-110 omitted only with rules in improved-English2048 contrast.",
+  "product_default": "Builtin unchanged; recommendation is not applied config.",
+  "model_variant": "Unknown in evidence",
+  "parent_acceptance": "Final review manifest hashes match; accepted."
+}

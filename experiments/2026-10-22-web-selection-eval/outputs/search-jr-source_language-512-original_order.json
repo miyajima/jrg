@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.6 years ago; Crawled: 1.4 years ago; 　　　　２名を超えた人数分の小児運賃が必要です。 ... ウィング号をご利用になる幼児または乳児が，座席を１人で占有するときは， ... 　　　　　（上記区間できっぷをお求めの場合の大人運賃は460円，小児運賃は230円）\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-9",
+      "source_hash": "1def080cfa565a5f136e674ff35017a450ce4c03df8e7c42ae9f571b56e8722e",
+      "title": "乗車券の年齢区分 - 京急電鉄FAQ",
+      "url": "https://keikyufaq.fastcloud.jp/fa/keikyucall/web/knowledge569.html?suid=1330ae40-d01e-4189-9416-bf05974e30a4"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 7 months ago; ①「おとな」または「こども」1人に同伴される「幼児」の人数が2人を超える場合（3人目から「こども」の運賃・料金が必要です）。②「幼児」、「乳児」が1人で指定席、グリーン席（自由席グリーン車を除く）、寝台等を利用する場合。\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-10",
+      "source_hash": "4623f62e638b9b8b54bdbaf52fc2e6f26f68b3c31bd982f48314bb1c79f20451",
+      "title": "JR東日本運賃改定のご案内",
+      "url": "https://www.jreast.co.jp/zh-CHT/2026unchin-kaitei/assets/pdf/pamphlet.pdf"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 471,
+  "max_tokens": 512
+}

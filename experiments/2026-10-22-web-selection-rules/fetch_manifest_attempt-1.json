@@ -1,0 +1,66 @@
+[
+  {
+    "id": "queue",
+    "url": "https://docs.python.org/3/library/queue.html",
+    "retrieved_at": "2026-10-22T08:42:47.741259+00:00",
+    "final_url": "https://docs.python.org/3/library/queue.html",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/queue.html'"
+  },
+  {
+    "id": "semaphore",
+    "url": "https://docs.python.org/3/library/asyncio-sync.html",
+    "retrieved_at": "2026-10-22T08:42:47.741729+00:00",
+    "final_url": "https://docs.python.org/3/library/asyncio-sync.html",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/semaphore.html'"
+  },
+  {
+    "id": "timeout",
+    "url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+    "retrieved_at": "2026-10-22T08:42:47.741812+00:00",
+    "final_url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/timeout.html'"
+  },
+  {
+    "id": "ssh",
+    "url": "https://man.openbsd.org/ssh_config",
+    "retrieved_at": "2026-10-22T08:42:47.741887+00:00",
+    "final_url": "https://man.openbsd.org/ssh_config",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/ssh.html'"
+  },
+  {
+    "id": "github-rate",
+    "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+    "retrieved_at": "2026-10-22T08:42:48.079644+00:00",
+    "final_url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/github-rate.html'"
+  },
+  {
+    "id": "nginx",
+    "url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html",
+    "retrieved_at": "2026-10-22T08:42:48.109670+00:00",
+    "final_url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/nginx.html'"
+  },
+  {
+    "id": "gcs-retry",
+    "url": "https://cloud.google.com/storage/docs/retry-strategy",
+    "retrieved_at": "2026-10-22T08:42:48.269565+00:00",
+    "final_url": "https://docs.cloud.google.com/storage/docs/retry-strategy",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/gcs-retry.html'"
+  },
+  {
+    "id": "blockingqueue",
+    "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+    "retrieved_at": "2026-10-22T08:42:48.323607+00:00",
+    "final_url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+    "charset": "utf-8",
+    "error": "[Errno 2] No such file or directory: '/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-rules/raw/blockingqueue.html'"
+  }
+]

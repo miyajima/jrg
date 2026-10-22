@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "id": "node",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+      "title": "Modules: CommonJS modules | Node.js v22.15.0 Documentation",
+      "blocks": [
+        {
+          "id": "line-137",
+          "kind": "heading",
+          "text": "## Modules: CommonJS modules#\n",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "id": "line-247",
+          "kind": "heading",
+          "text": "### Loading ECMAScript modules using require()#\n",
+          "parent_id": "line-137",
+          "start_line": 247,
+          "end_line": 247
+        },
+        {
+          "id": "line-263",
+          "kind": "list",
+          "text": "- The module is fully synchronous (contains no top-level await); and\n",
+          "parent_id": "line-247",
+          "start_line": 263,
+          "end_line": 263
+        },
+        {
+          "id": "line-267",
+          "kind": "paragraph",
+          "text": "If the ES Module being loaded meets the requirements, require() can load it and return the module namespace object. In this case it is similar to dynamic import() but is run synchronously and returns the name space object directly.\n",
+          "parent_id": "line-247",
+          "start_line": 267,
+          "end_line": 267
+        },
+        {
+          "id": "line-302",
+          "kind": "paragraph",
+          "text": "When an ES Module contains both named exports and a default export, the result returned by require() is the module namespace object, which places the default export in the .default property, similar to the results returned by import(). To customize what should be returned by require(esm) directly, the ES Module can export the desired value using the string name \"module.exports\".\n",
+          "parent_id": "line-247",
+          "start_line": 302,
+          "end_line": 302
+        },
+        {
+          "id": "line-346",
+          "kind": "paragraph",
+          "text": "If the module being require()'d contains top-level await, or the module graph it imports contains top-level await, ERR_REQUIRE_ASYNC_MODULE will be thrown. In this case, users should load the asynchronous module using import().\n",
+          "parent_id": "line-247",
+          "start_line": 346,
+          "end_line": 346
+        }
+      ],
+      "source_hash": "a51c8cb292f9a70a570b414575078a82c3a9449680b610e5f989f718b76181f3"
+    }
+  ],
+  "omitted_count": 357,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 495,
+  "max_tokens": 512
+}

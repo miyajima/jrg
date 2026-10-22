@@ -1,0 +1,256 @@
+{
+  "documents": [
+    {
+      "id": "fetch",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+      "title": "Using the Fetch API - Web APIs | MDN",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Using the Fetch API\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-13",
+          "kind": "paragraph",
+          "text": "js\n",
+          "parent_id": "line-1",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-41",
+          "kind": "heading",
+          "text": "## Making a request\n",
+          "parent_id": "line-1",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-51",
+          "kind": "heading",
+          "text": "### Setting the method\n",
+          "parent_id": "line-41",
+          "start_line": 51,
+          "end_line": 51
+        },
+        {
+          "id": "line-65",
+          "kind": "paragraph",
+          "text": "If the mode option is set to no-cors, then method must be one of GET, POST or HEAD.\n",
+          "parent_id": "line-51",
+          "start_line": 65,
+          "end_line": 65
+        },
+        {
+          "id": "line-67",
+          "kind": "heading",
+          "text": "### Setting a body\n",
+          "parent_id": "line-41",
+          "start_line": 67,
+          "end_line": 67
+        },
+        {
+          "id": "line-69",
+          "kind": "paragraph",
+          "text": "The request body is the payload of the request: it's the thing the client is sending to the server. You cannot include a body with GET requests, but it's useful for requests that send content to the server, such as POST or PUT requests. For example, if you want to upload a file to the server, you might make a POST request and include the file as the request body.\n",
+          "parent_id": "line-67",
+          "start_line": 69,
+          "end_line": 69
+        },
+        {
+          "id": "line-162",
+          "kind": "heading",
+          "text": "### Setting headers\n",
+          "parent_id": "line-41",
+          "start_line": 162,
+          "end_line": 162
+        },
+        {
+          "id": "line-201",
+          "kind": "paragraph",
+          "text": "Compared to using plain objects, the Headers object provides some additional input sanitization. For example, it normalizes header names to lowercase, strips leading and trailing whitespace from header values, and prevents certain headers from being set. Many headers are set automatically by the browser and can't be set by a script: these are called Forbidden request headers. If the mode option is set to no-cors, then the set of permitted headers is further restricted.\n",
+          "parent_id": "line-162",
+          "start_line": 201,
+          "end_line": 201
+        },
+        {
+          "id": "line-203",
+          "kind": "heading",
+          "text": "### Sending data in a GET request\n",
+          "parent_id": "line-41",
+          "start_line": 203,
+          "end_line": 203
+        },
+        {
+          "id": "line-205",
+          "kind": "paragraph",
+          "text": "GET requests don't have a body, but you can still send data to the server by appending it to the URL as a query string. This is a common way to send form data to the server. You can do this by using URLSearchParams to encode the data, and then appending it to the URL:\n",
+          "parent_id": "line-203",
+          "start_line": 205,
+          "end_line": 205
+        },
+        {
+          "id": "line-218",
+          "kind": "heading",
+          "text": "### Making cross-origin requests\n",
+          "parent_id": "line-41",
+          "start_line": 218,
+          "end_line": 218
+        },
+        {
+          "id": "line-220",
+          "kind": "paragraph",
+          "text": "Whether a request can be made cross-origin or not is determined by the value of the RequestInit.mode option. This may take one of three values: cors, same-origin, or no-cors.\n",
+          "parent_id": "line-218",
+          "start_line": 220,
+          "end_line": 220
+        },
+        {
+          "id": "line-222",
+          "kind": "list",
+          "text": "- For fetch requests the default value of mode is cors, meaning that if the request is cross-origin then it will use the Cross-Origin Resource Sharing (CORS) mechanism. This means that: if the request is a simple request, then the request will always be sent, but the server must respond with the correct Access-Control-Allow-Origin header or the browser will not share the response with the caller. if the request is not a simple request, then the browser will send a preflighted request to check that the server understands CORS and allows the request, and the real request will not be sent unless the server responds to the preflighted request with the appropriate CORS headers.\n",
+          "parent_id": "line-218",
+          "start_line": 222,
+          "end_line": 222
+        },
+        {
+          "id": "line-224",
+          "kind": "list",
+          "text": "- Setting mode to same-origin disallows cross-origin requests completely.\n",
+          "parent_id": "line-218",
+          "start_line": 224,
+          "end_line": 224
+        },
+        {
+          "id": "line-226",
+          "kind": "list",
+          "text": "- Setting mode to no-cors disables CORS for cross-origin requests. This restricts the headers that may be set, and restricts methods to GET, HEAD, and POST. The response is opaque, meaning that its headers and body are not available to JavaScript. Most of the time a website should not use no-cors: the main application of it is for certain service worker use cases.\n",
+          "parent_id": "line-218",
+          "start_line": 226,
+          "end_line": 226
+        },
+        {
+          "id": "line-230",
+          "kind": "heading",
+          "text": "### Including credentials\n",
+          "parent_id": "line-41",
+          "start_line": 230,
+          "end_line": 230
+        },
+        {
+          "id": "line-234",
+          "kind": "list",
+          "text": "- HTTP cookies\n",
+          "parent_id": "line-230",
+          "start_line": 234,
+          "end_line": 234
+        },
+        {
+          "id": "line-240",
+          "kind": "paragraph",
+          "text": "By default, credentials are only included in same-origin requests. To customize this behavior, as well as to control whether the browser respects any Set-Cookie response headers, set the credentials option, which can take one of the following three values:\n",
+          "parent_id": "line-230",
+          "start_line": 240,
+          "end_line": 240
+        },
+        {
+          "id": "line-244",
+          "kind": "list",
+          "text": "- same-origin (the default): only send and include credentials for same-origin requests.\n",
+          "parent_id": "line-230",
+          "start_line": 244,
+          "end_line": 244
+        },
+        {
+          "id": "line-248",
+          "kind": "paragraph",
+          "text": "Note that if a cookie's SameSite attribute is set to Strict or Lax, then the cookie will not be sent cross-site, even if credentials is set to include.\n",
+          "parent_id": "line-230",
+          "start_line": 248,
+          "end_line": 248
+        },
+        {
+          "id": "line-250",
+          "kind": "paragraph",
+          "text": "Including credentials in cross-origin requests can make a site vulnerable to CSRF attacks, so even if credentials is set to include, the server must also agree to their inclusion by including the Access-Control-Allow-Credentials header in its response. Additionally, in this situation the server must explicitly specify the client's origin in the Access-Control-Allow-Origin response header (that is, * is not allowed).\n",
+          "parent_id": "line-230",
+          "start_line": 250,
+          "end_line": 250
+        },
+        {
+          "id": "line-254",
+          "kind": "list",
+          "text": "- If the request is a simple request, then the request will be sent with credentials, but the server must set the Access-Control-Allow-Credentials and Access-Control-Allow-Origin response headers, or the browser will return a network error to the caller. If the server does set the correct headers, then the response, including credentials, will be delivered to the caller.\n",
+          "parent_id": "line-230",
+          "start_line": 254,
+          "end_line": 254
+        },
+        {
+          "id": "line-256",
+          "kind": "list",
+          "text": "- If the request is not a simple request, then the browser will send a preflighted request without credentials, and the server must set the Access-Control-Allow-Credentials and Access-Control-Allow-Origin response headers, or the browser will return a network error to the caller. If the server does set the correct headers, then the browser will follow up with the real request, including credentials, and will deliver the real response, including credentials, to the caller.\n",
+          "parent_id": "line-230",
+          "start_line": 256,
+          "end_line": 256
+        },
+        {
+          "id": "line-258",
+          "kind": "heading",
+          "text": "### Creating a Request object\n",
+          "parent_id": "line-41",
+          "start_line": 258,
+          "end_line": 258
+        },
+        {
+          "id": "line-260",
+          "kind": "paragraph",
+          "text": "The Request() constructor takes the same arguments as fetch() itself. This means that instead of passing options into fetch(), you can pass the same options to the Request() constructor, and then pass that object to fetch().\n",
+          "parent_id": "line-258",
+          "start_line": 260,
+          "end_line": 260
+        },
+        {
+          "id": "line-380",
+          "kind": "heading",
+          "text": "## Handling the response\n",
+          "parent_id": "line-1",
+          "start_line": 380,
+          "end_line": 380
+        },
+        {
+          "id": "line-382",
+          "kind": "paragraph",
+          "text": "As soon as the browser has received the response status and headers from the server (and potentially before the response body itself has been received), the promise returned by fetch() is fulfilled with a Response object.\n",
+          "parent_id": "line-380",
+          "start_line": 382,
+          "end_line": 382
+        },
+        {
+          "id": "line-410",
+          "kind": "heading",
+          "text": "### Checking the response type\n",
+          "parent_id": "line-380",
+          "start_line": 410,
+          "end_line": 410
+        },
+        {
+          "id": "line-414",
+          "kind": "list",
+          "text": "- basic: the request was a same-origin request.\n",
+          "parent_id": "line-410",
+          "start_line": 414,
+          "end_line": 414
+        }
+      ],
+      "source_hash": "2858e831d9d4e4329d75aa2af75528ab82d3825b6cc167ac75d16a079cdc41dc"
+    }
+  ],
+  "omitted_count": 147,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2046,
+  "max_tokens": 2048
+}

@@ -1,0 +1,234 @@
+{
+  "frozen_at": "2026-10-22T08:49:52.260021+00:00",
+  "method": "Source-blind reader derived proposed source facts using Japanese questions only. Parent narrowed labels to asked clauses, dropping unasked exception137, insertion interruption details, and unrelated GCS transient-status list. No selector outcome exists.",
+  "cases": [
+    {
+      "id": "queue",
+      "units": [
+        {
+          "id": "maxsize",
+          "claim": "A maxsize less than or equal to zero makes Queue infinite.",
+          "url": "https://docs.python.org/3/library/queue.html",
+          "alternatives": [
+            [
+              "line-45",
+              "line-47"
+            ]
+          ]
+        },
+        {
+          "id": "put-timeout",
+          "claim": "Queue.put waits by default; a positive timeout limits waiting and raises Full on expiry; nonblocking mode ignores timeout and inserts immediately or raises Full.",
+          "url": "https://docs.python.org/3/library/queue.html",
+          "alternatives": [
+            [
+              "line-110",
+              "line-112"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "semaphore",
+      "units": [
+        {
+          "id": "initial-value",
+          "claim": "Semaphore initial counter can be zero; a value less than zero raises ValueError.",
+          "url": "https://docs.python.org/3/library/asyncio-sync.html",
+          "alternatives": [
+            [
+              "line-267"
+            ]
+          ]
+        },
+        {
+          "id": "bounded-release",
+          "claim": "BoundedSemaphore.release raises ValueError if it increases the counter above its initial value.",
+          "url": "https://docs.python.org/3/library/asyncio-sync.html",
+          "alternatives": [
+            [
+              "line-318"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "timeout",
+      "units": [
+        {
+          "id": "fractional-duration",
+          "claim": "The timeout duration can be floating point.",
+          "url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+          "alternatives": [
+            [
+              "line-58"
+            ]
+          ]
+        },
+        {
+          "id": "zero-duration",
+          "claim": "Zero duration disables the associated timeout.",
+          "url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+          "alternatives": [
+            [
+              "line-68"
+            ]
+          ]
+        },
+        {
+          "id": "exit-status",
+          "claim": "Timeout exits124 unless preserve-status; command not found exits127.",
+          "url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+          "alternatives": [
+            [
+              "line-72"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ssh",
+      "units": [
+        {
+          "id": "server-alive-zero",
+          "claim": "ServerAliveInterval controls the encrypted-channel alive check; zero disables those messages.",
+          "url": "https://man.openbsd.org/ssh_config",
+          "alternatives": [
+            [
+              "line-1181",
+              "line-1183"
+            ]
+          ]
+        },
+        {
+          "id": "tcp-comparison",
+          "claim": "Encrypted-channel alive messages cannot be spoofed while TCPKeepAlive is spoofable.",
+          "url": "https://man.openbsd.org/ssh_config",
+          "alternatives": [
+            [
+              "line-1166"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "github-rate",
+      "units": [
+        {
+          "id": "primary-retry",
+          "claim": "When the primary limit is exceeded, wait until after x-ratelimit-reset before retrying.",
+          "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+          "alternatives": [
+            [
+              "line-123"
+            ]
+          ]
+        },
+        {
+          "id": "secondary-retry",
+          "claim": "For secondary limits honor retry-after; if remaining is0 wait until reset; otherwise wait at least a minute; continuing failures need exponential waits and a finite retry count.",
+          "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+          "alternatives": [
+            [
+              "line-125"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nginx",
+      "units": [
+        {
+          "id": "burst",
+          "claim": "Above-rate requests are delayed within the burst limit and rejected when excessive requests exceed burst.",
+          "url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html",
+          "alternatives": [
+            [
+              "line-36"
+            ]
+          ]
+        },
+        {
+          "id": "nodelay",
+          "claim": "nodelay prevents delay for excessive requests admitted within the limit.",
+          "url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html",
+          "alternatives": [
+            [
+              "line-51"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gcs-retry",
+      "units": [
+        {
+          "id": "backoff-and-jitter",
+          "claim": "Use exponentially increasing waits with randomness (jitter) for retries.",
+          "url": "https://docs.cloud.google.com/storage/docs/retry-strategy",
+          "alternatives": [
+            [
+              "line-745"
+            ],
+            [
+              "line-755"
+            ]
+          ]
+        },
+        {
+          "id": "idempotency",
+          "claim": "Operation idempotency affects retry safety: conditional operations need their conditions, or non-idempotent retries risk duplicates.",
+          "url": "https://docs.cloud.google.com/storage/docs/retry-strategy",
+          "alternatives": [
+            [
+              "line-51"
+            ],
+            [
+              "line-761"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blockingqueue",
+      "units": [
+        {
+          "id": "unbounded-capacity",
+          "claim": "Without an intrinsic capacity limit remainingCapacity is Integer.MAX_VALUE.",
+          "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+          "alternatives": [
+            [
+              "line-39"
+            ],
+            [
+              "line-94"
+            ],
+            [
+              "line-96"
+            ]
+          ]
+        },
+        {
+          "id": "insertion-waiting",
+          "claim": "put waits for space, plain offer is immediate (false if full), and timed offer waits up to the given timeout.",
+          "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+          "alternatives": [
+            [
+              "line-94"
+            ],
+            [
+              "line-96"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

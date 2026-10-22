@@ -1,0 +1,75 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "tools": [
+      {
+        "name": "search",
+        "description": "mock search",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "jrg_focus": {
+              "type": "string",
+              "description": "Question used to select relevant search evidence; defaults to query or q."
+            },
+            "jrg_focus_en": {
+              "type": "string",
+              "description": "Optional English equivalent for English-language evidence when the user's goal is Japanese. Preserve negation, versions, numbers, and identifiers; do not add facts."
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "fetch",
+        "description": "mock fetch",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "jrg_focus": {
+              "type": "string",
+              "description": "Question used to select relevant page evidence; required for this tool."
+            },
+            "jrg_focus_en": {
+              "type": "string",
+              "description": "Optional English equivalent for English-language evidence when the user's goal is Japanese. Preserve negation, versions, numbers, and identifiers; do not add facts."
+            }
+          },
+          "required": [
+            "url",
+            "jrg_focus"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "name": "other",
+        "description": "mock other",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "outputSchema": {
+          "type": "object",
+          "properties": {
+            "upstream": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

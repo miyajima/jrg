@@ -1,0 +1,17 @@
+{
+  "frozen_at": "2026-10-22T09:09:02.776016+00:00",
+  "added_arm": {
+    "id": "D",
+    "english_file": "improved_english.json",
+    "query_rules": "off"
+  },
+  "original_frozen_inputs_sha256": "4b9759a24cbd9b1349822962873e308a694f00e31d200f8cd4bbaa964ffbe509",
+  "original_results_sha256": "7f8b828ef6636265ffaef0cabee9d5533538d4c7a0993e41e72fd775da484bcf",
+  "files": {
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/PLAN.md": "43528b89cdfd0b6e7228af4541200305b6d3e7c485d49487a7e5033d1dd01b35",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/run_ablation.py": "32deea9580a00ac32e4a38bcdac8f47f6ce5632157596a95bc4d8621f81573b4",
+    "experiments/2026-10-22-web-selection-rules/frozen_inputs.json": "33a05d0585b15cd1397c23a3d26ee3c4d792a69fc5c9de74ce1f82bd5de058e1",
+    "experiments/2026-10-22-web-selection-rules/results.json": "4277a78e9daa9cdb21421126c81a570b2a9a9b8a89374231df8f69db1071d556",
+    "experiments/2026-10-22-web-selection-rules/score.py": "7fe031cd2938511077ceca6d243838843d3f8a739bdad5d19ee2f3f6e04236f3"
+  }
+}

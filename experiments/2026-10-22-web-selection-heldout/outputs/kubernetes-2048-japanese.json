@@ -1,0 +1,328 @@
+{
+  "documents": [
+    {
+      "id": "kubernetes",
+      "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+      "title": "Secrets | Kubernetes",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Secrets\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-27",
+          "kind": "heading",
+          "text": "## Uses for Secrets\n",
+          "parent_id": "line-1",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "id": "line-39",
+          "kind": "heading",
+          "text": "### Use case: dotfiles in a secret volume\n",
+          "parent_id": "line-27",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-41",
+          "kind": "paragraph",
+          "text": "You can make your data \"hidden\" by defining a key that begins with a dot. This key represents a dotfile or \"hidden\" file. For example, when the following Secret is mounted into a volume, secret-volume, the volume will contain a single file, called .secret-file, and the dotfile-test-container will have this file present at the path /etc/secret-volume/.secret-file.\n",
+          "parent_id": "line-39",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-43",
+          "kind": "heading",
+          "text": "#### Note:\n",
+          "parent_id": "line-39",
+          "start_line": 43,
+          "end_line": 43
+        },
+        {
+          "id": "line-48",
+          "kind": "paragraph",
+          "text": "secret/dotfile-secret.yaml\n",
+          "parent_id": "line-43",
+          "start_line": 48,
+          "end_line": 48
+        },
+        {
+          "id": "line-50",
+          "kind": "code",
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: dotfile-secret\ndata:\n.secret-file: dmFsdWUtMg0KDQo=\n---\napiVersion: v1\nkind: Pod\nmetadata:\nname: secret-dotfiles-pod\nspec:\nvolumes:\n- name: secret-volume\nsecret:\nsecretName: dotfile-secret\ncontainers:\n- name: dotfile-test-container\nimage: registry.k8s.io/busybox\ncommand:\n- ls\n- \"-l\"\n- \"/etc/secret-volume\"\nvolumeMounts:\n- name: secret-volume\nreadOnly: true\nmountPath: \"/etc/secret-volume\"\n```\n",
+          "parent_id": "line-43",
+          "start_line": 50,
+          "end_line": 78
+        },
+        {
+          "id": "line-106",
+          "kind": "heading",
+          "text": "## Types of Secret\n",
+          "parent_id": "line-1",
+          "start_line": 106,
+          "end_line": 106
+        },
+        {
+          "id": "line-108",
+          "kind": "paragraph",
+          "text": "When creating a Secret, you can specify its type using the type field of the Secret resource, or certain equivalent kubectl command line flags (if available). The Secret type is used to facilitate programmatic handling of the Secret data.\n",
+          "parent_id": "line-106",
+          "start_line": 108,
+          "end_line": 108
+        },
+        {
+          "id": "line-128",
+          "kind": "heading",
+          "text": "### Opaque Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 128,
+          "end_line": 128
+        },
+        {
+          "id": "line-130",
+          "kind": "paragraph",
+          "text": "Opaque is the default Secret type if you don't explicitly specify a type in a Secret manifest. When you create a Secret using kubectl, you must use the generic subcommand to indicate an Opaque Secret type. For example, the following command creates an empty Secret of type Opaque:\n",
+          "parent_id": "line-128",
+          "start_line": 130,
+          "end_line": 130
+        },
+        {
+          "id": "line-132",
+          "kind": "code",
+          "text": "```\nkubectl create secret generic empty-secret\nkubectl get secret empty-secret\n\n```\n",
+          "parent_id": "line-128",
+          "start_line": 132,
+          "end_line": 136
+        },
+        {
+          "id": "line-148",
+          "kind": "heading",
+          "text": "### ServiceAccount token Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 148,
+          "end_line": 148
+        },
+        {
+          "id": "line-158",
+          "kind": "heading",
+          "text": "#### Note:\n",
+          "parent_id": "line-148",
+          "start_line": 158,
+          "end_line": 158
+        },
+        {
+          "id": "line-172",
+          "kind": "paragraph",
+          "text": "secret/serviceaccount-token-secret.yaml\n",
+          "parent_id": "line-158",
+          "start_line": 172,
+          "end_line": 172
+        },
+        {
+          "id": "line-190",
+          "kind": "heading",
+          "text": "### Docker config Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 190,
+          "end_line": 190
+        },
+        {
+          "id": "line-200",
+          "kind": "paragraph",
+          "text": "secret/dockercfg-secret.yaml\n",
+          "parent_id": "line-190",
+          "start_line": 200,
+          "end_line": 200
+        },
+        {
+          "id": "line-213",
+          "kind": "heading",
+          "text": "#### Note:\n",
+          "parent_id": "line-190",
+          "start_line": 213,
+          "end_line": 213
+        },
+        {
+          "id": "line-235",
+          "kind": "code",
+          "text": "```\nkubectl get secret secret-tiger-docker -o jsonpath='{.data.*}' | base64 -d\n\n```\n",
+          "parent_id": "line-213",
+          "start_line": 235,
+          "end_line": 238
+        },
+        {
+          "id": "line-262",
+          "kind": "heading",
+          "text": "### Basic authentication Secret\n",
+          "parent_id": "line-106",
+          "start_line": 262,
+          "end_line": 262
+        },
+        {
+          "id": "line-272",
+          "kind": "paragraph",
+          "text": "The following manifest is an example of a basic authentication Secret:\n",
+          "parent_id": "line-262",
+          "start_line": 272,
+          "end_line": 272
+        },
+        {
+          "id": "line-274",
+          "kind": "paragraph",
+          "text": "secret/basicauth-secret.yaml\n",
+          "parent_id": "line-262",
+          "start_line": 274,
+          "end_line": 274
+        },
+        {
+          "id": "line-293",
+          "kind": "heading",
+          "text": "### SSH authentication Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 293,
+          "end_line": 293
+        },
+        {
+          "id": "line-299",
+          "kind": "paragraph",
+          "text": "secret/ssh-auth-secret.yaml\n",
+          "parent_id": "line-293",
+          "start_line": 299,
+          "end_line": 299
+        },
+        {
+          "id": "line-321",
+          "kind": "heading",
+          "text": "### TLS Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 321,
+          "end_line": 321
+        },
+        {
+          "id": "line-331",
+          "kind": "paragraph",
+          "text": "secret/tls-auth-secret.yaml\n",
+          "parent_id": "line-321",
+          "start_line": 331,
+          "end_line": 331
+        },
+        {
+          "id": "line-351",
+          "kind": "code",
+          "text": "```\nkubectl create secret tls my-tls-secret \\\n--cert=path/to/cert/file \\\n--key=path/to/key/file\n\n```\n",
+          "parent_id": "line-321",
+          "start_line": 351,
+          "end_line": 356
+        },
+        {
+          "id": "line-360",
+          "kind": "heading",
+          "text": "### Bootstrap token Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 360,
+          "end_line": 360
+        },
+        {
+          "id": "line-368",
+          "kind": "paragraph",
+          "text": "secret/bootstrap-token-secret-base64.yaml\n",
+          "parent_id": "line-360",
+          "start_line": 368,
+          "end_line": 368
+        },
+        {
+          "id": "line-390",
+          "kind": "list",
+          "text": "- token-secret: A random 16 character string as the actual token Secret. Required.\n",
+          "parent_id": "line-360",
+          "start_line": 390,
+          "end_line": 390
+        },
+        {
+          "id": "line-402",
+          "kind": "paragraph",
+          "text": "secret/bootstrap-token-secret-literal.yaml\n",
+          "parent_id": "line-360",
+          "start_line": 402,
+          "end_line": 402
+        },
+        {
+          "id": "line-429",
+          "kind": "heading",
+          "text": "## Working with Secrets\n",
+          "parent_id": "line-1",
+          "start_line": 429,
+          "end_line": 429
+        },
+        {
+          "id": "line-465",
+          "kind": "heading",
+          "text": "### Using a Secret\n",
+          "parent_id": "line-429",
+          "start_line": 465,
+          "end_line": 465
+        },
+        {
+          "id": "line-473",
+          "kind": "heading",
+          "text": "#### Optional Secrets\n",
+          "parent_id": "line-465",
+          "start_line": 473,
+          "end_line": 473
+        },
+        {
+          "id": "line-477",
+          "kind": "paragraph",
+          "text": "secret/optional-secret.yaml\n",
+          "parent_id": "line-473",
+          "start_line": 477,
+          "end_line": 477
+        },
+        {
+          "id": "line-479",
+          "kind": "code",
+          "text": "```\napiVersion: v1\nkind: Pod\nmetadata:\nname: mypod\nspec:\ncontainers:\n- name: mypod\nimage: redis\nvolumeMounts:\n- name: foo\nmountPath: \"/etc/foo\"\nreadOnly: true\nvolumes:\n- name: foo\nsecret:\nsecretName: mysecret\noptional: true\n```\n",
+          "parent_id": "line-473",
+          "start_line": 479,
+          "end_line": 497
+        },
+        {
+          "id": "line-503",
+          "kind": "heading",
+          "text": "### Using Secrets as files from a Pod\n",
+          "parent_id": "line-429",
+          "start_line": 503,
+          "end_line": 503
+        },
+        {
+          "id": "line-511",
+          "kind": "heading",
+          "text": "#### Note:\n",
+          "parent_id": "line-503",
+          "start_line": 511,
+          "end_line": 511
+        },
+        {
+          "id": "line-513",
+          "kind": "paragraph",
+          "text": "A container using a Secret as a\nsubPath volume mount does not receive\nautomated Secret updates.\n",
+          "parent_id": "line-511",
+          "start_line": 513,
+          "end_line": 515
+        }
+      ],
+      "source_hash": "f9b756063d7923a42f9ad4eaa8b3d6e68a900e65a3434ef6881b66b60e24820c"
+    }
+  ],
+  "omitted_count": 181,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2013,
+  "max_tokens": 2048
+}

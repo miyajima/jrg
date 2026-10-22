@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 2 weeks ago; ### 1.88.0 ...   * Stabilized APIs ... feature(let_chains)]` in the 2024 edition. ... feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error.\n\n### 1.88.0\n\nImage: Table of Contents\n\n  * Language\n  * Compiler\n  * Platform Support\n  * Libraries\n  * Stabilized APIs\n  * Cargo\n  * Rustdoc\n  * Compatibility Notes\n\n# 1.88.0 #\n\n>   * Released on: 26 June, 2025\n\n## Language #\n\n  * Stabilize `#![feature(let_chains)]` in the 2024 edition. This feature allows `&&`-chaining `let` statements inside `if` and `while`, allowing intermixture with boolean expressions. The patterns inside the `let` sub-expressions can be irrefutable or refutable.\n  * Stabilize `#![feature(naked_functions)]`. Naked functions allow writing functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function.\n  * Stabilize `#![feature(cfg_boolean_literals)]`. This allows using boolean literals as `cfg` predicates, e.g. `#[cfg(true)]` and `#[cfg(false)]`.\n  * `Cell::get_mut`\n  * `Cell::from_mut`\n  * `Cell::as_slice_of_cells`\n\n## Cargo #\n\n  * Stabilize automatic garbage collection.\n  * use `zlib-rs` for gzip compression in rust code\n\n## Rustdoc #\n\n  * Doctests can be ignored based on target names using `ignore-*` attributes.\n  * Stabilize the `--test-runtool` and `--test-runtool-arg` CLI options to specify a program (like qemu) and its arguments to run a doctest.\n\n## Compatibility Notes #\n\n  * Finish changing the internal representation of pasted tokens. Certain invalid declarative macros that were previously accepted in obscure circumstances are now correctly rejected by the compiler. Use of a `tt` fragment specifier can often fix these macros.\n  * Fully de-stabilize the `#[bench]` attribute. Usage of `#[bench]` without `#![feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error.\n  * Fix borrow checking some always-true patterns. The borrow checker was overly permissive in some cases, allowing programs that shouldn’t have compiled.\n  * Update the minimum external LLVM to 19.\n  * Make it a hard error to use a vector type with a non-Rust ABI without enabling the required target feature.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-2",
+      "source_hash": "349c7550b61a15fd6f5eb68f308781efc674c51d8e9743aa43d7a41b3bc4f8a1",
+      "title": "1.88.0 | Rust Changelogs",
+      "url": "https://releases.rs/docs/1.88.0/"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.5 years ago; Crawled: 11 months ago; They alone make the 2024 edition worth the upgrade (at least in 12 weeks when they hit stable). ...   Personally I try to limit using crates to functionality I can't or don't want to write myself, but I hit the \"if let Some(x) == y && z == 18\" snag on literally day one of using Rust (with which I started in 2019).I've always wondered why the language couldn't chain those conditions and I've been using if\\_chain as long as I can remember.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-14",
+      "source_hash": "633d678e18d5d4b73b5c4c1afc2655b0f26b74a7fe24c1c084d19850f22b9376",
+      "title": "Let Chains are stabilized!",
+      "url": "https://www.reddit.com/r/rust/comments/1k54qqo"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 982,
+  "max_tokens": 1024
+}

@@ -1,0 +1,27 @@
+[workspace]
+
+[package]
+name = "jrg-rtk-proxy"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+rtk-proxy = { git = "https://github.com/rtk-ai/rtk", rev = "4ef8730cf3a0dea11c8d64a9b90bc0616fe52100" }
+async-trait = "0.1"
+axum = "0.7"
+clap = { version = "4", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tokio = { version = "1", features = ["full"] }
+
+[target.'cfg(unix)'.dependencies]
+rustix = { version = "1.1", features = ["process"] }
+
+[dev-dependencies]
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+tempfile = "3"
+
+[[bin]]
+name = "jrg-rtk-proxy"
+path = "src/main.rs"

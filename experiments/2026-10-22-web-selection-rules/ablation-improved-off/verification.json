@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "saved_outputs_checked": 64,
+  "new_outputs": 16,
+  "original_frozen_files_checked": 81,
+  "original_results_unchanged": true,
+  "source_and_dependency_check": "pass",
+  "token_budget_and_scores": "pass",
+  "contrasts_recomputed": "pass",
+  "selector_rerun": false,
+  "network_used": false,
+  "results_sha256": "edb272094b74eb487bdf5cc4db9d18f5a8d484b136a3665caa2236d6f22273d9"
+}

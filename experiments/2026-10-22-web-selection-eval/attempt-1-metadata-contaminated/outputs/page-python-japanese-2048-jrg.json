@@ -1,0 +1,311 @@
+{
+  "documents": [
+    {
+      "id": "python",
+      "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "title": "C API Extension Support for Free Threading — Python 3.15.0 documentation",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "### Navigation\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-13",
+          "kind": "list",
+          "text": "- Python »\n",
+          "parent_id": "line-1",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-19",
+          "kind": "list",
+          "text": "- 3.13.16 Documentation »\n",
+          "parent_id": "line-1",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "id": "line-21",
+          "kind": "list",
+          "text": "- Python HOWTOs »\n",
+          "parent_id": "line-1",
+          "start_line": 21,
+          "end_line": 21
+        },
+        {
+          "id": "line-23",
+          "kind": "list",
+          "text": "- Python experimental support for free threading\n",
+          "parent_id": "line-1",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "id": "line-29",
+          "kind": "heading",
+          "text": "# Python experimental support for free threading¶\n",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "id": "line-31",
+          "kind": "paragraph",
+          "text": "Starting with the 3.13 release, CPython has experimental support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. Free-threaded execution allows for full utilization of the available processing power by running threads in parallel on available CPU cores. While not all software will benefit from this automatically, programs designed with threading in mind will run faster on multi-core hardware.\n",
+          "parent_id": "line-29",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-37",
+          "kind": "paragraph",
+          "text": "See also\n",
+          "parent_id": "line-29",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "line-41",
+          "kind": "heading",
+          "text": "## Installation¶\n",
+          "parent_id": "line-29",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-43",
+          "kind": "paragraph",
+          "text": "Starting with Python 3.13, the official macOS and Windows installers optionally support installing free-threaded Python binaries. The installers are available at https://www.python.org/downloads/.\n",
+          "parent_id": "line-41",
+          "start_line": 43,
+          "end_line": 43
+        },
+        {
+          "id": "line-47",
+          "kind": "paragraph",
+          "text": "When building CPython from source, the --disable-gil configure option should be used to build a free-threaded Python interpreter.\n",
+          "parent_id": "line-41",
+          "start_line": 47,
+          "end_line": 47
+        },
+        {
+          "id": "line-49",
+          "kind": "heading",
+          "text": "## Identifying free-threaded Python¶\n",
+          "parent_id": "line-29",
+          "start_line": 49,
+          "end_line": 49
+        },
+        {
+          "id": "line-51",
+          "kind": "paragraph",
+          "text": "To check if the current interpreter supports free-threading, python -VV and sys.version contain “experimental free-threading build”. The new sys._is_gil_enabled() function can be used to check whether the GIL is actually disabled in the running process.\n",
+          "parent_id": "line-49",
+          "start_line": 51,
+          "end_line": 51
+        },
+        {
+          "id": "line-53",
+          "kind": "paragraph",
+          "text": "The sysconfig.get_config_var(\"Py_GIL_DISABLED\") configuration variable can be used to determine whether the build supports free threading. If the variable is set to 1, then the build supports free threading. This is the recommended mechanism for decisions related to the build configuration.\n",
+          "parent_id": "line-49",
+          "start_line": 53,
+          "end_line": 53
+        },
+        {
+          "id": "line-55",
+          "kind": "heading",
+          "text": "## The global interpreter lock in free-threaded Python¶\n",
+          "parent_id": "line-29",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "id": "line-57",
+          "kind": "paragraph",
+          "text": "Free-threaded builds of CPython support optionally running with the GIL enabled at runtime using the environment variable PYTHON_GIL or the command-line option -X gil.\n",
+          "parent_id": "line-55",
+          "start_line": 57,
+          "end_line": 57
+        },
+        {
+          "id": "line-59",
+          "kind": "paragraph",
+          "text": "The GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading. A warning will be printed in this case.\n",
+          "parent_id": "line-55",
+          "start_line": 59,
+          "end_line": 59
+        },
+        {
+          "id": "line-67",
+          "kind": "heading",
+          "text": "## Thread safety¶\n",
+          "parent_id": "line-29",
+          "start_line": 67,
+          "end_line": 67
+        },
+        {
+          "id": "line-69",
+          "kind": "paragraph",
+          "text": "The free-threaded build of CPython aims to provide similar thread-safety behavior at the Python level to the default GIL-enabled build. Built-in types like dict, list, and set use internal locks to protect against concurrent modifications in ways that behave similarly to the GIL. However, Python has not historically guaranteed specific behavior for concurrent modifications to these built-in types, so this should be treated as a description of the current implementation, not a guarantee of current or future behavior.\n",
+          "parent_id": "line-67",
+          "start_line": 69,
+          "end_line": 69
+        },
+        {
+          "id": "line-71",
+          "kind": "paragraph",
+          "text": "Note\n",
+          "parent_id": "line-67",
+          "start_line": 71,
+          "end_line": 71
+        },
+        {
+          "id": "line-75",
+          "kind": "heading",
+          "text": "## Known limitations¶\n",
+          "parent_id": "line-29",
+          "start_line": 75,
+          "end_line": 75
+        },
+        {
+          "id": "line-79",
+          "kind": "heading",
+          "text": "### Immortalization¶\n",
+          "parent_id": "line-75",
+          "start_line": 79,
+          "end_line": 79
+        },
+        {
+          "id": "line-81",
+          "kind": "paragraph",
+          "text": "The free-threaded build of the 3.13 release makes some objects immortal. Immortal objects are not deallocated and have reference counts that are never modified. This is done to avoid reference count contention that would prevent efficient multi-threaded scaling.\n",
+          "parent_id": "line-79",
+          "start_line": 81,
+          "end_line": 81
+        },
+        {
+          "id": "line-107",
+          "kind": "heading",
+          "text": "### Single-threaded performance¶\n",
+          "parent_id": "line-75",
+          "start_line": 107,
+          "end_line": 107
+        },
+        {
+          "id": "line-109",
+          "kind": "paragraph",
+          "text": "The free-threaded build has additional overhead when executing Python code compared to the default GIL-enabled build. In 3.13, this overhead is about 40% on the pyperformance suite. Programs that spend most of their time in C extensions or I/O will see less of an impact. The largest impact is because the specializing adaptive interpreter (PEP 659) is disabled in the free-threaded build. We expect to re-enable it in a thread-safe way in the 3.14 release. This overhead is expected to be reduced in upcoming Python release. We are aiming for an overhead of 10% or less on the pyperformance suite compared to the default GIL-enabled build.\n",
+          "parent_id": "line-107",
+          "start_line": 109,
+          "end_line": 109
+        },
+        {
+          "id": "line-111",
+          "kind": "heading",
+          "text": "### Table of Contents\n",
+          "parent_id": "line-75",
+          "start_line": 111,
+          "end_line": 111
+        },
+        {
+          "id": "line-115",
+          "kind": "heading",
+          "text": "#### Previous topic\n",
+          "parent_id": "line-111",
+          "start_line": 115,
+          "end_line": 115
+        },
+        {
+          "id": "line-117",
+          "kind": "paragraph",
+          "text": "The Python 2.3 Method Resolution Order\n",
+          "parent_id": "line-115",
+          "start_line": 117,
+          "end_line": 117
+        },
+        {
+          "id": "line-131",
+          "kind": "heading",
+          "text": "### Navigation\n",
+          "parent_id": "line-75",
+          "start_line": 131,
+          "end_line": 131
+        },
+        {
+          "id": "line-141",
+          "kind": "list",
+          "text": "- \n",
+          "parent_id": "line-131",
+          "start_line": 141,
+          "end_line": 141
+        },
+        {
+          "id": "line-143",
+          "kind": "list",
+          "text": "- Python »\n",
+          "parent_id": "line-131",
+          "start_line": 143,
+          "end_line": 143
+        },
+        {
+          "id": "line-145",
+          "kind": "list",
+          "text": "- \n",
+          "parent_id": "line-131",
+          "start_line": 145,
+          "end_line": 145
+        },
+        {
+          "id": "line-149",
+          "kind": "list",
+          "text": "- 3.13.16 Documentation »\n",
+          "parent_id": "line-131",
+          "start_line": 149,
+          "end_line": 149
+        },
+        {
+          "id": "line-151",
+          "kind": "list",
+          "text": "- Python HOWTOs »\n",
+          "parent_id": "line-131",
+          "start_line": 151,
+          "end_line": 151
+        },
+        {
+          "id": "line-153",
+          "kind": "list",
+          "text": "- Python experimental support for free threading\n",
+          "parent_id": "line-131",
+          "start_line": 153,
+          "end_line": 153
+        },
+        {
+          "id": "line-159",
+          "kind": "paragraph",
+          "text": "© Copyright 2001-2026, Python Software Foundation.\n",
+          "parent_id": "line-131",
+          "start_line": 159,
+          "end_line": 159
+        },
+        {
+          "id": "line-174",
+          "kind": "paragraph",
+          "text": "Created using Sphinx 8.2.3.\n",
+          "parent_id": "line-131",
+          "start_line": 174,
+          "end_line": 174
+        }
+      ],
+      "source_hash": "f50c5a3333e8d160d108fbc2fd0bff9f74bc4e483bef7c587c9e6f56f983c92e"
+    }
+  ],
+  "omitted_count": 50,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2029,
+  "max_tokens": 2048
+}

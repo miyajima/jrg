@@ -1,0 +1,198 @@
+{
+  "documents": [
+    {
+      "id": "rust",
+      "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+      "title": "Announcing Rust 1.88.0 | Rust Blog",
+      "blocks": [
+        {
+          "id": "line-5",
+          "kind": "paragraph",
+          "text": "If you have a previous version of Rust installed via rustup, you can get 1.88.0 with:\n",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "id": "line-15",
+          "kind": "heading",
+          "text": "## What's in 1.88.0 stable\n",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "id": "line-37",
+          "kind": "heading",
+          "text": "### Naked functions\n",
+          "parent_id": "line-15",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "line-41",
+          "kind": "paragraph",
+          "text": "For example:\n",
+          "parent_id": "line-37",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-58",
+          "kind": "heading",
+          "text": "### Boolean configuration\n",
+          "parent_id": "line-15",
+          "start_line": 58,
+          "end_line": 58
+        },
+        {
+          "id": "line-64",
+          "kind": "paragraph",
+          "text": "See RFC 3695 for more background!\n",
+          "parent_id": "line-58",
+          "start_line": 64,
+          "end_line": 64
+        },
+        {
+          "id": "line-76",
+          "kind": "heading",
+          "text": "### Stabilized APIs\n",
+          "parent_id": "line-15",
+          "start_line": 76,
+          "end_line": 76
+        },
+        {
+          "id": "line-78",
+          "kind": "list",
+          "text": "- Cell::update\n",
+          "parent_id": "line-76",
+          "start_line": 78,
+          "end_line": 78
+        },
+        {
+          "id": "line-80",
+          "kind": "list",
+          "text": "- impl Default for *const T\n",
+          "parent_id": "line-76",
+          "start_line": 80,
+          "end_line": 80
+        },
+        {
+          "id": "line-82",
+          "kind": "list",
+          "text": "- impl Default for *mut T\n",
+          "parent_id": "line-76",
+          "start_line": 82,
+          "end_line": 82
+        },
+        {
+          "id": "line-84",
+          "kind": "list",
+          "text": "- mod ffi::c_str\n",
+          "parent_id": "line-76",
+          "start_line": 84,
+          "end_line": 84
+        },
+        {
+          "id": "line-90",
+          "kind": "list",
+          "text": "- hint::select_unpredictable\n",
+          "parent_id": "line-76",
+          "start_line": 90,
+          "end_line": 90
+        },
+        {
+          "id": "line-104",
+          "kind": "list",
+          "text": "- <[T]>::as_chunks\n",
+          "parent_id": "line-76",
+          "start_line": 104,
+          "end_line": 104
+        },
+        {
+          "id": "line-106",
+          "kind": "list",
+          "text": "- <[T]>::as_rchunks\n",
+          "parent_id": "line-76",
+          "start_line": 106,
+          "end_line": 106
+        },
+        {
+          "id": "line-120",
+          "kind": "list",
+          "text": "- <*mut T>::replace\n",
+          "parent_id": "line-76",
+          "start_line": 120,
+          "end_line": 120
+        },
+        {
+          "id": "line-124",
+          "kind": "list",
+          "text": "- Cell::replace\n",
+          "parent_id": "line-76",
+          "start_line": 124,
+          "end_line": 124
+        },
+        {
+          "id": "line-126",
+          "kind": "list",
+          "text": "- Cell::get\n",
+          "parent_id": "line-76",
+          "start_line": 126,
+          "end_line": 126
+        },
+        {
+          "id": "line-128",
+          "kind": "list",
+          "text": "- Cell::get_mut\n",
+          "parent_id": "line-76",
+          "start_line": 128,
+          "end_line": 128
+        },
+        {
+          "id": "line-130",
+          "kind": "list",
+          "text": "- Cell::from_mut\n",
+          "parent_id": "line-76",
+          "start_line": 130,
+          "end_line": 130
+        },
+        {
+          "id": "line-134",
+          "kind": "heading",
+          "text": "### Other changes\n",
+          "parent_id": "line-15",
+          "start_line": 134,
+          "end_line": 134
+        },
+        {
+          "id": "line-138",
+          "kind": "paragraph",
+          "text": "Check out everything that changed in Rust, Cargo, and Clippy.\n",
+          "parent_id": "line-134",
+          "start_line": 138,
+          "end_line": 138
+        },
+        {
+          "id": "line-140",
+          "kind": "heading",
+          "text": "## Contributors to 1.88.0\n",
+          "start_line": 140,
+          "end_line": 140
+        },
+        {
+          "id": "line-142",
+          "kind": "paragraph",
+          "text": "Many people came together to create Rust 1.88.0. We couldn't have done it without all of you. Thanks!\n",
+          "parent_id": "line-140",
+          "start_line": 142,
+          "end_line": 142
+        }
+      ],
+      "source_hash": "d098b0afe7ebcb13f12c1165dc8f5e181310e3a07fbc0a5a27b95c866ca61ebd"
+    }
+  ],
+  "omitted_count": 39,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 996,
+  "max_tokens": 1024
+}

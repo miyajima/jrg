@@ -1,0 +1,70 @@
+{
+  "comparison": "Previous evaluation case gold URLs; not a claim about model training data.",
+  "previous_cases_sha256": "9a8b0efc824c4e23a0164b321be7e6e5bd86805aa0293bb94bbbe618e6662f0b",
+  "previous_urls": [
+    "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+    "https://doc.rust-lang.org/stable/edition-guide/rust-2024/let-chains.html",
+    "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+    "https://docs.python.org/3.13/howto/free-threading-python.html",
+    "https://docs.python.org/de/3.13/howto/free-threading-python.html",
+    "https://docs.python.org/fa/3.13/howto/free-threading-python.html",
+    "https://docs.python.org/sv/3.13/howto/free-threading-extensions.html",
+    "https://docs.python.org/uk/3.13/howto/free-threading-python.html",
+    "https://github.blog/changelog/2026-05-07-github-actions-concurrency-groups-now-allow-larger-queues/",
+    "https://github.com/github/docs/blob/main/content/actions/concepts/workflows-and-actions/concurrency.md",
+    "https://github.com/github/docs/blob/main/data/reusables/actions/actions-group-concurrency.md",
+    "https://jreastfaq.jreast.co.jp/faq/show/1177?site_domain=default",
+    "https://jreastfaq.jreast.co.jp/faq/show/3947?category_id=22&site_domain=default",
+    "https://nodejs.org/download/release/v22.15.0/docs/api/esm.html",
+    "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+    "https://www.data.jma.go.jp/yokohama/shosai/03-about/02-annai/01-qa.html",
+    "https://www.jma-net.go.jp/yokohama/shosai/03-about/02-annai/01-qa.html",
+    "https://www.jma.go.jp/jma/kishou/know/faq/faq4.html",
+    "https://www.jma.go.jp/jma/kishou/know/kisetsu_riyou/explain/prob_precip.html",
+    "https://www.jma.go.jp/jma/kishou/know/kurashi/yoho.html",
+    "https://www.jma.go.jp/jma/kishou/know/yougo_hp/yoho.html",
+    "https://www.jreast.co.jp/kippu/06.html"
+  ],
+  "checks": [
+    {
+      "id": "sqlite",
+      "url": "https://www.sqlite.org/foreignkeys.html",
+      "present_in_previous_evaluation_gold": false
+    },
+    {
+      "id": "postgres",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "present_in_previous_evaluation_gold": false
+    },
+    {
+      "id": "docker",
+      "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+      "present_in_previous_evaluation_gold": false
+    },
+    {
+      "id": "kubernetes",
+      "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+      "present_in_previous_evaluation_gold": false
+    },
+    {
+      "id": "fetch",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+      "present_in_previous_evaluation_gold": false
+    },
+    {
+      "id": "redis",
+      "url": "https://redis.io/docs/latest/commands/expire/",
+      "present_in_previous_evaluation_gold": false
+    },
+    {
+      "id": "go",
+      "url": "https://pkg.go.dev/context",
+      "present_in_previous_evaluation_gold": false
+    },
+    {
+      "id": "s3",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+      "present_in_previous_evaluation_gold": false
+    }
+  ]
+}

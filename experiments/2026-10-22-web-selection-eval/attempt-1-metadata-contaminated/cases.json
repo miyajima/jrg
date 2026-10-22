@@ -1,0 +1,647 @@
+{
+  "frozen_at": "2026-10-22T03:37:54.809646+00:00",
+  "budgets": [
+    512,
+    1024,
+    2048
+  ],
+  "search_label_policy": "Retention of specified official source URLs from the captured candidates; not exhaustive relevance or answer accuracy. Every retained original block from these targets is a hit.",
+  "page_label_policy": "Recall of human-labelled evidence units. Each unit requires every listed block from its original source. Parent headings are tested independently as provenance/context, not graded as additional facts.",
+  "cases": [
+    {
+      "id": "search-rust-source_language",
+      "topic": "rust",
+      "stage": "search",
+      "language": "source_language",
+      "query": "What edition is required for let chains in Rust 1.88.0?",
+      "input_file": "search-rust.json",
+      "documents_file": "search-rust-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-1",
+          "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-3",
+          "url": "https://doc.rust-lang.org/stable/edition-guide/rust-2024/let-chains.html",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-rust-japanese",
+      "topic": "rust",
+      "stage": "search",
+      "language": "japanese",
+      "query": "Rust 1.88.0の条件式でパターン照合を連結する機能は、2021エディションでも使えますか？",
+      "input_file": "search-rust.json",
+      "documents_file": "search-rust-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-1",
+          "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-3",
+          "url": "https://doc.rust-lang.org/stable/edition-guide/rust-2024/let-chains.html",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-rust-source_language",
+      "topic": "rust",
+      "stage": "page",
+      "language": "source_language",
+      "query": "What edition is required for let chains in Rust 1.88.0?",
+      "input_file": "page-rust.json",
+      "documents_file": "page-rust-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "edition-restriction",
+          "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+          "block_ids": [
+            "line-33"
+          ],
+          "source_text_sha256": [
+            "1e362c50d2d166d50806bc3cbee4f563d9978d485f6fcc751a18bb796e5a960a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-rust-japanese",
+      "topic": "rust",
+      "stage": "page",
+      "language": "japanese",
+      "query": "Rust 1.88.0の条件式でパターン照合を連結する機能は、2021エディションでも使えますか？",
+      "input_file": "page-rust.json",
+      "documents_file": "page-rust-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "edition-restriction",
+          "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+          "block_ids": [
+            "line-33"
+          ],
+          "source_text_sha256": [
+            "1e362c50d2d166d50806bc3cbee4f563d9978d485f6fcc751a18bb796e5a960a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-python-source_language",
+      "topic": "python",
+      "stage": "search",
+      "language": "source_language",
+      "query": "In Python 3.13 free-threaded builds, when can the GIL be re-enabled automatically, and how can it be enabled explicitly?",
+      "input_file": "search-python.json",
+      "documents_file": "search-python-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-3",
+          "url": "https://docs.python.org/sv/3.13/howto/free-threading-extensions.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-5",
+          "url": "https://docs.python.org/de/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-6",
+          "url": "https://docs.python.org/uk/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-9",
+          "url": "https://docs.python.org/fa/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-python-japanese",
+      "topic": "python",
+      "stage": "search",
+      "language": "japanese",
+      "query": "Python 3.13のGILなしビルドで、拡張モジュールを読み込むとロックが復活する条件と、明示的に有効化する方法は？",
+      "input_file": "search-python.json",
+      "documents_file": "search-python-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-3",
+          "url": "https://docs.python.org/sv/3.13/howto/free-threading-extensions.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-5",
+          "url": "https://docs.python.org/de/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-6",
+          "url": "https://docs.python.org/uk/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-9",
+          "url": "https://docs.python.org/fa/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-python-source_language",
+      "topic": "python",
+      "stage": "page",
+      "language": "source_language",
+      "query": "In Python 3.13 free-threaded builds, when can the GIL be re-enabled automatically, and how can it be enabled explicitly?",
+      "input_file": "page-python.json",
+      "documents_file": "page-python-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "explicit-gil-enable",
+          "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "line-57"
+          ],
+          "source_text_sha256": [
+            "e86d77e29898d5a9f8a35d77d1bccd58f4b533326ebbc26632f1586eec592402"
+          ]
+        },
+        {
+          "name": "unsupported-extension-enables-gil",
+          "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "line-59"
+          ],
+          "source_text_sha256": [
+            "f92089230c5ce5bda3ab179ce413a4a4b92e3dda1ea6c0ecbc96c7aa1cf22b54"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-python-japanese",
+      "topic": "python",
+      "stage": "page",
+      "language": "japanese",
+      "query": "Python 3.13のGILなしビルドで、拡張モジュールを読み込むとロックが復活する条件と、明示的に有効化する方法は？",
+      "input_file": "page-python.json",
+      "documents_file": "page-python-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "explicit-gil-enable",
+          "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "line-57"
+          ],
+          "source_text_sha256": [
+            "e86d77e29898d5a9f8a35d77d1bccd58f4b533326ebbc26632f1586eec592402"
+          ]
+        },
+        {
+          "name": "unsupported-extension-enables-gil",
+          "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+          "block_ids": [
+            "line-59"
+          ],
+          "source_text_sha256": [
+            "f92089230c5ce5bda3ab179ce413a4a4b92e3dda1ea6c0ecbc96c7aa1cf22b54"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-node-source_language",
+      "topic": "node",
+      "stage": "search",
+      "language": "source_language",
+      "query": "In Node.js 22.15.0, can require() load an ES module with top-level await in its dependency graph? What error and alternative apply?",
+      "input_file": "search-node.json",
+      "documents_file": "search-node-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-2",
+          "url": "https://nodejs.org/download/release/v22.15.0/docs/api/esm.html",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-node-japanese",
+      "topic": "node",
+      "stage": "search",
+      "language": "japanese",
+      "query": "Node.js 22.15.0で、読み込み先の依存モジュールが非同期の初期化を行うとrequire()はどうなり、代わりに何を使う？",
+      "input_file": "search-node.json",
+      "documents_file": "search-node-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-2",
+          "url": "https://nodejs.org/download/release/v22.15.0/docs/api/esm.html",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-node-source_language",
+      "topic": "node",
+      "stage": "page",
+      "language": "source_language",
+      "query": "In Node.js 22.15.0, can require() load an ES module with top-level await in its dependency graph? What error and alternative apply?",
+      "input_file": "page-node.json",
+      "documents_file": "page-node-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "synchronous-only",
+          "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+          "block_ids": [
+            "line-263"
+          ],
+          "source_text_sha256": [
+            "872bec3666dda3889eda84fe4fb1b9f903fd61d409bbf42b29ecf11dd8abf9e7"
+          ]
+        },
+        {
+          "name": "dependency-await-error-and-alternative",
+          "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+          "block_ids": [
+            "line-346"
+          ],
+          "source_text_sha256": [
+            "353727d5e1f0166a447c20e3350a93ad9ecace37997d9323be2fd2459906f2aa"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-node-japanese",
+      "topic": "node",
+      "stage": "page",
+      "language": "japanese",
+      "query": "Node.js 22.15.0で、読み込み先の依存モジュールが非同期の初期化を行うとrequire()はどうなり、代わりに何を使う？",
+      "input_file": "page-node.json",
+      "documents_file": "page-node-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "synchronous-only",
+          "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+          "block_ids": [
+            "line-263"
+          ],
+          "source_text_sha256": [
+            "872bec3666dda3889eda84fe4fb1b9f903fd61d409bbf42b29ecf11dd8abf9e7"
+          ]
+        },
+        {
+          "name": "dependency-await-error-and-alternative",
+          "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+          "block_ids": [
+            "line-346"
+          ],
+          "source_text_sha256": [
+            "353727d5e1f0166a447c20e3350a93ad9ecace37997d9323be2fd2459906f2aa"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-github-source_language",
+      "topic": "github",
+      "stage": "search",
+      "language": "source_language",
+      "query": "GitHub Actions concurrency: by default how are pending and running jobs handled? How many can wait with queue: max, and can it be combined with cancel-in-progress: true?",
+      "input_file": "search-github.json",
+      "documents_file": "search-github-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-1",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-2",
+          "url": "https://github.com/github/docs/blob/main/data/reusables/actions/actions-group-concurrency.md",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-3",
+          "url": "https://github.blog/changelog/2026-05-07-github-actions-concurrency-groups-now-allow-larger-queues/",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-4",
+          "url": "https://github.com/github/docs/blob/main/content/actions/concepts/workflows-and-actions/concurrency.md",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-github-japanese",
+      "topic": "github",
+      "stage": "search",
+      "language": "japanese",
+      "query": "GitHub Actionsで同じグループの実行が重なると、待機中と実行中の処理は既定でどう扱われる？最大待機数を増やす設定の上限と、実行中の中断設定との併用可否は？",
+      "input_file": "search-github.json",
+      "documents_file": "search-github-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-1",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-2",
+          "url": "https://github.com/github/docs/blob/main/data/reusables/actions/actions-group-concurrency.md",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-3",
+          "url": "https://github.blog/changelog/2026-05-07-github-actions-concurrency-groups-now-allow-larger-queues/",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-4",
+          "url": "https://github.com/github/docs/blob/main/content/actions/concepts/workflows-and-actions/concurrency.md",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-github-source_language",
+      "topic": "github",
+      "stage": "page",
+      "language": "source_language",
+      "query": "GitHub Actions concurrency: by default how are pending and running jobs handled? How many can wait with queue: max, and can it be combined with cancel-in-progress: true?",
+      "input_file": "page-github.json",
+      "documents_file": "page-github-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "default-pending-replacement",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-17"
+          ],
+          "source_text_sha256": [
+            "fbd482d7106801d0f9f8343bd9d4d0486b0ddc8fff7c8dc63955b1f2e5f8fe7b"
+          ]
+        },
+        {
+          "name": "running-cancellation-opt-in",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-19"
+          ],
+          "source_text_sha256": [
+            "5a2e95743d427fdcb86212e5e58b8e7dee880f6db97c5b8eacbc2d8dbe30510b"
+          ]
+        },
+        {
+          "name": "queue-maximum",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-25"
+          ],
+          "source_text_sha256": [
+            "26d7b32c01074691b8f954ba9bf54b46fc29c2f769d76cd9901a47d8493b3108"
+          ]
+        },
+        {
+          "name": "incompatible-settings",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-27"
+          ],
+          "source_text_sha256": [
+            "3aefb29f436a3196f206850a1e0488748982893352d5880ae1d1026464334422"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-github-japanese",
+      "topic": "github",
+      "stage": "page",
+      "language": "japanese",
+      "query": "GitHub Actionsで同じグループの実行が重なると、待機中と実行中の処理は既定でどう扱われる？最大待機数を増やす設定の上限と、実行中の中断設定との併用可否は？",
+      "input_file": "page-github.json",
+      "documents_file": "page-github-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "default-pending-replacement",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-17"
+          ],
+          "source_text_sha256": [
+            "fbd482d7106801d0f9f8343bd9d4d0486b0ddc8fff7c8dc63955b1f2e5f8fe7b"
+          ]
+        },
+        {
+          "name": "running-cancellation-opt-in",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-19"
+          ],
+          "source_text_sha256": [
+            "5a2e95743d427fdcb86212e5e58b8e7dee880f6db97c5b8eacbc2d8dbe30510b"
+          ]
+        },
+        {
+          "name": "queue-maximum",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-25"
+          ],
+          "source_text_sha256": [
+            "26d7b32c01074691b8f954ba9bf54b46fc29c2f769d76cd9901a47d8493b3108"
+          ]
+        },
+        {
+          "name": "incompatible-settings",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+          "block_ids": [
+            "line-27"
+          ],
+          "source_text_sha256": [
+            "3aefb29f436a3196f206850a1e0488748982893352d5880ae1d1026464334422"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-jr-source_language",
+      "topic": "jr",
+      "stage": "search",
+      "language": "source_language",
+      "query": "JR東日本で幼児を連れて乗るとき、無料になる人数と、指定席を幼児だけで使う場合の料金は？",
+      "input_file": "search-jr.json",
+      "documents_file": "search-jr-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-1",
+          "url": "https://jreastfaq.jreast.co.jp/faq/show/1177?site_domain=default",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-2",
+          "url": "https://www.jreast.co.jp/kippu/06.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-6",
+          "url": "https://jreastfaq.jreast.co.jp/faq/show/3947?category_id=22&site_domain=default",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-jma-source_language",
+      "topic": "jma",
+      "stage": "search",
+      "language": "source_language",
+      "query": "降水確率0％でも雨が降ることはある？対象になる降水量の基準と0％の意味は？",
+      "input_file": "search-jma.json",
+      "documents_file": "search-jma-documents.json",
+      "adapter": "search-results",
+      "gold": [
+        {
+          "name": "official-target-1",
+          "url": "https://www.jma.go.jp/jma/kishou/know/yougo_hp/yoho.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-4",
+          "url": "https://www.jma.go.jp/jma/kishou/know/faq/faq4.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-6",
+          "url": "https://www.data.jma.go.jp/yokohama/shosai/03-about/02-annai/01-qa.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-7",
+          "url": "https://www.jma.go.jp/jma/kishou/know/kurashi/yoho.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-9",
+          "url": "https://www.jma-net.go.jp/yokohama/shosai/03-about/02-annai/01-qa.html",
+          "block_ids": [
+            "snippet"
+          ]
+        },
+        {
+          "name": "official-target-12",
+          "url": "https://www.jma.go.jp/jma/kishou/know/kisetsu_riyou/explain/prob_precip.html",
+          "block_ids": [
+            "snippet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "page-jma-source_language",
+      "topic": "jma",
+      "stage": "page",
+      "language": "source_language",
+      "query": "降水確率0％でも雨が降ることはある？対象になる降水量の基準と0％の意味は？",
+      "input_file": "page-jma.json",
+      "documents_file": "page-jma-documents.json",
+      "adapter": "markdown-page",
+      "gold": [
+        {
+          "name": "probability-definition-and-zero",
+          "url": "https://www.jma.go.jp/jma/kishou/know/yougo_hp/yoho.html",
+          "block_ids": [
+            "line-13"
+          ],
+          "source_text_sha256": [
+            "ccf44ca360ae54b91c32a0944fb2944ce557ebcf54414c07f60985bb8e721162"
+          ]
+        }
+      ]
+    }
+  ]
+}

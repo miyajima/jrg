@@ -1,0 +1,34 @@
+{
+  "status": "pass",
+  "saved_outputs_checked": 48,
+  "frozen_files_checked": 78,
+  "provenance_and_dependencies": "pass",
+  "exact_token_counts_and_budgets": "pass",
+  "recomputed_scores_and_aggregates": "pass",
+  "comparisons": [
+    {
+      "budget": 512,
+      "improved": 5,
+      "unchanged": 3,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    },
+    {
+      "budget": 1024,
+      "improved": 5,
+      "unchanged": 3,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    },
+    {
+      "budget": 2048,
+      "improved": 4,
+      "unchanged": 4,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    }
+  ],
+  "selector_rerun": false,
+  "network_used": false,
+  "results_sha256": "0820c32f7273f927fac66afbafa978b274036515bb8ffd40a69e4384faef0cc7"
+}

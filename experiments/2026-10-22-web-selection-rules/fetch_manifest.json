@@ -1,0 +1,81 @@
+[
+  {
+    "id": "queue",
+    "url": "https://docs.python.org/3/library/queue.html",
+    "retrieved_at": "2026-10-22T08:43:42.743888+00:00",
+    "final_url": "https://docs.python.org/3/library/queue.html",
+    "charset": "utf-8",
+    "bytes": 55630,
+    "sha256": "423f6e0c4ab563dc66a5a1739af59eba09b080f61e6c2d1117445c74e9275885"
+  },
+  {
+    "id": "semaphore",
+    "url": "https://docs.python.org/3/library/asyncio-sync.html",
+    "retrieved_at": "2026-10-22T08:43:42.744327+00:00",
+    "final_url": "https://docs.python.org/3/library/asyncio-sync.html",
+    "charset": "utf-8",
+    "bytes": 61935,
+    "sha256": "72a1e4e23eec7fb63518f488f6fa9ec278ff64110cc577cf2c0a8ccc186d8b12"
+  },
+  {
+    "id": "timeout",
+    "url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+    "retrieved_at": "2026-10-22T08:43:42.744419+00:00",
+    "final_url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+    "charset": "utf-8",
+    "bytes": 11813,
+    "sha256": "8e0c74666b842b0f745455f9e853ba65f82776f379d57640d26291555e85259c"
+  },
+  {
+    "id": "ssh",
+    "url": "https://man.openbsd.org/ssh_config",
+    "retrieved_at": "2026-10-22T08:43:42.744510+00:00",
+    "final_url": "https://man.openbsd.org/ssh_config",
+    "charset": "utf-8",
+    "bytes": 116922,
+    "sha256": "da53ade0bfcb8e92a73e397ad9886a8a8e97b11c62ecad2ca6c5f1c3ed3221a9"
+  },
+  {
+    "id": "github-rate",
+    "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+    "retrieved_at": "2026-10-22T08:43:42.845039+00:00",
+    "final_url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+    "charset": "utf-8",
+    "bytes": 337116,
+    "sha256": "433b714d3afa98abed29bce39b4a9ed025cc38bbe955a434e3befd0740309d39"
+  },
+  {
+    "id": "nginx",
+    "url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html",
+    "retrieved_at": "2026-10-22T08:43:42.881958+00:00",
+    "final_url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html",
+    "charset": "utf-8",
+    "bytes": 13476,
+    "sha256": "ba573da49409eea09bd56ff7bc0e6356f6d24087a376fe35dc23fac4324fce66"
+  },
+  {
+    "id": "gcs-retry",
+    "url": "https://cloud.google.com/storage/docs/retry-strategy",
+    "retrieved_at": "2026-10-22T08:43:43.018465+00:00",
+    "final_url": "https://docs.cloud.google.com/storage/docs/retry-strategy",
+    "charset": "utf-8",
+    "bytes": 322897,
+    "sha256": "87539a085e24a35f4b41036eff87692ad93dc455660725e3109e127eb9fca4aa",
+    "original_sha256": "47104e05c598ad9a1287fa77909f05c63f389c2770b81214d94544bf8e4e5268",
+    "redaction": {
+      "type": "google_api_key",
+      "occurrences": 9,
+      "replacement": "[REDACTED_GOOGLE_API_KEY]",
+      "reason": "Public Google DevSite script configuration, unnecessary for document selection; article text unchanged."
+    }
+  },
+  {
+    "id": "blockingqueue",
+    "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+    "retrieved_at": "2026-10-22T08:43:43.284076+00:00",
+    "final_url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/BlockingQueue.html",
+    "charset": "utf-8",
+    "bytes": 45493,
+    "sha256": "410aa694385ba5e0c3dc8f2cab2c28481ba0fdc8bd3c7f8200e6b368dc546f5a"
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "documents": [
+    {
+      "id": "sqlite",
+      "url": "https://www.sqlite.org/foreignkeys.html",
+      "title": "SQLite Foreign Key Support",
+      "blocks": [
+        {
+          "id": "line-196",
+          "kind": "heading",
+          "text": "# 2. Enabling Foreign Key Support\n",
+          "start_line": 196,
+          "end_line": 196
+        },
+        {
+          "id": "line-200",
+          "kind": "paragraph",
+          "text": "Assuming the library is compiled with foreign key constraints enabled, it must still be enabled by the application at runtime, using the PRAGMA foreign_keys command. For example:\n",
+          "parent_id": "line-196",
+          "start_line": 200,
+          "end_line": 200
+        },
+        {
+          "id": "line-223",
+          "kind": "paragraph",
+          "text": "It is not possible to enable or disable foreign key constraints in the middle of a multi-statement transaction (when SQLite is not in autocommit mode). Attempting to do so does not return an error; it simply has no effect.\n",
+          "parent_id": "line-196",
+          "start_line": 223,
+          "end_line": 223
+        },
+        {
+          "id": "line-225",
+          "kind": "heading",
+          "text": "# 3. Required and Suggested Database Indexes\n",
+          "start_line": 225,
+          "end_line": 225
+        },
+        {
+          "id": "line-247",
+          "kind": "paragraph",
+          "text": "If the database schema contains foreign key errors that require looking at more than one table definition to identify, then those errors are not detected when the tables are created. Instead, such errors prevent the application from preparing SQL statements that modify the content of the child or parent tables in ways that use the foreign keys. Errors reported when content is changed are \"DML errors\" and errors reported when the schema is changed are \"DDL errors\". So, in other words, misconfigured foreign key constraints that require looking at both the child and parent are DML errors. The English language error message for foreign key DML errors is usually \"foreign key mismatch\" but can also be \"no such table\" if the parent table does not exist. Foreign key DML errors are reported if:\n",
+          "parent_id": "line-225",
+          "start_line": 247,
+          "end_line": 247
+        }
+      ],
+      "source_hash": "3e7ff88e20c0910a4143cea65a1a37eea34c4b69202f15f8d7c577a0be4dd4cd"
+    }
+  ],
+  "omitted_count": 134,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 500,
+  "max_tokens": 512
+}

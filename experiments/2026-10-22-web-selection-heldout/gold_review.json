@@ -1,0 +1,15 @@
+{
+  "reviewer": "native agent /root/selection_review",
+  "stage": "Before selector outputs; reviewer not given generated English.",
+  "findings": [
+    {
+      "issue": "Docker table answers the asked default behavior and kernel boundary.",
+      "resolution": "Accept line-274 OR line-278; remove unasked forced-readonly error requirement."
+    },
+    {
+      "issue": "Fetch include value alone does not identify option key.",
+      "resolution": "Require both line-240 credentials option and line-246 include value."
+    }
+  ],
+  "other_units": "Reviewer found no factual contradictions or question coverage gaps in other 16 units."
+}

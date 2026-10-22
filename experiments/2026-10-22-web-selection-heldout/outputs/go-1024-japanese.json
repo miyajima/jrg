@@ -1,0 +1,168 @@
+{
+  "documents": [
+    {
+      "id": "go",
+      "url": "https://pkg.go.dev/context",
+      "title": "context package - context - Go Packages",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "## Documentation ¶\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "### Overview ¶\n",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-11",
+          "kind": "paragraph",
+          "text": "The WithCancel, WithDeadline, and WithTimeout functions take a Context (the parent) and return a derived Context (the child) and a CancelFunc. Calling the CancelFunc directly cancels the child and its children, removes the parent's reference to the child, and stops any associated timers. Failing to call the CancelFunc leaks the child and its children until the parent is canceled. The go vet tool checks that CancelFuncs are used on all control-flow paths.\n",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-34",
+          "kind": "heading",
+          "text": "### Index ¶\n",
+          "parent_id": "line-1",
+          "start_line": 34,
+          "end_line": 34
+        },
+        {
+          "id": "line-42",
+          "kind": "list",
+          "text": "- func WithCancel(parent Context) (ctx Context, cancel CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 42,
+          "end_line": 42
+        },
+        {
+          "id": "line-46",
+          "kind": "list",
+          "text": "- func WithDeadline(parent Context, d time.Time) (Context, CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 46,
+          "end_line": 46
+        },
+        {
+          "id": "line-50",
+          "kind": "list",
+          "text": "- func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 50,
+          "end_line": 50
+        },
+        {
+          "id": "line-56",
+          "kind": "list",
+          "text": "- type CancelFunc\n",
+          "parent_id": "line-34",
+          "start_line": 56,
+          "end_line": 56
+        },
+        {
+          "id": "line-100",
+          "kind": "heading",
+          "text": "### Functions ¶\n",
+          "parent_id": "line-1",
+          "start_line": 100,
+          "end_line": 100
+        },
+        {
+          "id": "line-329",
+          "kind": "heading",
+          "text": "#### func WithCancel ¶\n",
+          "parent_id": "line-100",
+          "start_line": 329,
+          "end_line": 329
+        },
+        {
+          "id": "line-331",
+          "kind": "code",
+          "text": "```\nfunc WithCancel(parent Context) (ctx Context, cancel CancelFunc)\n```\n",
+          "parent_id": "line-329",
+          "start_line": 331,
+          "end_line": 333
+        },
+        {
+          "id": "line-419",
+          "kind": "heading",
+          "text": "#### func WithDeadline ¶\n",
+          "parent_id": "line-100",
+          "start_line": 419,
+          "end_line": 419
+        },
+        {
+          "id": "line-421",
+          "kind": "code",
+          "text": "```\nfunc WithDeadline(parent Context, d time.Time) (Context, CancelFunc)\n```\n",
+          "parent_id": "line-419",
+          "start_line": 421,
+          "end_line": 423
+        },
+        {
+          "id": "line-466",
+          "kind": "heading",
+          "text": "#### func WithTimeout ¶\n",
+          "parent_id": "line-100",
+          "start_line": 466,
+          "end_line": 466
+        },
+        {
+          "id": "line-468",
+          "kind": "code",
+          "text": "```\nfunc WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)\n```\n",
+          "parent_id": "line-466",
+          "start_line": 468,
+          "end_line": 470
+        },
+        {
+          "id": "line-519",
+          "kind": "heading",
+          "text": "### Types ¶\n",
+          "parent_id": "line-1",
+          "start_line": 519,
+          "end_line": 519
+        },
+        {
+          "id": "line-535",
+          "kind": "heading",
+          "text": "#### type CancelFunc ¶\n",
+          "parent_id": "line-519",
+          "start_line": 535,
+          "end_line": 535
+        },
+        {
+          "id": "line-537",
+          "kind": "code",
+          "text": "```\ntype CancelFunc func()\n```\n",
+          "parent_id": "line-535",
+          "start_line": 537,
+          "end_line": 539
+        },
+        {
+          "id": "line-541",
+          "kind": "paragraph",
+          "text": "A CancelFunc tells an operation to abandon its work. A CancelFunc does not wait for the work to stop. A CancelFunc may be called by multiple goroutines simultaneously. After the first call, subsequent calls to a CancelFunc do nothing.\n",
+          "parent_id": "line-535",
+          "start_line": 541,
+          "end_line": 541
+        }
+      ],
+      "source_hash": "9cddbc320f7f29bb568d856dd81f3afd1a5a612a828c770858110fdfd9fbe5ad"
+    }
+  ],
+  "omitted_count": 126,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 995,
+  "max_tokens": 1024
+}

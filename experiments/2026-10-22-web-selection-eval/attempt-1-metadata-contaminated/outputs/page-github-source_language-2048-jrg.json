@@ -1,0 +1,256 @@
+{
+  "documents": [
+    {
+      "id": "github",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+      "title": "Control the concurrency of workflows and jobs - GitHub Docs",
+      "blocks": [
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "# Control the concurrency of workflows and jobs\n",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-11",
+          "kind": "heading",
+          "text": "## Using concurrency in different scenarios\n",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-17",
+          "kind": "paragraph",
+          "text": "This means that there can be at most one running job or workflow in a concurrency group at any time. When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. By default, any existing pending job or workflow in the same concurrency group will be canceled and the new queued job or workflow will take its place.\n",
+          "parent_id": "line-11",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "id": "line-19",
+          "kind": "paragraph",
+          "text": "To also cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true. To conditionally cancel currently running jobs or workflows in the same concurrency group, you can specify cancel-in-progress as an expression with any of the allowed expression contexts.\n",
+          "parent_id": "line-11",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "id": "line-21",
+          "kind": "paragraph",
+          "text": "To allow more than one pending job or workflow run to wait in the same concurrency group, use the optional queue property. The queue property accepts the following values:\n",
+          "parent_id": "line-11",
+          "start_line": 21,
+          "end_line": 21
+        },
+        {
+          "id": "line-23",
+          "kind": "list",
+          "text": "- single (default): At most one job or workflow run can be pending in the concurrency group. When a new job or workflow run is queued, any existing pending job or workflow run in the same group is canceled and replaced.\n",
+          "parent_id": "line-11",
+          "start_line": 23,
+          "end_line": 23
+        },
+        {
+          "id": "line-25",
+          "kind": "list",
+          "text": "- max: Up to 100 jobs or workflow runs can be pending in the concurrency group. When the queue is full, any additional jobs or workflow runs are canceled.\n",
+          "parent_id": "line-11",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "id": "line-27",
+          "kind": "paragraph",
+          "text": "The combination of queue: max and cancel-in-progress: true is not allowed and will result in a workflow validation error.\n",
+          "parent_id": "line-11",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "id": "line-35",
+          "kind": "heading",
+          "text": "### Example: Using concurrency and the default behavior\n",
+          "parent_id": "line-11",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "id": "line-37",
+          "kind": "paragraph",
+          "text": "The default behavior of GitHub Actions is to allow multiple jobs or workflow runs to run concurrently. The concurrency keyword allows you to control the concurrency of workflow runs.\n",
+          "parent_id": "line-35",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "line-39",
+          "kind": "paragraph",
+          "text": "For example, you can use the concurrency keyword immediately after where trigger conditions are defined to limit the concurrency of entire workflow runs for a specific branch:\n",
+          "parent_id": "line-35",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-41",
+          "kind": "code",
+          "text": "```\non:\npush:\nbranches:\n- main\n\nconcurrency:\ngroup: ${{ github.workflow }}-${{ github.ref }}\ncancel-in-progress: true\n\n```\n",
+          "parent_id": "line-35",
+          "start_line": 41,
+          "end_line": 51
+        },
+        {
+          "id": "line-53",
+          "kind": "paragraph",
+          "text": "You can also limit the concurrency of jobs within a workflow by using the concurrency keyword at the job level:\n",
+          "parent_id": "line-35",
+          "start_line": 53,
+          "end_line": 53
+        },
+        {
+          "id": "line-55",
+          "kind": "code",
+          "text": "```\non:\npush:\nbranches:\n- main\n\njobs:\njob-1:\nruns-on: ubuntu-latest\nconcurrency:\ngroup: example-group\ncancel-in-progress: true\n\n```\n",
+          "parent_id": "line-35",
+          "start_line": 55,
+          "end_line": 68
+        },
+        {
+          "id": "line-70",
+          "kind": "heading",
+          "text": "### Example: Concurrency groups\n",
+          "parent_id": "line-11",
+          "start_line": 70,
+          "end_line": 70
+        },
+        {
+          "id": "line-74",
+          "kind": "paragraph",
+          "text": "The concurrency key is used to group workflows or jobs together into a concurrency group. When you define a concurrency key, GitHub Actions ensures that only one workflow or job with that key runs at any given time. If a new workflow run or job starts with the same concurrency key, GitHub Actions will cancel any workflow or job already running with that key. The concurrency key can be a hard-coded string, or it can be a dynamic expression that includes context variables.\n",
+          "parent_id": "line-70",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "id": "line-106",
+          "kind": "heading",
+          "text": "### Example: Queueing multiple pending runs\n",
+          "parent_id": "line-11",
+          "start_line": 106,
+          "end_line": 106
+        },
+        {
+          "id": "line-108",
+          "kind": "paragraph",
+          "text": "By default, only one job or workflow run can be pending in a concurrency group at a time. To allow multiple runs to queue instead of being canceled, set queue: max. With queue: max, up to 100 jobs or workflow runs can wait in the concurrency group; once the queue is full, any additional runs are canceled.\n",
+          "parent_id": "line-106",
+          "start_line": 108,
+          "end_line": 108
+        },
+        {
+          "id": "line-112",
+          "kind": "code",
+          "text": "```\non:\npush:\nbranches:\n- main\n\nconcurrency:\ngroup: production-deploy\nqueue: max\n\n```\n",
+          "parent_id": "line-106",
+          "start_line": 112,
+          "end_line": 122
+        },
+        {
+          "id": "line-124",
+          "kind": "paragraph",
+          "text": "Note that queue: max cannot be combined with cancel-in-progress: true, because the two options describe conflicting behaviors for handling in-progress runs.\n",
+          "parent_id": "line-106",
+          "start_line": 124,
+          "end_line": 124
+        },
+        {
+          "id": "line-126",
+          "kind": "heading",
+          "text": "### Example: Using concurrency to cancel any in-progress job or run\n",
+          "parent_id": "line-11",
+          "start_line": 126,
+          "end_line": 126
+        },
+        {
+          "id": "line-128",
+          "kind": "paragraph",
+          "text": "To use concurrency to cancel any in-progress job or run in GitHub Actions, you can use the concurrency key with the cancel-in-progress option set to true:\n",
+          "parent_id": "line-126",
+          "start_line": 128,
+          "end_line": 128
+        },
+        {
+          "id": "line-137",
+          "kind": "paragraph",
+          "text": "Note that in this example, without defining a particular concurrency group, GitHub Actions will cancel any in-progress run of the job or workflow.\n",
+          "parent_id": "line-126",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "id": "line-150",
+          "kind": "heading",
+          "text": "### Example: Only cancel in-progress jobs or runs for the current workflow\n",
+          "parent_id": "line-11",
+          "start_line": 150,
+          "end_line": 150
+        },
+        {
+          "id": "line-152",
+          "kind": "paragraph",
+          "text": "If you have multiple workflows in the same repository, concurrency group names must be unique across workflows to avoid canceling in-progress jobs or runs from other workflows. Otherwise, any previously in-progress or pending job will be canceled, regardless of the workflow.\n",
+          "parent_id": "line-150",
+          "start_line": 152,
+          "end_line": 152
+        },
+        {
+          "id": "line-163",
+          "kind": "heading",
+          "text": "### Example: Only cancel in-progress jobs on specific branches\n",
+          "parent_id": "line-11",
+          "start_line": 163,
+          "end_line": 163
+        },
+        {
+          "id": "line-165",
+          "kind": "paragraph",
+          "text": "If you would like to cancel in-progress jobs on certain branches but not on others, you can use conditional expressions with cancel-in-progress. For example, you can do this if you would like to cancel in-progress jobs on development branches but not on release branches.\n",
+          "parent_id": "line-163",
+          "start_line": 165,
+          "end_line": 165
+        },
+        {
+          "id": "line-167",
+          "kind": "paragraph",
+          "text": "To only cancel in-progress runs of the same workflow when not running on a release branch, you can set cancel-in-progress to an expression similar to the following:\n",
+          "parent_id": "line-163",
+          "start_line": 167,
+          "end_line": 167
+        },
+        {
+          "id": "line-178",
+          "kind": "heading",
+          "text": "## Monitoring your current jobs in your organization or enterprise\n",
+          "parent_id": "line-3",
+          "start_line": 178,
+          "end_line": 178
+        },
+        {
+          "id": "line-180",
+          "kind": "paragraph",
+          "text": "To identify any constraints with concurrency or queuing, you can check how many jobs are currently being processed on the GitHub-hosted runners in your organization or enterprise. For more information, see Viewing your current jobs.\n",
+          "parent_id": "line-178",
+          "start_line": 180,
+          "end_line": 180
+        }
+      ],
+      "source_hash": "82f4d5aaaad6ec61cd71618a0d200e3d3ad1a8902753de3253bea7bc35bb2642"
+    }
+  ],
+  "omitted_count": 25,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2034,
+  "max_tokens": 2048
+}

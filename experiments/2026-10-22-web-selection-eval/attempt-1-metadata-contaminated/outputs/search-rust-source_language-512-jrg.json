@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-6",
+      "url": "https://github.com/rust-lang/rust/issues/53667?timeline_page=1",
+      "title": "Tracking issue for eRFC 2497, \"if- and while-let-chains, take 2\" · Issue #53667 · rust-lang/rust · GitHub",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\nIssue body actions\n\n# Note: This feature was stabilized in 1.88.0 but on edition 2024 only. If you are using 1.88.0+ and get an error that the feature is still unstable, please upgrade the edition.\n\nThis is a tracking issue for the eRFC \"if- and while-let-chains, take 2\" (rust-lang/rfcs#2497).\nFor the tracking issue for the immediate edition changes, see #53668.\n\nSteps:\n\n  * [Input] Implement the RFC (cc @rust-lang/compiler -- can anyone write up mentoring instructions?)\n  * [Input] Adjust documentation (see instructions on forge)\n  * [Input] Formatting for new syntax has been added to the Style Guide (nightly-style-procedure)\n  * [Input] resolve expr fragment specifier issue (#86730)\n  * [Input] Initial stabilization PR: Stabilize `let_chains` in Rust 1.64 #94927, reverted in Revert let_chains stabilization #100538\n  * [Input] Second stabilization PR: Stabilize let chains in the 2024 edition #132833\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "d50d643fc46d9993e20857c7735fd3232b001010b19d76b96cc4373366c5d6c3"
+    },
+    {
+      "id": "result-15",
+      "url": "https://www.reddit.com/r/rust/comments/1ll7e0m",
+      "title": "Rust 1.88.0 is out",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "a242e094419c2d9d03ccb9cd86739c107b42bc305403552003954ed672ca4f80"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 499,
+  "max_tokens": 512
+}

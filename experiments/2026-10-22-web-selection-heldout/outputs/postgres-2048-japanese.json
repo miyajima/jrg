@@ -1,0 +1,264 @@
+{
+  "documents": [
+    {
+      "id": "postgres",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "title": "PostgreSQL: Documentation: 18: 5.5. Constraints",
+      "blocks": [
+        {
+          "id": "line-91",
+          "kind": "heading",
+          "text": "## 5.5. Constraints #\n",
+          "start_line": 91,
+          "end_line": 91
+        },
+        {
+          "id": "line-95",
+          "kind": "paragraph",
+          "text": "5.5.2. Not-Null Constraints\n",
+          "parent_id": "line-91",
+          "start_line": 95,
+          "end_line": 95
+        },
+        {
+          "id": "line-109",
+          "kind": "heading",
+          "text": "### 5.5.1. Check Constraints #\n",
+          "parent_id": "line-91",
+          "start_line": 109,
+          "end_line": 109
+        },
+        {
+          "id": "line-203",
+          "kind": "paragraph",
+          "text": "It should be noted that a check constraint is satisfied if the check expression evaluates to true or the null value. Since most expressions will evaluate to the null value if any operand is null, they will not prevent null values in the constrained columns. To ensure that a column does not contain null values, the not-null constraint described in the next section can be used.\n",
+          "parent_id": "line-109",
+          "start_line": 203,
+          "end_line": 203
+        },
+        {
+          "id": "line-217",
+          "kind": "heading",
+          "text": "### 5.5.2. Not-Null Constraints #\n",
+          "parent_id": "line-91",
+          "start_line": 217,
+          "end_line": 217
+        },
+        {
+          "id": "line-219",
+          "kind": "paragraph",
+          "text": "A not-null constraint simply specifies that a column must not assume the null value. A syntax example:\n",
+          "parent_id": "line-217",
+          "start_line": 219,
+          "end_line": 219
+        },
+        {
+          "id": "line-221",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NOT NULL,\nname text NOT NULL,\nprice numeric\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 221,
+          "end_line": 229
+        },
+        {
+          "id": "line-231",
+          "kind": "paragraph",
+          "text": "An explicit constraint name can also be specified, for example:\n",
+          "parent_id": "line-217",
+          "start_line": 231,
+          "end_line": 231
+        },
+        {
+          "id": "line-233",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NOT NULL,\nname text CONSTRAINT products_name_not_null NOT NULL,\nprice numeric\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 233,
+          "end_line": 241
+        },
+        {
+          "id": "line-243",
+          "kind": "paragraph",
+          "text": "A not-null constraint is usually written as a column constraint. The syntax for writing it as a table constraint is\n",
+          "parent_id": "line-217",
+          "start_line": 243,
+          "end_line": 243
+        },
+        {
+          "id": "line-245",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer,\nname text,\nprice numeric,\nNOT NULL product_no,\nNOT NULL name\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 245,
+          "end_line": 255
+        },
+        {
+          "id": "line-257",
+          "kind": "paragraph",
+          "text": "But this syntax is not standard and mainly intended for use by pg_dump.\n",
+          "parent_id": "line-217",
+          "start_line": 257,
+          "end_line": 257
+        },
+        {
+          "id": "line-259",
+          "kind": "paragraph",
+          "text": "A not-null constraint is functionally equivalent to creating a check constraint CHECK (column_name IS NOT NULL), but in PostgreSQL creating an explicit not-null constraint is more efficient.\n",
+          "parent_id": "line-217",
+          "start_line": 259,
+          "end_line": 259
+        },
+        {
+          "id": "line-261",
+          "kind": "paragraph",
+          "text": "Of course, a column can have more than one constraint. Just write the constraints one after another:\n",
+          "parent_id": "line-217",
+          "start_line": 261,
+          "end_line": 261
+        },
+        {
+          "id": "line-263",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NOT NULL,\nname text NOT NULL,\nprice numeric NOT NULL CHECK (price > 0)\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 263,
+          "end_line": 271
+        },
+        {
+          "id": "line-273",
+          "kind": "paragraph",
+          "text": "The order doesn't matter. It does not necessarily determine in which order the constraints are checked.\n",
+          "parent_id": "line-217",
+          "start_line": 273,
+          "end_line": 273
+        },
+        {
+          "id": "line-275",
+          "kind": "paragraph",
+          "text": "However, a column can have at most one explicit not-null constraint.\n",
+          "parent_id": "line-217",
+          "start_line": 275,
+          "end_line": 275
+        },
+        {
+          "id": "line-277",
+          "kind": "paragraph",
+          "text": "The NOT NULL constraint has an inverse: the NULL constraint. This does not mean that the column must be null, which would surely be useless. Instead, this simply selects the default behavior that the column might be null. The NULL constraint is not present in the SQL standard and should not be used in portable applications. (It was only added to PostgreSQL to be compatible with some other database systems.) Some users, however, like it because it makes it easy to toggle the constraint in a script file. For example, you could start with:\n",
+          "parent_id": "line-217",
+          "start_line": 277,
+          "end_line": 277
+        },
+        {
+          "id": "line-279",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NULL,\nname text NULL,\nprice numeric NULL\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 279,
+          "end_line": 287
+        },
+        {
+          "id": "line-289",
+          "kind": "paragraph",
+          "text": "and then insert the NOT key word where desired.\n",
+          "parent_id": "line-217",
+          "start_line": 289,
+          "end_line": 289
+        },
+        {
+          "id": "line-291",
+          "kind": "heading",
+          "text": "### Tip\n",
+          "parent_id": "line-91",
+          "start_line": 291,
+          "end_line": 291
+        },
+        {
+          "id": "line-293",
+          "kind": "paragraph",
+          "text": "In most database designs the majority of columns should be marked not null.\n",
+          "parent_id": "line-291",
+          "start_line": 293,
+          "end_line": 293
+        },
+        {
+          "id": "line-380",
+          "kind": "heading",
+          "text": "### 5.5.4. Primary Keys #\n",
+          "parent_id": "line-91",
+          "start_line": 380,
+          "end_line": 380
+        },
+        {
+          "id": "line-384",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer UNIQUE NOT NULL,\nname text,\nprice numeric\n);\n\n```\n",
+          "parent_id": "line-380",
+          "start_line": 384,
+          "end_line": 392
+        },
+        {
+          "id": "line-417",
+          "kind": "paragraph",
+          "text": "Adding a primary key will automatically create a unique B-tree index on the column or group of columns listed in the primary key, and will force the column(s) to be marked NOT NULL.\n",
+          "parent_id": "line-380",
+          "start_line": 417,
+          "end_line": 417
+        },
+        {
+          "id": "line-423",
+          "kind": "heading",
+          "text": "### 5.5.5. Foreign Keys #\n",
+          "parent_id": "line-91",
+          "start_line": 423,
+          "end_line": 423
+        },
+        {
+          "id": "line-451",
+          "kind": "paragraph",
+          "text": "Now it is impossible to create orders with non-NULL product_no entries that do not appear in the products table.\n",
+          "parent_id": "line-423",
+          "start_line": 451,
+          "end_line": 451
+        },
+        {
+          "id": "line-499",
+          "kind": "paragraph",
+          "text": "A top-level node would have NULL parent_id, while non-NULL parent_id entries would be constrained to reference valid rows of the table.\n",
+          "parent_id": "line-423",
+          "start_line": 499,
+          "end_line": 499
+        },
+        {
+          "id": "line-573",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE tenants (\ntenant_id integer PRIMARY KEY\n);\n\nCREATE TABLE users (\ntenant_id integer REFERENCES tenants ON DELETE CASCADE,\nuser_id integer NOT NULL,\nPRIMARY KEY (tenant_id, user_id)\n);\n\nCREATE TABLE posts (\ntenant_id integer REFERENCES tenants ON DELETE CASCADE,\npost_id integer NOT NULL,\nauthor_id integer,\nPRIMARY KEY (tenant_id, post_id),\nFOREIGN KEY (tenant_id, author_id) REFERENCES users ON DELETE SET NULL (author_id)\n);\n\n```\n",
+          "parent_id": "line-423",
+          "start_line": 573,
+          "end_line": 593
+        },
+        {
+          "id": "line-595",
+          "kind": "paragraph",
+          "text": "Without the specification of the column, the foreign key would also set the column tenant_id to null, but that column is still required as part of the primary key.\n",
+          "parent_id": "line-423",
+          "start_line": 595,
+          "end_line": 595
+        },
+        {
+          "id": "line-599",
+          "kind": "paragraph",
+          "text": "Normally, a referencing row need not satisfy the foreign key constraint if any of its referencing columns are null. If MATCH FULL is added to the foreign key declaration, a referencing row escapes satisfying the constraint only if all its referencing columns are null (so a mix of null and non-null values is guaranteed to fail a MATCH FULL constraint). If you don't want referencing rows to be able to avoid satisfying the foreign key constraint, declare the referencing column(s) as NOT NULL.\n",
+          "parent_id": "line-423",
+          "start_line": 599,
+          "end_line": 599
+        }
+      ],
+      "source_hash": "e6a80937be9f32bc0d7bde609f2ea0a2108a6c6790af364747813908f5d27e27"
+    }
+  ],
+  "omitted_count": 128,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2036,
+  "max_tokens": 2048
+}

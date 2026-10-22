@@ -1,0 +1,277 @@
+{
+  "kind": "post-hoc source-informed manual alias diagnostic",
+  "limitation": "Uses terminology observed in failed source blocks; cannot establish automatic generation or held-out generalization. Original benchmark remains unchanged.",
+  "product_changed": false,
+  "frozen_heldout_unchanged": true,
+  "rows": [
+    {
+      "id": "redis",
+      "added_alias": "non-positive timeout",
+      "budget": 1024,
+      "baseline_retained": [
+        "updates"
+      ],
+      "probe_retained": [
+        "updates",
+        "nonpositive"
+      ],
+      "total": 2,
+      "tokens": 1008,
+      "output": {
+        "documents": [
+          {
+            "id": "redis",
+            "url": "https://redis.io/docs/latest/commands/expire/",
+            "title": "EXPIRE | Docs",
+            "blocks": [
+              {
+                "id": "line-1",
+                "kind": "heading",
+                "text": "# EXPIRE\n",
+                "start_line": 1,
+                "end_line": 1
+              },
+              {
+                "id": "line-186",
+                "kind": "code",
+                "text": "```\nKeyExpire(\nkey: RedisKey, // The key to set the expiration for.\nexpiry: TimeSpan?, // The timeout to set.\nflags: CommandFlags // The flags to use for this operation.\n) → bool // true if the timeout was set. false if key does not exist or the timeout could not be set.\n\nKeyExpire(\nkey: RedisKey, // The key to set the expiration for.\nexpiry: TimeSpan?, // The timeout to set.\nwhen: ExpireWhen, // In Redis 7+, we choose under which condition the expiration will be set using ExpireWhen.\nflags: CommandFlags // The flags to use for this operation.\n) → bool // true if the timeout was set. false if key does not exist or the timeout could not be set.\n```\n",
+                "parent_id": "line-1",
+                "start_line": 186,
+                "end_line": 199
+              },
+              {
+                "id": "line-250",
+                "kind": "paragraph",
+                "text": "The timeout will only be cleared by commands that delete or overwrite the contents of the key, including DEL, SET, GETSET and all the *STORE commands. This means that all the operations that conceptually alter the value stored at the key without replacing it with a new one will leave the timeout untouched. For instance, incrementing the value of a key with INCR, pushing a new value into a list with LPUSH, or altering the field value of a hash with HSET are all operations that will leave the timeout untouched.\n",
+                "parent_id": "line-1",
+                "start_line": 250,
+                "end_line": 250
+              },
+              {
+                "id": "line-258",
+                "kind": "paragraph",
+                "text": "Note that calling EXPIRE/PEXPIRE with a non-positive timeout or EXPIREAT/PEXPIREAT with a time in the past will result in the key being deleted rather than expired (accordingly, the emitted key event will be del, not expired).\n",
+                "parent_id": "line-1",
+                "start_line": 258,
+                "end_line": 258
+              },
+              {
+                "id": "line-290",
+                "kind": "heading",
+                "text": "## Examples\n",
+                "parent_id": "line-1",
+                "start_line": 290,
+                "end_line": 290
+              },
+              {
+                "id": "line-320",
+                "kind": "paragraph",
+                "text": "Try it\n",
+                "parent_id": "line-290",
+                "start_line": 320,
+                "end_line": 320
+              },
+              {
+                "id": "line-2781",
+                "kind": "list",
+                "text": "- EXPIRE ( @keyspace , @write , @fast ) Sets the expiration time of a key in seconds. ▶ Methods KeyExpire( key: RedisKey, // The key to set the expiration for. expiry: TimeSpan?, // The timeout to set. flags: CommandFlags // The flags to use for this operation. ) → bool // true if the timeout was set. false if key does not exist or the timeout could not be set. KeyExpire( key: RedisKey, // The key to set the expiration for. expiry: TimeSpan?, // The timeout to set. when: ExpireWhen, // In Redis 7+, we choose under which condition the expiration will be set using ExpireWhen. flags: CommandFlags // The flags to use for this operation. ) → bool // true if the timeout was set. false if key does not exist or the timeout could not be set.\n",
+                "parent_id": "line-290",
+                "start_line": 2781,
+                "end_line": 2781
+              },
+              {
+                "id": "line-3936",
+                "kind": "heading",
+                "text": "## Details\n",
+                "parent_id": "line-1",
+                "start_line": 3936,
+                "end_line": 3936
+              },
+              {
+                "id": "line-3938",
+                "kind": "heading",
+                "text": "### Refreshing expires\n",
+                "parent_id": "line-3936",
+                "start_line": 3938,
+                "end_line": 3938
+              },
+              {
+                "id": "line-3940",
+                "kind": "paragraph",
+                "text": "It is possible to call EXPIRE using as argument a key that already has an existing expire set. In this case the time to live of a key is updated to the new value. There are many useful applications for this, an example is documented in the Navigation session pattern section below.\n",
+                "parent_id": "line-3938",
+                "start_line": 3940,
+                "end_line": 3940
+              }
+            ],
+            "source_hash": "5c3d05d8d796fbf45dc6ec043af48f54c7b265aed55c52ea67b123ebbd854f59"
+          }
+        ],
+        "omitted_count": 216,
+        "duplicate_count": 0,
+        "status": "selected",
+        "tokens": 1008,
+        "max_tokens": 1024
+      }
+    },
+    {
+      "id": "s3",
+      "added_alias": "general purpose buckets",
+      "budget": 1024,
+      "baseline_retained": [
+        "directory_order",
+        "token"
+      ],
+      "probe_retained": [
+        "general_order",
+        "directory_order",
+        "token"
+      ],
+      "total": 3,
+      "tokens": 1024,
+      "output": {
+        "documents": [
+          {
+            "id": "s3",
+            "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+            "title": "ListObjectsV2 - Amazon S3",
+            "blocks": [
+              {
+                "id": "line-1",
+                "kind": "paragraph",
+                "text": "View a markdown version of this page\n",
+                "start_line": 1,
+                "end_line": 1
+              },
+              {
+                "id": "line-9",
+                "kind": "heading",
+                "text": "# ListObjectsV2\n",
+                "start_line": 9,
+                "end_line": 9
+              },
+              {
+                "id": "line-13",
+                "kind": "heading",
+                "text": "###### Note\n",
+                "parent_id": "line-9",
+                "start_line": 13,
+                "end_line": 13
+              },
+              {
+                "id": "line-29",
+                "kind": "list",
+                "text": "- General purpose bucket - For general purpose buckets, ListObjectsV2 returns objects in lexicographical order based on their key names.\n",
+                "parent_id": "line-13",
+                "start_line": 29,
+                "end_line": 29
+              },
+              {
+                "id": "line-31",
+                "kind": "list",
+                "text": "- Directory bucket - For directory buckets, ListObjectsV2 does not return objects in lexicographical order.\n",
+                "parent_id": "line-13",
+                "start_line": 31,
+                "end_line": 31
+              },
+              {
+                "id": "line-64",
+                "kind": "heading",
+                "text": "## URI Request Parameters\n",
+                "parent_id": "line-9",
+                "start_line": 64,
+                "end_line": 64
+              },
+              {
+                "id": "line-72",
+                "kind": "paragraph",
+                "text": "Access points - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.\n",
+                "parent_id": "line-64",
+                "start_line": 72,
+                "end_line": 72
+              },
+              {
+                "id": "line-74",
+                "kind": "heading",
+                "text": "###### Note\n",
+                "parent_id": "line-64",
+                "start_line": 74,
+                "end_line": 74
+              },
+              {
+                "id": "line-84",
+                "kind": "paragraph",
+                "text": "ContinuationToken indicates to Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this ContinuationToken for pagination of the list results.\n",
+                "parent_id": "line-74",
+                "start_line": 84,
+                "end_line": 84
+              },
+              {
+                "id": "line-343",
+                "kind": "heading",
+                "text": "## Examples\n",
+                "parent_id": "line-9",
+                "start_line": 343,
+                "end_line": 343
+              },
+              {
+                "id": "line-387",
+                "kind": "heading",
+                "text": "### Sample Request for general purpose buckets: Listing keys using the max-keys, prefix, and start-after parameters\n",
+                "parent_id": "line-343",
+                "start_line": 387,
+                "end_line": 387
+              },
+              {
+                "id": "line-389",
+                "kind": "paragraph",
+                "text": "In addition to the list-type parameter that indicates version 2 of the API operation, the request also specifies additional parameters to retrieve up to three keys in the quotes bucket that start with E and occur lexicographically after ExampleGuide.pdf.\n",
+                "parent_id": "line-387",
+                "start_line": 389,
+                "end_line": 389
+              },
+              {
+                "id": "line-527",
+                "kind": "heading",
+                "text": "### Sample Request for general purpose buckets: Using a continuation token\n",
+                "parent_id": "line-343",
+                "start_line": 527,
+                "end_line": 527
+              },
+              {
+                "id": "line-529",
+                "kind": "paragraph",
+                "text": "In this example, the initial request returns more than 1,000 keys. In response to this request, Amazon S3 returns the IsTruncated element with the value set to true and with a NextContinuationToken element.\n",
+                "parent_id": "line-527",
+                "start_line": 529,
+                "end_line": 529
+              },
+              {
+                "id": "line-574",
+                "kind": "heading",
+                "text": "### Sample request for general purpose buckets\n",
+                "parent_id": "line-343",
+                "start_line": 574,
+                "end_line": 574
+              },
+              {
+                "id": "line-576",
+                "kind": "paragraph",
+                "text": "In the following subsequent request, we include a continuation-token query parameter in the request with the value of the NextContinuationToken element from the preceding response.\n",
+                "parent_id": "line-574",
+                "start_line": 576,
+                "end_line": 576
+              }
+            ],
+            "source_hash": "26b291deb241ace35bb3ba15037a1bc8752cd76721da1b74205eee11d53cfb1c"
+          }
+        ],
+        "omitted_count": 198,
+        "duplicate_count": 0,
+        "status": "selected",
+        "tokens": 1024,
+        "max_tokens": 1024
+      }
+    }
+  ]
+}

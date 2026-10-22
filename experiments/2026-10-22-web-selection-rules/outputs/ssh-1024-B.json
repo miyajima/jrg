@@ -1,0 +1,88 @@
+{
+  "documents": [
+    {
+      "id": "ssh",
+      "url": "https://man.openbsd.org/ssh_config",
+      "title": "ssh_config(5) - OpenBSD manual pages",
+      "blocks": [
+        {
+          "id": "line-5",
+          "kind": "heading",
+          "text": "## DESCRIPTION\n",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "id": "line-406",
+          "kind": "paragraph",
+          "text": "When used in conjunction with ControlMaster,\nspecifies that the master connection should remain open in the background\n(waiting for future client connections) after the initial client\nconnection has been closed. If set to no (the\ndefault), then the master connection will not be placed into the\nbackground, and will close as soon as the initial client connection is\nclosed. If set to yes or 0, then the master\nconnection will remain in the background indefinitely (until killed or\nclosed via a mechanism such as the \"ssh -O exit\"). If set to a\ntime in seconds, or a time in any of the formats documented in\nsshd_config(5), then the backgrounded master connection will\nautomatically terminate after it has remained idle (with no client\nconnections) for the specified time.\n",
+          "parent_id": "line-5",
+          "start_line": 406,
+          "end_line": 418
+        },
+        {
+          "id": "line-1166",
+          "kind": "paragraph",
+          "text": "Sets the number of server alive messages (see below) which may be sent\nwithout ssh(1)\nreceiving any messages back from the server. If this threshold is reached\nwhile server alive messages are being sent, ssh will disconnect from the\nserver, terminating the session. It is important to note that the use of\nserver alive messages is very different from\nTCPKeepAlive (below). The server alive messages\nare sent through the encrypted channel and therefore will not be\nspoofable. The TCP keepalive option enabled by\nTCPKeepAlive is spoofable. The server alive\nmechanism is valuable when the client or server depend on knowing when a\nconnection has become unresponsive.\n",
+          "parent_id": "line-5",
+          "start_line": 1166,
+          "end_line": 1177
+        },
+        {
+          "id": "line-1179",
+          "kind": "paragraph",
+          "text": "The default value is 3. If, for example, ServerAliveInterval (see below) is set to 15 and ServerAliveCountMax is left at the default, if the server becomes unresponsive, ssh will disconnect after approximately 45 seconds.\n",
+          "parent_id": "line-5",
+          "start_line": 1179,
+          "end_line": 1179
+        },
+        {
+          "id": "line-1181",
+          "kind": "paragraph",
+          "text": "ServerAliveInterval\n",
+          "parent_id": "line-5",
+          "start_line": 1181,
+          "end_line": 1181
+        },
+        {
+          "id": "line-1183",
+          "kind": "paragraph",
+          "text": "Sets a timeout interval in seconds after which if no data has been\nreceived from the server, ssh(1) will send a message through the encrypted channel to\nrequest a response from the server. The default is 0, indicating that\nthese messages will not be sent to the server.\n",
+          "parent_id": "line-5",
+          "start_line": 1183,
+          "end_line": 1186
+        },
+        {
+          "id": "line-1266",
+          "kind": "paragraph",
+          "text": "The argument must be transport to enable TCP keepalive messages on the SSH transport connection to the server, yes which is an alias for transport, all to enable TCP keepalive messages on all sockets opened by ssh(1), including sockets created for X11 or port forwarding, or no to disable TCP keepalive messages. The default is transport.\n",
+          "parent_id": "line-5",
+          "start_line": 1266,
+          "end_line": 1266
+        },
+        {
+          "id": "line-1268",
+          "kind": "paragraph",
+          "text": "See also ServerAliveInterval for a more robust connection failure detection mechanism that works at the SSH protocol level.\n",
+          "parent_id": "line-5",
+          "start_line": 1268,
+          "end_line": 1268
+        },
+        {
+          "id": "line-1339",
+          "kind": "paragraph",
+          "text": "Specifies whether to verify the remote key using DNS and SSHFP resource\nrecords. If this option is set to yes, the client\nwill implicitly trust keys that match a secure fingerprint from DNS.\nInsecure fingerprints will be handled as if this option was set to\nask. If this option is set to\nask, information on fingerprint match will be\ndisplayed, but the user will still need to confirm new host keys according\nto the StrictHostKeyChecking option. The default\nis no.\n",
+          "parent_id": "line-5",
+          "start_line": 1339,
+          "end_line": 1347
+        }
+      ],
+      "source_hash": "1584cb8efd8fe2c382bcaa5c1853124f7990c15faf1b363df1cd03a4258bb9e6"
+    }
+  ],
+  "omitted_count": 394,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1018,
+  "max_tokens": 1024
+}

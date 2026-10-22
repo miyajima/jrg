@@ -1,0 +1,247 @@
+{
+  "documents": [
+    {
+      "id": "timeout",
+      "url": "https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html",
+      "title": "timeout invocation (GNU Coreutils 9.12)",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "paragraph",
+          "text": "Previous: stdbuf: Run a command with modified I/O stream buffering, Up: Modified command invocation [Contents][Index]\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "### 23.6 timeout: Run a command with a time limit ¶\n",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-5",
+          "kind": "paragraph",
+          "text": "timeout runs the given command and kills it if it is still running after the specified time interval. Synopsis:\n",
+          "parent_id": "line-3",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "id": "line-12",
+          "kind": "paragraph",
+          "text": "command must not be a special built-in utility (see Special built-in utilities).\n",
+          "parent_id": "line-3",
+          "start_line": 12,
+          "end_line": 12
+        },
+        {
+          "id": "line-14",
+          "kind": "paragraph",
+          "text": "The program accepts the following options. Also see Common options. Options must precede operands.\n",
+          "parent_id": "line-3",
+          "start_line": 14,
+          "end_line": 14
+        },
+        {
+          "id": "line-16",
+          "kind": "paragraph",
+          "text": "‘-f’ ¶\n",
+          "parent_id": "line-3",
+          "start_line": 16,
+          "end_line": 16
+        },
+        {
+          "id": "line-18",
+          "kind": "paragraph",
+          "text": "‘--foreground’\n",
+          "parent_id": "line-3",
+          "start_line": 18,
+          "end_line": 18
+        },
+        {
+          "id": "line-20",
+          "kind": "paragraph",
+          "text": "Don’t create a separate background program group, so that the managed command can use the foreground TTY normally. This is needed to support two situations when timing out commands, when not invoking timeout from an interactive shell.\n",
+          "parent_id": "line-3",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "id": "line-22",
+          "kind": "list",
+          "text": "- command is interactive and needs to read from the terminal for example\n",
+          "parent_id": "line-3",
+          "start_line": 22,
+          "end_line": 22
+        },
+        {
+          "id": "line-24",
+          "kind": "list",
+          "text": "- the user wants to support sending signals directly to command from the terminal (like Ctrl-C for example)\n",
+          "parent_id": "line-3",
+          "start_line": 24,
+          "end_line": 24
+        },
+        {
+          "id": "line-26",
+          "kind": "paragraph",
+          "text": "In this mode of operation, any children of command will not be timed out. Also SIGCONT will not be sent to command, as it’s generally not needed with foreground processes, and can cause intermittent signal delivery issues with programs that are monitors themselves (like GDB for example).\n",
+          "parent_id": "line-3",
+          "start_line": 26,
+          "end_line": 26
+        },
+        {
+          "id": "line-32",
+          "kind": "paragraph",
+          "text": "Ensure the monitored command is killed by also sending a ‘KILL’ signal.\n",
+          "parent_id": "line-3",
+          "start_line": 32,
+          "end_line": 32
+        },
+        {
+          "id": "line-34",
+          "kind": "paragraph",
+          "text": "The specified duration starts from the point in time when timeout sends the initial signal to command, i.e., not from the beginning when the command is started.\n",
+          "parent_id": "line-3",
+          "start_line": 34,
+          "end_line": 34
+        },
+        {
+          "id": "line-36",
+          "kind": "paragraph",
+          "text": "This option has no effect if either the main duration of the timeout command, or the duration specified to this option, is 0.\n",
+          "parent_id": "line-3",
+          "start_line": 36,
+          "end_line": 36
+        },
+        {
+          "id": "line-38",
+          "kind": "paragraph",
+          "text": "This option may be useful if the selected signal did not kill the command, either because the signal was blocked or ignored, or if the command takes too long (e.g. for cleanup work) to terminate itself within a certain amount of time.\n",
+          "parent_id": "line-3",
+          "start_line": 38,
+          "end_line": 38
+        },
+        {
+          "id": "line-40",
+          "kind": "paragraph",
+          "text": "‘-p’ ¶\n",
+          "parent_id": "line-3",
+          "start_line": 40,
+          "end_line": 40
+        },
+        {
+          "id": "line-44",
+          "kind": "paragraph",
+          "text": "Return the exit status of the managed command on timeout, rather than a specific exit status indicating a timeout. This is useful if the managed command supports running for an indeterminate amount of time.\n",
+          "parent_id": "line-3",
+          "start_line": 44,
+          "end_line": 44
+        },
+        {
+          "id": "line-50",
+          "kind": "paragraph",
+          "text": "Send this signal to command on timeout, rather than the default ‘TERM’ signal. signal may be a name like ‘HUP’ or a number. See Signal specifications.\n",
+          "parent_id": "line-3",
+          "start_line": 50,
+          "end_line": 50
+        },
+        {
+          "id": "line-52",
+          "kind": "paragraph",
+          "text": "‘-v’ ¶\n",
+          "parent_id": "line-3",
+          "start_line": 52,
+          "end_line": 52
+        },
+        {
+          "id": "line-54",
+          "kind": "paragraph",
+          "text": "‘--verbose’\n",
+          "parent_id": "line-3",
+          "start_line": 54,
+          "end_line": 54
+        },
+        {
+          "id": "line-56",
+          "kind": "paragraph",
+          "text": "Diagnose to standard error, any signal sent upon timeout.\n",
+          "parent_id": "line-3",
+          "start_line": 56,
+          "end_line": 56
+        },
+        {
+          "id": "line-58",
+          "kind": "paragraph",
+          "text": "duration is a floating point number in either the current or the C locale (see Floating point numbers) followed by an optional unit:\n",
+          "parent_id": "line-3",
+          "start_line": 58,
+          "end_line": 58
+        },
+        {
+          "id": "line-60",
+          "kind": "code",
+          "text": "```\n‘s’ for seconds (the default)\n‘m’ for minutes\n‘h’ for hours\n‘d’ for days\n\n```\n",
+          "parent_id": "line-3",
+          "start_line": 60,
+          "end_line": 66
+        },
+        {
+          "id": "line-68",
+          "kind": "paragraph",
+          "text": "A hexadecimal number can precede a ‘d’ suffix only if the number has a ‘p’ style exponent, e.g., ‘0x1p0d’ means one day. A duration of 0 disables the associated timeout. The actual timeout duration is dependent on system conditions, which should be especially considered when specifying sub-second timeouts.\n",
+          "parent_id": "line-3",
+          "start_line": 68,
+          "end_line": 68
+        },
+        {
+          "id": "line-70",
+          "kind": "paragraph",
+          "text": "Exit status:\n",
+          "parent_id": "line-3",
+          "start_line": 70,
+          "end_line": 70
+        },
+        {
+          "id": "line-72",
+          "kind": "code",
+          "text": "```\n124 if command times out, and --preserve-status is not specified\n125 if timeout itself fails\n126 if command is found but cannot be invoked\n127 if command cannot be found\n137 if command or timeout is sent the KILL(9) signal (128+9)\nthe exit status of command otherwise\n\n```\n",
+          "parent_id": "line-3",
+          "start_line": 72,
+          "end_line": 80
+        },
+        {
+          "id": "line-82",
+          "kind": "paragraph",
+          "text": "In the case of the ‘KILL(9)’ signal, timeout returns with exit status 137, regardless of whether that signal is sent to command or to timeout itself, i.e., these cases cannot be distinguished. In the latter case, the command process may still be alive after timeout has forcefully been terminated.\n",
+          "parent_id": "line-3",
+          "start_line": 82,
+          "end_line": 82
+        },
+        {
+          "id": "line-86",
+          "kind": "code",
+          "text": "```\n# Send the default TERM signal after 20s to a short-living 'sleep 1'.\n# As that terminates long before the given duration, 'timeout' returns\n# with the same exit status as the command, 0 in this case.\ntimeout 20 sleep 1\n\n# Send the INT signal after 5s to the 'sleep' command. Returns after\n# 5 seconds with exit status 124 to indicate the sending of the signal.\ntimeout -s INT 5 sleep 20\n\n# Likewise, but the command ignoring the INT signal due to being started\n# via 'env --ignore-signal'. Thus, 'sleep' terminates regularly after\n# the full 20 seconds, still 'timeout' returns with exit status 124.\ntimeout -s INT 5s env --ignore-signal=INT sleep 20\n\n# Likewise, but sending the KILL signal 3 seconds after the initial\n# INT signal. Hence, 'sleep' is forcefully terminated after about\n# 8 seconds (5+3), and 'timeout' returns with an exit status of 137.\ntimeout -s INT -k 3s 5s env --ignore-signal=INT sleep 20\n\n```\n",
+          "parent_id": "line-3",
+          "start_line": 86,
+          "end_line": 106
+        },
+        {
+          "id": "line-108",
+          "kind": "paragraph",
+          "text": "Previous: stdbuf: Run a command with modified I/O stream buffering, Up: Modified command invocation [Contents][Index]\n",
+          "parent_id": "line-3",
+          "start_line": 108,
+          "end_line": 108
+        }
+      ],
+      "source_hash": "d8970dfbf2c6f9eb5e4025fd34f052aa1dda6629e4f0793debb6c0d68aec9f76"
+    }
+  ],
+  "omitted_count": 7,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2026,
+  "max_tokens": 2048
+}

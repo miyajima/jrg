@@ -1,0 +1,250 @@
+SQLite Foreign Key Support (https://www.sqlite.org/foreignkeys.html)
+citeturn18view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://www.sqlite.org/foreignkeys.html","lineno":null}); Total lines: 458
+L0: Small. Fast. Reliable.
+L1: Choose any three.
+L2: 
+L3:   * 【0†Home】
+L4:   * Menu
+L5:   * 【1†About】
+L6:   * 【2†Documentation】
+L7:   * 【3†Download】
+L8:   * 【4†License】
+L9:   * 【5†Support】
+L10:   * 【6†Purchase】
+L11:   * Search
+L12: 
+L13:   * 【1†About】
+L14:   * 【2†Documentation】
+L15:   * 【3†Download】
+L16:   * 【5†Support】
+L17:   * 【6†Purchase】
+L18: 
+L19: [Select] [Input] [Input]
+L20: 
+L21: SQLite Foreign Key Support
+L22: 
+L23: Table Of Contents
+L24: 
+L25: 【7†1. Introduction to Foreign Key Constraints】
+L26: 
+L27: 【8†2. Enabling Foreign Key Support】
+L28: 
+L29: 【9†3. Required and Suggested Database Indexes】
+L30: 【10†4. Advanced Foreign Key Constraint Features】
+L31: 
+L32: 【11†4.1. Composite Foreign Key Constraints】
+L33: 
+L34: 【12†4.2. Deferred Foreign Key Constraints】
+L35: 
+L36: 【13†4.3. ON DELETE and ON UPDATE Actions】
+L37: 
+L38: 【14†5. CREATE, ALTER and DROP TABLE commands】
+L39: 
+L40: 【15†6. Limits and Unsupported Features】
+L41: ## Overview
+L42: 
+L43: This document describes the support for SQL foreign key constraints introduced in SQLite 【16†version 3.6.19】 (2009-10-14).
+L44: The first section introduces the concept of an SQL foreign key by example and defines the terminology used for the remainder of the document. Section 2 describes the steps an application must take in order to enable foreign key constraints in SQLite (it is disabled by default). The next section, section 3, describes the indexes that the user must create in order to use foreign key constraints, and those that should be created in order for foreign key constraints to function efficiently.
+L45: Section 4 describes the advanced foreign key related features supported by SQLite and section 5 describes the way the 【17†ALTER】 and 【18†DROP TABLE】 commands are enhanced to support foreign key constraints. Finally, section 6 enumerates the missing features and limits of the current implementation.
+L46: This document does not contain a full description of the syntax used to create foreign key constraints in SQLite. This may be found as part of the documentation for the 【19†CREATE TABLE】 statement.
+L47: # 1. Introduction to Foreign Key Constraints
+L48: 
+L49: SQL foreign key constraints are used to enforce "exists" relationships between tables. For example, consider a database schema created using the following SQL commands:
+L50: 
+L51:     CREATE TABLE artist(
+L52:       artistid    INTEGER PRIMARY KEY,
+L53:       artistname  TEXT
+L54:     );
+L55:     CREATE TABLE track(
+L56:       trackid     INTEGER,
+L57:       trackname   TEXT,
+L58:       trackartist INTEGER     -- Must map to an artist.artistid!
+L59:     );
+L60: The applications using this database are entitled to assume that for each row in the track table there exists a corresponding row in the artist table. After all, the comment in the declaration says so. Unfortunately, if a user edits the database using an external tool or if there is a bug in an application, rows might be inserted into the track table that do not correspond to any row in the artist table.
+--------------------------------------------------------------------------------
+PostgreSQL: Documentation: 18: 5.5. Constraints (https://www.postgresql.org/docs/current/ddl-constraints.html)
+citeturn18view1 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://www.postgresql.org/docs/current/ddl-constraints.html","lineno":null}); Total lines: 401
+L0: October 15, 2026: 【0†PostgreSQL 19 RC 1 Released!】
+L1: 
+L2: 【1†Documentation】 → 【2†PostgreSQL 18】
+L3: 
+L4: Supported Versions: 【3†Current】 (【4†18】) / 【5†17】 / 【6†16】 / 【7†15】 / 【8†14】
+L5: 
+L6: Development Versions: 【9†19】 / 【10†devel】
+L7: 
+L8: Unsupported versions: 【11†13】 / 【12†12】 / 【13†11】 / 【14†10】 / 【15†9.6】 / 【16†9.5】 / 【17†9.4】 / 【18†9.3】 / 【19†9.2】 / 【20†9.1】 / 【21†9.0】 / 【22†8.4】 / 【23†8.3】 / 【24†8.2】 / 【25†8.1】 / 【26†8.0】 / 【27†7.4】 / 【28†7.3】
+L9: 
+L10: [Input]
+L11: 
+L12: [Input: Search the documentation for...]
+L13: 5.5. Constraints
+L14: ---
+L15: 【29†Prev】   | 【30†Up】  | Chapter 5. Data Definition  | 【31†Home】  |  【32†Next】
+L16: 
+L17: * * *
+L18: ## 5.5. Constraints 【33†#】
+L19: 
+L20: 【34†5.5.1. Check Constraints】
+L21: 【35†5.5.2. Not-Null Constraints】
+L22: 【36†5.5.3. Unique Constraints】
+L23: 【37†5.5.4. Primary Keys】
+L24: 【38†5.5.5. Foreign Keys】
+L25: 【39†5.5.6. Exclusion Constraints】
+L26: Data types are a way to limit the kind of data that can be stored in a table. For many applications, however, the constraint they provide is too coarse. For example, a column containing a product price should probably only accept positive values. But there is no standard data type that accepts only positive numbers. Another issue is that you might want to constrain column data with respect to other columns or rows.
+L27: For example, in a table containing product information, there should be only one row for each product number.
+L28: To that end, SQL allows you to define constraints on columns and tables. Constraints give you as much control over the data in your tables as you wish. If a user attempts to store data in a column that would violate a constraint, an error is raised. This applies even if the value came from the default value definition.
+L29: ### 5.5.1. Check Constraints 【34†#】
+L30: 
+L31: A check constraint is the most generic constraint type. It allows you to specify that the value in a certain column must satisfy a Boolean (truth-value) expression. For instance, to require positive product prices, you could use:
+L32: 
+L33:     CREATE TABLE products (
+L34:         product_no integer,
+L35:         name text,
+L36:         price numeric CHECK (price > 0)
+L37:     );
+L38: As you see, the constraint definition comes after the data type, just like default value definitions. Default values and constraints can be listed in any order. A check constraint consists of the key word `CHECK` followed by an expression in parentheses. The check constraint expression should involve the column thus constrained, otherwise the constraint would not make too much sense.
+L39: You can also give the constraint a separate name. This clarifies error messages and allows you to refer to the constraint when you need to change it. The syntax is:
+L40: 
+L41:     CREATE TABLE products (
+L42:         product_no integer,
+L43:         name text,
+L44:         price numeric CONSTRAINT positive_price CHECK (price > 0)
+L45:     );
+--------------------------------------------------------------------------------
+Bind mounts | Docker Docs (https://docs.docker.com/engine/storage/bind-mounts/)
+citeturn18view2 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://docs.docker.com/engine/storage/bind-mounts/","lineno":null}); Total lines: 353
+L0: When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
+L1: 
+L2: 【0†Share feedback†github.com】
+L3: 
+L4: Answers are generated based on the documentation.
+L5: 
+L6: Back
+L7: 
+L8: 【1†Manuals】
+L9: 
+L10:   * 【2†Get started】
+L11:   * 【3†Guides】
+L12:   * 【4†Reference】
+L13: 
+L14:   *   *     *     *       *     *     *     *     *     *     *     *     *       *       *         * 【5†Manage swarm security with public key infrastructure (PKI)】
+L15:     *     *   *   *   *   *   * # Bind mounts
+L16: 
+L17: Table of contents
+L18:   * 【6†When to use bind mounts】
+L19:   * 【7†Bind-mounting over existing data】
+L20:   * 【8†Considerations and constraints】
+L21:   * 【9†Syntax】
+L22:     * 【10†Options for --mount】
+L23:     * 【11†Options for --volume】
+L24:   * 【12†Start a container with a bind mount】
+L25:     * 【13†Mount into a non-empty directory on the container】
+L26:   * 【14†Use a read-only bind mount】
+L27:   * 【15†Recursive mounts】
+L28:   * 【16†Configure bind propagation】
+L29:   * 【17†Configure the SELinux label】
+L30:   * 【18†Use a bind mount with Docker Compose】
+L31:   * 【19†Next steps】
+L32: 
+L33: * * *
+L34: When you use a bind mount, a file or directory on the host machine is mounted from the host into a container. By contrast, when you use a volume, a new directory is created within Docker's storage directory on the host machine. Docker creates and maintains this storage location, but containers access it directly using standard filesystem operations.
+L35: ## 【6†When to use bind mounts】
+L36: 
+L37: Bind mounts are appropriate for the following types of use case:
+L38: 
+L39:   * Sharing source code or build artifacts between a development environment on the Docker host and a container.
+L40: 
+L41:   * When you want to create or generate files in a container and persist the files onto the host's filesystem.
+L42:   * Sharing configuration files from the host machine to containers. This is how Docker provides DNS resolution to containers by default, by mounting `/etc/resolv.conf` from the host machine into each container.
+L43: 
+L44: Bind mounts are also available for builds: you can bind mount source code from the host into the build container to test, lint, or compile a project.
+L45: ## 【7†Bind-mounting over existing data】
+L46: 
+L47: If you bind mount file or directory into a directory in the container in which files or directories exist, the pre-existing files are obscured by the mount. This is similar to if you were to save files into `/mnt` on a Linux host, and then mounted a USB drive into `/mnt`. The contents of `/mnt` would be obscured by the contents of the USB drive until the USB drive was unmounted.
+L48: With containers, there's no straightforward way of removing a mount to reveal the obscured files again. Your best option is to recreate the container without the mount.
+L49: ## 【8†Considerations and constraints】
+L50: 
+L51:   * Bind mounts have write access to files on the host by default.
+L52: 
+--------------------------------------------------------------------------------
+Secrets | Kubernetes (https://kubernetes.io/docs/concepts/configuration/secret/)
+citeturn18view3 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://kubernetes.io/docs/concepts/configuration/secret/","lineno":null}); Total lines: 1408
+L0:   * 【0†Versions】
+L1:     * 【1†Release Information】
+L2:     * 【2†v1.37】
+L3:     * 【3†v1.36†v1-36.docs.kubernetes.io】
+L4:     * 【4†v1.35†v1-35.docs.kubernetes.io】
+L5:     * 【5†v1.34†v1-34.docs.kubernetes.io】
+L6:     * 【6†v1.33†v1-33.docs.kubernetes.io】
+L7:   * 【0†English】
+L8:     * 【7†中文 (Chinese)】
+L9:     * 【8†Français (French)】
+L10:     * 【9†Deutsch (German)】
+L11:     * 【10†Bahasa Indonesia (Indonesian)】
+L12:     * 【11†日本語 (Japanese)】
+L13:     * 【12†한국어 (Korean)】
+L14:     * 【13†Português (Portuguese)】
+L15:     * 【14†Español (Spanish)】
+L16:     * 【15†Tiếng Việt (Vietnamese)】
+L17:     * বাংলা (Bengali)
+L18:     * हिन्दी (Hindi)
+L19:     * Italiano (Italian)
+L20:     * فارسی (Persian)
+L21:     * Polski (Polish)
+L22:     * Русский (Russian)
+L23:     * Українська (Ukrainian)
+L24: #### 【16†Image】 【17†KubeCon + CloudNativeCon North America 2026†events.linuxfoundation.org】
+L25: 
+L26: Join us for four days of incredible opportunities to collaborate, learn and share with the cloud native community.
+L27: 【17†Buy your ticket now! 9 - 12 November | Salt Lake City, Utah†events.linuxfoundation.org】
+L28: # Secrets
+L29: 
+L30: [Input: Search this site]
+L31: 
+L32: 【0†English】
+L33: 
+L34:   * 【18†বাংলা (Bengali)】
+L35:   * 【19†中文 (Chinese)】
+L36:   * 【20†Français (French)】
+L37:   * 【21†Deutsch (German)】
+L38:   * 【22†हिन्दी (Hindi)】
+L39:   * 【23†Bahasa Indonesia (Indonesian)】
+L40:   * 【24†Italiano (Italian)】
+L41:   * 【25†日本語 (Japanese)】
+L42:   * 【26†한국어 (Korean)】
+L43:   * 【27†Polski (Polish)】
+L44:   * 【28†Português (Portuguese)】
+L45:   * 【29†Русский (Russian)】
+L46:   * 【30†Español (Spanish)】
+L47:   * 【31†Українська (Ukrainian)】
+L48:   * 【32†Tiếng Việt (Vietnamese)】
+L49:   * فارسی (Persian)
+L50:   * 【33†Kubernetes Documentation】
+L51:     * [Input] 【34†Documentation】
+L52:       * [Input] 【35†Available Documentation Versions】
+L53:     * [Input] 【36†Getting started】
+L54:       * [Input] 【37†Learning environment】
+L55:       * [Input] 【38†Production environment】
+L56:         * [Input] 【39†Container Runtimes】
+L57:         * [Input] 【40†Installing Kubernetes with deployment tools】
+L58:           * [Input] 【41†Bootstrapping clusters with kubeadm】
+L59:             * [Input] 【42†Installing kubeadm】
+L60:             * [Input] 【43†Troubleshooting kubeadm】
+L61:             * [Input] 【44†Creating a cluster with kubeadm】
+L62:             * [Input] 【45†Customizing components with the kubeadm API】
+L63:             * [Input] 【46†Options for Highly Available Topology】
+L64:             * [Input] 【47†Creating Highly Available Clusters with kubeadm】
+L65:             * [Input] 【48†Set up a High Availability etcd Cluster with kubeadm】
+L66:             * [Input] 【49†Configuring each kubelet in your cluster using kubeadm】
+L67:             * [Input] 【50†Dual-stack support with kubeadm】
+L68:         * [Input] 【51†Turnkey Cloud Solutions】
+L69:       * [Input] 【52†Best practices】
+L70:         * [Input] 【53†Considerations for large clusters】
+L71:         * [Input] 【54†Running in multiple zones】
+L72:         * [Input] 【55†Validate node setup】
+L73:         * [Input] 【56†Enforcing Pod Security Standards】
+L74:         * [Input] 【57†PKI certificates and requirements】
+L75:     * [Input] 【58†Concepts】
+L76:       * [Input] 【59†Overview】
+L77:         * [Input] 【60†Kubernetes Components】
+L78:         * [Input] 【61†Objects In Kubernetes】

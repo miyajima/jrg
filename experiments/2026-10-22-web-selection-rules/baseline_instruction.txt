@@ -1,0 +1,1 @@
+Optional English equivalent for English-language evidence when the user's goal is Japanese. Preserve negation, versions, numbers, and identifiers; do not add facts.

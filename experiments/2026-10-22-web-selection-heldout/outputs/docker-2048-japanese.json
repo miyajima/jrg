@@ -1,0 +1,248 @@
+{
+  "documents": [
+    {
+      "id": "docker",
+      "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+      "title": "Bind mounts | Docker Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Bind mounts\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-25",
+          "kind": "heading",
+          "text": "## Bind-mounting over existing data\n",
+          "parent_id": "line-1",
+          "start_line": 25,
+          "end_line": 25
+        },
+        {
+          "id": "line-27",
+          "kind": "paragraph",
+          "text": "If you bind mount file or directory into a directory in the container in which files or directories exist, the pre-existing files are obscured by the mount. This is similar to if you were to save files into /mnt on a Linux host, and then mounted a USB drive into /mnt. The contents of /mnt would be obscured by the contents of the USB drive until the USB drive was unmounted.\n",
+          "parent_id": "line-25",
+          "start_line": 27,
+          "end_line": 27
+        },
+        {
+          "id": "line-31",
+          "kind": "heading",
+          "text": "## Considerations and constraints\n",
+          "parent_id": "line-1",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-35",
+          "kind": "list",
+          "text": "- Bind mounts are created to the Docker daemon host, not the client.If you're using a remote Docker daemon, you can't create a bind mount to access files on the client machine in a container.For Docker Desktop, the daemon runs inside a Linux VM, not directly on the native host. Docker Desktop has built-in mechanisms that transparently handle bind mounts, allowing you to share native host filesystem paths with containers running in the virtual machine.\n",
+          "parent_id": "line-31",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "id": "line-39",
+          "kind": "heading",
+          "text": "## Syntax\n",
+          "parent_id": "line-1",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-43",
+          "kind": "code",
+          "text": "```\n$ docker run --mount type=bind,src=<host-path>,dst=<container-path>\n$ docker run --volume <host-path>:<container-path>\n\n```\n",
+          "parent_id": "line-39",
+          "start_line": 43,
+          "end_line": 47
+        },
+        {
+          "id": "line-93",
+          "kind": "heading",
+          "text": "### Options for --volume\n",
+          "parent_id": "line-39",
+          "start_line": 93,
+          "end_line": 93
+        },
+        {
+          "id": "line-106",
+          "kind": "table",
+          "text": "| Option | Description |\n| readonly, ro | If present, causes the bind mount to be mounted into the container as read-only. |\n| z, Z | Configures SELinux labeling. See Configure the SELinux label |\n| rprivate (default) | Sets bind propagation to rprivate for this mount. See Configure bind propagation. |\n| private | Sets bind propagation to private for this mount. See Configure bind propagation. |\n| rshared | Sets bind propagation to rshared for this mount. See Configure bind propagation. |\n| shared | Sets bind propagation to shared for this mount. See Configure bind propagation. |\n| rslave | Sets bind propagation to rslave for this mount. See Configure bind propagation. |\n| slave | Sets bind propagation to slave for this mount. See Configure bind propagation. |\n",
+          "parent_id": "line-93",
+          "start_line": 106,
+          "end_line": 114
+        },
+        {
+          "id": "line-118",
+          "kind": "code",
+          "text": "```\n$ docker run -v .:/project:ro,rshared\n\n```\n",
+          "parent_id": "line-93",
+          "start_line": 118,
+          "end_line": 121
+        },
+        {
+          "id": "line-123",
+          "kind": "heading",
+          "text": "## Start a container with a bind mount\n",
+          "parent_id": "line-1",
+          "start_line": 123,
+          "end_line": 123
+        },
+        {
+          "id": "line-175",
+          "kind": "heading",
+          "text": "### Mount into a non-empty directory on the container\n",
+          "parent_id": "line-123",
+          "start_line": 175,
+          "end_line": 175
+        },
+        {
+          "id": "line-187",
+          "kind": "code",
+          "text": "```\n$ docker run -d \\\n-it \\\n--name broken-container \\\n--mount type=bind,source=/tmp,target=/usr \\\nnginx:latest\n\ndocker: Error response from daemon: oci runtime error: container_linux.go:262:\nstarting container process caused \"exec: \\\"nginx\\\": executable file not found in $PATH\".\n\n```\n",
+          "parent_id": "line-175",
+          "start_line": 187,
+          "end_line": 197
+        },
+        {
+          "id": "line-199",
+          "kind": "code",
+          "text": "```\n$ docker run -d \\\n-it \\\n--name broken-container \\\n-v /tmp:/usr \\\nnginx:latest\n\ndocker: Error response from daemon: oci runtime error: container_linux.go:262:\nstarting container process caused \"exec: \\\"nginx\\\": executable file not found in $PATH\".\n\n```\n",
+          "parent_id": "line-175",
+          "start_line": 199,
+          "end_line": 209
+        },
+        {
+          "id": "line-270",
+          "kind": "heading",
+          "text": "## Recursive mounts\n",
+          "parent_id": "line-1",
+          "start_line": 270,
+          "end_line": 270
+        },
+        {
+          "id": "line-274",
+          "kind": "paragraph",
+          "text": "If the bind mount is read-only, the Docker Engine makes a best-effort attempt at making the submounts read-only as well. This is referred to as recursive read-only mounts. Recursive read-only mounts require Linux kernel version 5.12 or later. If you're running an older kernel version, submounts are automatically mounted as read-write by default. Attempting to set submounts to be read-only on a kernel version earlier than 5.12, using the bind-recursive=readonly option, results in an error.\n",
+          "parent_id": "line-270",
+          "start_line": 274,
+          "end_line": 274
+        },
+        {
+          "id": "line-284",
+          "kind": "heading",
+          "text": "## Configure bind propagation\n",
+          "parent_id": "line-1",
+          "start_line": 284,
+          "end_line": 284
+        },
+        {
+          "id": "line-286",
+          "kind": "paragraph",
+          "text": "Bind propagation defaults to rprivate for both bind mounts and volumes. It is only configurable for bind mounts, and only on Linux host machines. Bind propagation is an advanced topic and many users never need to configure it.\n",
+          "parent_id": "line-284",
+          "start_line": 286,
+          "end_line": 286
+        },
+        {
+          "id": "line-304",
+          "kind": "paragraph",
+          "text": "For more information about bind propagation, see the Linux kernel documentation for shared subtree.\n",
+          "parent_id": "line-284",
+          "start_line": 304,
+          "end_line": 304
+        },
+        {
+          "id": "line-336",
+          "kind": "heading",
+          "text": "## Configure the SELinux label\n",
+          "parent_id": "line-1",
+          "start_line": 336,
+          "end_line": 336
+        },
+        {
+          "id": "line-338",
+          "kind": "paragraph",
+          "text": "If you use SELinux, you can add the z or Z options to modify the SELinux label of the host file or directory being mounted into the container. This affects the file or directory on the host machine itself and can have consequences outside of the scope of Docker.\n",
+          "parent_id": "line-336",
+          "start_line": 338,
+          "end_line": 338
+        },
+        {
+          "id": "line-340",
+          "kind": "list",
+          "text": "- The z option indicates that the bind mount content is shared among multiple containers.\n",
+          "parent_id": "line-336",
+          "start_line": 340,
+          "end_line": 340
+        },
+        {
+          "id": "line-342",
+          "kind": "list",
+          "text": "- The Z option indicates that the bind mount content is private and unshared.\n",
+          "parent_id": "line-336",
+          "start_line": 342,
+          "end_line": 342
+        },
+        {
+          "id": "line-344",
+          "kind": "paragraph",
+          "text": "Use extreme caution with these options. Bind-mounting a system directory such as /home or /usr with the Z option renders your host machine inoperable and you may need to relabel the host machine files by hand.\n",
+          "parent_id": "line-336",
+          "start_line": 344,
+          "end_line": 344
+        },
+        {
+          "id": "line-346",
+          "kind": "paragraph",
+          "text": "Important\n",
+          "parent_id": "line-336",
+          "start_line": 346,
+          "end_line": 346
+        },
+        {
+          "id": "line-348",
+          "kind": "paragraph",
+          "text": "When using bind mounts with services, SELinux labels (:Z and :z), as well as :ro are ignored. See moby/moby #32579 for details.\n",
+          "parent_id": "line-336",
+          "start_line": 348,
+          "end_line": 348
+        },
+        {
+          "id": "line-350",
+          "kind": "paragraph",
+          "text": "This example sets the z option to specify that multiple containers can share the bind mount's contents:\n",
+          "parent_id": "line-336",
+          "start_line": 350,
+          "end_line": 350
+        },
+        {
+          "id": "line-352",
+          "kind": "paragraph",
+          "text": "It is not possible to modify the SELinux label using the --mount flag.\n",
+          "parent_id": "line-336",
+          "start_line": 352,
+          "end_line": 352
+        },
+        {
+          "id": "line-354",
+          "kind": "code",
+          "text": "```\n$ docker run -d \\\n-it \\\n--name devtest \\\n-v \"$(pwd)\"/target:/app:z \\\nnginx:latest\n\n```\n",
+          "parent_id": "line-336",
+          "start_line": 354,
+          "end_line": 361
+        }
+      ],
+      "source_hash": "7bd2f1aa709e2bae31826f48062fda846a5ef638d9db973fc799eb9eeaeeb47f"
+    }
+  ],
+  "omitted_count": 87,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2035,
+  "max_tokens": 2048
+}

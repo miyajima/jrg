@@ -1,0 +1,72 @@
+{
+  "documents": [
+    {
+      "id": "postgres",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "title": "PostgreSQL: Documentation: 18: 5.5. Constraints",
+      "blocks": [
+        {
+          "id": "line-91",
+          "kind": "heading",
+          "text": "## 5.5. Constraints #\n",
+          "start_line": 91,
+          "end_line": 91
+        },
+        {
+          "id": "line-217",
+          "kind": "heading",
+          "text": "### 5.5.2. Not-Null Constraints #\n",
+          "parent_id": "line-91",
+          "start_line": 217,
+          "end_line": 217
+        },
+        {
+          "id": "line-219",
+          "kind": "paragraph",
+          "text": "A not-null constraint simply specifies that a column must not assume the null value. A syntax example:\n",
+          "parent_id": "line-217",
+          "start_line": 219,
+          "end_line": 219
+        },
+        {
+          "id": "line-221",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NOT NULL,\nname text NOT NULL,\nprice numeric\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 221,
+          "end_line": 229
+        },
+        {
+          "id": "line-233",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NOT NULL,\nname text CONSTRAINT products_name_not_null NOT NULL,\nprice numeric\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 233,
+          "end_line": 241
+        },
+        {
+          "id": "line-263",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NOT NULL,\nname text NOT NULL,\nprice numeric NOT NULL CHECK (price > 0)\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 263,
+          "end_line": 271
+        },
+        {
+          "id": "line-279",
+          "kind": "code",
+          "text": "```\n\nCREATE TABLE products (\nproduct_no integer NULL,\nname text NULL,\nprice numeric NULL\n);\n\n```\n",
+          "parent_id": "line-217",
+          "start_line": 279,
+          "end_line": 287
+        }
+      ],
+      "source_hash": "e6a80937be9f32bc0d7bde609f2ea0a2108a6c6790af364747813908f5d27e27"
+    }
+  ],
+  "omitted_count": 152,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 501,
+  "max_tokens": 512
+}

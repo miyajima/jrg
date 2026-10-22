@@ -1,0 +1,61 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "### Loading ECMAScript modules using `require()`#\n\nAdded in: v22.0.0, v20.17.0 History\nVersion  | Changes\n--- | ---\nv25.4.0  | This feature is no longer experimental.\nv23.5.0, v22.13.0, v20.19.0  | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module.\nv23.0.0, v22.12.0, v20.19.0  | This feature is no longer behind the `--experimental-require-module` CLI flag.\nv23.0.0, v22.12.0  | Support `'module.exports'` interop export in `require(esm)`.\n\nThe `.mjs` extension is reserved for ECMAScript Modules. See Determining module system section for more info regarding which files are parsed as ECMAScript modules.\n\n`require()` only supports loading ECMAScript modules that meet the following requirements:\n\n  * The module is fully synchronous (contains no top-level `await`); and\n  * One of these conditions are met:\n    1. The file has a `.mjs` extension.\n    2. The file has a `.js` extension, and the closest `package.json` contains `\"type\": \"module\"`\n    \n    [Input]`export function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); }\n    \n    export default class Point {\n      constructor(x, y) { this.x = x; this.y = y; }\n      static distance = distance;\n    }\n    \n    export { Point as 'module.exports' };\n    ``const Point = require('./point.mjs');\n    console.log(Point); // [class Point]\n    \n    const { distance } = require('./point.mjs');\n    console.log(distance); // [Function: distance]\n    `\n    \n    javascript[Button: copy]\n\nIf the module being `require()`'d contains top-level `await`, or the module graph it `import`s contains top-level `await`, `ERR_REQUIRE_ASYNC_MODULE` will be thrown. In this case, users should load the asynchronous module using `import()`.\n\nIf `--experimental-print-required-tla` is enabled and the error is uncaught, Node.js will try to locate the top-level `await`s in the `require()`'d module graph and print the locations in the stderr.\n\nIf support for loading ES modules using `require()` results in unexpected breakage, it can be disabled using `--no-require-module`. To print where this feature is used, use `--trace-require-module`.\n\nThis feature can be detected by checking if `process.features.require_module` is `true`.\n\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-1",
+      "source_hash": "92b2e857cceea2df21c9ee3d2104455a36403177a21b180a3042697e0e9a9f9c",
+      "title": "Modules: CommonJS modules | Node.js v26.12.0 Documentation",
+      "url": "https://nodejs.org/api/modules.html"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n### Loading ECMAScript modules using `require()`#\n\nHistory\nVersion  | Changes\n--- | ---\nv22.13.0  | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module.\nv23.0.0, v22.12.0  | This feature is no longer behind the `--experimental-require-module` CLI flag.\nv22.12.0  | Support `'module.exports'` interop export in `require(esm)`.\nv22.0.0  | Added in: v22.0.0\n\nStability: 1.2 - Release candidate\n\nThe `.mjs` extension is reserved for ECMAScript Modules. See Determining module system section for more info regarding which files are parsed as ECMAScript modules.\n\n`require()` only supports loading ECMAScript modules that meet the following requirements:\n\n  * The module is fully synchronous (contains no top-level `await`); and\n  * One of these conditions are met:\n    1. The file has a `.mjs` extension.\n    2. The file has a `.js` extension, and the closest `package.json` contains `\"type\": \"module\"`\n    3.     \n    `export function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); }\n    \n    export default class Point {\n      constructor(x, y) { this.x = x; this.y = y; }\n      static distance = distance;\n    }\n    \n    export { Point as 'module.exports' }` [Button: copy]\n    \n    `const Point = require('./point.mjs');\n    console.log(Point); // [class Point]\n    \n    const { distance } = require('./point.mjs');\n    console.log(distance); // [Function: distance]` [Button: copy]\n\nIf the module being `require()`'d contains top-level `await`, or the module graph it `import`s contains top-level `await`, `ERR_REQUIRE_ASYNC_MODULE` will be thrown. In this case, users should load the asynchronous module using `import()`.\n\nIf `--experimental-print-required-tla` is enabled, instead of throwing `ERR_REQUIRE_ASYNC_MODULE` before evaluation, Node.js will evaluate the module, try to locate the top-level awaits, and print their location to help users fix them.\n\nSupport for loading ES modules using `require()` is currently experimental and can be disabled using `--no-experimental-require-module`. To print where this feature is used, use `--trace-require-module`.\n\nThis feature can be detected by checking if `process.features.require_module` is `true`.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-3",
+      "source_hash": "7c6deb165806e1622b3c9393a519ecccabcc7ad231af48ae26c8bef1c5edcd53",
+      "title": "Modules: CommonJS modules | Node.js v22.23.4 Documentation",
+      "url": "https://nodejs.org/download/release/latest-jod/docs/api/modules.html"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\nNode.js error\n\n# ERR_REQUIRE_ESM\n\nCommonJS code called require() on a file that Node.js treats as an ES module, and the running Node.js version (or a flag) does not allow require() to load ES modules. The file is usually a dependency that became ESM-only in a major release.\n\nUpdated 25 Sept 2026Node.js\n\nNode.js 20.19+, 22.12+ and 23+ load synchronous ES modules with require() by default, so this error does not appear on those versions unless --no-require-module is set. On those versions, requiring an ES module that uses top-level await throws ERR_REQUIRE_ASYNC_MODULE instead.\n\n## The error messages\n    \n    Error [ERR_REQUIRE_ESM]: require() of ES Module /app/lib/util.js from /app/index.js not supported.\n    util.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains \"type\": \"module\" which declares all .js files in that package scope as ES modules.\n    Instead either rename util.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change \"type\": \"module\" to \"type\": \"commonjs\" in /app/lib/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-4",
+      "source_hash": "05fd4b930dacdf2cbf2b5cc6085f6e2636bfb20b3030f2c477cca15cde947a4c",
+      "title": "ERR_REQUIRE_ESM: require() of ES Module not supported | JavaScripts.com",
+      "url": "https://javascripts.com/errors/node/err-require-esm/"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-13",
+      "source_hash": "3582afbe294b197bebf24afa8a3ae1fd8f7a2aff06ac0041c16c661f7e1c85cc",
+      "title": "Jest: docs/ECMAScriptModules.md | Fossies",
+      "url": "https://fossies.org/linux/jest/docs/ECMAScriptModules.md"
+    }
+  ],
+  "omitted_count": 13,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1991,
+  "max_tokens": 2048
+}

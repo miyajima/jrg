@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "id": "result-6",
+      "url": "https://github.github.com/gh-aw/reference/concurrency/",
+      "title": "Concurrency Control | GitHub Agentic Workflows",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: 2 days ago; For triggers where `cancel-in-progress` is not enabled, the generated top-level group also emits `queue: max` by default, so back-to-back triggers (for example rapid pushes) are queued and run sequentially instead of displacing pending runs. ... GitHub Actions concurrency groups accept an optional `queue` field that controls how multiple pending runs in the same group are handled. ... Because GitHub Actions requires `queue` to be a literal value, the compiler omits it for this mixed-trigger group; the default `single` queue behavior applies.\n\nSee Safe Outputs for details.\n\n## Queue Behavior (`queue`)\n\nSection titled “Queue Behavior (queue)”\n\nGitHub Actions concurrency groups accept an optional `queue` field that controls how multiple pending runs in the same group are handled. The gh-aw compiler preserves this field in both top-level and per-engine concurrency blocks:\n\nValue  | Behavior\n--- | ---\n`single` (Actions default)  | Only the latest pending run is kept; earlier pending runs are discarded.\n`max`  | All pending runs queue and run in arrival order.\n    \n    `\n    \n    concurrency:\n    \n      group: ${{ github.workflow }}-${{ github.ref }}\n    \n      queue: max\n    \n    `\n\nCompiler-generated concurrency groups (the top-level workflow group, and the agent, output, and conclusion jobs) emit `queue: max` by default so back-to-back triggers run sequentially rather than being dropped. The top-level group only emits `queue: max` when `cancel-in-progress` is not enabled, since GitHub Actions rejects the combination of `queue: max` and `cancel-in-progress: true`. --------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "5bae488394efd18ecf43199fa28db21d12992d2b19f8f4724505a20fb4115fc5"
+    }
+  ],
+  "omitted_count": 15,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 494,
+  "max_tokens": 512
+}

@@ -1,0 +1,88 @@
+{
+  "documents": [
+    {
+      "id": "docker",
+      "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+      "title": "Bind mounts | Docker Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Bind mounts\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-3",
+          "kind": "paragraph",
+          "text": "Ask Gordon\n",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-284",
+          "kind": "heading",
+          "text": "## Configure bind propagation\n",
+          "parent_id": "line-1",
+          "start_line": 284,
+          "end_line": 284
+        },
+        {
+          "id": "line-304",
+          "kind": "paragraph",
+          "text": "For more information about bind propagation, see the Linux kernel documentation for shared subtree.\n",
+          "parent_id": "line-284",
+          "start_line": 304,
+          "end_line": 304
+        },
+        {
+          "id": "line-336",
+          "kind": "heading",
+          "text": "## Configure the SELinux label\n",
+          "parent_id": "line-1",
+          "start_line": 336,
+          "end_line": 336
+        },
+        {
+          "id": "line-338",
+          "kind": "paragraph",
+          "text": "If you use SELinux, you can add the z or Z options to modify the SELinux label of the host file or directory being mounted into the container. This affects the file or directory on the host machine itself and can have consequences outside of the scope of Docker.\n",
+          "parent_id": "line-336",
+          "start_line": 338,
+          "end_line": 338
+        },
+        {
+          "id": "line-346",
+          "kind": "paragraph",
+          "text": "Important\n",
+          "parent_id": "line-336",
+          "start_line": 346,
+          "end_line": 346
+        },
+        {
+          "id": "line-348",
+          "kind": "paragraph",
+          "text": "When using bind mounts with services, SELinux labels (:Z and :z), as well as :ro are ignored. See moby/moby #32579 for details.\n",
+          "parent_id": "line-336",
+          "start_line": 348,
+          "end_line": 348
+        },
+        {
+          "id": "line-352",
+          "kind": "paragraph",
+          "text": "It is not possible to modify the SELinux label using the --mount flag.\n",
+          "parent_id": "line-336",
+          "start_line": 352,
+          "end_line": 352
+        }
+      ],
+      "source_hash": "7bd2f1aa709e2bae31826f48062fda846a5ef638d9db973fc799eb9eeaeeb47f"
+    }
+  ],
+  "omitted_count": 107,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 511,
+  "max_tokens": 512
+}

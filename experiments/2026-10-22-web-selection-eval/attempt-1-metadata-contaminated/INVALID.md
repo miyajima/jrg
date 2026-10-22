@@ -1,0 +1,1 @@
+Contaminated exploratory run. Do not use efficacy numbers. Three source-format defects: wrong page title/version, lost inline snippets, merged empty-title candidate. Originals and old evaluator retained for audit.

@@ -1,0 +1,1771 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "heading",
+          "start_line": 1,
+          "text": "# Secrets\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "text": "A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. Such information might otherwise be put in a Pod specification or in a container image. Using a Secret means that you don't need to include confidential data in your application code.\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 5,
+          "text": "Because Secrets can be created independently of the Pods that use them, there is less risk of the Secret (and its data) being exposed during the workflow of creating, viewing, and editing Pods. Kubernetes, and applications that run in your cluster, can also take additional precautions with Secrets, such as avoiding writing sensitive data to nonvolatile storage.\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "paragraph",
+          "parent_id": "line-1",
+          "start_line": 7,
+          "text": "Secrets are similar to ConfigMaps but are specifically intended to hold confidential data.\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 9,
+          "text": "#### Caution:\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "paragraph",
+          "parent_id": "line-9",
+          "start_line": 11,
+          "text": "Kubernetes Secrets are, by default, stored unencrypted in the API server's underlying data store (etcd). Anyone with API access can retrieve or modify a Secret, and so can anyone with access to etcd. Additionally, anyone who is authorized to create a Pod in a namespace can use that access to read any Secret in that namespace; this includes indirect access such as the ability to create a Deployment.\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "paragraph",
+          "parent_id": "line-9",
+          "start_line": 13,
+          "text": "In order to safely use Secrets, take at least the following steps:\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "list",
+          "parent_id": "line-9",
+          "start_line": 15,
+          "text": "- Enable Encryption at Rest for Secrets.\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "parent_id": "line-9",
+          "start_line": 17,
+          "text": "- Enable or configure RBAC rules with least-privilege access to Secrets.\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "parent_id": "line-9",
+          "start_line": 19,
+          "text": "- Restrict Secret access to specific containers.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "parent_id": "line-9",
+          "start_line": 21,
+          "text": "- Consider using external Secret store providers.\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "paragraph",
+          "parent_id": "line-9",
+          "start_line": 23,
+          "text": "For more guidelines to manage and improve the security of your Secrets, refer to Good practices for Kubernetes Secrets.\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "paragraph",
+          "parent_id": "line-9",
+          "start_line": 25,
+          "text": "See Information security for Secrets for more details.\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 27,
+          "text": "## Uses for Secrets\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "paragraph",
+          "parent_id": "line-27",
+          "start_line": 29,
+          "text": "You can use Secrets for purposes such as the following:\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "list",
+          "parent_id": "line-27",
+          "start_line": 31,
+          "text": "- Set environment variables for a container.\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "list",
+          "parent_id": "line-27",
+          "start_line": 33,
+          "text": "- Provide credentials such as SSH keys or passwords to Pods.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "list",
+          "parent_id": "line-27",
+          "start_line": 35,
+          "text": "- Allow the kubelet to pull container images from private registries.\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "paragraph",
+          "parent_id": "line-27",
+          "start_line": 37,
+          "text": "The Kubernetes control plane also uses Secrets; for example, bootstrap token Secrets are a mechanism to help automate node registration.\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "heading",
+          "parent_id": "line-27",
+          "start_line": 39,
+          "text": "### Use case: dotfiles in a secret volume\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "paragraph",
+          "parent_id": "line-39",
+          "start_line": 41,
+          "text": "You can make your data \"hidden\" by defining a key that begins with a dot. This key represents a dotfile or \"hidden\" file. For example, when the following Secret is mounted into a volume, secret-volume, the volume will contain a single file, called .secret-file, and the dotfile-test-container will have this file present at the path /etc/secret-volume/.secret-file.\n"
+        },
+        {
+          "end_line": 43,
+          "id": "line-43",
+          "kind": "heading",
+          "parent_id": "line-39",
+          "start_line": 43,
+          "text": "#### Note:\n"
+        },
+        {
+          "end_line": 46,
+          "id": "line-45",
+          "kind": "paragraph",
+          "parent_id": "line-43",
+          "start_line": 45,
+          "text": "Files beginning with dot characters are hidden from the output of ls -l;\nyou must use ls -la to see them when listing directory contents.\n"
+        },
+        {
+          "end_line": 48,
+          "id": "line-48",
+          "kind": "paragraph",
+          "parent_id": "line-43",
+          "start_line": 48,
+          "text": "secret/dotfile-secret.yaml\n"
+        },
+        {
+          "end_line": 78,
+          "id": "line-50",
+          "kind": "code",
+          "parent_id": "line-43",
+          "start_line": 50,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: dotfile-secret\ndata:\n.secret-file: dmFsdWUtMg0KDQo=\n---\napiVersion: v1\nkind: Pod\nmetadata:\nname: secret-dotfiles-pod\nspec:\nvolumes:\n- name: secret-volume\nsecret:\nsecretName: dotfile-secret\ncontainers:\n- name: dotfile-test-container\nimage: registry.k8s.io/busybox\ncommand:\n- ls\n- \"-l\"\n- \"/etc/secret-volume\"\nvolumeMounts:\n- name: secret-volume\nreadOnly: true\nmountPath: \"/etc/secret-volume\"\n```\n"
+        },
+        {
+          "end_line": 80,
+          "id": "line-80",
+          "kind": "heading",
+          "parent_id": "line-27",
+          "start_line": 80,
+          "text": "### Use case: Secret visible to one container in a Pod\n"
+        },
+        {
+          "end_line": 82,
+          "id": "line-82",
+          "kind": "paragraph",
+          "parent_id": "line-80",
+          "start_line": 82,
+          "text": "Consider a program that needs to handle HTTP requests, do some complex business logic, and then sign some messages with an HMAC. Because it has complex application logic, there might be an unnoticed remote file reading exploit in the server, which could expose the private key to an attacker.\n"
+        },
+        {
+          "end_line": 84,
+          "id": "line-84",
+          "kind": "paragraph",
+          "parent_id": "line-80",
+          "start_line": 84,
+          "text": "This could be divided into two processes in two containers: a frontend container which handles user interaction and business logic, but which cannot see the private key; and a signer container that can see the private key, and responds to simple signing requests from the frontend (for example, over localhost networking).\n"
+        },
+        {
+          "end_line": 86,
+          "id": "line-86",
+          "kind": "paragraph",
+          "parent_id": "line-80",
+          "start_line": 86,
+          "text": "With this partitioned approach, an attacker now has to trick the application server into doing something rather arbitrary, which may be harder than getting it to read a file.\n"
+        },
+        {
+          "end_line": 88,
+          "id": "line-88",
+          "kind": "heading",
+          "parent_id": "line-27",
+          "start_line": 88,
+          "text": "### Alternatives to Secrets\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-90",
+          "kind": "paragraph",
+          "parent_id": "line-88",
+          "start_line": 90,
+          "text": "Rather than using a Secret to protect confidential data, you can pick from alternatives.\n"
+        },
+        {
+          "end_line": 92,
+          "id": "line-92",
+          "kind": "paragraph",
+          "parent_id": "line-88",
+          "start_line": 92,
+          "text": "Here are some of your options:\n"
+        },
+        {
+          "end_line": 94,
+          "id": "line-94",
+          "kind": "list",
+          "parent_id": "line-88",
+          "start_line": 94,
+          "text": "- If your cloud-native component needs to authenticate to another application that you know is running within the same Kubernetes cluster, you can use a ServiceAccount and its tokens to identify your client.\n"
+        },
+        {
+          "end_line": 96,
+          "id": "line-96",
+          "kind": "list",
+          "parent_id": "line-88",
+          "start_line": 96,
+          "text": "- There are third-party tools that you can run, either within or outside your cluster, that manage sensitive data. For example, a service that Pods access over HTTPS, that reveals a Secret if the client correctly authenticates (for example, with a ServiceAccount token).\n"
+        },
+        {
+          "end_line": 98,
+          "id": "line-98",
+          "kind": "list",
+          "parent_id": "line-88",
+          "start_line": 98,
+          "text": "- For authentication, you can implement a custom signer for X.509 certificates, and use CertificateSigningRequests to let that custom signer issue certificates to Pods that need them.\n"
+        },
+        {
+          "end_line": 100,
+          "id": "line-100",
+          "kind": "list",
+          "parent_id": "line-88",
+          "start_line": 100,
+          "text": "- You can use a device plugin to expose node-local encryption hardware to a specific Pod. For example, you can schedule trusted Pods onto nodes that provide a Trusted Platform Module, configured out-of-band.\n"
+        },
+        {
+          "end_line": 102,
+          "id": "line-102",
+          "kind": "paragraph",
+          "parent_id": "line-88",
+          "start_line": 102,
+          "text": "You can also combine two or more of those options, including the option to use Secret objects themselves.\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-104",
+          "kind": "paragraph",
+          "parent_id": "line-88",
+          "start_line": 104,
+          "text": "For example: implement (or deploy) an operator that fetches short-lived session tokens from an external service, and then creates Secrets based on those short-lived session tokens. Pods running in your cluster can make use of the session tokens, and operator ensures they are valid. This separation means that you can run Pods that are unaware of the exact mechanisms for issuing and refreshing those session tokens.\n"
+        },
+        {
+          "end_line": 106,
+          "id": "line-106",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 106,
+          "text": "## Types of Secret\n"
+        },
+        {
+          "end_line": 108,
+          "id": "line-108",
+          "kind": "paragraph",
+          "parent_id": "line-106",
+          "start_line": 108,
+          "text": "When creating a Secret, you can specify its type using the type field of the Secret resource, or certain equivalent kubectl command line flags (if available). The Secret type is used to facilitate programmatic handling of the Secret data.\n"
+        },
+        {
+          "end_line": 110,
+          "id": "line-110",
+          "kind": "paragraph",
+          "parent_id": "line-106",
+          "start_line": 110,
+          "text": "Kubernetes provides several built-in types for some common usage scenarios. These types vary in terms of the validations performed and the constraints Kubernetes imposes on them.\n"
+        },
+        {
+          "end_line": 120,
+          "id": "line-112",
+          "kind": "table",
+          "parent_id": "line-106",
+          "start_line": 112,
+          "text": "| Built-in Type | Usage |\n| Opaque | arbitrary user-defined data |\n| kubernetes.io/service-account-token | ServiceAccount token |\n| kubernetes.io/dockercfg | serialized ~/.dockercfg file |\n| kubernetes.io/dockerconfigjson | serialized ~/.docker/config.json file |\n| kubernetes.io/basic-auth | credentials for basic authentication |\n| kubernetes.io/ssh-auth | credentials for SSH authentication |\n| kubernetes.io/tls | data for a TLS client or server |\n| bootstrap.kubernetes.io/token | bootstrap token data |\n"
+        },
+        {
+          "end_line": 122,
+          "id": "line-122",
+          "kind": "paragraph",
+          "parent_id": "line-106",
+          "start_line": 122,
+          "text": "You can define and use your own Secret type by assigning a non-empty string as the type value for a Secret object (an empty string is treated as an Opaque type).\n"
+        },
+        {
+          "end_line": 124,
+          "id": "line-124",
+          "kind": "paragraph",
+          "parent_id": "line-106",
+          "start_line": 124,
+          "text": "Kubernetes doesn't impose any constraints on the type name. However, if you are using one of the built-in types, you must meet all the requirements defined for that type.\n"
+        },
+        {
+          "end_line": 126,
+          "id": "line-126",
+          "kind": "paragraph",
+          "parent_id": "line-106",
+          "start_line": 126,
+          "text": "If you are defining a type of Secret that's for public use, follow the convention and structure the Secret type to have your domain name before the name, separated by a /. For example: cloud-hosting.example.net/cloud-api-credentials.\n"
+        },
+        {
+          "end_line": 128,
+          "id": "line-128",
+          "kind": "heading",
+          "parent_id": "line-106",
+          "start_line": 128,
+          "text": "### Opaque Secrets\n"
+        },
+        {
+          "end_line": 130,
+          "id": "line-130",
+          "kind": "paragraph",
+          "parent_id": "line-128",
+          "start_line": 130,
+          "text": "Opaque is the default Secret type if you don't explicitly specify a type in a Secret manifest. When you create a Secret using kubectl, you must use the generic subcommand to indicate an Opaque Secret type. For example, the following command creates an empty Secret of type Opaque:\n"
+        },
+        {
+          "end_line": 136,
+          "id": "line-132",
+          "kind": "code",
+          "parent_id": "line-128",
+          "start_line": 132,
+          "text": "```\nkubectl create secret generic empty-secret\nkubectl get secret empty-secret\n\n```\n"
+        },
+        {
+          "end_line": 138,
+          "id": "line-138",
+          "kind": "paragraph",
+          "parent_id": "line-128",
+          "start_line": 138,
+          "text": "The output looks like:\n"
+        },
+        {
+          "end_line": 144,
+          "id": "line-140",
+          "kind": "code",
+          "parent_id": "line-128",
+          "start_line": 140,
+          "text": "```\nNAME TYPE DATA AGE\nempty-secret Opaque 0 2m6s\n\n```\n"
+        },
+        {
+          "end_line": 146,
+          "id": "line-146",
+          "kind": "paragraph",
+          "parent_id": "line-128",
+          "start_line": 146,
+          "text": "The DATA column shows the number of data items stored in the Secret. In this case, 0 means you have created an empty Secret.\n"
+        },
+        {
+          "end_line": 148,
+          "id": "line-148",
+          "kind": "heading",
+          "parent_id": "line-106",
+          "start_line": 148,
+          "text": "### ServiceAccount token Secrets\n"
+        },
+        {
+          "end_line": 150,
+          "id": "line-150",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 150,
+          "text": "A kubernetes.io/service-account-token type of Secret is used to store a token credential that identifies a ServiceAccount. This is a legacy mechanism that provides long-lived ServiceAccount credentials to Pods.\n"
+        },
+        {
+          "end_line": 152,
+          "id": "line-152",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 152,
+          "text": "In Kubernetes v1.22 and later, the recommended approach is to obtain a short-lived, automatically rotating ServiceAccount token by using the TokenRequest API instead. You can get these short-lived tokens using the following methods:\n"
+        },
+        {
+          "end_line": 154,
+          "id": "line-154",
+          "kind": "list",
+          "parent_id": "line-148",
+          "start_line": 154,
+          "text": "- Call the TokenRequest API either directly or by using an API client like kubectl. For example, you can use the kubectl create token command.\n"
+        },
+        {
+          "end_line": 156,
+          "id": "line-156",
+          "kind": "list",
+          "parent_id": "line-148",
+          "start_line": 156,
+          "text": "- Request a mounted token in a projected volume in your Pod manifest. Kubernetes creates the token and mounts it in the Pod. The token is automatically invalidated when the Pod that it's mounted in is deleted. For details, see Launch a Pod using service account token projection.\n"
+        },
+        {
+          "end_line": 158,
+          "id": "line-158",
+          "kind": "heading",
+          "parent_id": "line-148",
+          "start_line": 158,
+          "text": "#### Note:\n"
+        },
+        {
+          "end_line": 164,
+          "id": "line-160",
+          "kind": "paragraph",
+          "parent_id": "line-158",
+          "start_line": 160,
+          "text": "You should only create a ServiceAccount token Secret\nif you can't use the TokenRequest API to obtain a token,\nand the security exposure of persisting a non-expiring token credential\nin a readable API object is acceptable to you. For instructions, see\nManually create a long-lived API token for a ServiceAccount.\n"
+        },
+        {
+          "end_line": 166,
+          "id": "line-166",
+          "kind": "paragraph",
+          "parent_id": "line-158",
+          "start_line": 166,
+          "text": "When using this Secret type, you need to ensure that the kubernetes.io/service-account.name annotation is set to an existing ServiceAccount name. If you are creating both the ServiceAccount and the Secret objects, you should create the ServiceAccount object first.\n"
+        },
+        {
+          "end_line": 168,
+          "id": "line-168",
+          "kind": "paragraph",
+          "parent_id": "line-158",
+          "start_line": 168,
+          "text": "After the Secret is created, a Kubernetes controller fills in some other fields such as the kubernetes.io/service-account.uid annotation, and the token key in the data field, which is populated with an authentication token.\n"
+        },
+        {
+          "end_line": 170,
+          "id": "line-170",
+          "kind": "paragraph",
+          "parent_id": "line-158",
+          "start_line": 170,
+          "text": "The following example configuration declares a ServiceAccount token Secret:\n"
+        },
+        {
+          "end_line": 172,
+          "id": "line-172",
+          "kind": "paragraph",
+          "parent_id": "line-158",
+          "start_line": 172,
+          "text": "secret/serviceaccount-token-secret.yaml\n"
+        },
+        {
+          "end_line": 184,
+          "id": "line-174",
+          "kind": "code",
+          "parent_id": "line-158",
+          "start_line": 174,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: secret-sa-sample\nannotations:\nkubernetes.io/service-account.name: \"sa-name\"\ntype: kubernetes.io/service-account-token\ndata:\nextra: YmFyCg==\n```\n"
+        },
+        {
+          "end_line": 186,
+          "id": "line-186",
+          "kind": "paragraph",
+          "parent_id": "line-158",
+          "start_line": 186,
+          "text": "After creating the Secret, wait for Kubernetes to populate the token key in the data field.\n"
+        },
+        {
+          "end_line": 188,
+          "id": "line-188",
+          "kind": "paragraph",
+          "parent_id": "line-158",
+          "start_line": 188,
+          "text": "See the ServiceAccount documentation for more information on how ServiceAccounts work. You can also check the automountServiceAccountToken field and the serviceAccountName field of the Pod for information on referencing ServiceAccount credentials from within Pods.\n"
+        },
+        {
+          "end_line": 190,
+          "id": "line-190",
+          "kind": "heading",
+          "parent_id": "line-106",
+          "start_line": 190,
+          "text": "### Docker config Secrets\n"
+        },
+        {
+          "end_line": 192,
+          "id": "line-192",
+          "kind": "paragraph",
+          "parent_id": "line-190",
+          "start_line": 192,
+          "text": "If you are creating a Secret to store credentials for accessing a container image registry, you must use one of the following type values for that Secret:\n"
+        },
+        {
+          "end_line": 194,
+          "id": "line-194",
+          "kind": "list",
+          "parent_id": "line-190",
+          "start_line": 194,
+          "text": "- kubernetes.io/dockercfg: store a serialized ~/.dockercfg which is the legacy format for configuring Docker command line. The Secret data field contains a .dockercfg key whose value is the content of a base64 encoded ~/.dockercfg file.\n"
+        },
+        {
+          "end_line": 196,
+          "id": "line-196",
+          "kind": "list",
+          "parent_id": "line-190",
+          "start_line": 196,
+          "text": "- kubernetes.io/dockerconfigjson: store a serialized JSON that follows the same format rules as the ~/.docker/config.json file, which is a new format for ~/.dockercfg. The Secret data field must contain a .dockerconfigjson key for which the value is the content of a base64 encoded ~/.docker/config.json file.\n"
+        },
+        {
+          "end_line": 198,
+          "id": "line-198",
+          "kind": "paragraph",
+          "parent_id": "line-190",
+          "start_line": 198,
+          "text": "Below is an example for a kubernetes.io/dockercfg type of Secret:\n"
+        },
+        {
+          "end_line": 200,
+          "id": "line-200",
+          "kind": "paragraph",
+          "parent_id": "line-190",
+          "start_line": 200,
+          "text": "secret/dockercfg-secret.yaml\n"
+        },
+        {
+          "end_line": 211,
+          "id": "line-202",
+          "kind": "code",
+          "parent_id": "line-190",
+          "start_line": 202,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: secret-dockercfg\ntype: kubernetes.io/dockercfg\ndata:\n.dockercfg: |\neyJhdXRocyI6eyJodHRwczovL2V4YW1wbGUvdjEvIjp7ImF1dGgiOiJvcGVuc2VzYW1lIn19fQo=\n```\n"
+        },
+        {
+          "end_line": 213,
+          "id": "line-213",
+          "kind": "heading",
+          "parent_id": "line-190",
+          "start_line": 213,
+          "text": "#### Note:\n"
+        },
+        {
+          "end_line": 216,
+          "id": "line-215",
+          "kind": "paragraph",
+          "parent_id": "line-213",
+          "start_line": 215,
+          "text": "If you do not want to perform the base64 encoding, you can choose to use the\nstringData field instead.\n"
+        },
+        {
+          "end_line": 218,
+          "id": "line-218",
+          "kind": "paragraph",
+          "parent_id": "line-213",
+          "start_line": 218,
+          "text": "When you create Docker config Secrets using a manifest, the API server checks whether the expected key exists in the data field, and it verifies if the value provided can be parsed as a valid JSON. The API server doesn't validate if the JSON actually is a Docker config file.\n"
+        },
+        {
+          "end_line": 220,
+          "id": "line-220",
+          "kind": "paragraph",
+          "parent_id": "line-213",
+          "start_line": 220,
+          "text": "You can also use kubectl to create a Secret for accessing a container registry, such as when you don't have a Docker configuration file:\n"
+        },
+        {
+          "end_line": 229,
+          "id": "line-222",
+          "kind": "code",
+          "parent_id": "line-213",
+          "start_line": 222,
+          "text": "```\nkubectl create secret docker-registry secret-tiger-docker \\\n--docker-email=tiger@acme.example \\\n--docker-username=tiger \\\n--docker-password=pass1234 \\\n--docker-server=my-registry.example:5000\n\n```\n"
+        },
+        {
+          "end_line": 231,
+          "id": "line-231",
+          "kind": "paragraph",
+          "parent_id": "line-213",
+          "start_line": 231,
+          "text": "This command creates a Secret of type kubernetes.io/dockerconfigjson.\n"
+        },
+        {
+          "end_line": 233,
+          "id": "line-233",
+          "kind": "paragraph",
+          "parent_id": "line-213",
+          "start_line": 233,
+          "text": "Retrieve the .data.dockerconfigjson field from that new Secret and decode the data:\n"
+        },
+        {
+          "end_line": 238,
+          "id": "line-235",
+          "kind": "code",
+          "parent_id": "line-213",
+          "start_line": 235,
+          "text": "```\nkubectl get secret secret-tiger-docker -o jsonpath='{.data.*}' | base64 -d\n\n```\n"
+        },
+        {
+          "end_line": 240,
+          "id": "line-240",
+          "kind": "paragraph",
+          "parent_id": "line-213",
+          "start_line": 240,
+          "text": "The output is equivalent to the following JSON document (which is also a valid Docker configuration file):\n"
+        },
+        {
+          "end_line": 254,
+          "id": "line-242",
+          "kind": "code",
+          "parent_id": "line-213",
+          "start_line": 242,
+          "text": "```\n{\n\"auths\": {\n\"my-registry.example:5000\": {\n\"username\": \"tiger\",\n\"password\": \"pass1234\",\n\"email\": \"tiger@acme.example\",\n\"auth\": \"dGlnZXI6cGFzczEyMzQ=\"\n}\n}\n}\n\n```\n"
+        },
+        {
+          "end_line": 256,
+          "id": "line-256",
+          "kind": "heading",
+          "parent_id": "line-190",
+          "start_line": 256,
+          "text": "#### Caution:\n"
+        },
+        {
+          "end_line": 258,
+          "id": "line-258",
+          "kind": "paragraph",
+          "parent_id": "line-256",
+          "start_line": 258,
+          "text": "The auth value there is base64 encoded; it is obscured but not secret. Anyone who can read that Secret can learn the registry access bearer token.\n"
+        },
+        {
+          "end_line": 260,
+          "id": "line-260",
+          "kind": "paragraph",
+          "parent_id": "line-256",
+          "start_line": 260,
+          "text": "It is suggested to use credential providers to dynamically and securely provide pull secrets on-demand.\n"
+        },
+        {
+          "end_line": 262,
+          "id": "line-262",
+          "kind": "heading",
+          "parent_id": "line-106",
+          "start_line": 262,
+          "text": "### Basic authentication Secret\n"
+        },
+        {
+          "end_line": 264,
+          "id": "line-264",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 264,
+          "text": "The kubernetes.io/basic-auth type is provided for storing credentials needed for basic authentication. When using this Secret type, the data field of the Secret must contain one of the following two keys:\n"
+        },
+        {
+          "end_line": 266,
+          "id": "line-266",
+          "kind": "list",
+          "parent_id": "line-262",
+          "start_line": 266,
+          "text": "- username: the user name for authentication\n"
+        },
+        {
+          "end_line": 268,
+          "id": "line-268",
+          "kind": "list",
+          "parent_id": "line-262",
+          "start_line": 268,
+          "text": "- password: the password or token for authentication\n"
+        },
+        {
+          "end_line": 270,
+          "id": "line-270",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 270,
+          "text": "Both values for the above two keys are base64 encoded strings. You can alternatively provide the clear text content using the stringData field in the Secret manifest.\n"
+        },
+        {
+          "end_line": 272,
+          "id": "line-272",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 272,
+          "text": "The following manifest is an example of a basic authentication Secret:\n"
+        },
+        {
+          "end_line": 274,
+          "id": "line-274",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 274,
+          "text": "secret/basicauth-secret.yaml\n"
+        },
+        {
+          "end_line": 285,
+          "id": "line-276",
+          "kind": "code",
+          "parent_id": "line-262",
+          "start_line": 276,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: secret-basic-auth\ntype: kubernetes.io/basic-auth\nstringData:\nusername: admin # required field for kubernetes.io/basic-auth\npassword: t0p-Secret # required field for kubernetes.io/basic-auth\n```\n"
+        },
+        {
+          "end_line": 287,
+          "id": "line-287",
+          "kind": "heading",
+          "parent_id": "line-262",
+          "start_line": 287,
+          "text": "#### Note:\n"
+        },
+        {
+          "end_line": 289,
+          "id": "line-289",
+          "kind": "paragraph",
+          "parent_id": "line-287",
+          "start_line": 289,
+          "text": "The stringData field for a Secret does not work well with server-side apply.\n"
+        },
+        {
+          "end_line": 291,
+          "id": "line-291",
+          "kind": "paragraph",
+          "parent_id": "line-287",
+          "start_line": 291,
+          "text": "The basic authentication Secret type is provided only for convenience. You can create an Opaque type for credentials used for basic authentication. However, using the defined and public Secret type (kubernetes.io/basic-auth) helps other people to understand the purpose of your Secret, and sets a convention for what key names to expect.\n"
+        },
+        {
+          "end_line": 293,
+          "id": "line-293",
+          "kind": "heading",
+          "parent_id": "line-106",
+          "start_line": 293,
+          "text": "### SSH authentication Secrets\n"
+        },
+        {
+          "end_line": 295,
+          "id": "line-295",
+          "kind": "paragraph",
+          "parent_id": "line-293",
+          "start_line": 295,
+          "text": "The builtin type kubernetes.io/ssh-auth is provided for storing data used in SSH authentication. When using this Secret type, you will have to specify a ssh-privatekey key-value pair in the data (or stringData) field as the SSH credential to use.\n"
+        },
+        {
+          "end_line": 297,
+          "id": "line-297",
+          "kind": "paragraph",
+          "parent_id": "line-293",
+          "start_line": 297,
+          "text": "The following manifest is an example of a Secret used for SSH public/private key authentication:\n"
+        },
+        {
+          "end_line": 299,
+          "id": "line-299",
+          "kind": "paragraph",
+          "parent_id": "line-293",
+          "start_line": 299,
+          "text": "secret/ssh-auth-secret.yaml\n"
+        },
+        {
+          "end_line": 311,
+          "id": "line-301",
+          "kind": "code",
+          "parent_id": "line-293",
+          "start_line": 301,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: secret-ssh-auth\ntype: kubernetes.io/ssh-auth\ndata:\n# the data is abbreviated in this example\nssh-privatekey: |\nUG91cmluZzYlRW1vdGljb24lU2N1YmE=\n```\n"
+        },
+        {
+          "end_line": 313,
+          "id": "line-313",
+          "kind": "paragraph",
+          "parent_id": "line-293",
+          "start_line": 313,
+          "text": "The SSH authentication Secret type is provided only for convenience. You can create an Opaque type for credentials used for SSH authentication. However, using the defined and public Secret type (kubernetes.io/ssh-auth) helps other people to understand the purpose of your Secret, and sets a convention for what key names to expect. The Kubernetes API verifies that the required keys are set for a Secret of this type.\n"
+        },
+        {
+          "end_line": 315,
+          "id": "line-315",
+          "kind": "heading",
+          "parent_id": "line-293",
+          "start_line": 315,
+          "text": "#### Caution:\n"
+        },
+        {
+          "end_line": 319,
+          "id": "line-317",
+          "kind": "paragraph",
+          "parent_id": "line-315",
+          "start_line": 317,
+          "text": "SSH private keys do not establish trusted communication between an SSH client and\nhost server on their own. A secondary means of establishing trust is needed to\nmitigate \"man in the middle\" attacks, such as a known_hosts file added to a ConfigMap.\n"
+        },
+        {
+          "end_line": 321,
+          "id": "line-321",
+          "kind": "heading",
+          "parent_id": "line-106",
+          "start_line": 321,
+          "text": "### TLS Secrets\n"
+        },
+        {
+          "end_line": 323,
+          "id": "line-323",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 323,
+          "text": "The kubernetes.io/tls Secret type is for storing a certificate and its associated key that are typically used for TLS.\n"
+        },
+        {
+          "end_line": 325,
+          "id": "line-325",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 325,
+          "text": "One common use for TLS Secrets is to configure encryption in transit for an Ingress, but you can also use it with other resources or directly in your workload. When using this type of Secret, the tls.key and the tls.crt key must be provided in the data (or stringData) field of the Secret configuration, although the API server doesn't actually validate the values for each key.\n"
+        },
+        {
+          "end_line": 327,
+          "id": "line-327",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 327,
+          "text": "As an alternative to using stringData, you can use the data field to provide the base64 encoded certificate and private key. For details, see Constraints on Secret names and data.\n"
+        },
+        {
+          "end_line": 329,
+          "id": "line-329",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 329,
+          "text": "The following YAML contains an example config for a TLS Secret:\n"
+        },
+        {
+          "end_line": 331,
+          "id": "line-331",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 331,
+          "text": "secret/tls-auth-secret.yaml\n"
+        },
+        {
+          "end_line": 345,
+          "id": "line-333",
+          "kind": "code",
+          "parent_id": "line-321",
+          "start_line": 333,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: secret-tls\ntype: kubernetes.io/tls\ndata:\n# values are base64 encoded, which obscures them but does NOT provide\n# any useful level of confidentiality\n# Replace the following values with your own base64-encoded certificate and key.\ntls.crt: \"REPLACE_WITH_BASE64_CERT\" \ntls.key: \"REPLACE_WITH_BASE64_KEY\"\n```\n"
+        },
+        {
+          "end_line": 347,
+          "id": "line-347",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 347,
+          "text": "The TLS Secret type is provided only for convenience. You can create an Opaque type for credentials used for TLS authentication. However, using the defined and public Secret type (kubernetes.io/tls) helps ensure the consistency of Secret format in your project. The API server verifies if the required keys are set for a Secret of this type.\n"
+        },
+        {
+          "end_line": 349,
+          "id": "line-349",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 349,
+          "text": "To create a TLS Secret using kubectl, use the tls subcommand:\n"
+        },
+        {
+          "end_line": 356,
+          "id": "line-351",
+          "kind": "code",
+          "parent_id": "line-321",
+          "start_line": 351,
+          "text": "```\nkubectl create secret tls my-tls-secret \\\n--cert=path/to/cert/file \\\n--key=path/to/key/file\n\n```\n"
+        },
+        {
+          "end_line": 358,
+          "id": "line-358",
+          "kind": "paragraph",
+          "parent_id": "line-321",
+          "start_line": 358,
+          "text": "The public/private key pair must exist before hand. The public key certificate for --cert must be .PEM encoded and must match the given private key for --key.\n"
+        },
+        {
+          "end_line": 360,
+          "id": "line-360",
+          "kind": "heading",
+          "parent_id": "line-106",
+          "start_line": 360,
+          "text": "### Bootstrap token Secrets\n"
+        },
+        {
+          "end_line": 362,
+          "id": "line-362",
+          "kind": "paragraph",
+          "parent_id": "line-360",
+          "start_line": 362,
+          "text": "The bootstrap.kubernetes.io/token Secret type is for tokens used during the node bootstrap process. It stores tokens used to sign well-known ConfigMaps.\n"
+        },
+        {
+          "end_line": 364,
+          "id": "line-364",
+          "kind": "paragraph",
+          "parent_id": "line-360",
+          "start_line": 364,
+          "text": "A bootstrap token Secret is usually created in the kube-system namespace and named in the form bootstrap-token-<token-id> where <token-id> is a 6 character string of the token ID.\n"
+        },
+        {
+          "end_line": 366,
+          "id": "line-366",
+          "kind": "paragraph",
+          "parent_id": "line-360",
+          "start_line": 366,
+          "text": "As a Kubernetes manifest, a bootstrap token Secret might look like the following:\n"
+        },
+        {
+          "end_line": 368,
+          "id": "line-368",
+          "kind": "paragraph",
+          "parent_id": "line-360",
+          "start_line": 368,
+          "text": "secret/bootstrap-token-secret-base64.yaml\n"
+        },
+        {
+          "end_line": 384,
+          "id": "line-370",
+          "kind": "code",
+          "parent_id": "line-360",
+          "start_line": 370,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\nname: bootstrap-token-5emitj\nnamespace: kube-system\ntype: bootstrap.kubernetes.io/token\ndata:\nauth-extra-groups: c3lzdGVtOmJvb3RzdHJhcHBlcnM6a3ViZWFkbTpkZWZhdWx0LW5vZGUtdG9rZW4=\nexpiration: MjAyMC0wOS0xM1QwNDozOToxMFo=\ntoken-id: NWVtaXRq\ntoken-secret: a3E0Z2lodnN6emduMXAwcg==\nusage-bootstrap-authentication: dHJ1ZQ==\nusage-bootstrap-signing: dHJ1ZQ==\n```\n"
+        },
+        {
+          "end_line": 386,
+          "id": "line-386",
+          "kind": "paragraph",
+          "parent_id": "line-360",
+          "start_line": 386,
+          "text": "A bootstrap token Secret has the following keys specified under data:\n"
+        },
+        {
+          "end_line": 388,
+          "id": "line-388",
+          "kind": "list",
+          "parent_id": "line-360",
+          "start_line": 388,
+          "text": "- token-id: A random 6 character string as the token identifier. Required.\n"
+        },
+        {
+          "end_line": 390,
+          "id": "line-390",
+          "kind": "list",
+          "parent_id": "line-360",
+          "start_line": 390,
+          "text": "- token-secret: A random 16 character string as the actual token Secret. Required.\n"
+        },
+        {
+          "end_line": 392,
+          "id": "line-392",
+          "kind": "list",
+          "parent_id": "line-360",
+          "start_line": 392,
+          "text": "- description: A human-readable string that describes what the token is used for. Optional.\n"
+        },
+        {
+          "end_line": 394,
+          "id": "line-394",
+          "kind": "list",
+          "parent_id": "line-360",
+          "start_line": 394,
+          "text": "- expiration: An absolute UTC time using RFC3339 specifying when the token should be expired. Optional.\n"
+        },
+        {
+          "end_line": 396,
+          "id": "line-396",
+          "kind": "list",
+          "parent_id": "line-360",
+          "start_line": 396,
+          "text": "- usage-bootstrap-<usage>: A boolean flag indicating additional usage for the bootstrap token.\n"
+        },
+        {
+          "end_line": 398,
+          "id": "line-398",
+          "kind": "list",
+          "parent_id": "line-360",
+          "start_line": 398,
+          "text": "- auth-extra-groups: A comma-separated list of group names that will be authenticated as in addition to the system:bootstrappers group.\n"
+        },
+        {
+          "end_line": 400,
+          "id": "line-400",
+          "kind": "paragraph",
+          "parent_id": "line-360",
+          "start_line": 400,
+          "text": "You can alternatively provide the values in the stringData field of the Secret without base64 encoding them:\n"
+        },
+        {
+          "end_line": 402,
+          "id": "line-402",
+          "kind": "paragraph",
+          "parent_id": "line-360",
+          "start_line": 402,
+          "text": "secret/bootstrap-token-secret-literal.yaml\n"
+        },
+        {
+          "end_line": 423,
+          "id": "line-404",
+          "kind": "code",
+          "parent_id": "line-360",
+          "start_line": 404,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata:\n# Note how the Secret is named\nname: bootstrap-token-5emitj\n# A bootstrap token Secret usually resides in the kube-system namespace\nnamespace: kube-system\ntype: bootstrap.kubernetes.io/token\nstringData:\nauth-extra-groups: \"system:bootstrappers:kubeadm:default-node-token\"\nexpiration: \"2020-09-13T04:39:10Z\"\n# This token ID is used in the name\ntoken-id: \"5emitj\"\ntoken-secret: \"kq4gihvszzgn1p0r\"\n# This token can be used for authentication\nusage-bootstrap-authentication: \"true\"\n# and it can be used for signing\nusage-bootstrap-signing: \"true\"\n```\n"
+        },
+        {
+          "end_line": 425,
+          "id": "line-425",
+          "kind": "heading",
+          "parent_id": "line-360",
+          "start_line": 425,
+          "text": "#### Note:\n"
+        },
+        {
+          "end_line": 427,
+          "id": "line-427",
+          "kind": "paragraph",
+          "parent_id": "line-425",
+          "start_line": 427,
+          "text": "The stringData field for a Secret does not work well with server-side apply.\n"
+        },
+        {
+          "end_line": 429,
+          "id": "line-429",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 429,
+          "text": "## Working with Secrets\n"
+        },
+        {
+          "end_line": 431,
+          "id": "line-431",
+          "kind": "heading",
+          "parent_id": "line-429",
+          "start_line": 431,
+          "text": "### Creating a Secret\n"
+        },
+        {
+          "end_line": 433,
+          "id": "line-433",
+          "kind": "paragraph",
+          "parent_id": "line-431",
+          "start_line": 433,
+          "text": "There are several options to create a Secret:\n"
+        },
+        {
+          "end_line": 435,
+          "id": "line-435",
+          "kind": "list",
+          "parent_id": "line-431",
+          "start_line": 435,
+          "text": "- Use kubectl\n"
+        },
+        {
+          "end_line": 437,
+          "id": "line-437",
+          "kind": "list",
+          "parent_id": "line-431",
+          "start_line": 437,
+          "text": "- Use a configuration file\n"
+        },
+        {
+          "end_line": 439,
+          "id": "line-439",
+          "kind": "list",
+          "parent_id": "line-431",
+          "start_line": 439,
+          "text": "- Use the Kustomize tool\n"
+        },
+        {
+          "end_line": 441,
+          "id": "line-441",
+          "kind": "heading",
+          "parent_id": "line-431",
+          "start_line": 441,
+          "text": "#### Constraints on Secret names and data\n"
+        },
+        {
+          "end_line": 443,
+          "id": "line-443",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 443,
+          "text": "The name of a Secret object must be a valid DNS subdomain name.\n"
+        },
+        {
+          "end_line": 445,
+          "id": "line-445",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 445,
+          "text": "You can specify the data and/or the stringData field when creating a configuration file for a Secret. The data and the stringData fields are optional. The values for all keys in the data field have to be base64-encoded strings. If the conversion to base64 string is not desirable, you can choose to specify the stringData field instead, which accepts arbitrary strings as values.\n"
+        },
+        {
+          "end_line": 447,
+          "id": "line-447",
+          "kind": "paragraph",
+          "parent_id": "line-441",
+          "start_line": 447,
+          "text": "The keys of data and stringData must consist of alphanumeric characters, -, _ or .. All key-value pairs in the stringData field are internally merged into the data field. If a key appears in both the data and the stringData field, the value specified in the stringData field takes precedence.\n"
+        },
+        {
+          "end_line": 449,
+          "id": "line-449",
+          "kind": "heading",
+          "parent_id": "line-431",
+          "start_line": 449,
+          "text": "#### Size limit\n"
+        },
+        {
+          "end_line": 451,
+          "id": "line-451",
+          "kind": "paragraph",
+          "parent_id": "line-449",
+          "start_line": 451,
+          "text": "Individual Secrets are limited to 1MiB in size. This is to discourage creation of very large Secrets that could exhaust the API server and kubelet memory. However, creation of many smaller Secrets could also exhaust memory. You can use a resource quota to limit the number of Secrets (or other resources) in a namespace.\n"
+        },
+        {
+          "end_line": 453,
+          "id": "line-453",
+          "kind": "heading",
+          "parent_id": "line-429",
+          "start_line": 453,
+          "text": "### Editing a Secret\n"
+        },
+        {
+          "end_line": 455,
+          "id": "line-455",
+          "kind": "paragraph",
+          "parent_id": "line-453",
+          "start_line": 455,
+          "text": "You can edit an existing Secret unless it is immutable. To edit a Secret, use one of the following methods:\n"
+        },
+        {
+          "end_line": 457,
+          "id": "line-457",
+          "kind": "list",
+          "parent_id": "line-453",
+          "start_line": 457,
+          "text": "- Use kubectl\n"
+        },
+        {
+          "end_line": 459,
+          "id": "line-459",
+          "kind": "list",
+          "parent_id": "line-453",
+          "start_line": 459,
+          "text": "- Use a configuration file\n"
+        },
+        {
+          "end_line": 461,
+          "id": "line-461",
+          "kind": "paragraph",
+          "parent_id": "line-453",
+          "start_line": 461,
+          "text": "You can also edit the data in a Secret using the Kustomize tool. However, this method creates a new Secret object with the edited data.\n"
+        },
+        {
+          "end_line": 463,
+          "id": "line-463",
+          "kind": "paragraph",
+          "parent_id": "line-453",
+          "start_line": 463,
+          "text": "Depending on how you created the Secret, as well as how the Secret is used in your Pods, updates to existing Secret objects are propagated automatically to Pods that use the data. For more information, refer to Using Secrets as files from a Pod section.\n"
+        },
+        {
+          "end_line": 465,
+          "id": "line-465",
+          "kind": "heading",
+          "parent_id": "line-429",
+          "start_line": 465,
+          "text": "### Using a Secret\n"
+        },
+        {
+          "end_line": 467,
+          "id": "line-467",
+          "kind": "paragraph",
+          "parent_id": "line-465",
+          "start_line": 467,
+          "text": "Secrets can be mounted as data volumes or exposed as environment variables to be used by a container in a Pod. Secrets can also be used by other parts of the system, without being directly exposed to the Pod. For example, Secrets can hold credentials that other parts of the system should use to interact with external systems on your behalf.\n"
+        },
+        {
+          "end_line": 469,
+          "id": "line-469",
+          "kind": "paragraph",
+          "parent_id": "line-465",
+          "start_line": 469,
+          "text": "Secret volume sources are validated to ensure that the specified object reference actually points to an object of type Secret. Therefore, a Secret needs to be created before any Pods that depend on it.\n"
+        },
+        {
+          "end_line": 471,
+          "id": "line-471",
+          "kind": "paragraph",
+          "parent_id": "line-465",
+          "start_line": 471,
+          "text": "If the Secret cannot be fetched (perhaps because it does not exist, or due to a temporary lack of connection to the API server) the kubelet periodically retries running that Pod. The kubelet also reports an Event for that Pod, including details of the problem fetching the Secret.\n"
+        },
+        {
+          "end_line": 473,
+          "id": "line-473",
+          "kind": "heading",
+          "parent_id": "line-465",
+          "start_line": 473,
+          "text": "#### Optional Secrets\n"
+        },
+        {
+          "end_line": 475,
+          "id": "line-475",
+          "kind": "paragraph",
+          "parent_id": "line-473",
+          "start_line": 475,
+          "text": "When you reference a Secret in a Pod, you can mark the Secret as optional, such as in the following example. If an optional Secret doesn't exist, Kubernetes ignores it.\n"
+        },
+        {
+          "end_line": 477,
+          "id": "line-477",
+          "kind": "paragraph",
+          "parent_id": "line-473",
+          "start_line": 477,
+          "text": "secret/optional-secret.yaml\n"
+        },
+        {
+          "end_line": 497,
+          "id": "line-479",
+          "kind": "code",
+          "parent_id": "line-473",
+          "start_line": 479,
+          "text": "```\napiVersion: v1\nkind: Pod\nmetadata:\nname: mypod\nspec:\ncontainers:\n- name: mypod\nimage: redis\nvolumeMounts:\n- name: foo\nmountPath: \"/etc/foo\"\nreadOnly: true\nvolumes:\n- name: foo\nsecret:\nsecretName: mysecret\noptional: true\n```\n"
+        },
+        {
+          "end_line": 499,
+          "id": "line-499",
+          "kind": "paragraph",
+          "parent_id": "line-473",
+          "start_line": 499,
+          "text": "By default, Secrets are required. None of a Pod's containers will start until all non-optional Secrets are available.\n"
+        },
+        {
+          "end_line": 501,
+          "id": "line-501",
+          "kind": "paragraph",
+          "parent_id": "line-473",
+          "start_line": 501,
+          "text": "If a Pod references a specific key in a non-optional Secret and that Secret does exist, but is missing the named key, the Pod fails during startup.\n"
+        },
+        {
+          "end_line": 503,
+          "id": "line-503",
+          "kind": "heading",
+          "parent_id": "line-429",
+          "start_line": 503,
+          "text": "### Using Secrets as files from a Pod\n"
+        },
+        {
+          "end_line": 505,
+          "id": "line-505",
+          "kind": "paragraph",
+          "parent_id": "line-503",
+          "start_line": 505,
+          "text": "If you want to access data from a Secret in a Pod, one way to do that is to have Kubernetes make the value of that Secret be available as a file inside the filesystem of one or more of the Pod's containers.\n"
+        },
+        {
+          "end_line": 507,
+          "id": "line-507",
+          "kind": "paragraph",
+          "parent_id": "line-503",
+          "start_line": 507,
+          "text": "For instructions, refer to Create a Pod that has access to the secret data through a Volume.\n"
+        },
+        {
+          "end_line": 509,
+          "id": "line-509",
+          "kind": "paragraph",
+          "parent_id": "line-503",
+          "start_line": 509,
+          "text": "When a volume contains data from a Secret, and that Secret is updated, Kubernetes tracks this and updates the data in the volume, using an eventually-consistent approach.\n"
+        },
+        {
+          "end_line": 511,
+          "id": "line-511",
+          "kind": "heading",
+          "parent_id": "line-503",
+          "start_line": 511,
+          "text": "#### Note:\n"
+        },
+        {
+          "end_line": 515,
+          "id": "line-513",
+          "kind": "paragraph",
+          "parent_id": "line-511",
+          "start_line": 513,
+          "text": "A container using a Secret as a\nsubPath volume mount does not receive\nautomated Secret updates.\n"
+        },
+        {
+          "end_line": 517,
+          "id": "line-517",
+          "kind": "paragraph",
+          "parent_id": "line-511",
+          "start_line": 517,
+          "text": "The kubelet keeps a cache of the current keys and values for the Secrets that are used in volumes for pods on that node. You can configure the way that the kubelet detects changes from the cached values. The configMapAndSecretChangeDetectionStrategy field in the kubelet configuration controls which strategy the kubelet uses. The default strategy is Watch.\n"
+        },
+        {
+          "end_line": 519,
+          "id": "line-519",
+          "kind": "paragraph",
+          "parent_id": "line-511",
+          "start_line": 519,
+          "text": "Updates to Secrets can be either propagated by an API watch mechanism (the default), based on a cache with a defined time-to-live, or polled from the cluster API server on each kubelet synchronisation loop.\n"
+        },
+        {
+          "end_line": 521,
+          "id": "line-521",
+          "kind": "paragraph",
+          "parent_id": "line-511",
+          "start_line": 521,
+          "text": "As a result, the total delay from the moment when the Secret is updated to the moment when new keys are projected to the Pod can be as long as the kubelet sync period + cache propagation delay, where the cache propagation delay depends on the chosen cache type (following the same order listed in the previous paragraph, these are: watch propagation delay, the configured cache TTL, or zero for direct polling).\n"
+        },
+        {
+          "end_line": 523,
+          "id": "line-523",
+          "kind": "heading",
+          "parent_id": "line-429",
+          "start_line": 523,
+          "text": "### Using Secrets as environment variables\n"
+        },
+        {
+          "end_line": 525,
+          "id": "line-525",
+          "kind": "paragraph",
+          "parent_id": "line-523",
+          "start_line": 525,
+          "text": "To use a Secret in an environment variable in a Pod:\n"
+        },
+        {
+          "end_line": 527,
+          "id": "line-527",
+          "kind": "list",
+          "parent_id": "line-523",
+          "start_line": 527,
+          "text": "- For each container in your Pod specification, add an environment variable for each Secret key that you want to use to the env[].valueFrom.secretKeyRef field.\n"
+        },
+        {
+          "end_line": 529,
+          "id": "line-529",
+          "kind": "list",
+          "parent_id": "line-523",
+          "start_line": 529,
+          "text": "- Modify your image and/or command line so that the program looks for values in the specified environment variables.\n"
+        },
+        {
+          "end_line": 531,
+          "id": "line-531",
+          "kind": "paragraph",
+          "parent_id": "line-523",
+          "start_line": 531,
+          "text": "For instructions, refer to Define container environment variables using Secret data.\n"
+        },
+        {
+          "end_line": 533,
+          "id": "line-533",
+          "kind": "paragraph",
+          "parent_id": "line-523",
+          "start_line": 533,
+          "text": "It's important to note that the range of characters allowed for environment variable names in pods is restricted. If any keys do not meet the rules, those keys are not made available to your container, though the Pod is allowed to start.\n"
+        },
+        {
+          "end_line": 535,
+          "id": "line-535",
+          "kind": "heading",
+          "parent_id": "line-429",
+          "start_line": 535,
+          "text": "### Container image pull Secrets\n"
+        },
+        {
+          "end_line": 537,
+          "id": "line-537",
+          "kind": "paragraph",
+          "parent_id": "line-535",
+          "start_line": 537,
+          "text": "If you want to fetch container images from a private repository, you need a way for the kubelet on each node to authenticate to that repository. You can configure image pull Secrets to make this possible. These Secrets are configured at the Pod level.\n"
+        },
+        {
+          "end_line": 539,
+          "id": "line-539",
+          "kind": "heading",
+          "parent_id": "line-535",
+          "start_line": 539,
+          "text": "#### Using imagePullSecrets\n"
+        },
+        {
+          "end_line": 541,
+          "id": "line-541",
+          "kind": "paragraph",
+          "parent_id": "line-539",
+          "start_line": 541,
+          "text": "The imagePullSecrets field is a list of references to Secrets in the same namespace. You can use an imagePullSecrets to pass a Secret that contains a Docker (or other) image registry password to the kubelet. The kubelet uses this information to pull a private image on behalf of your Pod. See the PodSpec API for more information about the imagePullSecrets field.\n"
+        },
+        {
+          "end_line": 543,
+          "id": "line-543",
+          "kind": "heading",
+          "parent_id": "line-539",
+          "start_line": 543,
+          "text": "##### Manually specifying an imagePullSecret\n"
+        },
+        {
+          "end_line": 545,
+          "id": "line-545",
+          "kind": "paragraph",
+          "parent_id": "line-543",
+          "start_line": 545,
+          "text": "You can learn how to specify imagePullSecrets from the container images documentation.\n"
+        },
+        {
+          "end_line": 547,
+          "id": "line-547",
+          "kind": "heading",
+          "parent_id": "line-539",
+          "start_line": 547,
+          "text": "##### Arranging for imagePullSecrets to be automatically attached\n"
+        },
+        {
+          "end_line": 549,
+          "id": "line-549",
+          "kind": "paragraph",
+          "parent_id": "line-547",
+          "start_line": 549,
+          "text": "You can manually create imagePullSecrets, and reference these from a ServiceAccount. Any Pods created with that ServiceAccount or created with that ServiceAccount by default, will get their imagePullSecrets field set to that of the service account. See Add ImagePullSecrets to a service account for a detailed explanation of that process.\n"
+        },
+        {
+          "end_line": 551,
+          "id": "line-551",
+          "kind": "heading",
+          "parent_id": "line-429",
+          "start_line": 551,
+          "text": "### Using Secrets with static Pods\n"
+        },
+        {
+          "end_line": 553,
+          "id": "line-553",
+          "kind": "paragraph",
+          "parent_id": "line-551",
+          "start_line": 553,
+          "text": "You cannot use ConfigMaps or Secrets with static Pods.\n"
+        },
+        {
+          "end_line": 555,
+          "id": "line-555",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 555,
+          "text": "## Immutable Secrets\n"
+        },
+        {
+          "end_line": 558,
+          "id": "line-557",
+          "kind": "paragraph",
+          "parent_id": "line-555",
+          "start_line": 557,
+          "text": "Feature state:\nStable since Kubernetes v1.21\n"
+        },
+        {
+          "end_line": 560,
+          "id": "line-560",
+          "kind": "paragraph",
+          "parent_id": "line-555",
+          "start_line": 560,
+          "text": "Kubernetes lets you mark specific Secrets (and ConfigMaps) as immutable. Preventing changes to the data of an existing Secret has the following benefits:\n"
+        },
+        {
+          "end_line": 562,
+          "id": "line-562",
+          "kind": "list",
+          "parent_id": "line-555",
+          "start_line": 562,
+          "text": "- protects you from accidental (or unwanted) updates that could cause applications outages\n"
+        },
+        {
+          "end_line": 564,
+          "id": "line-564",
+          "kind": "list",
+          "parent_id": "line-555",
+          "start_line": 564,
+          "text": "- (for clusters that extensively use Secrets - at least tens of thousands of unique Secret to Pod mounts), switching to immutable Secrets improves the performance of your cluster by significantly reducing load on kube-apiserver. The kubelet does not need to maintain a [watch] on any Secrets that are marked as immutable.\n"
+        },
+        {
+          "end_line": 566,
+          "id": "line-566",
+          "kind": "heading",
+          "parent_id": "line-555",
+          "start_line": 566,
+          "text": "### Marking a Secret as immutable\n"
+        },
+        {
+          "end_line": 568,
+          "id": "line-568",
+          "kind": "paragraph",
+          "parent_id": "line-566",
+          "start_line": 568,
+          "text": "You can create an immutable Secret by setting the immutable field to true. For example,\n"
+        },
+        {
+          "end_line": 577,
+          "id": "line-570",
+          "kind": "code",
+          "parent_id": "line-566",
+          "start_line": 570,
+          "text": "```\napiVersion: v1\nkind: Secret\nmetadata: ...\ndata: ...\nimmutable: true\n\n```\n"
+        },
+        {
+          "end_line": 579,
+          "id": "line-579",
+          "kind": "paragraph",
+          "parent_id": "line-566",
+          "start_line": 579,
+          "text": "You can also update any existing mutable Secret to make it immutable.\n"
+        },
+        {
+          "end_line": 581,
+          "id": "line-581",
+          "kind": "heading",
+          "parent_id": "line-566",
+          "start_line": 581,
+          "text": "#### Note:\n"
+        },
+        {
+          "end_line": 586,
+          "id": "line-583",
+          "kind": "paragraph",
+          "parent_id": "line-581",
+          "start_line": 583,
+          "text": "Once a Secret or ConfigMap is marked as immutable, it is not possible to revert this change\nnor to mutate the contents of the data field. You can only delete and recreate the Secret.\nExisting Pods maintain a mount point to the deleted Secret - it is recommended to recreate\nthese pods.\n"
+        },
+        {
+          "end_line": 588,
+          "id": "line-588",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 588,
+          "text": "## Information security for Secrets\n"
+        },
+        {
+          "end_line": 590,
+          "id": "line-590",
+          "kind": "paragraph",
+          "parent_id": "line-588",
+          "start_line": 590,
+          "text": "Although ConfigMap and Secret work similarly, Kubernetes applies some additional protection for Secret objects.\n"
+        },
+        {
+          "end_line": 592,
+          "id": "line-592",
+          "kind": "paragraph",
+          "parent_id": "line-588",
+          "start_line": 592,
+          "text": "Secrets often hold values that span a spectrum of importance, many of which can cause escalations within Kubernetes (e.g. service account tokens) and to external systems. Even if an individual app can reason about the power of the Secrets it expects to interact with, other apps within the same namespace can render those assumptions invalid.\n"
+        },
+        {
+          "end_line": 594,
+          "id": "line-594",
+          "kind": "paragraph",
+          "parent_id": "line-588",
+          "start_line": 594,
+          "text": "Authorization configuration affects how Secret data can be accessed within a namespace. For example, granting list or watch permissions on Secrets allows a subject to read all Secret data in that namespace, not only the Secrets explicitly referenced by its Pods. Restrict access to the minimum set of permissions required for a workload to function, and avoid granting broad roles such as cluster-admin unless required for administrative purposes.\n"
+        },
+        {
+          "end_line": 596,
+          "id": "line-596",
+          "kind": "paragraph",
+          "parent_id": "line-588",
+          "start_line": 596,
+          "text": "Also see the Authorization documentation.\n"
+        },
+        {
+          "end_line": 598,
+          "id": "line-598",
+          "kind": "paragraph",
+          "parent_id": "line-588",
+          "start_line": 598,
+          "text": "A Secret is only sent to a node if a Pod on that node requires it. For mounting Secrets into Pods, the kubelet stores a copy of the data into a tmpfs so that the confidential data is not written to durable storage. Once the Pod that depends on the Secret is deleted, the kubelet deletes its local copy of the confidential data from the Secret.\n"
+        },
+        {
+          "end_line": 600,
+          "id": "line-600",
+          "kind": "paragraph",
+          "parent_id": "line-588",
+          "start_line": 600,
+          "text": "There may be several containers in a Pod. By default, containers you define only have access to the default ServiceAccount and its related Secret. You must explicitly define environment variables or map a volume into a container in order to provide access to any other Secret.\n"
+        },
+        {
+          "end_line": 602,
+          "id": "line-602",
+          "kind": "paragraph",
+          "parent_id": "line-588",
+          "start_line": 602,
+          "text": "There may be Secrets for several Pods on the same node. However, only the Secrets that a Pod requests are potentially visible within its containers. Therefore, one Pod does not have access to the Secrets of another Pod.\n"
+        },
+        {
+          "end_line": 604,
+          "id": "line-604",
+          "kind": "heading",
+          "parent_id": "line-588",
+          "start_line": 604,
+          "text": "### Configure least-privilege access to Secrets\n"
+        },
+        {
+          "end_line": 606,
+          "id": "line-606",
+          "kind": "paragraph",
+          "parent_id": "line-604",
+          "start_line": 606,
+          "text": "To enhance the security measures around Secrets, use separate namespaces to isolate access to mounted secrets.\n"
+        },
+        {
+          "end_line": 608,
+          "id": "line-608",
+          "kind": "heading",
+          "parent_id": "line-604",
+          "start_line": 608,
+          "text": "#### Warning:\n"
+        },
+        {
+          "end_line": 611,
+          "id": "line-610",
+          "kind": "paragraph",
+          "parent_id": "line-608",
+          "start_line": 610,
+          "text": "Any containers that run with privileged: true on a node can access all\nSecrets used on that node.\n"
+        },
+        {
+          "end_line": 613,
+          "id": "line-613",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 613,
+          "text": "## What's next\n"
+        },
+        {
+          "end_line": 615,
+          "id": "line-615",
+          "kind": "list",
+          "parent_id": "line-613",
+          "start_line": 615,
+          "text": "- For guidelines to manage and improve the security of your Secrets, refer to Good practices for Kubernetes Secrets.\n"
+        },
+        {
+          "end_line": 617,
+          "id": "line-617",
+          "kind": "list",
+          "parent_id": "line-613",
+          "start_line": 617,
+          "text": "- Learn how to manage Secrets using kubectl\n"
+        },
+        {
+          "end_line": 619,
+          "id": "line-619",
+          "kind": "list",
+          "parent_id": "line-613",
+          "start_line": 619,
+          "text": "- Learn how to manage Secrets using config file\n"
+        },
+        {
+          "end_line": 621,
+          "id": "line-621",
+          "kind": "list",
+          "parent_id": "line-613",
+          "start_line": 621,
+          "text": "- Learn how to manage Secrets using kustomize\n"
+        },
+        {
+          "end_line": 623,
+          "id": "line-623",
+          "kind": "list",
+          "parent_id": "line-613",
+          "start_line": 623,
+          "text": "- Read the API reference for Secret\n"
+        },
+        {
+          "end_line": 625,
+          "id": "line-625",
+          "kind": "heading",
+          "parent_id": "line-1",
+          "start_line": 625,
+          "text": "## Feedback\n"
+        },
+        {
+          "end_line": 627,
+          "id": "line-627",
+          "kind": "paragraph",
+          "parent_id": "line-625",
+          "start_line": 627,
+          "text": "Was this page helpful?\n"
+        },
+        {
+          "end_line": 630,
+          "id": "line-629",
+          "kind": "paragraph",
+          "parent_id": "line-625",
+          "start_line": 629,
+          "text": "Yes\nNo\n"
+        },
+        {
+          "end_line": 632,
+          "id": "line-632",
+          "kind": "paragraph",
+          "parent_id": "line-625",
+          "start_line": 632,
+          "text": "Thanks for the feedback. If you have a specific, answerable question about how to use Kubernetes, ask it on Stack Overflow. Open an issue in the GitHub Repository if you want to report a problem or suggest an improvement.\n"
+        },
+        {
+          "end_line": 634,
+          "id": "line-634",
+          "kind": "paragraph",
+          "parent_id": "line-625",
+          "start_line": 634,
+          "text": "Last modified July 23, 2026 at 7:19 PM PST: Replace code with code_sample shortcode (fc26d52c23)\n"
+        }
+      ],
+      "id": "kubernetes",
+      "source_hash": "f9b756063d7923a42f9ad4eaa8b3d6e68a900e65a3434ef6881b66b60e24820c",
+      "title": "Secrets | Kubernetes",
+      "url": "https://kubernetes.io/docs/concepts/configuration/secret/"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "status": "pass",
+  "saved_outputs_checked": 48,
+  "frozen_files_checked": 81,
+  "exact_token_counts_and_budget": "pass",
+  "provenance_and_dependencies": "pass",
+  "scores_and_aggregates": "pass",
+  "selector_rerun": false,
+  "network_used": false,
+  "results_sha256": "7f8b828ef6636265ffaef0cabee9d5533538d4c7a0993e41e72fd775da484bcf",
+  "comparisons": [
+    {
+      "budget": 1024,
+      "base": "A",
+      "compared": "B",
+      "improved": 0,
+      "unchanged": 8,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    },
+    {
+      "budget": 1024,
+      "base": "A",
+      "compared": "C",
+      "improved": 1,
+      "unchanged": 7,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    },
+    {
+      "budget": 1024,
+      "base": "B",
+      "compared": "C",
+      "improved": 1,
+      "unchanged": 7,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    },
+    {
+      "budget": 2048,
+      "base": "A",
+      "compared": "B",
+      "improved": 0,
+      "unchanged": 8,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    },
+    {
+      "budget": 2048,
+      "base": "A",
+      "compared": "C",
+      "improved": 3,
+      "unchanged": 5,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    },
+    {
+      "budget": 2048,
+      "base": "B",
+      "compared": "C",
+      "improved": 3,
+      "unchanged": 5,
+      "regressed": 0,
+      "previously_kept_units_lost": 0
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "documents": [
+    {
+      "id": "rust",
+      "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/",
+      "title": "Announcing Rust 1.88.0 | Rust Blog",
+      "blocks": [
+        {
+          "id": "line-11",
+          "kind": "paragraph",
+          "text": "If you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.88.0.\n",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-15",
+          "kind": "heading",
+          "text": "## What's in 1.88.0 stable\n",
+          "start_line": 15,
+          "end_line": 15
+        },
+        {
+          "id": "line-17",
+          "kind": "heading",
+          "text": "### Let chains\n",
+          "parent_id": "line-15",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "id": "line-19",
+          "kind": "paragraph",
+          "text": "This feature allows &&-chaining let statements inside if and while conditions, even intermingling with boolean expressions, so there is less distinction between if/if let and while/while let. The patterns inside the let sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.\n",
+          "parent_id": "line-17",
+          "start_line": 19,
+          "end_line": 19
+        },
+        {
+          "id": "line-21",
+          "kind": "paragraph",
+          "text": "For example, this snippet combines multiple conditions which would have required nesting if let and if blocks before:\n",
+          "parent_id": "line-17",
+          "start_line": 21,
+          "end_line": 21
+        },
+        {
+          "id": "line-23",
+          "kind": "code",
+          "text": "```\nif let Channel::Stable(v) = release_info()\n&& let Semver { major, minor, .. } = v\n&& major == 1\n&& minor == 88\n{\nprintln!(\"`let_chains` was stabilized in this version\");\n}\n```\n",
+          "parent_id": "line-17",
+          "start_line": 23,
+          "end_line": 31
+        },
+        {
+          "id": "line-33",
+          "kind": "paragraph",
+          "text": "Let chains are only available in the Rust 2024 edition, as this feature depends on the if let temporary scope change for more consistent drop order.\n",
+          "parent_id": "line-17",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "id": "line-35",
+          "kind": "paragraph",
+          "text": "Earlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!\n",
+          "parent_id": "line-17",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "id": "line-37",
+          "kind": "heading",
+          "text": "### Naked functions\n",
+          "parent_id": "line-15",
+          "start_line": 37,
+          "end_line": 37
+        },
+        {
+          "id": "line-41",
+          "kind": "paragraph",
+          "text": "For example:\n",
+          "parent_id": "line-37",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-56",
+          "kind": "paragraph",
+          "text": "Look for a more detailed post on this soon!\n",
+          "parent_id": "line-37",
+          "start_line": 56,
+          "end_line": 56
+        },
+        {
+          "id": "line-58",
+          "kind": "heading",
+          "text": "### Boolean configuration\n",
+          "parent_id": "line-15",
+          "start_line": 58,
+          "end_line": 58
+        },
+        {
+          "id": "line-62",
+          "kind": "paragraph",
+          "text": "Previously, empty predicate lists could be used for unconditional configuration, like cfg(all()) for enabled and cfg(any()) for disabled, but this meaning is rather implicit and easy to get backwards. cfg(true) and cfg(false) offer a more direct way to say what you mean.\n",
+          "parent_id": "line-58",
+          "start_line": 62,
+          "end_line": 62
+        },
+        {
+          "id": "line-64",
+          "kind": "paragraph",
+          "text": "See RFC 3695 for more background!\n",
+          "parent_id": "line-58",
+          "start_line": 64,
+          "end_line": 64
+        },
+        {
+          "id": "line-76",
+          "kind": "heading",
+          "text": "### Stabilized APIs\n",
+          "parent_id": "line-15",
+          "start_line": 76,
+          "end_line": 76
+        },
+        {
+          "id": "line-80",
+          "kind": "list",
+          "text": "- impl Default for *const T\n",
+          "parent_id": "line-76",
+          "start_line": 80,
+          "end_line": 80
+        },
+        {
+          "id": "line-82",
+          "kind": "list",
+          "text": "- impl Default for *mut T\n",
+          "parent_id": "line-76",
+          "start_line": 82,
+          "end_line": 82
+        }
+      ],
+      "source_hash": "d098b0afe7ebcb13f12c1165dc8f5e181310e3a07fbc0a5a27b95c866ca61ebd"
+    }
+  ],
+  "omitted_count": 45,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1015,
+  "max_tokens": 1024
+}

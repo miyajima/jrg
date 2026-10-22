@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-6",
+      "url": "https://github.github.com/gh-aw/reference/concurrency/",
+      "title": "Concurrency Control | GitHub Agentic Workflows",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\nSee Safe Outputs for details.\n\n## Queue Behavior (`queue`)\n\nSection titled “Queue Behavior (queue)”\n\nGitHub Actions concurrency groups accept an optional `queue` field that controls how multiple pending runs in the same group are handled. The gh-aw compiler preserves this field in both top-level and per-engine concurrency blocks:\n\nValue  | Behavior\n--- | ---\n`single` (Actions default)  | Only the latest pending run is kept; earlier pending runs are discarded.\n`max`  | All pending runs queue and run in arrival order.\n    \n    `\n    \n    concurrency:\n    \n      group: ${{ github.workflow }}-${{ github.ref }}\n    \n      queue: max\n    \n    `\n\nCompiler-generated concurrency groups (the top-level workflow group, and the agent, output, and conclusion jobs) emit `queue: max` by default so back-to-back triggers run sequentially rather than being dropped. The top-level group only emits `queue: max` when `cancel-in-progress` is not enabled, since GitHub Actions rejects the combination of `queue: max` and `cancel-in-progress: true`. --------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "d38d850f0d261c42f7cf900d0e37959b34ed1c3c1e4d22049901d3a9d3286228"
+    },
+    {
+      "id": "result-10",
+      "url": "https://github.com/orgs/community/discussions/5435",
+      "title": "Concurrency Cancel Pending · community · Discussion #5435 · GitHub",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "689423bcc000c6b5bfd590442fe71b2dfd26c05e7933d1e15549705565e09b13"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 474,
+  "max_tokens": 512
+}

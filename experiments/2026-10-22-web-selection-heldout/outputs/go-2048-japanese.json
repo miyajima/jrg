@@ -1,0 +1,288 @@
+{
+  "documents": [
+    {
+      "id": "go",
+      "url": "https://pkg.go.dev/context",
+      "title": "context package - context - Go Packages",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "## Documentation ¶\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "### Overview ¶\n",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-11",
+          "kind": "paragraph",
+          "text": "The WithCancel, WithDeadline, and WithTimeout functions take a Context (the parent) and return a derived Context (the child) and a CancelFunc. Calling the CancelFunc directly cancels the child and its children, removes the parent's reference to the child, and stops any associated timers. Failing to call the CancelFunc leaks the child and its children until the parent is canceled. The go vet tool checks that CancelFuncs are used on all control-flow paths.\n",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-34",
+          "kind": "heading",
+          "text": "### Index ¶\n",
+          "parent_id": "line-1",
+          "start_line": 34,
+          "end_line": 34
+        },
+        {
+          "id": "line-42",
+          "kind": "list",
+          "text": "- func WithCancel(parent Context) (ctx Context, cancel CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 42,
+          "end_line": 42
+        },
+        {
+          "id": "line-46",
+          "kind": "list",
+          "text": "- func WithDeadline(parent Context, d time.Time) (Context, CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 46,
+          "end_line": 46
+        },
+        {
+          "id": "line-48",
+          "kind": "list",
+          "text": "- func WithDeadlineCause(parent Context, d time.Time, cause error) (Context, CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 48,
+          "end_line": 48
+        },
+        {
+          "id": "line-50",
+          "kind": "list",
+          "text": "- func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 50,
+          "end_line": 50
+        },
+        {
+          "id": "line-52",
+          "kind": "list",
+          "text": "- func WithTimeoutCause(parent Context, timeout time.Duration, cause error) (Context, CancelFunc)\n",
+          "parent_id": "line-34",
+          "start_line": 52,
+          "end_line": 52
+        },
+        {
+          "id": "line-56",
+          "kind": "list",
+          "text": "- type CancelFunc\n",
+          "parent_id": "line-34",
+          "start_line": 56,
+          "end_line": 56
+        },
+        {
+          "id": "line-100",
+          "kind": "heading",
+          "text": "### Functions ¶\n",
+          "parent_id": "line-1",
+          "start_line": 100,
+          "end_line": 100
+        },
+        {
+          "id": "line-102",
+          "kind": "heading",
+          "text": "#### func AfterFunc ¶ added in go1.21.0\n",
+          "parent_id": "line-100",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "id": "line-271",
+          "kind": "code",
+          "text": "```\n\npackage main\n\nimport (\n\"context\"\n\"errors\"\n\"fmt\"\n)\n\nfunc main() {\n// mergeCancel returns a context that contains the values of ctx,\n// and which is canceled when either ctx or cancelCtx is canceled.\nmergeCancel := func(ctx, cancelCtx context.Context) (context.Context, context.CancelFunc) {\nctx, cancel := context.WithCancelCause(ctx)\nstop := context.AfterFunc(cancelCtx, func() {\ncancel(context.Cause(cancelCtx))\n})\nreturn ctx, func() {\nstop()\ncancel(context.Canceled)\n}\n}\n\nctx1, cancel1 := context.WithCancelCause(context.Background())\ndefer cancel1(errors.New(\"ctx1 canceled\"))\n\nctx2, cancel2 := context.WithCancelCause(context.Background())\n\nmergedCtx, mergedCancel := mergeCancel(ctx1, ctx2)\ndefer mergedCancel()\n\ncancel2(errors.New(\"ctx2 canceled\"))\n<-mergedCtx.Done()\nfmt.Println(context.Cause(mergedCtx))\n\n}\n\n```\n",
+          "parent_id": "line-102",
+          "start_line": 271,
+          "end_line": 309
+        },
+        {
+          "id": "line-329",
+          "kind": "heading",
+          "text": "#### func WithCancel ¶\n",
+          "parent_id": "line-100",
+          "start_line": 329,
+          "end_line": 329
+        },
+        {
+          "id": "line-331",
+          "kind": "code",
+          "text": "```\nfunc WithCancel(parent Context) (ctx Context, cancel CancelFunc)\n```\n",
+          "parent_id": "line-329",
+          "start_line": 331,
+          "end_line": 333
+        },
+        {
+          "id": "line-401",
+          "kind": "heading",
+          "text": "#### func WithCancelCause ¶ added in go1.20\n",
+          "parent_id": "line-100",
+          "start_line": 401,
+          "end_line": 401
+        },
+        {
+          "id": "line-403",
+          "kind": "code",
+          "text": "```\nfunc WithCancelCause(parent Context) (ctx Context, cancel CancelCauseFunc)\n```\n",
+          "parent_id": "line-401",
+          "start_line": 403,
+          "end_line": 405
+        },
+        {
+          "id": "line-407",
+          "kind": "paragraph",
+          "text": "WithCancelCause behaves like WithCancel but returns a CancelCauseFunc instead of a CancelFunc. Calling cancel with a non-nil error (the \"cause\") records that error in ctx; it can then be retrieved using Cause(ctx). Calling cancel with nil sets the cause to Canceled.\n",
+          "parent_id": "line-401",
+          "start_line": 407,
+          "end_line": 407
+        },
+        {
+          "id": "line-419",
+          "kind": "heading",
+          "text": "#### func WithDeadline ¶\n",
+          "parent_id": "line-100",
+          "start_line": 419,
+          "end_line": 419
+        },
+        {
+          "id": "line-421",
+          "kind": "code",
+          "text": "```\nfunc WithDeadline(parent Context, d time.Time) (Context, CancelFunc)\n```\n",
+          "parent_id": "line-419",
+          "start_line": 421,
+          "end_line": 423
+        },
+        {
+          "id": "line-458",
+          "kind": "heading",
+          "text": "#### func WithDeadlineCause ¶ added in go1.21.0\n",
+          "parent_id": "line-100",
+          "start_line": 458,
+          "end_line": 458
+        },
+        {
+          "id": "line-460",
+          "kind": "code",
+          "text": "```\nfunc WithDeadlineCause(parent Context, d time.Time, cause error) (Context, CancelFunc)\n```\n",
+          "parent_id": "line-458",
+          "start_line": 460,
+          "end_line": 462
+        },
+        {
+          "id": "line-464",
+          "kind": "paragraph",
+          "text": "WithDeadlineCause behaves like WithDeadline but also sets the cause of the returned Context when the deadline is exceeded. The returned CancelFunc does not set the cause.\n",
+          "parent_id": "line-458",
+          "start_line": 464,
+          "end_line": 464
+        },
+        {
+          "id": "line-466",
+          "kind": "heading",
+          "text": "#### func WithTimeout ¶\n",
+          "parent_id": "line-100",
+          "start_line": 466,
+          "end_line": 466
+        },
+        {
+          "id": "line-468",
+          "kind": "code",
+          "text": "```\nfunc WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)\n```\n",
+          "parent_id": "line-466",
+          "start_line": 468,
+          "end_line": 470
+        },
+        {
+          "id": "line-511",
+          "kind": "heading",
+          "text": "#### func WithTimeoutCause ¶ added in go1.21.0\n",
+          "parent_id": "line-100",
+          "start_line": 511,
+          "end_line": 511
+        },
+        {
+          "id": "line-513",
+          "kind": "code",
+          "text": "```\nfunc WithTimeoutCause(parent Context, timeout time.Duration, cause error) (Context, CancelFunc)\n```\n",
+          "parent_id": "line-511",
+          "start_line": 513,
+          "end_line": 515
+        },
+        {
+          "id": "line-517",
+          "kind": "paragraph",
+          "text": "WithTimeoutCause behaves like WithTimeout but also sets the cause of the returned Context when the timeout expires. The returned CancelFunc does not set the cause.\n",
+          "parent_id": "line-511",
+          "start_line": 517,
+          "end_line": 517
+        },
+        {
+          "id": "line-519",
+          "kind": "heading",
+          "text": "### Types ¶\n",
+          "parent_id": "line-1",
+          "start_line": 519,
+          "end_line": 519
+        },
+        {
+          "id": "line-521",
+          "kind": "heading",
+          "text": "#### type CancelCauseFunc ¶ added in go1.20\n",
+          "parent_id": "line-519",
+          "start_line": 521,
+          "end_line": 521
+        },
+        {
+          "id": "line-527",
+          "kind": "paragraph",
+          "text": "A CancelCauseFunc behaves like a CancelFunc but additionally sets the cancellation cause. This cause can be retrieved by calling Cause on the canceled Context or on any of its derived Contexts.\n",
+          "parent_id": "line-521",
+          "start_line": 527,
+          "end_line": 527
+        },
+        {
+          "id": "line-535",
+          "kind": "heading",
+          "text": "#### type CancelFunc ¶\n",
+          "parent_id": "line-519",
+          "start_line": 535,
+          "end_line": 535
+        },
+        {
+          "id": "line-537",
+          "kind": "code",
+          "text": "```\ntype CancelFunc func()\n```\n",
+          "parent_id": "line-535",
+          "start_line": 537,
+          "end_line": 539
+        },
+        {
+          "id": "line-541",
+          "kind": "paragraph",
+          "text": "A CancelFunc tells an operation to abandon its work. A CancelFunc does not wait for the work to stop. A CancelFunc may be called by multiple goroutines simultaneously. After the first call, subsequent calls to a CancelFunc do nothing.\n",
+          "parent_id": "line-535",
+          "start_line": 541,
+          "end_line": 541
+        }
+      ],
+      "source_hash": "9cddbc320f7f29bb568d856dd81f3afd1a5a612a828c770858110fdfd9fbe5ad"
+    }
+  ],
+  "omitted_count": 111,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2038,
+  "max_tokens": 2048
+}

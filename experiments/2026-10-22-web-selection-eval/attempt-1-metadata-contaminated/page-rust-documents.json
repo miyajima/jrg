@@ -1,0 +1,500 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "June 26, 2025 · The Rust Release Team\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "start_line": 3,
+          "text": "The Rust team is happy to announce a new version of Rust, 1.88.0. Rust is a programming language empowering everyone to build reliable and efficient software.\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "start_line": 5,
+          "text": "If you have a previous version of Rust installed via rustup, you can get 1.88.0 with:\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-7",
+          "kind": "code",
+          "start_line": 7,
+          "text": "```\n$ rustup update stable\n```\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "paragraph",
+          "start_line": 11,
+          "text": "If you don't have it already, you can get rustup from the appropriate page on our website, and check out the detailed release notes for 1.88.0.\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "paragraph",
+          "start_line": 13,
+          "text": "If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (rustup default beta) or the nightly channel (rustup default nightly). Please report any bugs you might come across!\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "heading",
+          "start_line": 15,
+          "text": "## What's in 1.88.0 stable\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 17,
+          "text": "### Let chains\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 19,
+          "text": "This feature allows &&-chaining let statements inside if and while conditions, even intermingling with boolean expressions, so there is less distinction between if/if let and while/while let. The patterns inside the let sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 21,
+          "text": "For example, this snippet combines multiple conditions which would have required nesting if let and if blocks before:\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-23",
+          "kind": "code",
+          "parent_id": "line-17",
+          "start_line": 23,
+          "text": "```\nif let Channel::Stable(v) = release_info()\n&& let Semver { major, minor, .. } = v\n&& major == 1\n&& minor == 88\n{\nprintln!(\"`let_chains` was stabilized in this version\");\n}\n```\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 33,
+          "text": "Let chains are only available in the Rust 2024 edition, as this feature depends on the if let temporary scope change for more consistent drop order.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 35,
+          "text": "Earlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 37,
+          "text": "### Naked functions\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 39,
+          "text": "Rust now supports writing naked functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function. This is a more ergonomic alternative to defining functions in a global_asm! block. A naked function is marked with the #[unsafe(naked)] attribute, and its body consists of a single naked_asm! call.\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 41,
+          "text": "For example:\n"
+        },
+        {
+          "end_line": 52,
+          "id": "line-43",
+          "kind": "code",
+          "parent_id": "line-37",
+          "start_line": 43,
+          "text": "```\n#[unsafe(naked)]\npub unsafe extern \"sysv64\" fn wrapping_add(a: u64, b: u64) -> u64 {\n// Equivalent to `a.wrapping_add(b)`.\ncore::arch::naked_asm!(\n\"lea rax, [rdi + rsi]\",\n\"ret\"\n);\n}\n```\n"
+        },
+        {
+          "end_line": 54,
+          "id": "line-54",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 54,
+          "text": "The handwritten assembly block defines the entire function body: unlike non-naked functions, the compiler does not add any special handling for arguments or return values. Naked functions are used in low-level settings like Rust's compiler-builtins, operating systems, and embedded applications.\n"
+        },
+        {
+          "end_line": 56,
+          "id": "line-56",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 56,
+          "text": "Look for a more detailed post on this soon!\n"
+        },
+        {
+          "end_line": 58,
+          "id": "line-58",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 58,
+          "text": "### Boolean configuration\n"
+        },
+        {
+          "end_line": 60,
+          "id": "line-60",
+          "kind": "paragraph",
+          "parent_id": "line-58",
+          "start_line": 60,
+          "text": "The cfg predicate language now supports boolean literals, true and false, acting as a configuration that is always enabled or disabled, respectively. This works in Rust conditional compilation with cfg and cfg_attr attributes and the built-in cfg! macro, and also in Cargo [target] tables in both configuration and manifests.\n"
+        },
+        {
+          "end_line": 62,
+          "id": "line-62",
+          "kind": "paragraph",
+          "parent_id": "line-58",
+          "start_line": 62,
+          "text": "Previously, empty predicate lists could be used for unconditional configuration, like cfg(all()) for enabled and cfg(any()) for disabled, but this meaning is rather implicit and easy to get backwards. cfg(true) and cfg(false) offer a more direct way to say what you mean.\n"
+        },
+        {
+          "end_line": 64,
+          "id": "line-64",
+          "kind": "paragraph",
+          "parent_id": "line-58",
+          "start_line": 64,
+          "text": "See RFC 3695 for more background!\n"
+        },
+        {
+          "end_line": 66,
+          "id": "line-66",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 66,
+          "text": "### Cargo automatic cache cleaning\n"
+        },
+        {
+          "end_line": 68,
+          "id": "line-68",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 68,
+          "text": "Starting in 1.88.0, Cargo will automatically run garbage collection on the cache in its home directory!\n"
+        },
+        {
+          "end_line": 70,
+          "id": "line-70",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 70,
+          "text": "When building, Cargo downloads and caches crates needed as dependencies. Historically, these downloaded files would never be cleaned up, leading to an unbounded amount of disk usage in Cargo's home directory. In this version, Cargo introduces a garbage collection mechanism to automatically clean up old files (e.g. .crate files). Cargo will remove files downloaded from the network if not accessed in 3 months, and files obtained from the local system if not accessed in 1 month. Note that this automatic garbage collection will not take place if running offline (using --offline or --frozen).\n"
+        },
+        {
+          "end_line": 72,
+          "id": "line-72",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 72,
+          "text": "Cargo 1.78 and newer track the access information needed for this garbage collection. This was introduced well before the actual cleanup that's starting now, in order to reduce cache churn for those that still use prior versions. If you regularly use versions of Cargo even older than 1.78, in addition to running current versions of Cargo, and you expect to have some crates accessed exclusively by the older versions of Cargo and don't want to re-download those crates every ~3 months, you may wish to set cache.auto-clean-frequency = \"never\" in the Cargo configuration, as described in the docs.\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-74",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 74,
+          "text": "For more information, see the original unstable announcement of this feature. Some parts of that design remain unstable, like the gc subcommand tracked in cargo#13060, so there's still more to look forward to!\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 76,
+          "text": "### Stabilized APIs\n"
+        },
+        {
+          "end_line": 78,
+          "id": "line-78",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 78,
+          "text": "- Cell::update\n"
+        },
+        {
+          "end_line": 80,
+          "id": "line-80",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 80,
+          "text": "- impl Default for *const T\n"
+        },
+        {
+          "end_line": 82,
+          "id": "line-82",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 82,
+          "text": "- impl Default for *mut T\n"
+        },
+        {
+          "end_line": 84,
+          "id": "line-84",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 84,
+          "text": "- mod ffi::c_str\n"
+        },
+        {
+          "end_line": 86,
+          "id": "line-86",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 86,
+          "text": "- HashMap::extract_if\n"
+        },
+        {
+          "end_line": 88,
+          "id": "line-88",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 88,
+          "text": "- HashSet::extract_if\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-90",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 90,
+          "text": "- hint::select_unpredictable\n"
+        },
+        {
+          "end_line": 92,
+          "id": "line-92",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 92,
+          "text": "- proc_macro::Span::line\n"
+        },
+        {
+          "end_line": 94,
+          "id": "line-94",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 94,
+          "text": "- proc_macro::Span::column\n"
+        },
+        {
+          "end_line": 96,
+          "id": "line-96",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 96,
+          "text": "- proc_macro::Span::start\n"
+        },
+        {
+          "end_line": 98,
+          "id": "line-98",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 98,
+          "text": "- proc_macro::Span::end\n"
+        },
+        {
+          "end_line": 100,
+          "id": "line-100",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 100,
+          "text": "- proc_macro::Span::file\n"
+        },
+        {
+          "end_line": 102,
+          "id": "line-102",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 102,
+          "text": "- proc_macro::Span::local_file\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-104",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 104,
+          "text": "- <[T]>::as_chunks\n"
+        },
+        {
+          "end_line": 106,
+          "id": "line-106",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 106,
+          "text": "- <[T]>::as_rchunks\n"
+        },
+        {
+          "end_line": 108,
+          "id": "line-108",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 108,
+          "text": "- <[T]>::as_chunks_unchecked\n"
+        },
+        {
+          "end_line": 110,
+          "id": "line-110",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 110,
+          "text": "- <[T]>::as_chunks_mut\n"
+        },
+        {
+          "end_line": 112,
+          "id": "line-112",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 112,
+          "text": "- <[T]>::as_rchunks_mut\n"
+        },
+        {
+          "end_line": 114,
+          "id": "line-114",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 114,
+          "text": "- <[T]>::as_chunks_unchecked_mut\n"
+        },
+        {
+          "end_line": 116,
+          "id": "line-116",
+          "kind": "paragraph",
+          "parent_id": "line-76",
+          "start_line": 116,
+          "text": "These previously stable APIs are now stable in const contexts:\n"
+        },
+        {
+          "end_line": 118,
+          "id": "line-118",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 118,
+          "text": "- NonNull<T>::replace\n"
+        },
+        {
+          "end_line": 120,
+          "id": "line-120",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 120,
+          "text": "- <*mut T>::replace\n"
+        },
+        {
+          "end_line": 122,
+          "id": "line-122",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 122,
+          "text": "- std::ptr::swap_nonoverlapping\n"
+        },
+        {
+          "end_line": 124,
+          "id": "line-124",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 124,
+          "text": "- Cell::replace\n"
+        },
+        {
+          "end_line": 126,
+          "id": "line-126",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 126,
+          "text": "- Cell::get\n"
+        },
+        {
+          "end_line": 128,
+          "id": "line-128",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 128,
+          "text": "- Cell::get_mut\n"
+        },
+        {
+          "end_line": 130,
+          "id": "line-130",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 130,
+          "text": "- Cell::from_mut\n"
+        },
+        {
+          "end_line": 132,
+          "id": "line-132",
+          "kind": "list",
+          "parent_id": "line-76",
+          "start_line": 132,
+          "text": "- Cell::as_slice_of_cells\n"
+        },
+        {
+          "end_line": 134,
+          "id": "line-134",
+          "kind": "heading",
+          "parent_id": "line-15",
+          "start_line": 134,
+          "text": "### Other changes\n"
+        },
+        {
+          "end_line": 136,
+          "id": "line-136",
+          "kind": "paragraph",
+          "parent_id": "line-134",
+          "start_line": 136,
+          "text": "The i686-pc-windows-gnu target has been demoted to Tier 2, as mentioned in an earlier post. This won't have any immediate effect for users, since both the compiler and standard library tools will still be distributed by rustup for this target. However, with less testing than it had at Tier 1, it has more chance of accumulating bugs in the future.\n"
+        },
+        {
+          "end_line": 138,
+          "id": "line-138",
+          "kind": "paragraph",
+          "parent_id": "line-134",
+          "start_line": 138,
+          "text": "Check out everything that changed in Rust, Cargo, and Clippy.\n"
+        },
+        {
+          "end_line": 140,
+          "id": "line-140",
+          "kind": "heading",
+          "start_line": 140,
+          "text": "## Contributors to 1.88.0\n"
+        },
+        {
+          "end_line": 142,
+          "id": "line-142",
+          "kind": "paragraph",
+          "parent_id": "line-140",
+          "start_line": 142,
+          "text": "Many people came together to create Rust 1.88.0. We couldn't have done it without all of you. Thanks!\n"
+        }
+      ],
+      "id": "rust",
+      "source_hash": "d098b0afe7ebcb13f12c1165dc8f5e181310e3a07fbc0a5a27b95c866ca61ebd",
+      "title": "Announcing Rust 1.88.0 | Rust Blog",
+      "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/"
+    }
+  ]
+}

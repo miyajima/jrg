@@ -1,0 +1,74 @@
+{
+  "documents": [
+    {
+      "id": "result-5",
+      "url": "https://docs.python.org/de/3.13/howto/free-threading-python.html",
+      "title": "Python experimental support for free threading — Python 3.13.16 Dokumentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: last week; Starting with the 3.13 release, CPython has experimental support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. ... The GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading.\n\n# Python experimental support for free threading¶\n\nStarting with the 3.13 release, CPython has experimental support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. Free-threaded execution allows for full utilization of the available processing power by running threads in parallel on available CPU cores. While not all software will benefit from this automatically, programs designed with threading in mind will run faster on multi-core hardware.\n\nThe free-threaded mode is experimental and work is ongoing to improve it: expect some bugs and a substantial single-threaded performance hit.\n\nThis document describes the implications of free threading for Python code. See C API Extension Support for Free Threading for information on how to write C extensions that support the free-threaded build.\n\n## Installation¶\n\nStarting with Python 3.13, the official macOS and Windows installers optionally support installing free-threaded Python binaries. \n## The global interpreter lock in free-threaded Python¶\n\nFree-threaded builds of CPython support optionally running with the GIL enabled at runtime using the environment variable `PYTHON_GIL` or the command-line option `-X gil`.\n\nThe GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading. A warning will be printed in this case.\n\nIn addition to individual package documentation, the following websites track the status of popular packages support for free threading:\n\n  * https://py-free-threading.github.io/tracking/\n\n  * https://hugovk.github.io/free-threaded-wheels/\n\n## Thread safety¶\n\nThe free-threaded build of CPython aims to provide similar thread-safety behavior at the Python level to the default GIL-enabled build. Built-in types like `dict`, `list`, and `set` use internal locks to protect against concurrent modifications in ways that behave similarly to the GIL. --------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "b4f67294752205670c0c8fe9967071e95e30ad43401b87c48e1c3a6015f28adc"
+    },
+    {
+      "id": "result-19",
+      "url": "https://arxiv.org/abs/2603.04782",
+      "title": "Unlocking Python's Cores: Hardware Usage and Energy Implications of Removing the GIL",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 7 months ago; However, starting with Python 3.13 an experimental build allows disabling the GIL. ... This study measures execution time, CPU utilization, memory usage, and energy consumption using four workload categories: NumPy-based, sequential kernels, threaded numerical workloads, and threaded object workloads, comparing GIL and free-threaded builds of Python 3.14.2.\n"
+        }
+      ],
+      "source_hash": "0023f28f6a42b2456e3ca52f71074cce5504280998c24541aab4e28f70bcebae"
+    },
+    {
+      "id": "result-6",
+      "url": "https://docs.python.org/uk/3.13/howto/free-threading-python.html",
+      "title": "Python experimental support for free threading — Python 3.13.16 documentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: today; Starting with the 3.13 release, CPython has experimental support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. ... The GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading.\n\n## Installation¶\n\nStarting with Python 3.13, the official macOS and Windows installers optionally support installing free-threaded Python binaries. The installers are available at https://www.python.org/downloads/.\n\nFor information on other platforms, see the Installing a Free-Threaded Python, a community-maintained installation guide for installing free-threaded Python.\n\nWhen building CPython from source, the `--disable-gil` configure option should be used to build a free-threaded Python interpreter.\n\n## Identifying free-threaded Python¶\n\nTo check if the current interpreter supports free-threading, `python -VV` and `sys.version` contain «experimental free-threading build». The new `sys._is_gil_enabled()` function can be used to check whether the GIL is actually disabled in the running process.\n\nThe `sysconfig.get_config_var(\"Py_GIL_DISABLED\")` configuration variable can be used to determine whether the build supports free threading. If the variable is set to `1`, then the build supports free threading. This is the recommended mechanism for decisions related to the build configuration.\n\n## The global interpreter lock in free-threaded Python¶\n\nFree-threaded builds of CPython support optionally running with the GIL enabled at runtime using the environment variable `PYTHON_GIL` or the command-line option `-X gil`.\n\nThe GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading. A warning will be printed in this case.\n\nIn addition to individual package documentation, the following websites track the status of popular packages support for free threading:\n\n  * https://py-free-threading.github.io/tracking/\n\n  * https://hugovk.github.io/free-threaded-wheels/\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "989470432ead359a20c3224aa9d55d6a784ea198987941c827a55c3428b7994b"
+    },
+    {
+      "id": "result-8",
+      "url": "https://github.com/python/cpython/blob/main/Doc/howto/free-threading-python.rst?plain=1",
+      "title": "cpython/Doc/howto/free-threading-python.rst at main · python/cpython · GitHub",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: 3 days ago; Starting with the 3.13 release, CPython has support for a build of ... with an :term:`extension module`, may not be ready for use in a ... <https://py-free-threading.github.io/installing-cpython/>`_, a ... Free-threaded builds of CPython support optionally running with the GIL enabled\n\n.. _freethreading-python-howto:\n\n*********************************\n\nPython support for free threading\n\n*********************************\n\nStarting with the 3.13 release, CPython has support for a build of\n\nPython called :term:`free threading` where the :term:`global interpreter lock`\n\n(GIL) is disabled. Free-threaded execution allows for full utilization of the\n\navailable processing power by running threads in parallel on available CPU cores.\n\nWhile not all software will benefit from this automatically, programs\n\ndesigned with threading in mind will run faster on multi-core hardware.\n\nSome third-party packages, in particular ones\n\nwith an :term:`extension module`, may not be ready for use in a\n\nfree-threaded build, and will re-enable the :term:`GIL`.\n\nThis document describes the implications of free threading\n\nfor Python code. See :ref:`freethreading-extensions-howto` for information on\n\nhow to write C extensions that support the free-threaded build.\n\n.. seealso::\n\n:pep:`703` – Making the Global Interpreter Lock Optional in CPython for an\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "0fd023833b41e4c8a11a4bc89129650a9a00e708f6ce68effdc508081ad2a28b"
+    },
+    {
+      "id": "result-16",
+      "url": "https://gknxt.com/python-docs/c-api/c-api.pdf",
+      "title": "The Python/C API",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.5 years ago; The Python/C API, Release 3.13.1 ... or not importing this module will cause the GIL to be automatically enabled.See whatsnew313-free-threaded- ... If Py_mod_gil is not specified, the import machinery defaults to Py_MOD_GIL_USED.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "8a4abd32022a7f47a2a184ecd19ff5ae876856f37fde37a780300611bf0ece9c"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1930,
+  "max_tokens": 2048
+}

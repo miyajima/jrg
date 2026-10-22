@@ -1,0 +1,2847 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "Skip to content\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "start_line": 3,
+          "text": "Node.js\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "list",
+          "start_line": 5,
+          "text": "- About this documentation\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "list",
+          "start_line": 7,
+          "text": "- Usage and example\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "list",
+          "start_line": 9,
+          "text": "- Assertion testing\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "list",
+          "start_line": 11,
+          "text": "- Asynchronous context tracking\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "list",
+          "start_line": 13,
+          "text": "- Async hooks\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "list",
+          "start_line": 15,
+          "text": "- Buffer\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "start_line": 17,
+          "text": "- C++ addons\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "start_line": 19,
+          "text": "- C/C++ addons with Node-API\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "start_line": 21,
+          "text": "- C++ embedder API\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "start_line": 23,
+          "text": "- Child processes\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "list",
+          "start_line": 25,
+          "text": "- Cluster\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "list",
+          "start_line": 27,
+          "text": "- Command-line options\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "list",
+          "start_line": 29,
+          "text": "- Console\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "list",
+          "start_line": 31,
+          "text": "- Crypto\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "list",
+          "start_line": 33,
+          "text": "- Debugger\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "list",
+          "start_line": 35,
+          "text": "- Deprecated APIs\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "list",
+          "start_line": 37,
+          "text": "- Diagnostics Channel\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "list",
+          "start_line": 39,
+          "text": "- DNS\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "list",
+          "start_line": 41,
+          "text": "- Domain\n"
+        },
+        {
+          "end_line": 43,
+          "id": "line-43",
+          "kind": "list",
+          "start_line": 43,
+          "text": "- Errors\n"
+        },
+        {
+          "end_line": 45,
+          "id": "line-45",
+          "kind": "list",
+          "start_line": 45,
+          "text": "- Events\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-47",
+          "kind": "list",
+          "start_line": 47,
+          "text": "- File system\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "list",
+          "start_line": 49,
+          "text": "- Globals\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "list",
+          "start_line": 51,
+          "text": "- HTTP\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "list",
+          "start_line": 53,
+          "text": "- HTTP/2\n"
+        },
+        {
+          "end_line": 55,
+          "id": "line-55",
+          "kind": "list",
+          "start_line": 55,
+          "text": "- HTTPS\n"
+        },
+        {
+          "end_line": 57,
+          "id": "line-57",
+          "kind": "list",
+          "start_line": 57,
+          "text": "- Inspector\n"
+        },
+        {
+          "end_line": 59,
+          "id": "line-59",
+          "kind": "list",
+          "start_line": 59,
+          "text": "- Internationalization\n"
+        },
+        {
+          "end_line": 61,
+          "id": "line-61",
+          "kind": "list",
+          "start_line": 61,
+          "text": "- Modules: CommonJS modules\n"
+        },
+        {
+          "end_line": 63,
+          "id": "line-63",
+          "kind": "list",
+          "start_line": 63,
+          "text": "- Modules: ECMAScript modules\n"
+        },
+        {
+          "end_line": 65,
+          "id": "line-65",
+          "kind": "list",
+          "start_line": 65,
+          "text": "- Modules: node:module API\n"
+        },
+        {
+          "end_line": 67,
+          "id": "line-67",
+          "kind": "list",
+          "start_line": 67,
+          "text": "- Modules: Packages\n"
+        },
+        {
+          "end_line": 69,
+          "id": "line-69",
+          "kind": "list",
+          "start_line": 69,
+          "text": "- Modules: TypeScript\n"
+        },
+        {
+          "end_line": 71,
+          "id": "line-71",
+          "kind": "list",
+          "start_line": 71,
+          "text": "- Net\n"
+        },
+        {
+          "end_line": 73,
+          "id": "line-73",
+          "kind": "list",
+          "start_line": 73,
+          "text": "- OS\n"
+        },
+        {
+          "end_line": 75,
+          "id": "line-75",
+          "kind": "list",
+          "start_line": 75,
+          "text": "- Path\n"
+        },
+        {
+          "end_line": 77,
+          "id": "line-77",
+          "kind": "list",
+          "start_line": 77,
+          "text": "- Performance hooks\n"
+        },
+        {
+          "end_line": 79,
+          "id": "line-79",
+          "kind": "list",
+          "start_line": 79,
+          "text": "- Permissions\n"
+        },
+        {
+          "end_line": 81,
+          "id": "line-81",
+          "kind": "list",
+          "start_line": 81,
+          "text": "- Process\n"
+        },
+        {
+          "end_line": 83,
+          "id": "line-83",
+          "kind": "list",
+          "start_line": 83,
+          "text": "- Punycode\n"
+        },
+        {
+          "end_line": 85,
+          "id": "line-85",
+          "kind": "list",
+          "start_line": 85,
+          "text": "- Query strings\n"
+        },
+        {
+          "end_line": 87,
+          "id": "line-87",
+          "kind": "list",
+          "start_line": 87,
+          "text": "- Readline\n"
+        },
+        {
+          "end_line": 89,
+          "id": "line-89",
+          "kind": "list",
+          "start_line": 89,
+          "text": "- REPL\n"
+        },
+        {
+          "end_line": 91,
+          "id": "line-91",
+          "kind": "list",
+          "start_line": 91,
+          "text": "- Report\n"
+        },
+        {
+          "end_line": 93,
+          "id": "line-93",
+          "kind": "list",
+          "start_line": 93,
+          "text": "- Single executable applications\n"
+        },
+        {
+          "end_line": 95,
+          "id": "line-95",
+          "kind": "list",
+          "start_line": 95,
+          "text": "- SQLite\n"
+        },
+        {
+          "end_line": 97,
+          "id": "line-97",
+          "kind": "list",
+          "start_line": 97,
+          "text": "- Stream\n"
+        },
+        {
+          "end_line": 99,
+          "id": "line-99",
+          "kind": "list",
+          "start_line": 99,
+          "text": "- String decoder\n"
+        },
+        {
+          "end_line": 101,
+          "id": "line-101",
+          "kind": "list",
+          "start_line": 101,
+          "text": "- Test runner\n"
+        },
+        {
+          "end_line": 103,
+          "id": "line-103",
+          "kind": "list",
+          "start_line": 103,
+          "text": "- Timers\n"
+        },
+        {
+          "end_line": 105,
+          "id": "line-105",
+          "kind": "list",
+          "start_line": 105,
+          "text": "- TLS/SSL\n"
+        },
+        {
+          "end_line": 107,
+          "id": "line-107",
+          "kind": "list",
+          "start_line": 107,
+          "text": "- Trace events\n"
+        },
+        {
+          "end_line": 109,
+          "id": "line-109",
+          "kind": "list",
+          "start_line": 109,
+          "text": "- TTY\n"
+        },
+        {
+          "end_line": 111,
+          "id": "line-111",
+          "kind": "list",
+          "start_line": 111,
+          "text": "- UDP/datagram\n"
+        },
+        {
+          "end_line": 113,
+          "id": "line-113",
+          "kind": "list",
+          "start_line": 113,
+          "text": "- URL\n"
+        },
+        {
+          "end_line": 115,
+          "id": "line-115",
+          "kind": "list",
+          "start_line": 115,
+          "text": "- Utilities\n"
+        },
+        {
+          "end_line": 117,
+          "id": "line-117",
+          "kind": "list",
+          "start_line": 117,
+          "text": "- V8\n"
+        },
+        {
+          "end_line": 119,
+          "id": "line-119",
+          "kind": "list",
+          "start_line": 119,
+          "text": "- VM\n"
+        },
+        {
+          "end_line": 121,
+          "id": "line-121",
+          "kind": "list",
+          "start_line": 121,
+          "text": "- WASI\n"
+        },
+        {
+          "end_line": 123,
+          "id": "line-123",
+          "kind": "list",
+          "start_line": 123,
+          "text": "- Web Crypto API\n"
+        },
+        {
+          "end_line": 125,
+          "id": "line-125",
+          "kind": "list",
+          "start_line": 125,
+          "text": "- Web Streams API\n"
+        },
+        {
+          "end_line": 127,
+          "id": "line-127",
+          "kind": "list",
+          "start_line": 127,
+          "text": "- Worker threads\n"
+        },
+        {
+          "end_line": 129,
+          "id": "line-129",
+          "kind": "list",
+          "start_line": 129,
+          "text": "- Zlib\n"
+        },
+        {
+          "end_line": 131,
+          "id": "line-131",
+          "kind": "list",
+          "start_line": 131,
+          "text": "- Code repository and issue tracker\n"
+        },
+        {
+          "end_line": 133,
+          "id": "line-133",
+          "kind": "paragraph",
+          "start_line": 133,
+          "text": "Table of contents\n"
+        },
+        {
+          "end_line": 135,
+          "id": "line-135",
+          "kind": "list",
+          "start_line": 135,
+          "text": "- Modules: CommonJS modules Enabling Accessing the main module Package manager tips Loading ECMAScript modules using require() All together Caching Module caching caveats Built-in modules Built-in modules with mandatory node: prefix Cycles File modules Folders as modules Loading from node_modules folders Loading from the global folders The module wrapper The module scope __dirname __filename exports module require(id) require.cache require.extensions require.main require.resolve(request[, options]) require.resolve.paths(request) The module object module.children module.exports exports shortcut module.filename module.id module.isPreloading module.loaded module.parent module.path module.paths module.require(id) The Module object Source map v3 support\n"
+        },
+        {
+          "end_line": 137,
+          "id": "line-137",
+          "kind": "heading",
+          "start_line": 137,
+          "text": "## Modules: CommonJS modules#\n"
+        },
+        {
+          "end_line": 139,
+          "id": "line-139",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 139,
+          "text": "Stability: 2 - Stable\n"
+        },
+        {
+          "end_line": 141,
+          "id": "line-141",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 141,
+          "text": "CommonJS modules are the original way to package JavaScript code for Node.js. Node.js also supports the ECMAScript modules standard used by browsers and other JavaScript runtimes.\n"
+        },
+        {
+          "end_line": 143,
+          "id": "line-143",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 143,
+          "text": "In Node.js, each file is treated as a separate module. For example, consider a file named foo.js:\n"
+        },
+        {
+          "end_line": 148,
+          "id": "line-145",
+          "kind": "code",
+          "parent_id": "line-137",
+          "start_line": 145,
+          "text": "```\nconst circle = require('./circle.js');\nconsole.log(`The area of a circle of radius 4 is ${circle.area(4)}`); copy\n```\n"
+        },
+        {
+          "end_line": 150,
+          "id": "line-150",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 150,
+          "text": "On the first line, foo.js loads the module circle.js that is in the same directory as foo.js.\n"
+        },
+        {
+          "end_line": 152,
+          "id": "line-152",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 152,
+          "text": "Here are the contents of circle.js:\n"
+        },
+        {
+          "end_line": 160,
+          "id": "line-154",
+          "kind": "code",
+          "parent_id": "line-137",
+          "start_line": 154,
+          "text": "```\nconst { PI } = Math;\n\nexports.area = (r) => PI * r ** 2;\n\nexports.circumference = (r) => 2 * PI * r; copy\n```\n"
+        },
+        {
+          "end_line": 162,
+          "id": "line-162",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 162,
+          "text": "The module circle.js has exported the functions area() and circumference(). Functions and objects are added to the root of a module by specifying additional properties on the special exports object.\n"
+        },
+        {
+          "end_line": 164,
+          "id": "line-164",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 164,
+          "text": "Variables local to the module will be private, because the module is wrapped in a function by Node.js (see module wrapper). In this example, the variable PI is private to circle.js.\n"
+        },
+        {
+          "end_line": 166,
+          "id": "line-166",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 166,
+          "text": "The module.exports property can be assigned a new value (such as a function or object).\n"
+        },
+        {
+          "end_line": 168,
+          "id": "line-168",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 168,
+          "text": "In the following code, bar.js makes use of the square module, which exports a Square class:\n"
+        },
+        {
+          "end_line": 174,
+          "id": "line-170",
+          "kind": "code",
+          "parent_id": "line-137",
+          "start_line": 170,
+          "text": "```\nconst Square = require('./square.js');\nconst mySquare = new Square(2);\nconsole.log(`The area of mySquare is ${mySquare.area()}`); copy\n```\n"
+        },
+        {
+          "end_line": 176,
+          "id": "line-176",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 176,
+          "text": "The square module is defined in square.js:\n"
+        },
+        {
+          "end_line": 189,
+          "id": "line-178",
+          "kind": "code",
+          "parent_id": "line-137",
+          "start_line": 178,
+          "text": "```\n// Assigning to exports will not modify module, must use module.exports\nmodule.exports = class Square {\nconstructor(width) {\nthis.width = width;\n}\n\narea() {\nreturn this.width ** 2;\n}\n}; copy\n```\n"
+        },
+        {
+          "end_line": 191,
+          "id": "line-191",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 191,
+          "text": "The CommonJS module system is implemented in the module core module.\n"
+        },
+        {
+          "end_line": 193,
+          "id": "line-193",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 193,
+          "text": "### Enabling#\n"
+        },
+        {
+          "end_line": 195,
+          "id": "line-195",
+          "kind": "paragraph",
+          "parent_id": "line-193",
+          "start_line": 195,
+          "text": "Node.js has two module systems: CommonJS modules and ECMAScript modules.\n"
+        },
+        {
+          "end_line": 197,
+          "id": "line-197",
+          "kind": "paragraph",
+          "parent_id": "line-193",
+          "start_line": 197,
+          "text": "By default, Node.js will treat the following as CommonJS modules:\n"
+        },
+        {
+          "end_line": 199,
+          "id": "line-199",
+          "kind": "list",
+          "parent_id": "line-193",
+          "start_line": 199,
+          "text": "- Files with a .cjs extension;\n"
+        },
+        {
+          "end_line": 201,
+          "id": "line-201",
+          "kind": "list",
+          "parent_id": "line-193",
+          "start_line": 201,
+          "text": "- Files with a .js extension when the nearest parent package.json file contains a top-level field \"type\" with a value of \"commonjs\".\n"
+        },
+        {
+          "end_line": 203,
+          "id": "line-203",
+          "kind": "list",
+          "parent_id": "line-193",
+          "start_line": 203,
+          "text": "- Files with a .js extension or without an extension, when the nearest parent package.json file doesn't contain a top-level field \"type\" or there is no package.json in any parent folder; unless the file contains syntax that errors unless it is evaluated as an ES module. Package authors should include the \"type\" field, even in packages where all sources are CommonJS. Being explicit about the type of the package will make things easier for build tools and loaders to determine how the files in the package should be interpreted.\n"
+        },
+        {
+          "end_line": 205,
+          "id": "line-205",
+          "kind": "list",
+          "parent_id": "line-193",
+          "start_line": 205,
+          "text": "- Files with an extension that is not .mjs, .cjs, .json, .node, or .js (when the nearest parent package.json file contains a top-level field \"type\" with a value of \"module\", those files will be recognized as CommonJS modules only if they are being included via require(), not when used as the command-line entry point of the program).\n"
+        },
+        {
+          "end_line": 207,
+          "id": "line-207",
+          "kind": "paragraph",
+          "parent_id": "line-193",
+          "start_line": 207,
+          "text": "See Determining module system for more details.\n"
+        },
+        {
+          "end_line": 209,
+          "id": "line-209",
+          "kind": "paragraph",
+          "parent_id": "line-193",
+          "start_line": 209,
+          "text": "Calling require() always use the CommonJS module loader. Calling import() always use the ECMAScript module loader.\n"
+        },
+        {
+          "end_line": 211,
+          "id": "line-211",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 211,
+          "text": "### Accessing the main module#\n"
+        },
+        {
+          "end_line": 213,
+          "id": "line-213",
+          "kind": "paragraph",
+          "parent_id": "line-211",
+          "start_line": 213,
+          "text": "When a file is run directly from Node.js, require.main is set to its module. That means that it is possible to determine whether a file has been run directly by testing require.main === module.\n"
+        },
+        {
+          "end_line": 215,
+          "id": "line-215",
+          "kind": "paragraph",
+          "parent_id": "line-211",
+          "start_line": 215,
+          "text": "For a file foo.js, this will be true if run via node foo.js, but false if run by require('./foo').\n"
+        },
+        {
+          "end_line": 217,
+          "id": "line-217",
+          "kind": "paragraph",
+          "parent_id": "line-211",
+          "start_line": 217,
+          "text": "When the entry point is not a CommonJS module, require.main is undefined, and the main module is out of reach.\n"
+        },
+        {
+          "end_line": 219,
+          "id": "line-219",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 219,
+          "text": "### Package manager tips#\n"
+        },
+        {
+          "end_line": 221,
+          "id": "line-221",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 221,
+          "text": "The semantics of the Node.js require() function were designed to be general enough to support reasonable directory structures. Package manager programs such as dpkg, rpm, and npm will hopefully find it possible to build native packages from Node.js modules without modification.\n"
+        },
+        {
+          "end_line": 223,
+          "id": "line-223",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 223,
+          "text": "In the following, we give a suggested directory structure that could work:\n"
+        },
+        {
+          "end_line": 225,
+          "id": "line-225",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 225,
+          "text": "Let's say that we wanted to have the folder at /usr/lib/node/<some-package>/<some-version> hold the contents of a specific version of a package.\n"
+        },
+        {
+          "end_line": 227,
+          "id": "line-227",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 227,
+          "text": "Packages can depend on one another. In order to install package foo, it may be necessary to install a specific version of package bar. The bar package may itself have dependencies, and in some cases, these may even collide or form cyclic dependencies.\n"
+        },
+        {
+          "end_line": 229,
+          "id": "line-229",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 229,
+          "text": "Because Node.js looks up the realpath of any modules it loads (that is, it resolves symlinks) and then looks for their dependencies in node_modules folders, this situation can be resolved with the following architecture:\n"
+        },
+        {
+          "end_line": 231,
+          "id": "line-231",
+          "kind": "list",
+          "parent_id": "line-219",
+          "start_line": 231,
+          "text": "- /usr/lib/node/foo/1.2.3/: Contents of the foo package, version 1.2.3.\n"
+        },
+        {
+          "end_line": 233,
+          "id": "line-233",
+          "kind": "list",
+          "parent_id": "line-219",
+          "start_line": 233,
+          "text": "- /usr/lib/node/bar/4.3.2/: Contents of the bar package that foo depends on.\n"
+        },
+        {
+          "end_line": 235,
+          "id": "line-235",
+          "kind": "list",
+          "parent_id": "line-219",
+          "start_line": 235,
+          "text": "- /usr/lib/node/foo/1.2.3/node_modules/bar: Symbolic link to /usr/lib/node/bar/4.3.2/.\n"
+        },
+        {
+          "end_line": 237,
+          "id": "line-237",
+          "kind": "list",
+          "parent_id": "line-219",
+          "start_line": 237,
+          "text": "- /usr/lib/node/bar/4.3.2/node_modules/*: Symbolic links to the packages that bar depends on.\n"
+        },
+        {
+          "end_line": 239,
+          "id": "line-239",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 239,
+          "text": "Thus, even if a cycle is encountered, or if there are dependency conflicts, every module will be able to get a version of its dependency that it can use.\n"
+        },
+        {
+          "end_line": 241,
+          "id": "line-241",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 241,
+          "text": "When the code in the foo package does require('bar'), it will get the version that is symlinked into /usr/lib/node/foo/1.2.3/node_modules/bar. Then, when the code in the bar package calls require('quux'), it'll get the version that is symlinked into /usr/lib/node/bar/4.3.2/node_modules/quux.\n"
+        },
+        {
+          "end_line": 243,
+          "id": "line-243",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 243,
+          "text": "Furthermore, to make the module lookup process even more optimal, rather than putting packages directly in /usr/lib/node, we could put them in /usr/lib/node_modules/<name>/<version>. Then Node.js will not bother looking for missing dependencies in /usr/node_modules or /node_modules.\n"
+        },
+        {
+          "end_line": 245,
+          "id": "line-245",
+          "kind": "paragraph",
+          "parent_id": "line-219",
+          "start_line": 245,
+          "text": "In order to make modules available to the Node.js REPL, it might be useful to also add the /usr/lib/node_modules folder to the $NODE_PATH environment variable. Since the module lookups using node_modules folders are all relative, and based on the real path of the files making the calls to require(), the packages themselves can be anywhere.\n"
+        },
+        {
+          "end_line": 247,
+          "id": "line-247",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 247,
+          "text": "### Loading ECMAScript modules using require()#\n"
+        },
+        {
+          "end_line": 249,
+          "id": "line-249",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 249,
+          "text": "History\n"
+        },
+        {
+          "end_line": 255,
+          "id": "line-251",
+          "kind": "table",
+          "parent_id": "line-247",
+          "start_line": 251,
+          "text": "| Version | Changes |\n| v22.13.0 | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module. |\n| v23.0.0, v22.12.0 | This feature is no longer behind the --experimental-require-module CLI flag. |\n| v22.12.0 | Support 'module.exports' interop export in require(esm). |\n| v22.0.0 | Added in: v22.0.0 |\n"
+        },
+        {
+          "end_line": 257,
+          "id": "line-257",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 257,
+          "text": "Stability: 1.2 - Release candidate\n"
+        },
+        {
+          "end_line": 259,
+          "id": "line-259",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 259,
+          "text": "The .mjs extension is reserved for ECMAScript Modules. See Determining module system section for more info regarding which files are parsed as ECMAScript modules.\n"
+        },
+        {
+          "end_line": 261,
+          "id": "line-261",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 261,
+          "text": "require() only supports loading ECMAScript modules that meet the following requirements:\n"
+        },
+        {
+          "end_line": 263,
+          "id": "line-263",
+          "kind": "list",
+          "parent_id": "line-247",
+          "start_line": 263,
+          "text": "- The module is fully synchronous (contains no top-level await); and\n"
+        },
+        {
+          "end_line": 265,
+          "id": "line-265",
+          "kind": "list",
+          "parent_id": "line-247",
+          "start_line": 265,
+          "text": "- One of these conditions are met: The file has a .mjs extension. The file has a .js extension, and the closest package.json contains \"type\": \"module\" The file has a .js extension, the closest package.json does not contain \"type\": \"commonjs\", and the module contains ES module syntax.\n"
+        },
+        {
+          "end_line": 267,
+          "id": "line-267",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 267,
+          "text": "If the ES Module being loaded meets the requirements, require() can load it and return the module namespace object. In this case it is similar to dynamic import() but is run synchronously and returns the name space object directly.\n"
+        },
+        {
+          "end_line": 269,
+          "id": "line-269",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 269,
+          "text": "With the following ES Modules:\n"
+        },
+        {
+          "end_line": 274,
+          "id": "line-271",
+          "kind": "code",
+          "parent_id": "line-247",
+          "start_line": 271,
+          "text": "```\n// distance.mjs\nexport function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); } copy\n```\n"
+        },
+        {
+          "end_line": 281,
+          "id": "line-276",
+          "kind": "code",
+          "parent_id": "line-247",
+          "start_line": 276,
+          "text": "```\n// point.mjs\nexport default class Point {\nconstructor(x, y) { this.x = x; this.y = y; }\n} copy\n```\n"
+        },
+        {
+          "end_line": 283,
+          "id": "line-283",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 283,
+          "text": "A CommonJS module can load them with require():\n"
+        },
+        {
+          "end_line": 298,
+          "id": "line-285",
+          "kind": "code",
+          "parent_id": "line-247",
+          "start_line": 285,
+          "text": "```\nconst distance = require('./distance.mjs');\nconsole.log(distance);\n// [Module: null prototype] {\n// distance: [Function: distance]\n// }\n\nconst point = require('./point.mjs');\nconsole.log(point);\n// [Module: null prototype] {\n// default: [class Point],\n// __esModule: true,\n// } copy\n```\n"
+        },
+        {
+          "end_line": 300,
+          "id": "line-300",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 300,
+          "text": "For interoperability with existing tools that convert ES Modules into CommonJS, which could then load real ES Modules through require(), the returned namespace would contain a __esModule: true property if it has a default export so that consuming code generated by tools can recognize the default exports in real ES Modules. If the namespace already defines __esModule, this would not be added. This property is experimental and can change in the future. It should only be used by tools converting ES modules into CommonJS modules, following existing ecosystem conventions. Code authored directly in CommonJS should avoid depending on it.\n"
+        },
+        {
+          "end_line": 302,
+          "id": "line-302",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 302,
+          "text": "When an ES Module contains both named exports and a default export, the result returned by require() is the module namespace object, which places the default export in the .default property, similar to the results returned by import(). To customize what should be returned by require(esm) directly, the ES Module can export the desired value using the string name \"module.exports\".\n"
+        },
+        {
+          "end_line": 314,
+          "id": "line-304",
+          "kind": "code",
+          "parent_id": "line-247",
+          "start_line": 304,
+          "text": "```\n// point.mjs\nexport default class Point {\nconstructor(x, y) { this.x = x; this.y = y; }\n}\n\n// `distance` is lost to CommonJS consumers of this module, unless it's\n// added to `Point` as a static property.\nexport function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); }\nexport { Point as 'module.exports' } copy\n```\n"
+        },
+        {
+          "end_line": 323,
+          "id": "line-316",
+          "kind": "code",
+          "parent_id": "line-247",
+          "start_line": 316,
+          "text": "```\nconst Point = require('./point.mjs');\nconsole.log(Point); // [class Point]\n\n// Named exports are lost when 'module.exports' is used\nconst { distance } = require('./point.mjs');\nconsole.log(distance); // undefined copy\n```\n"
+        },
+        {
+          "end_line": 325,
+          "id": "line-325",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 325,
+          "text": "Notice in the example above, when the module.exports export name is used, named exports will be lost to CommonJS consumers. To allow CommonJS consumers to continue accessing named exports, the module can make sure that the default export is an object with the named exports attached to it as properties. For example with the example above, distance can be attached to the default export, the Point class, as a static method.\n"
+        },
+        {
+          "end_line": 336,
+          "id": "line-327",
+          "kind": "code",
+          "parent_id": "line-247",
+          "start_line": 327,
+          "text": "```\nexport function distance(a, b) { return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2); }\n\nexport default class Point {\nconstructor(x, y) { this.x = x; this.y = y; }\nstatic distance = distance;\n}\n\nexport { Point as 'module.exports' } copy\n```\n"
+        },
+        {
+          "end_line": 344,
+          "id": "line-338",
+          "kind": "code",
+          "parent_id": "line-247",
+          "start_line": 338,
+          "text": "```\nconst Point = require('./point.mjs');\nconsole.log(Point); // [class Point]\n\nconst { distance } = require('./point.mjs');\nconsole.log(distance); // [Function: distance] copy\n```\n"
+        },
+        {
+          "end_line": 346,
+          "id": "line-346",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 346,
+          "text": "If the module being require()'d contains top-level await, or the module graph it imports contains top-level await, ERR_REQUIRE_ASYNC_MODULE will be thrown. In this case, users should load the asynchronous module using import().\n"
+        },
+        {
+          "end_line": 348,
+          "id": "line-348",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 348,
+          "text": "If --experimental-print-required-tla is enabled, instead of throwing ERR_REQUIRE_ASYNC_MODULE before evaluation, Node.js will evaluate the module, try to locate the top-level awaits, and print their location to help users fix them.\n"
+        },
+        {
+          "end_line": 350,
+          "id": "line-350",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 350,
+          "text": "Support for loading ES modules using require() is currently experimental and can be disabled using --no-experimental-require-module. To print where this feature is used, use --trace-require-module.\n"
+        },
+        {
+          "end_line": 352,
+          "id": "line-352",
+          "kind": "paragraph",
+          "parent_id": "line-247",
+          "start_line": 352,
+          "text": "This feature can be detected by checking if process.features.require_module is true.\n"
+        },
+        {
+          "end_line": 354,
+          "id": "line-354",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 354,
+          "text": "### All together#\n"
+        },
+        {
+          "end_line": 356,
+          "id": "line-356",
+          "kind": "paragraph",
+          "parent_id": "line-354",
+          "start_line": 356,
+          "text": "To get the exact filename that will be loaded when require() is called, use the require.resolve() function.\n"
+        },
+        {
+          "end_line": 358,
+          "id": "line-358",
+          "kind": "paragraph",
+          "parent_id": "line-354",
+          "start_line": 358,
+          "text": "Putting together all of the above, here is the high-level algorithm in pseudocode of what require() does:\n"
+        },
+        {
+          "end_line": 477,
+          "id": "line-360",
+          "kind": "code",
+          "parent_id": "line-354",
+          "start_line": 360,
+          "text": "```\nrequire(X) from module at path Y\n1. If X is a core module,\na. return the core module\nb. STOP\n2. If X begins with '/'\na. set Y to the file system root\n3. If X is equal to '.', or X begins with './', '/' or '../'\na. LOAD_AS_FILE(Y + X)\nb. LOAD_AS_DIRECTORY(Y + X)\nc. THROW \"not found\"\n4. If X begins with '#'\na. LOAD_PACKAGE_IMPORTS(X, dirname(Y))\n5. LOAD_PACKAGE_SELF(X, dirname(Y))\n6. LOAD_NODE_MODULES(X, dirname(Y))\n7. THROW \"not found\"\n\nMAYBE_DETECT_AND_LOAD(X)\n1. If X parses as a CommonJS module, load X as a CommonJS module. STOP.\n2. Else, if the source code of X can be parsed as ECMAScript module using\n<a href=\"esm.md#resolver-algorithm-specification\">DETECT_MODULE_SYNTAX defined in\nthe ESM resolver</a>,\na. Load X as an ECMAScript module. STOP.\n3. THROW the SyntaxError from attempting to parse X as CommonJS in 1. STOP.\n\nLOAD_AS_FILE(X)\n1. If X is a file, load X as its file extension format. STOP\n2. If X.js is a file,\na. Find the closest package scope SCOPE to X.\nb. If no scope was found\n1. MAYBE_DETECT_AND_LOAD(X.js)\nc. If the SCOPE/package.json contains \"type\" field,\n1. If the \"type\" field is \"module\", load X.js as an ECMAScript module. STOP.\n2. If the \"type\" field is \"commonjs\", load X.js as a CommonJS module. STOP.\nd. MAYBE_DETECT_AND_LOAD(X.js)\n3. If X.json is a file, load X.json to a JavaScript Object. STOP\n4. If X.node is a file, load X.node as binary addon. STOP\n\nLOAD_INDEX(X)\n1. If X/index.js is a file\na. Find the closest package scope SCOPE to X.\nb. If no scope was found, load X/index.js as a CommonJS module. STOP.\nc. If the SCOPE/package.json contains \"type\" field,\n1. If the \"type\" field is \"module\", load X/index.js as an ECMAScript module. STOP.\n2. Else, load X/index.js as a CommonJS module. STOP.\n2. If X/index.json is a file, parse X/index.json to a JavaScript object. STOP\n3. If X/index.node is a file, load X/index.node as binary addon. STOP\n\nLOAD_AS_DIRECTORY(X)\n1. If X/package.json is a file,\na. Parse X/package.json, and look for \"main\" field.\nb. If \"main\" is a falsy value, GOTO 2.\nc. let M = X + (json main field)\nd. LOAD_AS_FILE(M)\ne. LOAD_INDEX(M)\nf. LOAD_INDEX(X) DEPRECATED\ng. THROW \"not found\"\n2. LOAD_INDEX(X)\n\nLOAD_NODE_MODULES(X, START)\n1. let DIRS = NODE_MODULES_PATHS(START)\n2. for each DIR in DIRS:\na. LOAD_PACKAGE_EXPORTS(X, DIR)\nb. LOAD_AS_FILE(DIR/X)\nc. LOAD_AS_DIRECTORY(DIR/X)\n\nNODE_MODULES_PATHS(START)\n1. let PARTS = path split(START)\n2. let I = count of PARTS - 1\n3. let DIRS = []\n4. while I >= 0,\na. if PARTS[I] = \"node_modules\", GOTO d.\nb. DIR = path join(PARTS[0 .. I] + \"node_modules\")\nc. DIRS = DIR + DIRS\nd. let I = I - 1\n5. return DIRS + GLOBAL_FOLDERS\n\nLOAD_PACKAGE_IMPORTS(X, DIR)\n1. Find the closest package scope SCOPE to DIR.\n2. If no scope was found, return.\n3. If the SCOPE/package.json \"imports\" is null or undefined, return.\n4. If `--experimental-require-module` is enabled\na. let CONDITIONS = [\"node\", \"require\", \"module-sync\"]\nb. Else, let CONDITIONS = [\"node\", \"require\"]\n5. let MATCH = PACKAGE_IMPORTS_RESOLVE(X, pathToFileURL(SCOPE),\nCONDITIONS) <a href=\"esm.md#resolver-algorithm-specification\">defined in the ESM resolver</a>.\n6. RESOLVE_ESM_MATCH(MATCH).\n\nLOAD_PACKAGE_EXPORTS(X, DIR)\n1. Try to interpret X as a combination of NAME and SUBPATH where the name\nmay have a @scope/ prefix and the subpath begins with a slash (`/`).\n2. If X does not match this pattern or DIR/NAME/package.json is not a file,\nreturn.\n3. Parse DIR/NAME/package.json, and look for \"exports\" field.\n4. If \"exports\" is null or undefined, return.\n5. If `--experimental-require-module` is enabled\na. let CONDITIONS = [\"node\", \"require\", \"module-sync\"]\nb. Else, let CONDITIONS = [\"node\", \"require\"]\n6. let MATCH = PACKAGE_EXPORTS_RESOLVE(pathToFileURL(DIR/NAME), \".\" + SUBPATH,\n`package.json` \"exports\", CONDITIONS) <a href=\"esm.md#resolver-algorithm-specification\">defined in the ESM resolver</a>.\n7. RESOLVE_ESM_MATCH(MATCH)\n\nLOAD_PACKAGE_SELF(X, DIR)\n1. Find the closest package scope SCOPE to DIR.\n2. If no scope was found, return.\n3. If the SCOPE/package.json \"exports\" is null or undefined, return.\n4. If the SCOPE/package.json \"name\" is not the first segment of X, return.\n5. let MATCH = PACKAGE_EXPORTS_RESOLVE(pathToFileURL(SCOPE),\n\".\" + X.slice(\"name\".length), `package.json` \"exports\", [\"node\", \"require\"])\n<a href=\"esm.md#resolver-algorithm-specification\">defined in the ESM resolver</a>.\n6. RESOLVE_ESM_MATCH(MATCH)\n\nRESOLVE_ESM_MATCH(MATCH)\n1. let RESOLVED_PATH = fileURLToPath(MATCH)\n2. If the file at RESOLVED_PATH exists, load RESOLVED_PATH as its extension\nformat. STOP\n3. THROW \"not found\" copy\n```\n"
+        },
+        {
+          "end_line": 479,
+          "id": "line-479",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 479,
+          "text": "### Caching#\n"
+        },
+        {
+          "end_line": 481,
+          "id": "line-481",
+          "kind": "paragraph",
+          "parent_id": "line-479",
+          "start_line": 481,
+          "text": "Modules are cached after the first time they are loaded. This means (among other things) that every call to require('foo') will get exactly the same object returned, if it would resolve to the same file.\n"
+        },
+        {
+          "end_line": 483,
+          "id": "line-483",
+          "kind": "paragraph",
+          "parent_id": "line-479",
+          "start_line": 483,
+          "text": "Provided require.cache is not modified, multiple calls to require('foo') will not cause the module code to be executed multiple times. This is an important feature. With it, \"partially done\" objects can be returned, thus allowing transitive dependencies to be loaded even when they would cause cycles.\n"
+        },
+        {
+          "end_line": 485,
+          "id": "line-485",
+          "kind": "paragraph",
+          "parent_id": "line-479",
+          "start_line": 485,
+          "text": "To have a module execute code multiple times, export a function, and call that function.\n"
+        },
+        {
+          "end_line": 487,
+          "id": "line-487",
+          "kind": "heading",
+          "parent_id": "line-479",
+          "start_line": 487,
+          "text": "#### Module caching caveats#\n"
+        },
+        {
+          "end_line": 489,
+          "id": "line-489",
+          "kind": "paragraph",
+          "parent_id": "line-487",
+          "start_line": 489,
+          "text": "Modules are cached based on their resolved filename. Since modules may resolve to a different filename based on the location of the calling module (loading from node_modules folders), it is not a guarantee that require('foo') will always return the exact same object, if it would resolve to different files.\n"
+        },
+        {
+          "end_line": 491,
+          "id": "line-491",
+          "kind": "paragraph",
+          "parent_id": "line-487",
+          "start_line": 491,
+          "text": "Additionally, on case-insensitive file systems or operating systems, different resolved filenames can point to the same file, but the cache will still treat them as different modules and will reload the file multiple times. For example, require('./foo') and require('./FOO') return two different objects, irrespective of whether or not ./foo and ./FOO are the same file.\n"
+        },
+        {
+          "end_line": 493,
+          "id": "line-493",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 493,
+          "text": "### Built-in modules#\n"
+        },
+        {
+          "end_line": 495,
+          "id": "line-495",
+          "kind": "paragraph",
+          "parent_id": "line-493",
+          "start_line": 495,
+          "text": "History\n"
+        },
+        {
+          "end_line": 498,
+          "id": "line-497",
+          "kind": "table",
+          "parent_id": "line-493",
+          "start_line": 497,
+          "text": "| Version | Changes |\n| v16.0.0, v14.18.0 | Added node: import support to require(...). |\n"
+        },
+        {
+          "end_line": 500,
+          "id": "line-500",
+          "kind": "paragraph",
+          "parent_id": "line-493",
+          "start_line": 500,
+          "text": "Node.js has several modules compiled into the binary. These modules are described in greater detail elsewhere in this documentation.\n"
+        },
+        {
+          "end_line": 502,
+          "id": "line-502",
+          "kind": "paragraph",
+          "parent_id": "line-493",
+          "start_line": 502,
+          "text": "The built-in modules are defined within the Node.js source and are located in the lib/ folder.\n"
+        },
+        {
+          "end_line": 504,
+          "id": "line-504",
+          "kind": "paragraph",
+          "parent_id": "line-493",
+          "start_line": 504,
+          "text": "Built-in modules can be identified using the node: prefix, in which case it bypasses the require cache. For instance, require('node:http') will always return the built in HTTP module, even if there is require.cache entry by that name.\n"
+        },
+        {
+          "end_line": 506,
+          "id": "line-506",
+          "kind": "paragraph",
+          "parent_id": "line-493",
+          "start_line": 506,
+          "text": "Some built-in modules are always preferentially loaded if their identifier is passed to require(). For instance, require('http') will always return the built-in HTTP module, even if there is a file by that name. The list of built-in modules that can be loaded without using the node: prefix is exposed as module.builtinModules.\n"
+        },
+        {
+          "end_line": 508,
+          "id": "line-508",
+          "kind": "heading",
+          "parent_id": "line-493",
+          "start_line": 508,
+          "text": "#### Built-in modules with mandatory node: prefix#\n"
+        },
+        {
+          "end_line": 510,
+          "id": "line-510",
+          "kind": "paragraph",
+          "parent_id": "line-508",
+          "start_line": 510,
+          "text": "When being loaded by require(), some built-in modules must be requested with the node: prefix. This requirement exists to prevent newly introduced built-in modules from having a conflict with user land packages that already have taken the name. Currently the built-in modules that requires the node: prefix are:\n"
+        },
+        {
+          "end_line": 512,
+          "id": "line-512",
+          "kind": "list",
+          "parent_id": "line-508",
+          "start_line": 512,
+          "text": "- node:sea\n"
+        },
+        {
+          "end_line": 514,
+          "id": "line-514",
+          "kind": "list",
+          "parent_id": "line-508",
+          "start_line": 514,
+          "text": "- node:sqlite\n"
+        },
+        {
+          "end_line": 516,
+          "id": "line-516",
+          "kind": "list",
+          "parent_id": "line-508",
+          "start_line": 516,
+          "text": "- node:test\n"
+        },
+        {
+          "end_line": 518,
+          "id": "line-518",
+          "kind": "list",
+          "parent_id": "line-508",
+          "start_line": 518,
+          "text": "- node:test/reporters\n"
+        },
+        {
+          "end_line": 520,
+          "id": "line-520",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 520,
+          "text": "### Cycles#\n"
+        },
+        {
+          "end_line": 522,
+          "id": "line-522",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 522,
+          "text": "When there are circular require() calls, a module might not have finished executing when it is returned.\n"
+        },
+        {
+          "end_line": 524,
+          "id": "line-524",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 524,
+          "text": "Consider this situation:\n"
+        },
+        {
+          "end_line": 526,
+          "id": "line-526",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 526,
+          "text": "a.js:\n"
+        },
+        {
+          "end_line": 535,
+          "id": "line-528",
+          "kind": "code",
+          "parent_id": "line-520",
+          "start_line": 528,
+          "text": "```\nconsole.log('a starting');\nexports.done = false;\nconst b = require('./b.js');\nconsole.log('in a, b.done = %j', b.done);\nexports.done = true;\nconsole.log('a done'); copy\n```\n"
+        },
+        {
+          "end_line": 537,
+          "id": "line-537",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 537,
+          "text": "b.js:\n"
+        },
+        {
+          "end_line": 546,
+          "id": "line-539",
+          "kind": "code",
+          "parent_id": "line-520",
+          "start_line": 539,
+          "text": "```\nconsole.log('b starting');\nexports.done = false;\nconst a = require('./a.js');\nconsole.log('in b, a.done = %j', a.done);\nexports.done = true;\nconsole.log('b done'); copy\n```\n"
+        },
+        {
+          "end_line": 548,
+          "id": "line-548",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 548,
+          "text": "main.js:\n"
+        },
+        {
+          "end_line": 555,
+          "id": "line-550",
+          "kind": "code",
+          "parent_id": "line-520",
+          "start_line": 550,
+          "text": "```\nconsole.log('main starting');\nconst a = require('./a.js');\nconst b = require('./b.js');\nconsole.log('in main, a.done = %j, b.done = %j', a.done, b.done); copy\n```\n"
+        },
+        {
+          "end_line": 557,
+          "id": "line-557",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 557,
+          "text": "When main.js loads a.js, then a.js in turn loads b.js. At that point, b.js tries to load a.js. In order to prevent an infinite loop, an unfinished copy of the a.js exports object is returned to the b.js module. b.js then finishes loading, and its exports object is provided to the a.js module.\n"
+        },
+        {
+          "end_line": 559,
+          "id": "line-559",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 559,
+          "text": "By the time main.js has loaded both modules, they're both finished. The output of this program would thus be:\n"
+        },
+        {
+          "end_line": 571,
+          "id": "line-561",
+          "kind": "code",
+          "parent_id": "line-520",
+          "start_line": 561,
+          "text": "```\n$ node main.js\nmain starting\na starting\nb starting\nin b, a.done = false\nb done\nin a, b.done = true\na done\nin main, a.done = true, b.done = true copy\n```\n"
+        },
+        {
+          "end_line": 573,
+          "id": "line-573",
+          "kind": "paragraph",
+          "parent_id": "line-520",
+          "start_line": 573,
+          "text": "Careful planning is required to allow cyclic module dependencies to work correctly within an application.\n"
+        },
+        {
+          "end_line": 575,
+          "id": "line-575",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 575,
+          "text": "### File modules#\n"
+        },
+        {
+          "end_line": 577,
+          "id": "line-577",
+          "kind": "paragraph",
+          "parent_id": "line-575",
+          "start_line": 577,
+          "text": "If the exact filename is not found, then Node.js will attempt to load the required filename with the added extensions: .js, .json, and finally .node. When loading a file that has a different extension (e.g. .cjs), its full name must be passed to require(), including its file extension (e.g. require('./file.cjs')).\n"
+        },
+        {
+          "end_line": 579,
+          "id": "line-579",
+          "kind": "paragraph",
+          "parent_id": "line-575",
+          "start_line": 579,
+          "text": ".json files are parsed as JSON text files, .node files are interpreted as compiled addon modules loaded with process.dlopen(). Files using any other extension (or no extension at all) are parsed as JavaScript text files. Refer to the Determining module system section to understand what parse goal will be used.\n"
+        },
+        {
+          "end_line": 581,
+          "id": "line-581",
+          "kind": "paragraph",
+          "parent_id": "line-575",
+          "start_line": 581,
+          "text": "A required module prefixed with '/' is an absolute path to the file. For example, require('/home/marco/foo.js') will load the file at /home/marco/foo.js.\n"
+        },
+        {
+          "end_line": 583,
+          "id": "line-583",
+          "kind": "paragraph",
+          "parent_id": "line-575",
+          "start_line": 583,
+          "text": "A required module prefixed with './' is relative to the file calling require(). That is, circle.js must be in the same directory as foo.js for require('./circle') to find it.\n"
+        },
+        {
+          "end_line": 585,
+          "id": "line-585",
+          "kind": "paragraph",
+          "parent_id": "line-575",
+          "start_line": 585,
+          "text": "Without a leading '/', './', or '../' to indicate a file, the module must either be a core module or is loaded from a node_modules folder.\n"
+        },
+        {
+          "end_line": 587,
+          "id": "line-587",
+          "kind": "paragraph",
+          "parent_id": "line-575",
+          "start_line": 587,
+          "text": "If the given path does not exist, require() will throw a MODULE_NOT_FOUND error.\n"
+        },
+        {
+          "end_line": 589,
+          "id": "line-589",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 589,
+          "text": "### Folders as modules#\n"
+        },
+        {
+          "end_line": 591,
+          "id": "line-591",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 591,
+          "text": "Stability: 3 - Legacy: Use subpath exports or subpath imports instead.\n"
+        },
+        {
+          "end_line": 593,
+          "id": "line-593",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 593,
+          "text": "There are three ways in which a folder may be passed to require() as an argument.\n"
+        },
+        {
+          "end_line": 595,
+          "id": "line-595",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 595,
+          "text": "The first is to create a package.json file in the root of the folder, which specifies a main module. An example package.json file might look like this:\n"
+        },
+        {
+          "end_line": 600,
+          "id": "line-597",
+          "kind": "code",
+          "parent_id": "line-589",
+          "start_line": 597,
+          "text": "```\n{ \"name\" : \"some-library\",\n\"main\" : \"./lib/some-library.js\" } copy\n```\n"
+        },
+        {
+          "end_line": 602,
+          "id": "line-602",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 602,
+          "text": "If this was in a folder at ./some-library, then require('./some-library') would attempt to load ./some-library/lib/some-library.js.\n"
+        },
+        {
+          "end_line": 604,
+          "id": "line-604",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 604,
+          "text": "If there is no package.json file present in the directory, or if the \"main\" entry is missing or cannot be resolved, then Node.js will attempt to load an index.js or index.node file out of that directory. For example, if there was no package.json file in the previous example, then require('./some-library') would attempt to load:\n"
+        },
+        {
+          "end_line": 606,
+          "id": "line-606",
+          "kind": "list",
+          "parent_id": "line-589",
+          "start_line": 606,
+          "text": "- ./some-library/index.js\n"
+        },
+        {
+          "end_line": 608,
+          "id": "line-608",
+          "kind": "list",
+          "parent_id": "line-589",
+          "start_line": 608,
+          "text": "- ./some-library/index.node\n"
+        },
+        {
+          "end_line": 610,
+          "id": "line-610",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 610,
+          "text": "If these attempts fail, then Node.js will report the entire module as missing with the default error:\n"
+        },
+        {
+          "end_line": 614,
+          "id": "line-612",
+          "kind": "code",
+          "parent_id": "line-589",
+          "start_line": 612,
+          "text": "```\nError: Cannot find module 'some-library' copy\n```\n"
+        },
+        {
+          "end_line": 616,
+          "id": "line-616",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 616,
+          "text": "In all three above cases, an import('./some-library') call would result in a ERR_UNSUPPORTED_DIR_IMPORT error. Using package subpath exports or subpath imports can provide the same containment organization benefits as folders as modules, and work for both require and import.\n"
+        },
+        {
+          "end_line": 618,
+          "id": "line-618",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 618,
+          "text": "### Loading from node_modules folders#\n"
+        },
+        {
+          "end_line": 620,
+          "id": "line-620",
+          "kind": "paragraph",
+          "parent_id": "line-618",
+          "start_line": 620,
+          "text": "If the module identifier passed to require() is not a built-in module, and does not begin with '/', '../', or './', then Node.js starts at the directory of the current module, and adds /node_modules, and attempts to load the module from that location. Node.js will not append node_modules to a path already ending in node_modules.\n"
+        },
+        {
+          "end_line": 622,
+          "id": "line-622",
+          "kind": "paragraph",
+          "parent_id": "line-618",
+          "start_line": 622,
+          "text": "If it is not found there, then it moves to the parent directory, and so on, until the root of the file system is reached.\n"
+        },
+        {
+          "end_line": 624,
+          "id": "line-624",
+          "kind": "paragraph",
+          "parent_id": "line-618",
+          "start_line": 624,
+          "text": "For example, if the file at '/home/ry/projects/foo.js' called require('bar.js'), then Node.js would look in the following locations, in this order:\n"
+        },
+        {
+          "end_line": 626,
+          "id": "line-626",
+          "kind": "list",
+          "parent_id": "line-618",
+          "start_line": 626,
+          "text": "- /home/ry/projects/node_modules/bar.js\n"
+        },
+        {
+          "end_line": 628,
+          "id": "line-628",
+          "kind": "list",
+          "parent_id": "line-618",
+          "start_line": 628,
+          "text": "- /home/ry/node_modules/bar.js\n"
+        },
+        {
+          "end_line": 630,
+          "id": "line-630",
+          "kind": "list",
+          "parent_id": "line-618",
+          "start_line": 630,
+          "text": "- /home/node_modules/bar.js\n"
+        },
+        {
+          "end_line": 632,
+          "id": "line-632",
+          "kind": "list",
+          "parent_id": "line-618",
+          "start_line": 632,
+          "text": "- /node_modules/bar.js\n"
+        },
+        {
+          "end_line": 634,
+          "id": "line-634",
+          "kind": "paragraph",
+          "parent_id": "line-618",
+          "start_line": 634,
+          "text": "This allows programs to localize their dependencies, so that they do not clash.\n"
+        },
+        {
+          "end_line": 636,
+          "id": "line-636",
+          "kind": "paragraph",
+          "parent_id": "line-618",
+          "start_line": 636,
+          "text": "It is possible to require specific files or sub modules distributed with a module by including a path suffix after the module name. For instance require('example-module/path/to/file') would resolve path/to/file relative to where example-module is located. The suffixed path follows the same module resolution semantics.\n"
+        },
+        {
+          "end_line": 638,
+          "id": "line-638",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 638,
+          "text": "### Loading from the global folders#\n"
+        },
+        {
+          "end_line": 640,
+          "id": "line-640",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 640,
+          "text": "If the NODE_PATH environment variable is set to a colon-delimited list of absolute paths, then Node.js will search those paths for modules if they are not found elsewhere.\n"
+        },
+        {
+          "end_line": 642,
+          "id": "line-642",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 642,
+          "text": "On Windows, NODE_PATH is delimited by semicolons (;) instead of colons.\n"
+        },
+        {
+          "end_line": 644,
+          "id": "line-644",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 644,
+          "text": "NODE_PATH was originally created to support loading modules from varying paths before the current module resolution algorithm was defined.\n"
+        },
+        {
+          "end_line": 646,
+          "id": "line-646",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 646,
+          "text": "NODE_PATH is still supported, but is less necessary now that the Node.js ecosystem has settled on a convention for locating dependent modules. Sometimes deployments that rely on NODE_PATH show surprising behavior when people are unaware that NODE_PATH must be set. Sometimes a module's dependencies change, causing a different version (or even a different module) to be loaded as the NODE_PATH is searched.\n"
+        },
+        {
+          "end_line": 648,
+          "id": "line-648",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 648,
+          "text": "Additionally, Node.js will search in the following list of GLOBAL_FOLDERS:\n"
+        },
+        {
+          "end_line": 650,
+          "id": "line-650",
+          "kind": "list",
+          "parent_id": "line-638",
+          "start_line": 650,
+          "text": "- 1: $HOME/.node_modules\n"
+        },
+        {
+          "end_line": 652,
+          "id": "line-652",
+          "kind": "list",
+          "parent_id": "line-638",
+          "start_line": 652,
+          "text": "- 2: $HOME/.node_libraries\n"
+        },
+        {
+          "end_line": 654,
+          "id": "line-654",
+          "kind": "list",
+          "parent_id": "line-638",
+          "start_line": 654,
+          "text": "- 3: $PREFIX/lib/node\n"
+        },
+        {
+          "end_line": 656,
+          "id": "line-656",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 656,
+          "text": "Where $HOME is the user's home directory, and $PREFIX is the Node.js configured node_prefix.\n"
+        },
+        {
+          "end_line": 658,
+          "id": "line-658",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 658,
+          "text": "These are mostly for historic reasons.\n"
+        },
+        {
+          "end_line": 660,
+          "id": "line-660",
+          "kind": "paragraph",
+          "parent_id": "line-638",
+          "start_line": 660,
+          "text": "It is strongly encouraged to place dependencies in the local node_modules folder. These will be loaded faster, and more reliably.\n"
+        },
+        {
+          "end_line": 662,
+          "id": "line-662",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 662,
+          "text": "### The module wrapper#\n"
+        },
+        {
+          "end_line": 664,
+          "id": "line-664",
+          "kind": "paragraph",
+          "parent_id": "line-662",
+          "start_line": 664,
+          "text": "Before a module's code is executed, Node.js will wrap it with a function wrapper that looks like the following:\n"
+        },
+        {
+          "end_line": 670,
+          "id": "line-666",
+          "kind": "code",
+          "parent_id": "line-662",
+          "start_line": 666,
+          "text": "```\n(function(exports, require, module, __filename, __dirname) {\n// Module code actually lives in here\n}); copy\n```\n"
+        },
+        {
+          "end_line": 672,
+          "id": "line-672",
+          "kind": "paragraph",
+          "parent_id": "line-662",
+          "start_line": 672,
+          "text": "By doing this, Node.js achieves a few things:\n"
+        },
+        {
+          "end_line": 674,
+          "id": "line-674",
+          "kind": "list",
+          "parent_id": "line-662",
+          "start_line": 674,
+          "text": "- It keeps top-level variables (defined with var, const, or let) scoped to the module rather than the global object.\n"
+        },
+        {
+          "end_line": 676,
+          "id": "line-676",
+          "kind": "list",
+          "parent_id": "line-662",
+          "start_line": 676,
+          "text": "- It helps to provide some global-looking variables that are actually specific to the module, such as: The module and exports objects that the implementor can use to export values from the module. The convenience variables __filename and __dirname, containing the module's absolute filename and directory path.\n"
+        },
+        {
+          "end_line": 678,
+          "id": "line-678",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 678,
+          "text": "### The module scope#\n"
+        },
+        {
+          "end_line": 680,
+          "id": "line-680",
+          "kind": "heading",
+          "parent_id": "line-678",
+          "start_line": 680,
+          "text": "#### __dirname#\n"
+        },
+        {
+          "end_line": 682,
+          "id": "line-682",
+          "kind": "paragraph",
+          "parent_id": "line-680",
+          "start_line": 682,
+          "text": "Added in: v0.1.27\n"
+        },
+        {
+          "end_line": 684,
+          "id": "line-684",
+          "kind": "list",
+          "parent_id": "line-680",
+          "start_line": 684,
+          "text": "- <string>\n"
+        },
+        {
+          "end_line": 686,
+          "id": "line-686",
+          "kind": "paragraph",
+          "parent_id": "line-680",
+          "start_line": 686,
+          "text": "The directory name of the current module. This is the same as the path.dirname() of the __filename.\n"
+        },
+        {
+          "end_line": 688,
+          "id": "line-688",
+          "kind": "paragraph",
+          "parent_id": "line-680",
+          "start_line": 688,
+          "text": "Example: running node example.js from /Users/mjr\n"
+        },
+        {
+          "end_line": 695,
+          "id": "line-690",
+          "kind": "code",
+          "parent_id": "line-680",
+          "start_line": 690,
+          "text": "```\nconsole.log(__dirname);\n// Prints: /Users/mjr\nconsole.log(path.dirname(__filename));\n// Prints: /Users/mjr copy\n```\n"
+        },
+        {
+          "end_line": 697,
+          "id": "line-697",
+          "kind": "heading",
+          "parent_id": "line-678",
+          "start_line": 697,
+          "text": "#### __filename#\n"
+        },
+        {
+          "end_line": 699,
+          "id": "line-699",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 699,
+          "text": "Added in: v0.0.1\n"
+        },
+        {
+          "end_line": 701,
+          "id": "line-701",
+          "kind": "list",
+          "parent_id": "line-697",
+          "start_line": 701,
+          "text": "- <string>\n"
+        },
+        {
+          "end_line": 703,
+          "id": "line-703",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 703,
+          "text": "The file name of the current module. This is the current module file's absolute path with symlinks resolved.\n"
+        },
+        {
+          "end_line": 705,
+          "id": "line-705",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 705,
+          "text": "For a main program this is not necessarily the same as the file name used in the command line.\n"
+        },
+        {
+          "end_line": 707,
+          "id": "line-707",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 707,
+          "text": "See __dirname for the directory name of the current module.\n"
+        },
+        {
+          "end_line": 709,
+          "id": "line-709",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 709,
+          "text": "Examples:\n"
+        },
+        {
+          "end_line": 711,
+          "id": "line-711",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 711,
+          "text": "Running node example.js from /Users/mjr\n"
+        },
+        {
+          "end_line": 718,
+          "id": "line-713",
+          "kind": "code",
+          "parent_id": "line-697",
+          "start_line": 713,
+          "text": "```\nconsole.log(__filename);\n// Prints: /Users/mjr/example.js\nconsole.log(__dirname);\n// Prints: /Users/mjr copy\n```\n"
+        },
+        {
+          "end_line": 720,
+          "id": "line-720",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 720,
+          "text": "Given two modules: a and b, where b is a dependency of a and there is a directory structure of:\n"
+        },
+        {
+          "end_line": 722,
+          "id": "line-722",
+          "kind": "list",
+          "parent_id": "line-697",
+          "start_line": 722,
+          "text": "- /Users/mjr/app/a.js\n"
+        },
+        {
+          "end_line": 724,
+          "id": "line-724",
+          "kind": "list",
+          "parent_id": "line-697",
+          "start_line": 724,
+          "text": "- /Users/mjr/app/node_modules/b/b.js\n"
+        },
+        {
+          "end_line": 726,
+          "id": "line-726",
+          "kind": "paragraph",
+          "parent_id": "line-697",
+          "start_line": 726,
+          "text": "References to __filename within b.js will return /Users/mjr/app/node_modules/b/b.js while references to __filename within a.js will return /Users/mjr/app/a.js.\n"
+        },
+        {
+          "end_line": 728,
+          "id": "line-728",
+          "kind": "heading",
+          "parent_id": "line-678",
+          "start_line": 728,
+          "text": "#### exports#\n"
+        },
+        {
+          "end_line": 730,
+          "id": "line-730",
+          "kind": "paragraph",
+          "parent_id": "line-728",
+          "start_line": 730,
+          "text": "Added in: v0.1.12\n"
+        },
+        {
+          "end_line": 732,
+          "id": "line-732",
+          "kind": "list",
+          "parent_id": "line-728",
+          "start_line": 732,
+          "text": "- <Object>\n"
+        },
+        {
+          "end_line": 734,
+          "id": "line-734",
+          "kind": "paragraph",
+          "parent_id": "line-728",
+          "start_line": 734,
+          "text": "A reference to the module.exports that is shorter to type. See the section about the exports shortcut for details on when to use exports and when to use module.exports.\n"
+        },
+        {
+          "end_line": 736,
+          "id": "line-736",
+          "kind": "heading",
+          "parent_id": "line-678",
+          "start_line": 736,
+          "text": "#### module#\n"
+        },
+        {
+          "end_line": 738,
+          "id": "line-738",
+          "kind": "paragraph",
+          "parent_id": "line-736",
+          "start_line": 738,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 740,
+          "id": "line-740",
+          "kind": "list",
+          "parent_id": "line-736",
+          "start_line": 740,
+          "text": "- <module>\n"
+        },
+        {
+          "end_line": 742,
+          "id": "line-742",
+          "kind": "paragraph",
+          "parent_id": "line-736",
+          "start_line": 742,
+          "text": "A reference to the current module, see the section about the module object. In particular, module.exports is used for defining what a module exports and makes available through require().\n"
+        },
+        {
+          "end_line": 744,
+          "id": "line-744",
+          "kind": "heading",
+          "parent_id": "line-678",
+          "start_line": 744,
+          "text": "#### require(id)#\n"
+        },
+        {
+          "end_line": 746,
+          "id": "line-746",
+          "kind": "paragraph",
+          "parent_id": "line-744",
+          "start_line": 746,
+          "text": "Added in: v0.1.13\n"
+        },
+        {
+          "end_line": 748,
+          "id": "line-748",
+          "kind": "list",
+          "parent_id": "line-744",
+          "start_line": 748,
+          "text": "- id <string> module name or path\n"
+        },
+        {
+          "end_line": 750,
+          "id": "line-750",
+          "kind": "list",
+          "parent_id": "line-744",
+          "start_line": 750,
+          "text": "- Returns: <any> exported module content\n"
+        },
+        {
+          "end_line": 752,
+          "id": "line-752",
+          "kind": "paragraph",
+          "parent_id": "line-744",
+          "start_line": 752,
+          "text": "Used to import modules, JSON, and local files. Modules can be imported from node_modules. Local modules and JSON files can be imported using a relative path (e.g. ./, ./foo, ./bar/baz, ../foo) that will be resolved against the directory named by __dirname (if defined) or the current working directory. The relative paths of POSIX style are resolved in an OS independent fashion, meaning that the examples above will work on Windows in the same way they would on Unix systems.\n"
+        },
+        {
+          "end_line": 764,
+          "id": "line-754",
+          "kind": "code",
+          "parent_id": "line-744",
+          "start_line": 754,
+          "text": "```\n// Importing a local module with a path relative to the `__dirname` or current\n// working directory. (On Windows, this would resolve to .\\path\\myLocalModule.)\nconst myLocalModule = require('./path/myLocalModule');\n\n// Importing a JSON file:\nconst jsonData = require('./path/filename.json');\n\n// Importing a module from node_modules or Node.js built-in module:\nconst crypto = require('node:crypto'); copy\n```\n"
+        },
+        {
+          "end_line": 766,
+          "id": "line-766",
+          "kind": "heading",
+          "parent_id": "line-744",
+          "start_line": 766,
+          "text": "##### require.cache#\n"
+        },
+        {
+          "end_line": 768,
+          "id": "line-768",
+          "kind": "paragraph",
+          "parent_id": "line-766",
+          "start_line": 768,
+          "text": "Added in: v0.3.0\n"
+        },
+        {
+          "end_line": 770,
+          "id": "line-770",
+          "kind": "list",
+          "parent_id": "line-766",
+          "start_line": 770,
+          "text": "- <Object>\n"
+        },
+        {
+          "end_line": 772,
+          "id": "line-772",
+          "kind": "paragraph",
+          "parent_id": "line-766",
+          "start_line": 772,
+          "text": "Modules are cached in this object when they are required. By deleting a key value from this object, the next require will reload the module. This does not apply to native addons, for which reloading will result in an error.\n"
+        },
+        {
+          "end_line": 774,
+          "id": "line-774",
+          "kind": "paragraph",
+          "parent_id": "line-766",
+          "start_line": 774,
+          "text": "Adding or replacing entries is also possible. This cache is checked before built-in modules and if a name matching a built-in module is added to the cache, only node:-prefixed require calls are going to receive the built-in module. Use with care!\n"
+        },
+        {
+          "end_line": 785,
+          "id": "line-776",
+          "kind": "code",
+          "parent_id": "line-766",
+          "start_line": 776,
+          "text": "```\nconst assert = require('node:assert');\nconst realFs = require('node:fs');\n\nconst fakeFs = {};\nrequire.cache.fs = { exports: fakeFs };\n\nassert.strictEqual(require('fs'), fakeFs);\nassert.strictEqual(require('node:fs'), realFs); copy\n```\n"
+        },
+        {
+          "end_line": 787,
+          "id": "line-787",
+          "kind": "heading",
+          "parent_id": "line-744",
+          "start_line": 787,
+          "text": "##### require.extensions#\n"
+        },
+        {
+          "end_line": 789,
+          "id": "line-789",
+          "kind": "paragraph",
+          "parent_id": "line-787",
+          "start_line": 789,
+          "text": "Added in: v0.3.0Deprecated since: v0.10.6\n"
+        },
+        {
+          "end_line": 791,
+          "id": "line-791",
+          "kind": "paragraph",
+          "parent_id": "line-787",
+          "start_line": 791,
+          "text": "Stability: 0 - Deprecated\n"
+        },
+        {
+          "end_line": 793,
+          "id": "line-793",
+          "kind": "list",
+          "parent_id": "line-787",
+          "start_line": 793,
+          "text": "- <Object>\n"
+        },
+        {
+          "end_line": 795,
+          "id": "line-795",
+          "kind": "paragraph",
+          "parent_id": "line-787",
+          "start_line": 795,
+          "text": "Instruct require on how to handle certain file extensions.\n"
+        },
+        {
+          "end_line": 797,
+          "id": "line-797",
+          "kind": "paragraph",
+          "parent_id": "line-787",
+          "start_line": 797,
+          "text": "Process files with the extension .sjs as .js:\n"
+        },
+        {
+          "end_line": 801,
+          "id": "line-799",
+          "kind": "code",
+          "parent_id": "line-787",
+          "start_line": 799,
+          "text": "```\nrequire.extensions['.sjs'] = require.extensions['.js']; copy\n```\n"
+        },
+        {
+          "end_line": 803,
+          "id": "line-803",
+          "kind": "paragraph",
+          "parent_id": "line-787",
+          "start_line": 803,
+          "text": "Deprecated. In the past, this list has been used to load non-JavaScript modules into Node.js by compiling them on-demand. However, in practice, there are much better ways to do this, such as loading modules via some other Node.js program, or compiling them to JavaScript ahead of time.\n"
+        },
+        {
+          "end_line": 805,
+          "id": "line-805",
+          "kind": "paragraph",
+          "parent_id": "line-787",
+          "start_line": 805,
+          "text": "Avoid using require.extensions. Use could cause subtle bugs and resolving the extensions gets slower with each registered extension.\n"
+        },
+        {
+          "end_line": 807,
+          "id": "line-807",
+          "kind": "heading",
+          "parent_id": "line-744",
+          "start_line": 807,
+          "text": "##### require.main#\n"
+        },
+        {
+          "end_line": 809,
+          "id": "line-809",
+          "kind": "paragraph",
+          "parent_id": "line-807",
+          "start_line": 809,
+          "text": "Added in: v0.1.17\n"
+        },
+        {
+          "end_line": 811,
+          "id": "line-811",
+          "kind": "list",
+          "parent_id": "line-807",
+          "start_line": 811,
+          "text": "- <module> | <undefined>\n"
+        },
+        {
+          "end_line": 813,
+          "id": "line-813",
+          "kind": "paragraph",
+          "parent_id": "line-807",
+          "start_line": 813,
+          "text": "The Module object representing the entry script loaded when the Node.js process launched, or undefined if the entry point of the program is not a CommonJS module. See \"Accessing the main module\".\n"
+        },
+        {
+          "end_line": 815,
+          "id": "line-815",
+          "kind": "paragraph",
+          "parent_id": "line-807",
+          "start_line": 815,
+          "text": "In entry.js script:\n"
+        },
+        {
+          "end_line": 819,
+          "id": "line-817",
+          "kind": "code",
+          "parent_id": "line-807",
+          "start_line": 817,
+          "text": "```\nconsole.log(require.main); copy\n```\n"
+        },
+        {
+          "end_line": 823,
+          "id": "line-821",
+          "kind": "code",
+          "parent_id": "line-807",
+          "start_line": 821,
+          "text": "```\nnode entry.js copy\n```\n"
+        },
+        {
+          "end_line": 838,
+          "id": "line-825",
+          "kind": "code",
+          "parent_id": "line-807",
+          "start_line": 825,
+          "text": "```\nModule {\nid: '.',\npath: '/absolute/path/to',\nexports: {},\nfilename: '/absolute/path/to/entry.js',\nloaded: false,\nchildren: [],\npaths:\n[ '/absolute/path/to/node_modules',\n'/absolute/path/node_modules',\n'/absolute/node_modules',\n'/node_modules' ] } copy\n```\n"
+        },
+        {
+          "end_line": 840,
+          "id": "line-840",
+          "kind": "heading",
+          "parent_id": "line-744",
+          "start_line": 840,
+          "text": "##### require.resolve(request[, options])#\n"
+        },
+        {
+          "end_line": 842,
+          "id": "line-842",
+          "kind": "paragraph",
+          "parent_id": "line-840",
+          "start_line": 842,
+          "text": "History\n"
+        },
+        {
+          "end_line": 846,
+          "id": "line-844",
+          "kind": "table",
+          "parent_id": "line-840",
+          "start_line": 844,
+          "text": "| Version | Changes |\n| v8.9.0 | The paths option is now supported. |\n| v0.3.0 | Added in: v0.3.0 |\n"
+        },
+        {
+          "end_line": 848,
+          "id": "line-848",
+          "kind": "list",
+          "parent_id": "line-840",
+          "start_line": 848,
+          "text": "- request <string> The module path to resolve.\n"
+        },
+        {
+          "end_line": 850,
+          "id": "line-850",
+          "kind": "list",
+          "parent_id": "line-840",
+          "start_line": 850,
+          "text": "- options <Object> paths <string[]> Paths to resolve module location from. If present, these paths are used instead of the default resolution paths, with the exception of GLOBAL_FOLDERS like $HOME/.node_modules, which are always included. Each of these paths is used as a starting point for the module resolution algorithm, meaning that the node_modules hierarchy is checked from this location.\n"
+        },
+        {
+          "end_line": 852,
+          "id": "line-852",
+          "kind": "list",
+          "parent_id": "line-840",
+          "start_line": 852,
+          "text": "- Returns: <string>\n"
+        },
+        {
+          "end_line": 854,
+          "id": "line-854",
+          "kind": "paragraph",
+          "parent_id": "line-840",
+          "start_line": 854,
+          "text": "Use the internal require() machinery to look up the location of a module, but rather than loading the module, just return the resolved filename.\n"
+        },
+        {
+          "end_line": 856,
+          "id": "line-856",
+          "kind": "paragraph",
+          "parent_id": "line-840",
+          "start_line": 856,
+          "text": "If the module can not be found, a MODULE_NOT_FOUND error is thrown.\n"
+        },
+        {
+          "end_line": 858,
+          "id": "line-858",
+          "kind": "heading",
+          "parent_id": "line-840",
+          "start_line": 858,
+          "text": "###### require.resolve.paths(request)#\n"
+        },
+        {
+          "end_line": 860,
+          "id": "line-860",
+          "kind": "paragraph",
+          "parent_id": "line-858",
+          "start_line": 860,
+          "text": "Added in: v8.9.0\n"
+        },
+        {
+          "end_line": 862,
+          "id": "line-862",
+          "kind": "list",
+          "parent_id": "line-858",
+          "start_line": 862,
+          "text": "- request <string> The module path whose lookup paths are being retrieved.\n"
+        },
+        {
+          "end_line": 864,
+          "id": "line-864",
+          "kind": "list",
+          "parent_id": "line-858",
+          "start_line": 864,
+          "text": "- Returns: <string[]> | <null>\n"
+        },
+        {
+          "end_line": 866,
+          "id": "line-866",
+          "kind": "paragraph",
+          "parent_id": "line-858",
+          "start_line": 866,
+          "text": "Returns an array containing the paths searched during resolution of request or null if the request string references a core module, for example http or fs.\n"
+        },
+        {
+          "end_line": 868,
+          "id": "line-868",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 868,
+          "text": "### The module object#\n"
+        },
+        {
+          "end_line": 870,
+          "id": "line-870",
+          "kind": "paragraph",
+          "parent_id": "line-868",
+          "start_line": 870,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 872,
+          "id": "line-872",
+          "kind": "list",
+          "parent_id": "line-868",
+          "start_line": 872,
+          "text": "- <Object>\n"
+        },
+        {
+          "end_line": 874,
+          "id": "line-874",
+          "kind": "paragraph",
+          "parent_id": "line-868",
+          "start_line": 874,
+          "text": "In each module, the module free variable is a reference to the object representing the current module. For convenience, module.exports is also accessible via the exports module-global. module is not actually a global but rather local to each module.\n"
+        },
+        {
+          "end_line": 876,
+          "id": "line-876",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 876,
+          "text": "#### module.children#\n"
+        },
+        {
+          "end_line": 878,
+          "id": "line-878",
+          "kind": "paragraph",
+          "parent_id": "line-876",
+          "start_line": 878,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 880,
+          "id": "line-880",
+          "kind": "list",
+          "parent_id": "line-876",
+          "start_line": 880,
+          "text": "- <module[]>\n"
+        },
+        {
+          "end_line": 882,
+          "id": "line-882",
+          "kind": "paragraph",
+          "parent_id": "line-876",
+          "start_line": 882,
+          "text": "The module objects required for the first time by this one.\n"
+        },
+        {
+          "end_line": 884,
+          "id": "line-884",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 884,
+          "text": "#### module.exports#\n"
+        },
+        {
+          "end_line": 886,
+          "id": "line-886",
+          "kind": "paragraph",
+          "parent_id": "line-884",
+          "start_line": 886,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 888,
+          "id": "line-888",
+          "kind": "list",
+          "parent_id": "line-884",
+          "start_line": 888,
+          "text": "- <Object>\n"
+        },
+        {
+          "end_line": 890,
+          "id": "line-890",
+          "kind": "paragraph",
+          "parent_id": "line-884",
+          "start_line": 890,
+          "text": "The module.exports object is created by the Module system. Sometimes this is not acceptable; many want their module to be an instance of some class. To do this, assign the desired export object to module.exports. Assigning the desired object to exports will simply rebind the local exports variable, which is probably not what is desired.\n"
+        },
+        {
+          "end_line": 892,
+          "id": "line-892",
+          "kind": "paragraph",
+          "parent_id": "line-884",
+          "start_line": 892,
+          "text": "For example, suppose we were making a module called a.js:\n"
+        },
+        {
+          "end_line": 904,
+          "id": "line-894",
+          "kind": "code",
+          "parent_id": "line-884",
+          "start_line": 894,
+          "text": "```\nconst EventEmitter = require('node:events');\n\nmodule.exports = new EventEmitter();\n\n// Do some work, and after some time emit\n// the 'ready' event from the module itself.\nsetTimeout(() => {\nmodule.exports.emit('ready');\n}, 1000); copy\n```\n"
+        },
+        {
+          "end_line": 906,
+          "id": "line-906",
+          "kind": "paragraph",
+          "parent_id": "line-884",
+          "start_line": 906,
+          "text": "Then in another file we could do:\n"
+        },
+        {
+          "end_line": 913,
+          "id": "line-908",
+          "kind": "code",
+          "parent_id": "line-884",
+          "start_line": 908,
+          "text": "```\nconst a = require('./a');\na.on('ready', () => {\nconsole.log('module \"a\" is ready');\n}); copy\n```\n"
+        },
+        {
+          "end_line": 915,
+          "id": "line-915",
+          "kind": "paragraph",
+          "parent_id": "line-884",
+          "start_line": 915,
+          "text": "Assignment to module.exports must be done immediately. It cannot be done in any callbacks. This does not work:\n"
+        },
+        {
+          "end_line": 917,
+          "id": "line-917",
+          "kind": "paragraph",
+          "parent_id": "line-884",
+          "start_line": 917,
+          "text": "x.js:\n"
+        },
+        {
+          "end_line": 923,
+          "id": "line-919",
+          "kind": "code",
+          "parent_id": "line-884",
+          "start_line": 919,
+          "text": "```\nsetTimeout(() => {\nmodule.exports = { a: 'hello' };\n}, 0); copy\n```\n"
+        },
+        {
+          "end_line": 925,
+          "id": "line-925",
+          "kind": "paragraph",
+          "parent_id": "line-884",
+          "start_line": 925,
+          "text": "y.js:\n"
+        },
+        {
+          "end_line": 930,
+          "id": "line-927",
+          "kind": "code",
+          "parent_id": "line-884",
+          "start_line": 927,
+          "text": "```\nconst x = require('./x');\nconsole.log(x.a); copy\n```\n"
+        },
+        {
+          "end_line": 932,
+          "id": "line-932",
+          "kind": "heading",
+          "parent_id": "line-884",
+          "start_line": 932,
+          "text": "##### exports shortcut#\n"
+        },
+        {
+          "end_line": 934,
+          "id": "line-934",
+          "kind": "paragraph",
+          "parent_id": "line-932",
+          "start_line": 934,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 936,
+          "id": "line-936",
+          "kind": "paragraph",
+          "parent_id": "line-932",
+          "start_line": 936,
+          "text": "The exports variable is available within a module's file-level scope, and is assigned the value of module.exports before the module is evaluated.\n"
+        },
+        {
+          "end_line": 938,
+          "id": "line-938",
+          "kind": "paragraph",
+          "parent_id": "line-932",
+          "start_line": 938,
+          "text": "It allows a shortcut, so that module.exports.f = ... can be written more succinctly as exports.f = .... However, be aware that like any variable, if a new value is assigned to exports, it is no longer bound to module.exports:\n"
+        },
+        {
+          "end_line": 943,
+          "id": "line-940",
+          "kind": "code",
+          "parent_id": "line-932",
+          "start_line": 940,
+          "text": "```\nmodule.exports.hello = true; // Exported from require of module\nexports = { hello: false }; // Not exported, only available in the module copy\n```\n"
+        },
+        {
+          "end_line": 945,
+          "id": "line-945",
+          "kind": "paragraph",
+          "parent_id": "line-932",
+          "start_line": 945,
+          "text": "When the module.exports property is being completely replaced by a new object, it is common to also reassign exports:\n"
+        },
+        {
+          "end_line": 951,
+          "id": "line-947",
+          "kind": "code",
+          "parent_id": "line-932",
+          "start_line": 947,
+          "text": "```\nmodule.exports = exports = function Constructor() {\n// ... etc.\n}; copy\n```\n"
+        },
+        {
+          "end_line": 953,
+          "id": "line-953",
+          "kind": "paragraph",
+          "parent_id": "line-932",
+          "start_line": 953,
+          "text": "To illustrate the behavior, imagine this hypothetical implementation of require(), which is quite similar to what is actually done by require():\n"
+        },
+        {
+          "end_line": 970,
+          "id": "line-955",
+          "kind": "code",
+          "parent_id": "line-932",
+          "start_line": 955,
+          "text": "```\nfunction require(/* ... */) {\nconst module = { exports: {} };\n((module, exports) => {\n// Module code here. In this example, define a function.\nfunction someFunc() {}\nexports = someFunc;\n// At this point, exports is no longer a shortcut to module.exports, and\n// this module will still export an empty default object.\nmodule.exports = someFunc;\n// At this point, the module will now export someFunc, instead of the\n// default object.\n})(module, module.exports);\nreturn module.exports;\n} copy\n```\n"
+        },
+        {
+          "end_line": 972,
+          "id": "line-972",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 972,
+          "text": "#### module.filename#\n"
+        },
+        {
+          "end_line": 974,
+          "id": "line-974",
+          "kind": "paragraph",
+          "parent_id": "line-972",
+          "start_line": 974,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 976,
+          "id": "line-976",
+          "kind": "list",
+          "parent_id": "line-972",
+          "start_line": 976,
+          "text": "- <string>\n"
+        },
+        {
+          "end_line": 978,
+          "id": "line-978",
+          "kind": "paragraph",
+          "parent_id": "line-972",
+          "start_line": 978,
+          "text": "The fully resolved filename of the module.\n"
+        },
+        {
+          "end_line": 980,
+          "id": "line-980",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 980,
+          "text": "#### module.id#\n"
+        },
+        {
+          "end_line": 982,
+          "id": "line-982",
+          "kind": "paragraph",
+          "parent_id": "line-980",
+          "start_line": 982,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 984,
+          "id": "line-984",
+          "kind": "list",
+          "parent_id": "line-980",
+          "start_line": 984,
+          "text": "- <string>\n"
+        },
+        {
+          "end_line": 986,
+          "id": "line-986",
+          "kind": "paragraph",
+          "parent_id": "line-980",
+          "start_line": 986,
+          "text": "The identifier for the module. Typically this is the fully resolved filename.\n"
+        },
+        {
+          "end_line": 988,
+          "id": "line-988",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 988,
+          "text": "#### module.isPreloading#\n"
+        },
+        {
+          "end_line": 990,
+          "id": "line-990",
+          "kind": "paragraph",
+          "parent_id": "line-988",
+          "start_line": 990,
+          "text": "Added in: v15.4.0, v14.17.0\n"
+        },
+        {
+          "end_line": 992,
+          "id": "line-992",
+          "kind": "list",
+          "parent_id": "line-988",
+          "start_line": 992,
+          "text": "- Type: <boolean> true if the module is running during the Node.js preload phase.\n"
+        },
+        {
+          "end_line": 994,
+          "id": "line-994",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 994,
+          "text": "#### module.loaded#\n"
+        },
+        {
+          "end_line": 996,
+          "id": "line-996",
+          "kind": "paragraph",
+          "parent_id": "line-994",
+          "start_line": 996,
+          "text": "Added in: v0.1.16\n"
+        },
+        {
+          "end_line": 998,
+          "id": "line-998",
+          "kind": "list",
+          "parent_id": "line-994",
+          "start_line": 998,
+          "text": "- <boolean>\n"
+        },
+        {
+          "end_line": 1000,
+          "id": "line-1000",
+          "kind": "paragraph",
+          "parent_id": "line-994",
+          "start_line": 1000,
+          "text": "Whether or not the module is done loading, or is in the process of loading.\n"
+        },
+        {
+          "end_line": 1002,
+          "id": "line-1002",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 1002,
+          "text": "#### module.parent#\n"
+        },
+        {
+          "end_line": 1004,
+          "id": "line-1004",
+          "kind": "paragraph",
+          "parent_id": "line-1002",
+          "start_line": 1004,
+          "text": "Added in: v0.1.16Deprecated since: v14.6.0, v12.19.0\n"
+        },
+        {
+          "end_line": 1007,
+          "id": "line-1006",
+          "kind": "paragraph",
+          "parent_id": "line-1002",
+          "start_line": 1006,
+          "text": "Stability: 0 - Deprecated: Please use require.main and\nmodule.children instead.\n"
+        },
+        {
+          "end_line": 1009,
+          "id": "line-1009",
+          "kind": "list",
+          "parent_id": "line-1002",
+          "start_line": 1009,
+          "text": "- <module> | <null> | <undefined>\n"
+        },
+        {
+          "end_line": 1011,
+          "id": "line-1011",
+          "kind": "paragraph",
+          "parent_id": "line-1002",
+          "start_line": 1011,
+          "text": "The module that first required this one, or null if the current module is the entry point of the current process, or undefined if the module was loaded by something that is not a CommonJS module (E.G.: REPL or import).\n"
+        },
+        {
+          "end_line": 1013,
+          "id": "line-1013",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 1013,
+          "text": "#### module.path#\n"
+        },
+        {
+          "end_line": 1015,
+          "id": "line-1015",
+          "kind": "paragraph",
+          "parent_id": "line-1013",
+          "start_line": 1015,
+          "text": "Added in: v11.14.0\n"
+        },
+        {
+          "end_line": 1017,
+          "id": "line-1017",
+          "kind": "list",
+          "parent_id": "line-1013",
+          "start_line": 1017,
+          "text": "- <string>\n"
+        },
+        {
+          "end_line": 1019,
+          "id": "line-1019",
+          "kind": "paragraph",
+          "parent_id": "line-1013",
+          "start_line": 1019,
+          "text": "The directory name of the module. This is usually the same as the path.dirname() of the module.id.\n"
+        },
+        {
+          "end_line": 1021,
+          "id": "line-1021",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 1021,
+          "text": "#### module.paths#\n"
+        },
+        {
+          "end_line": 1023,
+          "id": "line-1023",
+          "kind": "paragraph",
+          "parent_id": "line-1021",
+          "start_line": 1023,
+          "text": "Added in: v0.4.0\n"
+        },
+        {
+          "end_line": 1025,
+          "id": "line-1025",
+          "kind": "list",
+          "parent_id": "line-1021",
+          "start_line": 1025,
+          "text": "- <string[]>\n"
+        },
+        {
+          "end_line": 1027,
+          "id": "line-1027",
+          "kind": "paragraph",
+          "parent_id": "line-1021",
+          "start_line": 1027,
+          "text": "The search paths for the module.\n"
+        },
+        {
+          "end_line": 1029,
+          "id": "line-1029",
+          "kind": "heading",
+          "parent_id": "line-868",
+          "start_line": 1029,
+          "text": "#### module.require(id)#\n"
+        },
+        {
+          "end_line": 1031,
+          "id": "line-1031",
+          "kind": "paragraph",
+          "parent_id": "line-1029",
+          "start_line": 1031,
+          "text": "Added in: v0.5.1\n"
+        },
+        {
+          "end_line": 1033,
+          "id": "line-1033",
+          "kind": "list",
+          "parent_id": "line-1029",
+          "start_line": 1033,
+          "text": "- id <string>\n"
+        },
+        {
+          "end_line": 1035,
+          "id": "line-1035",
+          "kind": "list",
+          "parent_id": "line-1029",
+          "start_line": 1035,
+          "text": "- Returns: <any> exported module content\n"
+        },
+        {
+          "end_line": 1037,
+          "id": "line-1037",
+          "kind": "paragraph",
+          "parent_id": "line-1029",
+          "start_line": 1037,
+          "text": "The module.require() method provides a way to load a module as if require() was called from the original module.\n"
+        },
+        {
+          "end_line": 1039,
+          "id": "line-1039",
+          "kind": "paragraph",
+          "parent_id": "line-1029",
+          "start_line": 1039,
+          "text": "In order to do this, it is necessary to get a reference to the module object. Since require() returns the module.exports, and the module is typically only available within a specific module's code, it must be explicitly exported in order to be used.\n"
+        },
+        {
+          "end_line": 1041,
+          "id": "line-1041",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 1041,
+          "text": "### The Module object#\n"
+        },
+        {
+          "end_line": 1043,
+          "id": "line-1043",
+          "kind": "paragraph",
+          "parent_id": "line-1041",
+          "start_line": 1043,
+          "text": "This section was moved to Modules: module core module.\n"
+        },
+        {
+          "end_line": 1045,
+          "id": "line-1045",
+          "kind": "list",
+          "parent_id": "line-1041",
+          "start_line": 1045,
+          "text": "- module.builtinModules\n"
+        },
+        {
+          "end_line": 1047,
+          "id": "line-1047",
+          "kind": "list",
+          "parent_id": "line-1041",
+          "start_line": 1047,
+          "text": "- module.createRequire(filename)\n"
+        },
+        {
+          "end_line": 1049,
+          "id": "line-1049",
+          "kind": "list",
+          "parent_id": "line-1041",
+          "start_line": 1049,
+          "text": "- module.syncBuiltinESMExports()\n"
+        },
+        {
+          "end_line": 1051,
+          "id": "line-1051",
+          "kind": "heading",
+          "parent_id": "line-137",
+          "start_line": 1051,
+          "text": "### Source map v3 support#\n"
+        },
+        {
+          "end_line": 1053,
+          "id": "line-1053",
+          "kind": "paragraph",
+          "parent_id": "line-1051",
+          "start_line": 1053,
+          "text": "This section was moved to Modules: module core module.\n"
+        },
+        {
+          "end_line": 1055,
+          "id": "line-1055",
+          "kind": "list",
+          "parent_id": "line-1051",
+          "start_line": 1055,
+          "text": "- module.findSourceMap(path)\n"
+        },
+        {
+          "end_line": 1057,
+          "id": "line-1057",
+          "kind": "list",
+          "parent_id": "line-1051",
+          "start_line": 1057,
+          "text": "- Class: module.SourceMap new SourceMap(payload) sourceMap.payload sourceMap.findEntry(lineNumber, columnNumber)\n"
+        }
+      ],
+      "id": "node",
+      "source_hash": "a51c8cb292f9a70a570b414575078a82c3a9449680b610e5f989f718b76181f3",
+      "title": "Modules: CommonJS modules | Node.js v22.15.0 Documentation",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html"
+    }
+  ]
+}

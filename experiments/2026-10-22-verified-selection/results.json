@@ -1,0 +1,219 @@
+{
+  "policy": {
+    "catalog_sha256": "e4833795a164d67105b1ef60a5fd96b28d4a021a0d283dd87633ab4475feca7a",
+    "default_mode": "verified",
+    "engine_sha256": "70937b883d2fc75e3530e4d8eb2f3f7a534456f1cdc582f595f930c730c7fe20",
+    "registry_sha256": "76b9bb4760e446c2f28c9a1f3d634f8d1b405770840afd99440d6c114fce8594"
+  },
+  "selector_sha256": "582ab47ec0b15ef6dafcc455e7eb40162e9597197f1ecf5e56ae94cdae38c25f",
+  "sources": {
+    "experiments/2026-10-22-web-selection-heldout/questions.json": "67873d57fa332b98c024baaae29268f2858e55a8b6965c8954b95c44acb8db6d",
+    "experiments/2026-10-22-web-selection-heldout/generated_english.json": "12f2d02bab28c8260ee469f1a54fbb6916b4dcc962cc10d73a7563d3e0ceb4a8",
+    "experiments/2026-10-22-web-selection-heldout/gold.json": "17024ee4de582889b200ea9bb46462f62b08957f371463b99ad508ee04fac94c",
+    "experiments/2026-10-22-web-selection-heldout/redis-documents.json": "d1b4675a6c44b513a592ab6856e58f10a617a12766a334046e00e1e8acdd4609",
+    "experiments/2026-10-22-web-selection-heldout/s3-documents.json": "556d8dd7d00f6cba472e249cc8e57cfb5f53bf746f2ad240c310443b82cdb0a7",
+    "experiments/2026-10-22-web-selection-rules/questions.json": "467fe0d71335c388733f1ab85dee31520ea357d8ec561436b0c35d7a1bebfd0f",
+    "experiments/2026-10-22-web-selection-rules/improved_english.json": "5b1bf50a8481e42e803262691e4739ff33cc04de802a1aa338308f80287ee58f",
+    "experiments/2026-10-22-web-selection-rules/gold.json": "0109ed9db9aea0de5020ebe248b4aaa4a1f927bf516e7f77d3a19bfeebc01119",
+    "experiments/2026-10-22-web-selection-rules/queue-documents.json": "0ce68924b68a6bd558908767dc60b715beb3574c485c14e5045260cb104610fb",
+    "experiments/2026-10-22-web-selection-rules/semaphore-documents.json": "ce6b7db895a602a3ddafa479236e0f6d2e9908809779df5d93f259453c118d3f",
+    "experiments/2026-10-22-web-selection-rules/timeout-documents.json": "3669126a7b25dafb1f2a246feae442ad7d3a0b378e881a2f7c891fa49ba70418",
+    "experiments/2026-10-22-web-selection-rules/ssh-documents.json": "888007b9dc7248dffd10ff414d4acfb14205da3d17f91f4c607d9be658c7ed7b",
+    "experiments/2026-10-22-web-selection-rules/github-rate-documents.json": "5eefa0411a04cc9677a98c896998b01f24d79a4e0ca5d7c70e7ffb157c409a4e",
+    "experiments/2026-10-22-web-selection-rules/nginx-documents.json": "010803fdbd265e62989a201bf35106a7119cbafa2884e9ff6d89f46b6986d448",
+    "experiments/2026-10-22-web-selection-rules/gcs-retry-documents.json": "0323f7127fed8f03ac3cf385084b7d1b27036a310d40e53e467b23d1362cfe53",
+    "experiments/2026-10-22-web-selection-rules/blockingqueue-documents.json": "c9a09c548fedf2e6d43dff9026313c749dc4638bcea9d37b5a24adf53535717a"
+  },
+  "rows": [
+    {
+      "id": "redis",
+      "budget": 1024,
+      "baseline_units": [
+        "updates"
+      ],
+      "subset_units": [
+        "updates",
+        "nonpositive"
+      ],
+      "default_matches_verified_subset": true,
+      "mutated_conditions_match_off": true
+    },
+    {
+      "id": "s3",
+      "budget": 1024,
+      "baseline_units": [
+        "directory_order",
+        "token"
+      ],
+      "subset_units": [
+        "general_order",
+        "directory_order",
+        "token"
+      ],
+      "default_matches_verified_subset": true,
+      "mutated_conditions_match_off": true
+    },
+    {
+      "id": "queue",
+      "budget": 1024,
+      "retained_units": [],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "queue",
+      "budget": 2048,
+      "retained_units": [
+        "maxsize",
+        "put-timeout"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "semaphore",
+      "budget": 1024,
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "semaphore",
+      "budget": 2048,
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "timeout",
+      "budget": 1024,
+      "retained_units": [
+        "zero-duration",
+        "exit-status"
+      ],
+      "total_units": 3,
+      "default_matches_off": true
+    },
+    {
+      "id": "timeout",
+      "budget": 2048,
+      "retained_units": [
+        "fractional-duration",
+        "zero-duration",
+        "exit-status"
+      ],
+      "total_units": 3,
+      "default_matches_off": true
+    },
+    {
+      "id": "ssh",
+      "budget": 1024,
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "ssh",
+      "budget": 2048,
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "github-rate",
+      "budget": 1024,
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "github-rate",
+      "budget": 2048,
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "nginx",
+      "budget": 1024,
+      "retained_units": [
+        "burst"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "nginx",
+      "budget": 2048,
+      "retained_units": [
+        "burst",
+        "nodelay"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 1024,
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 2048,
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 1024,
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 2048,
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "total_units": 2,
+      "default_matches_off": true
+    }
+  ],
+  "standard_improved_english_totals": {
+    "1024": 13,
+    "2048": 17
+  },
+  "denominator": 17
+}

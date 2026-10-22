@@ -1,0 +1,11 @@
+{
+  "compiled_registry_matches_file": true,
+  "approvals": 2,
+  "proof_hashes_sources_outputs_and_gold_checked": true,
+  "policy": {
+    "catalog_sha256": "e4833795a164d67105b1ef60a5fd96b28d4a021a0d283dd87633ab4475feca7a",
+    "default_mode": "verified",
+    "engine_sha256": "70937b883d2fc75e3530e4d8eb2f3f7a534456f1cdc582f595f930c730c7fe20",
+    "registry_sha256": "76b9bb4760e446c2f28c9a1f3d634f8d1b405770840afd99440d6c114fce8594"
+  }
+}

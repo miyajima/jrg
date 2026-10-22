@@ -1,0 +1,119 @@
+{
+  "documents": [
+    {
+      "id": "nginx",
+      "url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html",
+      "title": "Module ngx_http_limit_req_module",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "paragraph",
+          "text": "Join us for the quarterly\nNGINX Community Call\non November 4th to connect and discuss NGINX development.\n",
+          "start_line": 1,
+          "end_line": 3
+        },
+        {
+          "id": "line-5",
+          "kind": "heading",
+          "text": "## Module ngx_http_limit_req_module\n",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "id": "line-30",
+          "kind": "heading",
+          "text": "#### Directives\n",
+          "parent_id": "line-5",
+          "start_line": 30,
+          "end_line": 30
+        },
+        {
+          "id": "line-36",
+          "kind": "paragraph",
+          "text": "Sets the shared memory zone and the maximum burst size of requests. If the requests rate exceeds the rate configured for a zone, their processing is delayed such that requests are processed at a defined rate. Excessive requests are delayed until their number exceeds the maximum burst size in which case the request is terminated with an error. By default, the maximum burst size is equal to zero. For example, the directives\n",
+          "parent_id": "line-30",
+          "start_line": 36,
+          "end_line": 36
+        },
+        {
+          "id": "line-49",
+          "kind": "paragraph",
+          "text": "allow not more than 1 request per second at an average, with bursts not exceeding 5 requests.\n",
+          "parent_id": "line-30",
+          "start_line": 49,
+          "end_line": 49
+        },
+        {
+          "id": "line-63",
+          "kind": "code",
+          "text": "```\n\nlimit_req_zone $binary_remote_addr zone=perip:10m rate=1r/s;\nlimit_req_zone $server_name zone=perserver:10m rate=10r/s;\n\nserver {\n...\nlimit_req zone=perip burst=5 nodelay;\nlimit_req zone=perserver burst=10;\n}\n\n```\n",
+          "parent_id": "line-30",
+          "start_line": 63,
+          "end_line": 74
+        },
+        {
+          "id": "line-92",
+          "kind": "paragraph",
+          "text": "Sets the desired logging level for cases when the server refuses to process requests due to rate exceeding, or delays request processing. Logging level for delays is one point less than for refusals; for example, if “limit_req_log_level notice” is specified, delays are logged with the info level.\n",
+          "parent_id": "line-30",
+          "start_line": 92,
+          "end_line": 92
+        },
+        {
+          "id": "line-106",
+          "kind": "paragraph",
+          "text": "Sets parameters for a shared memory zone that will keep states for various keys. In particular, the state stores the current number of excessive requests. The key can contain text, variables, and their combination. Requests with an empty key value are not accounted.\n",
+          "parent_id": "line-30",
+          "start_line": 106,
+          "end_line": 106
+        },
+        {
+          "id": "line-118",
+          "kind": "paragraph",
+          "text": "Here, the states are kept in a 10 megabyte zone “one”, and an average request processing rate for this zone cannot exceed 1 request per second.\n",
+          "parent_id": "line-30",
+          "start_line": 118,
+          "end_line": 118
+        },
+        {
+          "id": "line-122",
+          "kind": "paragraph",
+          "text": "If the zone storage is exhausted, the least recently used state is removed. If even after that a new state cannot be created, the request is terminated with an error.\n",
+          "parent_id": "line-30",
+          "start_line": 122,
+          "end_line": 122
+        },
+        {
+          "id": "line-124",
+          "kind": "paragraph",
+          "text": "The rate is specified in requests per second (r/s). If a rate of less than one request per second is desired, it is specified in request per minute (r/m). For example, half-request per second is 30r/m.\n",
+          "parent_id": "line-30",
+          "start_line": 124,
+          "end_line": 124
+        },
+        {
+          "id": "line-134",
+          "kind": "heading",
+          "text": "#### Embedded Variables\n",
+          "parent_id": "line-5",
+          "start_line": 134,
+          "end_line": 134
+        },
+        {
+          "id": "line-138",
+          "kind": "paragraph",
+          "text": "keeps the result of limiting the request processing rate (1.17.6):\nPASSED,\nDELAYED,\nREJECTED,\nDELAYED_DRY_RUN, or\nREJECTED_DRY_RUN\n",
+          "parent_id": "line-134",
+          "start_line": 138,
+          "end_line": 143
+        }
+      ],
+      "source_hash": "e9aa5f646b94f248e63e44377cd7cc0d28bf65d390929b924fd0fc06b4f1872e"
+    }
+  ],
+  "omitted_count": 29,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 991,
+  "max_tokens": 1024
+}

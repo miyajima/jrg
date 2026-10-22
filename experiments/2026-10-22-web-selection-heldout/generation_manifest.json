@@ -1,0 +1,13 @@
+{
+  "generated_by": "native collaboration agent",
+  "agent_task": "/root/blind_english_generator",
+  "fork_turns": "none",
+  "model": "inherited host model; exact variant not reported by tool",
+  "generation_batches": 1,
+  "source_access": "No sources, URLs, gold labels or prior outcomes supplied; tools prohibited by prompt.",
+  "instruction": "Optional English equivalent for English-language evidence when the user's goal is Japanese. Preserve negation, versions, numbers, and identifiers; do not add facts.",
+  "questions_sha256": "8bcdf0bdbcac4ebca5f1392da99b26286803814c2d33b7c384357e0a63019e73",
+  "output_sha256": "12f2d02bab28c8260ee469f1a54fbb6916b4dcc962cc10d73a7563d3e0ceb4a8",
+  "frozen_before_source_fetch_at": "2026-10-22T08:03:22.508210+00:00",
+  "manual_edits": false
+}

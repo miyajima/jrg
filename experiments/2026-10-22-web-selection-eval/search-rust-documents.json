@@ -1,0 +1,238 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 6 days ago; The Rust team is happy to announce a new version of Rust, 1.88.0. ... `let_chains` was stabilized in this version\"); ... Let chains are only available in the Rust 2024 edition, as this feature depends on the `if let` temporary scope change for more consistent drop order.\n\n## Announcing Rust 1.88.0\n\nJune 26, 2025 · The Rust Release Team\n\nThe Rust team is happy to announce a new version of Rust, 1.88.0. Rust is a programming language empowering everyone to build reliable and efficient software.\n\nIf you have a previous version of Rust installed via `rustup`, you can get 1.88.0 with:\n    \n    `$ rustup update stable`\n\nIf you don't have it already, you can get `rustup` from the appropriate page on our website, and check out the detailed release notes for 1.88.0.\n\nIf you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (`rustup default beta`) or the nightly channel (`rustup default nightly`). Please report any bugs you might come across!\n\n## What's in 1.88.0 stable\n\n### Let chains\n\nThis feature allows `&&`-chaining `let` statements inside `if` and `while` conditions, even intermingling with boolean expressions, so there is less distinction between `if`/`if let` and `while`/`while let`. The patterns inside the `let` sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.\n\nFor example, this snippet combines multiple conditions which would have required nesting `if let` and `if` blocks before:\n    \n    `if let Channel::Stable(v) = release_info()\n        && let Semver { major, minor, .. } = v\n        && major == 1\n        && minor == 88\n    {\n        println!(\"`let_chains` was stabilized in this version\");\n    }`\n\nLet chains are only available in the Rust 2024 edition, as this feature depends on the `if let` temporary scope change for more consistent drop order.\n\nEarlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!\n\n### Naked functions\n\nRust now supports writing naked functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function. This is a more ergonomic alternative to defining functions in a `global_asm!` block. A naked function is marked with the `#[unsafe(naked)]` attribute, and its body consists of a single `naked_asm!` call.\n\nFor example:\n    \n    `#[unsafe(naked)]\n    pub unsafe extern \"sysv64\" fn wrapping_add(a: u64, b: u64) -> u64 {\n        // Equivalent to `a.wrapping_add(b)`.\n        core::arch::naked_asm!(\n            \"lea rax, [rdi + rsi]\",\n            \"ret\"\n        );\n    }`\n\nThe handwritten assembly block defines the entire function body: unlike non-naked functions, the compiler does not add any special handling for arguments or return values. Naked functions are used in low-level settings like Rust's `compiler-builtins`, operating systems, and embedded applications.\n\nLook for a more detailed post on this soon!\n\n### Boolean configuration\n\nThe `cfg` predicate language now supports boolean literals, `true` and `false`, acting as a configuration that is always enabled or disabled, respectively. This works in Rust conditional compilation with `cfg` and `cfg_attr` attributes and the built-in `cfg!` macro, and also in Cargo `[target]` tables in both configuration and manifests.\n\nPreviously, empty predicate lists could be used for unconditional configuration, like `cfg(all())` for enabled and `cfg(any())` for disabled, but this meaning is rather implicit and easy to get backwards. `cfg(true)` and `cfg(false)` offer a more direct way to say what you mean.\n\nSee RFC 3695 for more background!\n\n### Cargo automatic cache cleaning\n\nStarting in 1.88.0, Cargo will automatically run garbage collection on the cache in its home directory!\n\nWhen building, Cargo downloads and caches crates needed as dependencies. Historically, these downloaded files would never be cleaned up, leading to an unbounded amount of disk usage in Cargo's home directory. In this version, Cargo introduces a garbage collection mechanism to automatically clean up old files (e.g. `.crate` files). Cargo will remove files downloaded from the network if not accessed in 3 months, and files obtained from the local system if not accessed in 1 month. Note that this automatic garbage collection will not take place if running offline (using `--offline` or `--frozen`).\n\nCargo 1.78 and newer track the access information needed for this garbage collection. This was introduced well before the actual cleanup that's starting now, in order to reduce cache churn for those that still use prior versions. If you regularly use versions of Cargo even older than 1.78, in addition to running current versions of Cargo, and you expect to have some crates accessed exclusively by the older versions of Cargo and don't want to re-download those crates every ~3 months, you may wish to set `cache.auto-clean-frequency = \"never\"` in the Cargo configuration, as described in the docs.\n\nFor more information, see the original unstable announcement of this feature. Some parts of that design remain unstable, like the `gc` subcommand tracked in cargo#13060, so there's still more to look forward to!\n\n### Stabilized APIs\n\n  * `Cell::update`\n\nThese previously stable APIs are now stable in const contexts:\n\n  * `NonNull<T>::replace`\n  * `<*mut T>::replace`\n  * `std::ptr::swap_nonoverlapping`\n  * `Cell::replace`\n  * `Cell::get`\n  * `Cell::get_mut`\n  * `Cell::from_mut`\n  * `Cell::as_slice_of_cells`\n\n### Other changes\n\nThe `i686-pc-windows-gnu` target has been demoted to Tier 2, as mentioned in an earlier post. This won't have any immediate effect for users, since both the compiler and standard library tools will still be distributed by `rustup` for this target. However, with less testing than it had at Tier 1, it has more chance of accumulating bugs in the future.\n\nCheck out everything that changed in Rust, Cargo, and Clippy.\n\n## Contributors to 1.88.0\n\nMany people came together to create Rust 1.88.0. We couldn't have done it without all of you. Thanks!--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-1",
+      "source_hash": "12b43a83c28c3a1aac0053b9db433dfe9fe0c01af5db0050f65131dd36e9b4c1",
+      "title": "Announcing Rust 1.88.0 | Rust Blog",
+      "url": "https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 2 weeks ago; ### 1.88.0 ...   * Stabilized APIs ... feature(let_chains)]` in the 2024 edition. ... feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error.\n\n### 1.88.0\n\nImage: Table of Contents\n\n  * Language\n  * Compiler\n  * Platform Support\n  * Libraries\n  * Stabilized APIs\n  * Cargo\n  * Rustdoc\n  * Compatibility Notes\n\n# 1.88.0 #\n\n>   * Released on: 26 June, 2025\n\n## Language #\n\n  * Stabilize `#![feature(let_chains)]` in the 2024 edition. This feature allows `&&`-chaining `let` statements inside `if` and `while`, allowing intermixture with boolean expressions. The patterns inside the `let` sub-expressions can be irrefutable or refutable.\n  * Stabilize `#![feature(naked_functions)]`. Naked functions allow writing functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function.\n  * Stabilize `#![feature(cfg_boolean_literals)]`. This allows using boolean literals as `cfg` predicates, e.g. `#[cfg(true)]` and `#[cfg(false)]`.\n  * `Cell::get_mut`\n  * `Cell::from_mut`\n  * `Cell::as_slice_of_cells`\n\n## Cargo #\n\n  * Stabilize automatic garbage collection.\n  * use `zlib-rs` for gzip compression in rust code\n\n## Rustdoc #\n\n  * Doctests can be ignored based on target names using `ignore-*` attributes.\n  * Stabilize the `--test-runtool` and `--test-runtool-arg` CLI options to specify a program (like qemu) and its arguments to run a doctest.\n\n## Compatibility Notes #\n\n  * Finish changing the internal representation of pasted tokens. Certain invalid declarative macros that were previously accepted in obscure circumstances are now correctly rejected by the compiler. Use of a `tt` fragment specifier can often fix these macros.\n  * Fully de-stabilize the `#[bench]` attribute. Usage of `#[bench]` without `#![feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error.\n  * Fix borrow checking some always-true patterns. The borrow checker was overly permissive in some cases, allowing programs that shouldn’t have compiled.\n  * Update the minimum external LLVM to 19.\n  * Make it a hard error to use a vector type with a non-Rust ABI without enabling the required target feature.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-2",
+      "source_hash": "349c7550b61a15fd6f5eb68f308781efc674c51d8e9743aa43d7a41b3bc4f8a1",
+      "title": "1.88.0 | Rust Changelogs",
+      "url": "https://releases.rs/docs/1.88.0/"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: last month; Starting with the 2024 Edition, it is now allowed to have chaining of `let` expressions inside `if` and `while` condition operands, where chaining refers to `&&` chains. ... The switch to Edition 2024 doesn’t neccessitate any migrations due to this feature, as it creates a true extension of the set of allowed Rust programs.\n\n# The Rust Edition Guide\n\n# `let` chains in `if` and `while`\n\n## Summary\n\n  * Allow chaining of `let` expressions in the condition operand of `if` and `while`.\n\n## Details\n\nStarting with the 2024 Edition, it is now allowed to have chaining of `let` expressions inside `if` and `while` condition operands, where chaining refers to `&&` chains. The `let` expressions still have to appear at the top level, so `if (let Some(hi) = foo || let Some(hi) = bar)` is not allowed.\n\nBefore 2024, the `let` had to appear directly after the `if` or `while`, forming a `if let` or `while let` special variant. Now, `if` and `while` allow chains of one or more `let` expressions, possibly mixed with expressions that are `bool` typed.\n    \n    `#![allow(unused)]\n    fn main() {\n    fn sum_first_two(nums: &[u8]) -> Option<u8> {\n        let mut iter = nums.iter();\n        if let Some(first) = iter.next()\n            && let Some(second) = iter.next()\n        {\n            first.checked_add(*second)\n        } else {\n            None\n        }\n    }\n    }`\n\nThe feature is edition gated due to requiring if let rescoping, which is a Edition 2024 change.\n\n## Migration\n\nThe switch to Edition 2024 doesn’t neccessitate any migrations due to this feature, as it creates a true extension of the set of allowed Rust programs.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-3",
+      "source_hash": "67f2f4d5c9145ead0aee55f09102ab68a626b47c374b22daca0c9192ed9155c4",
+      "title": "let chains in if and while - The Rust Edition Guide",
+      "url": "https://doc.rust-lang.org/stable/edition-guide/rust-2024/let-chains.html"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 3 days ago; # Version 1.88.0 (2025-06-26) ... feature(let_chains)]` in the 2024 edition. ... feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error. ... ## Stabilized APIs\n\n# Version 1.88.0 (2025-06-26)\n\n## Language\n\n  * Stabilize `#![feature(let_chains)]` in the 2024 edition. This feature allows `&&`-chaining `let` statements inside `if` and `while`, allowing intermixture with boolean expressions. The patterns inside the `let` sub-expressions can be irrefutable or refutable.\n  * Stabilize `#![feature(naked_functions)]`. Naked functions allow writing functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function.\n  * Stabilize `#![feature(cfg_boolean_literals)]`. This allows using boolean literals as `cfg` predicates, e.g. `#[cfg(true)]` and `#[cfg(false)]`.\n  * Fully de-stabilize the `#[bench]` attribute. Usage of `#[bench]` without `#![feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error.\n  * Add warn-by-default `dangerous_implicit_autorefs` lint against implicit autoref of raw pointer dereference. The lint will be bumped to deny-by-default in the next version of Rust.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-4",
+      "source_hash": "a02b6859071bc77fda071a8f0a276c6c01553015a66a6af745d5f71364c9fa60",
+      "title": "Version 1.88.0 (2025-06-26)",
+      "url": "https://chromium.googlesource.com/external/github.com/rust-lang/rust/%2B/refs/tags/1.88.0/RELEASES.md"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 8 months ago; RHEL provides Rust Toolset in version 1.88.0. ... - Rust 2024 Edition: The Rust 2024 Edition is now stable. ... - Let Chains: This feature allows using `&&` to chain multiple `let` statements within `if` and `while` conditions, enabling more concise complex conditional checks.\nCHAPTER 5. CHANGES IN RUST 1.88.0 TOOLSET\n\nRHEL provides Rust Toolset in version 1.88.0. Notable enhancements since the previously available version 1.84.1 include:\n\n- Rust 2024 Edition: The Rust 2024 Edition is now stable. It introduces changes such as refined capture rules for `impl Trait`, and safer `extern` blocks which now require the `unsafe` keyword.\n- Async Closures: The `async` closures are now stable.\n- Let Chains: This feature allows using `&&` to chain multiple `let` statements within `if` and `while` conditions, enabling more concise complex conditional checks. This feature is available only in the Rust 2024 Edition.\n- Naked Functions: Developers can now define \"naked functions\" using the `#[unsafe(naked)]` attribute. These functions do not have a compiler-generated prologue or epilogue, providing full control over the assembly code.\n- High-performance computing: When you enable target features, you can call multiple `std::arch` intrinsics directly in safe Rust, which gives you direct access to specific CPU features.\n- Trait Upcasting: It is now possible to upcast trait objects to their supertraits, improving flexibility when working with trait objects.\n- Standard Library Improvements:\n  - Anonymous Pipes: Access to anonymous pipes is now available in the standard library.\n  - Mutable Multiple Element Indexing: `HashMap`s and slices now support safely retrieving mutable references to multiple elements simultaneously.\n\nCompatibility notes\n\n- The `#[bench]` attribute has been fully de-stabilized and its usage will result in a hard error.\n- The `wasm_c_abi` future compatibility warning is now a hard error.\n- The `missing_abi` lint is now warn-by-default, and explicitly specify the ABI in `extern` blocks.\n\nRust Toolset is a rolling Application Stream, and Red Hat only supports the latest version. For more information, see the Red Hat Enterprise Linux Application Streams Life Cycle document.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-5",
+      "source_hash": "98b24288ef4a2924bbe8918e10e00b9481485eafedcedbe37a596d708804643c",
+      "title": "Red Hat Developer Tools 1 Using Rust 1.88.0 Toolset",
+      "url": "https://docs.redhat.com/en/documentation/red_hat_developer_tools/1/pdf/using_rust_1.88.0_toolset/Red_Hat_Developer_Tools-1-Using_Rust_1.88.0_Toolset-en-US.pdf"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 8.2 years ago; Crawled: 2 months ago; # Note: This feature was stabilized in 1.88.0 but on edition 2024 only. ... This is a tracking issue for the eRFC \"if- and while-let-chains, take 2\" (rust-lang/rfcs#2497). ...   * [Input] Second stabilization PR: Stabilize let chains in the 2024 edition #132833\n\nIssue body actions\n\n# Note: This feature was stabilized in 1.88.0 but on edition 2024 only. If you are using 1.88.0+ and get an error that the feature is still unstable, please upgrade the edition.\n\nThis is a tracking issue for the eRFC \"if- and while-let-chains, take 2\" (rust-lang/rfcs#2497).\nFor the tracking issue for the immediate edition changes, see #53668.\n\nSteps:\n\n  * [Input] Implement the RFC (cc @rust-lang/compiler -- can anyone write up mentoring instructions?)\n  * [Input] Adjust documentation (see instructions on forge)\n  * [Input] Formatting for new syntax has been added to the Style Guide (nightly-style-procedure)\n  * [Input] resolve expr fragment specifier issue (#86730)\n  * [Input] Initial stabilization PR: Stabilize `let_chains` in Rust 1.64 #94927, reverted in Revert let_chains stabilization #100538\n  * [Input] Second stabilization PR: Stabilize let chains in the 2024 edition #132833\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-6",
+      "source_hash": "e21e72c2e6f9196ef83946e13e2871a254471827532724c82995cbd037c9360c",
+      "title": "Tracking issue for eRFC 2497, \"if- and while-let-chains, take 2\" · Issue #53667 · rust-lang/rust · GitHub",
+      "url": "https://github.com/rust-lang/rust/issues/53667?timeline_page=1"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 5 months ago;   * Update to version 1.88.0 - for details see the rust1.88 package ... feature(let_chains)]` in the 2024 edition. ...   * `proc_macro::Span::file` https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.file\n\n# Recommended update for rust, rust1.88\n\nAnnouncement ID:  | SUSE-RU-2025:39484-1\nRelease Date:  | 2025-07-17T15:06:50Z\nRating:  | moderate\nReferences:  | \n\n  * jsc#PED-11411\n  * jsc#SLE-18626\nAffected Products:  | \n\nAn update that contains two features can now be installed.\n\n## Description:\n\nThis update for rust fixes the following issues:\n\n  * Update to version 1.88.0 - for details see the rust1.88 package\n\n# Version 1.88.0 (2025-06-26)\n\nLanguage:\n\n  * Stabilize `#![feature(let_chains)]` in the 2024 edition. This feature allows `&amp;&amp;`-chaining `let` statements inside `if` and `while`, allowing intermixture with boolean expressions. The patterns inside the `let` sub-expressions can be irrefutable or refutable.\n  * Stabilize `#![feature(naked_functions)]`. Naked functions allow writing functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function.\n  * Stabilize `#![feature(cfg_boolean_literals)]`. --------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-7",
+      "source_hash": "8c15092c028d464c0405e468a9dab3e41696a58feee04f4ac9af4f5b734e4e2c",
+      "title": "Recommended update for rust, rust1.88 | SUSE Support | SUSE",
+      "url": "https://www.suse.com/support/update/announcement/2025/suse-ru-202539484-1"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 2 months ago; cc @rust-lang/release ... # Version 1.88.0 (2025-06-26) ... feature(let_chains)]` in the 2024 edition. ... ## Stabilized APIs\n📝\n  * Add warn-by-default `dangerous_implicit_autorefs` lint against implicit autoref of raw pointer dereference.\nThe lint may be bumped to deny-by-default in a future version of Rust.\n📝\n  * Stabilize `#![feature(let_chains)]` in the 2024 edition.\nThis feature allows `&&`-chaining `let` statements inside `if` and `while`, allowing intermixture with boolean expressions. The patterns inside the `let` sub-expressions can be irrefutable or refutable.\n📝\n  * Stabilize `#![feature(naked_functions)]`.\nNaked functions allow writing functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function.\n📝\n  * Fully de-stabilize the `#[bench]` attribute. Usage of `#[bench]` without `#![feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error.\n📝\n  * Change trait impl candidate preference for builtin impls and trivial where-clauses.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-8",
+      "source_hash": "8e5591329abb02d3f45385ceb567b022af5749a979cd8f254e3793f818c55cd5",
+      "title": "Draft release notes for 1.88.0 · Issue #141598 · rust-lang/rust · GitHub",
+      "url": "https://github.com/rust-lang/rust/issues/141598"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 8.2 years ago; Crawled: 4 months ago; # Note: This feature was stabilized in 1.88.0 but on edition 2024 only. ... This is a tracking issue for the eRFC \"if- and while-let-chains, take 2\" (rust-lang/rfcs#2497). ... Second stabilization PR: Stabilize let chains in the 2024 edition #132833\n\nopened on Aug 24, 2018\n\nIssue body actions\n\n# Note: This feature was stabilized in 1.88.0 but on edition 2024 only. If you are using 1.88.0+ and get an error that the feature is still unstable, please upgrade the edition.\n\nThis is a tracking issue for the eRFC \"if- and while-let-chains, take 2\" (rust-lang/rfcs#2497).\nFor the tracking issue for the immediate edition changes, see #53668.\n\nSteps:\n\n  * [Input]\n\nImplement the RFC (cc @rust-lang/compiler -- can anyone write up mentoring instructions?)\n\n[Input]\n\nAdjust documentation (see instructions on forge)\n\n[Input]\n\nFormatting for new syntax has been added to the Style Guide (nightly-style-procedure)\n\n[Input]\n\nresolve expr fragment specifier issue (#86730)\n\n[Input]\n\nInitial stabilization PR: Stabilize `let_chains` in Rust 1.64 #94927, reverted in Revert let_chains stabilization #100538\n\n[Input]\n\nSecond stabilization PR: Stabilize let chains in the 2024 edition #132833\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-9",
+      "source_hash": "49a0d7fd181cc540aed6148b5822ebe10417b4b17b0a853e239eab60328cb8df",
+      "title": "Tracking issue for eRFC 2497, \"if- and while-let-chains, take 2\" · Issue #53667 · rust-lang/rust",
+      "url": "https://github.com/rust-lang/rust/issues/53667"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: last week; Rust 1.88 makes conditional control flow more direct with Rust 2024 let chains, gives low-level code full control over a function’s assembly with naked functions, and introduces explicit boolean `cfg` predicates. ...   * Let chains require the Rust 2024 edition; upgrade a crate’s edition to use them. ... `let_chains` was stabilized in this version\");\n\nThe earlier unstable announcement gives more background. Parts of that design remain unstable, including the `gc` subcommand tracked in cargo#13060.\n\n## Let chains flatten conditional matching in Rust 2024\n\n`if` and `while` conditions can now chain `let` statements with `&&` and intermingle them with boolean expressions. Patterns in the `let` sub-expressions may be refutable or irrefutable, and their bindings are available to later parts of the chain and to the body. This reduces the nesting previously needed to combine `if let` or `while let` with further matches and conditions:\n    \n    `if let Channel::Stable(v) = release_info()\n        && let Semver { major, minor, .. } = v\n        && major == 1\n        && minor == 88\n    {\n        println!(\"`let_chains` was stabilized in this version\");\n    }\n    `\n\nLet chains are available only in the Rust 2024 edition because they depend on its `if let` temporary-scope change for more consistent drop order. Earlier attempts to support every edition encountered difficult edge cases that threatened the implementation’s integrity; crates must upgrade to the 2024 edition to use the feature.\n\n## Compatibility notes\n\n  * Let chains require the Rust 2024 edition; upgrade a crate’s edition to use them.\n  * If current Cargo is used alongside versions older than 1.78 and some crates are accessed only by those older versions, set `cache.auto-clean-frequency = \"never\"` if downloading those crates again approximately every three months is undesirable.\n  * The `i686-pc-windows-gnu` target remains available through `rustup` after its Tier 2 demotion, but receives less testing and may accumulate more bugs in the future.\n\nReproduced from the Rust blog under its publication licence. Typeset in Literata.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-10",
+      "source_hash": "bfb074e685cd194e79aaaeca5e88c80553701f056dacf0db9831f73b242397a3",
+      "title": "Announcing Rust 1.88.0 · The Rust Annals",
+      "url": "https://nlopes.dev/rust-timeline/1.88/"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: 5 days ago; Red Hat Enterprise Linux provides Rust Toolset at version 1.88.0. ... Notable enhancements include the Rust 2024 Edition, async closures, let chains, naked functions, high-performance computing, trait upcasting, and standard library improvements. ...   * Let Chains: In `if` and `while` conditions, you can use `&&` to chain multiple `let` statements, which shortens complex conditional logic.\n\n## Red Hat Developer Tools\n\n# Chapter 5. Changes in Rust 1.88.0 Toolset\n\n* * *\n\nRed Hat Enterprise Linux provides Rust Toolset at version 1.88.0. The previous version was 1.84.1. Notable enhancements include the Rust 2024 Edition, async closures, let chains, naked functions, high-performance computing, trait upcasting, and standard library improvements.\n\n  * Rust 2024 Edition: The Rust 2024 Edition is now stable. It introduces changes such as refined capture rules for `impl Trait`, and safer `extern` blocks which now require the `unsafe` keyword.\n  * Async Closures: The `async` closures are now stable.\n  * Let Chains: In `if` and `while` conditions, you can use `&&` to chain multiple `let` statements, which shortens complex conditional logic. Let chains are available only in the Rust 2024 Edition.\n  * Naked Functions: Developers can now define \"naked functions\" using the `#[unsafe(naked)]` attribute. These functions do not have a compiler-generated prologue or epilogue, providing full control over the assembly code.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-11",
+      "source_hash": "98bddd9165add7779a39e82ab298892bc1c79e443078587873984a4bcbcb9543",
+      "title": "Chapter 5. Changes in Rust 1.88.0 Toolset | Using Rust 1.88.0 Toolset | Red Hat Developer Tools | 1 | Red Hat Documentation",
+      "url": "https://docs.openshift.com/ko/documentation/red_hat_developer_tools/1/html/using_rust_1.88.0_toolset/changes-in-rust-1-88-0-toolset"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: 2 weeks ago;  | Version 1.88.0 (2025-06-26) ... feature(let_chains)]` in the 2024 edition.](https://github.com/rust-lang/rust/pull/132833)\n | \n | \n | Version 1.88.0 (2025-06-26)\n | ==========================\n | \n | <a id=\"1.88.0-Language\"></a>\n | \n | Language\n | --------\n | - [Stabilize `#![feature(let_chains)]` in the 2024 edition.](https://github.com/rust-lang/rust/pull/132833)\n | This feature allows `&&`-chaining `let` statements inside `if` and `while`, allowing intermixture with boolean expressions. The patterns inside the `let` sub-expressions can be irrefutable or refutable.\n | - [Stabilize `#![feature(naked_functions)]`.](https://github.com/rust-lang/rust/pull/134213)\n | Naked functions allow writing functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function.\n | - [Stabilize `#![feature(cfg_boolean_literals)]`.](https://github.com/rust-lang/rust/pull/138632)\n | This allows using boolean literals as `cfg` predicates, e.g. `#[cfg(true)]` and `#[cfg(false)]`.\n | - [Fully de-stabilize the `#[bench]` attribute](https://github.com/rust-lang/rust/pull/134273). Usage of `#[bench]` without `#![--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-12",
+      "source_hash": "7ce37f003de87f3a280f9bf1a36defe23908b2a97d0516a1cf56428209fff07e",
+      "title": "RELEASES.md - third_party/rust - Git at Google",
+      "url": "https://fuchsia.googlesource.com/third_party/rust/%2Bshow/fd847d4d5d5d1e96bde2d97635faec8655da6b18/RELEASES.md"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: last month; Rust 1.88.0 ... feature(let_chains)]` in the 2024 edition. ... ## Stabilized APIs\n\nRust 1.88.0\n\non GitHub\n\nlatest releases: 1.98.1, 1.98.0, 1.97.1...\n\n14 months ago\n\n## Language\n\n  * Stabilize `#![feature(let_chains)]` in the 2024 edition. This feature allows `&&`-chaining `let` statements inside `if` and `while`, allowing intermixture with boolean expressions. The patterns inside the `let` sub-expressions can be irrefutable or refutable.\n  * Stabilize `#![feature(naked_functions)]`. Naked functions allow writing functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function.\n  * Stabilize `#![feature(cfg_boolean_literals)]`. This allows using boolean literals as `cfg` predicates, e.g. `#[cfg(true)]` and `#[cfg(false)]`.\n  * Fully de-stabilize the `#[bench]` attribute. Usage of `#[bench]` without `#![feature(custom_test_frameworks)]` already triggered a deny-by-default future-incompatibility lint since Rust 1.77, but will now become a hard error.\n  * `<[T]>::as_chunks`\n  * `<[T]>::as_chunks_mut`\n  * `<[T]>::as_chunks_unchecked`\n  * `<[T]>::as_chunks_unchecked_mut`\n  * `<[T]>::as_rchunks`\n  * `<[T]>::as_rchunks_mut`\n  * `mod ffi::c_str`\n\nThese previously stable APIs are now stable in const contexts:\n\n  * `NonNull<T>::replace`\n  * `<*mut T>::replace`\n  * `std::ptr::swap_nonoverlapping`\n  * `Cell::replace`\n  * `Cell::get`\n  * `Cell::get_mut`\n  * `Cell::from_mut`\n  * `Cell::as_slice_of_cells`\n\n## Cargo\n\n  * Stabilize automatic garbage collection.\n  * use `zlib-rs` for gzip compression in rust code\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-13",
+      "source_hash": "acbe47bc754775c71418714c24113eaf770fac8d008ecab6e3c3fbe616427623",
+      "title": "rust-lang/rust 1.88.0 on GitHub",
+      "url": "https://newreleases.io/project/github/rust-lang/rust/release/1.88.0"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.5 years ago; Crawled: 11 months ago; They alone make the 2024 edition worth the upgrade (at least in 12 weeks when they hit stable). ...   Personally I try to limit using crates to functionality I can't or don't want to write myself, but I hit the \"if let Some(x) == y && z == 18\" snag on literally day one of using Rust (with which I started in 2019).I've always wondered why the language couldn't chain those conditions and I've been using if\\_chain as long as I can remember.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-14",
+      "source_hash": "633d678e18d5d4b73b5c4c1afc2655b0f26b74a7fe24c1c084d19850f22b9376",
+      "title": "Let Chains are stabilized!",
+      "url": "https://www.reddit.com/r/rust/comments/1k54qqo"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 1.3 years ago;     I'm utilizing procedural macros in this project and the macro needs to know the file path of the macro call site. ...       Other annoying thing for me that will get stabilized for `edition 2024` is `unsafe_op_in_unsafe_fn` for FFI code. ... if let Channel::Stable(Semver { major: 1, minor: 88, ..}) = release_info() ... It's a little annoying how `rustup toolchain list` or `rustup show` doesn't actually show the rust version, but something like `stable-x86_64-pc-windows-msvc (active, default)` and `nightly-x86_64-pc-windows-msvc`.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-15",
+      "source_hash": "a598630206dc857515aaa62719c07dcbe1d05631c18e9aec2765d1ea23660ee8",
+      "title": "Rust 1.88.0 is out",
+      "url": "https://www.reddit.com/r/rust/comments/1ll7e0m"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 11 months ago; This version of the text assumes you’re using Rust 1.90.0 (released 2025-09-18) or later with `edition = \"2024\"` in the Cargo.toml file of all projects to configure them to use Rust 2024 Edition idioms. ... The HTML format is available online at https://doc.rust-lang.org/stable/book/ and offline with installations of Rust made with `rustup`; run `rustup doc --book` to open.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-16",
+      "source_hash": "287af63996c50ff91727c7c50025f5dacf0e5fea3daea8082365c87bac1a2bd6",
+      "title": "The Rust Programming Language",
+      "url": "https://artur-sulej.github.io/rust-ebooks/rust-book.pdf"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.8 years ago; Crawled: 1.8 years ago; What I mean is that the stabilization PR hasn't been merged: https://github.com/rust-lang/rust/pull/132833 ... This can be added to the language at any time, even after edition 2024 stabilizes. ... That is, let chains are incompatible with how rust 2021 and earlier works.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-17",
+      "source_hash": "ae11a44a6ec90eda5b6b34d7dc3c46d91f0aa84e804f011b6dcf40e22db43469",
+      "title": "Do we need an new edition for stabilizing let chains?",
+      "url": "https://www.reddit.com/r/rust/comments/1hsbivz"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.9 years ago; Crawled: 1.5 years ago;       [Tuesday November 12 2024] [+1 votes] ... Also, nice solution to motivate upgrading to Rust 2024 xD. ... Keeps the binding around only if it’s the last expr in a chain and you use Fallible operator ? ...   I remember when it was stabilized, but then the stabilization was reverted. ...     && let Some(edition) == get_edition()\n"
+        }
+      ],
+      "id": "result-18",
+      "source_hash": "29eacd91bd54b3384032bad63be6a15522636678fd851f5a79b1270749412c51",
+      "title": "Stabilize let chains in the 2024 edition by est31 · Pull Request #132833 · rust-lang/rust",
+      "url": "https://www.reddit.com/r/rust/comments/1gocwud"
+    }
+  ]
+}

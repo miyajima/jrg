@@ -1,0 +1,79 @@
+{
+  "documents": [
+    {
+      "id": "github",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
+      "title": "Control the concurrency of workflows and jobs - GitHub Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "paragraph",
+          "text": "In this article\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "# Control the concurrency of workflows and jobs\n",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-11",
+          "kind": "heading",
+          "text": "## Using concurrency in different scenarios\n",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-29",
+          "kind": "paragraph",
+          "text": "Note\n",
+          "parent_id": "line-11",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "id": "line-70",
+          "kind": "heading",
+          "text": "### Example: Concurrency groups\n",
+          "parent_id": "line-11",
+          "start_line": 70,
+          "end_line": 70
+        },
+        {
+          "id": "line-74",
+          "kind": "paragraph",
+          "text": "The concurrency key is used to group workflows or jobs together into a concurrency group. When you define a concurrency key, GitHub Actions ensures that only one workflow or job with that key runs at any given time. If a new workflow run or job starts with the same concurrency key, GitHub Actions will cancel any workflow or job already running with that key. The concurrency key can be a hard-coded string, or it can be a dynamic expression that includes context variables.\n",
+          "parent_id": "line-70",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "id": "line-126",
+          "kind": "heading",
+          "text": "### Example: Using concurrency to cancel any in-progress job or run\n",
+          "parent_id": "line-11",
+          "start_line": 126,
+          "end_line": 126
+        },
+        {
+          "id": "line-137",
+          "kind": "paragraph",
+          "text": "Note that in this example, without defining a particular concurrency group, GitHub Actions will cancel any in-progress run of the job or workflow.\n",
+          "parent_id": "line-126",
+          "start_line": 137,
+          "end_line": 137
+        }
+      ],
+      "source_hash": "82f4d5aaaad6ec61cd71618a0d200e3d3ad1a8902753de3253bea7bc35bb2642"
+    }
+  ],
+  "omitted_count": 47,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 512,
+  "max_tokens": 512
+}

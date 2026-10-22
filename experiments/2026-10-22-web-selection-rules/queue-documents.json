@@ -1,0 +1,1098 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "heading",
+          "start_line": 1,
+          "text": "### Navigation\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "text": "- index\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 5,
+          "text": "- modules |\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 7,
+          "text": "- next |\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 9,
+          "text": "- previous |\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 11,
+          "text": "- \n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 13,
+          "text": "- Python »\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 15,
+          "text": "- \n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 17,
+          "text": "- \n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 19,
+          "text": "- 3.15.1 Documentation »\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 21,
+          "text": "- The Python standard library »\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 23,
+          "text": "- Concurrent Execution »\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 25,
+          "text": "- queue — A synchronized queue class\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 27,
+          "text": "- |\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 29,
+          "text": "- Theme Auto Light Dark |\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "heading",
+          "start_line": 31,
+          "text": "# queue — A synchronized queue class¶\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 33,
+          "text": "Source code: Lib/queue.py\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 35,
+          "text": "The queue module implements multi-producer, multi-consumer queues. It is especially useful in threaded programming when information must be exchanged safely between multiple threads. The Queue class in this module implements all the required locking semantics.\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 37,
+          "text": "The module implements three types of queue, which differ only in the order in which the entries are retrieved. In a FIFO queue, the first tasks added are the first retrieved. In a LIFO queue, the most recently added entry is the first retrieved (operating like a stack). With a priority queue, the entries are kept sorted (using the heapq module) and the lowest valued entry is retrieved first.\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 39,
+          "text": "Internally, those three types of queues use locks to temporarily block competing threads; however, they are not designed to handle reentrancy within a thread.\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 41,
+          "text": "In addition, the module implements a “simple” FIFO queue type, SimpleQueue, whose specific implementation provides additional guarantees in exchange for the smaller functionality.\n"
+        },
+        {
+          "end_line": 43,
+          "id": "line-43",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 43,
+          "text": "The queue module defines the following classes and exceptions:\n"
+        },
+        {
+          "end_line": 45,
+          "id": "line-45",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 45,
+          "text": "class queue.Queue(maxsize=0)¶\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-47",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 47,
+          "text": "Constructor for a FIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 49,
+          "text": "class queue.LifoQueue(maxsize=0)¶\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 51,
+          "text": "Constructor for a LIFO queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 53,
+          "text": "class queue.PriorityQueue(maxsize=0)¶\n"
+        },
+        {
+          "end_line": 55,
+          "id": "line-55",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 55,
+          "text": "Constructor for a priority queue. maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue. Insertion will block once this size has been reached, until queue items are consumed. If maxsize is less than or equal to zero, the queue size is infinite.\n"
+        },
+        {
+          "end_line": 57,
+          "id": "line-57",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 57,
+          "text": "The lowest valued entries are retrieved first (the lowest valued entry is the one that would be returned by min(entries)). A typical pattern for entries is a tuple in the form: (priority_number, data).\n"
+        },
+        {
+          "end_line": 59,
+          "id": "line-59",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 59,
+          "text": "If the data elements are not comparable, the data can be wrapped in a class that ignores the data item and only compares the priority number:\n"
+        },
+        {
+          "end_line": 70,
+          "id": "line-61",
+          "kind": "code",
+          "parent_id": "line-31",
+          "start_line": 61,
+          "text": "```\nfrom dataclasses import dataclass, field\nfrom typing import Any\n\n@dataclass(order=True)\nclass PrioritizedItem:\npriority: int\nitem: Any=field(compare=False)\n\n```\n"
+        },
+        {
+          "end_line": 72,
+          "id": "line-72",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 72,
+          "text": "class queue.SimpleQueue¶\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-74",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 74,
+          "text": "Constructor for an unbounded FIFO queue. Simple queues lack advanced functionality such as task tracking.\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 76,
+          "text": "Simple queues are generic over the type of their items.\n"
+        },
+        {
+          "end_line": 78,
+          "id": "line-78",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 78,
+          "text": "Added in version 3.7.\n"
+        },
+        {
+          "end_line": 80,
+          "id": "line-80",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 80,
+          "text": "exception queue.Empty¶\n"
+        },
+        {
+          "end_line": 82,
+          "id": "line-82",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 82,
+          "text": "Exception raised when non-blocking get() (or get_nowait()) is called on a Queue object which is empty.\n"
+        },
+        {
+          "end_line": 84,
+          "id": "line-84",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 84,
+          "text": "exception queue.Full¶\n"
+        },
+        {
+          "end_line": 86,
+          "id": "line-86",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 86,
+          "text": "Exception raised when non-blocking put() (or put_nowait()) is called on a Queue object which is full.\n"
+        },
+        {
+          "end_line": 88,
+          "id": "line-88",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 88,
+          "text": "exception queue.ShutDown¶\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-90",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 90,
+          "text": "Exception raised when put() or get() is called on a Queue object which has been shut down.\n"
+        },
+        {
+          "end_line": 92,
+          "id": "line-92",
+          "kind": "paragraph",
+          "parent_id": "line-31",
+          "start_line": 92,
+          "text": "Added in version 3.13.\n"
+        },
+        {
+          "end_line": 94,
+          "id": "line-94",
+          "kind": "heading",
+          "parent_id": "line-31",
+          "start_line": 94,
+          "text": "## Queue Objects¶\n"
+        },
+        {
+          "end_line": 96,
+          "id": "line-96",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 96,
+          "text": "Queue objects (Queue, LifoQueue, or PriorityQueue) provide the public methods described below.\n"
+        },
+        {
+          "end_line": 98,
+          "id": "line-98",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 98,
+          "text": "Queue.qsize()¶\n"
+        },
+        {
+          "end_line": 100,
+          "id": "line-100",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 100,
+          "text": "Return the approximate size of the queue. Note, qsize() > 0 doesn’t guarantee that a subsequent get() will not block, nor will qsize() < maxsize guarantee that put() will not block.\n"
+        },
+        {
+          "end_line": 102,
+          "id": "line-102",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 102,
+          "text": "Queue.empty()¶\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-104",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 104,
+          "text": "Return True if the queue is empty, False otherwise. If empty() returns True it doesn’t guarantee that a subsequent call to put() will not block. Similarly, if empty() returns False it doesn’t guarantee that a subsequent call to get() will not block.\n"
+        },
+        {
+          "end_line": 106,
+          "id": "line-106",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 106,
+          "text": "Queue.full()¶\n"
+        },
+        {
+          "end_line": 108,
+          "id": "line-108",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 108,
+          "text": "Return True if the queue is full, False otherwise. If full() returns True it doesn’t guarantee that a subsequent call to get() will not block. Similarly, if full() returns False it doesn’t guarantee that a subsequent call to put() will not block.\n"
+        },
+        {
+          "end_line": 110,
+          "id": "line-110",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 110,
+          "text": "Queue.put(item, block=True, timeout=None)¶\n"
+        },
+        {
+          "end_line": 112,
+          "id": "line-112",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 112,
+          "text": "Put item into the queue. If optional args block is true and timeout is None (the default), block if necessary until a free slot is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Full exception if no free slot was available within that time. Otherwise (block is false), put an item on the queue if a free slot is immediately available, else raise the Full exception (timeout is ignored in that case).\n"
+        },
+        {
+          "end_line": 114,
+          "id": "line-114",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 114,
+          "text": "Raises ShutDown if the queue has been shut down.\n"
+        },
+        {
+          "end_line": 116,
+          "id": "line-116",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 116,
+          "text": "Queue.put_nowait(item)¶\n"
+        },
+        {
+          "end_line": 118,
+          "id": "line-118",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 118,
+          "text": "Equivalent to put(item, block=False).\n"
+        },
+        {
+          "end_line": 120,
+          "id": "line-120",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 120,
+          "text": "Queue.get(block=True, timeout=None)¶\n"
+        },
+        {
+          "end_line": 122,
+          "id": "line-122",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 122,
+          "text": "Remove and return an item from the queue. If optional args block is true and timeout is None (the default), block if necessary until an item is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time. Otherwise (block is false), return an item if one is immediately available, else raise the Empty exception (timeout is ignored in that case).\n"
+        },
+        {
+          "end_line": 124,
+          "id": "line-124",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 124,
+          "text": "Prior to 3.0 on POSIX systems, and for all versions on Windows, if block is true and timeout is None, this operation goes into an uninterruptible wait on an underlying lock. This means that no exceptions can occur, and in particular a SIGINT will not trigger a KeyboardInterrupt.\n"
+        },
+        {
+          "end_line": 126,
+          "id": "line-126",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 126,
+          "text": "Raises ShutDown if the queue has been shut down and is empty, or if the queue has been shut down immediately.\n"
+        },
+        {
+          "end_line": 128,
+          "id": "line-128",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 128,
+          "text": "Queue.get_nowait()¶\n"
+        },
+        {
+          "end_line": 130,
+          "id": "line-130",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 130,
+          "text": "Equivalent to get(False).\n"
+        },
+        {
+          "end_line": 132,
+          "id": "line-132",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 132,
+          "text": "Two methods are offered to support tracking whether enqueued tasks have been fully processed by daemon consumer threads.\n"
+        },
+        {
+          "end_line": 134,
+          "id": "line-134",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 134,
+          "text": "Queue.task_done()¶\n"
+        },
+        {
+          "end_line": 136,
+          "id": "line-136",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 136,
+          "text": "Indicate that a formerly enqueued task is complete. Used by queue consumer threads. For each get() used to fetch a task, a subsequent call to task_done() tells the queue that the processing on the task is complete.\n"
+        },
+        {
+          "end_line": 138,
+          "id": "line-138",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 138,
+          "text": "If a join() is currently blocking, it will resume when all items have been processed (meaning that a task_done() call was received for every item that had been put() into the queue).\n"
+        },
+        {
+          "end_line": 140,
+          "id": "line-140",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 140,
+          "text": "Raises a ValueError if called more times than there were items placed in the queue.\n"
+        },
+        {
+          "end_line": 142,
+          "id": "line-142",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 142,
+          "text": "Queue.join()¶\n"
+        },
+        {
+          "end_line": 144,
+          "id": "line-144",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 144,
+          "text": "Blocks until all items in the queue have been gotten and processed.\n"
+        },
+        {
+          "end_line": 146,
+          "id": "line-146",
+          "kind": "paragraph",
+          "parent_id": "line-94",
+          "start_line": 146,
+          "text": "The count of unfinished tasks goes up whenever an item is added to the queue. The count goes down whenever a consumer thread calls task_done() to indicate that the item was retrieved and all work on it is complete. When the count of unfinished tasks drops to zero, join() unblocks.\n"
+        },
+        {
+          "end_line": 148,
+          "id": "line-148",
+          "kind": "heading",
+          "parent_id": "line-94",
+          "start_line": 148,
+          "text": "### Waiting for task completion¶\n"
+        },
+        {
+          "end_line": 150,
+          "id": "line-150",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 150,
+          "text": "Example of how to wait for enqueued tasks to be completed:\n"
+        },
+        {
+          "end_line": 176,
+          "id": "line-152",
+          "kind": "code",
+          "parent_id": "line-148",
+          "start_line": 152,
+          "text": "```\nimport threading\nimport queue\n\nq = queue.Queue()\n\ndef worker():\nwhile True:\nitem = q.get()\nprint(f'Working on {item}')\nprint(f'Finished {item}')\nq.task_done()\n\n# Turn-on the worker thread.\nthreading.Thread(target=worker, daemon=True).start()\n\n# Send thirty task requests to the worker.\nfor item in range(30):\nq.put(item)\n\n# Block until all tasks are done.\nq.join()\nprint('All work completed')\n\n```\n"
+        },
+        {
+          "end_line": 178,
+          "id": "line-178",
+          "kind": "heading",
+          "parent_id": "line-94",
+          "start_line": 178,
+          "text": "### Terminating queues¶\n"
+        },
+        {
+          "end_line": 180,
+          "id": "line-180",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 180,
+          "text": "When no longer needed, Queue objects can be wound down until empty or terminated immediately with a hard shutdown.\n"
+        },
+        {
+          "end_line": 182,
+          "id": "line-182",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 182,
+          "text": "Queue.shutdown(immediate=False)¶\n"
+        },
+        {
+          "end_line": 184,
+          "id": "line-184",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 184,
+          "text": "Put a Queue instance into a shutdown mode.\n"
+        },
+        {
+          "end_line": 186,
+          "id": "line-186",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 186,
+          "text": "The queue can no longer grow. Future calls to put() raise ShutDown. Currently blocked callers of put() will be unblocked and will raise ShutDown in the formerly blocked thread.\n"
+        },
+        {
+          "end_line": 188,
+          "id": "line-188",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 188,
+          "text": "If immediate is false (the default), the queue can be wound down normally with get() calls to extract tasks that have already been loaded.\n"
+        },
+        {
+          "end_line": 190,
+          "id": "line-190",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 190,
+          "text": "And if task_done() is called for each remaining task, a pending join() will be unblocked normally.\n"
+        },
+        {
+          "end_line": 192,
+          "id": "line-192",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 192,
+          "text": "Once the queue is empty, future calls to get() will raise ShutDown.\n"
+        },
+        {
+          "end_line": 194,
+          "id": "line-194",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 194,
+          "text": "If immediate is true, the queue is terminated immediately. The queue is drained to be completely empty and the count of unfinished tasks is reduced by the number of tasks drained. If unfinished tasks is zero, callers of join() are unblocked. Also, blocked callers of get() are unblocked and will raise ShutDown because the queue is empty.\n"
+        },
+        {
+          "end_line": 196,
+          "id": "line-196",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 196,
+          "text": "Use caution when using join() with immediate set to true. This unblocks the join even when no work has been done on the tasks, violating the usual invariant for joining a queue.\n"
+        },
+        {
+          "end_line": 198,
+          "id": "line-198",
+          "kind": "paragraph",
+          "parent_id": "line-178",
+          "start_line": 198,
+          "text": "Added in version 3.13.\n"
+        },
+        {
+          "end_line": 200,
+          "id": "line-200",
+          "kind": "heading",
+          "parent_id": "line-31",
+          "start_line": 200,
+          "text": "## SimpleQueue Objects¶\n"
+        },
+        {
+          "end_line": 202,
+          "id": "line-202",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 202,
+          "text": "SimpleQueue objects provide the public methods described below.\n"
+        },
+        {
+          "end_line": 204,
+          "id": "line-204",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 204,
+          "text": "SimpleQueue.qsize()¶\n"
+        },
+        {
+          "end_line": 206,
+          "id": "line-206",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 206,
+          "text": "Return the approximate size of the queue. Note, qsize() > 0 doesn’t guarantee that a subsequent get() will not block.\n"
+        },
+        {
+          "end_line": 208,
+          "id": "line-208",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 208,
+          "text": "SimpleQueue.empty()¶\n"
+        },
+        {
+          "end_line": 210,
+          "id": "line-210",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 210,
+          "text": "Return True if the queue is empty, False otherwise. If empty() returns False it doesn’t guarantee that a subsequent call to get() will not block.\n"
+        },
+        {
+          "end_line": 212,
+          "id": "line-212",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 212,
+          "text": "SimpleQueue.put(item, block=True, timeout=None)¶\n"
+        },
+        {
+          "end_line": 214,
+          "id": "line-214",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 214,
+          "text": "Put item into the queue. The method never blocks and always succeeds (except for potential low-level errors such as failure to allocate memory). The optional args block and timeout are ignored and only provided for compatibility with Queue.put().\n"
+        },
+        {
+          "end_line": 216,
+          "id": "line-216",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 216,
+          "text": "CPython implementation detail: This method has a C implementation which is reentrant. That is, a put() or get() call can be interrupted by another put() call in the same thread without deadlocking or corrupting internal state inside the queue. This makes it appropriate for use in destructors such as __del__ methods or weakref callbacks.\n"
+        },
+        {
+          "end_line": 218,
+          "id": "line-218",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 218,
+          "text": "SimpleQueue.put_nowait(item)¶\n"
+        },
+        {
+          "end_line": 220,
+          "id": "line-220",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 220,
+          "text": "Equivalent to put(item, block=False), provided for compatibility with Queue.put_nowait().\n"
+        },
+        {
+          "end_line": 222,
+          "id": "line-222",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 222,
+          "text": "SimpleQueue.get(block=True, timeout=None)¶\n"
+        },
+        {
+          "end_line": 224,
+          "id": "line-224",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 224,
+          "text": "Remove and return an item from the queue. If optional args block is true and timeout is None (the default), block if necessary until an item is available. If timeout is a positive number, it blocks at most timeout seconds and raises the Empty exception if no item was available within that time. Otherwise (block is false), return an item if one is immediately available, else raise the Empty exception (timeout is ignored in that case).\n"
+        },
+        {
+          "end_line": 226,
+          "id": "line-226",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 226,
+          "text": "SimpleQueue.get_nowait()¶\n"
+        },
+        {
+          "end_line": 228,
+          "id": "line-228",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 228,
+          "text": "Equivalent to get(False).\n"
+        },
+        {
+          "end_line": 230,
+          "id": "line-230",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 230,
+          "text": "See also\n"
+        },
+        {
+          "end_line": 232,
+          "id": "line-232",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 232,
+          "text": "Class multiprocessing.Queue\n"
+        },
+        {
+          "end_line": 234,
+          "id": "line-234",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 234,
+          "text": "A queue class for use in a multi-processing (rather than multi-threading) context.\n"
+        },
+        {
+          "end_line": 236,
+          "id": "line-236",
+          "kind": "paragraph",
+          "parent_id": "line-200",
+          "start_line": 236,
+          "text": "collections.deque is an alternative implementation of unbounded queues with fast atomic append() and popleft() operations that do not require locking and also support indexing.\n"
+        },
+        {
+          "end_line": 238,
+          "id": "line-238",
+          "kind": "heading",
+          "parent_id": "line-200",
+          "start_line": 238,
+          "text": "### Table of Contents\n"
+        },
+        {
+          "end_line": 240,
+          "id": "line-240",
+          "kind": "list",
+          "parent_id": "line-238",
+          "start_line": 240,
+          "text": "- queue — A synchronized queue class Queue Objects Waiting for task completion Terminating queues SimpleQueue Objects\n"
+        },
+        {
+          "end_line": 242,
+          "id": "line-242",
+          "kind": "heading",
+          "parent_id": "line-238",
+          "start_line": 242,
+          "text": "#### Previous topic\n"
+        },
+        {
+          "end_line": 244,
+          "id": "line-244",
+          "kind": "paragraph",
+          "parent_id": "line-242",
+          "start_line": 244,
+          "text": "sched — Event scheduler\n"
+        },
+        {
+          "end_line": 246,
+          "id": "line-246",
+          "kind": "heading",
+          "parent_id": "line-238",
+          "start_line": 246,
+          "text": "#### Next topic\n"
+        },
+        {
+          "end_line": 248,
+          "id": "line-248",
+          "kind": "paragraph",
+          "parent_id": "line-246",
+          "start_line": 248,
+          "text": "contextvars — Context Variables\n"
+        },
+        {
+          "end_line": 250,
+          "id": "line-250",
+          "kind": "heading",
+          "parent_id": "line-200",
+          "start_line": 250,
+          "text": "### This page\n"
+        },
+        {
+          "end_line": 252,
+          "id": "line-252",
+          "kind": "list",
+          "parent_id": "line-250",
+          "start_line": 252,
+          "text": "- Report a bug\n"
+        },
+        {
+          "end_line": 254,
+          "id": "line-254",
+          "kind": "list",
+          "parent_id": "line-250",
+          "start_line": 254,
+          "text": "- Improve this page\n"
+        },
+        {
+          "end_line": 256,
+          "id": "line-256",
+          "kind": "list",
+          "parent_id": "line-250",
+          "start_line": 256,
+          "text": "- Show source\n"
+        },
+        {
+          "end_line": 258,
+          "id": "line-258",
+          "kind": "paragraph",
+          "parent_id": "line-250",
+          "start_line": 258,
+          "text": "«\n"
+        },
+        {
+          "end_line": 260,
+          "id": "line-260",
+          "kind": "heading",
+          "parent_id": "line-200",
+          "start_line": 260,
+          "text": "### Navigation\n"
+        },
+        {
+          "end_line": 262,
+          "id": "line-262",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 262,
+          "text": "- index\n"
+        },
+        {
+          "end_line": 264,
+          "id": "line-264",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 264,
+          "text": "- modules |\n"
+        },
+        {
+          "end_line": 266,
+          "id": "line-266",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 266,
+          "text": "- next |\n"
+        },
+        {
+          "end_line": 268,
+          "id": "line-268",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 268,
+          "text": "- previous |\n"
+        },
+        {
+          "end_line": 270,
+          "id": "line-270",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 270,
+          "text": "- \n"
+        },
+        {
+          "end_line": 272,
+          "id": "line-272",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 272,
+          "text": "- Python »\n"
+        },
+        {
+          "end_line": 274,
+          "id": "line-274",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 274,
+          "text": "- \n"
+        },
+        {
+          "end_line": 276,
+          "id": "line-276",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 276,
+          "text": "- \n"
+        },
+        {
+          "end_line": 278,
+          "id": "line-278",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 278,
+          "text": "- 3.15.1 Documentation »\n"
+        },
+        {
+          "end_line": 280,
+          "id": "line-280",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 280,
+          "text": "- The Python standard library »\n"
+        },
+        {
+          "end_line": 282,
+          "id": "line-282",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 282,
+          "text": "- Concurrent Execution »\n"
+        },
+        {
+          "end_line": 284,
+          "id": "line-284",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 284,
+          "text": "- queue — A synchronized queue class\n"
+        },
+        {
+          "end_line": 286,
+          "id": "line-286",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 286,
+          "text": "- |\n"
+        },
+        {
+          "end_line": 288,
+          "id": "line-288",
+          "kind": "list",
+          "parent_id": "line-260",
+          "start_line": 288,
+          "text": "- Theme Auto Light Dark |\n"
+        },
+        {
+          "end_line": 290,
+          "id": "line-290",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 290,
+          "text": "© Copyright 2001 Python Software Foundation.\n"
+        },
+        {
+          "end_line": 292,
+          "id": "line-292",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 292,
+          "text": "This page is licensed under the Python Software Foundation License Version 2.\n"
+        },
+        {
+          "end_line": 294,
+          "id": "line-294",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 294,
+          "text": "Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.\n"
+        },
+        {
+          "end_line": 296,
+          "id": "line-296",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 296,
+          "text": "See History and License for more information.\n"
+        },
+        {
+          "end_line": 299,
+          "id": "line-298",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 298,
+          "text": "The Python Software Foundation is a non-profit corporation.\nPlease donate.\n"
+        },
+        {
+          "end_line": 301,
+          "id": "line-301",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 301,
+          "text": "Last updated on Oct 22, 2026 (07:21 UTC).\n"
+        },
+        {
+          "end_line": 303,
+          "id": "line-303",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 303,
+          "text": "Found a bug?\n"
+        },
+        {
+          "end_line": 305,
+          "id": "line-305",
+          "kind": "paragraph",
+          "parent_id": "line-260",
+          "start_line": 305,
+          "text": "Created using Sphinx 8.2.3.\n"
+        }
+      ],
+      "id": "queue",
+      "source_hash": "8a05033cec7622e7dc2c304a8b52b94a77b5b534d731d009902f76551058ad2a",
+      "title": "queue — A synchronized queue class — Python 3.15.1 documentation",
+      "url": "https://docs.python.org/3/library/queue.html"
+    }
+  ]
+}

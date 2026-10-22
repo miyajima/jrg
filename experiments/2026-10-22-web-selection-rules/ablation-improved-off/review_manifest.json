@@ -1,0 +1,36 @@
+{
+  "files": {
+    "docs/WEB_SELECTION.md": "bcd93bca3e5345dcc0764234b7a35a164e9ca52a22ff1d80feeac2ff938c9132",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/PLAN.md": "43528b89cdfd0b6e7228af4541200305b6d3e7c485d49487a7e5033d1dd01b35",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/REPORT.md": "81bf5d46d93e065219e40e21301a75b6455cca00e4fe97a39534e3b037afbebf",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/frozen_inputs.json": "a36195356af57427a1d2a84fdfa2fe771b6850772cd835dcaec96accd0f14a45",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/blockingqueue-1024-D.json": "aba3403b2501b78f6d6c3e53024758e32d2df32d42a2e8b2ffbd517d3cd00e74",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/blockingqueue-2048-D.json": "19a12fd770b2ae94164e1cda1150fd3b7dcb71b928a409e40c61601176f02340",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/gcs-retry-1024-D.json": "d747fea2578b91b280ab63879e5e9284fed1cfdb3285f623562bdf07854a39ec",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/gcs-retry-2048-D.json": "9a1b8e51103378165464650e10bf987a736cab1d7fdac50580a8b35eba7dbc4c",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/github-rate-1024-D.json": "8d1361abb5c99e21f5ffdc2a207a9bbde2f5800c4aefd3014153ddb9496f2117",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/github-rate-2048-D.json": "523101cbce464bd18b5592769c15b3ad77801f7f856aad768f02cc14bdbe74da",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/nginx-1024-D.json": "01c6cd56c52cd021455b85b2d2a91b0b31c48438795f95405426b357cddf297d",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/nginx-2048-D.json": "15e0a18712376f8d9a950e3cb5da7a1f8f4ff336dd5cb5718e0c2a8fb3a2008b",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/queue-1024-D.json": "ae573eefc8926d430165128e661858661449832d87587314817e181415d776a3",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/queue-2048-D.json": "cb7d6f87f529e84b58654566d7a1074878f106d15d5ecf60cf46d8ef3199e7ee",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/semaphore-1024-D.json": "404c88cafacd64bdd77a4b056e07308514845fc44be0cc290f9bb7b0f3e5443a",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/semaphore-2048-D.json": "2450b47f579a74e5015152d9b6f7333f9ad27e064a25a7f5e2c613dac0c44bd2",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/ssh-1024-D.json": "c8ef5d42d68b19b4dc869c6be77845d1185cc1d6887a55bc9d3b2f8a970f7a1c",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/ssh-2048-D.json": "3401bd5295a461bf3d06915682e909bf32f5255cb4fc0848d815e5d98a543359",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/timeout-1024-D.json": "b77adb20a11338362698023b1c4a43e64471fea3f739cfd48bbe841d3e52052d",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/outputs/timeout-2048-D.json": "dfdf6c42b783743705b11e8c04ae0c4e75e048ec7ebcc2366ea5d9b6d3f2faa2",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/results.json": "edb272094b74eb487bdf5cc4db9d18f5a8d484b136a3665caa2236d6f22273d9",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/run_ablation.py": "32deea9580a00ac32e4a38bcdac8f47f6ce5632157596a95bc4d8621f81573b4",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/verification.json": "ea3b24b830f1d125a0c9ea064d1e756609ca394ccc16eeaca0b9b8cd8a17fc4a",
+    "experiments/2026-10-22-web-selection-rules/ablation-improved-off/verify.py": "1267eb53f0d4b5a39a9a258000e07a02c511c40e90e1220b0bc316c63bad9e91"
+  },
+  "criteria": [
+    "Fixed improvedEnglish/source/gold/engine unchanged; onlyDoff16runs added",
+    "Old48outputs reused exactly and preserved",
+    "All4cells/contrasts distinguish English-set effect and ruleincrement",
+    "Queue2ksignature110lostwithrules whileparagraph112andcapacitygroupremain",
+    "Report same13/17 at1k, off17/on16at2k, no generalization to answeraccuracy",
+    "Post-hocuserrequestedextension declared; defaultproductBuiltinunchanged; currentdocumentationupdated"
+  ]
+}

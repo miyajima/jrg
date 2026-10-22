@@ -1,0 +1,151 @@
+{
+  "documents": [
+    {
+      "id": "node",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+      "title": "Modules: CommonJS modules | Node.js v22.15.0 Documentation",
+      "blocks": [
+        {
+          "id": "line-135",
+          "kind": "list",
+          "text": "- Modules: CommonJS modules Enabling Accessing the main module Package manager tips Loading ECMAScript modules using require() All together Caching Module caching caveats Built-in modules Built-in modules with mandatory node: prefix Cycles File modules Folders as modules Loading from node_modules folders Loading from the global folders The module wrapper The module scope __dirname __filename exports module require(id) require.cache require.extensions require.main require.resolve(request[, options]) require.resolve.paths(request) The module object module.children module.exports exports shortcut module.filename module.id module.isPreloading module.loaded module.parent module.path module.paths module.require(id) The Module object Source map v3 support\n",
+          "start_line": 135,
+          "end_line": 135
+        },
+        {
+          "id": "line-137",
+          "kind": "heading",
+          "text": "## Modules: CommonJS modules#\n",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "id": "line-247",
+          "kind": "heading",
+          "text": "### Loading ECMAScript modules using require()#\n",
+          "parent_id": "line-137",
+          "start_line": 247,
+          "end_line": 247
+        },
+        {
+          "id": "line-350",
+          "kind": "paragraph",
+          "text": "Support for loading ES modules using require() is currently experimental and can be disabled using --no-experimental-require-module. To print where this feature is used, use --trace-require-module.\n",
+          "parent_id": "line-247",
+          "start_line": 350,
+          "end_line": 350
+        },
+        {
+          "id": "line-678",
+          "kind": "heading",
+          "text": "### The module scope#\n",
+          "parent_id": "line-137",
+          "start_line": 678,
+          "end_line": 678
+        },
+        {
+          "id": "line-744",
+          "kind": "heading",
+          "text": "#### require(id)#\n",
+          "parent_id": "line-678",
+          "start_line": 744,
+          "end_line": 744
+        },
+        {
+          "id": "line-766",
+          "kind": "heading",
+          "text": "##### require.cache#\n",
+          "parent_id": "line-744",
+          "start_line": 766,
+          "end_line": 766
+        },
+        {
+          "id": "line-776",
+          "kind": "code",
+          "text": "```\nconst assert = require('node:assert');\nconst realFs = require('node:fs');\n\nconst fakeFs = {};\nrequire.cache.fs = { exports: fakeFs };\n\nassert.strictEqual(require('fs'), fakeFs);\nassert.strictEqual(require('node:fs'), realFs); copy\n```\n",
+          "parent_id": "line-766",
+          "start_line": 776,
+          "end_line": 785
+        },
+        {
+          "id": "line-787",
+          "kind": "heading",
+          "text": "##### require.extensions#\n",
+          "parent_id": "line-744",
+          "start_line": 787,
+          "end_line": 787
+        },
+        {
+          "id": "line-795",
+          "kind": "paragraph",
+          "text": "Instruct require on how to handle certain file extensions.\n",
+          "parent_id": "line-787",
+          "start_line": 795,
+          "end_line": 795
+        },
+        {
+          "id": "line-799",
+          "kind": "code",
+          "text": "```\nrequire.extensions['.sjs'] = require.extensions['.js']; copy\n```\n",
+          "parent_id": "line-787",
+          "start_line": 799,
+          "end_line": 801
+        },
+        {
+          "id": "line-807",
+          "kind": "heading",
+          "text": "##### require.main#\n",
+          "parent_id": "line-744",
+          "start_line": 807,
+          "end_line": 807
+        },
+        {
+          "id": "line-817",
+          "kind": "code",
+          "text": "```\nconsole.log(require.main); copy\n```\n",
+          "parent_id": "line-807",
+          "start_line": 817,
+          "end_line": 819
+        },
+        {
+          "id": "line-840",
+          "kind": "heading",
+          "text": "##### require.resolve(request[, options])#\n",
+          "parent_id": "line-744",
+          "start_line": 840,
+          "end_line": 840
+        },
+        {
+          "id": "line-858",
+          "kind": "heading",
+          "text": "###### require.resolve.paths(request)#\n",
+          "parent_id": "line-840",
+          "start_line": 858,
+          "end_line": 858
+        },
+        {
+          "id": "line-860",
+          "kind": "paragraph",
+          "text": "Added in: v8.9.0\n",
+          "parent_id": "line-858",
+          "start_line": 860,
+          "end_line": 860
+        },
+        {
+          "id": "line-864",
+          "kind": "list",
+          "text": "- Returns: <string[]> | <null>\n",
+          "parent_id": "line-858",
+          "start_line": 864,
+          "end_line": 864
+        }
+      ],
+      "source_hash": "a51c8cb292f9a70a570b414575078a82c3a9449680b610e5f989f718b76181f3"
+    }
+  ],
+  "omitted_count": 346,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 998,
+  "max_tokens": 1024
+}

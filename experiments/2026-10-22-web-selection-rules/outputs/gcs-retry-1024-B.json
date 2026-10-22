@@ -1,0 +1,80 @@
+{
+  "documents": [
+    {
+      "id": "gcs-retry",
+      "url": "https://docs.cloud.google.com/storage/docs/retry-strategy",
+      "title": "Retry strategy | Cloud Storage | Google Cloud Documentation",
+      "blocks": [
+        {
+          "id": "line-13",
+          "kind": "heading",
+          "text": "# Retry strategy Stay organized with collections Save and categorize content based on your preferences.\n",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-292",
+          "kind": "heading",
+          "text": "## Customizing retries\n",
+          "parent_id": "line-13",
+          "start_line": 292,
+          "end_line": 292
+        },
+        {
+          "id": "line-466",
+          "kind": "heading",
+          "text": "### Node.js\n",
+          "parent_id": "line-292",
+          "start_line": 466,
+          "end_line": 466
+        },
+        {
+          "id": "line-470",
+          "kind": "paragraph",
+          "text": "See the following code sample to learn how to customize your retry behavior.\n",
+          "parent_id": "line-466",
+          "start_line": 470,
+          "end_line": 470
+        },
+        {
+          "id": "line-472",
+          "kind": "code",
+          "text": "```\n/**\n* TODO(developer): Uncomment the following lines before running the sample.\n*/\n// The ID of your GCS bucket\n// const bucketName = 'your-unique-bucket-name';\n\n// The ID of your GCS file\n// const fileName = 'your-file-name';\n\n// Imports the Google Cloud client library\nconst {Storage} = require('@google-cloud/storage');\n\n// Creates a client\nconst storage = new Storage({\nretryOptions: {\n// If this is false, requests will not retry and the parameters\n// below will not affect retry behavior.\nautoRetry: true,\n// The multiplier by which to increase the delay time between the\n// completion of failed requests, and the initiation of the subsequent\n// retrying request.\nretryDelayMultiplier: 3,\n// The total time between an initial request getting sent and its timeout.\n// After timeout, an error will be returned regardless of any retry attempts\n// made during this time period.\ntotalTimeout: 500,\n// The maximum delay time between requests. When this value is reached,\n// retryDelayMultiplier will no longer be used to increase delay time.\nmaxRetryDelay: 60,\n// The maximum number of automatic retries attempted before returning\n// the error.\nmaxRetries: 5,\n// Will respect other retry settings and attempt to always retry\n// conditionally idempotent operations, regardless of precondition\nidempotencyStrategy: IdempotencyStrategy.RetryAlways,\n},\n});\nconsole.log(\n'Functions are customized to be retried according to the following parameters:'\n);\nconsole.log(`Auto Retry: ${storage.retryOptions.autoRetry}`);\nconsole.log(\n`Retry delay multiplier: ${storage.retryOptions.retryDelayMultiplier}`\n);\nconsole.log(`Total timeout: ${storage.retryOptions.totalTimeout}`);\nconsole.log(`Maximum retry delay: ${storage.retryOptions.maxRetryDelay}`);\nconsole.log(`Maximum retries: ${storage.retryOptions.maxRetries}`);\nconsole.log(\n`Idempotency strategy: ${storage.retryOptions.idempotencyStrategy}`\n);\n\nasync function deleteFileWithCustomizedRetrySetting() {\nawait storage.bucket(bucketName).file(fileName).delete();\nconsole.log(`File ${fileName} deleted with a customized retry strategy.`);\n}\n\ndeleteFileWithCustomizedRetrySetting();\n```\n",
+          "parent_id": "line-466",
+          "start_line": 472,
+          "end_line": 530
+        },
+        {
+          "id": "line-747",
+          "kind": "heading",
+          "text": "## Retry anti-patterns\n",
+          "parent_id": "line-13",
+          "start_line": 747,
+          "end_line": 747
+        },
+        {
+          "id": "line-775",
+          "kind": "heading",
+          "text": "#### Unnecessarily layering retries\n",
+          "parent_id": "line-747",
+          "start_line": 775,
+          "end_line": 775
+        },
+        {
+          "id": "line-777",
+          "kind": "paragraph",
+          "text": "Adding custom application level retry logic on top of the existing retry mechanisms can lead to an excessive number of retry attempts. For example, if your application retries an operation three times, and the underlying client library also retries it three times for each of your application's attempts, you could end up with nine retry attempts. Sending high amounts of retries for errors that cannot be retried might lead to request throttling, limiting the throughput of all workloads. High numbers of retries might also increase latency of requests without improving the success rate.\n",
+          "parent_id": "line-775",
+          "start_line": 777,
+          "end_line": 777
+        }
+      ],
+      "source_hash": "1b2e474e9648296c33b265537fcccd41c74670edf3200e6788051892d6b3bb9e"
+    }
+  ],
+  "omitted_count": 180,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1016,
+  "max_tokens": 1024
+}

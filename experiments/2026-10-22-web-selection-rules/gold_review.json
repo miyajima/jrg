@@ -1,0 +1,9 @@
+{
+  "status": "pass",
+  "reviewer": "native independent /root/selection_review",
+  "stage": "Before selection; no English, rule catalog or outputs read.",
+  "cases": 8,
+  "units": 17,
+  "original_blocks_checked": 23,
+  "coverage": "All Japanese clauses covered without requiring unasked details; source alternatives and setting-name/value groups verified against original HTML."
+}

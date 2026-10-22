@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "id": "result-6",
+      "url": "https://r2.nodejs.org/docs/v26.5.0/api/errors.html",
+      "title": "Errors | Node.js v26.5.0 Documentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "    * `line` `<number>` The 1-based line number of the top-level await.\n    * `column` `<number>` The 1-based column number of the top-level await.\n    * `sourceLine` `<string>` The source line containing the top-level await.\n\n#### `ERR_REQUIRE_CYCLE_MODULE`#\n\nWhen trying to `require()` a ES Module, a CommonJS to ESM or ESM to CommonJS edge participates in an immediate cycle. This is not allowed because ES Modules cannot be evaluated while they are already being evaluated.\n\nTo avoid the cycle, the `require()` call involved in a cycle should not happen at the top-level of either an ES Module (via `createRequire()`) or a CommonJS module, and should be done lazily in an inner function.\n\n#### `ERR_REQUIRE_ESM`#\n\nHistory\nVersion  | Changes\n--- | ---\nv23.0.0, v22.12.0, v20.19.0  | require() now supports loading synchronous ES modules by default.\n\nStability: 0 - Deprecated\n\nAn attempt was made to `require()` an ES Module.\n\nThis error has been deprecated since `require()` now supports loading synchronous ES modules. When `require()` encounters an ES module that contains top-level `await`, it will throw `ERR_REQUIRE_ASYNC_MODULE` instead.\n\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "0225655e44e5acd32553c8ef84885c595391d2ae5ba5c5c794ac2380f32c3d6e"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 434,
+  "max_tokens": 512
+}

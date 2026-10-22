@@ -1,0 +1,19 @@
+{
+  "frozen_before_fetch_at": "2026-10-22T08:40:15.648180+00:00",
+  "model": "Inherited host model, exact variant not reported; no override.",
+  "manual_edits": false,
+  "batches_per_arm": 1,
+  "source_access": "Japanese questions and respective instruction only; no URLs, documents, labels, rule file or other generator output. Tools prohibited.",
+  "agents": {
+    "baseline": "/root/rules_baseline_english",
+    "improved": "/root/rules_improved_english"
+  },
+  "sha256": {
+    "translator_questions.json": "f04f033048e8dea7f8c2ba993a93663286815c2b452455e4231642d4871cf48a",
+    "baseline_instruction.txt": "6207d052de7be9c02c9e5bcf820a5cb772d954080e240dcf1a77d6442629659e",
+    "improved_instruction.txt": "de70588502bcbb957a68d1bd6762ad21225a2553facd3cfd3ec9556c6450f820",
+    "baseline_english.json": "d4616c9bdbf1e4d87c0d2c2d7e168cae341402c9fbe4a287350c4c9a1df0a2eb",
+    "improved_english.json": "5b1bf50a8481e42e803262691e4739ff33cc04de802a1aa338308f80287ee58f"
+  },
+  "production_description_note": "Production MCP description uses the improved instruction plus an explicit Do not add facts sentence retained for the existing schema contract; generated questions were not edited or regenerated."
+}

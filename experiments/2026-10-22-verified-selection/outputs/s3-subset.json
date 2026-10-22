@@ -1,0 +1,143 @@
+{
+  "documents": [
+    {
+      "id": "s3",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+      "title": "ListObjectsV2 - Amazon S3",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "paragraph",
+          "text": "View a markdown version of this page\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-9",
+          "kind": "heading",
+          "text": "# ListObjectsV2\n",
+          "start_line": 9,
+          "end_line": 9
+        },
+        {
+          "id": "line-13",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-9",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-29",
+          "kind": "list",
+          "text": "- General purpose bucket - For general purpose buckets, ListObjectsV2 returns objects in lexicographical order based on their key names.\n",
+          "parent_id": "line-13",
+          "start_line": 29,
+          "end_line": 29
+        },
+        {
+          "id": "line-31",
+          "kind": "list",
+          "text": "- Directory bucket - For directory buckets, ListObjectsV2 does not return objects in lexicographical order.\n",
+          "parent_id": "line-13",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-64",
+          "kind": "heading",
+          "text": "## URI Request Parameters\n",
+          "parent_id": "line-9",
+          "start_line": 64,
+          "end_line": 64
+        },
+        {
+          "id": "line-72",
+          "kind": "paragraph",
+          "text": "Access points - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.\n",
+          "parent_id": "line-64",
+          "start_line": 72,
+          "end_line": 72
+        },
+        {
+          "id": "line-74",
+          "kind": "heading",
+          "text": "###### Note\n",
+          "parent_id": "line-64",
+          "start_line": 74,
+          "end_line": 74
+        },
+        {
+          "id": "line-84",
+          "kind": "paragraph",
+          "text": "ContinuationToken indicates to Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this ContinuationToken for pagination of the list results.\n",
+          "parent_id": "line-74",
+          "start_line": 84,
+          "end_line": 84
+        },
+        {
+          "id": "line-343",
+          "kind": "heading",
+          "text": "## Examples\n",
+          "parent_id": "line-9",
+          "start_line": 343,
+          "end_line": 343
+        },
+        {
+          "id": "line-387",
+          "kind": "heading",
+          "text": "### Sample Request for general purpose buckets: Listing keys using the max-keys, prefix, and start-after parameters\n",
+          "parent_id": "line-343",
+          "start_line": 387,
+          "end_line": 387
+        },
+        {
+          "id": "line-389",
+          "kind": "paragraph",
+          "text": "In addition to the list-type parameter that indicates version 2 of the API operation, the request also specifies additional parameters to retrieve up to three keys in the quotes bucket that start with E and occur lexicographically after ExampleGuide.pdf.\n",
+          "parent_id": "line-387",
+          "start_line": 389,
+          "end_line": 389
+        },
+        {
+          "id": "line-527",
+          "kind": "heading",
+          "text": "### Sample Request for general purpose buckets: Using a continuation token\n",
+          "parent_id": "line-343",
+          "start_line": 527,
+          "end_line": 527
+        },
+        {
+          "id": "line-529",
+          "kind": "paragraph",
+          "text": "In this example, the initial request returns more than 1,000 keys. In response to this request, Amazon S3 returns the IsTruncated element with the value set to true and with a NextContinuationToken element.\n",
+          "parent_id": "line-527",
+          "start_line": 529,
+          "end_line": 529
+        },
+        {
+          "id": "line-574",
+          "kind": "heading",
+          "text": "### Sample request for general purpose buckets\n",
+          "parent_id": "line-343",
+          "start_line": 574,
+          "end_line": 574
+        },
+        {
+          "id": "line-576",
+          "kind": "paragraph",
+          "text": "In the following subsequent request, we include a continuation-token query parameter in the request with the value of the NextContinuationToken element from the preceding response.\n",
+          "parent_id": "line-574",
+          "start_line": 576,
+          "end_line": 576
+        }
+      ],
+      "source_hash": "26b291deb241ace35bb3ba15037a1bc8752cd76721da1b74205eee11d53cfb1c"
+    }
+  ],
+  "omitted_count": 198,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1024,
+  "max_tokens": 1024
+}

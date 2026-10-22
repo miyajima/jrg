@@ -1,0 +1,144 @@
+{
+  "documents": [
+    {
+      "id": "kubernetes",
+      "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+      "title": "Secrets | Kubernetes",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Secrets\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-106",
+          "kind": "heading",
+          "text": "## Types of Secret\n",
+          "parent_id": "line-1",
+          "start_line": 106,
+          "end_line": 106
+        },
+        {
+          "id": "line-108",
+          "kind": "paragraph",
+          "text": "When creating a Secret, you can specify its type using the type field of the Secret resource, or certain equivalent kubectl command line flags (if available). The Secret type is used to facilitate programmatic handling of the Secret data.\n",
+          "parent_id": "line-106",
+          "start_line": 108,
+          "end_line": 108
+        },
+        {
+          "id": "line-148",
+          "kind": "heading",
+          "text": "### ServiceAccount token Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 148,
+          "end_line": 148
+        },
+        {
+          "id": "line-156",
+          "kind": "list",
+          "text": "- Request a mounted token in a projected volume in your Pod manifest. Kubernetes creates the token and mounts it in the Pod. The token is automatically invalidated when the Pod that it's mounted in is deleted. For details, see Launch a Pod using service account token projection.\n",
+          "parent_id": "line-148",
+          "start_line": 156,
+          "end_line": 156
+        },
+        {
+          "id": "line-321",
+          "kind": "heading",
+          "text": "### TLS Secrets\n",
+          "parent_id": "line-106",
+          "start_line": 321,
+          "end_line": 321
+        },
+        {
+          "id": "line-323",
+          "kind": "paragraph",
+          "text": "The kubernetes.io/tls Secret type is for storing a certificate and its associated key that are typically used for TLS.\n",
+          "parent_id": "line-321",
+          "start_line": 323,
+          "end_line": 323
+        },
+        {
+          "id": "line-429",
+          "kind": "heading",
+          "text": "## Working with Secrets\n",
+          "parent_id": "line-1",
+          "start_line": 429,
+          "end_line": 429
+        },
+        {
+          "id": "line-453",
+          "kind": "heading",
+          "text": "### Editing a Secret\n",
+          "parent_id": "line-429",
+          "start_line": 453,
+          "end_line": 453
+        },
+        {
+          "id": "line-463",
+          "kind": "paragraph",
+          "text": "Depending on how you created the Secret, as well as how the Secret is used in your Pods, updates to existing Secret objects are propagated automatically to Pods that use the data. For more information, refer to Using Secrets as files from a Pod section.\n",
+          "parent_id": "line-453",
+          "start_line": 463,
+          "end_line": 463
+        },
+        {
+          "id": "line-503",
+          "kind": "heading",
+          "text": "### Using Secrets as files from a Pod\n",
+          "parent_id": "line-429",
+          "start_line": 503,
+          "end_line": 503
+        },
+        {
+          "id": "line-509",
+          "kind": "paragraph",
+          "text": "When a volume contains data from a Secret, and that Secret is updated, Kubernetes tracks this and updates the data in the volume, using an eventually-consistent approach.\n",
+          "parent_id": "line-503",
+          "start_line": 509,
+          "end_line": 509
+        },
+        {
+          "id": "line-511",
+          "kind": "heading",
+          "text": "#### Note:\n",
+          "parent_id": "line-503",
+          "start_line": 511,
+          "end_line": 511
+        },
+        {
+          "id": "line-513",
+          "kind": "paragraph",
+          "text": "A container using a Secret as a\nsubPath volume mount does not receive\nautomated Secret updates.\n",
+          "parent_id": "line-511",
+          "start_line": 513,
+          "end_line": 515
+        },
+        {
+          "id": "line-517",
+          "kind": "paragraph",
+          "text": "The kubelet keeps a cache of the current keys and values for the Secrets that are used in volumes for pods on that node. You can configure the way that the kubelet detects changes from the cached values. The configMapAndSecretChangeDetectionStrategy field in the kubelet configuration controls which strategy the kubelet uses. The default strategy is Watch.\n",
+          "parent_id": "line-511",
+          "start_line": 517,
+          "end_line": 517
+        },
+        {
+          "id": "line-521",
+          "kind": "paragraph",
+          "text": "As a result, the total delay from the moment when the Secret is updated to the moment when new keys are projected to the Pod can be as long as the kubelet sync period + cache propagation delay, where the cache propagation delay depends on the chosen cache type (following the same order listed in the previous paragraph, these are: watch propagation delay, the configured cache TTL, or zero for direct polling).\n",
+          "parent_id": "line-511",
+          "start_line": 521,
+          "end_line": 521
+        }
+      ],
+      "source_hash": "f9b756063d7923a42f9ad4eaa8b3d6e68a900e65a3434ef6881b66b60e24820c"
+    }
+  ],
+  "omitted_count": 204,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1010,
+  "max_tokens": 1024
+}

@@ -1,0 +1,25 @@
+{
+  "status": "pass",
+  "reviewer": "native agent /root/selection_review",
+  "review_scope": "Read-only independent final audit of frozen artifacts; no engine/model/network rerun.",
+  "findings": [],
+  "verified": {
+    "saved_outputs": 48,
+    "review_manifest_files": 111,
+    "frozen_input_files": 78,
+    "primary_hits": [
+      6,
+      14
+    ],
+    "primary_total": 17,
+    "complete_cases": [
+      1,
+      5
+    ],
+    "primary_improved": 5,
+    "primary_unchanged": 3,
+    "primary_regressed": 0
+  },
+  "caveats": "Specified-block retention is not answer accuracy. Fetch labels may undercount semantic retention; Redis and S3 misses remain. Model exact variant not reported.",
+  "parent_acceptance": "Accepted after all review_manifest hashes matched again; reviewed files unchanged."
+}

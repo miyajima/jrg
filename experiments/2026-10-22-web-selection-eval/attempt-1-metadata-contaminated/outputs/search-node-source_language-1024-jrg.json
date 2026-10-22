@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-7",
+      "url": "https://www.fixdevs.com/blog/node-err-require-esm/",
+      "title": "Fix: Error [ERR_REQUIRE_ESM]: require() of ES Module not supported - FixDevs",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "## The limitation that survives the upgrade: top-level await\n\nEven on Node 22.12+, 20.19+, or 23+, `require()` still cannot load an ES module that uses top-level `await`, directly or in anything it imports. `require()` has to return synchronously, and a module suspended on an unresolved `await` cannot produce a value yet. Node gives this its own distinct error code, `ERR_REQUIRE_ASYNC_MODULE`, rather than falling back to `ERR_REQUIRE_ESM`:\n    \n    `Error [ERR_REQUIRE_ASYNC_MODULE]: require() of an ES Module ... that uses top-level await is not supported.`\n\nThis is the case that catches people who already upgraded and are confused why the error persists. There is no flag that fixes it, but there is one that helps you find it: `--experimental-print-required-tla` prints which module in the dependency tree contains the top-level `await` that is blocking the `require()` call, since it is often several layers deep in a transitive dependency rather than in the package you actually required. The fix is dynamic `import()`, covered below.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "d6ec0b738998bbe8570d637a918dc5b4230a64aacf6f5546a6bb58c8df9a418a"
+    },
+    {
+      "id": "result-10",
+      "url": "https://bun.com/docs/lint/rules/node/no-top-level-await",
+      "title": "n/no-top-level-await | Bun Docs",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n# n/no-top-level-await\n\nDisallow `await` at the top level of a module\n\nAlso called `node/no-top-level-await`\n\nNode.js can load an ES module with `require()`, but not one that uses `await` at its top level, or one that imports a module like that. In both cases `require()` throws `ERR_REQUIRE_ASYNC_MODULE`. For a published package, that locks out everyone who still uses CommonJS.\n\n`await`, `for await` and `await using` are reported when they're outside of every function.\n\n## Configure#\n\nOff by default. To turn it on:\n\nbunfig.toml\n    \n    `[lint.rules]\n    \"n/no-top-level-await\" = \"error\" # or \"warn\"`\n\nEvery option, set to its default:\n\nbunfig.toml\n    \n    `[lint.rules]\n    \"n/no-top-level-await\" = [\"error\", {\n      ignoreBin = false,\n    }]`\n\n## Examples#\n\nexample.js 2 problems\n    \n    `import { connect } from \"./db.js\";\n    \n    export const db = await connect();\n    \n    for await (const row of db.rows()) {\n      console.log(row);\n    }`\n\nexample.js No problems\n    \n    `import { connect } from \"./db.js\";\n    \n    let db;\n    \n    export async function getDb() {\n      db ??= await connect();\n      return db;\n    }`\n\n## Options#\n\nOption  | Default  | What it does\n--- | --- | ---\n`ignoreBin`  | `false`  | Skip files that start with `#!`. They're run, not imported.\n\nexample.js with `{ \"ignoreBin\": true }`No problems\n    \n    `#!/usr/bin/env node\n    import { run } from \"./cli.js\";\n    \n    await run(process.argv.slice(2));`\n\nexample.js 1 problem\n    \n    `#!/usr/bin/env node\n    import { run } from \"./cli.js\";\n    \n    await run(process.argv.slice(2));`\n\n## When not to use it#\n\nIn an application, or in any module that nobody loads with `require()`, top-level `await` is harmless.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "e15a360edc456b86f7aedeacee061dffb4d2229e3f50dfe819f1a2a684dcc01a"
+    }
+  ],
+  "omitted_count": 15,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1009,
+  "max_tokens": 1024
+}

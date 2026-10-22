@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "reviewer": "native independent agent /root/selection_review",
+  "actual_model_variant": "Not available in tool evidence; no variant inferred.",
+  "reviewed_files": 129,
+  "preselection_frozen_files": 81,
+  "saved_outputs_checked": 48,
+  "independent_exact_token_counts": 96,
+  "primary_A_B_C": [
+    11,
+    11,
+    13
+  ],
+  "secondary_A_B_C": [
+    13,
+    13,
+    16
+  ],
+  "gold_units": 17,
+  "findings": [],
+  "parent_acceptance": "All reviewed file hashes matched again; accepted implementation, source-blind evaluation, limitations and versioned update procedure."
+}

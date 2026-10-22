@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 5 months ago; Crawled: 3 days ago; You can now allow multiple jobs or workflow runs to wait in the same GitHub Actions concurrency group instead of being limited to a single pending run. ... Increased queuing can be enabled by adding `queue: max` to the concurrency block in YAML when `cancel-in-progress` is `false` or not set.\n\nBack to changelog\n\nImprovement\n\nMay 7, 2026 • 1 minute read\n\n# GitHub Actions concurrency groups now allow larger queues\n\nImage\n\nYou can now allow multiple jobs or workflow runs to wait in the same GitHub Actions concurrency group instead of being limited to a single pending run.\n\nPreviously, a concurrency group could have one run in progress and one pending run. If another run entered the group, the pending run was canceled and replaced. Now, you can configure concurrency groups to queue multiple pending runs and process them sequentially, with support for up to 100 queued jobs or workflow runs per concurrency group.\n\nThis makes it easier to manage deployments and other workflows that need to run in order against a shared environment or resource. Increased queuing can be enabled by adding `queue: max` to the concurrency block in YAML when `cancel-in-progress` is `false` or not set.\n\nFor more information, see the GitHub Actions documentation on controlling the concurrency of workflows and jobs.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-3",
+      "source_hash": "c4212bb41fd64bf53b7b5a81d10e71eb2050b44df7ea1f4f517d6e172d97775d",
+      "title": "GitHub Actions concurrency groups now allow larger queues - GitHub Changelog",
+      "url": "https://github.blog/changelog/2026-05-07-github-actions-concurrency-groups-now-allow-larger-queues/"
+    }
+  ],
+  "omitted_count": 15,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 439,
+  "max_tokens": 512
+}

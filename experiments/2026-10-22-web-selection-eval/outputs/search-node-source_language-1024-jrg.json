@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-12",
+      "url": "https://nodejs.github.io/package-examples/04-cjs-esm-interop/shipping-esm-for-cjs/",
+      "title": "Shipping ESM for CommonJS · Node.js package configuration guide",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: 6 months ago; Since Node.js v20.19.0/v22.12.0, CommonJS can load ESM via `require()`, as long as the ESM does not use top-level `await`. ... Synchronous graph only: `require(esm)` is synchronous; When the ESM loaded by `require()` or any of its dependencies contain top‑level `await`, an `ERR_REQUIRE_ASYNC_MODULE` is thrown.\n\n`app-with-default-export.cjs`:\n    \n    `const { Logger } = require('my-logger-with-default-export');  // [class Logger]\n    // Logger {} - no need to destructure from `default`\n    const logger = require('my-logger-with-default-export');\n    `\n\nThis aligns CommonJS usage with the ESM equivalent:\n\n`app-with-default-export.mjs`:\n    \n    `import { Logger } from 'my-logger-with-default-export';  // [class Logger]\n    import logger from 'my-logger-with-default-export';  // Logger {}\n    `\n\n## Limitations\n\nWhen shipping ESM for CommonJS via `require(esm)`, note:\n\n  1. Synchronous graph only: `require(esm)` is synchronous; When the ESM loaded by `require()` or any of its dependencies contain top‑level `await`, an `ERR_REQUIRE_ASYNC_MODULE` is thrown.\n  2. No ESM <-> CJS cycles: To maintain ECMAScript invariants, cycles that cross the CommonJS/ESM boundary are unsupported and throw `ERR_REQUIRE_CYCLE_MODULE`.\n\n`cycle-error/a.mjs`:\n    \n    `import './b.cjs';\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "b1702dddda37a94f14ec01e8efea9156a676c2d56799e447fb6d393711c1b354"
+    },
+    {
+      "id": "result-7",
+      "url": "https://www.fixdevs.com/blog/node-err-require-esm/",
+      "title": "Fix: Error [ERR_REQUIRE_ESM]: require() of ES Module not supported - FixDevs",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 3 months ago; Crawled: 3 weeks ago; Even on Node 22.12+, 20.19+, or 23+, `require()` still cannot load an ES module that uses top-level `await`, directly or in anything it imports. `require()` has to return synchronously, and a module suspended on an unresolved `await` cannot produce a value yet. ...     `Error [ERR_REQUIRE_ASYNC_MODULE]: require() of an ES Module ... that uses top-level await is not supported. ... With that shape, Node’s CommonJS resolver never finds a matching path at all, so it fails before the require(esm) machinery even gets involved: ...     `// WRONG: synchronous require on an ESM-only package\n## The limitation that survives the upgrade: top-level await\n\nEven on Node 22.12+, 20.19+, or 23+, `require()` still cannot load an ES module that uses top-level `await`, directly or in anything it imports. `require()` has to return synchronously, and a module suspended on an unresolved `await` cannot produce a value yet. Node gives this its own distinct error code, `ERR_REQUIRE_ASYNC_MODULE`, rather than falling back to `ERR_REQUIRE_ESM`:\n    \n    `Error [ERR_REQUIRE_ASYNC_MODULE]: require() of an ES Module ... that uses top-level await is not supported.`\n\nThis is the case that catches people who already upgraded and are confused why the error persists. There is no flag that fixes it, but there is one that helps you find it: `--experimental-print-required-tla` prints which module in the dependency tree contains the top-level `await` that is blocking the `require()` call, since it is often several layers deep in a transitive dependency rather than in the package you actually required. The fix is dynamic `import()`, covered below.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "fe6e5c36c84dcea38e19a0dc14fd4917f49d03dc8be2b43294f30a341201db6f"
+    }
+  ],
+  "omitted_count": 15,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1018,
+  "max_tokens": 1024
+}

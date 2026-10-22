@@ -1,0 +1,96 @@
+{
+  "documents": [
+    {
+      "id": "redis",
+      "url": "https://redis.io/docs/latest/commands/expire/",
+      "title": "EXPIRE | Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# EXPIRE\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-250",
+          "kind": "paragraph",
+          "text": "The timeout will only be cleared by commands that delete or overwrite the contents of the key, including DEL, SET, GETSET and all the *STORE commands. This means that all the operations that conceptually alter the value stored at the key without replacing it with a new one will leave the timeout untouched. For instance, incrementing the value of a key with INCR, pushing a new value into a list with LPUSH, or altering the field value of a hash with HSET are all operations that will leave the timeout untouched.\n",
+          "parent_id": "line-1",
+          "start_line": 250,
+          "end_line": 250
+        },
+        {
+          "id": "line-290",
+          "kind": "heading",
+          "text": "## Examples\n",
+          "parent_id": "line-1",
+          "start_line": 290,
+          "end_line": 290
+        },
+        {
+          "id": "line-786",
+          "kind": "list",
+          "text": "- SET ( @write , @string , @slow ) Sets the string value of a key, ignoring its type. The key is created if it doesn't exist. ▶ Method SET( key: RedisArgument, value: RedisArgument | number, options?: SetOptions ) → Any\n",
+          "parent_id": "line-290",
+          "start_line": 786,
+          "end_line": 786
+        },
+        {
+          "id": "line-2779",
+          "kind": "list",
+          "text": "- SET ( @write , @string , @slow ) Sets the string value of a key, ignoring its type. The key is created if it doesn't exist. ▶ Methods StringSet( key: RedisKey, value: RedisValue, expiry: TimeSpan?, // The expiry to set. when: When // Which condition to set the value under (defaults to always). ) → bool // true if the keys were set, false otherwise. StringSet( key: RedisKey, value: RedisValue, expiry: TimeSpan?, // The expiry to set. when: When, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise. StringSet( key: RedisKey, value: RedisValue, expiry: TimeSpan?, // The expiry to set. keepTtl: bool, when: When, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise. StringSet( key: RedisKey, value: RedisValue, expiry: Expiration, // The expiry to set. when: ValueCondition, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise. StringSet( values: KeyValuePair<RedisKey, RedisValue>[], // The keys and values to set. when: When, // Which condition to set the value under (defaults to always). flags: CommandFlags // The flags to use for this operation. ) → bool // true if the keys were set, false otherwise.\n",
+          "parent_id": "line-290",
+          "start_line": 2779,
+          "end_line": 2779
+        },
+        {
+          "id": "line-3936",
+          "kind": "heading",
+          "text": "## Details\n",
+          "parent_id": "line-1",
+          "start_line": 3936,
+          "end_line": 3936
+        },
+        {
+          "id": "line-3942",
+          "kind": "heading",
+          "text": "### Differences in Redis prior to 2.1.3\n",
+          "parent_id": "line-3936",
+          "start_line": 3942,
+          "end_line": 3942
+        },
+        {
+          "id": "line-3946",
+          "kind": "paragraph",
+          "text": "EXPIRE would return 0 and not alter the timeout for a key with a timeout set.\n",
+          "parent_id": "line-3942",
+          "start_line": 3946,
+          "end_line": 3946
+        },
+        {
+          "id": "line-3948",
+          "kind": "heading",
+          "text": "### Pattern: navigation session\n",
+          "parent_id": "line-3936",
+          "start_line": 3948,
+          "end_line": 3948
+        },
+        {
+          "id": "line-3964",
+          "kind": "paragraph",
+          "text": "This pattern is easily modified to use counters using INCR instead of lists using RPUSH.\n",
+          "parent_id": "line-3948",
+          "start_line": 3964,
+          "end_line": 3964
+        }
+      ],
+      "source_hash": "5c3d05d8d796fbf45dc6ec043af48f54c7b265aed55c52ea67b123ebbd854f59"
+    }
+  ],
+  "omitted_count": 216,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1018,
+  "max_tokens": 1024
+}

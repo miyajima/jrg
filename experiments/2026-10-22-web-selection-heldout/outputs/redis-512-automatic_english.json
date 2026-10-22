@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "id": "redis",
+      "url": "https://redis.io/docs/latest/commands/expire/",
+      "title": "EXPIRE | Docs",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# EXPIRE\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-248",
+          "kind": "paragraph",
+          "text": "Set a timeout on key. After the timeout has expired, the key will automatically be deleted. A key with an associated timeout is often said to be volatile in Redis terminology.\n",
+          "parent_id": "line-1",
+          "start_line": 248,
+          "end_line": 248
+        },
+        {
+          "id": "line-250",
+          "kind": "paragraph",
+          "text": "The timeout will only be cleared by commands that delete or overwrite the contents of the key, including DEL, SET, GETSET and all the *STORE commands. This means that all the operations that conceptually alter the value stored at the key without replacing it with a new one will leave the timeout untouched. For instance, incrementing the value of a key with INCR, pushing a new value into a list with LPUSH, or altering the field value of a hash with HSET are all operations that will leave the timeout untouched.\n",
+          "parent_id": "line-1",
+          "start_line": 250,
+          "end_line": 250
+        },
+        {
+          "id": "line-3936",
+          "kind": "heading",
+          "text": "## Details\n",
+          "parent_id": "line-1",
+          "start_line": 3936,
+          "end_line": 3936
+        },
+        {
+          "id": "line-3938",
+          "kind": "heading",
+          "text": "### Refreshing expires\n",
+          "parent_id": "line-3936",
+          "start_line": 3938,
+          "end_line": 3938
+        },
+        {
+          "id": "line-3940",
+          "kind": "paragraph",
+          "text": "It is possible to call EXPIRE using as argument a key that already has an existing expire set. In this case the time to live of a key is updated to the new value. There are many useful applications for this, an example is documented in the Navigation session pattern section below.\n",
+          "parent_id": "line-3938",
+          "start_line": 3940,
+          "end_line": 3940
+        }
+      ],
+      "source_hash": "5c3d05d8d796fbf45dc6ec043af48f54c7b265aed55c52ea67b123ebbd854f59"
+    }
+  ],
+  "omitted_count": 220,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 497,
+  "max_tokens": 512
+}

@@ -1,0 +1,160 @@
+{
+  "documents": [
+    {
+      "id": "fetch",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+      "title": "Using the Fetch API - Web APIs | MDN",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Using the Fetch API\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-41",
+          "kind": "heading",
+          "text": "## Making a request\n",
+          "parent_id": "line-1",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-218",
+          "kind": "heading",
+          "text": "### Making cross-origin requests\n",
+          "parent_id": "line-41",
+          "start_line": 218,
+          "end_line": 218
+        },
+        {
+          "id": "line-220",
+          "kind": "paragraph",
+          "text": "Whether a request can be made cross-origin or not is determined by the value of the RequestInit.mode option. This may take one of three values: cors, same-origin, or no-cors.\n",
+          "parent_id": "line-218",
+          "start_line": 220,
+          "end_line": 220
+        },
+        {
+          "id": "line-224",
+          "kind": "list",
+          "text": "- Setting mode to same-origin disallows cross-origin requests completely.\n",
+          "parent_id": "line-218",
+          "start_line": 224,
+          "end_line": 224
+        },
+        {
+          "id": "line-230",
+          "kind": "heading",
+          "text": "### Including credentials\n",
+          "parent_id": "line-41",
+          "start_line": 230,
+          "end_line": 230
+        },
+        {
+          "id": "line-240",
+          "kind": "paragraph",
+          "text": "By default, credentials are only included in same-origin requests. To customize this behavior, as well as to control whether the browser respects any Set-Cookie response headers, set the credentials option, which can take one of the following three values:\n",
+          "parent_id": "line-230",
+          "start_line": 240,
+          "end_line": 240
+        },
+        {
+          "id": "line-244",
+          "kind": "list",
+          "text": "- same-origin (the default): only send and include credentials for same-origin requests.\n",
+          "parent_id": "line-230",
+          "start_line": 244,
+          "end_line": 244
+        },
+        {
+          "id": "line-248",
+          "kind": "paragraph",
+          "text": "Note that if a cookie's SameSite attribute is set to Strict or Lax, then the cookie will not be sent cross-site, even if credentials is set to include.\n",
+          "parent_id": "line-230",
+          "start_line": 248,
+          "end_line": 248
+        },
+        {
+          "id": "line-250",
+          "kind": "paragraph",
+          "text": "Including credentials in cross-origin requests can make a site vulnerable to CSRF attacks, so even if credentials is set to include, the server must also agree to their inclusion by including the Access-Control-Allow-Credentials header in its response. Additionally, in this situation the server must explicitly specify the client's origin in the Access-Control-Allow-Origin response header (that is, * is not allowed).\n",
+          "parent_id": "line-230",
+          "start_line": 250,
+          "end_line": 250
+        },
+        {
+          "id": "line-258",
+          "kind": "heading",
+          "text": "### Creating a Request object\n",
+          "parent_id": "line-41",
+          "start_line": 258,
+          "end_line": 258
+        },
+        {
+          "id": "line-260",
+          "kind": "paragraph",
+          "text": "The Request() constructor takes the same arguments as fetch() itself. This means that instead of passing options into fetch(), you can pass the same options to the Request() constructor, and then pass that object to fetch().\n",
+          "parent_id": "line-258",
+          "start_line": 260,
+          "end_line": 260
+        },
+        {
+          "id": "line-278",
+          "kind": "paragraph",
+          "text": "However, we could rewrite this to pass the same arguments to the Request() constructor:\n",
+          "parent_id": "line-258",
+          "start_line": 278,
+          "end_line": 278
+        },
+        {
+          "id": "line-380",
+          "kind": "heading",
+          "text": "## Handling the response\n",
+          "parent_id": "line-1",
+          "start_line": 380,
+          "end_line": 380
+        },
+        {
+          "id": "line-410",
+          "kind": "heading",
+          "text": "### Checking the response type\n",
+          "parent_id": "line-380",
+          "start_line": 410,
+          "end_line": 410
+        },
+        {
+          "id": "line-414",
+          "kind": "list",
+          "text": "- basic: the request was a same-origin request.\n",
+          "parent_id": "line-410",
+          "start_line": 414,
+          "end_line": 414
+        },
+        {
+          "id": "line-607",
+          "kind": "heading",
+          "text": "### Locked and disturbed streams\n",
+          "parent_id": "line-380",
+          "start_line": 607,
+          "end_line": 607
+        },
+        {
+          "id": "line-615",
+          "kind": "paragraph",
+          "text": "This means it's not possible to read the same response (or request) body more than once:\n",
+          "parent_id": "line-607",
+          "start_line": 615,
+          "end_line": 615
+        }
+      ],
+      "source_hash": "2858e831d9d4e4329d75aa2af75528ab82d3825b6cc167ac75d16a079cdc41dc"
+    }
+  ],
+  "omitted_count": 159,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1019,
+  "max_tokens": 1024
+}

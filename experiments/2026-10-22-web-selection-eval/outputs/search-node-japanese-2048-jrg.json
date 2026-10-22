@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "id": "result-2",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/esm.html",
+      "title": "Modules: ECMAScript modules | Node.js v22.15.0 Documentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: 1.5 years ago; v15.3.0, v14.17.0, v12.22.0  | Stabilize modules implementation. ... If a top level `await` expression never resolves, the `node` process will exit with a `13` status code. ... The algorithm to determine the module format of a resolved URL is provided by ESM_FILE_FORMAT, which returns the unique module format for any file. ... If source contains top-level `await`, static `import` or `export` statements, or `import.meta`, return true. ... If source contains a top-level lexical declaration (`const`, `let`, or `class`) of any of the CommonJS wrapper variables (`require`, `exports`, `module`, `__filename`, or `__dirname`) then return true.\n\n## Modules: ECMAScript modules#\n\nHistory\nVersion  | Changes\n--- | ---\nv22.12.0  | Import attributes are no longer experimental.\nv22.0.0  | Drop support for import assertions.\nv21.0.0, v20.10.0, v18.20.0  | Add experimental support for import attributes.\nv20.0.0, v18.19.0  | Module customization hooks are executed off the main thread.\nv18.6.0, v16.17.0  | Add support for chaining module customization hooks.\nv17.1.0, v16.14.0  | Add experimental support for import assertions.\nv17.0.0, v16.12.0  | Consolidate customization hooks, removed `getFormat`, `getSource`, `transformSource`, and `getGlobalPreloadCode` hooks added `load` and `globalPreload` hooks allowed returning `format` from either `resolve` or `load` hooks.\nv14.8.0  | Unflag Top-Level Await.\nv15.3.0, v14.17.0, v12.22.0  | Stabilize modules implementation.\nv14.13.0, v12.20.0  | Support for detection of CommonJS named exports.\nv14.0.0, v13.14.0, v12.20.0  | Remove experimental modules warning.\nv13.2.0, v12.17.0  | Loading ECMAScript modules no longer requires a command-line flag.\nv12.0.0  | Add support for ES modules using `.js` file extension via `package.json` `\"type\"` field.\nv8.5.0  | Added in: v8.5.0\n\nStability: 2 - Stable\n\n### Introduction#\n\nECMAScript modules are the official standard format to package JavaScript code for reuse. Modules are defined using a variety of `import` and `export` statements.\n\nThe following example of an ES module exports a function:\n    \n    `// addTwo.mjs\n    function addTwo(num) {\n      return num + 2;\n    }\n    \n    export { addTwo };` [Button: copy]\n\nThe following example of an ES module imports the function from `addTwo.mjs`:\n    \n    `// app.mjs\n    import { addTwo } from './addTwo.mjs';\n    \n    // Prints: 6\n    console.log(addTwo(4));` [Button: copy]\n\nNode.js fully supports ECMAScript modules as they are currently specified and provides interoperability between them and its original module format, CommonJS.\n\n#### Differences between ES modules and CommonJS#\n\n##### No `require`, `exports`, or `module.exports`#\n\nIn most cases, the ES module `import` can be used to load CommonJS modules.\n\nIf needed, a `require` function can be constructed within an ES module using `module.createRequire()`.\n\n##### No `__filename` or `__dirname`#\n\nThese CommonJS variables are not available in ES modules.\n\n`__filename` and `__dirname` use cases can be replicated via `import.meta.filename` and `import.meta.dirname`.\n\n##### No Addon Loading#\n\nAddons are not currently supported with ES module imports.\n\nThey can instead be loaded with `module.createRequire()` or `process.dlopen`.\n\n##### No `require.resolve`#\n\nRelative resolution can be handled via `new URL('./local', import.meta.url)`.\n\nFor a complete `require.resolve` replacement, there is the import.meta.resolve API.\n\nAlternatively `module.createRequire()` can be used.\n### Top-level `await`#\n\nAdded in: v14.8.0\n\nThe `await` keyword may be used in the top level body of an ECMAScript module.\n\nAssuming an `a.mjs` with\n    \n    `export const five = await Promise.resolve(5);` [Button: copy]\n\nAnd a `b.mjs` with\n    \n    `import { five } from './a.mjs';\n    \n    console.log(five); // Logs `5`` [Button: copy]\n    \n    `node b.mjs # works` [Button: copy]\n\nIf a top level `await` expression never resolves, the `node` process will exit with a `13` status code.\n    \n    `import { spawn } from 'node:child_process';\n    import { execPath } from 'node:process';\n    \n    spawn(execPath, [\n      '--input-type=module',\n      '--eval',\n      // Never-resolving Promise:\n      'await new Promise(() => {})',\n    ]).once('exit', (code) => {\n      console.log(code); // Logs `13`\n    });` [Button: copy]\n\n### Loaders#\n\nThe former Loaders documentation is now at Modules: Customization hooks.\n\n### Resolution and loading algorithm#\n\n#### Features#\nDETECT_MODULE_SYNTAX(source)\n\n>   1. Parse source as an ECMAScript module.\n>   2. If the parse is successful, then\n>     1. If source contains top-level `await`, static `import` or `export` statements, or `import.meta`, return true.\n>     2. If source contains a top-level lexical declaration (`const`, `let`, or `class`) of any of the CommonJS wrapper variables (`require`, `exports`, `module`, `__filename`, or `__dirname`) then return true.\n>   3. Else return false.\n\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "1dd32e03cfca75365c115faf1b6ade1086bdb9e9275247bc02157cc8332fb918"
+    },
+    {
+      "id": "result-15",
+      "url": "https://static.sched.com/hosted_files/pu2025/17/PowerUP%202025%20-Node.js%20What%E2%80%99s%20new%20and%20what%E2%80%99s%20next.pdf",
+      "title": "PowerUP 2025 -Node.js What’s new and what’s next",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 3 months ago; >node hello.js Hello World The Fine Print: None | The Fine Print: | | Backported to 22.x i --- | --- | --- | --- >node hello.js Hello World The Fine Print: None | | | Backported to 22.x i NoneDepends on two features that are still experimental but stability is “release candidate”, and no experimental warnings. ... --no-experimental-require-module-> ESM must be synchronous\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "7f2928969d0c1672db2b651d89ee5e67ad87888c7abd61b2f5feab9cb1fd9070"
+    },
+    {
+      "id": "result-14",
+      "url": "https://doccompiler.ai/api/v1/jobs/shared/job_1776399442426_3925001f/download/nodejs__node__UserGuide.pdf",
+      "title": "nodejs/node User Guide",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 6 months ago; **Cause:** CommonJS require() loaded a module whose graph contains top-level await or dynamic import() requirements that cannot be satisfied synchronously.**Solution:** Convert the caller to ESM, or use dynamic import('...') inside an async function.Since Node.js 22, fully synchronous ESM can be required from CommonJS.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "0c8b05f9222adbf94255bcb38ee9eddfd771f6b177cae48b083304f436ff9d3f"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2010,
+  "max_tokens": 2048
+}

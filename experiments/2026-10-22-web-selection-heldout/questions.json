@@ -1,0 +1,45 @@
+{
+  "frozen_at": "2026-10-22T08:00:59.534852+00:00",
+  "questions": [
+    {
+      "id": "sqlite",
+      "question_ja": "SQLiteで外部キー制約を有効にするとき、接続ごとの設定が必要ですか。トランザクションの途中で切り替えるとどうなりますか？",
+      "url": "https://www.sqlite.org/foreignkeys.html"
+    },
+    {
+      "id": "postgres",
+      "question_ja": "PostgreSQLの一意制約でNULLを含む行は重複扱いになりますか。NULL同士も重複として扱う設定はありますか？",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html"
+    },
+    {
+      "id": "docker",
+      "question_ja": "Dockerの読み取り専用バインドマウントでは、配下のサブマウントも読み取り専用になりますか。Linuxカーネルの版による違いはありますか？",
+      "url": "https://docs.docker.com/engine/storage/bind-mounts/"
+    },
+    {
+      "id": "kubernetes",
+      "question_ja": "KubernetesのSecretをボリュームで使うと、値の変更はいつ反映されますか。subPathでマウントした場合も自動更新されますか？",
+      "url": "https://kubernetes.io/docs/concepts/configuration/secret/"
+    },
+    {
+      "id": "fetch",
+      "question_ja": "ブラウザーのfetchで別オリジンへCookieを送るには何を指定しますか。CookieのSameSite設定やサーバー側の許可にはどんな制限がありますか？",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
+    },
+    {
+      "id": "redis",
+      "question_ja": "RedisのEXPIREで有効期限を付けたキーをSETやINCRで更新すると期限はどうなりますか。期限にゼロや負の値を指定した場合も知りたいです。",
+      "url": "https://redis.io/docs/latest/commands/expire/"
+    },
+    {
+      "id": "go",
+      "question_ja": "GoのcontextでCancelFuncを呼ぶと、処理の終了まで待ちますか。キャンセル関数を呼ばずに残したときの問題も教えてください。",
+      "url": "https://pkg.go.dev/context"
+    },
+    {
+      "id": "s3",
+      "question_ja": "S3のListObjectsV2の返却順は、通常のバケットとディレクトリバケットで同じですか。続きの取得に使うトークンは実際のキー名ですか？",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html"
+    }
+  ]
+}

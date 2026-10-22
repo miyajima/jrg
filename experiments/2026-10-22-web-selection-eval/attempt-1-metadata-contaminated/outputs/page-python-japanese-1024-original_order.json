@@ -1,0 +1,175 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "heading",
+          "start_line": 1,
+          "text": "### Navigation\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "text": "- index\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 5,
+          "text": "- modules |\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 7,
+          "text": "- next |\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 9,
+          "text": "- previous |\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 11,
+          "text": "- \n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 13,
+          "text": "- Python »\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 15,
+          "text": "- \n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 17,
+          "text": "- \n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 19,
+          "text": "- 3.13.16 Documentation »\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 21,
+          "text": "- Python HOWTOs »\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 23,
+          "text": "- Python experimental support for free threading\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 25,
+          "text": "- |\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "list",
+          "parent_id": "line-1",
+          "start_line": 27,
+          "text": "- Theme Auto Light Dark |\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "heading",
+          "start_line": 29,
+          "text": "# Python experimental support for free threading¶\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "paragraph",
+          "parent_id": "line-29",
+          "start_line": 31,
+          "text": "Starting with the 3.13 release, CPython has experimental support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. Free-threaded execution allows for full utilization of the available processing power by running threads in parallel on available CPU cores. While not all software will benefit from this automatically, programs designed with threading in mind will run faster on multi-core hardware.\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "paragraph",
+          "parent_id": "line-29",
+          "start_line": 33,
+          "text": "The free-threaded mode is experimental and work is ongoing to improve it: expect some bugs and a substantial single-threaded performance hit.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "paragraph",
+          "parent_id": "line-29",
+          "start_line": 35,
+          "text": "This document describes the implications of free threading for Python code. See C API Extension Support for Free Threading for information on how to write C extensions that support the free-threaded build.\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "paragraph",
+          "parent_id": "line-29",
+          "start_line": 37,
+          "text": "See also\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-29",
+          "start_line": 39,
+          "text": "PEP 703 – Making the Global Interpreter Lock Optional in CPython for an overall description of free-threaded Python.\n"
+        }
+      ],
+      "id": "python",
+      "source_hash": "f50c5a3333e8d160d108fbc2fd0bff9f74bc4e483bef7c587c9e6f56f983c92e",
+      "title": "C API Extension Support for Free Threading — Python 3.15.0 documentation",
+      "url": "https://docs.python.org/3.13/howto/free-threading-python.html"
+    }
+  ],
+  "omitted_count": 67,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 964,
+  "max_tokens": 1024
+}

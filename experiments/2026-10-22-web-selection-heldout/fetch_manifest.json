@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sqlite",
+    "url": "https://www.sqlite.org/foreignkeys.html",
+    "retrieved_at": "2026-10-22T08:04:00.713166+00:00",
+    "final_url": "https://www.sqlite.org/foreignkeys.html",
+    "charset": "utf-8",
+    "bytes": 47276,
+    "sha256": "f9cc6cefbdf18e07893b036365a2f3ca2a9a81fa41ed0849c7e4df214ccca8c0"
+  },
+  {
+    "id": "postgres",
+    "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+    "retrieved_at": "2026-10-22T08:04:00.713585+00:00",
+    "final_url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+    "charset": "utf-8",
+    "bytes": 46639,
+    "sha256": "d1458637a67864b78f80fccaa3adb5ed491063721cfefdf4889df8eb1cf3a6b7"
+  },
+  {
+    "id": "docker",
+    "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+    "retrieved_at": "2026-10-22T08:04:00.713668+00:00",
+    "final_url": "https://docs.docker.com/engine/storage/bind-mounts/",
+    "charset": "utf-8",
+    "bytes": 600059,
+    "sha256": "8115680c69fe447d18f2bb830094adf71341d628d9155e08930d6babea347f2a"
+  },
+  {
+    "id": "kubernetes",
+    "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+    "retrieved_at": "2026-10-22T08:04:00.713744+00:00",
+    "final_url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+    "charset": "utf-8",
+    "bytes": 572414,
+    "sha256": "595d1ee06d05430db8f7f83983d99813ad6bb1e59bb22a2a00f4fe69e340c08f"
+  },
+  {
+    "id": "fetch",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+    "retrieved_at": "2026-10-22T08:04:00.827209+00:00",
+    "final_url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+    "charset": "utf-8",
+    "bytes": 184064,
+    "sha256": "6c5492f726c22233b30648929bb44d09b0f982717764d192eeec610678ca0ef3"
+  },
+  {
+    "id": "redis",
+    "url": "https://redis.io/docs/latest/commands/expire/",
+    "retrieved_at": "2026-10-22T08:04:00.858612+00:00",
+    "final_url": "https://redis.io/docs/latest/commands/expire/",
+    "charset": "utf-8",
+    "bytes": 1491972,
+    "sha256": "b8efee49075118001f34a0c69fa409e3abb0ca3f44449142c0b1128fba2a4c95"
+  },
+  {
+    "id": "go",
+    "url": "https://pkg.go.dev/context",
+    "retrieved_at": "2026-10-22T08:04:00.905060+00:00",
+    "final_url": "https://pkg.go.dev/context",
+    "charset": "utf-8",
+    "bytes": 97092,
+    "sha256": "923e89e847ef3f541b7696b79b1416fa43dbd4a54bb19544fe9018d6f9c484b4"
+  },
+  {
+    "id": "s3",
+    "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+    "retrieved_at": "2026-10-22T08:04:01.162940+00:00",
+    "final_url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+    "charset": "utf-8",
+    "bytes": 68808,
+    "sha256": "0e071f2d7afda4e887c55db0542ead638e559fcbd0c328f0a58bcc6862cc03ad"
+  }
+]

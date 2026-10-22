@@ -1,0 +1,219 @@
+{
+  "frozen_at": "2026-10-22T08:11:02.626149+00:00",
+  "method": "Parent annotation of original blocks before any selection runs. Same-paragraph facts grouped into one evidence unit; alternative blocks accepted for duplicated token fact. No output inspection.",
+  "cases": [
+    {
+      "id": "sqlite",
+      "units": [
+        {
+          "id": "per_connection",
+          "claim": "Each database connection must enable foreign keys separately.",
+          "url": "https://www.sqlite.org/foreignkeys.html",
+          "alternatives": [
+            [
+              "line-207"
+            ]
+          ]
+        },
+        {
+          "id": "transaction",
+          "claim": "Changing foreign key enforcement during a multi-statement transaction has no effect and does not return an error.",
+          "url": "https://www.sqlite.org/foreignkeys.html",
+          "alternatives": [
+            [
+              "line-223"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "postgres",
+      "units": [
+        {
+          "id": "null_semantics",
+          "claim": "NULL values are distinct by default, allowing otherwise duplicate constrained rows containing NULL; NULLS NOT DISTINCT changes this comparison.",
+          "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+          "alternatives": [
+            [
+              "line-353"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "docker",
+      "units": [
+        {
+          "id": "recursive_readonly",
+          "claim": "Recursive read-only is best effort, requires Linux 5.12+, older kernels default submounts to read-write and explicit bind-recursive=readonly errors.",
+          "url": "https://docs.docker.com/engine/storage/bind-mounts/",
+          "alternatives": [
+            [
+              "line-274"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kubernetes",
+      "units": [
+        {
+          "id": "eventual",
+          "claim": "Secret volume data updates are eventually consistent.",
+          "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+          "alternatives": [
+            [
+              "line-509"
+            ]
+          ]
+        },
+        {
+          "id": "delay",
+          "claim": "Update delay can be kubelet sync period plus cache propagation delay, dependent on cache type.",
+          "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+          "alternatives": [
+            [
+              "line-521"
+            ]
+          ]
+        },
+        {
+          "id": "subpath",
+          "claim": "subPath volume mounts do not receive automated Secret updates.",
+          "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+          "alternatives": [
+            [
+              "line-513"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fetch",
+      "units": [
+        {
+          "id": "include",
+          "claim": "credentials include sends credentials even cross-origin.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+          "alternatives": [
+            [
+              "line-246"
+            ]
+          ]
+        },
+        {
+          "id": "samesite",
+          "claim": "SameSite Strict or Lax blocks cross-site cookies even with credentials include.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+          "alternatives": [
+            [
+              "line-248"
+            ]
+          ]
+        },
+        {
+          "id": "server",
+          "claim": "Server must allow credentials and specify the client origin rather than wildcard in Access-Control-Allow-Origin.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+          "alternatives": [
+            [
+              "line-250"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "redis",
+      "units": [
+        {
+          "id": "updates",
+          "claim": "SET overwrites clear expiration; INCR modifies without replacing and retains expiration.",
+          "url": "https://redis.io/docs/latest/commands/expire/",
+          "alternatives": [
+            [
+              "line-250"
+            ]
+          ]
+        },
+        {
+          "id": "nonpositive",
+          "claim": "Non-positive EXPIRE timeout deletes the key rather than expiring it.",
+          "url": "https://redis.io/docs/latest/commands/expire/",
+          "alternatives": [
+            [
+              "line-258"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "go",
+      "units": [
+        {
+          "id": "wait",
+          "claim": "CancelFunc does not wait for the work to stop.",
+          "url": "https://pkg.go.dev/context",
+          "alternatives": [
+            [
+              "line-541"
+            ]
+          ]
+        },
+        {
+          "id": "leak",
+          "claim": "Failing to call CancelFunc leaks the child and its children until the parent is canceled; calling removes references and stops timers.",
+          "url": "https://pkg.go.dev/context",
+          "alternatives": [
+            [
+              "line-11"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "units": [
+        {
+          "id": "general_order",
+          "claim": "General purpose buckets list keys in lexicographical order.",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+          "alternatives": [
+            [
+              "line-29"
+            ]
+          ]
+        },
+        {
+          "id": "directory_order",
+          "claim": "Directory buckets do not list keys in lexicographical order.",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+          "alternatives": [
+            [
+              "line-31"
+            ]
+          ]
+        },
+        {
+          "id": "token",
+          "claim": "Continuation token is obfuscated and is not an actual key.",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html",
+          "alternatives": [
+            [
+              "line-84"
+            ],
+            [
+              "line-311"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n# 降水確率\n\n〖読み方：こうすいかくりつ、分類：気象〗\n降水確率は、予報区内で一定の時間内に降水量にして１mm以上の雨または雪の降る確率（％表示）の平均値をいいます。これは、0％、10％、20％、30％、40％、50％、60％、70％、80％、90％、100％と10％刻みで表わされ、この間は四捨五入されます（降水確率0％は、5％未満）。また、その内容については、例えば、降水確率40％とは「40％という予報が100回発表された時に、その内のおよそ40回は１mm以上の降水がある」という意味であって、雨の強さを予報するものではありません。--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-5",
+      "source_hash": "a4794143711ddc645c5a77fcb39eb6ece08c74a4c8cdb5a1a9bf65e3fa57db17",
+      "title": "降水確率とは｜防災情報ナビ",
+      "url": "https://www.ibousai.jp/words/bswd422.html"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-12",
+      "source_hash": "d0cfcc08b18bd40fa1224af347d68b48e1f7912f32f1ccf4c82cb26c354e5ebb",
+      "title": "降水確率予報との比較 | 気象庁",
+      "url": "https://www.jma.go.jp/jma/kishou/know/kisetsu_riyou/explain/prob_precip.html"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 448,
+  "max_tokens": 512
+}

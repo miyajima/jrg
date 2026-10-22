@@ -1,0 +1,8 @@
+{
+  "comparison": "Prior completed bilingual API experiment identity",
+  "checks": {
+    "src/selection.rs": true,
+    "src/bin/jrg-select.rs": true,
+    "target/debug/jrg-select": true
+  }
+}

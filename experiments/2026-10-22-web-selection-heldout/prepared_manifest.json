@@ -1,0 +1,55 @@
+{
+  "optional_end_tag_fix_sha256": "6c3a6cf1517ea3e1b0a882b9b55c6734f849d520ecab8603367b2defd5499b78",
+  "preprocessor": "/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-eval/evaluate.py",
+  "preprocessor_sha256": "38ee75cb6b932b0a42839286c12515b1cea5723bb8d64f99d67e6df343546a8d",
+  "documents": [
+    {
+      "id": "sqlite",
+      "title": "SQLite Foreign Key Support",
+      "blocks": 139,
+      "input_tokens": 7871
+    },
+    {
+      "id": "postgres",
+      "title": "PostgreSQL: Documentation: 18: 5.5. Constraints",
+      "blocks": 159,
+      "input_tokens": 5515
+    },
+    {
+      "id": "docker",
+      "title": "Bind mounts | Docker Docs",
+      "blocks": 116,
+      "input_tokens": 4003
+    },
+    {
+      "id": "kubernetes",
+      "title": "Secrets | Kubernetes",
+      "blocks": 220,
+      "input_tokens": 7004
+    },
+    {
+      "id": "fetch",
+      "title": "Using the Fetch API - Web APIs | MDN",
+      "blocks": 177,
+      "input_tokens": 5660
+    },
+    {
+      "id": "redis",
+      "title": "EXPIRE | Docs",
+      "blocks": 226,
+      "input_tokens": 36159
+    },
+    {
+      "id": "go",
+      "title": "context package - context - Go Packages",
+      "blocks": 145,
+      "input_tokens": 5414
+    },
+    {
+      "id": "s3",
+      "title": "ListObjectsV2 - Amazon S3",
+      "blocks": 214,
+      "input_tokens": 6387
+    }
+  ]
+}

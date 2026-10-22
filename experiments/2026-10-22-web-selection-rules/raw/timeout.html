@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- This manual documents version 9.12 of the GNU core
+utilities, including the standard programs for text and file manipulation.
+
+Copyright © 1994-2026 Free Software Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the section entitled "GNU
+Free Documentation License". -->
+<title>timeout invocation (GNU Coreutils 9.12)</title>
+
+<meta name="description" content="timeout invocation (GNU Coreutils 9.12)">
+<meta name="keywords" content="timeout invocation (GNU Coreutils 9.12)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Concept-index.html" rel="index" title="Concept index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Modified-command-invocation.html" rel="up" title="Modified command invocation">
+<link href="stdbuf-invocation.html" rel="prev" title="stdbuf invocation">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+pre.display-preformatted {font-family: inherit}
+span:hover a.copiable-link {visibility: visible}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://www.gnu.org/software/gnulib/manual.css">
+
+
+</head>
+
+<body lang="en">
+<div class="section-level-extent" id="timeout-invocation">
+<div class="nav-panel">
+<p>
+Previous: <a href="stdbuf-invocation.html" accesskey="p" rel="prev"><code class="command">stdbuf</code>: Run a command with modified I/O stream buffering</a>, Up: <a href="Modified-command-invocation.html" accesskey="u" rel="up">Modified command invocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<h3 class="section" id="timeout_003a-Run-a-command-with-a-time-limit"><span>23.6 <code class="command">timeout</code>: Run a command with a time limit<a class="copiable-link" href="#timeout_003a-Run-a-command-with-a-time-limit"> &para;</a></span></h3>
+
+<a class="index-entry-id" id="index-timeout"></a>
+<a class="index-entry-id" id="index-time-limit"></a>
+<a class="index-entry-id" id="index-run-commands-with-bounded-time"></a>
+
+<p><code class="command">timeout</code> runs the given <var class="var">command</var> and kills it if it is
+still running after the specified time interval.  Synopsis:
+</p>
+<div class="example">
+<pre class="example-preformatted">timeout [<var class="var">option</var>]... <var class="var">duration</var> <var class="var">command</var> [<var class="var">arg</var>]...
+</pre></div>
+
+<p><var class="var">command</var> must not be a special built-in utility (see <a class="pxref" href="Special-built_002din-utilities.html">Special built-in utilities</a>).
+</p>
+<p>The program accepts the following options.  Also see <a class="ref" href="Common-options.html">Common options</a>.
+Options must precede operands.
+</p>
+<dl class="table">
+<dd><a class="anchor" id="timeout-f"></a></dd>
+<dt><a id="index-_002d_002dforeground"></a><span>&lsquo;<samp class="samp">-f</samp>&rsquo;<a class="copiable-link" href="#index-_002d_002dforeground"> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-_002df-25"></a>
+<a class="anchor" id="timeout--foreground"></a></dd>
+<dt>&lsquo;<samp class="samp">--foreground</samp>&rsquo;</dt>
+<dd><p>Don&rsquo;t create a separate background program group, so that
+the managed <var class="var">command</var> can use the foreground TTY normally.
+This is needed to support two situations when timing out commands,
+when not invoking <code class="command">timeout</code> from an interactive shell.
+</p><ol class="enumerate">
+<li> <var class="var">command</var> is interactive and needs to read from the terminal for example
+</li><li> the user wants to support sending signals directly to <var class="var">command</var>
+from the terminal (like Ctrl-C for example)
+</li></ol>
+
+<p>In this mode of operation, any children of <var class="var">command</var>
+will not be timed out.  Also SIGCONT will not be sent to <var class="var">command</var>,
+as it&rsquo;s generally not needed with foreground processes, and can
+cause intermittent signal delivery issues with programs that are monitors
+themselves (like GDB for example).
+</p>
+<a class="anchor" id="timeout-k"></a></dd>
+<dt><a id="index-_002d_002dkill_002dafter"></a><span>&lsquo;<samp class="samp">-k&nbsp;<!-- /@w --><var class="var">duration</var></samp>&rsquo;<a class="copiable-link" href="#index-_002d_002dkill_002dafter"> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-_002dk-7"></a>
+<a class="anchor" id="timeout--kill-after"></a></dd>
+<dt>&lsquo;<samp class="samp">--kill-after=<var class="var">duration</var></samp>&rsquo;</dt>
+<dd><p>Ensure the monitored <var class="var">command</var> is killed by also sending a &lsquo;<samp class="samp">KILL</samp>&rsquo;
+signal.
+</p>
+<p>The specified <var class="var">duration</var> starts from the point in time when
+<code class="command">timeout</code> sends the initial signal to <var class="var">command</var>, i.e.,
+not from the beginning when the <var class="var">command</var> is started.
+</p>
+<p>This option has no effect if either the main <var class="var">duration</var>
+of the <code class="command">timeout</code> command, or the <var class="var">duration</var> specified
+to this option, is 0.
+</p>
+<p>This option may be useful if the selected signal did not kill the <var class="var">command</var>,
+either because the signal was blocked or ignored, or if the <var class="var">command</var> takes
+too long (e.g. for cleanup work) to terminate itself within a certain amount
+of time.
+</p>
+<a class="anchor" id="timeout-p"></a></dd>
+<dt><a id="index-_002d_002dpreserve_002dstatus"></a><span>&lsquo;<samp class="samp">-p</samp>&rsquo;<a class="copiable-link" href="#index-_002d_002dpreserve_002dstatus"> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-_002dp-15"></a>
+<a class="anchor" id="timeout--preserve-status"></a></dd>
+<dt>&lsquo;<samp class="samp">--preserve-status</samp>&rsquo;</dt>
+<dd><p>Return the exit status of the managed <var class="var">command</var> on timeout, rather than
+a specific exit status indicating a timeout.  This is useful if the
+managed <var class="var">command</var> supports running for an indeterminate amount of time.
+</p>
+<a class="anchor" id="timeout-s"></a></dd>
+<dt><a id="index-_002d_002dsignal"></a><span>&lsquo;<samp class="samp">-s&nbsp;<!-- /@w --><var class="var">signal</var></samp>&rsquo;<a class="copiable-link" href="#index-_002d_002dsignal"> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-_002ds-31"></a>
+<a class="anchor" id="timeout--signal"></a></dd>
+<dt>&lsquo;<samp class="samp">--signal=<var class="var">signal</var></samp>&rsquo;</dt>
+<dd><p>Send this <var class="var">signal</var> to <var class="var">command</var> on timeout, rather than the
+default &lsquo;<samp class="samp">TERM</samp>&rsquo; signal.  <var class="var">signal</var> may be a name like &lsquo;<samp class="samp">HUP</samp>&rsquo;
+or a number.  See <a class="xref" href="Signal-specifications.html">Signal specifications</a>.
+</p>
+<a class="anchor" id="timeout-v"></a></dd>
+<dt><a id="index-_002d_002dverbose-16"></a><span>&lsquo;<samp class="samp">-v</samp>&rsquo;<a class="copiable-link" href="#index-_002d_002dverbose-16"> &para;</a></span></dt>
+<dd><a class="index-entry-id" id="index-_002dv-24"></a>
+<a class="anchor" id="timeout--verbose"></a></dd>
+<dt>&lsquo;<samp class="samp">--verbose</samp>&rsquo;</dt>
+<dd><p>Diagnose to standard error, any signal sent upon timeout.
+</p></dd>
+</dl>
+
+<a class="index-entry-id" id="index-time-units"></a>
+<p><var class="var">duration</var> is a floating point number in either the current or the
+C locale (see <a class="pxref" href="Floating-point.html">Floating point numbers</a>) followed by an optional unit:
+</p><div class="display">
+<pre class="display-preformatted">&lsquo;<samp class="samp">s</samp>&rsquo; for seconds (the default)
+&lsquo;<samp class="samp">m</samp>&rsquo; for minutes
+&lsquo;<samp class="samp">h</samp>&rsquo; for hours
+&lsquo;<samp class="samp">d</samp>&rsquo; for days
+</pre></div>
+<p>A hexadecimal number can precede a &lsquo;<samp class="samp">d</samp>&rsquo; suffix only if the number
+has a &lsquo;<samp class="samp">p</samp>&rsquo; style exponent, e.g., &lsquo;<samp class="samp">0x1p0d</samp>&rsquo; means one day.
+A duration of 0 disables the associated timeout.
+The actual timeout duration is dependent on system conditions,
+which should be especially considered when specifying sub-second timeouts.
+</p>
+<a class="index-entry-id" id="index-exit-status-of-timeout"></a>
+<p>Exit status:
+</p>
+<div class="display">
+<pre class="display-preformatted">124 if <var class="var">command</var> times out, and <samp class="option">--preserve-status</samp> is not specified
+125 if <code class="command">timeout</code> itself fails
+126 if <var class="var">command</var> is found but cannot be invoked
+127 if <var class="var">command</var> cannot be found
+137 if <var class="var">command</var> or <code class="command">timeout</code> is sent the KILL(9) signal (128+9)
+the exit status of <var class="var">command</var> otherwise
+</pre></div>
+
+<p>In the case of the &lsquo;<samp class="samp">KILL(9)</samp>&rsquo; signal, <code class="command">timeout</code> returns with
+exit status 137, regardless of whether that signal is sent to <var class="var">command</var>
+or to <code class="command">timeout</code> itself, i.e., these cases cannot be distinguished.
+In the latter case, the <var class="var">command</var> process may still be alive after
+<code class="command">timeout</code> has forcefully been terminated.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted"># Send the default TERM signal after 20s to a short-living 'sleep 1'.
+# As that terminates long before the given duration, 'timeout' returns
+# with the same exit status as the command, 0 in this case.
+timeout 20 sleep 1
+
+# Send the INT signal after 5s to the 'sleep' command.  Returns after
+# 5 seconds with exit status 124 to indicate the sending of the signal.
+timeout -s INT 5 sleep 20
+
+# Likewise, but the command ignoring the INT signal due to being started
+# via 'env --ignore-signal'.  Thus, 'sleep' terminates regularly after
+# the full 20 seconds, still 'timeout' returns with exit status 124.
+timeout -s INT 5s env --ignore-signal=INT sleep 20
+
+# Likewise, but sending the KILL signal 3 seconds after the initial
+# INT signal.  Hence, 'sleep' is forcefully terminated after about
+# 8 seconds (5+3), and 'timeout' returns with an exit status of 137.
+timeout -s INT -k 3s 5s env --ignore-signal=INT sleep 20
+</pre></div>
+
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Previous: <a href="stdbuf-invocation.html"><code class="command">stdbuf</code>: Run a command with modified I/O stream buffering</a>, Up: <a href="Modified-command-invocation.html">Modified command invocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

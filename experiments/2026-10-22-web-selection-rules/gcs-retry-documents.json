@@ -1,0 +1,1509 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "list",
+          "start_line": 1,
+          "text": "- Home\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "list",
+          "start_line": 3,
+          "text": "- Documentation\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "list",
+          "start_line": 5,
+          "text": "- Storage\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "list",
+          "start_line": 7,
+          "text": "- Cloud Storage\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "list",
+          "start_line": 9,
+          "text": "- Guides\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "paragraph",
+          "start_line": 11,
+          "text": "Send feedback\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "heading",
+          "start_line": 13,
+          "text": "# Retry strategy Stay organized with collections Save and categorize content based on your preferences.\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "paragraph",
+          "parent_id": "line-13",
+          "start_line": 15,
+          "text": "This page describes how Cloud Storage tools retry failed requests and how to customize the behavior of retries. It also describes considerations for retrying requests.\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "heading",
+          "parent_id": "line-13",
+          "start_line": 17,
+          "text": "## Overview\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "paragraph",
+          "parent_id": "line-17",
+          "start_line": 19,
+          "text": "There are two factors that determine whether or not a request is safe to retry:\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "parent_id": "line-17",
+          "start_line": 21,
+          "text": "- The response that you receive from the request.\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "parent_id": "line-17",
+          "start_line": 23,
+          "text": "- The idempotency of the request.\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "heading",
+          "parent_id": "line-17",
+          "start_line": 25,
+          "text": "### Response\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "paragraph",
+          "parent_id": "line-25",
+          "start_line": 27,
+          "text": "The response that you receive from your request indicates whether or not it's useful to retry the request. Responses related to transient problems are generally retryable. On the other hand, response related to permanent errors indicate you need to make changes, such as authorization or configuration changes, before it's useful to try the request again. The following responses indicate transient problems that are useful to retry:\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "list",
+          "parent_id": "line-25",
+          "start_line": 29,
+          "text": "- HTTP 408, 429, and 5xx response codes.\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "list",
+          "parent_id": "line-25",
+          "start_line": 31,
+          "text": "- Socket timeouts and TCP disconnects.\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "paragraph",
+          "parent_id": "line-25",
+          "start_line": 33,
+          "text": "For more information, see the status and error codes for JSON and XML.\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "heading",
+          "parent_id": "line-17",
+          "start_line": 35,
+          "text": "### Idempotency\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "paragraph",
+          "parent_id": "line-35",
+          "start_line": 37,
+          "text": "Requests that are idempotent can be executed repeatedly without changing the final state of the targeted resource, resulting in the same end state each time. For example, list operations are always idempotent, because such requests don't modify resources. On the other hand, creating a new Pub/Sub notification is never idempotent, because it creates a new notification ID each time the request succeeds.\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-35",
+          "start_line": 39,
+          "text": "The following are examples of conditions that make an operation idempotent:\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "list",
+          "parent_id": "line-35",
+          "start_line": 41,
+          "text": "- The operation has the same observable effect on the targeted resource even when continually requested.\n"
+        },
+        {
+          "end_line": 43,
+          "id": "line-43",
+          "kind": "list",
+          "parent_id": "line-35",
+          "start_line": 43,
+          "text": "- The operation only succeeds once.\n"
+        },
+        {
+          "end_line": 45,
+          "id": "line-45",
+          "kind": "list",
+          "parent_id": "line-35",
+          "start_line": 45,
+          "text": "- The operation has no observable effect on the state of the targeted resource.\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-47",
+          "kind": "paragraph",
+          "parent_id": "line-35",
+          "start_line": 47,
+          "text": "When you receive a retryable response, you should consider the idempotency of the request, because retrying requests that are not idempotent can lead to race conditions and other conflicts.\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "heading",
+          "parent_id": "line-35",
+          "start_line": 49,
+          "text": "#### Conditional idempotency\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "paragraph",
+          "parent_id": "line-49",
+          "start_line": 51,
+          "text": "A subset of requests are conditionally idempotent, which means they are only idempotent if they include specific optional arguments. Operations that are conditionally safe to retry should only be retried by default if the condition case passes. Cloud Storage accepts preconditions and ETags as condition cases for requests.\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "heading",
+          "parent_id": "line-13",
+          "start_line": 53,
+          "text": "## Idempotency of operations\n"
+        },
+        {
+          "end_line": 55,
+          "id": "line-55",
+          "kind": "paragraph",
+          "parent_id": "line-53",
+          "start_line": 55,
+          "text": "The following table lists the Cloud Storage operations that fall into each category of idempotency.\n"
+        },
+        {
+          "end_line": 60,
+          "id": "line-57",
+          "kind": "table",
+          "parent_id": "line-53",
+          "start_line": 57,
+          "text": "| Idempotency | Operations |\n| Always idempotent | All get and list requests Insert or delete buckets Test bucket IAM policies and permissions Lock retention policies Delete an HMAC key or Pub/Sub notification |\n| Conditionally idempotent | Update/patch requests for buckets with IfMetagenerationMatch1 or etag1 as HTTP precondition Update/patch requests for objects with IfMetagenerationMatch1 or etag1 as HTTP precondition Set a bucket IAM policy with etag1 as HTTP precondition or in resource body Update an HMAC key with etag1 as HTTP precondition or in resource body Insert, copy, compose, or rewrite objects with ifGenerationMatch1 Delete an object with ifGenerationMatch1 (or with a generation number for object versions) |\n| Never idempotent | Create an HMAC key Create a Pub/Sub notification Create, delete, or send patch/update requests for bucket and object ACLs or default object ACLs |\n"
+        },
+        {
+          "end_line": 62,
+          "id": "line-62",
+          "kind": "paragraph",
+          "parent_id": "line-53",
+          "start_line": 62,
+          "text": "1This field is available for use in the JSON API. For fields available for use in the client libraries, see the relevant client library documentation.\n"
+        },
+        {
+          "end_line": 64,
+          "id": "line-64",
+          "kind": "heading",
+          "parent_id": "line-13",
+          "start_line": 64,
+          "text": "## How Cloud Storage tools implement retry strategies\n"
+        },
+        {
+          "end_line": 66,
+          "id": "line-66",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 66,
+          "text": "### Console\n"
+        },
+        {
+          "end_line": 68,
+          "id": "line-68",
+          "kind": "paragraph",
+          "parent_id": "line-66",
+          "start_line": 68,
+          "text": "The Google Cloud console sends requests to Cloud Storage on your behalf and handles any necessary backoff.\n"
+        },
+        {
+          "end_line": 70,
+          "id": "line-70",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 70,
+          "text": "### Command line\n"
+        },
+        {
+          "end_line": 72,
+          "id": "line-72",
+          "kind": "paragraph",
+          "parent_id": "line-70",
+          "start_line": 72,
+          "text": "gcloud storage commands retry the errors listed in the Response section without requiring you to take additional action. You might have to take action for other errors, such as the following:\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-74",
+          "kind": "list",
+          "parent_id": "line-70",
+          "start_line": 74,
+          "text": "- Invalid credentials or insufficient permissions.\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "list",
+          "parent_id": "line-70",
+          "start_line": 76,
+          "text": "- Network unreachable because of a proxy configuration problem.\n"
+        },
+        {
+          "end_line": 78,
+          "id": "line-78",
+          "kind": "paragraph",
+          "parent_id": "line-70",
+          "start_line": 78,
+          "text": "For retryable errors, the gcloud CLI retries requests using a truncated binary exponential backoff strategy. The default number of maximum retries is 32 for the gcloud CLI.\n"
+        },
+        {
+          "end_line": 80,
+          "id": "line-80",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 80,
+          "text": "### Client libraries\n"
+        },
+        {
+          "end_line": 82,
+          "id": "line-82",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 82,
+          "text": "### C++\n"
+        },
+        {
+          "end_line": 84,
+          "id": "line-84",
+          "kind": "paragraph",
+          "parent_id": "line-82",
+          "start_line": 84,
+          "text": "By default, operations support retries for the following HTTP error codes, as well as any socket errors that indicate the connection was lost or never successfully established.\n"
+        },
+        {
+          "end_line": 86,
+          "id": "line-86",
+          "kind": "list",
+          "parent_id": "line-82",
+          "start_line": 86,
+          "text": "- 408 Request Timeout\n"
+        },
+        {
+          "end_line": 88,
+          "id": "line-88",
+          "kind": "list",
+          "parent_id": "line-82",
+          "start_line": 88,
+          "text": "- 429 Too Many Requests\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-90",
+          "kind": "list",
+          "parent_id": "line-82",
+          "start_line": 90,
+          "text": "- 500 Internal Server Error\n"
+        },
+        {
+          "end_line": 92,
+          "id": "line-92",
+          "kind": "list",
+          "parent_id": "line-82",
+          "start_line": 92,
+          "text": "- 502 Bad Gateway\n"
+        },
+        {
+          "end_line": 94,
+          "id": "line-94",
+          "kind": "list",
+          "parent_id": "line-82",
+          "start_line": 94,
+          "text": "- 503 Service Unavailable\n"
+        },
+        {
+          "end_line": 96,
+          "id": "line-96",
+          "kind": "list",
+          "parent_id": "line-82",
+          "start_line": 96,
+          "text": "- 504 Gateway Timeout\n"
+        },
+        {
+          "end_line": 98,
+          "id": "line-98",
+          "kind": "paragraph",
+          "parent_id": "line-82",
+          "start_line": 98,
+          "text": "All exponential backoff and retry settings in the C++ library are configurable. If the algorithms implemented in the library don't support your needs, you can provide custom code to implement your own strategies.\n"
+        },
+        {
+          "end_line": 105,
+          "id": "line-100",
+          "kind": "table",
+          "parent_id": "line-82",
+          "start_line": 100,
+          "text": "| Setting | Default value |\n| Auto retry | True |\n| Maximum time retrying a request | 15 minutes |\n| Initial wait (backoff) time | 1 second |\n| Wait time multiplier per iteration | 2 |\n| Maximum amount of wait time | 5 minutes |\n"
+        },
+        {
+          "end_line": 107,
+          "id": "line-107",
+          "kind": "paragraph",
+          "parent_id": "line-82",
+          "start_line": 107,
+          "text": "By default, the C++ library retries all operations with retryable errors, even those that are never idempotent and can delete or create multiple resources when repeatedly successful. To only retry idempotent operations, use the google::cloud::storage::StrictIdempotencyPolicy class.\n"
+        },
+        {
+          "end_line": 109,
+          "id": "line-109",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 109,
+          "text": "### C#\n"
+        },
+        {
+          "end_line": 111,
+          "id": "line-111",
+          "kind": "paragraph",
+          "parent_id": "line-109",
+          "start_line": 111,
+          "text": "The C# client library uses exponential backoff by default.\n"
+        },
+        {
+          "end_line": 113,
+          "id": "line-113",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 113,
+          "text": "### Go\n"
+        },
+        {
+          "end_line": 115,
+          "id": "line-115",
+          "kind": "paragraph",
+          "parent_id": "line-113",
+          "start_line": 115,
+          "text": "By default, operations support retries for the following errors:\n"
+        },
+        {
+          "end_line": 117,
+          "id": "line-117",
+          "kind": "list",
+          "parent_id": "line-113",
+          "start_line": 117,
+          "text": "- Connection errors: io.ErrUnexpectedEOF: This may occur due to transient network issues. url.Error containing connection refused: This may occur due to transient network issues. url.Error containing connection reset by peer: This means that Google Cloud has reset the connection. net.ErrClosed: This means that Google Cloud has closed the connection.\n"
+        },
+        {
+          "end_line": 119,
+          "id": "line-119",
+          "kind": "list",
+          "parent_id": "line-113",
+          "start_line": 119,
+          "text": "- HTTP codes: 408 Request Timeout 429 Too Many Requests 500 Internal Server Error 502 Bad Gateway 503 Service Unavailable 504 Gateway Timeout\n"
+        },
+        {
+          "end_line": 121,
+          "id": "line-121",
+          "kind": "list",
+          "parent_id": "line-113",
+          "start_line": 121,
+          "text": "- Errors that implement the Temporary() interface and give a value of err.Temporary() == true\n"
+        },
+        {
+          "end_line": 123,
+          "id": "line-123",
+          "kind": "list",
+          "parent_id": "line-113",
+          "start_line": 123,
+          "text": "- Any of the above errors that have been wrapped using Go 1.13 error wrapping\n"
+        },
+        {
+          "end_line": 125,
+          "id": "line-125",
+          "kind": "paragraph",
+          "parent_id": "line-113",
+          "start_line": 125,
+          "text": "All exponential backoff settings in the Go library are configurable. By default, operations in Go use the following settings for exponential backoff (defaults are taken from gax):\n"
+        },
+        {
+          "end_line": 134,
+          "id": "line-127",
+          "kind": "table",
+          "parent_id": "line-113",
+          "start_line": 127,
+          "text": "| Setting | Default value (in seconds) |\n| Auto retry | True if idempotent |\n| Max number of attempts | No limit |\n| Initial retry delay | 1 second |\n| Retry delay multiplier | 2.0 |\n| Maximum retry delay | 30 seconds |\n| Total timeout (resumable upload chunk) | 32 seconds |\n| Total timeout (all other operations) | No limit |\n"
+        },
+        {
+          "end_line": 136,
+          "id": "line-136",
+          "kind": "paragraph",
+          "parent_id": "line-113",
+          "start_line": 136,
+          "text": "In general, retrying continues indefinitely unless the controlling context is canceled, the client is closed, or a non-transient error is received. To stop retries from continuing, use context timeouts or cancellation. The only exception to this behavior is when performing resumable uploads using Writer, where the data is large enough that it requires multiple requests. In this scenario, each chunk times out and stops retrying after 32 seconds by default. You can adjust the default timeout by changing Writer.ChunkRetryDeadline.\n"
+        },
+        {
+          "end_line": 138,
+          "id": "line-138",
+          "kind": "paragraph",
+          "parent_id": "line-113",
+          "start_line": 138,
+          "text": "There is a subset of Go operations that are conditionally idempotent (conditionally safe to retry). These operations only retry if they meet specific conditions:\n"
+        },
+        {
+          "end_line": 140,
+          "id": "line-140",
+          "kind": "list",
+          "parent_id": "line-113",
+          "start_line": 140,
+          "text": "- GenerationMatch or Generation Safe to retry if a GenerationMatch precondition was applied to the call, or if ObjectHandle.Generation was set.\n"
+        },
+        {
+          "end_line": 142,
+          "id": "line-142",
+          "kind": "list",
+          "parent_id": "line-113",
+          "start_line": 142,
+          "text": "- MetagenerationMatch Safe to retry if a MetagenerationMatch precondition was applied to the call.\n"
+        },
+        {
+          "end_line": 144,
+          "id": "line-144",
+          "kind": "list",
+          "parent_id": "line-113",
+          "start_line": 144,
+          "text": "- Etag Safe to retry if the method inserts an etag into the JSON request body. Only used in HMACKeyHandle.Update when HmacKeyMetadata.Etag has been set.\n"
+        },
+        {
+          "end_line": 146,
+          "id": "line-146",
+          "kind": "paragraph",
+          "parent_id": "line-113",
+          "start_line": 146,
+          "text": "RetryPolicy is set to RetryPolicy.RetryIdempotent by default. See Customize retries for examples on how to modify the default retry behavior.\n"
+        },
+        {
+          "end_line": 148,
+          "id": "line-148",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 148,
+          "text": "### Java\n"
+        },
+        {
+          "end_line": 150,
+          "id": "line-150",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 150,
+          "text": "By default, operations support retries for the following errors:\n"
+        },
+        {
+          "end_line": 152,
+          "id": "line-152",
+          "kind": "list",
+          "parent_id": "line-148",
+          "start_line": 152,
+          "text": "- Connection errors: Connection reset by peer: This means that Google Cloud has reset the connection. Unexpected connection closure: This means Google Cloud has closed the connection.\n"
+        },
+        {
+          "end_line": 154,
+          "id": "line-154",
+          "kind": "list",
+          "parent_id": "line-148",
+          "start_line": 154,
+          "text": "- HTTP codes: 408 Request Timeout 429 Too Many Requests 500 Internal Server Error 502 Bad Gateway 503 Service Unavailable 504 Gateway Timeout\n"
+        },
+        {
+          "end_line": 156,
+          "id": "line-156",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 156,
+          "text": "All exponential backoff settings in the Java library are configurable. By default, operations through Java use the following settings for exponential backoff:\n"
+        },
+        {
+          "end_line": 169,
+          "id": "line-158",
+          "kind": "table",
+          "parent_id": "line-148",
+          "start_line": 158,
+          "text": "| Setting | Default value (in seconds) |\n| Auto retry | True if idempotent |\n| Max number of attempts | 6 |\n| Initial retry delay | 1 second |\n| Retry delay multiplier | 2.0 |\n| Maximum retry delay | 32 seconds |\n| Total Timeout | 50 seconds |\n| Initial RPC Timeout | 50 seconds |\n| RPC Timeout Multiplier | 1.0 |\n| Max RPC Timeout | 50 seconds |\n| Connect Timeout | 20 seconds |\n| Read Timeout | 20 seconds |\n"
+        },
+        {
+          "end_line": 171,
+          "id": "line-171",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 171,
+          "text": "For more information about the settings, see the Java reference documentation for RetrySettings.Builder and HttpTransportOptions.Builder.\n"
+        },
+        {
+          "end_line": 173,
+          "id": "line-173",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 173,
+          "text": "There is a subset of Java operations that are conditionally idempotent (conditionally safe to retry). These operations only retry if they include specific arguments:\n"
+        },
+        {
+          "end_line": 175,
+          "id": "line-175",
+          "kind": "list",
+          "parent_id": "line-148",
+          "start_line": 175,
+          "text": "- ifGenerationMatch or generation Safe to retry if ifGenerationMatch or generation was passed in as an option to the method.\n"
+        },
+        {
+          "end_line": 177,
+          "id": "line-177",
+          "kind": "list",
+          "parent_id": "line-148",
+          "start_line": 177,
+          "text": "- ifMetagenerationMatch Safe to retry if ifMetagenerationMatch was passed in as an option.\n"
+        },
+        {
+          "end_line": 179,
+          "id": "line-179",
+          "kind": "paragraph",
+          "parent_id": "line-148",
+          "start_line": 179,
+          "text": "StorageOptions.setStorageRetryStrategy is set to StorageRetryStrategy#getDefaultStorageRetryStrategy by default. See Customize retries for examples on how to modify the default retry behavior.\n"
+        },
+        {
+          "end_line": 181,
+          "id": "line-181",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 181,
+          "text": "### Node.js\n"
+        },
+        {
+          "end_line": 183,
+          "id": "line-183",
+          "kind": "paragraph",
+          "parent_id": "line-181",
+          "start_line": 183,
+          "text": "By default, operations support retries for the following error codes:\n"
+        },
+        {
+          "end_line": 185,
+          "id": "line-185",
+          "kind": "list",
+          "parent_id": "line-181",
+          "start_line": 185,
+          "text": "- Connection errors: EAI_again: This is a DNS lookup error. For more information, see the getaddrinfo documentation. Connection reset by peer: This means that Google Cloud has reset the connection. Unexpected connection closure: This means Google Cloud has closed the connection.\n"
+        },
+        {
+          "end_line": 187,
+          "id": "line-187",
+          "kind": "list",
+          "parent_id": "line-181",
+          "start_line": 187,
+          "text": "- HTTP codes: 408 Request Timeout 429 Too Many Requests 500 Internal Server Error 502 Bad Gateway 503 Service Unavailable 504 Gateway Timeout\n"
+        },
+        {
+          "end_line": 189,
+          "id": "line-189",
+          "kind": "paragraph",
+          "parent_id": "line-181",
+          "start_line": 189,
+          "text": "All exponential backoff settings in the Node.js library are configurable. By default, operations through Node.js use the following settings for exponential backoff:\n"
+        },
+        {
+          "end_line": 197,
+          "id": "line-191",
+          "kind": "table",
+          "parent_id": "line-181",
+          "start_line": 191,
+          "text": "| Setting | Default value (in seconds) |\n| Auto retry | True if idempotent |\n| Maximum number of retries | 3 |\n| Initial wait time | 1 second |\n| Wait time multiplier per iteration | 2 |\n| Maximum amount of wait time | 64 seconds |\n| Default deadline | 600 seconds |\n"
+        },
+        {
+          "end_line": 199,
+          "id": "line-199",
+          "kind": "paragraph",
+          "parent_id": "line-181",
+          "start_line": 199,
+          "text": "There is a subset of Node.js operations that are conditionally idempotent (conditionally safe to retry). These operations only retry if they include specific arguments:\n"
+        },
+        {
+          "end_line": 201,
+          "id": "line-201",
+          "kind": "list",
+          "parent_id": "line-181",
+          "start_line": 201,
+          "text": "- ifGenerationMatch or generation Safe to retry if ifGenerationMatch or generation was passed in as an option to the method. Often, methods only accept one of these two parameters.\n"
+        },
+        {
+          "end_line": 203,
+          "id": "line-203",
+          "kind": "list",
+          "parent_id": "line-181",
+          "start_line": 203,
+          "text": "- ifMetagenerationMatch Safe to retry if ifMetagenerationMatch was passed in as an option.\n"
+        },
+        {
+          "end_line": 205,
+          "id": "line-205",
+          "kind": "paragraph",
+          "parent_id": "line-181",
+          "start_line": 205,
+          "text": "retryOptions.idempotencyStrategy is set to IdempotencyStrategy.RetryConditional by default. See Customize retries for examples on how to modify the default retry behavior.\n"
+        },
+        {
+          "end_line": 207,
+          "id": "line-207",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 207,
+          "text": "### PHP\n"
+        },
+        {
+          "end_line": 209,
+          "id": "line-209",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 209,
+          "text": "The PHP client library uses exponential backoff by default.\n"
+        },
+        {
+          "end_line": 211,
+          "id": "line-211",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 211,
+          "text": "By default, operations support retries for the following error codes:\n"
+        },
+        {
+          "end_line": 213,
+          "id": "line-213",
+          "kind": "list",
+          "parent_id": "line-207",
+          "start_line": 213,
+          "text": "- Connection errors: connetion-refused: This may occur due to transient network issues. connection-reset: This means that Google Cloud has reset the connection.\n"
+        },
+        {
+          "end_line": 215,
+          "id": "line-215",
+          "kind": "list",
+          "parent_id": "line-207",
+          "start_line": 215,
+          "text": "- HTTP codes: 200: for partial download cases 408 Request Timeout 429 Too Many Requests 500 Internal Server Error 502 Bad Gateway 503 Service Unavailable 504 Gateway Timeout\n"
+        },
+        {
+          "end_line": 217,
+          "id": "line-217",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 217,
+          "text": "Some exponential backoff settings in the PHP library are configurable. By default, operations through PHP use the following settings for exponential backoff:\n"
+        },
+        {
+          "end_line": 225,
+          "id": "line-219",
+          "kind": "table",
+          "parent_id": "line-207",
+          "start_line": 219,
+          "text": "| Setting | Default value (in seconds) |\n| Auto retry | True if idempotent |\n| Initial retry delay | 1 second |\n| Retry delay multiplier | 2.0 |\n| Maximum retry delay | 60 seconds |\n| Request timeout | 0 with REST, 60 with gRPC |\n| Default number of retries | 3 |\n"
+        },
+        {
+          "end_line": 227,
+          "id": "line-227",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 227,
+          "text": "There is a subset of PHP operations that are conditionally idempotent (conditionally safe to retry). These operations only retry if they include specific arguments:\n"
+        },
+        {
+          "end_line": 229,
+          "id": "line-229",
+          "kind": "list",
+          "parent_id": "line-207",
+          "start_line": 229,
+          "text": "- ifGenerationMatch or generation Safe to retry if ifGenerationMatch or generation was passed in as an option to the method. Often, methods only accept one of these two parameters.\n"
+        },
+        {
+          "end_line": 231,
+          "id": "line-231",
+          "kind": "list",
+          "parent_id": "line-207",
+          "start_line": 231,
+          "text": "- ifMetagenerationMatch Safe to retry if ifMetagenerationMatch was passed in as an option.\n"
+        },
+        {
+          "end_line": 233,
+          "id": "line-233",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 233,
+          "text": "When creating StorageClient the StorageClient::RETRY_IDEMPOTENT strategy is used by default. See Customize retries for examples on how to modify the default retry behavior.\n"
+        },
+        {
+          "end_line": 235,
+          "id": "line-235",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 235,
+          "text": "### Python\n"
+        },
+        {
+          "end_line": 237,
+          "id": "line-237",
+          "kind": "paragraph",
+          "parent_id": "line-235",
+          "start_line": 237,
+          "text": "By default, operations support retries for the following error codes:\n"
+        },
+        {
+          "end_line": 239,
+          "id": "line-239",
+          "kind": "list",
+          "parent_id": "line-235",
+          "start_line": 239,
+          "text": "- Connection errors: requests.exceptions.ConnectionError requests.exceptions.ChunkedEncodingError (only for operations that fetch or send payload data to objects, like uploads and downloads) ConnectionError http.client.ResponseNotReady urllib3.exceptions.TimeoutError\n"
+        },
+        {
+          "end_line": 241,
+          "id": "line-241",
+          "kind": "list",
+          "parent_id": "line-235",
+          "start_line": 241,
+          "text": "- HTTP codes: 408 Request Timeout 429 Too Many Requests 500 Internal Server Error 502 Bad Gateway 503 Service Unavailable 504 Gateway Timeout\n"
+        },
+        {
+          "end_line": 243,
+          "id": "line-243",
+          "kind": "paragraph",
+          "parent_id": "line-235",
+          "start_line": 243,
+          "text": "Operations through Python use the following default settings for exponential backoff:\n"
+        },
+        {
+          "end_line": 250,
+          "id": "line-245",
+          "kind": "table",
+          "parent_id": "line-235",
+          "start_line": 245,
+          "text": "| Setting | Default value (in seconds) |\n| Auto retry | True if idempotent |\n| Initial wait time | 1 |\n| Wait time multiplier per iteration | 2 |\n| Maximum amount of wait time | 60 |\n| Default deadline | 120 |\n"
+        },
+        {
+          "end_line": 252,
+          "id": "line-252",
+          "kind": "paragraph",
+          "parent_id": "line-235",
+          "start_line": 252,
+          "text": "In addition to Cloud Storage operations that are always idempotent, the Python client library automatically retries Objects: insert, Objects: delete, and Objects: patch by default.\n"
+        },
+        {
+          "end_line": 254,
+          "id": "line-254",
+          "kind": "paragraph",
+          "parent_id": "line-235",
+          "start_line": 254,
+          "text": "There is a subset of Python operations that are conditionally idempotent (conditionally safe to retry) when they include specific arguments. These operations only retry if a condition case passes:\n"
+        },
+        {
+          "end_line": 256,
+          "id": "line-256",
+          "kind": "list",
+          "parent_id": "line-235",
+          "start_line": 256,
+          "text": "- DEFAULT_RETRY_IF_GENERATION_SPECIFIED Safe to retry if generation or if_generation_match was passed in as an argument to the method. Often methods only accept one of these two parameters.\n"
+        },
+        {
+          "end_line": 258,
+          "id": "line-258",
+          "kind": "list",
+          "parent_id": "line-235",
+          "start_line": 258,
+          "text": "- DEFAULT_RETRY_IF_METAGENERATION_SPECIFIED Safe to retry if if_metageneration_match was passed in as an argument to the method.\n"
+        },
+        {
+          "end_line": 260,
+          "id": "line-260",
+          "kind": "list",
+          "parent_id": "line-235",
+          "start_line": 260,
+          "text": "- DEFAULT_RETRY_IF_ETAG_IN_JSON Safe to retry if the method inserts an etag into the JSON request body. For HMACKeyMetadata.update() this means etag must be set on the HMACKeyMetadata object itself. For the set_iam_policy() method on other classes, this means the etag must be set in the \"policy\" argument passed into the method.\n"
+        },
+        {
+          "end_line": 262,
+          "id": "line-262",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 262,
+          "text": "### Ruby\n"
+        },
+        {
+          "end_line": 264,
+          "id": "line-264",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 264,
+          "text": "By default, operations support retries for the following error codes:\n"
+        },
+        {
+          "end_line": 266,
+          "id": "line-266",
+          "kind": "list",
+          "parent_id": "line-262",
+          "start_line": 266,
+          "text": "- Connection errors: SocketError HTTPClient::TimeoutError Errno::ECONNREFUSED HTTPClient::KeepAliveDisconnected\n"
+        },
+        {
+          "end_line": 268,
+          "id": "line-268",
+          "kind": "list",
+          "parent_id": "line-262",
+          "start_line": 268,
+          "text": "- HTTP codes: 408 Request Timeout 429 Too Many Requests 5xx Server Error\n"
+        },
+        {
+          "end_line": 270,
+          "id": "line-270",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 270,
+          "text": "All exponential backoff settings in the Ruby client library are configurable. By default, operations through the Ruby client library use the following settings for exponential backoff:\n"
+        },
+        {
+          "end_line": 278,
+          "id": "line-272",
+          "kind": "table",
+          "parent_id": "line-262",
+          "start_line": 272,
+          "text": "| Setting | Default value |\n| Auto retry | True |\n| Max number of retries | 3 |\n| Initial wait time | 1 second |\n| Wait time multiplier per iteration | 2 |\n| Maximum amount of wait time | 60 seconds |\n| Default deadline | 900 seconds |\n"
+        },
+        {
+          "end_line": 280,
+          "id": "line-280",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 280,
+          "text": "There is a subset of Ruby operations that are conditionally idempotent (conditionally safe to retry) when they include specific arguments:\n"
+        },
+        {
+          "end_line": 282,
+          "id": "line-282",
+          "kind": "list",
+          "parent_id": "line-262",
+          "start_line": 282,
+          "text": "- if_generation_match or generation Safe to retry if the generation or if_generation_match parameter is passed in as an argument to the method. Often methods only accept one of these two parameters.\n"
+        },
+        {
+          "end_line": 284,
+          "id": "line-284",
+          "kind": "list",
+          "parent_id": "line-262",
+          "start_line": 284,
+          "text": "- if_metageneration_match Safe to retry if the if_metageneration_match parameter is passed in as an option.\n"
+        },
+        {
+          "end_line": 286,
+          "id": "line-286",
+          "kind": "paragraph",
+          "parent_id": "line-262",
+          "start_line": 286,
+          "text": "By default, all idempotent operations are retried, and conditionally idempotent operations are retried only if the condition case passes. Non-idempotent operations are not retried. See Customize retries for examples on how to modify the default retry behavior.\n"
+        },
+        {
+          "end_line": 288,
+          "id": "line-288",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 288,
+          "text": "### REST APIs\n"
+        },
+        {
+          "end_line": 290,
+          "id": "line-290",
+          "kind": "paragraph",
+          "parent_id": "line-288",
+          "start_line": 290,
+          "text": "When calling the JSON or XML API directly, you should use the exponential backoff algorithm to implement your own retry strategy.\n"
+        },
+        {
+          "end_line": 292,
+          "id": "line-292",
+          "kind": "heading",
+          "parent_id": "line-13",
+          "start_line": 292,
+          "text": "## Customizing retries\n"
+        },
+        {
+          "end_line": 294,
+          "id": "line-294",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 294,
+          "text": "### Console\n"
+        },
+        {
+          "end_line": 296,
+          "id": "line-296",
+          "kind": "paragraph",
+          "parent_id": "line-294",
+          "start_line": 296,
+          "text": "You cannot customize the behavior of retries using the Google Cloud console.\n"
+        },
+        {
+          "end_line": 298,
+          "id": "line-298",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 298,
+          "text": "### Command line\n"
+        },
+        {
+          "end_line": 300,
+          "id": "line-300",
+          "kind": "paragraph",
+          "parent_id": "line-298",
+          "start_line": 300,
+          "text": "For gcloud storage commands, you can control the retry strategy by creating a named configuration and setting some or all of the following properties:\n"
+        },
+        {
+          "end_line": 306,
+          "id": "line-302",
+          "kind": "table",
+          "parent_id": "line-298",
+          "start_line": 302,
+          "text": "| Setting | Default value (in seconds) |\n| base_retry_delay | 1 |\n| exponential_sleep_multiplier | 2 |\n| max_retries | 32 |\n| max_retry_delay | 32 |\n"
+        },
+        {
+          "end_line": 308,
+          "id": "line-308",
+          "kind": "paragraph",
+          "parent_id": "line-298",
+          "start_line": 308,
+          "text": "You then apply the defined configuration either on a per-command basis by using the --configuration project-wide flag or for all Google Cloud CLI commands by using the gcloud config set command.\n"
+        },
+        {
+          "end_line": 310,
+          "id": "line-310",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 310,
+          "text": "### Client libraries\n"
+        },
+        {
+          "end_line": 312,
+          "id": "line-312",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 312,
+          "text": "### C++\n"
+        },
+        {
+          "end_line": 314,
+          "id": "line-314",
+          "kind": "paragraph",
+          "parent_id": "line-312",
+          "start_line": 314,
+          "text": "To customize the retry behavior, provide values for the following options when you initialize the google::cloud::storage::Client object:\n"
+        },
+        {
+          "end_line": 316,
+          "id": "line-316",
+          "kind": "list",
+          "parent_id": "line-312",
+          "start_line": 316,
+          "text": "- google::cloud::storage::RetryPolicyOption: The library provides google::cloud::storage::LimitedErrorCountRetryPolicy and google::cloud::storage::LimitedTimeRetryPolicy classes. You can provide your own class, which must implement the google::cloud::RetryPolicy interface.\n"
+        },
+        {
+          "end_line": 318,
+          "id": "line-318",
+          "kind": "list",
+          "parent_id": "line-312",
+          "start_line": 318,
+          "text": "- google::cloud::storage::BackoffPolicyOption: The library provides the google::cloud::storage::ExponentialBackoffPolicy class. You can provide your own class, which must implement the google::cloud::storage::BackoffPolicy interface.\n"
+        },
+        {
+          "end_line": 320,
+          "id": "line-320",
+          "kind": "list",
+          "parent_id": "line-312",
+          "start_line": 320,
+          "text": "- google::cloud::storage::IdempotencyPolicyOption: The library provides the google::cloud::storage::StrictIdempotencyPolicy and google::cloud::storage::AlwaysRetryIdempotencyPolicy classes. You can provide your own class, which must implement the google::cloud::storage::IdempotencyPolicy interface.\n"
+        },
+        {
+          "end_line": 322,
+          "id": "line-322",
+          "kind": "paragraph",
+          "parent_id": "line-312",
+          "start_line": 322,
+          "text": "For more information, see the C++ client library reference documentation.\n"
+        },
+        {
+          "end_line": 344,
+          "id": "line-324",
+          "kind": "code",
+          "parent_id": "line-312",
+          "start_line": 324,
+          "text": "```\nnamespace gcs = ::google::cloud::storage;\n// Create the client configuration:\nauto options = google::cloud::Options{};\n// Retries only idempotent operations.\noptions.set<gcs::IdempotencyPolicyOption>(\ngcs::StrictIdempotencyPolicy().clone());\n// On error, it backs off for a random delay between [1, 3] seconds, then [3,\n// 9] seconds, then [9, 27] seconds, etc. The backoff time never grows larger\n// than 1 minute.\noptions.set<gcs::BackoffPolicyOption>(\ngcs::ExponentialBackoffPolicy(\n/*initial_delay=*/std::chrono::seconds(1),\n/*maximum_delay=*/std::chrono::minutes(1),\n/*scaling=*/3.0)\n.clone());\n// Retries all operations for up to 5 minutes, including any backoff time.\noptions.set<gcs::RetryPolicyOption>(\ngcs::LimitedTimeRetryPolicy(std::chrono::minutes(5)).clone());\nreturn gcs::Client(std::move(options));\n```\n"
+        },
+        {
+          "end_line": 346,
+          "id": "line-346",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 346,
+          "text": "### C#\n"
+        },
+        {
+          "end_line": 348,
+          "id": "line-348",
+          "kind": "paragraph",
+          "parent_id": "line-346",
+          "start_line": 348,
+          "text": "You cannot customize the default retry strategy used by the C# client library.\n"
+        },
+        {
+          "end_line": 350,
+          "id": "line-350",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 350,
+          "text": "### Go\n"
+        },
+        {
+          "end_line": 352,
+          "id": "line-352",
+          "kind": "paragraph",
+          "parent_id": "line-350",
+          "start_line": 352,
+          "text": "When you initialize a storage client, a default retry configuration will be set. Unless they're overridden, the options in the config are set to the default values. Users can configure non-default retry behavior for a single library call (using BucketHandle.Retryer and ObjectHandle.Retryer) or for all calls made by a client (using Client.SetRetry). To modify retry behavior, pass in the relevant RetryOptions to one of these methods.\n"
+        },
+        {
+          "end_line": 354,
+          "id": "line-354",
+          "kind": "paragraph",
+          "parent_id": "line-350",
+          "start_line": 354,
+          "text": "See the following code sample to learn how to customize your retry behavior.\n"
+        },
+        {
+          "end_line": 409,
+          "id": "line-356",
+          "kind": "code",
+          "parent_id": "line-350",
+          "start_line": 356,
+          "text": "```\nimport (\n\"context\"\n\"fmt\"\n\"io\"\n\"time\"\n\n\"cloud.google.com/go/storage\"\n\"github.com/googleapis/gax-go/v2\"\n)\n\n// configureRetries configures a custom retry strategy for a single API call.\nfunc configureRetries(w io.Writer, bucket, object string) error {\n// bucket := \"bucket-name\"\n// object := \"object-name\"\nctx := context.Background()\nclient, err := storage.NewClient(ctx)\nif err != nil {\nreturn fmt.Errorf(\"storage.NewClient: %w\", err)\n}\ndefer client.Close()\n\n// Configure retries for all operations using this ObjectHandle. Retries may\n// also be configured on the BucketHandle or Client types.\no := client.Bucket(bucket).Object(object).Retryer(\n// Use WithBackoff to control the timing of the exponential backoff.\nstorage.WithBackoff(gax.Backoff{\n// Set the initial retry delay to a maximum of 2 seconds. The length of\n// pauses between retries is subject to random jitter.\nInitial: 2 * time.Second,\n// Set the maximum retry delay to 60 seconds.\nMax: 60 * time.Second,\n// Set the backoff multiplier to 3.0.\nMultiplier: 3,\n}),\n// Use WithPolicy to customize retry so that all requests are retried even\n// if they are non-idempotent.\nstorage.WithPolicy(storage.RetryAlways),\n)\n\n// Use context timeouts to set an overall deadline on the call, including all\n// potential retries.\nctx, cancel := context.WithTimeout(ctx, 500*time.Second)\ndefer cancel()\n\n// Delete an object using the specified retry policy.\nif err := o.Delete(ctx); err != nil {\nreturn fmt.Errorf(\"Object(%q).Delete: %w\", object, err)\n}\nfmt.Fprintf(w, \"Blob %v deleted with a customized retry strategy.\\n\", object)\nreturn nil\n}\n\n```\n"
+        },
+        {
+          "end_line": 411,
+          "id": "line-411",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 411,
+          "text": "### Java\n"
+        },
+        {
+          "end_line": 413,
+          "id": "line-413",
+          "kind": "paragraph",
+          "parent_id": "line-411",
+          "start_line": 413,
+          "text": "When you initialize Storage, an instance of RetrySettings is initialized as well. Unless they are overridden, the options in the RetrySettings are set to the default values. To modify the default automatic retry behavior, pass the custom StorageRetryStrategy into the StorageOptions used to construct the Storage instance. To modify any of the other scalar parameters, pass a custom RetrySettings into the StorageOptions used to construct the Storage instance.\n"
+        },
+        {
+          "end_line": 415,
+          "id": "line-415",
+          "kind": "paragraph",
+          "parent_id": "line-411",
+          "start_line": 415,
+          "text": "See the following example to learn how to customize your retry behavior:\n"
+        },
+        {
+          "end_line": 464,
+          "id": "line-417",
+          "kind": "code",
+          "parent_id": "line-411",
+          "start_line": 417,
+          "text": "```\n\nimport com.google.api.gax.retrying.RetrySettings;\nimport com.google.cloud.storage.BlobId;\nimport com.google.cloud.storage.Storage;\nimport com.google.cloud.storage.StorageOptions;\nimport com.google.cloud.storage.StorageRetryStrategy;\nimport org.threeten.bp.Duration;\n\npublic final class ConfigureRetries {\npublic static void main(String[] args) {\nString bucketName = \"my-bucket\";\nString blobName = \"blob/to/delete\";\ndeleteBlob(bucketName, blobName);\n}\n\nstatic void deleteBlob(String bucketName, String blobName) {\n// Customize retry behavior\nRetrySettings retrySettings =\nStorageOptions.getDefaultRetrySettings().toBuilder()\n// Set the max number of attempts to 10 (initial attempt plus 9 retries)\n.setMaxAttempts(10)\n// Set the backoff multiplier to 3.0\n.setRetryDelayMultiplier(3.0)\n// Set the max duration of all attempts to 5 minutes\n.setTotalTimeout(Duration.ofMinutes(5))\n.build();\n\nStorageOptions alwaysRetryStorageOptions =\nStorageOptions.newBuilder()\n// Customize retry so all requests are retried even if they are non-idempotent.\n.setStorageRetryStrategy(StorageRetryStrategy.getUniformStorageRetryStrategy())\n// provide the previously configured retrySettings\n.setRetrySettings(retrySettings)\n.build();\n\n// Instantiate a client\nStorage storage = alwaysRetryStorageOptions.getService();\n\n// Delete the blob\nBlobId blobId = BlobId.of(bucketName, blobName);\nboolean success = storage.delete(blobId);\n\nSystem.out.printf(\n\"Deletion of Blob %s completed %s.%n\", blobId, success ? \"successfully\" : \"unsuccessfully\");\n}\n}\n```\n"
+        },
+        {
+          "end_line": 466,
+          "id": "line-466",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 466,
+          "text": "### Node.js\n"
+        },
+        {
+          "end_line": 468,
+          "id": "line-468",
+          "kind": "paragraph",
+          "parent_id": "line-466",
+          "start_line": 468,
+          "text": "When you initialize Cloud Storage, a retryOptions config file is initialized as well. Unless they're overridden, the options in the config are set to the default values. To modify the default retry behavior, pass the custom retry configuration retryOptions into the storage constructor upon initialization. The Node.js client library can automatically use backoff strategies to retry requests with the autoRetry parameter.\n"
+        },
+        {
+          "end_line": 470,
+          "id": "line-470",
+          "kind": "paragraph",
+          "parent_id": "line-466",
+          "start_line": 470,
+          "text": "See the following code sample to learn how to customize your retry behavior.\n"
+        },
+        {
+          "end_line": 530,
+          "id": "line-472",
+          "kind": "code",
+          "parent_id": "line-466",
+          "start_line": 472,
+          "text": "```\n/**\n* TODO(developer): Uncomment the following lines before running the sample.\n*/\n// The ID of your GCS bucket\n// const bucketName = 'your-unique-bucket-name';\n\n// The ID of your GCS file\n// const fileName = 'your-file-name';\n\n// Imports the Google Cloud client library\nconst {Storage} = require('@google-cloud/storage');\n\n// Creates a client\nconst storage = new Storage({\nretryOptions: {\n// If this is false, requests will not retry and the parameters\n// below will not affect retry behavior.\nautoRetry: true,\n// The multiplier by which to increase the delay time between the\n// completion of failed requests, and the initiation of the subsequent\n// retrying request.\nretryDelayMultiplier: 3,\n// The total time between an initial request getting sent and its timeout.\n// After timeout, an error will be returned regardless of any retry attempts\n// made during this time period.\ntotalTimeout: 500,\n// The maximum delay time between requests. When this value is reached,\n// retryDelayMultiplier will no longer be used to increase delay time.\nmaxRetryDelay: 60,\n// The maximum number of automatic retries attempted before returning\n// the error.\nmaxRetries: 5,\n// Will respect other retry settings and attempt to always retry\n// conditionally idempotent operations, regardless of precondition\nidempotencyStrategy: IdempotencyStrategy.RetryAlways,\n},\n});\nconsole.log(\n'Functions are customized to be retried according to the following parameters:'\n);\nconsole.log(`Auto Retry: ${storage.retryOptions.autoRetry}`);\nconsole.log(\n`Retry delay multiplier: ${storage.retryOptions.retryDelayMultiplier}`\n);\nconsole.log(`Total timeout: ${storage.retryOptions.totalTimeout}`);\nconsole.log(`Maximum retry delay: ${storage.retryOptions.maxRetryDelay}`);\nconsole.log(`Maximum retries: ${storage.retryOptions.maxRetries}`);\nconsole.log(\n`Idempotency strategy: ${storage.retryOptions.idempotencyStrategy}`\n);\n\nasync function deleteFileWithCustomizedRetrySetting() {\nawait storage.bucket(bucketName).file(fileName).delete();\nconsole.log(`File ${fileName} deleted with a customized retry strategy.`);\n}\n\ndeleteFileWithCustomizedRetrySetting();\n```\n"
+        },
+        {
+          "end_line": 532,
+          "id": "line-532",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 532,
+          "text": "### PHP\n"
+        },
+        {
+          "end_line": 534,
+          "id": "line-534",
+          "kind": "paragraph",
+          "parent_id": "line-532",
+          "start_line": 534,
+          "text": "When you initialize a storage client, a default retry configuration will be set. Unless they're overridden, the options in the config are set to the default values. Users can configure non-default retry behavior for a client or a single operation call by passing override options in an array.\n"
+        },
+        {
+          "end_line": 536,
+          "id": "line-536",
+          "kind": "paragraph",
+          "parent_id": "line-532",
+          "start_line": 536,
+          "text": "See the following code sample to learn how to customize your retry behavior.\n"
+        },
+        {
+          "end_line": 634,
+          "id": "line-538",
+          "kind": "code",
+          "parent_id": "line-532",
+          "start_line": 538,
+          "text": "```\nuse Google\\Cloud\\Storage\\StorageClient;\n\n/**\n* Configures retries with customizations.\n*\n* @param string $bucketName The name of your Cloud Storage bucket.\n* (e.g. 'my-bucket')\n*/\nfunction configure_retries(string $bucketName): void\n{\n$storage = new StorageClient([\n// The maximum number of automatic retries attempted before returning\n// the error.\n// Default: 3\n'retries' => 10,\n\n// Exponential backoff settings\n// Retry strategy to signify that we never want to retry an operation\n// even if the error is retryable.\n// Default: StorageClient::RETRY_IDEMPOTENT\n'retryStrategy' => StorageClient::RETRY_ALWAYS,\n\n// Executes a delay\n// Defaults to utilizing `usleep`.\n// Function signature should match: `function (int $delay) : void`.\n// This function is mostly used internally, so the tests don't wait\n// the time of the delay to run.\n'restDelayFunction' => function ($delay) {\nusleep($delay);\n},\n\n// Sets the conditions for determining how long to wait between attempts to retry.\n// Function signature should match: `function (int $attempt) : int`.\n// Allows to change the initial retry delay, retry delay multiplier and maximum retry delay.\n'restCalcDelayFunction' => fn ($attempt) => ($attempt + 1) * 100,\n\n// Sets the conditions for whether or not a request should attempt to retry.\n// Function signature should match: `function (\\Exception $ex) : bool`.\n'restRetryFunction' => function (\\Exception $e) {\n// Custom logic: ex. only retry if the error code is 404.\nreturn $e->getCode() === 404;\n},\n\n// Runs after the restRetryFunction. This might be used to simply consume the\n// exception and $arguments b/w retries. This returns the new $arguments thus allowing\n// modification on demand for $arguments. For ex: changing the headers in b/w retries.\n'restRetryListener' => function (\\Exception $e, $retryAttempt, &$arguments) {\n// logic\n},\n]);\n$bucket = $storage->bucket($bucketName);\n$operationRetriesOverrides = [\n// The maximum number of automatic retries attempted before returning\n// the error.\n// Default: 3\n'retries' => 10,\n\n// Exponential backoff settings\n// Retry strategy to signify that we never want to retry an operation\n// even if the error is retryable.\n// Default: StorageClient::RETRY_IDEMPOTENT\n'retryStrategy' => StorageClient::RETRY_ALWAYS,\n\n// Executes a delay\n// Defaults to utilizing `usleep`.\n// Function signature should match: `function (int $delay) : void`.\n// This function is mostly used internally, so the tests don't wait\n// the time of the delay to run.\n'restDelayFunction' => function ($delay) {\nusleep($delay);\n},\n\n// Sets the conditions for determining how long to wait between attempts to retry.\n// Function signature should match: `function (int $attempt) : int`.\n// Allows to change the initial retry delay, retry delay multiplier and maximum retry delay.\n'restCalcDelayFunction' => fn ($attempt) => ($attempt + 1) * 100,\n\n// Sets the conditions for whether or not a request should attempt to retry.\n// Function signature should match: `function (\\Exception $ex) : bool`.\n'restRetryFunction' => function (\\Exception $e) {\n// Custom logic: ex. only retry if the error code is 404.\nreturn $e->getCode() === 404;\n},\n\n// Runs after the restRetryFunction. This might be used to simply consume the\n// exception and $arguments b/w retries. This returns the new $arguments thus allowing\n// modification on demand for $arguments. For ex: changing the headers in b/w retries.\n'restRetryListener' => function (\\Exception $e, $retryAttempt, &$arguments) {\n// logic\n},\n];\nforeach ($bucket->objects($operationRetriesOverrides) as $object) {\nprintf('Object: %s' . PHP_EOL, $object->name());\n}\n}\n```\n"
+        },
+        {
+          "end_line": 636,
+          "id": "line-636",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 636,
+          "text": "### Python\n"
+        },
+        {
+          "end_line": 638,
+          "id": "line-638",
+          "kind": "paragraph",
+          "parent_id": "line-636",
+          "start_line": 638,
+          "text": "To modify the default retry behavior, create a copy of the google.cloud.storage.retry.DEFAULT_RETRY object by calling it with a with_BEHAVIOR method. The Python client library automatically uses backoff strategies to retry requests if you include the DEFAULT_RETRY parameter.\n"
+        },
+        {
+          "end_line": 640,
+          "id": "line-640",
+          "kind": "paragraph",
+          "parent_id": "line-636",
+          "start_line": 640,
+          "text": "Note that with_predicate is not supported for operations that fetch or send payload data to objects, like uploads and downloads. It's recommended that you modify attributes one by one. For more information, see the google-api-core Retry reference.\n"
+        },
+        {
+          "end_line": 642,
+          "id": "line-642",
+          "kind": "paragraph",
+          "parent_id": "line-636",
+          "start_line": 642,
+          "text": "To configure your own conditional retry, create a ConditionalRetryPolicy object and wrap your custom Retry object with DEFAULT_RETRY_IF_GENERATION_SPECIFIED, DEFAULT_RETRY_IF_METAGENERATION_SPECIFIED, or DEFAULT_RETRY_IF_ETAG_IN_JSON.\n"
+        },
+        {
+          "end_line": 644,
+          "id": "line-644",
+          "kind": "paragraph",
+          "parent_id": "line-636",
+          "start_line": 644,
+          "text": "See the following code sample to learn how to customize your retry behavior.\n"
+        },
+        {
+          "end_line": 677,
+          "id": "line-646",
+          "kind": "code",
+          "parent_id": "line-636",
+          "start_line": 646,
+          "text": "```\nfrom google.cloud import storage\nfrom google.cloud.storage.retry import DEFAULT_RETRY\n\ndef configure_retries(bucket_name, blob_name):\n\"\"\"Configures retries with customizations.\"\"\"\n# The ID of your GCS bucket\n# bucket_name = \"your-bucket-name\"\n# The ID of your GCS object\n# blob_name = \"your-object-name\"\n\nstorage_client = storage.Client()\nbucket = storage_client.bucket(bucket_name)\nblob = bucket.blob(blob_name)\n\n# Customize retry with a timeout of 500 seconds (default=120 seconds).\nmodified_retry = DEFAULT_RETRY.with_timeout(500.0)\n# Customize retry with an initial wait time of 1.5 (default=1.0).\n# Customize retry with a wait time multiplier per iteration of 1.2 (default=2.0).\n# Customize retry with a maximum wait time of 45.0 (default=60.0).\nmodified_retry = modified_retry.with_delay(initial=1.5, multiplier=1.2, maximum=45.0)\n\n# blob.delete() uses DEFAULT_RETRY by default.\n# Pass in modified_retry to override the default retry behavior.\nprint(\nf\"The following library method is customized to be retried according to the following configurations: {modified_retry}\"\n)\n\nblob.delete(retry=modified_retry)\nprint(f\"Blob {blob_name} deleted with a customized retry strategy.\")\n\n```\n"
+        },
+        {
+          "end_line": 679,
+          "id": "line-679",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 679,
+          "text": "### Ruby\n"
+        },
+        {
+          "end_line": 681,
+          "id": "line-681",
+          "kind": "paragraph",
+          "parent_id": "line-679",
+          "start_line": 681,
+          "text": "When you initialize the storage client, all retry configurations are set to the values shown in the table above. To modify the default retry behavior, pass retry configurations while initializing the storage client.\n"
+        },
+        {
+          "end_line": 683,
+          "id": "line-683",
+          "kind": "paragraph",
+          "parent_id": "line-679",
+          "start_line": 683,
+          "text": "To override the number of retries for a particular operation, pass retries in the options parameter of the operation.\n"
+        },
+        {
+          "end_line": 737,
+          "id": "line-685",
+          "kind": "code",
+          "parent_id": "line-679",
+          "start_line": 685,
+          "text": "```\ndef configure_retries bucket_name: nil, file_name: nil\n# The ID of your GCS bucket\n# bucket_name = \"your-unique-bucket-name\"\n\n# The ID of your GCS object\n# file_name = \"your-file-name\"\n\nrequire \"google/cloud/storage\"\n\n# Creates a client\nstorage = Google::Cloud::Storage.new(\n\n# The maximum number of automatic retries attempted before returning\n# the error.\n#\n# Customize retry configuration with the maximum retry attempt of 5.\nretries: 5,\n\n# The total time in seconds that requests are allowed to keep being retried.\n# After max_elapsed_time, an error will be returned regardless of any\n# retry attempts made during this time period.\n#\n# Customize retry configuration with maximum elapsed time of 500 seconds.\nmax_elapsed_time: 500,\n\n# The initial interval between the completion of failed requests, and the\n# initiation of the subsequent retrying request.\n#\n# Customize retry configuration with an initial interval of 1.5 seconds.\nbase_interval: 1.5,\n\n# The maximum interval between requests. When this value is reached,\n# multiplier will no longer be used to increase the interval.\n#\n# Customize retry configuration with maximum interval of 45.0 seconds.\nmax_interval: 45,\n\n# The multiplier by which to increase the interval between the completion\n# of failed requests, and the initiation of the subsequent retrying request.\n#\n# Customize retry configuration with an interval multiplier per iteration of 1.2.\nmultiplier: 1.2\n)\n\n# Uses the retry configuration set during the client initialization above with 5 retries\nfile = storage.service.get_file bucket_name, file_name\n\n# Maximum retry attempt can be overridden for each operation using options parameter.\nstorage.service.delete_file bucket_name, file_name, options: { retries: 4 }\nputs \"File #{file.name} deleted with a customized retry strategy.\"\nend\n```\n"
+        },
+        {
+          "end_line": 739,
+          "id": "line-739",
+          "kind": "heading",
+          "parent_id": "line-292",
+          "start_line": 739,
+          "text": "### REST APIs\n"
+        },
+        {
+          "end_line": 741,
+          "id": "line-741",
+          "kind": "paragraph",
+          "parent_id": "line-739",
+          "start_line": 741,
+          "text": "Use the exponential backoff algorithm to implement your own retry strategy.\n"
+        },
+        {
+          "end_line": 743,
+          "id": "line-743",
+          "kind": "heading",
+          "parent_id": "line-13",
+          "start_line": 743,
+          "text": "## Exponential backoff algorithm\n"
+        },
+        {
+          "end_line": 745,
+          "id": "line-745",
+          "kind": "paragraph",
+          "parent_id": "line-743",
+          "start_line": 745,
+          "text": "An exponential backoff algorithm retries requests using exponentially increasing waiting times between requests, up to a maximum backoff time. You should generally use exponential backoff with jitter to retry requests that meet both the response and idempotency criteria. For best practices implementing automatic retries with exponential backoff, see Addressing Cascading Failures.\n"
+        },
+        {
+          "end_line": 747,
+          "id": "line-747",
+          "kind": "heading",
+          "parent_id": "line-13",
+          "start_line": 747,
+          "text": "## Retry anti-patterns\n"
+        },
+        {
+          "end_line": 749,
+          "id": "line-749",
+          "kind": "paragraph",
+          "parent_id": "line-747",
+          "start_line": 749,
+          "text": "It is recommended to use or customize the built-in retry mechanisms where applicable; see customizing retries. Whether you are using the default retry mechanisms, customizing them, or implementing your own retry logic, it's crucial to avoid the following common anti-patterns as they can exacerbate issues rather than resolve them.\n"
+        },
+        {
+          "end_line": 751,
+          "id": "line-751",
+          "kind": "heading",
+          "parent_id": "line-747",
+          "start_line": 751,
+          "text": "#### Retrying without backoff\n"
+        },
+        {
+          "end_line": 753,
+          "id": "line-753",
+          "kind": "paragraph",
+          "parent_id": "line-751",
+          "start_line": 753,
+          "text": "Retrying requests immediately or with very short delays can lead to cascading failures which are failures that might trigger other failures.\n"
+        },
+        {
+          "end_line": 755,
+          "id": "line-755",
+          "kind": "paragraph",
+          "parent_id": "line-751",
+          "start_line": 755,
+          "text": "How to avoid this: Implement exponential backoff with jitter. This strategy progressively increases the wait time between retries and adds a random element to prevent retries from overwhelming the service.\n"
+        },
+        {
+          "end_line": 757,
+          "id": "line-757",
+          "kind": "heading",
+          "parent_id": "line-747",
+          "start_line": 757,
+          "text": "#### Unconditionally retrying non-idempotent operations\n"
+        },
+        {
+          "end_line": 759,
+          "id": "line-759",
+          "kind": "paragraph",
+          "parent_id": "line-757",
+          "start_line": 759,
+          "text": "Repeatedly executing operations that are not idempotent can lead to unintended side effects, such as unintended overwrites or deletions of data.\n"
+        },
+        {
+          "end_line": 761,
+          "id": "line-761",
+          "kind": "paragraph",
+          "parent_id": "line-757",
+          "start_line": 761,
+          "text": "How to avoid this: Thoroughly understand the idempotency characteristics of each operation as detailed in the idempotency of operations section. For non-idempotent operations, ensure your retry logic can handle potential duplicates or avoid retrying them altogether. Be cautious with retries that may lead to race conditions.\n"
+        },
+        {
+          "end_line": 763,
+          "id": "line-763",
+          "kind": "heading",
+          "parent_id": "line-747",
+          "start_line": 763,
+          "text": "#### Retrying unretryable errors\n"
+        },
+        {
+          "end_line": 765,
+          "id": "line-765",
+          "kind": "paragraph",
+          "parent_id": "line-763",
+          "start_line": 765,
+          "text": "Treating all errors as able to be tried again can be problematic. Some errors for example, authorization failures or invalid requests are persistent and retrying them without addressing the underlying cause won't be successful and may result in applications getting caught in an infinite loop.\n"
+        },
+        {
+          "end_line": 767,
+          "id": "line-767",
+          "kind": "paragraph",
+          "parent_id": "line-763",
+          "start_line": 767,
+          "text": "How to avoid this: Categorize errors into transient (retryable) and permanent (non-retryable). Only retry transient errors like 408, 429, and 5xx HTTP codes, or specific connection issues. For permanent errors, log them and handle the underlying cause appropriately.\n"
+        },
+        {
+          "end_line": 769,
+          "id": "line-769",
+          "kind": "heading",
+          "parent_id": "line-747",
+          "start_line": 769,
+          "text": "#### Ignoring retry limits\n"
+        },
+        {
+          "end_line": 771,
+          "id": "line-771",
+          "kind": "paragraph",
+          "parent_id": "line-769",
+          "start_line": 771,
+          "text": "Retrying indefinitely can lead to resource exhaustion in your application or continuously send requests to a service that won't recover without intervention.\n"
+        },
+        {
+          "end_line": 773,
+          "id": "line-773",
+          "kind": "paragraph",
+          "parent_id": "line-769",
+          "start_line": 773,
+          "text": "How to avoid this: Tailor retry limits to the nature of your workload. For latency sensitive workloads, consider setting a total maximum retry duration to ensure a timely response or failure. For batch workloads, which might tolerate longer retry periods for transient server side errors, consider setting a higher total retry limit.\n"
+        },
+        {
+          "end_line": 775,
+          "id": "line-775",
+          "kind": "heading",
+          "parent_id": "line-747",
+          "start_line": 775,
+          "text": "#### Unnecessarily layering retries\n"
+        },
+        {
+          "end_line": 777,
+          "id": "line-777",
+          "kind": "paragraph",
+          "parent_id": "line-775",
+          "start_line": 777,
+          "text": "Adding custom application level retry logic on top of the existing retry mechanisms can lead to an excessive number of retry attempts. For example, if your application retries an operation three times, and the underlying client library also retries it three times for each of your application's attempts, you could end up with nine retry attempts. Sending high amounts of retries for errors that cannot be retried might lead to request throttling, limiting the throughput of all workloads. High numbers of retries might also increase latency of requests without improving the success rate.\n"
+        },
+        {
+          "end_line": 779,
+          "id": "line-779",
+          "kind": "paragraph",
+          "parent_id": "line-775",
+          "start_line": 779,
+          "text": "How to avoid this: We recommend using and configuring the built-in retry mechanisms. If you must implement application-level retries, like for specific business logic that spans multiple operations, do so with a clear understanding of the underlying retry behavior. Consider disabling or significantly limiting retries in one of the layers to prevent multiplicative effects.\n"
+        },
+        {
+          "end_line": 781,
+          "id": "line-781",
+          "kind": "heading",
+          "parent_id": "line-13",
+          "start_line": 781,
+          "text": "## What's next\n"
+        },
+        {
+          "end_line": 783,
+          "id": "line-783",
+          "kind": "list",
+          "parent_id": "line-781",
+          "start_line": 783,
+          "text": "- Learn more about request preconditions.\n"
+        },
+        {
+          "end_line": 785,
+          "id": "line-785",
+          "kind": "paragraph",
+          "parent_id": "line-781",
+          "start_line": 785,
+          "text": "Send feedback\n"
+        }
+      ],
+      "id": "gcs-retry",
+      "source_hash": "1b2e474e9648296c33b265537fcccd41c74670edf3200e6788051892d6b3bb9e",
+      "title": "Retry strategy | Cloud Storage | Google Cloud Documentation",
+      "url": "https://docs.cloud.google.com/storage/docs/retry-strategy"
+    }
+  ]
+}

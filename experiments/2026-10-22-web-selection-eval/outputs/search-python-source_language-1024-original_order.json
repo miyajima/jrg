@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: 2 days ago; Starting with the 3.13 release, CPython has support for running with the global interpreter lock (GIL) disabled in a configuration called free threading. ... Extension modules need to explicitly indicate that they support running with the GIL disabled; otherwise importing the extension will raise a warning and enable the GIL at runtime. ... `PyImport_AddModule()`  | `PyImport_AddModuleRef()` ... For thread-safety, the free-threaded build requires that only Python objects are allocated using the object domain, and that all Python objects are allocated using that domain.\n\n# C API Extension Support for Free Threading¶\n\nStarting with the 3.13 release, CPython has support for running with the global interpreter lock (GIL) disabled in a configuration called free threading. This document describes how to adapt C API extensions to support free threading.\n\n## Identifying the Free-Threaded Build in C¶\n\nThe CPython C API exposes the `Py_GIL_DISABLED` macro: in the free-threaded build it’s defined to `1`, and in the regular build it’s not defined. You can use it to enable code that only runs under the free-threaded build:\n    \n    #ifdef Py_GIL_DISABLED\n    /* code that only runs in the free-threaded build */\n    #endif\n    \n\nNote\n\nOn Windows, this macro is not defined automatically, but must be specified to the compiler when building. The `sysconfig.get_config_var()` function can be used to determine whether the current running interpreter had the macro defined.\n\n## Module Initialization¶\n\nExtension modules need to explicitly indicate that they support running with the GIL disabled; otherwise importing the extension will raise a warning and enable the GIL at runtime.\n\nThere are two ways to indicate that an extension module supports running with the GIL disabled depending on whether the extension uses multi-phase or single-phase initialization.\n\n### Multi-Phase Initialization¶\n\nExtensions that use multi-phase initialization (functions like `PyModuleDef_Init()`, `PyModExport_*` export hook, `PyModule_FromSlotsAndSpec()`) should add a `Py_mod_gil` slot in the module definition. If your extension supports older versions of CPython, you should guard the slot with a `PY_VERSION_HEX` check.\n    \n    static struct PyModuleDef_Slot module_slots[] = {\n        ...\n    #if PY_VERSION_HEX >= 0x030D0000\n        {Py_mod_gil, Py_MOD_GIL_NOT_USED},\n    #endif\n        {0, NULL}\n    };\n\n### Single-Phase Initialization¶\n\nExtensions that use legacy single-phase initialization (that is, `PyModule_Create()`) should call `PyUnstable_Module_SetGIL()` to indicate that they support running with the GIL disabled. The function is only defined in the free-threaded build, so you should guard the call with `#ifdef Py_GIL_DISABLED` to avoid compilation errors in the regular build.\n    \n    static struct PyModuleDef moduledef = {\n        PyModuleDef_HEAD_INIT,\n        ...\n    };\n    \n    PyMODINIT_FUNC\n    PyInit_mymodule(void)\n    {\n        PyObject *m = PyModule_Create(&moduledef);\n        if (m == NULL) {\n            return NULL;\n        }\n    #ifdef Py_GIL_DISABLED\n        PyUnstable_Module_SetGIL(m, Py_MOD_GIL_NOT_USED);\n    #endif\n        return m;\n    }\n\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-1",
+      "source_hash": "cfd9abd4f3044edcdb15012ac6dc4e3e4044f0b18bc0147a2f05de619b5a69d5",
+      "title": "C API Extension Support for Free Threading — Python 3.15.0 documentation",
+      "url": "https://docs.python.org/3/howto/free-threading-extensions.html"
+    }
+  ],
+  "omitted_count": 18,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 910,
+  "max_tokens": 1024
+}

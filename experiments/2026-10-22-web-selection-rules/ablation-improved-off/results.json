@@ -1,0 +1,1942 @@
+{
+  "started_at": "2026-10-22T09:09:02.777666+00:00",
+  "finished_at": "2026-10-22T09:09:37.787193+00:00",
+  "frozen_inputs_sha256": "485460312985d554df24b4ba40ffbe2035ce6bb4615797d45252b2f5913aac7c",
+  "new_rows": [
+    {
+      "id": "queue",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 0,
+      "total": 2,
+      "retained_units": [],
+      "complete": false,
+      "input_tokens": 2808,
+      "output_tokens": 999,
+      "status": "selected",
+      "output_file": "outputs/queue-1024-D.json",
+      "sha256": "ae573eefc8926d430165128e661858661449832d87587314817e181415d776a3"
+    },
+    {
+      "id": "queue",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "maxsize",
+        "put-timeout"
+      ],
+      "complete": true,
+      "input_tokens": 2808,
+      "output_tokens": 2039,
+      "status": "selected",
+      "output_file": "outputs/queue-2048-D.json",
+      "sha256": "cb7d6f87f529e84b58654566d7a1074878f106d15d5ecf60cf46d8ef3199e7ee"
+    },
+    {
+      "id": "semaphore",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "complete": true,
+      "input_tokens": 3053,
+      "output_tokens": 1019,
+      "status": "selected",
+      "output_file": "outputs/semaphore-1024-D.json",
+      "sha256": "404c88cafacd64bdd77a4b056e07308514845fc44be0cc290f9bb7b0f3e5443a"
+    },
+    {
+      "id": "semaphore",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "complete": true,
+      "input_tokens": 3053,
+      "output_tokens": 2032,
+      "status": "selected",
+      "output_file": "outputs/semaphore-2048-D.json",
+      "sha256": "2450b47f579a74e5015152d9b6f7333f9ad27e064a25a7f5e2c613dac0c44bd2"
+    },
+    {
+      "id": "timeout",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 3,
+      "retained_units": [
+        "zero-duration",
+        "exit-status"
+      ],
+      "complete": false,
+      "input_tokens": 1197,
+      "output_tokens": 1012,
+      "status": "selected",
+      "output_file": "outputs/timeout-1024-D.json",
+      "sha256": "b77adb20a11338362698023b1c4a43e64471fea3f739cfd48bbe841d3e52052d"
+    },
+    {
+      "id": "timeout",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 3,
+      "total": 3,
+      "retained_units": [
+        "fractional-duration",
+        "zero-duration",
+        "exit-status"
+      ],
+      "complete": true,
+      "input_tokens": 1197,
+      "output_tokens": 2044,
+      "status": "selected",
+      "output_file": "outputs/timeout-2048-D.json",
+      "sha256": "dfdf6c42b783743705b11e8c04ae0c4e75e048ec7ebcc2366ea5d9b6d3f2faa2"
+    },
+    {
+      "id": "ssh",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "complete": true,
+      "input_tokens": 15799,
+      "output_tokens": 1006,
+      "status": "selected",
+      "output_file": "outputs/ssh-1024-D.json",
+      "sha256": "c8ef5d42d68b19b4dc869c6be77845d1185cc1d6887a55bc9d3b2f8a970f7a1c"
+    },
+    {
+      "id": "ssh",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "complete": true,
+      "input_tokens": 15799,
+      "output_tokens": 2025,
+      "status": "selected",
+      "output_file": "outputs/ssh-2048-D.json",
+      "sha256": "3401bd5295a461bf3d06915682e909bf32f5255cb4fc0848d815e5d98a543359"
+    },
+    {
+      "id": "github-rate",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "complete": true,
+      "input_tokens": 2482,
+      "output_tokens": 1018,
+      "status": "selected",
+      "output_file": "outputs/github-rate-1024-D.json",
+      "sha256": "8d1361abb5c99e21f5ffdc2a207a9bbde2f5800c4aefd3014153ddb9496f2117"
+    },
+    {
+      "id": "github-rate",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "complete": true,
+      "input_tokens": 2482,
+      "output_tokens": 2030,
+      "status": "selected",
+      "output_file": "outputs/github-rate-2048-D.json",
+      "sha256": "523101cbce464bd18b5592769c15b3ad77801f7f856aad768f02cc14bdbe74da"
+    },
+    {
+      "id": "nginx",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 1,
+      "total": 2,
+      "retained_units": [
+        "burst"
+      ],
+      "complete": false,
+      "input_tokens": 1507,
+      "output_tokens": 1004,
+      "status": "selected",
+      "output_file": "outputs/nginx-1024-D.json",
+      "sha256": "01c6cd56c52cd021455b85b2d2a91b0b31c48438795f95405426b357cddf297d"
+    },
+    {
+      "id": "nginx",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "burst",
+        "nodelay"
+      ],
+      "complete": true,
+      "input_tokens": 1507,
+      "output_tokens": 2045,
+      "status": "selected",
+      "output_file": "outputs/nginx-2048-D.json",
+      "sha256": "15e0a18712376f8d9a950e3cb5da7a1f8f4ff336dd5cb5718e0c2a8fb3a2008b"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "complete": true,
+      "input_tokens": 8669,
+      "output_tokens": 1023,
+      "status": "selected",
+      "output_file": "outputs/gcs-retry-1024-D.json",
+      "sha256": "d747fea2578b91b280ab63879e5e9284fed1cfdb3285f623562bdf07854a39ec"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "complete": true,
+      "input_tokens": 8669,
+      "output_tokens": 2048,
+      "status": "selected",
+      "output_file": "outputs/gcs-retry-2048-D.json",
+      "sha256": "9a1b8e51103378165464650e10bf987a736cab1d7fdac50580a8b35eba7dbc4c"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "complete": true,
+      "input_tokens": 2886,
+      "output_tokens": 1020,
+      "status": "selected",
+      "output_file": "outputs/blockingqueue-1024-D.json",
+      "sha256": "aba3403b2501b78f6d6c3e53024758e32d2df32d42a2e8b2ffbd517d3cd00e74"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "complete": true,
+      "input_tokens": 2886,
+      "output_tokens": 2038,
+      "status": "selected",
+      "output_file": "outputs/blockingqueue-2048-D.json",
+      "sha256": "19a12fd770b2ae94164e1cda1150fd3b7dcb71b928a409e40c61601176f02340"
+    }
+  ],
+  "combined_rows": [
+    {
+      "id": "queue",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 1014,
+      "input_tokens": 2808,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/queue-1024-A.json",
+      "sha256": "6da17f1337e17f01a3f291b758f4fbca8fa817424d3629d4333acd3d595fe18e",
+      "output_root": "base"
+    },
+    {
+      "id": "queue",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 1022,
+      "input_tokens": 2808,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/queue-1024-B.json",
+      "sha256": "98245a152be19f3b913569002d69f6debae367fea121f3345dbe24d7eb4a2d9d",
+      "output_root": "base"
+    },
+    {
+      "id": "queue",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 1006,
+      "input_tokens": 2808,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/queue-1024-C.json",
+      "sha256": "430cd0f82d362ef436e52eb7a891b2cbded082bcdd4c777b49b6c3aa2af6c2ab",
+      "output_root": "base"
+    },
+    {
+      "id": "queue",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 2038,
+      "input_tokens": 2808,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/queue-2048-A.json",
+      "sha256": "b4e1eada6a9e755442a3e0fca0388cc7827f5d32bae9118b15073644823afe26",
+      "output_root": "base"
+    },
+    {
+      "id": "queue",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 2032,
+      "input_tokens": 2808,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/queue-2048-B.json",
+      "sha256": "69995002bcc703138968c2b884d9b39f04ee278e738fc671ed1bca53f14ca6f5",
+      "output_root": "base"
+    },
+    {
+      "id": "queue",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "maxsize"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 2022,
+      "input_tokens": 2808,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/queue-2048-C.json",
+      "sha256": "cc91497130ec5d30b311727f5204235bdf2f357fe213de944ba39d8e8d1c2377",
+      "output_root": "base"
+    },
+    {
+      "id": "semaphore",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1017,
+      "input_tokens": 3053,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/semaphore-1024-A.json",
+      "sha256": "c1d614cf4243fcf54d294dc45b075d862b93bd2c528b0d1e820f30df96e376d9",
+      "output_root": "base"
+    },
+    {
+      "id": "semaphore",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1009,
+      "input_tokens": 3053,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/semaphore-1024-B.json",
+      "sha256": "10a1c3008911a9f1426bac9d04dd9f2ad969184ac7e5fe11c95dbd32cc98860d",
+      "output_root": "base"
+    },
+    {
+      "id": "semaphore",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1019,
+      "input_tokens": 3053,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/semaphore-1024-C.json",
+      "sha256": "404c88cafacd64bdd77a4b056e07308514845fc44be0cc290f9bb7b0f3e5443a",
+      "output_root": "base"
+    },
+    {
+      "id": "semaphore",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2047,
+      "input_tokens": 3053,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/semaphore-2048-A.json",
+      "sha256": "d49dbcbe352b7386632f09230bf882a188e5b5504cb02ff555ad4d04c48d4413",
+      "output_root": "base"
+    },
+    {
+      "id": "semaphore",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2029,
+      "input_tokens": 3053,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/semaphore-2048-B.json",
+      "sha256": "2cc2fc97309c92ceb96e4b3f4b201de2124e795eb0d9ee2ecac63dec418539b1",
+      "output_root": "base"
+    },
+    {
+      "id": "semaphore",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2032,
+      "input_tokens": 3053,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/semaphore-2048-C.json",
+      "sha256": "2450b47f579a74e5015152d9b6f7333f9ad27e064a25a7f5e2c613dac0c44bd2",
+      "output_root": "base"
+    },
+    {
+      "id": "timeout",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [
+        "zero-duration",
+        "exit-status"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "output_tokens": 1012,
+      "input_tokens": 1197,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/timeout-1024-A.json",
+      "sha256": "c52c9880761b23ba3eb7ac50cff462dd764f2376f2faca8bb6c15a5f6f50dde0",
+      "output_root": "base"
+    },
+    {
+      "id": "timeout",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [
+        "zero-duration",
+        "exit-status"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "output_tokens": 1012,
+      "input_tokens": 1197,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/timeout-1024-B.json",
+      "sha256": "c52c9880761b23ba3eb7ac50cff462dd764f2376f2faca8bb6c15a5f6f50dde0",
+      "output_root": "base"
+    },
+    {
+      "id": "timeout",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [
+        "zero-duration",
+        "exit-status"
+      ],
+      "hits": 2,
+      "total": 3,
+      "complete": false,
+      "output_tokens": 1012,
+      "input_tokens": 1197,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/timeout-1024-C.json",
+      "sha256": "b77adb20a11338362698023b1c4a43e64471fea3f739cfd48bbe841d3e52052d",
+      "output_root": "base"
+    },
+    {
+      "id": "timeout",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [
+        "fractional-duration",
+        "zero-duration",
+        "exit-status"
+      ],
+      "hits": 3,
+      "total": 3,
+      "complete": true,
+      "output_tokens": 2026,
+      "input_tokens": 1197,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/timeout-2048-A.json",
+      "sha256": "10e638bfa909f4ebe4c1b7692fd949a9a6fed023509b97a0a0a60139569033b5",
+      "output_root": "base"
+    },
+    {
+      "id": "timeout",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [
+        "fractional-duration",
+        "zero-duration",
+        "exit-status"
+      ],
+      "hits": 3,
+      "total": 3,
+      "complete": true,
+      "output_tokens": 2026,
+      "input_tokens": 1197,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/timeout-2048-B.json",
+      "sha256": "10e638bfa909f4ebe4c1b7692fd949a9a6fed023509b97a0a0a60139569033b5",
+      "output_root": "base"
+    },
+    {
+      "id": "timeout",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "fractional-duration",
+        "zero-duration",
+        "exit-status"
+      ],
+      "hits": 3,
+      "total": 3,
+      "complete": true,
+      "output_tokens": 2044,
+      "input_tokens": 1197,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/timeout-2048-C.json",
+      "sha256": "dfdf6c42b783743705b11e8c04ae0c4e75e048ec7ebcc2366ea5d9b6d3f2faa2",
+      "output_root": "base"
+    },
+    {
+      "id": "ssh",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1018,
+      "input_tokens": 15799,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/ssh-1024-A.json",
+      "sha256": "030d8e9836af8340184e9b36928a1b02e16751f85b0193b785a1048c9f1adff3",
+      "output_root": "base"
+    },
+    {
+      "id": "ssh",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1018,
+      "input_tokens": 15799,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/ssh-1024-B.json",
+      "sha256": "030d8e9836af8340184e9b36928a1b02e16751f85b0193b785a1048c9f1adff3",
+      "output_root": "base"
+    },
+    {
+      "id": "ssh",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1006,
+      "input_tokens": 15799,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/ssh-1024-C.json",
+      "sha256": "c8ef5d42d68b19b4dc869c6be77845d1185cc1d6887a55bc9d3b2f8a970f7a1c",
+      "output_root": "base"
+    },
+    {
+      "id": "ssh",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [
+        "tcp-comparison"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 2036,
+      "input_tokens": 15799,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/ssh-2048-A.json",
+      "sha256": "00f8fb044f8bb91e5abfec39e6f7964650cb1b352c7ef1ea43d926d95dde3497",
+      "output_root": "base"
+    },
+    {
+      "id": "ssh",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [
+        "tcp-comparison"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 2036,
+      "input_tokens": 15799,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/ssh-2048-B.json",
+      "sha256": "00f8fb044f8bb91e5abfec39e6f7964650cb1b352c7ef1ea43d926d95dde3497",
+      "output_root": "base"
+    },
+    {
+      "id": "ssh",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2025,
+      "input_tokens": 15799,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/ssh-2048-C.json",
+      "sha256": "3401bd5295a461bf3d06915682e909bf32f5255cb4fc0848d815e5d98a543359",
+      "output_root": "base"
+    },
+    {
+      "id": "github-rate",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1024,
+      "input_tokens": 2482,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/github-rate-1024-A.json",
+      "sha256": "6045abc6b21fc29ed39dde81aa354cae4ec5faa415770a6f7c6f729161222ab9",
+      "output_root": "base"
+    },
+    {
+      "id": "github-rate",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1020,
+      "input_tokens": 2482,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/github-rate-1024-B.json",
+      "sha256": "fc3fffe7305da0a67237f193b7a652676a9b2778c4bdc949b69dc4d2a1daa7e3",
+      "output_root": "base"
+    },
+    {
+      "id": "github-rate",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1018,
+      "input_tokens": 2482,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/github-rate-1024-C.json",
+      "sha256": "8d1361abb5c99e21f5ffdc2a207a9bbde2f5800c4aefd3014153ddb9496f2117",
+      "output_root": "base"
+    },
+    {
+      "id": "github-rate",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2040,
+      "input_tokens": 2482,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/github-rate-2048-A.json",
+      "sha256": "c742d7e3af766c2404d36dd0c58038a959b4093516506b1ef92508dc852ea669",
+      "output_root": "base"
+    },
+    {
+      "id": "github-rate",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2040,
+      "input_tokens": 2482,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/github-rate-2048-B.json",
+      "sha256": "c742d7e3af766c2404d36dd0c58038a959b4093516506b1ef92508dc852ea669",
+      "output_root": "base"
+    },
+    {
+      "id": "github-rate",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2030,
+      "input_tokens": 2482,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/github-rate-2048-C.json",
+      "sha256": "523101cbce464bd18b5592769c15b3ad77801f7f856aad768f02cc14bdbe74da",
+      "output_root": "base"
+    },
+    {
+      "id": "nginx",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [
+        "burst"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 1024,
+      "input_tokens": 1507,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/nginx-1024-A.json",
+      "sha256": "4daea706f59c63cc3f31afb36f7a88e20efdbbc824747d7c4c66dec85ee42895",
+      "output_root": "base"
+    },
+    {
+      "id": "nginx",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [
+        "burst"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 1017,
+      "input_tokens": 1507,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/nginx-1024-B.json",
+      "sha256": "82fb0b1301bd3d8354f2761e0ab87293fd0f2c6b604fff21122b58b31f4c3607",
+      "output_root": "base"
+    },
+    {
+      "id": "nginx",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [
+        "burst"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 991,
+      "input_tokens": 1507,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/nginx-1024-C.json",
+      "sha256": "8c58da6d9005d30a5584c94a1a3c2da45c8a64390bacfc569865d644da65e624",
+      "output_root": "base"
+    },
+    {
+      "id": "nginx",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [
+        "burst",
+        "nodelay"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2037,
+      "input_tokens": 1507,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/nginx-2048-A.json",
+      "sha256": "40de699d95813bd9564d37ff71eae45d3ae973e74b3a9a73562b3ce0dd87ca73",
+      "output_root": "base"
+    },
+    {
+      "id": "nginx",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [
+        "burst",
+        "nodelay"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2037,
+      "input_tokens": 1507,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/nginx-2048-B.json",
+      "sha256": "40de699d95813bd9564d37ff71eae45d3ae973e74b3a9a73562b3ce0dd87ca73",
+      "output_root": "base"
+    },
+    {
+      "id": "nginx",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "burst",
+        "nodelay"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2045,
+      "input_tokens": 1507,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/nginx-2048-C.json",
+      "sha256": "15e0a18712376f8d9a950e3cb5da7a1f8f4ff336dd5cb5718e0c2a8fb3a2008b",
+      "output_root": "base"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 1016,
+      "input_tokens": 8669,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/gcs-retry-1024-A.json",
+      "sha256": "44fea87599323b0db044afb3f917ed1bc2196f2fd4d2c0c645e1d6e3abbfd563",
+      "output_root": "base"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [],
+      "hits": 0,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 1016,
+      "input_tokens": 8669,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/gcs-retry-1024-B.json",
+      "sha256": "44fea87599323b0db044afb3f917ed1bc2196f2fd4d2c0c645e1d6e3abbfd563",
+      "output_root": "base"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1023,
+      "input_tokens": 8669,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/gcs-retry-1024-C.json",
+      "sha256": "d747fea2578b91b280ab63879e5e9284fed1cfdb3285f623562bdf07854a39ec",
+      "output_root": "base"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [
+        "idempotency"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 2046,
+      "input_tokens": 8669,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/gcs-retry-2048-A.json",
+      "sha256": "f117104f9ef8651485e8c6728fde98eb24a49965baca8cc48586954a7ff84ad3",
+      "output_root": "base"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [
+        "idempotency"
+      ],
+      "hits": 1,
+      "total": 2,
+      "complete": false,
+      "output_tokens": 2046,
+      "input_tokens": 8669,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/gcs-retry-2048-B.json",
+      "sha256": "f117104f9ef8651485e8c6728fde98eb24a49965baca8cc48586954a7ff84ad3",
+      "output_root": "base"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2048,
+      "input_tokens": 8669,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/gcs-retry-2048-C.json",
+      "sha256": "9a1b8e51103378165464650e10bf987a736cab1d7fdac50580a8b35eba7dbc4c",
+      "output_root": "base"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 1024,
+      "arm": "A",
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1020,
+      "input_tokens": 2886,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/blockingqueue-1024-A.json",
+      "sha256": "aba3403b2501b78f6d6c3e53024758e32d2df32d42a2e8b2ffbd517d3cd00e74",
+      "output_root": "base"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 1024,
+      "arm": "B",
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1020,
+      "input_tokens": 2886,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/blockingqueue-1024-B.json",
+      "sha256": "aba3403b2501b78f6d6c3e53024758e32d2df32d42a2e8b2ffbd517d3cd00e74",
+      "output_root": "base"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 1024,
+      "arm": "C",
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 1020,
+      "input_tokens": 2886,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/blockingqueue-1024-C.json",
+      "sha256": "aba3403b2501b78f6d6c3e53024758e32d2df32d42a2e8b2ffbd517d3cd00e74",
+      "output_root": "base"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 2048,
+      "arm": "A",
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2038,
+      "input_tokens": 2886,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/blockingqueue-2048-A.json",
+      "sha256": "19a12fd770b2ae94164e1cda1150fd3b7dcb71b928a409e40c61601176f02340",
+      "output_root": "base"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 2048,
+      "arm": "B",
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2038,
+      "input_tokens": 2886,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/blockingqueue-2048-B.json",
+      "sha256": "19a12fd770b2ae94164e1cda1150fd3b7dcb71b928a409e40c61601176f02340",
+      "output_root": "base"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 2048,
+      "arm": "C",
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "hits": 2,
+      "total": 2,
+      "complete": true,
+      "output_tokens": 2038,
+      "input_tokens": 2886,
+      "status": "selected",
+      "provenance_pass": true,
+      "output_file": "outputs/blockingqueue-2048-C.json",
+      "sha256": "19a12fd770b2ae94164e1cda1150fd3b7dcb71b928a409e40c61601176f02340",
+      "output_root": "base"
+    },
+    {
+      "id": "queue",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 0,
+      "total": 2,
+      "retained_units": [],
+      "complete": false,
+      "input_tokens": 2808,
+      "output_tokens": 999,
+      "status": "selected",
+      "output_file": "outputs/queue-1024-D.json",
+      "sha256": "ae573eefc8926d430165128e661858661449832d87587314817e181415d776a3",
+      "output_root": "ablation"
+    },
+    {
+      "id": "queue",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "maxsize",
+        "put-timeout"
+      ],
+      "complete": true,
+      "input_tokens": 2808,
+      "output_tokens": 2039,
+      "status": "selected",
+      "output_file": "outputs/queue-2048-D.json",
+      "sha256": "cb7d6f87f529e84b58654566d7a1074878f106d15d5ecf60cf46d8ef3199e7ee",
+      "output_root": "ablation"
+    },
+    {
+      "id": "semaphore",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "complete": true,
+      "input_tokens": 3053,
+      "output_tokens": 1019,
+      "status": "selected",
+      "output_file": "outputs/semaphore-1024-D.json",
+      "sha256": "404c88cafacd64bdd77a4b056e07308514845fc44be0cc290f9bb7b0f3e5443a",
+      "output_root": "ablation"
+    },
+    {
+      "id": "semaphore",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "initial-value",
+        "bounded-release"
+      ],
+      "complete": true,
+      "input_tokens": 3053,
+      "output_tokens": 2032,
+      "status": "selected",
+      "output_file": "outputs/semaphore-2048-D.json",
+      "sha256": "2450b47f579a74e5015152d9b6f7333f9ad27e064a25a7f5e2c613dac0c44bd2",
+      "output_root": "ablation"
+    },
+    {
+      "id": "timeout",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 3,
+      "retained_units": [
+        "zero-duration",
+        "exit-status"
+      ],
+      "complete": false,
+      "input_tokens": 1197,
+      "output_tokens": 1012,
+      "status": "selected",
+      "output_file": "outputs/timeout-1024-D.json",
+      "sha256": "b77adb20a11338362698023b1c4a43e64471fea3f739cfd48bbe841d3e52052d",
+      "output_root": "ablation"
+    },
+    {
+      "id": "timeout",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 3,
+      "total": 3,
+      "retained_units": [
+        "fractional-duration",
+        "zero-duration",
+        "exit-status"
+      ],
+      "complete": true,
+      "input_tokens": 1197,
+      "output_tokens": 2044,
+      "status": "selected",
+      "output_file": "outputs/timeout-2048-D.json",
+      "sha256": "dfdf6c42b783743705b11e8c04ae0c4e75e048ec7ebcc2366ea5d9b6d3f2faa2",
+      "output_root": "ablation"
+    },
+    {
+      "id": "ssh",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "complete": true,
+      "input_tokens": 15799,
+      "output_tokens": 1006,
+      "status": "selected",
+      "output_file": "outputs/ssh-1024-D.json",
+      "sha256": "c8ef5d42d68b19b4dc869c6be77845d1185cc1d6887a55bc9d3b2f8a970f7a1c",
+      "output_root": "ablation"
+    },
+    {
+      "id": "ssh",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "server-alive-zero",
+        "tcp-comparison"
+      ],
+      "complete": true,
+      "input_tokens": 15799,
+      "output_tokens": 2025,
+      "status": "selected",
+      "output_file": "outputs/ssh-2048-D.json",
+      "sha256": "3401bd5295a461bf3d06915682e909bf32f5255cb4fc0848d815e5d98a543359",
+      "output_root": "ablation"
+    },
+    {
+      "id": "github-rate",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "complete": true,
+      "input_tokens": 2482,
+      "output_tokens": 1018,
+      "status": "selected",
+      "output_file": "outputs/github-rate-1024-D.json",
+      "sha256": "8d1361abb5c99e21f5ffdc2a207a9bbde2f5800c4aefd3014153ddb9496f2117",
+      "output_root": "ablation"
+    },
+    {
+      "id": "github-rate",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "primary-retry",
+        "secondary-retry"
+      ],
+      "complete": true,
+      "input_tokens": 2482,
+      "output_tokens": 2030,
+      "status": "selected",
+      "output_file": "outputs/github-rate-2048-D.json",
+      "sha256": "523101cbce464bd18b5592769c15b3ad77801f7f856aad768f02cc14bdbe74da",
+      "output_root": "ablation"
+    },
+    {
+      "id": "nginx",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 1,
+      "total": 2,
+      "retained_units": [
+        "burst"
+      ],
+      "complete": false,
+      "input_tokens": 1507,
+      "output_tokens": 1004,
+      "status": "selected",
+      "output_file": "outputs/nginx-1024-D.json",
+      "sha256": "01c6cd56c52cd021455b85b2d2a91b0b31c48438795f95405426b357cddf297d",
+      "output_root": "ablation"
+    },
+    {
+      "id": "nginx",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "burst",
+        "nodelay"
+      ],
+      "complete": true,
+      "input_tokens": 1507,
+      "output_tokens": 2045,
+      "status": "selected",
+      "output_file": "outputs/nginx-2048-D.json",
+      "sha256": "15e0a18712376f8d9a950e3cb5da7a1f8f4ff336dd5cb5718e0c2a8fb3a2008b",
+      "output_root": "ablation"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "complete": true,
+      "input_tokens": 8669,
+      "output_tokens": 1023,
+      "status": "selected",
+      "output_file": "outputs/gcs-retry-1024-D.json",
+      "sha256": "d747fea2578b91b280ab63879e5e9284fed1cfdb3285f623562bdf07854a39ec",
+      "output_root": "ablation"
+    },
+    {
+      "id": "gcs-retry",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "backoff-and-jitter",
+        "idempotency"
+      ],
+      "complete": true,
+      "input_tokens": 8669,
+      "output_tokens": 2048,
+      "status": "selected",
+      "output_file": "outputs/gcs-retry-2048-D.json",
+      "sha256": "9a1b8e51103378165464650e10bf987a736cab1d7fdac50580a8b35eba7dbc4c",
+      "output_root": "ablation"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 1024,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "complete": true,
+      "input_tokens": 2886,
+      "output_tokens": 1020,
+      "status": "selected",
+      "output_file": "outputs/blockingqueue-1024-D.json",
+      "sha256": "aba3403b2501b78f6d6c3e53024758e32d2df32d42a2e8b2ffbd517d3cd00e74",
+      "output_root": "ablation"
+    },
+    {
+      "id": "blockingqueue",
+      "budget": 2048,
+      "arm": "D",
+      "hits": 2,
+      "total": 2,
+      "retained_units": [
+        "unbounded-capacity",
+        "insertion-waiting"
+      ],
+      "complete": true,
+      "input_tokens": 2886,
+      "output_tokens": 2038,
+      "status": "selected",
+      "output_file": "outputs/blockingqueue-2048-D.json",
+      "sha256": "19a12fd770b2ae94164e1cda1150fd3b7dcb71b928a409e40c61601176f02340",
+      "output_root": "ablation"
+    }
+  ],
+  "aggregates": [
+    {
+      "budget": 1024,
+      "arm": "A",
+      "cases": 8,
+      "hits": 11,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 8145,
+      "complete_cases": 4
+    },
+    {
+      "budget": 1024,
+      "arm": "B",
+      "cases": 8,
+      "hits": 11,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 8134,
+      "complete_cases": 4
+    },
+    {
+      "budget": 1024,
+      "arm": "D",
+      "cases": 8,
+      "hits": 13,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 8101,
+      "complete_cases": 5
+    },
+    {
+      "budget": 1024,
+      "arm": "C",
+      "cases": 8,
+      "hits": 13,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 8095,
+      "complete_cases": 5
+    },
+    {
+      "budget": 2048,
+      "arm": "A",
+      "cases": 8,
+      "hits": 13,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 16308,
+      "complete_cases": 5
+    },
+    {
+      "budget": 2048,
+      "arm": "B",
+      "cases": 8,
+      "hits": 13,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 16284,
+      "complete_cases": 5
+    },
+    {
+      "budget": 2048,
+      "arm": "D",
+      "cases": 8,
+      "hits": 17,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 16301,
+      "complete_cases": 8
+    },
+    {
+      "budget": 2048,
+      "arm": "C",
+      "cases": 8,
+      "hits": 16,
+      "total": 17,
+      "input_tokens": 38401,
+      "output_tokens": 16284,
+      "complete_cases": 7
+    }
+  ],
+  "contrasts": [
+    {
+      "budget": 1024,
+      "before": "A",
+      "after": "D",
+      "cases": [
+        {
+          "id": "queue",
+          "before_hits": 0,
+          "after_hits": 0,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "semaphore",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "timeout",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "ssh",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "github-rate",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "nginx",
+          "before_hits": 1,
+          "after_hits": 1,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "gcs-retry",
+          "before_hits": 0,
+          "after_hits": 2,
+          "gained": [
+            "backoff-and-jitter",
+            "idempotency"
+          ],
+          "lost": []
+        },
+        {
+          "id": "blockingqueue",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        }
+      ],
+      "improved": 1,
+      "regressed": 0,
+      "unchanged": 7
+    },
+    {
+      "budget": 1024,
+      "before": "A",
+      "after": "B",
+      "cases": [
+        {
+          "id": "queue",
+          "before_hits": 0,
+          "after_hits": 0,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "semaphore",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "timeout",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "ssh",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "github-rate",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "nginx",
+          "before_hits": 1,
+          "after_hits": 1,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "gcs-retry",
+          "before_hits": 0,
+          "after_hits": 0,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "blockingqueue",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        }
+      ],
+      "improved": 0,
+      "regressed": 0,
+      "unchanged": 8
+    },
+    {
+      "budget": 1024,
+      "before": "D",
+      "after": "C",
+      "cases": [
+        {
+          "id": "queue",
+          "before_hits": 0,
+          "after_hits": 0,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "semaphore",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "timeout",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "ssh",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "github-rate",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "nginx",
+          "before_hits": 1,
+          "after_hits": 1,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "gcs-retry",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "blockingqueue",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        }
+      ],
+      "improved": 0,
+      "regressed": 0,
+      "unchanged": 8
+    },
+    {
+      "budget": 2048,
+      "before": "A",
+      "after": "D",
+      "cases": [
+        {
+          "id": "queue",
+          "before_hits": 0,
+          "after_hits": 2,
+          "gained": [
+            "maxsize",
+            "put-timeout"
+          ],
+          "lost": []
+        },
+        {
+          "id": "semaphore",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "timeout",
+          "before_hits": 3,
+          "after_hits": 3,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "ssh",
+          "before_hits": 1,
+          "after_hits": 2,
+          "gained": [
+            "server-alive-zero"
+          ],
+          "lost": []
+        },
+        {
+          "id": "github-rate",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "nginx",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "gcs-retry",
+          "before_hits": 1,
+          "after_hits": 2,
+          "gained": [
+            "backoff-and-jitter"
+          ],
+          "lost": []
+        },
+        {
+          "id": "blockingqueue",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        }
+      ],
+      "improved": 3,
+      "regressed": 0,
+      "unchanged": 5
+    },
+    {
+      "budget": 2048,
+      "before": "A",
+      "after": "B",
+      "cases": [
+        {
+          "id": "queue",
+          "before_hits": 0,
+          "after_hits": 0,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "semaphore",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "timeout",
+          "before_hits": 3,
+          "after_hits": 3,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "ssh",
+          "before_hits": 1,
+          "after_hits": 1,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "github-rate",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "nginx",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "gcs-retry",
+          "before_hits": 1,
+          "after_hits": 1,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "blockingqueue",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        }
+      ],
+      "improved": 0,
+      "regressed": 0,
+      "unchanged": 8
+    },
+    {
+      "budget": 2048,
+      "before": "D",
+      "after": "C",
+      "cases": [
+        {
+          "id": "queue",
+          "before_hits": 2,
+          "after_hits": 1,
+          "gained": [],
+          "lost": [
+            "put-timeout"
+          ]
+        },
+        {
+          "id": "semaphore",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "timeout",
+          "before_hits": 3,
+          "after_hits": 3,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "ssh",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "github-rate",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "nginx",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "gcs-retry",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        },
+        {
+          "id": "blockingqueue",
+          "before_hits": 2,
+          "after_hits": 2,
+          "gained": [],
+          "lost": []
+        }
+      ],
+      "improved": 0,
+      "regressed": 1,
+      "unchanged": 7
+    }
+  ],
+  "scope": "User-requested post-hoc fourth arm; fixed English/source/gold/binary, no regeneration or tuning."
+}

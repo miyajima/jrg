@@ -1,0 +1,346 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 3,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "Join us for the quarterly\nNGINX Community Call\non November 4th to connect and discuss NGINX development.\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "heading",
+          "start_line": 5,
+          "text": "## Module ngx_http_limit_req_module\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "table",
+          "parent_id": "line-5",
+          "start_line": 7,
+          "text": "| Example ConfigurationDirectives limit_req limit_req_dry_run limit_req_log_level limit_req_status limit_req_zoneEmbedded Variables |\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "paragraph",
+          "parent_id": "line-5",
+          "start_line": 9,
+          "text": "The ngx_http_limit_req_module module (0.7.21) is used to limit the request processing rate per a defined key, in particular, the processing rate of requests coming from a single IP address. The limitation is done using the “leaky bucket” method.\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "heading",
+          "parent_id": "line-5",
+          "start_line": 11,
+          "text": "#### Example Configuration\n"
+        },
+        {
+          "end_line": 28,
+          "id": "line-13",
+          "kind": "code",
+          "parent_id": "line-11",
+          "start_line": 13,
+          "text": "```\n\nhttp {\nlimit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;\n\n...\n\nserver {\n\n...\n\nlocation /search/ {\nlimit_req zone=one burst=5;\n}\n\n```\n"
+        },
+        {
+          "end_line": 30,
+          "id": "line-30",
+          "kind": "heading",
+          "parent_id": "line-5",
+          "start_line": 30,
+          "text": "#### Directives\n"
+        },
+        {
+          "end_line": 34,
+          "id": "line-32",
+          "kind": "table",
+          "parent_id": "line-30",
+          "start_line": 32,
+          "text": "| Syntax: | limit_req zone=name [burst=number] [nodelay \\| delay=number]; |\n| Default: | — |\n| Context: | http, server, location |\n"
+        },
+        {
+          "end_line": 36,
+          "id": "line-36",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 36,
+          "text": "Sets the shared memory zone and the maximum burst size of requests. If the requests rate exceeds the rate configured for a zone, their processing is delayed such that requests are processed at a defined rate. Excessive requests are delayed until their number exceeds the maximum burst size in which case the request is terminated with an error. By default, the maximum burst size is equal to zero. For example, the directives\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-38",
+          "kind": "code",
+          "parent_id": "line-30",
+          "start_line": 38,
+          "text": "```\n\nlimit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;\n\nserver {\nlocation /search/ {\nlimit_req zone=one burst=5;\n}\n\n```\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 49,
+          "text": "allow not more than 1 request per second at an average, with bursts not exceeding 5 requests.\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 51,
+          "text": "If delaying of excessive requests while requests are being limited is not desired, the parameter nodelay should be used:\n"
+        },
+        {
+          "end_line": 57,
+          "id": "line-53",
+          "kind": "code",
+          "parent_id": "line-30",
+          "start_line": 53,
+          "text": "```\n\nlimit_req zone=one burst=5 nodelay;\n\n```\n"
+        },
+        {
+          "end_line": 59,
+          "id": "line-59",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 59,
+          "text": "The delay parameter (1.15.7) specifies a limit at which excessive requests become delayed. Default value is zero, i.e. all excessive requests are delayed.\n"
+        },
+        {
+          "end_line": 61,
+          "id": "line-61",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 61,
+          "text": "There could be several limit_req directives. For example, the following configuration will limit the processing rate of requests coming from a single IP address and, at the same time, the request processing rate by the virtual server:\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-63",
+          "kind": "code",
+          "parent_id": "line-30",
+          "start_line": 63,
+          "text": "```\n\nlimit_req_zone $binary_remote_addr zone=perip:10m rate=1r/s;\nlimit_req_zone $server_name zone=perserver:10m rate=10r/s;\n\nserver {\n...\nlimit_req zone=perip burst=5 nodelay;\nlimit_req zone=perserver burst=10;\n}\n\n```\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 76,
+          "text": "These directives are inherited from the previous configuration level if and only if there are no limit_req directives defined on the current level.\n"
+        },
+        {
+          "end_line": 80,
+          "id": "line-78",
+          "kind": "table",
+          "parent_id": "line-30",
+          "start_line": 78,
+          "text": "| Syntax: | limit_req_dry_run on \\| off; |\n| Default: | limit_req_dry_run off; |\n| Context: | http, server, location |\n"
+        },
+        {
+          "end_line": 82,
+          "id": "line-82",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 82,
+          "text": "This directive appeared in version 1.17.1.\n"
+        },
+        {
+          "end_line": 84,
+          "id": "line-84",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 84,
+          "text": "Enables the dry run mode. In this mode, requests processing rate is not limited, however, in the shared memory zone, the number of excessive requests is accounted as usual.\n"
+        },
+        {
+          "end_line": 88,
+          "id": "line-86",
+          "kind": "table",
+          "parent_id": "line-30",
+          "start_line": 86,
+          "text": "| Syntax: | limit_req_log_level info \\| notice \\| warn \\| error; |\n| Default: | limit_req_log_level error; |\n| Context: | http, server, location |\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-90",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 90,
+          "text": "This directive appeared in version 0.8.18.\n"
+        },
+        {
+          "end_line": 92,
+          "id": "line-92",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 92,
+          "text": "Sets the desired logging level for cases when the server refuses to process requests due to rate exceeding, or delays request processing. Logging level for delays is one point less than for refusals; for example, if “limit_req_log_level notice” is specified, delays are logged with the info level.\n"
+        },
+        {
+          "end_line": 96,
+          "id": "line-94",
+          "kind": "table",
+          "parent_id": "line-30",
+          "start_line": 94,
+          "text": "| Syntax: | limit_req_status code; |\n| Default: | limit_req_status 503; |\n| Context: | http, server, location |\n"
+        },
+        {
+          "end_line": 98,
+          "id": "line-98",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 98,
+          "text": "This directive appeared in version 1.3.15.\n"
+        },
+        {
+          "end_line": 100,
+          "id": "line-100",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 100,
+          "text": "Sets the status code to return in response to rejected requests.\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-102",
+          "kind": "table",
+          "parent_id": "line-30",
+          "start_line": 102,
+          "text": "| Syntax: | limit_req_zone key zone=name:size rate=rate [sync]; |\n| Default: | — |\n| Context: | http |\n"
+        },
+        {
+          "end_line": 106,
+          "id": "line-106",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 106,
+          "text": "Sets parameters for a shared memory zone that will keep states for various keys. In particular, the state stores the current number of excessive requests. The key can contain text, variables, and their combination. Requests with an empty key value are not accounted.\n"
+        },
+        {
+          "end_line": 108,
+          "id": "line-108",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 108,
+          "text": "Prior to version 1.7.6, a key could contain exactly one variable.\n"
+        },
+        {
+          "end_line": 110,
+          "id": "line-110",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 110,
+          "text": "Usage example:\n"
+        },
+        {
+          "end_line": 116,
+          "id": "line-112",
+          "kind": "code",
+          "parent_id": "line-30",
+          "start_line": 112,
+          "text": "```\n\nlimit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;\n\n```\n"
+        },
+        {
+          "end_line": 118,
+          "id": "line-118",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 118,
+          "text": "Here, the states are kept in a 10 megabyte zone “one”, and an average request processing rate for this zone cannot exceed 1 request per second.\n"
+        },
+        {
+          "end_line": 120,
+          "id": "line-120",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 120,
+          "text": "A client IP address serves as a key. Note that instead of $remote_addr, the $binary_remote_addr variable is used here. The $binary_remote_addr variable’s size is always 4 bytes for IPv4 addresses or 16 bytes for IPv6 addresses. The stored state always occupies 64 bytes on 32-bit platforms and 128 bytes on 64-bit platforms. One megabyte zone can keep about 16 thousand 64-byte states or about 8 thousand 128-byte states.\n"
+        },
+        {
+          "end_line": 122,
+          "id": "line-122",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 122,
+          "text": "If the zone storage is exhausted, the least recently used state is removed. If even after that a new state cannot be created, the request is terminated with an error.\n"
+        },
+        {
+          "end_line": 124,
+          "id": "line-124",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 124,
+          "text": "The rate is specified in requests per second (r/s). If a rate of less than one request per second is desired, it is specified in request per minute (r/m). For example, half-request per second is 30r/m.\n"
+        },
+        {
+          "end_line": 126,
+          "id": "line-126",
+          "kind": "paragraph",
+          "parent_id": "line-30",
+          "start_line": 126,
+          "text": "Additionally, the following functionality is available as part of our commercial subscription:\n"
+        },
+        {
+          "end_line": 128,
+          "id": "line-128",
+          "kind": "list",
+          "parent_id": "line-30",
+          "start_line": 128,
+          "text": "- The rate parameter can contain variables (1.31.3). The rate is evaluated at runtime for each request. Example: map $uri $rate { default 10r/s; /api/slow 1r/s; /api/fast 100r/s; } limit_req_zone $binary_remote_addr zone=one:10m rate=$rate;\n"
+        },
+        {
+          "end_line": 130,
+          "id": "line-130",
+          "kind": "list",
+          "parent_id": "line-30",
+          "start_line": 130,
+          "text": "- The sync parameter (1.15.3) enables synchronization of the shared memory zone.\n"
+        },
+        {
+          "end_line": 132,
+          "id": "line-132",
+          "kind": "list",
+          "parent_id": "line-30",
+          "start_line": 132,
+          "text": "- The status information for each such shared memory zone can be obtained or reset with the API since 1.17.7.\n"
+        },
+        {
+          "end_line": 134,
+          "id": "line-134",
+          "kind": "heading",
+          "parent_id": "line-5",
+          "start_line": 134,
+          "text": "#### Embedded Variables\n"
+        },
+        {
+          "end_line": 136,
+          "id": "line-136",
+          "kind": "paragraph",
+          "parent_id": "line-134",
+          "start_line": 136,
+          "text": "$limit_req_status\n"
+        },
+        {
+          "end_line": 143,
+          "id": "line-138",
+          "kind": "paragraph",
+          "parent_id": "line-134",
+          "start_line": 138,
+          "text": "keeps the result of limiting the request processing rate (1.17.6):\nPASSED,\nDELAYED,\nREJECTED,\nDELAYED_DRY_RUN, or\nREJECTED_DRY_RUN\n"
+        }
+      ],
+      "id": "nginx",
+      "source_hash": "e9aa5f646b94f248e63e44377cd7cc0d28bf65d390929b924fd0fc06b4f1872e",
+      "title": "Module ngx_http_limit_req_module",
+      "url": "https://nginx.org/en/docs/http/ngx_http_limit_req_module.html"
+    }
+  ]
+}

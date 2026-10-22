@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "id": "result-11",
+      "url": "https://docs.openshift.com/ko/documentation/red_hat_developer_tools/1/html/using_rust_1.88.0_toolset/changes-in-rust-1-88-0-toolset",
+      "title": "Chapter 5. Changes in Rust 1.88.0 Toolset | Using Rust 1.88.0 Toolset | Red Hat Developer Tools | 1 | Red Hat Documentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\n## Red Hat Developer Tools\n\n# Chapter 5. Changes in Rust 1.88.0 Toolset\n\n* * *\n\nRed Hat Enterprise Linux provides Rust Toolset at version 1.88.0. The previous version was 1.84.1. Notable enhancements include the Rust 2024 Edition, async closures, let chains, naked functions, high-performance computing, trait upcasting, and standard library improvements.\n\n  * Rust 2024 Edition: The Rust 2024 Edition is now stable. It introduces changes such as refined capture rules for `impl Trait`, and safer `extern` blocks which now require the `unsafe` keyword.\n  * Async Closures: The `async` closures are now stable.\n  * Let Chains: In `if` and `while` conditions, you can use `&&` to chain multiple `let` statements, which shortens complex conditional logic. Let chains are available only in the Rust 2024 Edition.\n  * Naked Functions: Developers can now define \"naked functions\" using the `#[unsafe(naked)]` attribute. These functions do not have a compiler-generated prologue or epilogue, providing full control over the assembly code.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "c59a923ebe8aac848b9971535863ff382a1f752d0227bfd97d7c9d26559f70aa"
+    }
+  ],
+  "omitted_count": 17,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 440,
+  "max_tokens": 512
+}

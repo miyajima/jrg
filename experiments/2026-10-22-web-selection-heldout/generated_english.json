@@ -1,0 +1,34 @@
+[
+  {
+    "id": "sqlite",
+    "query_en": "Does enabling foreign key constraints in SQLite require a setting for each connection? What happens if the setting is changed during a transaction?"
+  },
+  {
+    "id": "postgres",
+    "query_en": "Do PostgreSQL unique constraints treat rows containing NULL as duplicates? Is there a setting to treat NULL values as duplicates of each other?"
+  },
+  {
+    "id": "docker",
+    "query_en": "With a read-only Docker bind mount, are nested submounts also read-only? Does this differ by Linux kernel version?"
+  },
+  {
+    "id": "kubernetes",
+    "query_en": "When a Kubernetes Secret is used as a volume, when are changes to its values reflected? Are mounts using subPath also updated automatically?"
+  },
+  {
+    "id": "fetch",
+    "query_en": "What must be specified to send cookies to another origin using browser fetch? What restrictions apply to cookie SameSite settings and server-side permissions?"
+  },
+  {
+    "id": "redis",
+    "query_en": "What happens to the expiration of a Redis key set with EXPIRE when it is updated using SET or INCR? What happens when the expiration is set to zero or a negative value?"
+  },
+  {
+    "id": "go",
+    "query_en": "Does calling a Go context CancelFunc wait for the operation to finish? What problems arise if the cancellation function is left uncalled?"
+  },
+  {
+    "id": "s3",
+    "query_en": "Does S3 ListObjectsV2 return results in the same order for regular buckets and directory buckets? Is the token used to retrieve subsequent results an actual key name?"
+  }
+]

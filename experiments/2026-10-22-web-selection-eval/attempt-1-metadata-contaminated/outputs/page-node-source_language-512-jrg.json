@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "id": "node",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html",
+      "title": "Modules: CommonJS modules | Node.js v26.12.0 Documentation",
+      "blocks": [
+        {
+          "id": "line-137",
+          "kind": "heading",
+          "text": "## Modules: CommonJS modules#\n",
+          "start_line": 137,
+          "end_line": 137
+        },
+        {
+          "id": "line-247",
+          "kind": "heading",
+          "text": "### Loading ECMAScript modules using require()#\n",
+          "parent_id": "line-137",
+          "start_line": 247,
+          "end_line": 247
+        },
+        {
+          "id": "line-251",
+          "kind": "table",
+          "text": "| Version | Changes |\n| v22.13.0 | This feature no longer emits an experimental warning by default, though the warning can still be emitted by --trace-require-module. |\n| v23.0.0, v22.12.0 | This feature is no longer behind the --experimental-require-module CLI flag. |\n| v22.12.0 | Support 'module.exports' interop export in require(esm). |\n| v22.0.0 | Added in: v22.0.0 |\n",
+          "parent_id": "line-247",
+          "start_line": 251,
+          "end_line": 255
+        },
+        {
+          "id": "line-263",
+          "kind": "list",
+          "text": "- The module is fully synchronous (contains no top-level await); and\n",
+          "parent_id": "line-247",
+          "start_line": 263,
+          "end_line": 263
+        },
+        {
+          "id": "line-283",
+          "kind": "paragraph",
+          "text": "A CommonJS module can load them with require():\n",
+          "parent_id": "line-247",
+          "start_line": 283,
+          "end_line": 283
+        },
+        {
+          "id": "line-346",
+          "kind": "paragraph",
+          "text": "If the module being require()'d contains top-level await, or the module graph it imports contains top-level await, ERR_REQUIRE_ASYNC_MODULE will be thrown. In this case, users should load the asynchronous module using import().\n",
+          "parent_id": "line-247",
+          "start_line": 346,
+          "end_line": 346
+        }
+      ],
+      "source_hash": "7fb29625c4d8281a74217e9569dac2d979ac8469a0cb9ae0c691d15e77c4aa46"
+    }
+  ],
+  "omitted_count": 357,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 502,
+  "max_tokens": 512
+}

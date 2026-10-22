@@ -1,0 +1,136 @@
+{
+  "documents": [
+    {
+      "id": "github-rate",
+      "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "title": "Rate limits for the REST API - GitHub Docs",
+      "blocks": [
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "# Rate limits for the REST API\n",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-5",
+          "kind": "paragraph",
+          "text": "Learn about REST API rate limits, how to avoid exceeding them, and what to do if you do exceed them.\n",
+          "parent_id": "line-3",
+          "start_line": 5,
+          "end_line": 5
+        },
+        {
+          "id": "line-11",
+          "kind": "heading",
+          "text": "## About primary rate limits\n",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-31",
+          "kind": "heading",
+          "text": "### Primary rate limit for Git LFS access\n",
+          "parent_id": "line-11",
+          "start_line": 31,
+          "end_line": 31
+        },
+        {
+          "id": "line-33",
+          "kind": "paragraph",
+          "text": "API requests are required when you upload or download Git LFS content. These count towards a separate rate limiting bucket with a limit of 300 requests per minute for unauthenticated requests and 3,000 requests per minute for authenticated requests.\n",
+          "parent_id": "line-31",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "id": "line-45",
+          "kind": "heading",
+          "text": "### Primary rate limit for OAuth apps\n",
+          "parent_id": "line-11",
+          "start_line": 45,
+          "end_line": 45
+        },
+        {
+          "id": "line-58",
+          "kind": "paragraph",
+          "text": "Note\n",
+          "parent_id": "line-45",
+          "start_line": 58,
+          "end_line": 58
+        },
+        {
+          "id": "line-60",
+          "kind": "paragraph",
+          "text": "Never include your app's client secret in client-side code or in code that runs on a user device. The client secret can be used to generate OAuth access tokens for users who have authorized your app, so you should always keep the client secret secure.\n",
+          "parent_id": "line-45",
+          "start_line": 60,
+          "end_line": 60
+        },
+        {
+          "id": "line-68",
+          "kind": "heading",
+          "text": "## About secondary rate limits\n",
+          "parent_id": "line-3",
+          "start_line": 68,
+          "end_line": 68
+        },
+        {
+          "id": "line-78",
+          "kind": "list",
+          "text": "- Make too many requests per minute. No more than 90 seconds of CPU time per 60 seconds of real time is allowed. No more than 60 seconds of this CPU time may be for the GraphQL API. You can roughly estimate the CPU time by measuring the total response time for your API requests.\n",
+          "parent_id": "line-68",
+          "start_line": 78,
+          "end_line": 78
+        },
+        {
+          "id": "line-88",
+          "kind": "heading",
+          "text": "### Calculating points for the secondary rate limit\n",
+          "parent_id": "line-68",
+          "start_line": 88,
+          "end_line": 88
+        },
+        {
+          "id": "line-98",
+          "kind": "paragraph",
+          "text": "Some REST API endpoints have a different point cost that is not shared publicly.\n",
+          "parent_id": "line-88",
+          "start_line": 98,
+          "end_line": 98
+        },
+        {
+          "id": "line-121",
+          "kind": "heading",
+          "text": "## Exceeding the rate limit\n",
+          "parent_id": "line-3",
+          "start_line": 121,
+          "end_line": 121
+        },
+        {
+          "id": "line-123",
+          "kind": "paragraph",
+          "text": "If you exceed your primary rate limit, you will receive a 403 or 429 response, and the x-ratelimit-remaining header will be 0. You should not retry your request until after the time specified by the x-ratelimit-reset header.\n",
+          "parent_id": "line-121",
+          "start_line": 123,
+          "end_line": 123
+        },
+        {
+          "id": "line-125",
+          "kind": "paragraph",
+          "text": "If you exceed a secondary rate limit, you will receive a 403 or 429 response and an error message that indicates that you exceeded a secondary rate limit. If the retry-after response header is present, you should not retry your request until after that many seconds has elapsed. If the x-ratelimit-remaining header is 0, you should not retry your request until after the time, in UTC epoch seconds, specified by the x-ratelimit-reset header. Otherwise, wait for at least one minute before retrying. If your request continues to fail due to a secondary rate limit, wait for an exponentially increasing amount of time between retries, and throw an error after a specific number of retries.\n",
+          "parent_id": "line-121",
+          "start_line": 125,
+          "end_line": 125
+        }
+      ],
+      "source_hash": "e9556f31e117f6001daa6e46b8306f4a70cdd3b02eecfa4c8784411117726579"
+    }
+  ],
+  "omitted_count": 49,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1018,
+  "max_tokens": 1024
+}

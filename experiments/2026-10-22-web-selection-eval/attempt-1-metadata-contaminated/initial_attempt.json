@@ -1,0 +1,6 @@
+{
+  "stage": "first case input validation before selection",
+  "error": "blocks need nonempty text and a supported kind",
+  "resolution": "empty body uses original title without dropping candidates",
+  "refrozen_at": "2026-10-22T03:40:12.006518+00:00"
+}

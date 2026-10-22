@@ -1,0 +1,136 @@
+{
+  "documents": [
+    {
+      "id": "go",
+      "url": "https://pkg.go.dev/context",
+      "title": "context package - context - Go Packages",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "## Documentation ¶\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-3",
+          "kind": "heading",
+          "text": "### Overview ¶\n",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-11",
+          "kind": "paragraph",
+          "text": "The WithCancel, WithDeadline, and WithTimeout functions take a Context (the parent) and return a derived Context (the child) and a CancelFunc. Calling the CancelFunc directly cancels the child and its children, removes the parent's reference to the child, and stops any associated timers. Failing to call the CancelFunc leaks the child and its children until the parent is canceled. The go vet tool checks that CancelFuncs are used on all control-flow paths.\n",
+          "parent_id": "line-3",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-13",
+          "kind": "paragraph",
+          "text": "The WithCancelCause function returns a CancelCauseFunc, which takes an error and records it as the cancellation cause. WithDeadlineCause and WithTimeoutCause take a cause to use when the deadline expires. Calling Cause on the canceled context or any of its children retrieves the cause. If no cause is specified, Cause(ctx) returns the same value as ctx.Err().\n",
+          "parent_id": "line-3",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-100",
+          "kind": "heading",
+          "text": "### Functions ¶\n",
+          "parent_id": "line-1",
+          "start_line": 100,
+          "end_line": 100
+        },
+        {
+          "id": "line-102",
+          "kind": "heading",
+          "text": "#### func AfterFunc ¶ added in go1.21.0\n",
+          "parent_id": "line-100",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "id": "line-112",
+          "kind": "paragraph",
+          "text": "Calling the returned stop function stops the association of ctx with f. It returns true if the call stopped f from being run. If stop returns false, either the context is canceled and f has been started in its own goroutine; or f was already stopped. The stop function does not wait for f to complete before returning. If the caller needs to know whether f is completed, it must coordinate with f explicitly.\n",
+          "parent_id": "line-102",
+          "start_line": 112,
+          "end_line": 112
+        },
+        {
+          "id": "line-118",
+          "kind": "paragraph",
+          "text": "This example uses AfterFunc to define a function which waits on a sync.Cond, stopping the wait when a context is canceled.\n",
+          "parent_id": "line-102",
+          "start_line": 118,
+          "end_line": 118
+        },
+        {
+          "id": "line-269",
+          "kind": "paragraph",
+          "text": "This example uses AfterFunc to define a function which combines the cancellation signals of two Contexts.\n",
+          "parent_id": "line-102",
+          "start_line": 269,
+          "end_line": 269
+        },
+        {
+          "id": "line-519",
+          "kind": "heading",
+          "text": "### Types ¶\n",
+          "parent_id": "line-1",
+          "start_line": 519,
+          "end_line": 519
+        },
+        {
+          "id": "line-521",
+          "kind": "heading",
+          "text": "#### type CancelCauseFunc ¶ added in go1.20\n",
+          "parent_id": "line-519",
+          "start_line": 521,
+          "end_line": 521
+        },
+        {
+          "id": "line-527",
+          "kind": "paragraph",
+          "text": "A CancelCauseFunc behaves like a CancelFunc but additionally sets the cancellation cause. This cause can be retrieved by calling Cause on the canceled Context or on any of its derived Contexts.\n",
+          "parent_id": "line-521",
+          "start_line": 527,
+          "end_line": 527
+        },
+        {
+          "id": "line-529",
+          "kind": "paragraph",
+          "text": "If the context has already been canceled, CancelCauseFunc does not set the cause. For example, if childContext is derived from parentContext:\n",
+          "parent_id": "line-521",
+          "start_line": 529,
+          "end_line": 529
+        },
+        {
+          "id": "line-535",
+          "kind": "heading",
+          "text": "#### type CancelFunc ¶\n",
+          "parent_id": "line-519",
+          "start_line": 535,
+          "end_line": 535
+        },
+        {
+          "id": "line-541",
+          "kind": "paragraph",
+          "text": "A CancelFunc tells an operation to abandon its work. A CancelFunc does not wait for the work to stop. A CancelFunc may be called by multiple goroutines simultaneously. After the first call, subsequent calls to a CancelFunc do nothing.\n",
+          "parent_id": "line-535",
+          "start_line": 541,
+          "end_line": 541
+        }
+      ],
+      "source_hash": "9cddbc320f7f29bb568d856dd81f3afd1a5a612a828c770858110fdfd9fbe5ad"
+    }
+  ],
+  "omitted_count": 130,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 1014,
+  "max_tokens": 1024
+}

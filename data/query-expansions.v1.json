@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "version": "2026-10-22.1",
+  "rules": [
+    {"id":"nonpositive","phrases":["zero or negative","zero or a negative value","negative or zero","non-positive","nonpositive","at most zero","less than or equal to zero","less than or equal to 0"],"aliases":["non-positive","at most zero","less than or equal to zero"]},
+    {"id":"nonnegative","phrases":["zero or positive","zero or a positive value","positive or zero","non-negative","nonnegative","at least zero","greater than or equal to zero","greater than or equal to 0"],"aliases":["non-negative","at least zero","greater than or equal to zero"]},
+    {"id":"positive","phrases":["strictly positive","greater than zero","greater than 0"],"aliases":["strictly positive","greater than zero"]},
+    {"id":"negative","phrases":["strictly negative","less than zero","less than 0"],"aliases":["strictly negative","less than zero"]},
+    {"id":"unbounded","phrases":["unlimited","unbounded","no upper limit","without an upper limit"],"aliases":["unlimited","unbounded","no upper limit"]},
+    {"id":"rate-limit","phrases":["rate limit","rate limits","rate limiting","throttling","throttled"],"aliases":["rate limiting","throttling","throttled"]},
+    {"id":"retry-backoff","require_any":["retry","retries","retrying","backoff"],"phrases":["exponential backoff","exponentially increasing delay","exponentially increasing wait"],"aliases":["exponential backoff","exponentially increasing delay"]},
+    {"id":"s3-general-purpose","require_any":["s3","listobjectsv2"],"phrases":["regular bucket","regular buckets","ordinary bucket","ordinary buckets","general purpose bucket","general purpose buckets"],"aliases":["general purpose buckets"]}
+  ]
+}

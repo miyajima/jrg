@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "\nBack to changelog\n\nImprovement\n\nMay 7, 2026 • 1 minute read\n\n# GitHub Actions concurrency groups now allow larger queues\n\nImage\n\nYou can now allow multiple jobs or workflow runs to wait in the same GitHub Actions concurrency group instead of being limited to a single pending run.\n\nPreviously, a concurrency group could have one run in progress and one pending run. If another run entered the group, the pending run was canceled and replaced. Now, you can configure concurrency groups to queue multiple pending runs and process them sequentially, with support for up to 100 queued jobs or workflow runs per concurrency group.\n\nThis makes it easier to manage deployments and other workflows that need to run in order against a shared environment or resource. Increased queuing can be enabled by adding `queue: max` to the concurrency block in YAML when `cancel-in-progress` is `false` or not set.\n\nFor more information, see the GitHub Actions documentation on controlling the concurrency of workflows and jobs.--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-3",
+      "source_hash": "c7dd8aed9eed869ae9fae6240be2190c00f368769f0cd99637bf112147604195",
+      "title": "GitHub Actions concurrency groups now allow larger queues - GitHub Changelog",
+      "url": "https://github.blog/changelog/2026-05-07-github-actions-concurrency-groups-now-allow-larger-queues/"
+    },
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-8",
+      "source_hash": "74c7fd2401a57dbc62ad621b74e41b5a24015ccfbc0f9d7fef4d5955fe396809",
+      "title": "3. Triggers, filters and concurrency | learn",
+      "url": "https://spareilleux.github.io/learn/github-actions/03-triggers/"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 452,
+  "max_tokens": 512
+}

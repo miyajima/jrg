@@ -1,0 +1,336 @@
+{
+  "documents": [
+    {
+      "id": "fetch",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+      "title": "Using the Fetch API - Web APIs | MDN",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "# Using the Fetch API\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-3",
+          "kind": "paragraph",
+          "text": "The Fetch API provides a JavaScript interface for making HTTP requests and processing the responses.\n",
+          "parent_id": "line-1",
+          "start_line": 3,
+          "end_line": 3
+        },
+        {
+          "id": "line-7",
+          "kind": "paragraph",
+          "text": "With the Fetch API, you make a request by calling fetch(), which is available as a global function in both window and worker contexts. You pass it a Request object or a string containing the URL to fetch, along with an optional argument to configure the request.\n",
+          "parent_id": "line-1",
+          "start_line": 7,
+          "end_line": 7
+        },
+        {
+          "id": "line-11",
+          "kind": "paragraph",
+          "text": "Here's a minimal function that uses fetch() to retrieve some JSON data from a server:\n",
+          "parent_id": "line-1",
+          "start_line": 11,
+          "end_line": 11
+        },
+        {
+          "id": "line-13",
+          "kind": "paragraph",
+          "text": "js\n",
+          "parent_id": "line-1",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-33",
+          "kind": "paragraph",
+          "text": "We declare a string containing the URL and then call fetch(), passing the URL with no extra options.\n",
+          "parent_id": "line-1",
+          "start_line": 33,
+          "end_line": 33
+        },
+        {
+          "id": "line-41",
+          "kind": "heading",
+          "text": "## Making a request\n",
+          "parent_id": "line-1",
+          "start_line": 41,
+          "end_line": 41
+        },
+        {
+          "id": "line-43",
+          "kind": "paragraph",
+          "text": "To make a request, call fetch(), passing in:\n",
+          "parent_id": "line-41",
+          "start_line": 43,
+          "end_line": 43
+        },
+        {
+          "id": "line-51",
+          "kind": "heading",
+          "text": "### Setting the method\n",
+          "parent_id": "line-41",
+          "start_line": 51,
+          "end_line": 51
+        },
+        {
+          "id": "line-55",
+          "kind": "paragraph",
+          "text": "js\n",
+          "parent_id": "line-51",
+          "start_line": 55,
+          "end_line": 55
+        },
+        {
+          "id": "line-57",
+          "kind": "code",
+          "text": "```\nconst response = await fetch(\"https://example.org/post\", {\nmethod: \"POST\",\n// …\n});\n\n```\n",
+          "parent_id": "line-51",
+          "start_line": 57,
+          "end_line": 63
+        },
+        {
+          "id": "line-218",
+          "kind": "heading",
+          "text": "### Making cross-origin requests\n",
+          "parent_id": "line-41",
+          "start_line": 218,
+          "end_line": 218
+        },
+        {
+          "id": "line-220",
+          "kind": "paragraph",
+          "text": "Whether a request can be made cross-origin or not is determined by the value of the RequestInit.mode option. This may take one of three values: cors, same-origin, or no-cors.\n",
+          "parent_id": "line-218",
+          "start_line": 220,
+          "end_line": 220
+        },
+        {
+          "id": "line-224",
+          "kind": "list",
+          "text": "- Setting mode to same-origin disallows cross-origin requests completely.\n",
+          "parent_id": "line-218",
+          "start_line": 224,
+          "end_line": 224
+        },
+        {
+          "id": "line-230",
+          "kind": "heading",
+          "text": "### Including credentials\n",
+          "parent_id": "line-41",
+          "start_line": 230,
+          "end_line": 230
+        },
+        {
+          "id": "line-240",
+          "kind": "paragraph",
+          "text": "By default, credentials are only included in same-origin requests. To customize this behavior, as well as to control whether the browser respects any Set-Cookie response headers, set the credentials option, which can take one of the following three values:\n",
+          "parent_id": "line-230",
+          "start_line": 240,
+          "end_line": 240
+        },
+        {
+          "id": "line-244",
+          "kind": "list",
+          "text": "- same-origin (the default): only send and include credentials for same-origin requests.\n",
+          "parent_id": "line-230",
+          "start_line": 244,
+          "end_line": 244
+        },
+        {
+          "id": "line-248",
+          "kind": "paragraph",
+          "text": "Note that if a cookie's SameSite attribute is set to Strict or Lax, then the cookie will not be sent cross-site, even if credentials is set to include.\n",
+          "parent_id": "line-230",
+          "start_line": 248,
+          "end_line": 248
+        },
+        {
+          "id": "line-250",
+          "kind": "paragraph",
+          "text": "Including credentials in cross-origin requests can make a site vulnerable to CSRF attacks, so even if credentials is set to include, the server must also agree to their inclusion by including the Access-Control-Allow-Credentials header in its response. Additionally, in this situation the server must explicitly specify the client's origin in the Access-Control-Allow-Origin response header (that is, * is not allowed).\n",
+          "parent_id": "line-230",
+          "start_line": 250,
+          "end_line": 250
+        },
+        {
+          "id": "line-258",
+          "kind": "heading",
+          "text": "### Creating a Request object\n",
+          "parent_id": "line-41",
+          "start_line": 258,
+          "end_line": 258
+        },
+        {
+          "id": "line-260",
+          "kind": "paragraph",
+          "text": "The Request() constructor takes the same arguments as fetch() itself. This means that instead of passing options into fetch(), you can pass the same options to the Request() constructor, and then pass that object to fetch().\n",
+          "parent_id": "line-258",
+          "start_line": 260,
+          "end_line": 260
+        },
+        {
+          "id": "line-278",
+          "kind": "paragraph",
+          "text": "However, we could rewrite this to pass the same arguments to the Request() constructor:\n",
+          "parent_id": "line-258",
+          "start_line": 278,
+          "end_line": 278
+        },
+        {
+          "id": "line-328",
+          "kind": "heading",
+          "text": "## Canceling a request\n",
+          "parent_id": "line-1",
+          "start_line": 328,
+          "end_line": 328
+        },
+        {
+          "id": "line-334",
+          "kind": "paragraph",
+          "text": "js\n",
+          "parent_id": "line-328",
+          "start_line": 334,
+          "end_line": 334
+        },
+        {
+          "id": "line-336",
+          "kind": "code",
+          "text": "```\nconst controller = new AbortController();\n\nconst fetchButton = document.querySelector(\"#fetch\");\nfetchButton.addEventListener(\"click\", async () => {\ntry {\nconsole.log(\"Starting fetch\");\nconst response = await fetch(\"https://example.org/get\", {\nsignal: controller.signal,\n});\nconsole.log(`Response: ${response.status}`);\n} catch (e) {\nconsole.error(`Error: ${e}`);\n}\n});\n\nconst cancelButton = document.querySelector(\"#cancel\");\ncancelButton.addEventListener(\"click\", () => {\ncontroller.abort();\nconsole.log(\"Canceled fetch\");\n});\n\n```\n",
+          "parent_id": "line-328",
+          "start_line": 336,
+          "end_line": 358
+        },
+        {
+          "id": "line-362",
+          "kind": "paragraph",
+          "text": "js\n",
+          "parent_id": "line-328",
+          "start_line": 362,
+          "end_line": 362
+        },
+        {
+          "id": "line-380",
+          "kind": "heading",
+          "text": "## Handling the response\n",
+          "parent_id": "line-1",
+          "start_line": 380,
+          "end_line": 380
+        },
+        {
+          "id": "line-410",
+          "kind": "heading",
+          "text": "### Checking the response type\n",
+          "parent_id": "line-380",
+          "start_line": 410,
+          "end_line": 410
+        },
+        {
+          "id": "line-414",
+          "kind": "list",
+          "text": "- basic: the request was a same-origin request.\n",
+          "parent_id": "line-410",
+          "start_line": 414,
+          "end_line": 414
+        },
+        {
+          "id": "line-607",
+          "kind": "heading",
+          "text": "### Locked and disturbed streams\n",
+          "parent_id": "line-380",
+          "start_line": 607,
+          "end_line": 607
+        },
+        {
+          "id": "line-615",
+          "kind": "paragraph",
+          "text": "This means it's not possible to read the same response (or request) body more than once:\n",
+          "parent_id": "line-607",
+          "start_line": 615,
+          "end_line": 615
+        },
+        {
+          "id": "line-691",
+          "kind": "heading",
+          "text": "## See also\n",
+          "parent_id": "line-1",
+          "start_line": 691,
+          "end_line": 691
+        },
+        {
+          "id": "line-693",
+          "kind": "list",
+          "text": "- Service Worker API\n",
+          "parent_id": "line-691",
+          "start_line": 693,
+          "end_line": 693
+        },
+        {
+          "id": "line-695",
+          "kind": "list",
+          "text": "- Streams API\n",
+          "parent_id": "line-691",
+          "start_line": 695,
+          "end_line": 695
+        },
+        {
+          "id": "line-697",
+          "kind": "list",
+          "text": "- CORS\n",
+          "parent_id": "line-691",
+          "start_line": 697,
+          "end_line": 697
+        },
+        {
+          "id": "line-699",
+          "kind": "list",
+          "text": "- HTTP\n",
+          "parent_id": "line-691",
+          "start_line": 699,
+          "end_line": 699
+        },
+        {
+          "id": "line-701",
+          "kind": "list",
+          "text": "- Fetch examples on GitHub\n",
+          "parent_id": "line-691",
+          "start_line": 701,
+          "end_line": 701
+        },
+        {
+          "id": "line-703",
+          "kind": "heading",
+          "text": "## Help improve MDN\n",
+          "parent_id": "line-1",
+          "start_line": 703,
+          "end_line": 703
+        },
+        {
+          "id": "line-707",
+          "kind": "paragraph",
+          "text": "Yes\n",
+          "parent_id": "line-703",
+          "start_line": 707,
+          "end_line": 707
+        },
+        {
+          "id": "line-709",
+          "kind": "paragraph",
+          "text": "No\n",
+          "parent_id": "line-703",
+          "start_line": 709,
+          "end_line": 709
+        }
+      ],
+      "source_hash": "2858e831d9d4e4329d75aa2af75528ab82d3825b6cc167ac75d16a079cdc41dc"
+    }
+  ],
+  "omitted_count": 137,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2047,
+  "max_tokens": 2048
+}

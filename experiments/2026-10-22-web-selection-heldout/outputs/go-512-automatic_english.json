@@ -1,0 +1,80 @@
+{
+  "documents": [
+    {
+      "id": "go",
+      "url": "https://pkg.go.dev/context",
+      "title": "context package - context - Go Packages",
+      "blocks": [
+        {
+          "id": "line-1",
+          "kind": "heading",
+          "text": "## Documentation ¶\n",
+          "start_line": 1,
+          "end_line": 1
+        },
+        {
+          "id": "line-100",
+          "kind": "heading",
+          "text": "### Functions ¶\n",
+          "parent_id": "line-1",
+          "start_line": 100,
+          "end_line": 100
+        },
+        {
+          "id": "line-102",
+          "kind": "heading",
+          "text": "#### func AfterFunc ¶ added in go1.21.0\n",
+          "parent_id": "line-100",
+          "start_line": 102,
+          "end_line": 102
+        },
+        {
+          "id": "line-112",
+          "kind": "paragraph",
+          "text": "Calling the returned stop function stops the association of ctx with f. It returns true if the call stopped f from being run. If stop returns false, either the context is canceled and f has been started in its own goroutine; or f was already stopped. The stop function does not wait for f to complete before returning. If the caller needs to know whether f is completed, it must coordinate with f explicitly.\n",
+          "parent_id": "line-102",
+          "start_line": 112,
+          "end_line": 112
+        },
+        {
+          "id": "line-519",
+          "kind": "heading",
+          "text": "### Types ¶\n",
+          "parent_id": "line-1",
+          "start_line": 519,
+          "end_line": 519
+        },
+        {
+          "id": "line-535",
+          "kind": "heading",
+          "text": "#### type CancelFunc ¶\n",
+          "parent_id": "line-519",
+          "start_line": 535,
+          "end_line": 535
+        },
+        {
+          "id": "line-537",
+          "kind": "code",
+          "text": "```\ntype CancelFunc func()\n```\n",
+          "parent_id": "line-535",
+          "start_line": 537,
+          "end_line": 539
+        },
+        {
+          "id": "line-541",
+          "kind": "paragraph",
+          "text": "A CancelFunc tells an operation to abandon its work. A CancelFunc does not wait for the work to stop. A CancelFunc may be called by multiple goroutines simultaneously. After the first call, subsequent calls to a CancelFunc do nothing.\n",
+          "parent_id": "line-535",
+          "start_line": 541,
+          "end_line": 541
+        }
+      ],
+      "source_hash": "9cddbc320f7f29bb568d856dd81f3afd1a5a612a828c770858110fdfd9fbe5ad"
+    }
+  ],
+  "omitted_count": 137,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 512,
+  "max_tokens": 512
+}

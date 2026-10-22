@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-7",
+      "url": "https://www.fixdevs.com/blog/node-err-require-esm/",
+      "title": "Fix: Error [ERR_REQUIRE_ESM]: require() of ES Module not supported - FixDevs",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "## The limitation that survives the upgrade: top-level await\n\nEven on Node 22.12+, 20.19+, or 23+, `require()` still cannot load an ES module that uses top-level `await`, directly or in anything it imports. `require()` has to return synchronously, and a module suspended on an unresolved `await` cannot produce a value yet. Node gives this its own distinct error code, `ERR_REQUIRE_ASYNC_MODULE`, rather than falling back to `ERR_REQUIRE_ESM`:\n    \n    `Error [ERR_REQUIRE_ASYNC_MODULE]: require() of an ES Module ... that uses top-level await is not supported.`\n\nThis is the case that catches people who already upgraded and are confused why the error persists. There is no flag that fixes it, but there is one that helps you find it: `--experimental-print-required-tla` prints which module in the dependency tree contains the top-level `await` that is blocking the `require()` call, since it is often several layers deep in a transitive dependency rather than in the package you actually required. The fix is dynamic `import()`, covered below.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "d6ec0b738998bbe8570d637a918dc5b4230a64aacf6f5546a6bb58c8df9a418a"
+    },
+    {
+      "id": "result-17",
+      "url": "https://www.reddit.com/r/node/comments/1n5vigs",
+      "title": "TIL that you can require() ESM by default in Node 20+",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": "TIL that you can require() ESM by default in Node 20+"
+        }
+      ],
+      "source_hash": "5acba213119bf94b20d9f46a2c024518e7ab116854631c4cc574f9462ded33a5"
+    }
+  ],
+  "omitted_count": 15,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 489,
+  "max_tokens": 512
+}

@@ -1,0 +1,1719 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "View a markdown version of this page\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "start_line": 3,
+          "text": "ListObjectsV2 - Amazon S3\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "paragraph",
+          "start_line": 5,
+          "text": "DocumentationAmazon Simple Storage Service (S3)API Reference\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "paragraph",
+          "start_line": 7,
+          "text": "Request SyntaxURI Request ParametersRequest BodyResponse SyntaxResponse ElementsErrorsExamplesSee Also\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "heading",
+          "start_line": 9,
+          "text": "# ListObjectsV2\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "paragraph",
+          "parent_id": "line-9",
+          "start_line": 11,
+          "text": "Returns some or all (up to 1,000) of the objects in a bucket with each request. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. A 200 OK response can contain valid or invalid XML. Make sure to design your application to parse the contents of the response and handle it appropriately. For more information about listing objects, see Listing object keys programmatically in the Amazon S3 User Guide. To get a list of your buckets, see ListBuckets.\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 13,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 15,
+          "text": "- General purpose bucket - For general purpose buckets, ListObjectsV2 doesn't return prefixes that are related only to in-progress multipart uploads.\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 17,
+          "text": "- Directory buckets - For directory buckets, ListObjectsV2 response includes the prefixes that are related only to in-progress multipart uploads.\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 19,
+          "text": "- Directory buckets - For directory buckets, you must make requests for this API operation to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format https://amzn-s3-demo-bucket.s3express-zone-id.region-code.amazonaws.com/key-name . Path-style requests are not supported. For more information about endpoints in Availability Zones, see Regional and Zonal endpoints for directory buckets in Availability Zones in the Amazon S3 User Guide. For more information about endpoints in Local Zones, see Concepts for directory buckets in Local Zones in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "paragraph",
+          "parent_id": "line-13",
+          "start_line": 21,
+          "text": "Permissions\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 23,
+          "text": "- General purpose bucket permissions - To use this operation, you must have READ access to the bucket. You must have permission to perform the s3:ListBucket action. The bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see Permissions Related to Bucket Subresource Operations and Managing Access Permissions to Your Amazon S3 Resources in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 25,
+          "text": "- Directory bucket permissions - To grant access to this API operation on a directory bucket, we recommend that you use the CreateSession API operation for session-based authorization. Specifically, you grant the s3express:CreateSession permission to the directory bucket in a bucket policy or an IAM identity-based policy. Then, you make the CreateSession API call on the bucket to obtain a session token. With the session token in your request header, you can make API requests to this operation. After the session token expires, you make another CreateSession API call to generate a new session token for use. AWS CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see CreateSession.\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "paragraph",
+          "parent_id": "line-13",
+          "start_line": 27,
+          "text": "Sorting order of returned objects\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 29,
+          "text": "- General purpose bucket - For general purpose buckets, ListObjectsV2 returns objects in lexicographical order based on their key names.\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "list",
+          "parent_id": "line-13",
+          "start_line": 31,
+          "text": "- Directory bucket - For directory buckets, ListObjectsV2 does not return objects in lexicographical order.\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "paragraph",
+          "parent_id": "line-13",
+          "start_line": 33,
+          "text": "HTTP Host header syntax\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "paragraph",
+          "parent_id": "line-13",
+          "start_line": 35,
+          "text": "Directory buckets - The HTTP Host header syntax is Bucket-name.s3express-zone-id.region-code.amazonaws.com.\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 37,
+          "text": "###### Important\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 39,
+          "text": "This section describes the latest revision of this action. We recommend that you use this revised API operation for application development. For backward compatibility, Amazon S3 continues to support the prior version of this API operation, ListObjects.\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "paragraph",
+          "parent_id": "line-37",
+          "start_line": 41,
+          "text": "The following operations are related to ListObjectsV2:\n"
+        },
+        {
+          "end_line": 43,
+          "id": "line-43",
+          "kind": "list",
+          "parent_id": "line-37",
+          "start_line": 43,
+          "text": "- GetObject\n"
+        },
+        {
+          "end_line": 45,
+          "id": "line-45",
+          "kind": "list",
+          "parent_id": "line-37",
+          "start_line": 45,
+          "text": "- PutObject\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-47",
+          "kind": "list",
+          "parent_id": "line-37",
+          "start_line": 47,
+          "text": "- CreateBucket\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 49,
+          "text": "###### Important\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "paragraph",
+          "parent_id": "line-49",
+          "start_line": 51,
+          "text": "You must URL encode any signed header values that contain spaces. For example, if your header value is my file.txt, containing two spaces after my, you must URL encode this value to my%20%20file.txt.\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 53,
+          "text": "## Request Syntax\n"
+        },
+        {
+          "end_line": 62,
+          "id": "line-55",
+          "kind": "code",
+          "parent_id": "line-53",
+          "start_line": 55,
+          "text": "```\nGET /?list-type=2&continuation-token=ContinuationToken&delimiter=Delimiter&encoding-type=EncodingType&fetch-owner=FetchOwner&max-keys=MaxKeys&prefix=Prefix&start-after=StartAfter HTTP/1.1\nHost: Bucket.s3.amazonaws.com\nx-amz-request-payer: RequestPayer\nx-amz-expected-bucket-owner: ExpectedBucketOwner\nx-amz-optional-object-attributes: OptionalObjectAttributes\n\n```\n"
+        },
+        {
+          "end_line": 64,
+          "id": "line-64",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 64,
+          "text": "## URI Request Parameters\n"
+        },
+        {
+          "end_line": 66,
+          "id": "line-66",
+          "kind": "paragraph",
+          "parent_id": "line-64",
+          "start_line": 66,
+          "text": "The request uses the following URI parameters.\n"
+        },
+        {
+          "end_line": 68,
+          "id": "line-68",
+          "kind": "paragraph",
+          "parent_id": "line-64",
+          "start_line": 68,
+          "text": "Bucket\n"
+        },
+        {
+          "end_line": 70,
+          "id": "line-70",
+          "kind": "paragraph",
+          "parent_id": "line-64",
+          "start_line": 70,
+          "text": "Directory buckets - When you use this operation with a directory bucket, you must use virtual-hosted-style requests in the format Bucket-name.s3express-zone-id.region-code.amazonaws.com. Path-style requests are not supported. Directory bucket names must be unique in the chosen Zone (Availability Zone or Local Zone). Bucket names must follow the format bucket-base-name--zone-id--x-s3 (for example, amzn-s3-demo-bucket--usw2-az1--x-s3). For information about bucket naming restrictions, see Directory bucket naming rules in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 72,
+          "id": "line-72",
+          "kind": "paragraph",
+          "parent_id": "line-64",
+          "start_line": 72,
+          "text": "Access points - When you use this action with an access point for general purpose buckets, you must provide the alias of the access point in place of the bucket name or specify the access point ARN. When you use this action with an access point for directory buckets, you must provide the access point name in place of the bucket name. When using the access point ARN, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 74,
+          "id": "line-74",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 74,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 76,
+          "id": "line-76",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 76,
+          "text": "Object Lambda access points are not supported by directory buckets.\n"
+        },
+        {
+          "end_line": 78,
+          "id": "line-78",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 78,
+          "text": "S3 on Outposts - When you use this action with S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When you use this action with S3 on Outposts, the destination bucket must be the Outposts access point ARN or the access point alias. For more information about S3 on Outposts, see What is S3 on Outposts? in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 80,
+          "id": "line-80",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 80,
+          "text": "Required: Yes\n"
+        },
+        {
+          "end_line": 82,
+          "id": "line-82",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 82,
+          "text": "continuation-token\n"
+        },
+        {
+          "end_line": 84,
+          "id": "line-84",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 84,
+          "text": "ContinuationToken indicates to Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key. You can use this ContinuationToken for pagination of the list results.\n"
+        },
+        {
+          "end_line": 86,
+          "id": "line-86",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 86,
+          "text": "delimiter\n"
+        },
+        {
+          "end_line": 88,
+          "id": "line-88",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 88,
+          "text": "A delimiter is a character that you use to group keys.\n"
+        },
+        {
+          "end_line": 90,
+          "id": "line-90",
+          "kind": "paragraph",
+          "parent_id": "line-74",
+          "start_line": 90,
+          "text": "CommonPrefixes is filtered out from results if it is not lexicographically greater than the StartAfter value.\n"
+        },
+        {
+          "end_line": 92,
+          "id": "line-92",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 92,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 94,
+          "id": "line-94",
+          "kind": "list",
+          "parent_id": "line-92",
+          "start_line": 94,
+          "text": "- Directory buckets - For directory buckets, / is the only supported delimiter.\n"
+        },
+        {
+          "end_line": 96,
+          "id": "line-96",
+          "kind": "list",
+          "parent_id": "line-92",
+          "start_line": 96,
+          "text": "- Directory buckets - When you query ListObjectsV2 with a delimiter during in-progress multipart uploads, the CommonPrefixes response parameter contains the prefixes that are associated with the in-progress multipart uploads. For more information about multipart uploads, see Multipart Upload Overview in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 98,
+          "id": "line-98",
+          "kind": "paragraph",
+          "parent_id": "line-92",
+          "start_line": 98,
+          "text": "encoding-type\n"
+        },
+        {
+          "end_line": 100,
+          "id": "line-100",
+          "kind": "paragraph",
+          "parent_id": "line-92",
+          "start_line": 100,
+          "text": "Encoding type used by Amazon S3 to encode the object keys in the response. Responses are encoded only in UTF-8. An object key can contain any Unicode character. However, the XML 1.0 parser can't parse certain characters, such as characters with an ASCII value from 0 to 10. For characters that aren't supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response. For more information about characters to avoid in object key names, see Object key naming guidelines.\n"
+        },
+        {
+          "end_line": 102,
+          "id": "line-102",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 102,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 104,
+          "id": "line-104",
+          "kind": "paragraph",
+          "parent_id": "line-102",
+          "start_line": 104,
+          "text": "When using the URL encoding type, non-ASCII characters that are used in an object's key name will be percent-encoded according to UTF-8 code values. For example, the object test_file(3).png will appear as test_file%283%29.png.\n"
+        },
+        {
+          "end_line": 106,
+          "id": "line-106",
+          "kind": "paragraph",
+          "parent_id": "line-102",
+          "start_line": 106,
+          "text": "Valid Values: url\n"
+        },
+        {
+          "end_line": 108,
+          "id": "line-108",
+          "kind": "paragraph",
+          "parent_id": "line-102",
+          "start_line": 108,
+          "text": "fetch-owner\n"
+        },
+        {
+          "end_line": 110,
+          "id": "line-110",
+          "kind": "paragraph",
+          "parent_id": "line-102",
+          "start_line": 110,
+          "text": "The owner field is not present in ListObjectsV2 by default. If you want to return the owner field with each key in the result, then set the FetchOwner field to true.\n"
+        },
+        {
+          "end_line": 112,
+          "id": "line-112",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 112,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 114,
+          "id": "line-114",
+          "kind": "paragraph",
+          "parent_id": "line-112",
+          "start_line": 114,
+          "text": "Directory buckets - For directory buckets, the bucket owner is returned as the object owner for all objects.\n"
+        },
+        {
+          "end_line": 116,
+          "id": "line-116",
+          "kind": "paragraph",
+          "parent_id": "line-112",
+          "start_line": 116,
+          "text": "max-keys\n"
+        },
+        {
+          "end_line": 118,
+          "id": "line-118",
+          "kind": "paragraph",
+          "parent_id": "line-112",
+          "start_line": 118,
+          "text": "Sets the maximum number of keys returned in the response. By default, the action returns up to 1,000 key names. The response might contain fewer keys but will never contain more.\n"
+        },
+        {
+          "end_line": 120,
+          "id": "line-120",
+          "kind": "paragraph",
+          "parent_id": "line-112",
+          "start_line": 120,
+          "text": "prefix\n"
+        },
+        {
+          "end_line": 122,
+          "id": "line-122",
+          "kind": "paragraph",
+          "parent_id": "line-112",
+          "start_line": 122,
+          "text": "Limits the response to keys that begin with the specified prefix.\n"
+        },
+        {
+          "end_line": 124,
+          "id": "line-124",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 124,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 126,
+          "id": "line-126",
+          "kind": "paragraph",
+          "parent_id": "line-124",
+          "start_line": 126,
+          "text": "Directory buckets - For directory buckets, only prefixes that end in a delimiter (/) are supported.\n"
+        },
+        {
+          "end_line": 128,
+          "id": "line-128",
+          "kind": "paragraph",
+          "parent_id": "line-124",
+          "start_line": 128,
+          "text": "start-after\n"
+        },
+        {
+          "end_line": 130,
+          "id": "line-130",
+          "kind": "paragraph",
+          "parent_id": "line-124",
+          "start_line": 130,
+          "text": "StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket.\n"
+        },
+        {
+          "end_line": 132,
+          "id": "line-132",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 132,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 134,
+          "id": "line-134",
+          "kind": "paragraph",
+          "parent_id": "line-132",
+          "start_line": 134,
+          "text": "This functionality is not supported for directory buckets.\n"
+        },
+        {
+          "end_line": 136,
+          "id": "line-136",
+          "kind": "paragraph",
+          "parent_id": "line-132",
+          "start_line": 136,
+          "text": "x-amz-expected-bucket-owner\n"
+        },
+        {
+          "end_line": 138,
+          "id": "line-138",
+          "kind": "paragraph",
+          "parent_id": "line-132",
+          "start_line": 138,
+          "text": "The account ID of the expected bucket owner. If the account ID that you provide does not match the actual owner of the bucket, the request fails with the HTTP status code 403 Forbidden (access denied).\n"
+        },
+        {
+          "end_line": 140,
+          "id": "line-140",
+          "kind": "paragraph",
+          "parent_id": "line-132",
+          "start_line": 140,
+          "text": "x-amz-optional-object-attributes\n"
+        },
+        {
+          "end_line": 142,
+          "id": "line-142",
+          "kind": "paragraph",
+          "parent_id": "line-132",
+          "start_line": 142,
+          "text": "Specifies the optional fields that you want returned in the response. Fields that you do not specify are not returned.\n"
+        },
+        {
+          "end_line": 144,
+          "id": "line-144",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 144,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 146,
+          "id": "line-146",
+          "kind": "paragraph",
+          "parent_id": "line-144",
+          "start_line": 146,
+          "text": "This functionality is not supported for directory buckets.\n"
+        },
+        {
+          "end_line": 148,
+          "id": "line-148",
+          "kind": "paragraph",
+          "parent_id": "line-144",
+          "start_line": 148,
+          "text": "Valid Values: RestoreStatus\n"
+        },
+        {
+          "end_line": 150,
+          "id": "line-150",
+          "kind": "paragraph",
+          "parent_id": "line-144",
+          "start_line": 150,
+          "text": "x-amz-request-payer\n"
+        },
+        {
+          "end_line": 152,
+          "id": "line-152",
+          "kind": "paragraph",
+          "parent_id": "line-144",
+          "start_line": 152,
+          "text": "Confirms that the requester knows that she or he will be charged for the list objects request in V2 style. Bucket owners need not specify this parameter in their requests.\n"
+        },
+        {
+          "end_line": 154,
+          "id": "line-154",
+          "kind": "heading",
+          "parent_id": "line-64",
+          "start_line": 154,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 156,
+          "id": "line-156",
+          "kind": "paragraph",
+          "parent_id": "line-154",
+          "start_line": 156,
+          "text": "This functionality is not supported for directory buckets.\n"
+        },
+        {
+          "end_line": 158,
+          "id": "line-158",
+          "kind": "paragraph",
+          "parent_id": "line-154",
+          "start_line": 158,
+          "text": "Valid Values: requester\n"
+        },
+        {
+          "end_line": 160,
+          "id": "line-160",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 160,
+          "text": "## Request Body\n"
+        },
+        {
+          "end_line": 162,
+          "id": "line-162",
+          "kind": "paragraph",
+          "parent_id": "line-160",
+          "start_line": 162,
+          "text": "The request does not have a request body.\n"
+        },
+        {
+          "end_line": 164,
+          "id": "line-164",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 164,
+          "text": "## Response Syntax\n"
+        },
+        {
+          "end_line": 205,
+          "id": "line-166",
+          "kind": "code",
+          "parent_id": "line-164",
+          "start_line": 166,
+          "text": "```\nHTTP/1.1 200\nx-amz-request-charged: RequestCharged\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListBucketResult>\n<IsTruncated>boolean</IsTruncated>\n<Contents>\n<ChecksumAlgorithm>string</ChecksumAlgorithm>\n...\n<ChecksumType>string</ChecksumType>\n<ETag>string</ETag>\n<Key>string</Key>\n<LastModified>timestamp</LastModified>\n<Owner>\n<DisplayName>string</DisplayName>\n<ID>string</ID>\n</Owner>\n<RestoreStatus>\n<IsRestoreInProgress>boolean</IsRestoreInProgress>\n<RestoreExpiryDate>timestamp</RestoreExpiryDate>\n</RestoreStatus>\n<Size>long</Size>\n<StorageClass>string</StorageClass>\n</Contents>\n...\n<Name>string</Name>\n<Prefix>string</Prefix>\n<Delimiter>string</Delimiter>\n<MaxKeys>integer</MaxKeys>\n<CommonPrefixes>\n<Prefix>string</Prefix>\n</CommonPrefixes>\n...\n<EncodingType>string</EncodingType>\n<KeyCount>integer</KeyCount>\n<ContinuationToken>string</ContinuationToken>\n<NextContinuationToken>string</NextContinuationToken>\n<StartAfter>string</StartAfter>\n</ListBucketResult>\n```\n"
+        },
+        {
+          "end_line": 207,
+          "id": "line-207",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 207,
+          "text": "## Response Elements\n"
+        },
+        {
+          "end_line": 209,
+          "id": "line-209",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 209,
+          "text": "If the action is successful, the service sends back an HTTP 200 response.\n"
+        },
+        {
+          "end_line": 211,
+          "id": "line-211",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 211,
+          "text": "The response returns the following HTTP headers.\n"
+        },
+        {
+          "end_line": 213,
+          "id": "line-213",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 213,
+          "text": "x-amz-request-charged\n"
+        },
+        {
+          "end_line": 215,
+          "id": "line-215",
+          "kind": "paragraph",
+          "parent_id": "line-207",
+          "start_line": 215,
+          "text": "If present, indicates that the requester was successfully charged for the request. For more information, see Using Requester Pays buckets for storage transfers and usage in the Amazon Simple Storage Service user guide.\n"
+        },
+        {
+          "end_line": 217,
+          "id": "line-217",
+          "kind": "heading",
+          "parent_id": "line-207",
+          "start_line": 217,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 219,
+          "id": "line-219",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 219,
+          "text": "This functionality is not supported for directory buckets.\n"
+        },
+        {
+          "end_line": 221,
+          "id": "line-221",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 221,
+          "text": "Valid Values: requester\n"
+        },
+        {
+          "end_line": 223,
+          "id": "line-223",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 223,
+          "text": "The following data is returned in XML format by the service.\n"
+        },
+        {
+          "end_line": 225,
+          "id": "line-225",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 225,
+          "text": "ListBucketResult\n"
+        },
+        {
+          "end_line": 227,
+          "id": "line-227",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 227,
+          "text": "Root level tag for the ListBucketResult parameters.\n"
+        },
+        {
+          "end_line": 229,
+          "id": "line-229",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 229,
+          "text": "Required: Yes\n"
+        },
+        {
+          "end_line": 231,
+          "id": "line-231",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 231,
+          "text": "CommonPrefixes\n"
+        },
+        {
+          "end_line": 233,
+          "id": "line-233",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 233,
+          "text": "All of the keys (up to 1,000) that share the same prefix are grouped together. When counting the total numbers of returns by this API operation, this group of keys is considered as one item.\n"
+        },
+        {
+          "end_line": 235,
+          "id": "line-235",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 235,
+          "text": "A response can contain CommonPrefixes only if you specify a delimiter.\n"
+        },
+        {
+          "end_line": 237,
+          "id": "line-237",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 237,
+          "text": "CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by a delimiter.\n"
+        },
+        {
+          "end_line": 239,
+          "id": "line-239",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 239,
+          "text": "CommonPrefixes lists keys that act like subdirectories in the directory specified by Prefix.\n"
+        },
+        {
+          "end_line": 241,
+          "id": "line-241",
+          "kind": "paragraph",
+          "parent_id": "line-217",
+          "start_line": 241,
+          "text": "For example, if the prefix is notes/ and the delimiter is a slash (/) as in notes/summer/july, the common prefix is notes/summer/. All of the keys that roll up into a common prefix count as a single return when calculating the number of returns.\n"
+        },
+        {
+          "end_line": 243,
+          "id": "line-243",
+          "kind": "heading",
+          "parent_id": "line-207",
+          "start_line": 243,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 245,
+          "id": "line-245",
+          "kind": "list",
+          "parent_id": "line-243",
+          "start_line": 245,
+          "text": "- Directory buckets - For directory buckets, only prefixes that end in a delimiter (/) are supported.\n"
+        },
+        {
+          "end_line": 247,
+          "id": "line-247",
+          "kind": "list",
+          "parent_id": "line-243",
+          "start_line": 247,
+          "text": "- Directory buckets - When you query ListObjectsV2 with a delimiter during in-progress multipart uploads, the CommonPrefixes response parameter contains the prefixes that are associated with the in-progress multipart uploads. For more information about multipart uploads, see Multipart Upload Overview in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 249,
+          "id": "line-249",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 249,
+          "text": "Type: Array of CommonPrefix data types\n"
+        },
+        {
+          "end_line": 251,
+          "id": "line-251",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 251,
+          "text": "Contents\n"
+        },
+        {
+          "end_line": 253,
+          "id": "line-253",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 253,
+          "text": "Metadata about each object returned.\n"
+        },
+        {
+          "end_line": 255,
+          "id": "line-255",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 255,
+          "text": "Type: Array of Object data types\n"
+        },
+        {
+          "end_line": 257,
+          "id": "line-257",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 257,
+          "text": "ContinuationToken\n"
+        },
+        {
+          "end_line": 259,
+          "id": "line-259",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 259,
+          "text": "If ContinuationToken was sent with the request, it is included in the response. You can use the returned ContinuationToken for pagination of the list response.\n"
+        },
+        {
+          "end_line": 261,
+          "id": "line-261",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 261,
+          "text": "Type: String\n"
+        },
+        {
+          "end_line": 263,
+          "id": "line-263",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 263,
+          "text": "Delimiter\n"
+        },
+        {
+          "end_line": 265,
+          "id": "line-265",
+          "kind": "paragraph",
+          "parent_id": "line-243",
+          "start_line": 265,
+          "text": "Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response. Each rolled-up result counts as only one return against the MaxKeys value.\n"
+        },
+        {
+          "end_line": 267,
+          "id": "line-267",
+          "kind": "heading",
+          "parent_id": "line-207",
+          "start_line": 267,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 269,
+          "id": "line-269",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 269,
+          "text": "Directory buckets - For directory buckets, / is the only supported delimiter.\n"
+        },
+        {
+          "end_line": 271,
+          "id": "line-271",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 271,
+          "text": "Type: String\n"
+        },
+        {
+          "end_line": 273,
+          "id": "line-273",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 273,
+          "text": "EncodingType\n"
+        },
+        {
+          "end_line": 275,
+          "id": "line-275",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 275,
+          "text": "Encoding type used by Amazon S3 to encode object key names in the XML response.\n"
+        },
+        {
+          "end_line": 277,
+          "id": "line-277",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 277,
+          "text": "If you specify the encoding-type request parameter, Amazon S3 includes this element in the response, and returns encoded key name values in the following response elements:\n"
+        },
+        {
+          "end_line": 279,
+          "id": "line-279",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 279,
+          "text": "Delimiter, Prefix, Key, and StartAfter.\n"
+        },
+        {
+          "end_line": 281,
+          "id": "line-281",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 281,
+          "text": "Type: String\n"
+        },
+        {
+          "end_line": 283,
+          "id": "line-283",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 283,
+          "text": "Valid Values: url\n"
+        },
+        {
+          "end_line": 285,
+          "id": "line-285",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 285,
+          "text": "IsTruncated\n"
+        },
+        {
+          "end_line": 287,
+          "id": "line-287",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 287,
+          "text": "Set to false if all of the results were returned. Set to true if more keys are available to return. If the number of results exceeds that specified by MaxKeys, all of the results might not be returned.\n"
+        },
+        {
+          "end_line": 289,
+          "id": "line-289",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 289,
+          "text": "Type: Boolean\n"
+        },
+        {
+          "end_line": 291,
+          "id": "line-291",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 291,
+          "text": "KeyCount\n"
+        },
+        {
+          "end_line": 293,
+          "id": "line-293",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 293,
+          "text": "KeyCount is the number of keys returned with this request. KeyCount will always be less than or equal to the MaxKeys field. For example, if you ask for 50 keys, your result will include 50 keys or fewer.\n"
+        },
+        {
+          "end_line": 295,
+          "id": "line-295",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 295,
+          "text": "Type: Integer\n"
+        },
+        {
+          "end_line": 297,
+          "id": "line-297",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 297,
+          "text": "MaxKeys\n"
+        },
+        {
+          "end_line": 299,
+          "id": "line-299",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 299,
+          "text": "Sets the maximum number of keys returned in the response. By default, the action returns up to 1,000 key names. The response might contain fewer keys but will never contain more.\n"
+        },
+        {
+          "end_line": 301,
+          "id": "line-301",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 301,
+          "text": "Type: Integer\n"
+        },
+        {
+          "end_line": 303,
+          "id": "line-303",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 303,
+          "text": "Name\n"
+        },
+        {
+          "end_line": 305,
+          "id": "line-305",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 305,
+          "text": "The bucket name.\n"
+        },
+        {
+          "end_line": 307,
+          "id": "line-307",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 307,
+          "text": "Type: String\n"
+        },
+        {
+          "end_line": 309,
+          "id": "line-309",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 309,
+          "text": "NextContinuationToken\n"
+        },
+        {
+          "end_line": 311,
+          "id": "line-311",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 311,
+          "text": "NextContinuationToken is sent when isTruncated is true, which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key\n"
+        },
+        {
+          "end_line": 313,
+          "id": "line-313",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 313,
+          "text": "Type: String\n"
+        },
+        {
+          "end_line": 315,
+          "id": "line-315",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 315,
+          "text": "Prefix\n"
+        },
+        {
+          "end_line": 317,
+          "id": "line-317",
+          "kind": "paragraph",
+          "parent_id": "line-267",
+          "start_line": 317,
+          "text": "Keys that begin with the indicated prefix.\n"
+        },
+        {
+          "end_line": 319,
+          "id": "line-319",
+          "kind": "heading",
+          "parent_id": "line-207",
+          "start_line": 319,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 321,
+          "id": "line-321",
+          "kind": "paragraph",
+          "parent_id": "line-319",
+          "start_line": 321,
+          "text": "Directory buckets - For directory buckets, only prefixes that end in a delimiter (/) are supported.\n"
+        },
+        {
+          "end_line": 323,
+          "id": "line-323",
+          "kind": "paragraph",
+          "parent_id": "line-319",
+          "start_line": 323,
+          "text": "Type: String\n"
+        },
+        {
+          "end_line": 325,
+          "id": "line-325",
+          "kind": "paragraph",
+          "parent_id": "line-319",
+          "start_line": 325,
+          "text": "StartAfter\n"
+        },
+        {
+          "end_line": 327,
+          "id": "line-327",
+          "kind": "paragraph",
+          "parent_id": "line-319",
+          "start_line": 327,
+          "text": "If StartAfter was sent with the request, it is included in the response.\n"
+        },
+        {
+          "end_line": 329,
+          "id": "line-329",
+          "kind": "heading",
+          "parent_id": "line-207",
+          "start_line": 329,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 331,
+          "id": "line-331",
+          "kind": "paragraph",
+          "parent_id": "line-329",
+          "start_line": 331,
+          "text": "This functionality is not supported for directory buckets.\n"
+        },
+        {
+          "end_line": 333,
+          "id": "line-333",
+          "kind": "paragraph",
+          "parent_id": "line-329",
+          "start_line": 333,
+          "text": "Type: String\n"
+        },
+        {
+          "end_line": 335,
+          "id": "line-335",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 335,
+          "text": "## Errors\n"
+        },
+        {
+          "end_line": 337,
+          "id": "line-337",
+          "kind": "paragraph",
+          "parent_id": "line-335",
+          "start_line": 337,
+          "text": "NoSuchBucket\n"
+        },
+        {
+          "end_line": 339,
+          "id": "line-339",
+          "kind": "paragraph",
+          "parent_id": "line-335",
+          "start_line": 339,
+          "text": "The specified bucket does not exist.\n"
+        },
+        {
+          "end_line": 341,
+          "id": "line-341",
+          "kind": "paragraph",
+          "parent_id": "line-335",
+          "start_line": 341,
+          "text": "HTTP Status Code: 404\n"
+        },
+        {
+          "end_line": 343,
+          "id": "line-343",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 343,
+          "text": "## Examples\n"
+        },
+        {
+          "end_line": 345,
+          "id": "line-345",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 345,
+          "text": "### Sample Request for general purpose buckets: Listing keys\n"
+        },
+        {
+          "end_line": 347,
+          "id": "line-347",
+          "kind": "paragraph",
+          "parent_id": "line-345",
+          "start_line": 347,
+          "text": "This request returns the objects in bucket. The request specifies the list-type parameter, which indicates version 2 of the API operation.\n"
+        },
+        {
+          "end_line": 357,
+          "id": "line-349",
+          "kind": "code",
+          "parent_id": "line-345",
+          "start_line": 349,
+          "text": "```\n\nGET /?list-type=2 HTTP/1.1\nHost: bucket.s3.<Region>.amazonaws.com\nx-amz-date: 20160430T233541Z\nAuthorization: authorization string\nContent-Type: text/plain\n\n```\n"
+        },
+        {
+          "end_line": 359,
+          "id": "line-359",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 359,
+          "text": "### Sample Response for general purpose buckets\n"
+        },
+        {
+          "end_line": 361,
+          "id": "line-361",
+          "kind": "paragraph",
+          "parent_id": "line-359",
+          "start_line": 361,
+          "text": "This example illustrates one usage of ListObjectsV2.\n"
+        },
+        {
+          "end_line": 385,
+          "id": "line-363",
+          "kind": "code",
+          "parent_id": "line-359",
+          "start_line": 363,
+          "text": "```\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<Name>bucket</Name>\n<Prefix/>\n<KeyCount>205</KeyCount>\n<MaxKeys>1000</MaxKeys>\n<IsTruncated>false</IsTruncated>\n<Contents>\n<Key>my-image.jpg</Key>\n<LastModified>2009-10-12T17:50:30.000Z</LastModified>\n<ETag>\"fba9dede5f27731c9771645a39863328\"</ETag>\n<Size>434234</Size>\n<StorageClass>STANDARD</StorageClass>\n</Contents>\n<Contents>\n...\n</Contents>\n...\n</ListBucketResult>\n\n```\n"
+        },
+        {
+          "end_line": 387,
+          "id": "line-387",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 387,
+          "text": "### Sample Request for general purpose buckets: Listing keys using the max-keys, prefix, and start-after parameters\n"
+        },
+        {
+          "end_line": 389,
+          "id": "line-389",
+          "kind": "paragraph",
+          "parent_id": "line-387",
+          "start_line": 389,
+          "text": "In addition to the list-type parameter that indicates version 2 of the API operation, the request also specifies additional parameters to retrieve up to three keys in the quotes bucket that start with E and occur lexicographically after ExampleGuide.pdf.\n"
+        },
+        {
+          "end_line": 398,
+          "id": "line-391",
+          "kind": "code",
+          "parent_id": "line-387",
+          "start_line": 391,
+          "text": "```\n\nGET /?list-type=2&max-keys=3&prefix=E&start-after=ExampleGuide.pdf HTTP/1.1\nHost: quotes.s3.<Region>.amazonaws.com\nx-amz-date: 20160430T232933Z\nAuthorization: authorization string\n\n```\n"
+        },
+        {
+          "end_line": 400,
+          "id": "line-400",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 400,
+          "text": "### Sample Response for general purpose buckets\n"
+        },
+        {
+          "end_line": 402,
+          "id": "line-402",
+          "kind": "paragraph",
+          "parent_id": "line-400",
+          "start_line": 402,
+          "text": "This example illustrates one usage of ListObjectsV2.\n"
+        },
+        {
+          "end_line": 432,
+          "id": "line-404",
+          "kind": "code",
+          "parent_id": "line-400",
+          "start_line": 404,
+          "text": "```\n\nHTTP/1.1 200 OK\nx-amz-id-2: gyB+3jRPnrkN98ZajxHXr3u7EFM67bNgSAxexeEHndCX/7GRnfTXxReKUQF28IfP\nx-amz-request-id: 3B3C7C725673C630\nDate: Sat, 30 Apr 2016 23:29:37 GMT\nContent-Type: application/xml\nContent-Length: length\nConnection: close\nServer: AmazonS3\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<Name>quotes</Name>\n<Prefix>E</Prefix>\n<StartAfter>ExampleGuide.pdf</StartAfter>\n<KeyCount>1</KeyCount>\n<MaxKeys>3</MaxKeys>\n<IsTruncated>false</IsTruncated>\n<Contents>\n<Key>ExampleObject.txt</Key>\n<LastModified>2013-09-17T18:07:53.000Z</LastModified>\n<ETag>\"599bab3ed2c697f1d26842727561fd94\"</ETag>\n<Size>857</Size>\n<StorageClass>REDUCED_REDUNDANCY</StorageClass>\n</Contents>\n</ListBucketResult>\n\n```\n"
+        },
+        {
+          "end_line": 434,
+          "id": "line-434",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 434,
+          "text": "### Sample Request for general purpose buckets: Listing keys by using the prefix and delimiter parameters\n"
+        },
+        {
+          "end_line": 436,
+          "id": "line-436",
+          "kind": "paragraph",
+          "parent_id": "line-434",
+          "start_line": 436,
+          "text": "This example illustrates the use of the prefix and the delimiter parameters in the request. For this example, we assume that you have the following keys in your bucket:\n"
+        },
+        {
+          "end_line": 438,
+          "id": "line-438",
+          "kind": "list",
+          "parent_id": "line-434",
+          "start_line": 438,
+          "text": "- sample.jpg\n"
+        },
+        {
+          "end_line": 440,
+          "id": "line-440",
+          "kind": "list",
+          "parent_id": "line-434",
+          "start_line": 440,
+          "text": "- photos/2006/January/sample.jpg\n"
+        },
+        {
+          "end_line": 442,
+          "id": "line-442",
+          "kind": "list",
+          "parent_id": "line-434",
+          "start_line": 442,
+          "text": "- photos/2006/February/sample2.jpg\n"
+        },
+        {
+          "end_line": 444,
+          "id": "line-444",
+          "kind": "list",
+          "parent_id": "line-434",
+          "start_line": 444,
+          "text": "- photos/2006/February/sample3.jpg\n"
+        },
+        {
+          "end_line": 446,
+          "id": "line-446",
+          "kind": "list",
+          "parent_id": "line-434",
+          "start_line": 446,
+          "text": "- photos/2006/February/sample4.jpg\n"
+        },
+        {
+          "end_line": 448,
+          "id": "line-448",
+          "kind": "paragraph",
+          "parent_id": "line-434",
+          "start_line": 448,
+          "text": "The following GET request specifies the delimiter parameter with a value of /.\n"
+        },
+        {
+          "end_line": 457,
+          "id": "line-450",
+          "kind": "code",
+          "parent_id": "line-434",
+          "start_line": 450,
+          "text": "```\n\nGET /?list-type=2&delimiter=/ HTTP/1.1\nHost: example-bucket.s3.<Region>.amazonaws.com\nx-amz-date: 20160430T235931Z\nAuthorization: authorization string \n\n```\n"
+        },
+        {
+          "end_line": 459,
+          "id": "line-459",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 459,
+          "text": "### Sample Response for general purpose buckets\n"
+        },
+        {
+          "end_line": 461,
+          "id": "line-461",
+          "kind": "paragraph",
+          "parent_id": "line-459",
+          "start_line": 461,
+          "text": "The key sample.jpg does not contain the delimiter character, and Amazon S3 returns it in the Contents element in the response. However, all of the other keys contain the delimiter character. Amazon S3 groups these keys and returns a single CommonPrefixes element with the Prefix value photos/. The Prefix element is a substring that starts at the beginning of these keys and ends at the first occurrence of the specified delimiter.\n"
+        },
+        {
+          "end_line": 484,
+          "id": "line-463",
+          "kind": "code",
+          "parent_id": "line-459",
+          "start_line": 463,
+          "text": "```\n\n<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<Name>example-bucket</Name>\n<Prefix></Prefix>\n<KeyCount>2</KeyCount>\n<MaxKeys>1000</MaxKeys>\n<Delimiter>/</Delimiter>\n<IsTruncated>false</IsTruncated>\n<Contents>\n<Key>sample.jpg</Key>\n<LastModified>2011-02-26T01:56:20.000Z</LastModified>\n<ETag>\"bf1d737a4d46a19f3bced6905cc8b902\"</ETag>\n<Size>142863</Size>\n<StorageClass>STANDARD</StorageClass>\n</Contents>\n<CommonPrefixes>\n<Prefix>photos/</Prefix>\n</CommonPrefixes>\n</ListBucketResult> \n\n```\n"
+        },
+        {
+          "end_line": 486,
+          "id": "line-486",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 486,
+          "text": "### Sample Request for general purpose buckets\n"
+        },
+        {
+          "end_line": 488,
+          "id": "line-488",
+          "kind": "paragraph",
+          "parent_id": "line-486",
+          "start_line": 488,
+          "text": "The following request specifies the delimiter parameter with the value /, and the prefix parameter with the value photos/2006/.\n"
+        },
+        {
+          "end_line": 497,
+          "id": "line-490",
+          "kind": "code",
+          "parent_id": "line-486",
+          "start_line": 490,
+          "text": "```\n\nGET /?list-type=2&prefix=photos/2006/&delimiter=/ HTTP/1.1\nHost: example-bucket.s3.<Region>.amazonaws.com\nx-amz-date: 20160501T000433Z\nAuthorization: authorization string\n\n```\n"
+        },
+        {
+          "end_line": 499,
+          "id": "line-499",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 499,
+          "text": "### Sample Response for general purpose buckets\n"
+        },
+        {
+          "end_line": 501,
+          "id": "line-501",
+          "kind": "paragraph",
+          "parent_id": "line-499",
+          "start_line": 501,
+          "text": "In response, Amazon S3 returns only the keys that start with the specified prefix. Further, Amazon S3 uses the delimiter character to group keys that contain the same substring until the first occurrence of the delimiter character after the specified prefix. For each such key group, Amazon S3 returns one CommonPrefixes element in the response. The keys grouped under this CommonPrefixes element are not returned elsewhere in the response. The Prefix value returned in the CommonPrefixes element is a substring that starts at the beginning of the key and ends at the first occurrence of the specified delimiter after the prefix.\n"
+        },
+        {
+          "end_line": 503,
+          "id": "line-503",
+          "kind": "heading",
+          "parent_id": "line-499",
+          "start_line": 503,
+          "text": "###### Note\n"
+        },
+        {
+          "end_line": 505,
+          "id": "line-505",
+          "kind": "paragraph",
+          "parent_id": "line-503",
+          "start_line": 505,
+          "text": "If you created folders by using the Amazon S3 console, you will see an additional 0-byte object with a key of photos/2006/. This object is created because of the way that the console supports folder structures. For more information, see Organizing objects in the Amazon S3 console using folders in the Amazon S3 User Guide.\n"
+        },
+        {
+          "end_line": 525,
+          "id": "line-507",
+          "kind": "code",
+          "parent_id": "line-503",
+          "start_line": 507,
+          "text": "```\n\n<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<Name>example-bucket</Name>\n<Prefix>photos/2006/</Prefix>\n<KeyCount>2</KeyCount>\n<MaxKeys>1000</MaxKeys>\n<Delimiter>/</Delimiter>\n<IsTruncated>false</IsTruncated>\n\n<CommonPrefixes>\n<Prefix>photos/2006/February/</Prefix>\n</CommonPrefixes>\n<CommonPrefixes>\n<Prefix>photos/2006/January/</Prefix>\n</CommonPrefixes>\n</ListBucketResult>\n\n```\n"
+        },
+        {
+          "end_line": 527,
+          "id": "line-527",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 527,
+          "text": "### Sample Request for general purpose buckets: Using a continuation token\n"
+        },
+        {
+          "end_line": 529,
+          "id": "line-529",
+          "kind": "paragraph",
+          "parent_id": "line-527",
+          "start_line": 529,
+          "text": "In this example, the initial request returns more than 1,000 keys. In response to this request, Amazon S3 returns the IsTruncated element with the value set to true and with a NextContinuationToken element.\n"
+        },
+        {
+          "end_line": 538,
+          "id": "line-531",
+          "kind": "code",
+          "parent_id": "line-527",
+          "start_line": 531,
+          "text": "```\n\nGET /?list-type=2 HTTP/1.1\nHost: bucket.s3.<Region>.amazonaws.com\nDate: Mon, 02 May 2016 23:17:07 GMT\nAuthorization: authorization string\n\n```\n"
+        },
+        {
+          "end_line": 540,
+          "id": "line-540",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 540,
+          "text": "### Sample Response for general purpose buckets: Using a continuation token\n"
+        },
+        {
+          "end_line": 542,
+          "id": "line-542",
+          "kind": "paragraph",
+          "parent_id": "line-540",
+          "start_line": 542,
+          "text": "This example illustrates one usage of ListObjectsV2.\n"
+        },
+        {
+          "end_line": 572,
+          "id": "line-544",
+          "kind": "code",
+          "parent_id": "line-540",
+          "start_line": 544,
+          "text": "```\n\nHTTP/1.1 200 OK\nx-amz-id-2: gyB+3jRPnrkN98ZajxHXr3u7EFM67bNgSAxexeEHndCX/7GRnfTXxReKUQF28IfP\nx-amz-request-id: 3B3C7C725673C630\nDate: Sat, 30 Apr 2016 23:29:37 GMT\nContent-Type: application/xml\nContent-Length: length\nConnection: close\nServer: AmazonS3\n\n<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<Name>bucket</Name>\n<Prefix></Prefix>\n<NextContinuationToken>1ueGcxLPRx1Tr/XYExHnhbYLgveDs2J/wm36Hy4vbOwM=</NextContinuationToken>\n<KeyCount>1000</KeyCount>\n<MaxKeys>1000</MaxKeys>\n<IsTruncated>true</IsTruncated>\n<Contents>\n<Key>happyface.jpg</Key>\n<LastModified>2014-11-21T19:40:05.000Z</LastModified>\n<ETag>\"70ee1738b6b21e2c8a43f3a5ab0eee71\"</ETag>\n<Size>11</Size>\n<StorageClass>STANDARD</StorageClass>\n</Contents>\n...\n</ListBucketResult>\n\n```\n"
+        },
+        {
+          "end_line": 574,
+          "id": "line-574",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 574,
+          "text": "### Sample request for general purpose buckets\n"
+        },
+        {
+          "end_line": 576,
+          "id": "line-576",
+          "kind": "paragraph",
+          "parent_id": "line-574",
+          "start_line": 576,
+          "text": "In the following subsequent request, we include a continuation-token query parameter in the request with the value of the NextContinuationToken element from the preceding response.\n"
+        },
+        {
+          "end_line": 587,
+          "id": "line-578",
+          "kind": "code",
+          "parent_id": "line-574",
+          "start_line": 578,
+          "text": "```\n\nGET /?list-type=2 HTTP/1.1\nGET /?list-type=2&continuation-token=1ueGcxLPRx1Tr/XYExHnhbYLgveDs2J/wm36Hy4vbOwM= HTTP/1.1\n\nHost: bucket.s3.<Region>.amazonaws.com\nDate: Mon, 02 May 2016 23:17:07 GMT\nAuthorization: authorization string\n\n```\n"
+        },
+        {
+          "end_line": 589,
+          "id": "line-589",
+          "kind": "heading",
+          "parent_id": "line-343",
+          "start_line": 589,
+          "text": "### Sample response for general purpose buckets:\n"
+        },
+        {
+          "end_line": 591,
+          "id": "line-591",
+          "kind": "paragraph",
+          "parent_id": "line-589",
+          "start_line": 591,
+          "text": "Amazon S3 returns a list of the next set of keys starting where the previous request ended.\n"
+        },
+        {
+          "end_line": 621,
+          "id": "line-593",
+          "kind": "code",
+          "parent_id": "line-589",
+          "start_line": 593,
+          "text": "```\n\nHTTP/1.1 200 OK\nx-amz-id-2: gyB+3jRPnrkN98ZajxHXr3u7EFM67bNgSAxexeEHndCX/7GRnfTXxReKUQF28IfP\nx-amz-request-id: 3B3C7C725673C630\nDate: Sat, 30 Apr 2016 23:29:37 GMT\nContent-Type: application/xml\nContent-Length: length\nConnection: close\nServer: AmazonS3\n\n<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n<Name>bucket</Name>\n<Prefix></Prefix>\n<ContinuationToken>1ueGcxLPRx1Tr/XYExHnhbYLgveDs2J/wm36Hy4vbOwM=</ContinuationToken>\n<KeyCount>112</KeyCount>\n<MaxKeys>1000</MaxKeys>\n<IsTruncated>false</IsTruncated>\n<Contents>\n<Key>happyfacex.jpg</Key>\n<LastModified>2014-11-21T19:40:05.000Z</LastModified>\n<ETag>\"70ee1738b6b21e2c8a43f3a5ab0eee71\"</ETag>\n<Size>1111</Size>\n<StorageClass>STANDARD</StorageClass>\n</Contents>\n...\n</ListBucketResult>\n\n```\n"
+        },
+        {
+          "end_line": 623,
+          "id": "line-623",
+          "kind": "heading",
+          "parent_id": "line-9",
+          "start_line": 623,
+          "text": "## See Also\n"
+        },
+        {
+          "end_line": 625,
+          "id": "line-625",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 625,
+          "text": "For more information about using this API in one of the language-specific AWS SDKs, see the following:\n"
+        },
+        {
+          "end_line": 627,
+          "id": "line-627",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 627,
+          "text": "- AWS Command Line Interface V2\n"
+        },
+        {
+          "end_line": 629,
+          "id": "line-629",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 629,
+          "text": "- AWS SDK for .NET V4\n"
+        },
+        {
+          "end_line": 631,
+          "id": "line-631",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 631,
+          "text": "- AWS SDK for C++\n"
+        },
+        {
+          "end_line": 633,
+          "id": "line-633",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 633,
+          "text": "- AWS SDK for Go v2\n"
+        },
+        {
+          "end_line": 635,
+          "id": "line-635",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 635,
+          "text": "- AWS SDK for Java V2\n"
+        },
+        {
+          "end_line": 637,
+          "id": "line-637",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 637,
+          "text": "- AWS SDK for JavaScript V3\n"
+        },
+        {
+          "end_line": 639,
+          "id": "line-639",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 639,
+          "text": "- AWS SDK for Kotlin\n"
+        },
+        {
+          "end_line": 641,
+          "id": "line-641",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 641,
+          "text": "- AWS SDK for PHP V3\n"
+        },
+        {
+          "end_line": 643,
+          "id": "line-643",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 643,
+          "text": "- AWS SDK for Python (Boto3)\n"
+        },
+        {
+          "end_line": 645,
+          "id": "line-645",
+          "kind": "list",
+          "parent_id": "line-623",
+          "start_line": 645,
+          "text": "- AWS SDK for Ruby V3\n"
+        },
+        {
+          "end_line": 647,
+          "id": "line-647",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 647,
+          "text": "Document Conventions\n"
+        },
+        {
+          "end_line": 649,
+          "id": "line-649",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 649,
+          "text": "ListObjects\n"
+        },
+        {
+          "end_line": 651,
+          "id": "line-651",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 651,
+          "text": "ListObjectVersions\n"
+        },
+        {
+          "end_line": 653,
+          "id": "line-653",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 653,
+          "text": "Did this page help you? - Yes\n"
+        },
+        {
+          "end_line": 655,
+          "id": "line-655",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 655,
+          "text": "Thanks for letting us know we're doing a good job!\n"
+        },
+        {
+          "end_line": 657,
+          "id": "line-657",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 657,
+          "text": "If you've got a moment, please tell us what we did right so we can do more of it.\n"
+        },
+        {
+          "end_line": 659,
+          "id": "line-659",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 659,
+          "text": "Did this page help you? - No\n"
+        },
+        {
+          "end_line": 661,
+          "id": "line-661",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 661,
+          "text": "Thanks for letting us know this page needs work. We're sorry we let you down.\n"
+        },
+        {
+          "end_line": 663,
+          "id": "line-663",
+          "kind": "paragraph",
+          "parent_id": "line-623",
+          "start_line": 663,
+          "text": "If you've got a moment, please tell us how we can make the documentation better.\n"
+        }
+      ],
+      "id": "s3",
+      "source_hash": "26b291deb241ace35bb3ba15037a1bc8752cd76721da1b74205eee11d53cfb1c",
+      "title": "ListObjectsV2 - Amazon S3",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html"
+    }
+  ]
+}

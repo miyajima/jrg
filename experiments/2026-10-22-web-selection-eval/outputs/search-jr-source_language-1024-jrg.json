@@ -1,0 +1,61 @@
+{
+  "documents": [
+    {
+      "id": "result-18",
+      "url": "https://railway.jr-central.co.jp/ticket-rule/cjr-regulation/_pdf/000043856.pdf",
+      "title": "小児　6才以上12才未満の者",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.6 years ago; 2　前項の規定による幼児又は乳児であっても、次の各号の1に該当する場合は、これを小児とみなし、旅客運賃・料金を収受する。 ... (4)　幼児又は乳児が、指定を行う座席又は寝台を幼児又は乳児だけで使用して旅行するとき。\n"
+        }
+      ],
+      "source_hash": "3fcc2aa2e5f90e8eed3407d206af51b52430b8fe5adfc2d180d9801248737015"
+    },
+    {
+      "id": "result-9",
+      "url": "https://keikyufaq.fastcloud.jp/fa/keikyucall/web/knowledge569.html?suid=1330ae40-d01e-4189-9416-bf05974e30a4",
+      "title": "乗車券の年齢区分 - 京急電鉄FAQ",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.6 years ago; Crawled: 1.4 years ago; 　　　　２名を超えた人数分の小児運賃が必要です。 ... ウィング号をご利用になる幼児または乳児が，座席を１人で占有するときは， ... 　　　　　（上記区間できっぷをお求めの場合の大人運賃は460円，小児運賃は230円）\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "1def080cfa565a5f136e674ff35017a450ce4c03df8e7c42ae9f571b56e8722e"
+    },
+    {
+      "id": "result-13",
+      "url": "https://www.jr-odekake.net/railroad/service/children.html",
+      "title": "お子様連れのお客様へ | 駅・時刻・列車を調べる ：JRおでかけネット",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: last week; 6歳未満のお子様（幼児・乳児）は、おとなの膝の上でご利用になる場合は基本的に無料です。ただし、1人で指定席・グリーン席（自由席グリーン車を除く）・寝台等を利用する場合などには運賃・料金が必要です。詳しくは「きっぷのルール」をご確認ください。\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "65ddeb38e799b064a529b9db1daae0b6b367802f1321a959d2f0f0b751990582"
+    },
+    {
+      "id": "result-16",
+      "url": "https://secure.okbiz.jp/eki-net/faq/show/1983?category_id=260&site_domain=default",
+      "title": "こども連れで「新幹線eチケットサービス」を利用する場合の乗車方法を教えてください。 | えきねっと Q＆A よくあるご質問",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 6.7 years ago; Crawled: 2 days ago; ・1歳未満の「乳児」、1歳～6歳未満の「幼児」は無料ですが、1人で指定席・グリーン席などを利用する場合は、「こども」の運賃・料金が必要です。 ... ・乳幼児のお客さまが、新幹線eチケットサービスを利用して１人で指定席・グリーン席などを利用する場合は、「こども」の予約が必要です。\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "99bfef2746880e279e00bad9f2f622b9878e5a82cceeb85d66365ceb926a8df7"
+    }
+  ],
+  "omitted_count": 14,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 940,
+  "max_tokens": 1024
+}

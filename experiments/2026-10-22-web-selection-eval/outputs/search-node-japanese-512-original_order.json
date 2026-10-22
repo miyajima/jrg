@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: today; Node.js 20.19+, 22.12+ and 23+ load synchronous ES modules with require() by default, so this error does not appear on those versions unless --no-require-module is set. ... If the module or anything it imports uses top-level await, require() throws ERR_REQUIRE_ASYNC_MODULE and import() is needed.\n\nNode.js error\n\n# ERR_REQUIRE_ESM\n\nCommonJS code called require() on a file that Node.js treats as an ES module, and the running Node.js version (or a flag) does not allow require() to load ES modules. The file is usually a dependency that became ESM-only in a major release.\n\nUpdated 25 Sept 2026Node.js\n\nNode.js 20.19+, 22.12+ and 23+ load synchronous ES modules with require() by default, so this error does not appear on those versions unless --no-require-module is set. On those versions, requiring an ES module that uses top-level await throws ERR_REQUIRE_ASYNC_MODULE instead.\n\n## The error messages\n    \n    Error [ERR_REQUIRE_ESM]: require() of ES Module /app/lib/util.js from /app/index.js not supported.\n    util.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains \"type\": \"module\" which declares all .js files in that package scope as ES modules.\n    Instead either rename util.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change \"type\": \"module\" to \"type\": \"commonjs\" in /app/lib/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "id": "result-4",
+      "source_hash": "9f3892e4e3e7da8dd5ca7989a2fc48e1f3fe3ed68089727347cb037d42480a74",
+      "title": "ERR_REQUIRE_ESM: require() of ES Module not supported | JavaScripts.com",
+      "url": "https://javascripts.com/errors/node/err-require-esm/"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 511,
+  "max_tokens": 512
+}

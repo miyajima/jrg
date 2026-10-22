@@ -1,0 +1,501 @@
+{
+  "documents": [
+    {
+      "blocks": [
+        {
+          "end_line": 1,
+          "id": "line-1",
+          "kind": "paragraph",
+          "start_line": 1,
+          "text": "Skip to content\n"
+        },
+        {
+          "end_line": 3,
+          "id": "line-3",
+          "kind": "paragraph",
+          "start_line": 3,
+          "text": "Node.js\n"
+        },
+        {
+          "end_line": 5,
+          "id": "line-5",
+          "kind": "list",
+          "start_line": 5,
+          "text": "- About this documentation\n"
+        },
+        {
+          "end_line": 7,
+          "id": "line-7",
+          "kind": "list",
+          "start_line": 7,
+          "text": "- Usage and example\n"
+        },
+        {
+          "end_line": 9,
+          "id": "line-9",
+          "kind": "list",
+          "start_line": 9,
+          "text": "- Assertion testing\n"
+        },
+        {
+          "end_line": 11,
+          "id": "line-11",
+          "kind": "list",
+          "start_line": 11,
+          "text": "- Asynchronous context tracking\n"
+        },
+        {
+          "end_line": 13,
+          "id": "line-13",
+          "kind": "list",
+          "start_line": 13,
+          "text": "- Async hooks\n"
+        },
+        {
+          "end_line": 15,
+          "id": "line-15",
+          "kind": "list",
+          "start_line": 15,
+          "text": "- Buffer\n"
+        },
+        {
+          "end_line": 17,
+          "id": "line-17",
+          "kind": "list",
+          "start_line": 17,
+          "text": "- C++ addons\n"
+        },
+        {
+          "end_line": 19,
+          "id": "line-19",
+          "kind": "list",
+          "start_line": 19,
+          "text": "- C/C++ addons with Node-API\n"
+        },
+        {
+          "end_line": 21,
+          "id": "line-21",
+          "kind": "list",
+          "start_line": 21,
+          "text": "- C++ embedder API\n"
+        },
+        {
+          "end_line": 23,
+          "id": "line-23",
+          "kind": "list",
+          "start_line": 23,
+          "text": "- Child processes\n"
+        },
+        {
+          "end_line": 25,
+          "id": "line-25",
+          "kind": "list",
+          "start_line": 25,
+          "text": "- Cluster\n"
+        },
+        {
+          "end_line": 27,
+          "id": "line-27",
+          "kind": "list",
+          "start_line": 27,
+          "text": "- Command-line options\n"
+        },
+        {
+          "end_line": 29,
+          "id": "line-29",
+          "kind": "list",
+          "start_line": 29,
+          "text": "- Console\n"
+        },
+        {
+          "end_line": 31,
+          "id": "line-31",
+          "kind": "list",
+          "start_line": 31,
+          "text": "- Crypto\n"
+        },
+        {
+          "end_line": 33,
+          "id": "line-33",
+          "kind": "list",
+          "start_line": 33,
+          "text": "- Debugger\n"
+        },
+        {
+          "end_line": 35,
+          "id": "line-35",
+          "kind": "list",
+          "start_line": 35,
+          "text": "- Deprecated APIs\n"
+        },
+        {
+          "end_line": 37,
+          "id": "line-37",
+          "kind": "list",
+          "start_line": 37,
+          "text": "- Diagnostics Channel\n"
+        },
+        {
+          "end_line": 39,
+          "id": "line-39",
+          "kind": "list",
+          "start_line": 39,
+          "text": "- DNS\n"
+        },
+        {
+          "end_line": 41,
+          "id": "line-41",
+          "kind": "list",
+          "start_line": 41,
+          "text": "- Domain\n"
+        },
+        {
+          "end_line": 43,
+          "id": "line-43",
+          "kind": "list",
+          "start_line": 43,
+          "text": "- Errors\n"
+        },
+        {
+          "end_line": 45,
+          "id": "line-45",
+          "kind": "list",
+          "start_line": 45,
+          "text": "- Events\n"
+        },
+        {
+          "end_line": 47,
+          "id": "line-47",
+          "kind": "list",
+          "start_line": 47,
+          "text": "- File system\n"
+        },
+        {
+          "end_line": 49,
+          "id": "line-49",
+          "kind": "list",
+          "start_line": 49,
+          "text": "- Globals\n"
+        },
+        {
+          "end_line": 51,
+          "id": "line-51",
+          "kind": "list",
+          "start_line": 51,
+          "text": "- HTTP\n"
+        },
+        {
+          "end_line": 53,
+          "id": "line-53",
+          "kind": "list",
+          "start_line": 53,
+          "text": "- HTTP/2\n"
+        },
+        {
+          "end_line": 55,
+          "id": "line-55",
+          "kind": "list",
+          "start_line": 55,
+          "text": "- HTTPS\n"
+        },
+        {
+          "end_line": 57,
+          "id": "line-57",
+          "kind": "list",
+          "start_line": 57,
+          "text": "- Inspector\n"
+        },
+        {
+          "end_line": 59,
+          "id": "line-59",
+          "kind": "list",
+          "start_line": 59,
+          "text": "- Internationalization\n"
+        },
+        {
+          "end_line": 61,
+          "id": "line-61",
+          "kind": "list",
+          "start_line": 61,
+          "text": "- Modules: CommonJS modules\n"
+        },
+        {
+          "end_line": 63,
+          "id": "line-63",
+          "kind": "list",
+          "start_line": 63,
+          "text": "- Modules: ECMAScript modules\n"
+        },
+        {
+          "end_line": 65,
+          "id": "line-65",
+          "kind": "list",
+          "start_line": 65,
+          "text": "- Modules: node:module API\n"
+        },
+        {
+          "end_line": 67,
+          "id": "line-67",
+          "kind": "list",
+          "start_line": 67,
+          "text": "- Modules: Packages\n"
+        },
+        {
+          "end_line": 69,
+          "id": "line-69",
+          "kind": "list",
+          "start_line": 69,
+          "text": "- Modules: TypeScript\n"
+        },
+        {
+          "end_line": 71,
+          "id": "line-71",
+          "kind": "list",
+          "start_line": 71,
+          "text": "- Net\n"
+        },
+        {
+          "end_line": 73,
+          "id": "line-73",
+          "kind": "list",
+          "start_line": 73,
+          "text": "- OS\n"
+        },
+        {
+          "end_line": 75,
+          "id": "line-75",
+          "kind": "list",
+          "start_line": 75,
+          "text": "- Path\n"
+        },
+        {
+          "end_line": 77,
+          "id": "line-77",
+          "kind": "list",
+          "start_line": 77,
+          "text": "- Performance hooks\n"
+        },
+        {
+          "end_line": 79,
+          "id": "line-79",
+          "kind": "list",
+          "start_line": 79,
+          "text": "- Permissions\n"
+        },
+        {
+          "end_line": 81,
+          "id": "line-81",
+          "kind": "list",
+          "start_line": 81,
+          "text": "- Process\n"
+        },
+        {
+          "end_line": 83,
+          "id": "line-83",
+          "kind": "list",
+          "start_line": 83,
+          "text": "- Punycode\n"
+        },
+        {
+          "end_line": 85,
+          "id": "line-85",
+          "kind": "list",
+          "start_line": 85,
+          "text": "- Query strings\n"
+        },
+        {
+          "end_line": 87,
+          "id": "line-87",
+          "kind": "list",
+          "start_line": 87,
+          "text": "- Readline\n"
+        },
+        {
+          "end_line": 89,
+          "id": "line-89",
+          "kind": "list",
+          "start_line": 89,
+          "text": "- REPL\n"
+        },
+        {
+          "end_line": 91,
+          "id": "line-91",
+          "kind": "list",
+          "start_line": 91,
+          "text": "- Report\n"
+        },
+        {
+          "end_line": 93,
+          "id": "line-93",
+          "kind": "list",
+          "start_line": 93,
+          "text": "- Single executable applications\n"
+        },
+        {
+          "end_line": 95,
+          "id": "line-95",
+          "kind": "list",
+          "start_line": 95,
+          "text": "- SQLite\n"
+        },
+        {
+          "end_line": 97,
+          "id": "line-97",
+          "kind": "list",
+          "start_line": 97,
+          "text": "- Stream\n"
+        },
+        {
+          "end_line": 99,
+          "id": "line-99",
+          "kind": "list",
+          "start_line": 99,
+          "text": "- String decoder\n"
+        },
+        {
+          "end_line": 101,
+          "id": "line-101",
+          "kind": "list",
+          "start_line": 101,
+          "text": "- Test runner\n"
+        },
+        {
+          "end_line": 103,
+          "id": "line-103",
+          "kind": "list",
+          "start_line": 103,
+          "text": "- Timers\n"
+        },
+        {
+          "end_line": 105,
+          "id": "line-105",
+          "kind": "list",
+          "start_line": 105,
+          "text": "- TLS/SSL\n"
+        },
+        {
+          "end_line": 107,
+          "id": "line-107",
+          "kind": "list",
+          "start_line": 107,
+          "text": "- Trace events\n"
+        },
+        {
+          "end_line": 109,
+          "id": "line-109",
+          "kind": "list",
+          "start_line": 109,
+          "text": "- TTY\n"
+        },
+        {
+          "end_line": 111,
+          "id": "line-111",
+          "kind": "list",
+          "start_line": 111,
+          "text": "- UDP/datagram\n"
+        },
+        {
+          "end_line": 113,
+          "id": "line-113",
+          "kind": "list",
+          "start_line": 113,
+          "text": "- URL\n"
+        },
+        {
+          "end_line": 115,
+          "id": "line-115",
+          "kind": "list",
+          "start_line": 115,
+          "text": "- Utilities\n"
+        },
+        {
+          "end_line": 117,
+          "id": "line-117",
+          "kind": "list",
+          "start_line": 117,
+          "text": "- V8\n"
+        },
+        {
+          "end_line": 119,
+          "id": "line-119",
+          "kind": "list",
+          "start_line": 119,
+          "text": "- VM\n"
+        },
+        {
+          "end_line": 121,
+          "id": "line-121",
+          "kind": "list",
+          "start_line": 121,
+          "text": "- WASI\n"
+        },
+        {
+          "end_line": 123,
+          "id": "line-123",
+          "kind": "list",
+          "start_line": 123,
+          "text": "- Web Crypto API\n"
+        },
+        {
+          "end_line": 125,
+          "id": "line-125",
+          "kind": "list",
+          "start_line": 125,
+          "text": "- Web Streams API\n"
+        },
+        {
+          "end_line": 127,
+          "id": "line-127",
+          "kind": "list",
+          "start_line": 127,
+          "text": "- Worker threads\n"
+        },
+        {
+          "end_line": 129,
+          "id": "line-129",
+          "kind": "list",
+          "start_line": 129,
+          "text": "- Zlib\n"
+        },
+        {
+          "end_line": 131,
+          "id": "line-131",
+          "kind": "list",
+          "start_line": 131,
+          "text": "- Code repository and issue tracker\n"
+        },
+        {
+          "end_line": 133,
+          "id": "line-133",
+          "kind": "paragraph",
+          "start_line": 133,
+          "text": "Table of contents\n"
+        },
+        {
+          "end_line": 137,
+          "id": "line-137",
+          "kind": "heading",
+          "start_line": 137,
+          "text": "## Modules: CommonJS modules#\n"
+        },
+        {
+          "end_line": 139,
+          "id": "line-139",
+          "kind": "paragraph",
+          "parent_id": "line-137",
+          "start_line": 139,
+          "text": "Stability: 2 - Stable\n"
+        }
+      ],
+      "id": "node",
+      "source_hash": "a51c8cb292f9a70a570b414575078a82c3a9449680b610e5f989f718b76181f3",
+      "title": "Modules: CommonJS modules | Node.js v22.15.0 Documentation",
+      "url": "https://nodejs.org/download/release/v22.15.0/docs/api/modules.html"
+    }
+  ],
+  "omitted_count": 294,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2013,
+  "max_tokens": 2048
+}

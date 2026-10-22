@@ -1,0 +1,183 @@
+{
+  "documents": [
+    {
+      "id": "postgres",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "title": "PostgreSQL: Documentation: 18: 5.5. Constraints",
+      "blocks": [
+        {
+          "id": "line-10",
+          "kind": "paragraph",
+          "text": "/ \n",
+          "start_line": 10,
+          "end_line": 10
+        },
+        {
+          "id": "line-91",
+          "kind": "heading",
+          "text": "## 5.5. Constraints #\n",
+          "start_line": 91,
+          "end_line": 91
+        },
+        {
+          "id": "line-105",
+          "kind": "paragraph",
+          "text": "Data types are a way to limit the kind of data that can be stored in a table. For many applications, however, the constraint they provide is too coarse. For example, a column containing a product price should probably only accept positive values. But there is no standard data type that accepts only positive numbers. Another issue is that you might want to constrain column data with respect to other columns or rows. For example, in a table containing product information, there should be only one row for each product number.\n",
+          "parent_id": "line-91",
+          "start_line": 105,
+          "end_line": 105
+        },
+        {
+          "id": "line-211",
+          "kind": "heading",
+          "text": "### Note\n",
+          "parent_id": "line-91",
+          "start_line": 211,
+          "end_line": 211
+        },
+        {
+          "id": "line-215",
+          "kind": "paragraph",
+          "text": "An example of a common way to break this assumption is to reference a user-defined function in a CHECK expression, and then change the behavior of that function. PostgreSQL does not disallow that, but it will not notice if there are rows in the table that now violate the CHECK constraint. That would cause a subsequent database dump and restore to fail. The recommended way to handle such a change is to drop the constraint (using ALTER TABLE), adjust the function definition, and re-add the constraint, thereby rechecking it against all table rows.\n",
+          "parent_id": "line-211",
+          "start_line": 215,
+          "end_line": 215
+        },
+        {
+          "id": "line-295",
+          "kind": "heading",
+          "text": "### 5.5.3. Unique Constraints #\n",
+          "parent_id": "line-91",
+          "start_line": 295,
+          "end_line": 295
+        },
+        {
+          "id": "line-297",
+          "kind": "paragraph",
+          "text": "Unique constraints ensure that the data contained in a column, or a group of columns, is unique among all the rows in the table. The syntax is:\n",
+          "parent_id": "line-295",
+          "start_line": 297,
+          "end_line": 297
+        },
+        {
+          "id": "line-351",
+          "kind": "paragraph",
+          "text": "Adding a unique constraint will automatically create a unique B-tree index on the column or group of columns listed in the constraint. A uniqueness restriction covering only some rows cannot be written as a unique constraint, but it is possible to enforce such a restriction by creating a unique partial index.\n",
+          "parent_id": "line-295",
+          "start_line": 351,
+          "end_line": 351
+        },
+        {
+          "id": "line-353",
+          "kind": "paragraph",
+          "text": "In general, a unique constraint is violated if there is more than one row in the table where the values of all of the columns included in the constraint are equal. By default, two null values are not considered equal in this comparison. That means even in the presence of a unique constraint it is possible to store duplicate rows that contain a null value in at least one of the constrained columns. This behavior can be changed by adding the clause NULLS NOT DISTINCT, like\n",
+          "parent_id": "line-295",
+          "start_line": 353,
+          "end_line": 353
+        },
+        {
+          "id": "line-380",
+          "kind": "heading",
+          "text": "### 5.5.4. Primary Keys #\n",
+          "parent_id": "line-91",
+          "start_line": 380,
+          "end_line": 380
+        },
+        {
+          "id": "line-382",
+          "kind": "paragraph",
+          "text": "A primary key constraint indicates that a column, or group of columns, can be used as a unique identifier for rows in the table. This requires that the values be both unique and not null. So, the following two table definitions accept the same data:\n",
+          "parent_id": "line-380",
+          "start_line": 382,
+          "end_line": 382
+        },
+        {
+          "id": "line-419",
+          "kind": "paragraph",
+          "text": "A table can have at most one primary key. (There can be any number of unique constraints, which combined with not-null constraints are functionally almost the same thing, but only one can be identified as the primary key.) Relational database theory dictates that every table must have a primary key. This rule is not enforced by PostgreSQL, but it is usually best to follow it.\n",
+          "parent_id": "line-380",
+          "start_line": 419,
+          "end_line": 419
+        },
+        {
+          "id": "line-421",
+          "kind": "paragraph",
+          "text": "Primary keys are useful both for documentation purposes and for client applications. For example, a GUI application that allows modifying row values probably needs to know the primary key of a table to be able to identify rows uniquely. There are also various ways in which the database system makes use of a primary key if one has been declared; for example, the primary key defines the default target column(s) for foreign keys referencing its table.\n",
+          "parent_id": "line-380",
+          "start_line": 421,
+          "end_line": 421
+        },
+        {
+          "id": "line-423",
+          "kind": "heading",
+          "text": "### 5.5.5. Foreign Keys #\n",
+          "parent_id": "line-91",
+          "start_line": 423,
+          "end_line": 423
+        },
+        {
+          "id": "line-486",
+          "kind": "paragraph",
+          "text": "Sometimes it is useful for the “other table” of a foreign key constraint to be the same table; this is called a self-referential foreign key. For example, if you want rows of a table to represent nodes of a tree structure, you could write\n",
+          "parent_id": "line-423",
+          "start_line": 486,
+          "end_line": 486
+        },
+        {
+          "id": "line-528",
+          "kind": "paragraph",
+          "text": "We know that the foreign keys disallow creation of orders that do not relate to any products. But what if a product is removed after an order is created that references it? SQL allows you to handle that as well. Intuitively, we have a few options:\n",
+          "parent_id": "line-423",
+          "start_line": 528,
+          "end_line": 528
+        },
+        {
+          "id": "line-567",
+          "kind": "paragraph",
+          "text": "There are two other options: SET NULL and SET DEFAULT. These cause the referencing column(s) in the referencing row(s) to be set to nulls or their default values, respectively, when the referenced row is deleted. Note that these do not excuse you from observing any constraints. For example, if an action specifies SET DEFAULT but the default value would not satisfy the foreign key constraint, the operation will fail.\n",
+          "parent_id": "line-423",
+          "start_line": 567,
+          "end_line": 567
+        },
+        {
+          "id": "line-571",
+          "kind": "paragraph",
+          "text": "The actions SET NULL and SET DEFAULT can take a column list to specify which columns to set. Normally, all columns of the foreign-key constraint are set; setting only a subset is useful in some special cases. Consider the following example:\n",
+          "parent_id": "line-423",
+          "start_line": 571,
+          "end_line": 571
+        },
+        {
+          "id": "line-597",
+          "kind": "paragraph",
+          "text": "Analogous to ON DELETE there is also ON UPDATE which is invoked when a referenced column is changed (updated). The possible actions are the same, except that column lists cannot be specified for SET NULL and SET DEFAULT. In this case, CASCADE means that the updated values of the referenced column(s) should be copied into the referencing row(s). There is also a noticeable difference between ON UPDATE NO ACTION (the default) and ON UPDATE RESTRICT. The former will allow the update to proceed and the foreign-key constraint will be checked against the state after the update. The latter will prevent the update to run even if the state after the update would still satisfy the constraint. This prevents updating a referenced row to a value that is distinct but compares as equal (for example, a character string with a different case variant, if a character string type with a case-insensitive collation is used).\n",
+          "parent_id": "line-423",
+          "start_line": 597,
+          "end_line": 597
+        },
+        {
+          "id": "line-599",
+          "kind": "paragraph",
+          "text": "Normally, a referencing row need not satisfy the foreign key constraint if any of its referencing columns are null. If MATCH FULL is added to the foreign key declaration, a referencing row escapes satisfying the constraint only if all its referencing columns are null (so a mix of null and non-null values is guaranteed to fail a MATCH FULL constraint). If you don't want referencing rows to be able to avoid satisfying the foreign key constraint, declare the referencing column(s) as NOT NULL.\n",
+          "parent_id": "line-423",
+          "start_line": 599,
+          "end_line": 599
+        },
+        {
+          "id": "line-601",
+          "kind": "paragraph",
+          "text": "A foreign key must reference columns that either are a primary key or form a unique constraint, or are columns from a non-partial unique index. This means that the referenced columns always have an index to allow efficient lookups on whether a referencing row has a match. Since a DELETE of a row from the referenced table or an UPDATE of a referenced column will require a scan of the referencing table for rows matching the old value, it is often a good idea to index the referencing columns too. Because this is not always needed, and there are many choices available on how to index, the declaration of a foreign key constraint does not automatically create an index on the referencing columns.\n",
+          "parent_id": "line-423",
+          "start_line": 601,
+          "end_line": 601
+        }
+      ],
+      "source_hash": "e6a80937be9f32bc0d7bde609f2ea0a2108a6c6790af364747813908f5d27e27"
+    }
+  ],
+  "omitted_count": 138,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2045,
+  "max_tokens": 2048
+}

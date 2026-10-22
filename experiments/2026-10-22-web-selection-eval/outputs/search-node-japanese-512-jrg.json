@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-15",
+      "url": "https://static.sched.com/hosted_files/pu2025/17/PowerUP%202025%20-Node.js%20What%E2%80%99s%20new%20and%20what%E2%80%99s%20next.pdf",
+      "title": "PowerUP 2025 -Node.js What’s new and what’s next",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 3 months ago; >node hello.js Hello World The Fine Print: None | The Fine Print: | | Backported to 22.x i --- | --- | --- | --- >node hello.js Hello World The Fine Print: None | | | Backported to 22.x i NoneDepends on two features that are still experimental but stability is “release candidate”, and no experimental warnings. ... --no-experimental-require-module-> ESM must be synchronous\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "7f2928969d0c1672db2b651d89ee5e67ad87888c7abd61b2f5feab9cb1fd9070"
+    },
+    {
+      "id": "result-14",
+      "url": "https://doccompiler.ai/api/v1/jobs/shared/job_1776399442426_3925001f/download/nodejs__node__UserGuide.pdf",
+      "title": "nodejs/node User Guide",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 6 months ago; **Cause:** CommonJS require() loaded a module whose graph contains top-level await or dynamic import() requirements that cannot be satisfied synchronously.**Solution:** Convert the caller to ESM, or use dynamic import('...') inside an async function.Since Node.js 22, fully synchronous ESM can be required from CommonJS.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "0c8b05f9222adbf94255bcb38ee9eddfd771f6b177cae48b083304f436ff9d3f"
+    }
+  ],
+  "omitted_count": 15,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 453,
+  "max_tokens": 512
+}

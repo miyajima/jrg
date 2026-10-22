@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-17",
+      "url": "https://www.reddit.com/r/rust/comments/1hsbivz",
+      "title": "Do we need an new edition for stabilizing let chains?",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.8 years ago; Crawled: 1.8 years ago; What I mean is that the stabilization PR hasn't been merged: https://github.com/rust-lang/rust/pull/132833 ... This can be added to the language at any time, even after edition 2024 stabilizes. ... That is, let chains are incompatible with how rust 2021 and earlier works.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "ae11a44a6ec90eda5b6b34d7dc3c46d91f0aa84e804f011b6dcf40e22db43469"
+    },
+    {
+      "id": "result-15",
+      "url": "https://www.reddit.com/r/rust/comments/1ll7e0m",
+      "title": "Rust 1.88.0 is out",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: 1.3 years ago; Crawled: 1.3 years ago;     I'm utilizing procedural macros in this project and the macro needs to know the file path of the macro call site. ...       Other annoying thing for me that will get stabilized for `edition 2024` is `unsafe_op_in_unsafe_fn` for FFI code. ... if let Channel::Stable(Semver { major: 1, minor: 88, ..}) = release_info() ... It's a little annoying how `rustup toolchain list` or `rustup show` doesn't actually show the rust version, but something like `stable-x86_64-pc-windows-msvc (active, default)` and `nightly-x86_64-pc-windows-msvc`.\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "a598630206dc857515aaa62719c07dcbe1d05631c18e9aec2765d1ea23660ee8"
+    }
+  ],
+  "omitted_count": 16,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 471,
+  "max_tokens": 512
+}

@@ -1,0 +1,55 @@
+{
+  "optional_end_tag_fix_sha256": "6c3a6cf1517ea3e1b0a882b9b55c6734f849d520ecab8603367b2defd5499b78",
+  "preprocessor": "/Users/miyajimakazuhiro/projects/jrg/experiments/2026-10-22-web-selection-eval/evaluate.py",
+  "preprocessor_sha256": "38ee75cb6b932b0a42839286c12515b1cea5723bb8d64f99d67e6df343546a8d",
+  "documents": [
+    {
+      "id": "queue",
+      "title": "queue — A synchronized queue class — Python 3.15.1 documentation",
+      "blocks": 136,
+      "input_tokens": 2808
+    },
+    {
+      "id": "semaphore",
+      "title": "Synchronization Primitives — Python 3.15.1 documentation",
+      "blocks": 190,
+      "input_tokens": 3053
+    },
+    {
+      "id": "timeout",
+      "title": "timeout invocation (GNU Coreutils 9.12)",
+      "blocks": 36,
+      "input_tokens": 1197
+    },
+    {
+      "id": "ssh",
+      "title": "ssh_config(5) - OpenBSD manual pages",
+      "blocks": 403,
+      "input_tokens": 15799
+    },
+    {
+      "id": "github-rate",
+      "title": "Rate limits for the REST API - GitHub Docs",
+      "blocks": 64,
+      "input_tokens": 2482
+    },
+    {
+      "id": "nginx",
+      "title": "Module ngx_http_limit_req_module",
+      "blocks": 42,
+      "input_tokens": 1507
+    },
+    {
+      "id": "gcs-retry",
+      "title": "Retry strategy | Cloud Storage | Google Cloud Documentation",
+      "blocks": 188,
+      "input_tokens": 8669
+    },
+    {
+      "id": "blockingqueue",
+      "title": "BlockingQueue (Java SE 21 & JDK 21)",
+      "blocks": 28,
+      "input_tokens": 2886
+    }
+  ]
+}

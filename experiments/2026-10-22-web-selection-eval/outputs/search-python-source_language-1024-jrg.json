@@ -1,0 +1,35 @@
+{
+  "documents": [
+    {
+      "id": "result-4",
+      "url": "https://docs.python.org/3/howto/free-threading-python.html",
+      "title": "Python support for free threading — Python 3.14.7 documentation",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Crawled: last month; Starting with the 3.13 release, CPython has support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. ... The GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading.\n\n# Python support for free threading¶\n\nStarting with the 3.13 release, CPython has support for a build of Python called free threading where the global interpreter lock (GIL) is disabled. Free-threaded execution allows for full utilization of the available processing power by running threads in parallel on available CPU cores. While not all software will benefit from this automatically, programs designed with threading in mind will run faster on multi-core hardware.\n\nSome third-party packages, in particular ones with an extension module, may not be ready for use in a free-threaded build, and will re-enable the GIL.\n\nThis document describes the implications of free threading for Python code. See C API Extension Support for Free Threading for information on how to write C extensions that support the free-threaded build.\n\n## Installation¶\n\nStarting with Python 3.13, the official macOS and Windows installers optionally support installing free-threaded Python binaries. The installers are available at https://www.python.org/downloads/.\n\nFor information on other platforms, see the Installing a Free-Threaded Python, a community-maintained installation guide for installing free-threaded Python.\n\nWhen building CPython from source, the `--disable-gil` configure option should be used to build a free-threaded Python interpreter.\n\n## Identifying free-threaded Python¶\n\nTo check if the current interpreter supports free-threading, `python -VV` and `sys.version` contain “free-threading build”. The new `sys._is_gil_enabled()` function can be used to check whether the GIL is actually disabled in the running process.\n\nThe `sysconfig.get_config_var(\"Py_GIL_DISABLED\")` configuration variable can be used to determine whether the build supports free threading. If the variable is set to `1`, then the build supports free threading. This is the recommended mechanism for decisions related to the build configuration.\n\n## The global interpreter lock in free-threaded Python¶\n\nFree-threaded builds of CPython support optionally running with the GIL enabled at runtime using the environment variable `PYTHON_GIL` or the command-line option `-X gil`.\n\nThe GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked as supporting free threading. A warning will be printed in this case.\n\nIn addition to individual package documentation, the following websites track the status of popular packages support for free threading:\n\n  * https://py-free-threading.github.io/tracking/\n\n  * https://hugovk.github.io/free-threaded-wheels/\n\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "0a2cd857f7b3cf86f437393767be9f02ffc734fe7e11da0e70e5386412475354"
+    },
+    {
+      "id": "result-13",
+      "url": "https://fossies.org/linux/misc/python-3.13.8-docs-pdf-a4.tar.bz2/docs-pdf/howto-free-threading-python.pdf",
+      "title": "Python experimental support for free",
+      "blocks": [
+        {
+          "id": "snippet",
+          "kind": "result",
+          "text": " Published: last year; Starting with Python 3.13, the official macOS and Windows installers optionally support installing free-threaded ... Free-threaded builds of CPython support optionally running with the GIL enabled at runtime using the environment ... The GIL may also automatically be enabled when importing a C-API extension module that is not explicitly marked\n--------------------------------------------------------------------------------\n"
+        }
+      ],
+      "source_hash": "c8cf65f10f26d537134e8bece059c935f092573739ea1f5c7d4e187cd3628f43"
+    }
+  ],
+  "omitted_count": 17,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 925,
+  "max_tokens": 1024
+}

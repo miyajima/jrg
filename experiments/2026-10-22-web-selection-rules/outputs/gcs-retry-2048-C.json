@@ -1,0 +1,176 @@
+{
+  "documents": [
+    {
+      "id": "gcs-retry",
+      "url": "https://docs.cloud.google.com/storage/docs/retry-strategy",
+      "title": "Retry strategy | Cloud Storage | Google Cloud Documentation",
+      "blocks": [
+        {
+          "id": "line-13",
+          "kind": "heading",
+          "text": "# Retry strategy Stay organized with collections Save and categorize content based on your preferences.\n",
+          "start_line": 13,
+          "end_line": 13
+        },
+        {
+          "id": "line-17",
+          "kind": "heading",
+          "text": "## Overview\n",
+          "parent_id": "line-13",
+          "start_line": 17,
+          "end_line": 17
+        },
+        {
+          "id": "line-35",
+          "kind": "heading",
+          "text": "### Idempotency\n",
+          "parent_id": "line-17",
+          "start_line": 35,
+          "end_line": 35
+        },
+        {
+          "id": "line-39",
+          "kind": "paragraph",
+          "text": "The following are examples of conditions that make an operation idempotent:\n",
+          "parent_id": "line-35",
+          "start_line": 39,
+          "end_line": 39
+        },
+        {
+          "id": "line-43",
+          "kind": "list",
+          "text": "- The operation only succeeds once.\n",
+          "parent_id": "line-35",
+          "start_line": 43,
+          "end_line": 43
+        },
+        {
+          "id": "line-47",
+          "kind": "paragraph",
+          "text": "When you receive a retryable response, you should consider the idempotency of the request, because retrying requests that are not idempotent can lead to race conditions and other conflicts.\n",
+          "parent_id": "line-35",
+          "start_line": 47,
+          "end_line": 47
+        },
+        {
+          "id": "line-49",
+          "kind": "heading",
+          "text": "#### Conditional idempotency\n",
+          "parent_id": "line-35",
+          "start_line": 49,
+          "end_line": 49
+        },
+        {
+          "id": "line-51",
+          "kind": "paragraph",
+          "text": "A subset of requests are conditionally idempotent, which means they are only idempotent if they include specific optional arguments. Operations that are conditionally safe to retry should only be retried by default if the condition case passes. Cloud Storage accepts preconditions and ETags as condition cases for requests.\n",
+          "parent_id": "line-49",
+          "start_line": 51,
+          "end_line": 51
+        },
+        {
+          "id": "line-292",
+          "kind": "heading",
+          "text": "## Customizing retries\n",
+          "parent_id": "line-13",
+          "start_line": 292,
+          "end_line": 292
+        },
+        {
+          "id": "line-466",
+          "kind": "heading",
+          "text": "### Node.js\n",
+          "parent_id": "line-292",
+          "start_line": 466,
+          "end_line": 466
+        },
+        {
+          "id": "line-472",
+          "kind": "code",
+          "text": "```\n/**\n* TODO(developer): Uncomment the following lines before running the sample.\n*/\n// The ID of your GCS bucket\n// const bucketName = 'your-unique-bucket-name';\n\n// The ID of your GCS file\n// const fileName = 'your-file-name';\n\n// Imports the Google Cloud client library\nconst {Storage} = require('@google-cloud/storage');\n\n// Creates a client\nconst storage = new Storage({\nretryOptions: {\n// If this is false, requests will not retry and the parameters\n// below will not affect retry behavior.\nautoRetry: true,\n// The multiplier by which to increase the delay time between the\n// completion of failed requests, and the initiation of the subsequent\n// retrying request.\nretryDelayMultiplier: 3,\n// The total time between an initial request getting sent and its timeout.\n// After timeout, an error will be returned regardless of any retry attempts\n// made during this time period.\ntotalTimeout: 500,\n// The maximum delay time between requests. When this value is reached,\n// retryDelayMultiplier will no longer be used to increase delay time.\nmaxRetryDelay: 60,\n// The maximum number of automatic retries attempted before returning\n// the error.\nmaxRetries: 5,\n// Will respect other retry settings and attempt to always retry\n// conditionally idempotent operations, regardless of precondition\nidempotencyStrategy: IdempotencyStrategy.RetryAlways,\n},\n});\nconsole.log(\n'Functions are customized to be retried according to the following parameters:'\n);\nconsole.log(`Auto Retry: ${storage.retryOptions.autoRetry}`);\nconsole.log(\n`Retry delay multiplier: ${storage.retryOptions.retryDelayMultiplier}`\n);\nconsole.log(`Total timeout: ${storage.retryOptions.totalTimeout}`);\nconsole.log(`Maximum retry delay: ${storage.retryOptions.maxRetryDelay}`);\nconsole.log(`Maximum retries: ${storage.retryOptions.maxRetries}`);\nconsole.log(\n`Idempotency strategy: ${storage.retryOptions.idempotencyStrategy}`\n);\n\nasync function deleteFileWithCustomizedRetrySetting() {\nawait storage.bucket(bucketName).file(fileName).delete();\nconsole.log(`File ${fileName} deleted with a customized retry strategy.`);\n}\n\ndeleteFileWithCustomizedRetrySetting();\n```\n",
+          "parent_id": "line-466",
+          "start_line": 472,
+          "end_line": 530
+        },
+        {
+          "id": "line-679",
+          "kind": "heading",
+          "text": "### Ruby\n",
+          "parent_id": "line-292",
+          "start_line": 679,
+          "end_line": 679
+        },
+        {
+          "id": "line-685",
+          "kind": "code",
+          "text": "```\ndef configure_retries bucket_name: nil, file_name: nil\n# The ID of your GCS bucket\n# bucket_name = \"your-unique-bucket-name\"\n\n# The ID of your GCS object\n# file_name = \"your-file-name\"\n\nrequire \"google/cloud/storage\"\n\n# Creates a client\nstorage = Google::Cloud::Storage.new(\n\n# The maximum number of automatic retries attempted before returning\n# the error.\n#\n# Customize retry configuration with the maximum retry attempt of 5.\nretries: 5,\n\n# The total time in seconds that requests are allowed to keep being retried.\n# After max_elapsed_time, an error will be returned regardless of any\n# retry attempts made during this time period.\n#\n# Customize retry configuration with maximum elapsed time of 500 seconds.\nmax_elapsed_time: 500,\n\n# The initial interval between the completion of failed requests, and the\n# initiation of the subsequent retrying request.\n#\n# Customize retry configuration with an initial interval of 1.5 seconds.\nbase_interval: 1.5,\n\n# The maximum interval between requests. When this value is reached,\n# multiplier will no longer be used to increase the interval.\n#\n# Customize retry configuration with maximum interval of 45.0 seconds.\nmax_interval: 45,\n\n# The multiplier by which to increase the interval between the completion\n# of failed requests, and the initiation of the subsequent retrying request.\n#\n# Customize retry configuration with an interval multiplier per iteration of 1.2.\nmultiplier: 1.2\n)\n\n# Uses the retry configuration set during the client initialization above with 5 retries\nfile = storage.service.get_file bucket_name, file_name\n\n# Maximum retry attempt can be overridden for each operation using options parameter.\nstorage.service.delete_file bucket_name, file_name, options: { retries: 4 }\nputs \"File #{file.name} deleted with a customized retry strategy.\"\nend\n```\n",
+          "parent_id": "line-679",
+          "start_line": 685,
+          "end_line": 737
+        },
+        {
+          "id": "line-743",
+          "kind": "heading",
+          "text": "## Exponential backoff algorithm\n",
+          "parent_id": "line-13",
+          "start_line": 743,
+          "end_line": 743
+        },
+        {
+          "id": "line-745",
+          "kind": "paragraph",
+          "text": "An exponential backoff algorithm retries requests using exponentially increasing waiting times between requests, up to a maximum backoff time. You should generally use exponential backoff with jitter to retry requests that meet both the response and idempotency criteria. For best practices implementing automatic retries with exponential backoff, see Addressing Cascading Failures.\n",
+          "parent_id": "line-743",
+          "start_line": 745,
+          "end_line": 745
+        },
+        {
+          "id": "line-747",
+          "kind": "heading",
+          "text": "## Retry anti-patterns\n",
+          "parent_id": "line-13",
+          "start_line": 747,
+          "end_line": 747
+        },
+        {
+          "id": "line-751",
+          "kind": "heading",
+          "text": "#### Retrying without backoff\n",
+          "parent_id": "line-747",
+          "start_line": 751,
+          "end_line": 751
+        },
+        {
+          "id": "line-753",
+          "kind": "paragraph",
+          "text": "Retrying requests immediately or with very short delays can lead to cascading failures which are failures that might trigger other failures.\n",
+          "parent_id": "line-751",
+          "start_line": 753,
+          "end_line": 753
+        },
+        {
+          "id": "line-775",
+          "kind": "heading",
+          "text": "#### Unnecessarily layering retries\n",
+          "parent_id": "line-747",
+          "start_line": 775,
+          "end_line": 775
+        },
+        {
+          "id": "line-777",
+          "kind": "paragraph",
+          "text": "Adding custom application level retry logic on top of the existing retry mechanisms can lead to an excessive number of retry attempts. For example, if your application retries an operation three times, and the underlying client library also retries it three times for each of your application's attempts, you could end up with nine retry attempts. Sending high amounts of retries for errors that cannot be retried might lead to request throttling, limiting the throughput of all workloads. High numbers of retries might also increase latency of requests without improving the success rate.\n",
+          "parent_id": "line-775",
+          "start_line": 777,
+          "end_line": 777
+        }
+      ],
+      "source_hash": "1b2e474e9648296c33b265537fcccd41c74670edf3200e6788051892d6b3bb9e"
+    }
+  ],
+  "omitted_count": 168,
+  "duplicate_count": 0,
+  "status": "selected",
+  "tokens": 2048,
+  "max_tokens": 2048
+}
